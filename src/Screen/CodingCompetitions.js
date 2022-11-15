@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, CSSProperties } from 'react'
 import styled from 'styled-components'
 import CCRightMenu from '../Components/CCRightMenu'
 import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import InfoIcon from '@material-ui/icons/Info'
+import ScaleLoader from 'react-spinners/ScaleLoader'
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1])
@@ -23,6 +24,28 @@ const CodingCompetitions = () => {
         console.log(data)
       })
   }, [])
+
+  const override = {
+    display: 'block',
+    margin: '0 auto',
+    borderColor: 'red',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+
+  const Loading = () => {
+    return (
+      <ScaleLoader
+        color={'#6bffc1'}
+        loading={waitingForData}
+        cssOverride={override}
+        size={150}
+        aria-label='Loading Spinner'
+        data-testid='loader'
+      />
+    )
+  }
 
   const returnHours = (e) => {
     return Math.floor(e / 60)
@@ -128,7 +151,7 @@ const CodingCompetitions = () => {
             </div>
 
             {waitingForData ? (
-              <></>
+              <>{Loading()}</>
             ) : (
               <>
                 {list.map((item, index) => (

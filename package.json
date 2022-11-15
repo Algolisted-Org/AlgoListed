@@ -12,6 +12,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.6",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
