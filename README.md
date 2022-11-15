@@ -1,6 +1,6 @@
-# Welcome to Algorithmist
+# 🚀 Welcome to Algorithmist
 
-🚀 This project is created with MERN stack. 
+This project is created with MERN stack. 
 <br/>
 <br/>
 <br/>
