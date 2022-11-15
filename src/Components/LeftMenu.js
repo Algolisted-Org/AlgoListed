@@ -122,7 +122,7 @@ const Container = styled.div`
 
   .mid-links{
     margin-top: 15px;
-    overflow-y: scroll;
+   
 
     .flag{
       display: flex;

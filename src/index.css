@@ -23,3 +23,19 @@ input{
   border: 1px solid black;
   outline: none;
 }
+::-webkit-scrollbar{
+  width: 1rem;
+}
+::-webkit-scrollbar-track{
+  
+  background-color: transparent;
+  border-radius: 100vw;
+  margin-block: 0.5em;
+
+}
+::-webkit-scrollbar-thumb{
+  background:black;
+  border: 0.25em solid #fefdff;
+  border-radius:100vw;
+
+}
