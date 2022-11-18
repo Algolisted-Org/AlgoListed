@@ -6,7 +6,7 @@ import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 
-const BrainTeasers = () => { 
+const Resources = () => { 
     return (
         <GrandContainer>
             <MobContainer>
@@ -16,13 +16,12 @@ const BrainTeasers = () => {
             </MobContainer>
             <Container>
                 <CCHeader />
-                <LeftMenu marked={"brain-teasers"} />
+                <LeftMenu marked={"resources"} />
                 <div className="cc-middle-content">
-                    <h1 className='main-heading'>Brain Teasers</h1>
+                    <h1 className='main-heading'>Resources <div className="head-tag">coming soon</div> </h1>
                     <p className="heading-supporter">
-                    Why Do Companies Ask Brainteaser Questions?
-                    Interviewers ask brainteaser questions because they think your ability to answer will provide some indication of your ability to do the job. Often, the hiring manager feels the brainteaser will help them to evaluate your strength in one or more of the following competency areas :
-                    Problem solving, Critical thinking, Analytic skills, Creativity and Ability to think on your feet.
+                        Here we have resources like notes and other important tools for computer related subjects. We are
+                        collecting the resources from students, various websites like linkedin. 
                     </p>
                     <div className="message">
                         <div className="icon"></div>
@@ -30,38 +29,15 @@ const BrainTeasers = () => {
                             Want to contribute a Brain Teaser or have any suggestion about the website <a href="/">click here</a>
                         </div> 
                     </div> 
-                    {/* <iframe width="220" height="400" src="https://www.youtube.com/embed/XF4l1T8kLUo" title="Puzzles for Software Engineers | Amazon #4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
 
-                    <div className="questions">
-                      <div className="ques-box">
-                        <div className="q-elem"><div className="q-num">1</div> <div className="q-text">You have a three-gallon bucket and a five-gallon bucket. How do you measure out exactly four gallons?</div></div>
-                        <div className="q-tags"><div className="q-tag">Closed Ended</div><div className="q-tag">Microsoft</div></div>
-                        <div className="ans">
-                        <b>Answer : </b>
-                        The three-gallon bucket is too small, and the five-gallon bucket is too large. This is a given fact, and along with it comes the assumption that our final four gallons will end up in the five-gallon bucket. <GapLine/>
-                        The first step is to fill the three-gallon bucket. Then, pour all three gallons into the five-gallon bucket. Now the five-gallon bucket has three gallons in it, and the three-gallon bucket is empty. <GapLine/>
-                        Because 5-3=2, we know that only two more gallons can fit into the five-gallon bucket before it is full. So we’d fill the three-gallon bucket again and slowly pour it into the five-gallon bucket until it’s full. 3-2=1, so there is one gallon in the three-gallon bucket. <GapLine/>
-                        We dump out the five-gallon bucket completely, then pour the one gallon into it. Finally, we fill up the three-gallon bucket and pour it into the five-gallon bucket. We end up with precisely four gallons. <br />
-                        </div>
-                      </div>
 
-                      <div className="ques-box">
-                        <div className="q-elem"><div className="q-num">2</div> <div className="q-text">The Beatles need to cross a bridge at night to get to a concert. They only have one flashlight, and they have seventeen minutes to get there. The bridge must be crossed with the flashlight and can only support two people at a time. John can cross in one minute, Paul can cross in two minutes, George can cross in five minutes, and Ringo takes ten minutes to cross. How can they all make it to the concert on time?</div></div>
-                        <div className="q-tags"><div className="q-tag">Closed Ended</div><div className="q-tag">Google</div><div className="q-tag">HR Round</div></div>
-                        <div className="ans">
-                        <b>Answer : </b>
-                        First, John takes the flashlight and crosses the bridge with Paul. This takes two minutes. John then returns across the bridge with the flashlight taking one more minute (three minutes have passed so far). John gives the flashlight to George, and George and Ringo cross together, taking ten minutes (thirteen minutes have passed so far). <GapLine/>
-                        George gives the flashlight to Paul, who recrosses the bridge taking two minutes (fifteen minutes have passed at this point). John and Paul now cross the bridge together, taking two more minutes. All end up across the bridge at the concert in exactly seventeen minutes. <GapLine/>
-                        </div>
-                      </div>
-                    </div>
                 </div>
             </Container>
         </GrandContainer>
     )
 }
 
-export default BrainTeasers
+export default Resources
 
 const GrandContainer = styled.div`
 
@@ -119,6 +95,18 @@ const Container = styled.div`
           font-size: 1.65rem;
           font-weight: 600;
           color: #292929;
+          display: flex; 
+          align-items: center;
+
+          .head-tag{
+            display: inline;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.25rem 0.5rem;
+            border-radius: 100px;
+            background-color: #e5e5e5;
+            margin-left: 10px;
+          }
       }
 
       .heading-supporter{

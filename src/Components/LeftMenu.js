@@ -18,10 +18,17 @@ const LeftMenu = ({marked}) => {
           )
         }
         {
-          marked == "brain-teasers" ? (
-            <a href='/brain-teasers' className="link current-link">Brain Teasers</a>
+          marked == "resources" ? (
+            <a href='/resources' className="link current-link">Resources</a>
           ):(
-            <a href='/brain-teasers' className="link">Brain Teasers</a>
+            <a href='/resources' className="link">Resources</a>
+          )
+        }
+        {
+          marked == "aptitude-round" ? (
+            <a href='/aptitude-round' className="link current-link">Aptitude Round</a>
+          ):(
+            <a href='/aptitude-round' className="link">Aptitude Round</a>
           )
         }
         {

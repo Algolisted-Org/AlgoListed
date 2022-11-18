@@ -18,7 +18,7 @@ const Opportunities = () => {
                 <CCHeader />
                 <LeftMenu marked={"opportunities"} />
                 <div className="cc-middle-content">
-                    <h1 className='main-heading'>All Internship & Job Opportunities</h1>
+                    <h1 className='main-heading'>All Internship & Job Opportunities <div className="head-tag">coming soon</div> </h1>
                     <p className="heading-supporter">
                     We are not fetching the data from any public API, we have build our own API which is being constantly updated by our the team and users with information.
                     </p>
@@ -92,6 +92,18 @@ const Container = styled.div`
           font-size: 1.65rem;
           font-weight: 600;
           color: #292929;
+          display: flex; 
+          align-items: center;
+
+          .head-tag{
+            display: inline;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.25rem 0.5rem;
+            border-radius: 100px;
+            background-color: #e5e5e5;
+            margin-left: 10px;
+          }
       }
 
       .heading-supporter{
