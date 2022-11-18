@@ -42,21 +42,11 @@ const LeftMenu = ({marked}) => {
         
         <div className="flag">
           <div className="line"></div>
-          <div className="text">Popular Topics</div>
+          <div className="text">Algorithmist</div>
           <div className="line"></div>
         </div>
-        <div className="link">Dynamic Programming</div>
-        {
-          marked == "graph-theory" ? (
-            <div className="link current-link">Graph Theory</div>
-          ):(
-            <div className="link">Graph Theory</div>
-          )
-        }
-        {/* <div className="link">Codeforces</div> */}
-        {/* <div className="link">OOPS - Beginners</div> */}
-        <div className="link">Open Source Newbie</div>
-        {/* <div className="link">Web Development</div> */}
+        <div className="link">Work with us</div>
+        <div className="link">Company Information</div>
       </div>
 
       {
@@ -129,7 +119,7 @@ const Container = styled.div`
       justify-content: space-between;
       align-items: center;
 
-      margin: 20px 0 10px 0;
+      margin: 30px 0 10px 0;
 
       .line{
         width: 20%;

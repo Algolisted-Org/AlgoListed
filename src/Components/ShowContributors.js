@@ -21,11 +21,16 @@ export default ShowContributors
 const Container = styled.div`
     position: fixed;
     bottom: 10px;
-    right: 355px;
+    right: 375px;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
-    
+
+    @media only screen and (max-width: 1200px){
+        right: 50px;
+    }  
+
+
     .btn{
         height: 50px;
         width: 180px;

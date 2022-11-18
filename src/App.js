@@ -6,11 +6,10 @@ import {
 import styled from 'styled-components'
 import BlogPage from './Screen/BlogPage'
 import BlogIdeas from './Screen/BlogIdeas'
-import LandingPage from './Screen/LandingPage'
 import CodingCompetitions from './Screen/CodingCompetitions'
 import Issues from './Screen/Issues'
 import PageNotExist from './Screen/PageNotExist';
-import LandingPageReal from './Screen/LandingPageReal';
+import LandingPage from './Screen/LandingPage';
 import OrganisationInfo from './Screen/OrganisationInfo';
 import AllBlogs from './Screen/AllBlogs';
 import BrainTeasers from './Screen/BrainTeasers';
@@ -22,8 +21,7 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/old-landing" element={<LandingPage/>} />
-        <Route path="/" element={<LandingPageReal/>} />
+        <Route path="/" element={<LandingPage/>} />
         <Route path="/blog/ideas" element={<BlogIdeas/>} />
         <Route path="/coding-competitions" element={<CodingCompetitions/>} />
         <Route path="/organisation-information/:showpage" element={<OrganisationInfo/>} />

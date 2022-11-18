@@ -24,18 +24,16 @@ input{
   outline: none;
 }
 ::-webkit-scrollbar{
-  width: 1rem;
+  width: 0.75rem;
 }
 ::-webkit-scrollbar-track{
-  
   background-color: transparent;
-  border-radius: 100vw;
+  /* border-radius: 100vw; */
   margin-block: 0.5em;
-
 }
-::-webkit-scrollbar-thumb{
-  background:black;
-  border: 0.25em solid #fefdff;
-  border-radius:100vw;
 
+::-webkit-scrollbar-thumb{
+  background: rgba(44, 43, 46, 0.501);
+  border: 0.15em solid #fefdff;
+  border-radius: 100px;
 }

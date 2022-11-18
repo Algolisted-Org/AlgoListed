@@ -5,7 +5,7 @@ import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import InfoIcon from '@material-ui/icons/Info'
-import ScaleLoader from 'react-spinners/ScaleLoader'
+import { LinearProgress } from '@material-ui/core'
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1])
@@ -32,19 +32,6 @@ const CodingCompetitions = () => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  }
-
-  const Loading = () => {
-    return (
-      <ScaleLoader
-        color={'#6bffc1'}
-        loading={waitingForData}
-        cssOverride={override}
-        size={150}
-        aria-label='Loading Spinner'
-        data-testid='loader'
-      />
-    )
   }
 
   const returnHours = (e) => {
@@ -78,10 +65,16 @@ const CodingCompetitions = () => {
     if (d < 0 || h < 0 || m < 0 || s < 0) {
       return 'Expired'
     }
-    if (d === 0) {
-      return `${h}h ${m}m ${s}s`
+
+    if(d === 0){
+      return `${h} hours ${m} minutes`
+    }
+    else if (d === 1) {
+      // return `${h}h ${m}m ${s}s`
+      return `${d} day, ${h} hours ${m} minutes`
     } else {
-      return `${d}d ${h}h ${m}m ${s}s`
+      // return `${d}d ${h}h ${m}m ${s}s`
+      return `${d} days, ${h} hours ${m} minutes`
     }
   }
 
@@ -151,7 +144,7 @@ const CodingCompetitions = () => {
             </div>
 
             {waitingForData ? (
-              <>{Loading()}</>
+              <LinearProgress />
             ) : (
               <>
                 {list.map((item, index) => (
@@ -357,7 +350,7 @@ const Table = styled.div`
   .row {
     background-color: white;
     width: 100%;
-    height: 65px;
+    height: 75px;
     padding: 0 15px;
     border-top: 1px solid #e0cece;
     display: flex;
@@ -437,7 +430,7 @@ const Table = styled.div`
   .top-row {
     background-color: whitesmoke;
     width: 100%;
-    height: 65px;
+    height: 75px;
     padding: 0 15px;
     border-top: 1px solid transparent;
     display: flex;

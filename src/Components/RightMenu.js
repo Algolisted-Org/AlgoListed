@@ -44,7 +44,7 @@ export default RightMenu
 
 const Container = styled.div`
   width: calc(100vw - 1100px);
-  max-width: 400px;
+  max-width: 360px;
   /* height: calc(100vh - 55px); */
   /* min-height: 630px; */
   /* height: 1040px; */

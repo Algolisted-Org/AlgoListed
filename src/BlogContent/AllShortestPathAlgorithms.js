@@ -14,7 +14,7 @@ const AllShortestPathAlgorithms = () => {
     return (
         <Container>
             <div className="left">
-                {/* <ShowContributors /> */}
+                <ShowContributors />
                 <h1 className='main-heading'>All Shortest Path Algorithms - Graph Theory.</h1>
                 <p className="heading-supporter">Explanation, code and interview questions with company tags</p>
                 <div className="gap-5px-tb"></div>
