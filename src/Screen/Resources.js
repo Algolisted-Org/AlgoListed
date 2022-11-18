@@ -30,6 +30,69 @@ const Resources = () => {
                         </div> 
                     </div> 
 
+                    <div className="search-input">
+                      <input type="text" placeholder='Search Topic for Resources . . .'/>
+                      <div className="search-btn">Search</div>
+                    </div>
+
+                    <div className="resources-container">
+                      <div className="resource">
+                        <a href='http://www.wbuthelp.com/chapter_file/1015.pdf' target={"_blank"} className="title">Introduction to Computer System - Computer Organisation</a>
+                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+                        <div className="tags">
+                          <div className="main-tag">Computer Org.</div>
+                          <div className="tag">PDF</div>
+                        </div>
+                      </div>
+                      <div className="resource">
+                        <a href='http://www.wbuthelp.com/chapter_file/1016.pdf' target={"_blank"} className="title">Arithmetic and Logic Unit - Computer Organisation</a>
+                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+                        <div className="tags">
+                          <div className="main-tag">Computer Org.</div>
+                          <div className="tag">PDF</div>
+                        </div>
+                      </div>
+                      <div className="resource">
+                        <a href='http://www.wbuthelp.com/chapter_file/1106.pdf' target={"_blank"} className="title">Memory - Computer Organisation</a>
+                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+                        <div className="tags">
+                          <div className="main-tag">Computer Org.</div>
+                          <div className="tag">PDF</div>
+                        </div>
+                      </div>
+                      <div className="resource">
+                        <a href='http://www.wbuthelp.com/chapter_file/1935.pdf' target={"_blank"} className="title">Instruction Set & Addressing Modes - Computer Organisation</a>
+                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+                        <div className="tags">
+                          <div className="main-tag">Computer Org.</div>
+                          <div className="tag">PDF</div>
+                        </div>
+                      </div>
+                      <div className="resource">
+                        <a href='http://www.wbuthelp.com/chapter_file/4051.pdf' target={"_blank"} className="title">CPU Design - Computer Organisation</a>
+                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+                        <div className="tags">
+                          <div className="main-tag">Computer Org.</div>
+                          <div className="tag">PDF</div>
+                        </div>
+                      </div>
+                      <div className="resource">
+                        <a href='http://www.wbuthelp.com/chapter_file/4052.pdf' target={"_blank"} className="title">Introduction to IO - Computer Organisation</a>
+                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+                        <div className="tags">
+                          <div className="main-tag">Computer Org.</div>
+                          <div className="tag">PDF</div>
+                        </div>
+                      </div>
+                      <div className="resource">
+                        <a href='http://www.wbuthelp.com/chapter_file/4054.pdf' target={"_blank"} className="title">Pipelining - Computer Organisation</a>
+                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+                        <div className="tags">
+                          <div className="main-tag">Computer Org.</div>
+                          <div className="tag">PDF</div>
+                        </div>
+                      </div>
+                    </div>
 
                 </div>
             </Container>
@@ -139,77 +202,88 @@ const Container = styled.div`
             
         }
       }
+      
+      .search-input{
+        display: flex;
+        margin: 30px 0 10px 0;
 
-      iframe{
-        border-radius: 5px;
-        border: none;
+        input{
+          width: 400px;
+          padding: 7.5px 12.5px;
+          border-radius: 5px;
+          font-size: 0.8rem;
+          border: 1px solid #c2bfbf;
+        }
+
+        .search-btn{
+          font-size: 0.8rem;
+          padding: 7.5px 12.5px;
+          margin-left: 5px;
+          background-color: #e5e5e5;
+          border-radius: 5px;
+          font-weight: 400;
+          cursor: pointer;
+        }
       }
 
-      .questions{
-        margin-top: 75px;
+      .resources-container{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
 
-        .ques-box{
-          width: max(860px, 60vw);
-          max-width: 1200px;
-          padding: 20px;
-          /* background-color: white; */
-          border-bottom: 1px solid #e5e7ed;
-          /* border-radius: 10px; */
-          margin-bottom: 50px;
-        
+        .resource{
+          width: 300px;
+          height: 180px;
+          border-radius: 5px;
+          background-color: white;
+          border: 1px solid #c2bfbf;
+          padding: 10px;
+          margin: 10px 10px 0 0;
 
-          .q-elem{
-            display: flex;
-            align-items: flex-start;
-            position: relative;
-  
-            .q-num{
-              position: absolute;
-              left: -1.75rem;
-              font-size: 0.95rem;
-              background-color: #70a936;
-              height: 1.15rem;
-              width: 1.15rem;
-              display: grid;
-              place-items: center;
-              margin-right: 10px;
-              color: white;
-              border-radius: 4px;
-              margin-top: 2.5px;
-              font-family: sohne-var, "Helvetica Neue", Arial, sans-serif;
-            }
-            .q-text{
-              font-size: 1rem;
-              width: calc(100% - 1.75rem);
-              line-height: 1.75rem;
-            }
+          .title{
+              font-size: 0.85rem;
+              font-weight: 500;
+              color: #374151;
+              cursor: pointer;
+              text-decoration: none;
+              width: 100%;
+              
+              &:hover{
+                color: cornflowerblue;
+                /* transition-duration: 150ms; */
+              }
           }
-  
-          .q-tags{
+
+
+          .short-desc{
+            font-size: 0.75rem;
+            font-weight: 200;
+            letter-spacing: 0.06rem;
+          }
+
+          .tags{
               display: flex;
               flex-wrap: wrap;
-              margin: 30px 0 20px 0;
-  
-              .q-tag{
-                  font-size: 0.75rem;
-                  padding: 5px 15px;
+              margin-top: 10px;
+
+              .main-tag{
+                  font-size: 0.7rem;
+                  padding: 2.5px 12.5px;
                   border-radius: 100px;
-                  background-color: #e5e5e5;
+                  background-color: #f3e8ff;
+                  color: rgb(107, 33, 168);
+                  font-weight: 400;
+                  margin: 5px 5px 0 0;
+              }
+
+              .tag{
+                  font-size: 0.7rem;
+                  padding: 2.5px 12.5px;
+                  border-radius: 100px;
+                  background-color: #eeeeee;
                   font-weight: 300;
                   margin: 5px 5px 0 0;
               }
-          }
-  
-          .ans{
-            font-size: 1rem;
-            font-weight: 300;
-            line-height: 1.75rem;
-            color: #686169;
-
-            b{
-              color: #222;
-              font-weight: 500;
-            }
           }
         }
       }
