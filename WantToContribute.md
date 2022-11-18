@@ -1,3 +1,5 @@
+# 🚀 Want to contribute to the project ? Apply 
+
 #### Name: [AGNIESZKA MISZKURKA](https://github.com/agnieszka-miszkurka)
 - Place: Poland
 - Bio: second year Computer Science Student, in love with NYC <3
