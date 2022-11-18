@@ -174,16 +174,20 @@ const CodingCompetitions = () => {
                       </div>
                     </div>
                     <div className='duration'>3 hrs</div>
+
                     <div className='registration'>
                       <div className='status'>{item.registration_status}</div>
                       <div className='time-left'>
                         {item.registration_status === 'Open' ? (
-                          <a href={`${item.registration_link}`} target='_blank'>
-                            Register
-                          </a>
+                          timeleft(item.registration_date) === 'Expired' ? (
+                            <>{(item.registration_status = 'Closed')}</>
+                          ) : (
+                            timeleft(item.registration_end_date)
+                          )
                         ) : (
-                          <></>
+                          <>Registration Closed</>
                         )}
+                        {/* 05 days, 19 hours, 02 minutes */}
                       </div>
                     </div>
                   </div>
