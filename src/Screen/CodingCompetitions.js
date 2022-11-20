@@ -1,16 +1,17 @@
-import React, { useState, useEffect, CSSProperties } from 'react'
-import styled from 'styled-components'
-import CCRightMenu from '../Components/CCRightMenu'
-import CCHeader from '../Components/CCHeader'
-import LeftMenu from '../Components/LeftMenu'
-import FilterListIcon from '@material-ui/icons/FilterList'
-import InfoIcon from '@material-ui/icons/Info'
-import { LinearProgress } from '@material-ui/core'
+import React, { useState, useEffect, CSSProperties } from 'react';
+import styled from 'styled-components';
+import CCRightMenu from '../Components/CCRightMenu';
+import CCHeader from '../Components/CCHeader';
+import LeftMenu from '../Components/LeftMenu';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import InfoIcon from '@material-ui/icons/Info';
+import { LinearProgress } from '@material-ui/core';
+import IntervalTimeLeft from '../helpers/IntervalTimeLeft';
 
 const CodingCompetitions = () => {
-  const [temp, setTemp] = useState([1])
-  const [waitingForData, setWaitingForData] = useState(true)
-  const [list, setList] = useState()
+  const [temp, setTemp] = useState([1]);
+  const [waitingForData, setWaitingForData] = useState(true);
+  const [list, setList] = useState();
 
   useEffect(async () => {
     await fetch(
@@ -18,12 +19,12 @@ const CodingCompetitions = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        setList(data)
-        setWaitingForData(false)
+        setList(data);
+        setWaitingForData(false);
 
-        console.log(data)
-      })
-  }, [])
+        console.log(data);
+      });
+  }, []);
 
   const override = {
     display: 'block',
@@ -32,51 +33,15 @@ const CodingCompetitions = () => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  };
 
   const returnHours = (e) => {
-    return Math.floor(e / 60)
-  }
+    return Math.floor(e / 60);
+  };
 
   const returnMins = (e) => {
-    return Math.floor(e % 60)
-  }
-
-  const timeleft = (date) => {
-    var now = new Date()
-    var eventDate = new Date(date)
-    var currentTime = now.getTime()
-    var eventTime = eventDate.getTime()
-    var remTime = eventTime - currentTime
-
-    var s = Math.floor(remTime / 1000)
-    var m = Math.floor(s / 60)
-    var h = Math.floor(m / 60)
-    var d = Math.floor(h / 24)
-
-    h %= 24
-    m %= 60
-    s %= 60
-
-    h = h < 10 ? '0' + h : h
-    m = m < 10 ? '0' + m : m
-    s = s < 10 ? '0' + s : s
-    //if day the time is negative then show expired
-    if (d < 0 || h < 0 || m < 0 || s < 0) {
-      return 'Expired'
-    }
-
-    if(d === 0){
-      return `${h} hours ${m} minutes`
-    }
-    else if (d === 1) {
-      // return `${h}h ${m}m ${s}s`
-      return `${d} day, ${h} hours ${m} minutes`
-    } else {
-      // return `${d}d ${h}h ${m}m ${s}s`
-      return `${d} days, ${h} hours ${m} minutes`
-    }
-  }
+    return Math.floor(e % 60);
+  };
 
   return (
     <GrandContainer>
@@ -85,62 +50,62 @@ const CodingCompetitions = () => {
         the site with width more than 1100px, a standard laptop or tablet
         landscape.
         <img
-          src='https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif'
-          alt=''
+          src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif"
+          alt=""
         />
       </MobContainer>
       <Container>
         <CCHeader />
         <LeftMenu marked={'all-coding-competitions'} />
-        <div className='cc-middle-content'>
-          <h1 className='main-heading'>All Upcoming Coding Competitions</h1>
-          <p className='heading-supporter'>
+        <div className="cc-middle-content">
+          <h1 className="main-heading">All Upcoming Coding Competitions</h1>
+          <p className="heading-supporter">
             We are not fetching the data from any public API, we have build our
             own API which is being constantly updated by our the team and users
             with information.
             {/* <a href="/">I know about a coding competiion which is not mentioned here</a> */}
           </p>
-          <div className='message'>
-            <div className='icon'></div>
-            <div className='text'>
+          <div className="message">
+            <div className="icon"></div>
+            <div className="text">
               You know about a coding competiion which is not mentioned here.{' '}
-              <a href='/'>click here</a>
+              <a href="/">click here</a>
             </div>
           </div>
-          <p className='heading-supporter'>
+          <p className="heading-supporter">
             Competions like - Google Kickstart, Codeforces, Leetcode, CC,
             Hackethrons, ICPC, Hackethrons, Microsoft Imagine, Microsoft Engage,
             Facebook hackecup, TCS Ninja, Uber Hacktag, Hacktoberfest,
             Girlscript, GSOC, Code jam, Hash Cup.
           </p>
           <Filters>
-            <div className='filter selected'>DSA competiions</div>
-            <div className='filter selected'>Competative Coding</div>
-            <div className='filter'>All</div>
-            <div className='filter'>Hackethrons</div>
-            <div className='filter'>Open Source</div>
-            <div className='filter'>Development</div>
-            <div className='filter'>MNC competiions</div>
-            <div className='filter'>Global</div>
-            <div className='filter'>Pan India</div>
-            <div className='filter'>College Level</div>
-            <div className='filter'>MAANG</div>
+            <div className="filter selected">DSA competiions</div>
+            <div className="filter selected">Competative Coding</div>
+            <div className="filter">All</div>
+            <div className="filter">Hackethrons</div>
+            <div className="filter">Open Source</div>
+            <div className="filter">Development</div>
+            <div className="filter">MNC competiions</div>
+            <div className="filter">Global</div>
+            <div className="filter">Pan India</div>
+            <div className="filter">College Level</div>
+            <div className="filter">MAANG</div>
           </Filters>
           <Sort>
-            <div className='box'>
-              <div className='text'>By Relevence</div>
+            <div className="box">
+              <div className="text">By Relevence</div>
               <FilterListIcon />
             </div>
             <InfoIcon style={{ fill: '#333' }} />
           </Sort>
           <Table>
-            <div className='row top-row'>
-              <div className='hash'>#</div>
-              <div className='platform'>Platform</div>
-              <div className='contest'>Competition</div>
-              <div className='date'>Date and Time left</div>
-              <div className='duration'>Duration</div>
-              <div className='registration'>Registration</div>
+            <div className="row top-row">
+              <div className="hash">#</div>
+              <div className="platform">Platform</div>
+              <div className="contest">Competition</div>
+              <div className="date">Date and Time left</div>
+              <div className="duration">Duration</div>
+              <div className="registration">Registration</div>
             </div>
 
             {waitingForData ? (
@@ -148,34 +113,37 @@ const CodingCompetitions = () => {
             ) : (
               <>
                 {list.map((item, index) => (
-                  <div className='row' key={index}>
-                    <div className='hash'>{index + 1}</div>
-                    <div className='platform'>{item.platform}</div>
-                    <div className='contest'>
-                      <a href={`${item.competition_link}`} target='_blank'>
+                  <div className="row" key={index}>
+                    <div className="hash">{index + 1}</div>
+                    <div className="platform">{item.platform}</div>
+                    <div className="contest">
+                      <a href={`${item.competition_link}`} target="_blank">
                         {item.competition_name}
                       </a>
                     </div>
-                    <div className='date'>
-                      <div className='date-show'>
+                    <div className="date">
+                      <div className="date-show">
                         {item.competition_date},{' '}
                         {returnHours(item.time_start_mins)}:
                         {returnMins(item.time_start_mins)}
                       </div>
-                      <div className='time-left'>
-                        {timeleft(item.competition_date)}
+                      <div className="time-left">
+                        {<IntervalTimeLeft date={item.competition_date} />}
                       </div>
                     </div>
-                    <div className='duration'>3 hrs</div>
+                    <div className="duration">3 hrs</div>
 
-                    <div className='registration'>
-                      <div className='status'>{item.registration_status}</div>
-                      <div className='time-left'>
+                    <div className="registration">
+                      <div className="status">{item.registration_status}</div>
+                      <div className="time-left">
                         {item.registration_status === 'Open' ? (
-                          timeleft(item.registration_date) === 'Expired' ? (
+                          <IntervalTimeLeft date={item.registration_date} /> ===
+                          'Expired' ? (
                             <>{(item.registration_status = 'Closed')}</>
                           ) : (
-                            timeleft(item.registration_end_date)
+                            <IntervalTimeLeft
+                              date={item.registration_end_date}
+                            />
                           )
                         ) : (
                           <>Registration Closed</>
@@ -192,12 +160,12 @@ const CodingCompetitions = () => {
         {/* <CCRightMenu/> */}
       </Container>
     </GrandContainer>
-  )
-}
+  );
+};
 
-export default CodingCompetitions
+export default CodingCompetitions;
 
-const GrandContainer = styled.div``
+const GrandContainer = styled.div``;
 
 const MobContainer = styled.div`
   width: 100vw;
@@ -216,7 +184,7 @@ const MobContainer = styled.div`
   @media only screen and (min-width: 1099px) {
     display: none;
   }
-`
+`;
 
 const Container = styled.div`
   @media only screen and (max-width: 1100px) {
@@ -282,7 +250,7 @@ const Container = styled.div`
       }
     }
   }
-`
+`;
 
 const Filters = styled.div`
   display: flex;
@@ -313,7 +281,7 @@ const Filters = styled.div`
     background-color: #201f1f;
     color: #ebdddd;
   }
-`
+`;
 
 const Sort = styled.div`
   display: flex;
@@ -339,7 +307,7 @@ const Sort = styled.div`
       margin: 0 7.5px;
     }
   }
-`
+`;
 
 const Table = styled.div`
   width: 100%;
@@ -464,4 +432,4 @@ const Table = styled.div`
   .last-row {
     border-bottom: 0px solid transparent;
   }
-`
+`;
