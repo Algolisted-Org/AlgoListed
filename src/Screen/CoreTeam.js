@@ -14,36 +14,54 @@ const CoreTeam = () => {
                 Core team has different sections which are - <b>tech team</b>, <b>resources team</b> and <b>blogs team</b>. 
             </p>
             <div className="users">
-                {
-                    temp.map((item, index) => (
-                        <>
-                            <div className="user">
-                                <img className='user-img' src="https://finclubju.com/assets/profile/team/atanu-nayak.jpg" alt="" />
-                                <div className="profile-links">
-                                    <a href='https://www.linkedin.com/in/atanu-nayak-profile/' target={"_blank"} className="profile-link"><img className='profile-img' src="https://cdn-icons-png.flaticon.com/512/355/355994.png" alt="" /></a>
-                                </div>
-                                <div className="name">Atanu Nayak</div>
-                                <div className="team">Tech Team</div>
-                            </div>
-                            <div className="user">
-                                <img className='user-img' src="https://finclubju.com/assets/profile/team/soumyadeep-pal.jpg" alt="" />
-                                <div className="profile-links">
-                                    <a href='https://www.linkedin.com/in/atanu-nayak-profile/' target={"_blank"} className="profile-link"><img className='profile-img' src="https://cdn-icons-png.flaticon.com/512/355/355994.png" alt="" /></a>
-                                </div>
-                                <div className="name">Soumyadeep Pal</div>
-                                <div className="team">Secretary</div>
-                            </div>
-                            <div className="user">
-                                <img className='user-img' src="https://finclubju.com/assets/profile/team/sanyukta-mandal.jpg" alt="" />
-                                <div className="profile-links">
-                                    <a href='https://www.linkedin.com/in/atanu-nayak-profile/' target={"_blank"} className="profile-link"><img className='profile-img' src="https://cdn-icons-png.flaticon.com/512/355/355994.png" alt="" /></a>
-                                </div>
-                                <div className="name">Sanyukta Mandal</div>
-                                <div className="team">Joint Editor</div>
-                            </div>
-                        </>
-                    ))
-                }
+                <div className="user">
+                    <img className='user-img' src="https://finclubju.com/assets/profile/team/atanu-nayak.jpg" alt="" />
+                    <div className="profile-links">
+                        <a href='https://www.linkedin.com/in/atanu-nayak-profile/' target={"_blank"} className="profile-link"><img className='profile-img' src="https://cdn-icons-png.flaticon.com/512/355/355994.png" alt="" /></a>
+                    </div>
+                    <div className="name">Atanu Nayak</div>
+                    <div className="team">Product Building Head <br /> CSE Jadavpur University</div>
+                </div>
+                <div className="user">
+                    <img className='user-img' src="https://media-exp1.licdn.com/dms/image/D4D03AQGf20qUFHNvAQ/profile-displayphoto-shrink_400_400/0/1666778019755?e=1674691200&v=beta&t=7Z0Am95mjYWz_PDYRGYimEv1fZbmsFuAnVOfMkDEXV4" alt="" />
+                    <div className="profile-links">
+                        <a href='https://www.linkedin.com/in/atanu-nayak-profile/' target={"_blank"} className="profile-link"><img className='profile-img' src="https://cdn-icons-png.flaticon.com/512/355/355994.png" alt="" /></a>
+                    </div>
+                    <div className="name">Ritika Gupta</div>
+                    <div className="team">Product Dev Mentor <br /> Uber SDE II</div>
+                </div>
+                <div className="user">
+                    <img className='user-img' src="https://media-exp1.licdn.com/dms/image/D4D03AQGMbRu5KDzWfQ/profile-displayphoto-shrink_400_400/0/1665347098068?e=1674691200&v=beta&t=KtmE2wcmsrt_2fB_P7yoiIczRiG_Ra9omU1riG6lifg" alt="" />
+                    <div className="profile-links">
+                        <a href='https://www.linkedin.com/in/atanu-nayak-profile/' target={"_blank"} className="profile-link"><img className='profile-img' src="https://cdn-icons-png.flaticon.com/512/355/355994.png" alt="" /></a>
+                    </div>
+                    <div className="name">Ritika Gupta</div>
+                    <div className="team">Social Media Management<br /> Chem IIT Delhi</div>
+                </div>
+                <div className="user">
+                    <img className='user-img' src="https://media-exp1.licdn.com/dms/image/C5603AQFXKBLVtzliTA/profile-displayphoto-shrink_400_400/0/1641810501980?e=1674691200&v=beta&t=lhfbMlf1-_4tIxH16-0iBDDadr-CkT8xNnBhOix5p6c" alt="" />
+                    <div className="profile-links">
+                        <a href='https://www.linkedin.com/in/atanu-nayak-profile/' target={"_blank"} className="profile-link"><img className='profile-img' src="https://cdn-icons-png.flaticon.com/512/355/355994.png" alt="" /></a>
+                    </div>
+                    <div className="name">Om Mittal</div>
+                    <div className="team">Technical Content Head <br /> CSE Jadavpur University</div>
+                </div>
+                <div className="user">
+                    <img className='user-img' src="https://media-exp1.licdn.com/dms/image/D4D03AQEtNGyYYAd7ag/profile-displayphoto-shrink_400_400/0/1667193299990?e=1674691200&v=beta&t=rgEdcB_uvMQA2uMyptZAQhs5dCrE88tzGAB-DyJmUto" alt="" />
+                    <div className="profile-links">
+                        <a href='https://www.linkedin.com/in/atanu-nayak-profile/' target={"_blank"} className="profile-link"><img className='profile-img' src="https://cdn-icons-png.flaticon.com/512/355/355994.png" alt="" /></a>
+                    </div>
+                    <div className="name">Ayush Kumar Pandit</div>
+                    <div className="team">Open Source Head <br /> Jadavpur University</div>
+                </div>
+                <div className="user">
+                    <img className='user-img' src="https://media-exp1.licdn.com/dms/image/D4E35AQExby8oPKhm2w/profile-framedphoto-shrink_400_400/0/1657177913508?e=1669590000&v=beta&t=wy0qGMWSODyGNObjillJ4IDmXo28uCIE5o711w0JyEU" alt="" />
+                    <div className="profile-links">
+                        <a href='https://www.linkedin.com/in/atanu-nayak-profile/' target={"_blank"} className="profile-link"><img className='profile-img' src="https://cdn-icons-png.flaticon.com/512/355/355994.png" alt="" /></a>
+                    </div>
+                    <div className="name">Soumyajit Naskar</div>
+                    <div className="team">Resources Section Head <br /> CSE Jadavpur University</div>
+                </div>
             </div>
         </Container>
     )

@@ -23,6 +23,7 @@ input{
   border: 1px solid black;
   outline: none;
 }
+
 ::-webkit-scrollbar{
   width: 0.75rem;
 }

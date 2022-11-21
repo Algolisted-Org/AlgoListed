@@ -6,98 +6,110 @@ import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 
-const Resources = () => { 
-    return (
-        <GrandContainer>
-            <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with 
-                width more than 1100px, a standard laptop or tablet landscape. 
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
-            </MobContainer>
-            <Container>
-                <CCHeader />
-                <LeftMenu marked={"resources"} />
-                <div className="cc-middle-content">
-                    <h1 className='main-heading'>Resources <div className="head-tag">coming soon</div> </h1>
-                    <p className="heading-supporter">
-                        Here we have resources like notes and other important tools for computer related subjects. We are
-                        collecting the resources from students, various websites like linkedin. 
-                    </p>
-                    <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            Want to contribute a Brain Teaser or have any suggestion about the website <a href="/">click here</a>
-                        </div> 
-                    </div> 
+const Resources = () => {
+  return (
+    <GrandContainer>
+      <MobContainer>
+        We are still working on Responsive Version of the website, please view the site with
+        width more than 1100px, a standard laptop or tablet landscape.
+        <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+      </MobContainer>
+      <Container>
+        <CCHeader />
+        <LeftMenu marked={"resources"} />
+        <div className="cc-middle-content">
+          <h1 className='main-heading'>Resources</h1>
+          <p className="heading-supporter">
+            Here we have resources like notes and other important tools for computer related subjects. We are
+            collecting the resources from students, various websites like linkedin.
+          </p>
+          <div className="message">
+            <div className="icon"></div>
+            <div className="text">
+              Want to contribute a Brain Teaser or have any suggestion about the website <a href="/">click here</a>
+            </div>
+          </div>
 
-                    <div className="search-input">
-                      <input type="text" placeholder='Search Topic for Resources . . .'/>
-                      <div className="search-btn">Search</div>
-                    </div>
+          <Filters>
+            <div className="filter selected">Computer Organisation</div>
+            <div className="filter">All Resources</div>
+            <div className="filter">Data Structures and Algorithms</div>
+            <div className="filter">Microprocessor and Assembly</div>
+            <div className="filter">OOPS</div>
+            <div className="filter">Operating System</div>
+            <div className="filter">C Language</div>
+          </Filters>
+          <Sort>
+            <div className="box">
+              <div className="text">By Relevence</div>
+              <FilterListIcon />
+            </div>
+            <InfoIcon style={{ fill: '#333' }} />
+          </Sort>
 
-                    <div className="resources-container">
-                      <div className="resource">
-                        <a href='http://www.wbuthelp.com/chapter_file/1015.pdf' target={"_blank"} className="title">Introduction to Computer System - Computer Organisation</a>
-                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-                        <div className="tags">
-                          <div className="main-tag">Computer Org.</div>
-                          <div className="tag">PDF</div>
-                        </div>
-                      </div>
-                      <div className="resource">
-                        <a href='http://www.wbuthelp.com/chapter_file/1016.pdf' target={"_blank"} className="title">Arithmetic and Logic Unit - Computer Organisation</a>
-                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-                        <div className="tags">
-                          <div className="main-tag">Computer Org.</div>
-                          <div className="tag">PDF</div>
-                        </div>
-                      </div>
-                      <div className="resource">
-                        <a href='http://www.wbuthelp.com/chapter_file/1106.pdf' target={"_blank"} className="title">Memory - Computer Organisation</a>
-                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-                        <div className="tags">
-                          <div className="main-tag">Computer Org.</div>
-                          <div className="tag">PDF</div>
-                        </div>
-                      </div>
-                      <div className="resource">
-                        <a href='http://www.wbuthelp.com/chapter_file/1935.pdf' target={"_blank"} className="title">Instruction Set & Addressing Modes - Computer Organisation</a>
-                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-                        <div className="tags">
-                          <div className="main-tag">Computer Org.</div>
-                          <div className="tag">PDF</div>
-                        </div>
-                      </div>
-                      <div className="resource">
-                        <a href='http://www.wbuthelp.com/chapter_file/4051.pdf' target={"_blank"} className="title">CPU Design - Computer Organisation</a>
-                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-                        <div className="tags">
-                          <div className="main-tag">Computer Org.</div>
-                          <div className="tag">PDF</div>
-                        </div>
-                      </div>
-                      <div className="resource">
-                        <a href='http://www.wbuthelp.com/chapter_file/4052.pdf' target={"_blank"} className="title">Introduction to IO - Computer Organisation</a>
-                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-                        <div className="tags">
-                          <div className="main-tag">Computer Org.</div>
-                          <div className="tag">PDF</div>
-                        </div>
-                      </div>
-                      <div className="resource">
-                        <a href='http://www.wbuthelp.com/chapter_file/4054.pdf' target={"_blank"} className="title">Pipelining - Computer Organisation</a>
-                        <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-                        <div className="tags">
-                          <div className="main-tag">Computer Org.</div>
-                          <div className="tag">PDF</div>
-                        </div>
-                      </div>
-                    </div>
+          <div className="resources-container">
+            <div className="resource">
+              <a href='http://www.wbuthelp.com/chapter_file/1015.pdf' target={"_blank"} className="title">Introduction to Computer System - Computer Organisation</a>
+              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+              <div className="tags">
+                <div className="main-tag">Computer Org.</div>
+                <div className="tag">PDF</div>
+              </div>
+            </div>
+            <div className="resource">
+              <a href='http://www.wbuthelp.com/chapter_file/1016.pdf' target={"_blank"} className="title">Arithmetic and Logic Unit - Computer Organisation</a>
+              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+              <div className="tags">
+                <div className="main-tag">Computer Org.</div>
+                <div className="tag">PDF</div>
+              </div>
+            </div>
+            <div className="resource">
+              <a href='http://www.wbuthelp.com/chapter_file/1106.pdf' target={"_blank"} className="title">Memory - Computer Organisation</a>
+              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+              <div className="tags">
+                <div className="main-tag">Computer Org.</div>
+                <div className="tag">PDF</div>
+              </div>
+            </div>
+            <div className="resource">
+              <a href='http://www.wbuthelp.com/chapter_file/1935.pdf' target={"_blank"} className="title">Instruction Set & Addressing Modes - Computer Organisation</a>
+              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+              <div className="tags">
+                <div className="main-tag">Computer Org.</div>
+                <div className="tag">PDF</div>
+              </div>
+            </div>
+            <div className="resource">
+              <a href='http://www.wbuthelp.com/chapter_file/4051.pdf' target={"_blank"} className="title">CPU Design - Computer Organisation</a>
+              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+              <div className="tags">
+                <div className="main-tag">Computer Org.</div>
+                <div className="tag">PDF</div>
+              </div>
+            </div>
+            <div className="resource">
+              <a href='http://www.wbuthelp.com/chapter_file/4052.pdf' target={"_blank"} className="title">Introduction to IO - Computer Organisation</a>
+              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+              <div className="tags">
+                <div className="main-tag">Computer Org.</div>
+                <div className="tag">PDF</div>
+              </div>
+            </div>
+            <div className="resource">
+              <a href='http://www.wbuthelp.com/chapter_file/4054.pdf' target={"_blank"} className="title">Pipelining - Computer Organisation</a>
+              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
+              <div className="tags">
+                <div className="main-tag">Computer Org.</div>
+                <div className="tag">PDF</div>
+              </div>
+            </div>
+          </div>
 
-                </div>
-            </Container>
-        </GrandContainer>
-    )
+        </div>
+      </Container>
+    </GrandContainer>
+  )
 }
 
 export default Resources
@@ -202,43 +214,21 @@ const Container = styled.div`
             
         }
       }
-      
-      .search-input{
-        display: flex;
-        margin: 30px 0 10px 0;
-
-        input{
-          width: 400px;
-          padding: 7.5px 12.5px;
-          border-radius: 5px;
-          font-size: 0.8rem;
-          border: 1px solid #c2bfbf;
-        }
-
-        .search-btn{
-          font-size: 0.8rem;
-          padding: 7.5px 12.5px;
-          margin-left: 5px;
-          background-color: #e5e5e5;
-          border-radius: 5px;
-          font-weight: 400;
-          cursor: pointer;
-        }
-      }
 
       .resources-container{
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
         width: 100%;
+        margin-top: 10px;
 
         .resource{
-          width: 300px;
-          height: 180px;
-          border-radius: 5px;
-          background-color: white;
-          border: 1px solid #c2bfbf;
-          padding: 10px;
-          margin: 10px 10px 0 0;
+          width: calc(50% - 30px);
+          min-height: 140px;
+          /* background-color: white; */
+          border-top: 1px solid rgb(232, 232, 232);
+          padding-top: 20px;
+          margin: 10px 0 30px 0;
 
           .title{
               font-size: 0.85rem;
@@ -294,3 +284,60 @@ const GapLine = styled.div`
   display: block;
   height: 10px;
 `
+
+const Filters = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 80px 0 10px 0;
+
+  .filter {
+    padding: 7.5px 15px;
+    font-size: 0.8rem;
+    border: 1px solid #b9afaf;
+    border-radius: 500px;
+    margin: 0px 5px 5px 0px;
+    font-weight: 300;
+
+    &:hover {
+      border-color: #201f1f;
+      background-color: #201f1f;
+      color: #ebdddd;
+      transition-duration: 250ms;
+      cursor: pointer;
+    }
+  }
+
+  .selected {
+    /* background-color: #ded7d7;
+    color: #111; */
+    border-color: #201f1f;
+    background-color: #201f1f;
+    color: #ebdddd;
+  }
+`;
+
+const Sort = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px 0;
+
+  .box {
+    padding: 5px 10px;
+    height: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 100px;
+    background-color: white;
+    border: 1px solid #b9afaf;
+    box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+    margin-right: 5px;
+
+    .text {
+      font-size: 0.8rem;
+      font-weight: 300;
+      margin: 0 7.5px;
+    }
+  }
+`;

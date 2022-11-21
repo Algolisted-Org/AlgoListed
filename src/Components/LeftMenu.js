@@ -8,7 +8,7 @@ const LeftMenu = ({marked}) => {
   return (
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
       {/* <div className="logo">Atanu Nayak</div> */}
-      <div className="logo">Algorithmist</div>
+      <a href='/' className="logo">Algorithmist</a>
       <div className="mid-links">
         {
           marked == "all-blogs" ? (
@@ -53,7 +53,7 @@ const LeftMenu = ({marked}) => {
           <div className="line"></div>
         </div>
         <div className="link">Work with us</div>
-        <div className="link">Company Information</div>
+        <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link">Report an Issue</a>
       </div>
 
       {
@@ -99,6 +99,7 @@ const Container = styled.div`
     width: 100%;
     font-size: 0.8rem;
     font-weight: 300;
+    text-decoration: none;
     /* text-transform: uppercase; */
     letter-spacing: 0.15rem;
     height: 45px;

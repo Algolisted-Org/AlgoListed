@@ -41,11 +41,19 @@ const LandingPageReal = () => {
 
         <div className="categories-page">
           <div className="page-head">Modules of Algorithmist</div>
-          <div className="page-sub-head">One platform, infinite possibilities. Artificial intelligence. We do this by providing a data-centric, end-to-end solution to manage the entire ML lifecycle.</div>
+          <div className="page-sub-head">
+            These are the main sections which the website is currently building on. 
+            Website has sections for the coding enthusiasts, from reading blogs to 
+            getting all informations about the coding opportunities. 
+          </div>
 
           <section>
-            <div className="sub-page-head">1. Blogs</div>
-            <div className="sub-page-sub-head">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum facere perferendis eos voluptates nisi incidunt sint dolores rem blanditiis vero!</div>
+            <div className="sub-page-head">1. Beginner Friendly Blogs</div>
+            <div className="sub-page-sub-head">
+              We have beginner friendly website contents, no fancy texts and informations. We just 
+              give as much information required by the first time reading users, because we firmly 
+              believe that when you want to learn a language you don't study it from a dictionary.
+            </div>
             <div className="cat-boxes">
               <a href='/blogs/all' className="cat-box">
                 <div className="cat-left">
@@ -79,19 +87,12 @@ const LandingPageReal = () => {
           </section>
 
           <section>
-            <div className="sub-page-head">2. Brain Teasers or Interview Puzzles</div>
-            <div className="sub-page-sub-head">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum facere perferendis eos voluptates nisi incidunt sint dolores rem blanditiis vero!</div>
+            <div className="sub-page-head">2. Aptitude Round - Hiring Process</div>
+            <div className="sub-page-sub-head">Interviewers ask brainteaser questions because they think your ability to answer will provide some indication of your ability to do the job. Often, the hiring manager feels the brainteaser will help them to evaluate your strength in one or more of the following competency areas : Problem solving, Critical thinking, Analytic skills, Creativity and Ability to think on your feet.</div>
             <div className="cat-boxes">
-              <a href='/brain-teasers' target="_blank" className="cat-box">
+              <a href='/aptitude-round' className="cat-box">
                 <div className="cat-left">
-                  <div className="cat-head">Top 20 most asked Brain Teasers </div>
-                  <div className="cat-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni eum commodi ipsa praesentium.</div>
-                </div>
-                <div className="cat-right"><ArrowRightAltIcon /></div>
-              </a>
-              <a target="_blank" className="cat-box">
-                <div className="cat-left">
-                  <div className="cat-head">Techniques to solve Brain Teasers </div>
+                  <div className="cat-head">Top most asked Brain Teasers </div>
                   <div className="cat-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni eum commodi ipsa praesentium.</div>
                 </div>
                 <div className="cat-right"><ArrowRightAltIcon /></div>
@@ -100,22 +101,46 @@ const LandingPageReal = () => {
           </section>
 
           <section>
-            <div className="sub-page-head">3. All Coding Competitions</div>
-            <div className="sub-page-sub-head">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum facere perferendis eos voluptates nisi incidunt sint dolores rem blanditiis vero!</div>
+            <div className="sub-page-head">3. Resources for Learning</div>
+            <div className="sub-page-sub-head">We link to you all the resources available on internet from question papers to notes in an organised manner. 
+            </div>
             <div className="cat-boxes">
-              <a href='/coding-competitions' target="_blank" className="cat-box">
+              <a href='/resources' className="cat-box">
+                <div className="cat-left">
+                  <div className="cat-head">Resources</div>
+                  <div className="cat-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni eum commodi ipsa praesentium.</div>
+                </div>
+                <div className="cat-right"><ArrowRightAltIcon /></div>
+              </a>
+            </div>
+          </section>
+
+          <section>
+            <div className="sub-page-head">4. List of Competitions & Opportunities</div>
+            <div className="sub-page-sub-head">These are the lists useful for coder who want to compete or want to get hired.</div>
+            <div className="cat-boxes">
+              <a href='/coding-competitions' className="cat-box">
                 <div className="cat-left">
                   <div className="cat-head">Upcoming Coding Competitions</div>
                   <div className="cat-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni eum commodi ipsa praesentium.</div>
                 </div>
                 <div className="cat-right"><ArrowRightAltIcon /></div>
               </a>
+              <a href='/opportunities' className="cat-box">
+                <div className="cat-left">
+                  <div className="cat-head">Opportunities List</div>
+                  <div className="cat-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni eum commodi ipsa praesentium.</div>
+                </div>
+                <div className="cat-right"><ArrowRightAltIcon /></div>
+              </a>
+              <a className="cat-box">
+                <div className="cat-left">
+                  <div className="cat-head">Coding communites to join</div>
+                  <div className="cat-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni eum commodi ipsa praesentium.</div>
+                </div>
+                <div className="cat-right"><ArrowRightAltIcon /></div>
+              </a>
             </div>
-          </section>
-
-          <section>
-            <div className="sub-page-head">4. All Off-Campus Opportunities</div>
-            <div className="sub-page-sub-head">Currently this product is under development. want to help us with this model <a href="/">contribute here</a>. </div>
           </section>
         </div>
 
@@ -340,7 +365,7 @@ const Container = styled.div`
     }
 
     .page-sub-head{
-      max-width: 780px;
+      max-width: 980px;
       margin: 10px 0;
       font-size: 1.15rem;
       font-weight: 200;
@@ -355,10 +380,11 @@ const Container = styled.div`
       }
 
       .sub-page-sub-head{
-        max-width: 700px;
-        margin: 10px 0 20px 10px;
-        font-size: 0.95rem;
+        max-width: 980px;
+        margin: 15px 0 15px 10px;
+        font-size: 1rem;
         font-weight: 200;
+        line-height: 1.75rem;
       }
 
       .cat-boxes{

@@ -20,7 +20,7 @@ const AllBlogs = () => {
                 <div className="cc-middle-content">
                     <h1 className='main-heading'>All Blogs</h1>
                     <p className="heading-supporter">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit impedit aliquid vitae aliquam debitis deleniti dolorum praesentium itaque ab quibusdam?
+                    We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
                     </p>
                     <div className="message">
                         <div className="icon"></div>
