@@ -19,7 +19,7 @@ const LandingPageReal = () => {
       <Container>
         
         <TopMessage>
-          <div className="text">The is website is under constant development, if there is something you can contribute the website with <a href="/"> click here</a>.</div>
+          <div className="text">The is website is under constant development, if there is something you can contribute the website with <a href="/work-with-us"> click here</a>.</div>
         </TopMessage>
 
         <div className="top-page">
@@ -156,15 +156,13 @@ const LandingPageReal = () => {
         <div className="open-source-page">
           <div className="page-head">Open Source Contribution</div>
           <div className="page-sub-head">Lorem One platform, infinite possibilities. Artificial intelligence. We do this by providing a data-centric, end-to-end solution to manage the entire ML lifecycle.</div>
-          <div className="btn">Start Contributing</div>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
           <div className="sub-page-head">Our Contributors</div>
           <div className="hold-contributors">
-            <div className="contributor"><img src="https://avatars.githubusercontent.com/u/93304796?v=4" alt="" /></div>
-            <div className="contributor"><img src="https://avatars.githubusercontent.com/u/31253617?v=4" alt="" /></div>
-            <div className="contributor"><img src="https://avatars.githubusercontent.com/u/80634689?s=100&v=4" alt="" /></div>
-            <div className="contributor"><img src="https://avatars.githubusercontent.com/u/65110396?s=100&v=4" alt="" /></div>
-            <div className="contributor"><img src="https://avatars.githubusercontent.com/u/69350358?s=64&v=4" alt="" /></div>
-            <div className="contributor"><img src="https://avatars.githubusercontent.com/u/72225789?s=64&v=4" alt="" /></div>
+            <a href='https://github.com/Nayaker/' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/93304796?v=4" alt="" /></a>
+            <a href='https://github.com/Ayushpanditmoto' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/31253617?v=4" alt="" /></a>
+            <a href='https://github.com/Mohit030802' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/80634689?s=100&v=4" alt="" /></a>
+            <a href='https://github.com/ThorezNS' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/84680745?v=4" alt="" /></a>
           </div>
         </div>
 
@@ -288,6 +286,7 @@ const Container = styled.div`
     display: inline-block;
     font-size: 0.85rem;
     font-weight: 400;
+    text-decoration: none;
     /* text-transform: uppercase; */
     letter-spacing: 0.15rem;
     border-radius: 100px;

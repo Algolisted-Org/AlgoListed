@@ -15,6 +15,7 @@ import AllBlogs from './Screen/AllBlogs';
 import AptitudeRound from './Screen/AptitudeRound';
 import Opportunities from './Screen/Opportunities';
 import Resources from './Screen/Resources';
+import ContributeSite from './Screen/ContributeSite';
 
 
 
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/resources" element={<Resources/>} />
         <Route path="/blogs/:blogname" element={<BlogPage/>} />
         <Route path="/blogs/all" element={<AllBlogs/>} />
+        <Route path="/work-with-us" element={<ContributeSite/>} />
         <Route path="/aptitude-round" element={<AptitudeRound/>} />
         <Route path="/opportunities" element={<Opportunities/>} />
         <Route path="/:random" element={<PageNotExist/>} />

@@ -79,10 +79,10 @@ const CodingCompetitions = () => {
             Facebook hackecup, TCS Ninja, Uber Hacktag, Hacktoberfest,
             Girlscript, GSOC, Code jam, Hash Cup.
           </p>
-          <Filters>
-            <div className="filter selected">DSA competiions</div>
-            <div className="filter selected">Competative Coding</div>
-            <div className="filter">All</div>
+          <Filters> 
+            <div className="filter selected">All</div>
+            <div className="filter">DSA competiions</div>
+            <div className="filter">Competative Coding</div>
             <div className="filter">Hackethrons</div>
             <div className="filter">Open Source</div>
             <div className="filter">Development</div>
