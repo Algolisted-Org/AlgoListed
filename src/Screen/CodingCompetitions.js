@@ -7,6 +7,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import { LinearProgress } from '@material-ui/core';
 import IntervalTimeLeft from '../helpers/IntervalTimeLeft';
+import TimeLeft from '../helpers/TimeLeft';
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1]);
@@ -112,47 +113,52 @@ const CodingCompetitions = () => {
               <LinearProgress />
             ) : (
               <>
-                {list.map((item, index) => (
-                  <div className="row" key={index}>
-                    <div className="hash">{index + 1}</div>
-                    <div className="platform">{item.platform}</div>
-                    <div className="contest">
-                      <a href={`${item.competition_link}`} target="_blank">
-                        {item.competition_name}
-                      </a>
-                    </div>
-                    <div className="date">
-                      <div className="date-show">
-                        {item.competition_date},{' '}
-                        {returnHours(item.time_start_mins)}:
-                        {returnMins(item.time_start_mins)}
+                {list
+                  .filter(
+                    (item) => TimeLeft(item.registration_end_date) !== 'Expired'
+                  )
+                  .map((item, index) => (
+                    <div className="row" key={index}>
+                      <div className="hash">{index + 1}</div>
+                      <div className="platform">{item.platform}</div>
+                      <div className="contest">
+                        <a href={`${item.competition_link}`} target="_blank">
+                          {item.competition_name}
+                        </a>
                       </div>
-                      <div className="time-left">
-                        {<IntervalTimeLeft date={item.competition_date} />}
+                      <div className="date">
+                        <div className="date-show">
+                          {item.competition_date},{' '}
+                          {returnHours(item.time_start_mins)}:
+                          {returnMins(item.time_start_mins)}
+                        </div>
+                        <div className="time-left">
+                          {<IntervalTimeLeft date={item.competition_date} />}
+                        </div>
                       </div>
-                    </div>
-                    <div className="duration">3 hrs</div>
+                      <div className="duration">3 hrs</div>
 
-                    <div className="registration">
-                      <div className="status">{item.registration_status}</div>
-                      <div className="time-left">
-                        {item.registration_status === 'Open' ? (
-                          <IntervalTimeLeft date={item.registration_date} /> ===
-                          'Expired' ? (
-                            <>{(item.registration_status = 'Closed')}</>
+                      <div className="registration">
+                        <div className="status">{item.registration_status}</div>
+                        <div className="time-left">
+                          {item.registration_status === 'Open' ? (
+                            (
+                              <IntervalTimeLeft date={item.registration_date} />
+                            ) === 'Expired' ? (
+                              <>{(item.registration_status = 'Closed')}</>
+                            ) : (
+                              <IntervalTimeLeft
+                                date={item.registration_end_date}
+                              />
+                            )
                           ) : (
-                            <IntervalTimeLeft
-                              date={item.registration_end_date}
-                            />
-                          )
-                        ) : (
-                          <>Registration Closed</>
-                        )}
-                        {/* 05 days, 19 hours, 02 minutes */}
+                            <>Registration Closed</>
+                          )}
+                          {/* 05 days, 19 hours, 02 minutes */}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </>
             )}
           </Table>
