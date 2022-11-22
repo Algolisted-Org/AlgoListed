@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Moon+Dance&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*, ::after, ::before{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  /* font-family: sohne-var, "Helvetica Neue", Arial, sans-serif; */
+  color: #000;
+}
+
+body{
+  background-color: #fefdff;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+a{
+  color: cornflowerblue;
+  font-weight: 300;
+}
+
+input{
+  border: 1px solid black;
+  outline: none;
+}
+
+::-webkit-scrollbar{
+  width: 0.75rem;
+}
+::-webkit-scrollbar-track{
+  background-color: transparent;
+  /* border-radius: 100vw; */
+  margin-block: 0.5em;
+}
+
+::-webkit-scrollbar-thumb{
+  background: rgba(44, 43, 46, 0.501);
+  border: 0.15em solid #fefdff;
+  border-radius: 100px;
+}
