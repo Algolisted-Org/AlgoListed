@@ -1,6 +1,0 @@
-This Controller folder will contain all files where the functions used in the apis will be declared .
-ie. All the functions , called in the router files while defining an api , will be declared here .
-eg :- router.post('/login',(req,res)=>{
-    Auth.login(req,res,bcrypt,jwt);
-});  
-For this api , the login function will be defined in a file named Auth.js in this folder .

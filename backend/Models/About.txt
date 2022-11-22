@@ -1,3 +1,0 @@
-This folder will contain files which contains the mongoose schema format for each ans every collections
-we are using in thios project .
-The config.js contains connection details of the database

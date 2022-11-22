@@ -1,3 +1,0 @@
-The Routers folder will basically contain files where the api routes will be defined . 
-We will divide all the apis among separate files , like say one file will contain apis which are for admin functions
-, one will contain apis for user functyionalities , one will contain apis for mobile app .
