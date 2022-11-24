@@ -1,18 +1,21 @@
-import React, { useState, useEffect, CSSProperties } from 'react';
-import styled from 'styled-components';
-import CCRightMenu from '../Components/CCRightMenu';
-import CCHeader from '../Components/CCHeader';
-import LeftMenu from '../Components/LeftMenu';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import InfoIcon from '@material-ui/icons/Info';
-import { LinearProgress } from '@material-ui/core';
-import IntervalTimeLeft from '../helpers/IntervalTimeLeft';
-import TimeLeft from '../helpers/TimeLeft';
+import React, { useState, useEffect, CSSProperties } from "react";
+import styled from "styled-components";
+import CCRightMenu from "../Components/CCRightMenu";
+import CCHeader from "../Components/CCHeader";
+import LeftMenu from "../Components/LeftMenu";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import InfoIcon from "@material-ui/icons/Info";
+import { LinearProgress } from "@material-ui/core";
+import IntervalTimeLeft from "../helpers/IntervalTimeLeft";
+import TimeLeft from "../helpers/TimeLeft";
+import { competitionFilters } from "./competitionFilters";
+import CompetitionItem from "./CompetitionItem";
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1]);
   const [waitingForData, setWaitingForData] = useState(true);
   const [list, setList] = useState();
+  const [filter, setFilter] = useState("All");
 
   useEffect(async () => {
     await fetch(
@@ -28,12 +31,16 @@ const CodingCompetitions = () => {
   }, []);
 
   const override = {
-    display: 'block',
-    margin: '0 auto',
-    borderColor: 'red',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  const handleFilter = (e) => {
+    setFilter(e.target.textContent);
   };
 
   const returnHours = (e) => {
@@ -43,6 +50,20 @@ const CodingCompetitions = () => {
   const returnMins = (e) => {
     return Math.floor(e % 60);
   };
+
+  const filters = competitionFilters.map((item) => {
+    return (
+      <div
+        onClick={(e) => {
+          handleFilter(e);
+        }}
+        key={item.id}
+        className={item.text == filter ? "filter selected" : "filter"}
+      >
+        {item.text}
+      </div>
+    );
+  });
 
   return (
     <GrandContainer>
@@ -57,7 +78,7 @@ const CodingCompetitions = () => {
       </MobContainer>
       <Container>
         <CCHeader />
-        <LeftMenu marked={'all-coding-competitions'} />
+        <LeftMenu marked={"all-coding-competitions"} />
         <div className="cc-middle-content">
           <h1 className="main-heading">All Upcoming Coding Competitions</h1>
           <p className="heading-supporter">
@@ -69,7 +90,7 @@ const CodingCompetitions = () => {
           <div className="message">
             <div className="icon"></div>
             <div className="text">
-              You know about a coding competiion which is not mentioned here.{' '}
+              You know about a coding competiion which is not mentioned here.{" "}
               <a href="/">click here</a>
             </div>
           </div>
@@ -79,25 +100,13 @@ const CodingCompetitions = () => {
             Facebook hackecup, TCS Ninja, Uber Hacktag, Hacktoberfest,
             Girlscript, GSOC, Code jam, Hash Cup.
           </p>
-          <Filters> 
-            <div className="filter selected">All</div>
-            <div className="filter">DSA competiions</div>
-            <div className="filter">Competative Coding</div>
-            <div className="filter">Hackethrons</div>
-            <div className="filter">Open Source</div>
-            <div className="filter">Development</div>
-            <div className="filter">MNC competiions</div>
-            <div className="filter">Global</div>
-            <div className="filter">Pan India</div>
-            <div className="filter">College Level</div>
-            <div className="filter">MAANG</div>
-          </Filters>
+          <Filters>{filters}</Filters>
           <Sort>
             <div className="box">
               <div className="text">By Relevence</div>
               <FilterListIcon />
             </div>
-            <InfoIcon style={{ fill: '#333' }} />
+            <InfoIcon style={{ fill: "#333" }} />
           </Sort>
           <Table>
             <div className="row top-row">
@@ -115,50 +124,27 @@ const CodingCompetitions = () => {
               <>
                 {list
                   .filter(
-                    (item) => TimeLeft(item.registration_end_date) !== 'Expired'
+                    (item) => TimeLeft(item.registration_end_date) !== "Expired"
                   )
-                  .map((item, index) => (
-                    <div className="row" key={index}>
-                      <div className="hash">{index + 1}</div>
-                      <div className="platform">{item.platform}</div>
-                      <div className="contest">
-                        <a href={`${item.competition_link}`} target="_blank">
-                          {item.competition_name}
-                        </a>
-                      </div>
-                      <div className="date">
-                        <div className="date-show">
-                          {item.competition_date},{' '}
-                          {returnHours(item.time_start_mins)}:
-                          {returnMins(item.time_start_mins)}
-                        </div>
-                        <div className="time-left">
-                          {<IntervalTimeLeft date={item.competition_date} />}
-                        </div>
-                      </div>
-                      <div className="duration">3 hrs</div>
-
-                      <div className="registration">
-                        <div className="status">{item.registration_status}</div>
-                        <div className="time-left">
-                          {item.registration_status === 'Open' ? (
-                            (
-                              <IntervalTimeLeft date={item.registration_date} />
-                            ) === 'Expired' ? (
-                              <>{(item.registration_status = 'Closed')}</>
-                            ) : (
-                              <IntervalTimeLeft
-                                date={item.registration_end_date}
-                              />
-                            )
-                          ) : (
-                            <>Registration Closed</>
-                          )}
-                          {/* 05 days, 19 hours, 02 minutes */}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                  .map((item, index) => {
+                    if (filter == "All") {
+                      return (
+                        <CompetitionItem
+                          key={index}
+                          index={index}
+                          item={item}
+                        />
+                      );
+                    } else if (item.tags.includes(filter)) {
+                      return (
+                        <CompetitionItem
+                          key={index}
+                          index={index}
+                          item={item}
+                        />
+                      );
+                    }
+                  })}
               </>
             )}
           </Table>
