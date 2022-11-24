@@ -9,12 +9,13 @@ import { LinearProgress } from "@material-ui/core";
 import IntervalTimeLeft from "../helpers/IntervalTimeLeft";
 import TimeLeft from "../helpers/TimeLeft";
 import { competitionFilters } from "./competitionFilters";
+import CompetitionItem from "./CompetitionItem";
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1]);
   const [waitingForData, setWaitingForData] = useState(true);
   const [list, setList] = useState();
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState("All");
 
   useEffect(async () => {
     await fetch(
@@ -99,100 +100,7 @@ const CodingCompetitions = () => {
             Facebook hackecup, TCS Ninja, Uber Hacktag, Hacktoberfest,
             Girlscript, GSOC, Code jam, Hash Cup.
           </p>
-          <Filters>
-            {filters}
-            {/* <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter selected"
-            >
-              All
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter"
-            >
-              DSA competiions
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-                console.log(this);
-              }}
-              className={
-                filter == "Competative Coding" ? "filter selected" : "filter"
-              }
-            >
-              Competative Coding
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter"
-            >
-              Hackethrons
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter"
-            >
-              Open Source
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter"
-            >
-              Development
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter"
-            >
-              MNC competiions
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter"
-            >
-              Global
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter"
-            >
-              Pan India
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter"
-            >
-              College Level
-            </div>
-            <div
-              onClick={(e) => {
-                handleFilter(e);
-              }}
-              className="filter"
-            >
-              MAANG
-            </div> */}
-          </Filters>
+          <Filters>{filters}</Filters>
           <Sort>
             <div className="box">
               <div className="text">By Relevence</div>
@@ -218,48 +126,25 @@ const CodingCompetitions = () => {
                   .filter(
                     (item) => TimeLeft(item.registration_end_date) !== "Expired"
                   )
-                  .map((item, index) => (
-                    <div className="row" key={index}>
-                      <div className="hash">{index + 1}</div>
-                      <div className="platform">{item.platform}</div>
-                      <div className="contest">
-                        <a href={`${item.competition_link}`} target="_blank">
-                          {item.competition_name}
-                        </a>
-                      </div>
-                      <div className="date">
-                        <div className="date-show">
-                          {item.competition_date},{" "}
-                          {returnHours(item.time_start_mins)}:
-                          {returnMins(item.time_start_mins)}
-                        </div>
-                        <div className="time-left">
-                          {<IntervalTimeLeft date={item.competition_date} />}
-                        </div>
-                      </div>
-                      <div className="duration">3 hrs</div>
-
-                      <div className="registration">
-                        <div className="status">{item.registration_status}</div>
-                        <div className="time-left">
-                          {item.registration_status === "Open" ? (
-                            (
-                              <IntervalTimeLeft date={item.registration_date} />
-                            ) === "Expired" ? (
-                              <>{(item.registration_status = "Closed")}</>
-                            ) : (
-                              <IntervalTimeLeft
-                                date={item.registration_end_date}
-                              />
-                            )
-                          ) : (
-                            <>Registration Closed</>
-                          )}
-                          {/* 05 days, 19 hours, 02 minutes */}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                  .map((item, index) => {
+                    if (filter == "All") {
+                      return (
+                        <CompetitionItem
+                          key={index}
+                          index={index}
+                          item={item}
+                        />
+                      );
+                    } else if (item.tags.includes(filter)) {
+                      return (
+                        <CompetitionItem
+                          key={index}
+                          index={index}
+                          item={item}
+                        />
+                      );
+                    }
+                  })}
               </>
             )}
           </Table>
