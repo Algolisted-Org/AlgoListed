@@ -16,6 +16,7 @@ import AptitudeRound from './Screen/AptitudeRound';
 import Opportunities from './Screen/Opportunities';
 import Resources from './Screen/Resources';
 import ContributeSite from './Screen/ContributeSite';
+import BlogAutoCode from './Screen/BlogAutoCode';
 
 
 
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/work-with-us" element={<ContributeSite/>} />
         <Route path="/aptitude-round" element={<AptitudeRound/>} />
         <Route path="/opportunities" element={<Opportunities/>} />
+        <Route path="/get-blog-code" element={<BlogAutoCode/>} />
         <Route path="/:random" element={<PageNotExist/>} />
       </Routes>
     </div>

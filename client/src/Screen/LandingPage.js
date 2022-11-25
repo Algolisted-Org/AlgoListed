@@ -163,6 +163,7 @@ const LandingPageReal = () => {
             <a href='https://github.com/Ayushpanditmoto' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/31253617?v=4" alt="" /></a>
             <a href='https://github.com/Mohit030802' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/80634689?s=100&v=4" alt="" /></a>
             <a href='https://github.com/ThorezNS' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/84680745?v=4" alt="" /></a>
+            <a href='https://github.com/jinitsuga' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/73081185?v=4" alt="" /></a>
           </div>
         </div>
 

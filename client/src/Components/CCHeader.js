@@ -86,7 +86,7 @@ const Container = styled.div`
       
       .icon-box{
         height: 32.5px;
-        aspect-ratio: 1/1;
+        width: 32.5px;
         display: grid;
         place-items: center;
         border-radius: 10px;

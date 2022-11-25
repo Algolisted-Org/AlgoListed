@@ -26,8 +26,7 @@ const AllShortestPathAlgorithms = () => {
                 </div>
                 <div className="big-margin"></div>
                 <div className="gap-15px-tb"></div>
-                <p className="para-1">This blog is about the most important shortest-path algorithms, there are a lot of blogs that exist on the topic but they are either lengthy and non-readable or give way too much information, which is not required. </p>
-                <div className="para-1">I have also used a lot of online free resources like from medium, cp-algorithms and leetcode discuss section and used the important useful portions. </div>
+                <p className="para-1">This blog is about the most important shortest-path algorithms, there are a lot of blogs that exist on the topic but they are either lengthy and non-readable or give way too much information, which is not required. I have also used a lot of online free resources like from medium, cp-algorithms and leetcode discuss section and used the important useful portions. </p>
                 <div className="gap-5px-tb"></div>
                 <div className="para-1">Here in this article, I have kept the concepts crisp and easy to understand, this whole blog can be broken down into three parts : </div>
                 <div className="para-2"><div className="sym">•</div> <div className="text">Understanding the Algorithms - 5 of the most used algorithms</div></div>

@@ -8,8 +8,8 @@ import InfoIcon from "@material-ui/icons/Info";
 import { LinearProgress } from "@material-ui/core";
 import IntervalTimeLeft from "../helpers/IntervalTimeLeft";
 import TimeLeft from "../helpers/TimeLeft";
-import { competitionFilters } from "./competitionFilters";
-import CompetitionItem from "./CompetitionItem";
+import { competitionFilters } from "../Components/competitionFilters";
+import CompetitionItem from "../Components/CompetitionItem";
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1]);
@@ -17,18 +17,31 @@ const CodingCompetitions = () => {
   const [list, setList] = useState();
   const [filter, setFilter] = useState("All");
 
-  useEffect(async () => {
-    await fetch(
-      `https://script.google.com/macros/s/AKfycbzXyVH1o6CzzJUfLN0qC-EscTKQeKouAUlU3oBs_S85WvB13wPHuawZLK43QJrqBua3Ng/exec`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setList(data);
-        setWaitingForData(false);
-
-        console.log(data);
-      });
+  useEffect(() => {
+    (async () => {
+      await fetch(
+        `https://script.google.com/macros/s/AKfycbzXyVH1o6CzzJUfLN0qC-EscTKQeKouAUlU3oBs_S85WvB13wPHuawZLK43QJrqBua3Ng/exec`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setList(data);
+          setWaitingForData(false);
+  
+          console.log(data); 
+        });
+    })();
   }, []);
+
+  // useEffect(() => {
+  //   first
+  
+  //   return () => {
+  //     second
+  //   }
+  // }, [third])
+
+  
+  
 
   const override = {
     display: "block",
@@ -41,14 +54,6 @@ const CodingCompetitions = () => {
 
   const handleFilter = (e) => {
     setFilter(e.target.textContent);
-  };
-
-  const returnHours = (e) => {
-    return Math.floor(e / 60);
-  };
-
-  const returnMins = (e) => {
-    return Math.floor(e % 60);
   };
 
   const filters = competitionFilters.map((item) => {

@@ -45,4 +45,8 @@ export const competitionFilters = [
     text: "MAANG",
     id: 11,
   },
+  {
+    text: "Coding Event",
+    id: 12,
+  },
 ];
