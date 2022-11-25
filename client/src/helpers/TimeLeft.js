@@ -1,4 +1,4 @@
-const TimeLeft = (date) => {
+const TimeLeft = (date, minutes) => {
   let timeLeft;
 
   (() => {
@@ -9,7 +9,7 @@ const TimeLeft = (date) => {
     const remTime = eventTime - currentTime;
 
     let s = Math.floor(remTime / 1000);
-    let m = Math.floor(s / 60);
+    let m = Math.floor(s / 60) + minutes;
     let h = Math.floor(m / 60);
     const d = Math.floor(h / 24);
 
