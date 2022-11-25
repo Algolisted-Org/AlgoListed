@@ -6,8 +6,13 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonIcon from '@material-ui/icons/Person';
+import { useState } from 'react';
 
 const CCHeader = () => {
+  const [showAccountModel, setShowAccountModel] = useState(false);
+  const [showNotificationModel, setShowNotificationModel] = useState(false);
+  
+
   return (
     <Container>
       <div className="search-box">
@@ -23,13 +28,60 @@ const CCHeader = () => {
             <GitHubIcon/>
           </a>
         </div>
-        <div className="icon-box">
+        <div className="icon-box" onClick={() => setShowNotificationModel(!showNotificationModel)}>
             <NotificationsIcon/>
         </div>
-        <div className="icon-box">
+        <div className="icon-box" onClick={() => setShowAccountModel(!showAccountModel)}>
             <PersonIcon/>
         </div>
       </div>
+
+      {
+        showNotificationModel ? (
+          <div className="nav-model-box">
+            <div className="text">Your <b>Notifications</b></div>
+            <div className="line"></div>
+            <div className="btn">
+              <div className="btn-text">Your account has been successfully created, do check out the
+              opportunites you have with Algorithmist.
+              </div>
+            </div>
+            <div className="line"></div>
+            <div className="btn">
+              <div className="btn-text">Your account has been successfully created, Welcome to Algorithmist.
+              </div>
+            </div>
+          </div>
+        ) : (<></>)
+      }
+
+      {
+        showAccountModel ? (
+          <div className="nav-model-box">
+            <div className="text">Login to <b>Algorithmist</b></div>
+            <div className="line"></div>
+            <div className="btn">
+              <div className="icon"><img src="https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/112-gmail_email_mail-512.png" alt="" /></div>
+              <div className="btn-text">Email and Password</div>
+            </div>
+            <div className="btn">
+              <div className="icon"><img src="https://www.firstrust.com/getattachment/cf7dac57-a2ed-437b-8d50-9fac4634a8a2/google_logo.png?lang=en-US&width=300&height=300&ext=.png" alt="" /></div>
+              <div className="btn-text">Google Account</div>
+            </div>
+            <div className="btn">
+              <div className="icon"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" /></div>
+              <div className="btn-text">Linkedin</div>
+            </div>
+            <div className="btn">
+              <div className="icon"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" /></div>
+              <div className="btn-text">Github</div>
+            </div>
+            <div className="line"></div>
+            <div className="text small">Don't have an account ? <a>sign up</a></div>
+          </div>
+        ) : (<></>)
+      }
+      
 
     </Container>
   )
@@ -104,6 +156,76 @@ const Container = styled.div`
           transition-duration: 250ms;
         }
       }
+    }
+
+    .nav-model-box{
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      width: 320px;
+      border-radius: 15px;
+      background-color: white;
+      border: 1px solid rgb(232, 232, 232);
+      box-shadow: rgb(28 28 28 / 28%) 0px 11px 18px;
+      padding: 10px;
+
+      .line{
+        width: 100%;
+        height: 1px;
+        background-color: #e5e7ed;
+        margin: 10px 0;
+      }
+
+      .text{
+        font-size: 0.9rem;
+        font-weight: 200;
+
+        b{
+          font-weight: 500;
+        }
+      }
+
+      .small{
+        font-size: 0.75rem;
+
+        a{
+          text-decoration: none;
+        }
+      }
+
+      .btn{
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        
+        &:hover{
+          background-color: #e5e5e5;
+          border-radius: 10px;
+          transition-duration: 250ms;
+          cursor: pointer;
+        }
+
+        .icon{
+          height: 100%;
+          display: grid;
+          place-items: center;
+          margin-right: 10px;
+
+          img{
+            height: 30px;
+          }
+        }
+
+        .btn-text{
+          font-size: 0.85rem;
+          font-weight: 200;
+
+          b{
+            font-weight: 500;
+          }
+        }
+      }
+
     }
 
 `
