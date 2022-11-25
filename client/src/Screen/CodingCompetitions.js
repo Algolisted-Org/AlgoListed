@@ -426,6 +426,10 @@ const Table = styled.div`
     }
   }
 
+  .ongoing {
+    background-color: #ffe0e0;
+  }
+
   .last-row {
     border-bottom: 0px solid transparent;
   }

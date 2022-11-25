@@ -1,5 +1,6 @@
 import React from 'react';
 import IntervalTimeLeft from '../helpers/IntervalTimeLeft';
+import TimeLeft from '../helpers/TimeLeft';
 
 export default function CompetitionItem(props) {
   const returnHours = (e) => {
@@ -11,7 +12,17 @@ export default function CompetitionItem(props) {
   };
 
   return (
-    <div className="row" key={props.index}>
+    <div
+      className={
+        TimeLeft(
+          props.item.registration_end_date,
+          props.item.registration_end_time_mins
+        ) === 'Expired'
+          ? 'row ' + 'ongoing'
+          : 'row '
+      }
+      key={props.index}
+    >
       <div className="hash">{props.index + 1}</div>
       <div className="platform">{props.item.platform}</div>
       <div className="contest">
