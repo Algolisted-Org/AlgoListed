@@ -1,5 +1,5 @@
-import React from "react";
-import IntervalTimeLeft from "../helpers/IntervalTimeLeft";
+import React from 'react';
+import IntervalTimeLeft from '../helpers/IntervalTimeLeft';
 
 export default function CompetitionItem(props) {
   const returnHours = (e) => {
@@ -26,7 +26,12 @@ export default function CompetitionItem(props) {
           {returnMins(props.item.time_start_mins)}
         </div>
         <div className="time-left">
-          {<IntervalTimeLeft date={props.item.competition_date} />}
+          {
+            <IntervalTimeLeft
+              date={props.item.competition_date}
+              minutes={props.item.time_start_mins}
+            />
+          }
         </div>
       </div>
       <div className="duration">3 hrs</div>
@@ -34,12 +39,19 @@ export default function CompetitionItem(props) {
       <div className="registration">
         <div className="status">{props.item.registration_status}</div>
         <div className="time-left">
-          {props.item.registration_status === "Open" ? (
-            <IntervalTimeLeft date={props.item.registration_date} /> ===
-            "Expired" ? (
-              <>{(props.item.registration_status = "Closed")}</>
+          {props.item.registration_status === 'Open' ? (
+            (
+              <IntervalTimeLeft
+                date={props.item.registration_end_date}
+                minutes={props.item.registration_end_time_mins}
+              />
+            ) === 'Expired' ? (
+              <>{(props.item.registration_status = 'Closed')}</>
             ) : (
-              <IntervalTimeLeft date={props.item.registration_end_date} />
+              <IntervalTimeLeft
+                date={props.item.registration_end_date}
+                minutes={props.item.registration_end_time_mins}
+              />
             )
           ) : (
             <>Registration Closed</>
