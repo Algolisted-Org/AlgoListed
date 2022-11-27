@@ -91,7 +91,7 @@ const CodingCompetitions = () => {
           <div className="message">
             <div className="icon"></div>
             <div className="text">
-              You know about a coding competiion which is not mentioned here.{" "}
+              You know about a coding competition which is not mentioned here.{" "}
               <a href="/">click here</a>
             </div>
           </div>
