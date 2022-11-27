@@ -1,20 +1,20 @@
-import React, { useState, useEffect, CSSProperties } from 'react';
-import styled from 'styled-components';
-import CCRightMenu from '../Components/CCRightMenu';
-import CCHeader from '../Components/CCHeader';
-import LeftMenu from '../Components/LeftMenu';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import InfoIcon from '@material-ui/icons/Info';
-import { LinearProgress } from '@material-ui/core';
-import TimeLeft from '../helpers/TimeLeft';
-import { competitionFilters } from '../Components/competitionFilters';
-import CompetitionItem from '../Components/CompetitionItem';
+import React, { useState, useEffect, CSSProperties } from "react";
+import styled from "styled-components";
+import CCRightMenu from "../Components/CCRightMenu";
+import CCHeader from "../Components/CCHeader";
+import LeftMenu from "../Components/LeftMenu";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import InfoIcon from "@material-ui/icons/Info";
+import { LinearProgress } from "@material-ui/core";
+import TimeLeft from "../helpers/TimeLeft";
+import { competitionFilters } from "../Components/competitionFilters";
+import CompetitionItem from "../Components/CompetitionItem";
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1]);
   const [waitingForData, setWaitingForData] = useState(true);
   const [list, setList] = useState();
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState("All");
 
   useEffect(() => {
     (async () => {
@@ -40,12 +40,12 @@ const CodingCompetitions = () => {
   // }, [third])
 
   const override = {
-    display: 'block',
-    margin: '0 auto',
-    borderColor: 'red',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   };
 
   const handleFilter = (e) => {
@@ -59,7 +59,7 @@ const CodingCompetitions = () => {
           handleFilter(e);
         }}
         key={item.id}
-        className={item.text == filter ? 'filter selected' : 'filter'}
+        className={item.text == filter ? "filter selected" : "filter"}
       >
         {item.text}
       </div>
@@ -79,7 +79,7 @@ const CodingCompetitions = () => {
       </MobContainer>
       <Container>
         <CCHeader />
-        <LeftMenu marked={'all-coding-competitions'} />
+        <LeftMenu marked={"all-coding-competitions"} />
         <div className="cc-middle-content">
           <h1 className="main-heading">All Upcoming Coding Competitions</h1>
           <p className="heading-supporter">
@@ -91,14 +91,14 @@ const CodingCompetitions = () => {
           <div className="message">
             <div className="icon"></div>
             <div className="text">
-              You know about a coding competiion which is not mentioned here.{' '}
+              You know about a coding competiion which is not mentioned here.{" "}
               <a href="/">click here</a>
             </div>
           </div>
           <p className="heading-supporter">
-            Competions like - Google Kickstart, Codeforces, Leetcode, CC,
-            Hackethrons, ICPC, Hackethrons, Microsoft Imagine, Microsoft Engage,
-            Facebook hackecup, TCS Ninja, Uber Hacktag, Hacktoberfest,
+            Competitions like - Google Kickstart, Codeforces, Leetcode, CC,
+            Hackathons, ICPC, Hackathons, Microsoft Imagine, Microsoft Engage,
+            Facebook Hacker Cup, TCS Ninja, Uber Hacktag, Hacktoberfest,
             Girlscript, GSOC, Code jam, Hash Cup.
           </p>
           <Filters>{filters}</Filters>
@@ -107,7 +107,7 @@ const CodingCompetitions = () => {
               <div className="text">By Relevence</div>
               <FilterListIcon />
             </div>
-            <InfoIcon style={{ fill: '#333' }} />
+            <InfoIcon style={{ fill: "#333" }} />
           </Sort>
           <Table>
             <div className="row top-row">
@@ -129,10 +129,10 @@ const CodingCompetitions = () => {
                       TimeLeft(
                         item.competition_date,
                         item.time_start_mins + item.duration_mins
-                      ) !== 'Expired'
+                      ) !== "Expired"
                   )
                   .map((item, index) => {
-                    if (filter == 'All') {
+                    if (filter == "All") {
                       return (
                         <CompetitionItem
                           key={index}
