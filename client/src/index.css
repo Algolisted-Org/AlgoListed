@@ -24,12 +24,11 @@ input{
   outline: none;
 }
 
-::-webkit-scrollbar{
+/* ::-webkit-scrollbar{
   width: 0.75rem;
 }
 ::-webkit-scrollbar-track{
   background-color: transparent;
-  /* border-radius: 100vw; */
   margin-block: 0.5em;
 }
 
@@ -37,4 +36,17 @@ input{
   background: rgba(44, 43, 46, 0.501);
   border: 0.15em solid #fefdff;
   border-radius: 100px;
+} */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+ 
+::-webkit-scrollbar-track {
+  background-color: #aaa;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: #335ddc;
+  border-radius: 8px;
 }
