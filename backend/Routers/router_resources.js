@@ -8,12 +8,11 @@ const AdminResource = require("../Controllers/resources/admin_resource");
 // Get Routes ------->
 
 router.get('/',(req,res)=>{
-    res.json('Showing all resources . . .') ;
+    UserResource.get_resources(req,res);
 });
 
-router.get('/:id',(req,res)=>{
-    var required_id = req.params.id;
-    res.json(`Showing a specific resource ${required_id} . . .`) ;
+router.get('/id/:id',(req,res)=>{
+    UserResource.get_resource_by_id(req,res);
 });
 
 // Post Routes ------->
