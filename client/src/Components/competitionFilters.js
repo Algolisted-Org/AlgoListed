@@ -1,4 +1,4 @@
-//  all, DSA Competiions, Competative Coding, Hackethrons, Open Source, Development, MNC competiions, Global, Pan India, College Level, MAANG
+//  all, DSA Competitions, Competative Coding, Hackethrons, Open Source, Development, MNC Competitions, Global, Pan India, College Level, MAANG
 
 export const competitionFilters = [
   {
@@ -6,15 +6,15 @@ export const competitionFilters = [
     id: 1,
   },
   {
-    text: "DSA Competiions",
+    text: "DSA Competitions",
     id: 2,
   },
   {
-    text: "Competative Coding",
+    text: "Competitive Coding",
     id: 3,
   },
   {
-    text: "Hackethrons",
+    text: "Hackathons",
     id: 4,
   },
   {
@@ -26,7 +26,7 @@ export const competitionFilters = [
     id: 6,
   },
   {
-    text: "MNC competiions",
+    text: "MNC Competitions",
     id: 7,
   },
   {

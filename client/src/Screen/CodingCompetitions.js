@@ -107,14 +107,14 @@ const CodingCompetitions = () => {
           <div className="message">
             <div className="icon"></div>
             <div className="text">
-              You know about a coding competiion which is not mentioned here.{" "}
+              You know about a coding competition which is not mentioned here.{" "}
               <a href="/">click here</a>
             </div>
           </div>
           <p className="heading-supporter">
-            Competions like - Google Kickstart, Codeforces, Leetcode, CC,
-            Hackethrons, ICPC, Hackethrons, Microsoft Imagine, Microsoft Engage,
-            Facebook hackecup, TCS Ninja, Uber Hacktag, Hacktoberfest,
+            Competitions like - Google Kickstart, Codeforces, Leetcode, CC,
+            Hackathons, ICPC, Hackathons, Microsoft Imagine, Microsoft Engage,
+            Facebook Hacker Cup, TCS Ninja, Uber Hacktag, Hacktoberfest,
             Girlscript, GSOC, Code jam, Hash Cup.
           </p>
           <Filters>{filters}</Filters>

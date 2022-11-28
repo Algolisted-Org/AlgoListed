@@ -17,6 +17,7 @@ import Opportunities from './Screen/Opportunities';
 import Resources from './Screen/Resources';
 import ContributeSite from './Screen/ContributeSite';
 import BlogAutoCode from './Screen/BlogAutoCode';
+import AuthPage from './Screen/AuthPage';
 
 
 
@@ -25,6 +26,7 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
+        <Route path="/auth" element={<AuthPage/>} />
         <Route path="/blog/ideas" element={<BlogIdeas/>} />
         <Route path="/coding-competitions" element={<CodingCompetitions/>} />
         <Route path="/organisation-information/:showpage" element={<OrganisationInfo/>} />

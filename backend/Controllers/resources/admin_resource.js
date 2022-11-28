@@ -1,7 +1,19 @@
-const create_resource = async(req,res)=>{
-    const { title, desc } = req.body;
+const All_Resources = require("../../Models/resourcesModel");
 
-    res.status(200).json(`We created a resource, title : ${title}, desc : ${desc}`);
+const create_resource = async(req,res)=>{
+    const { title, description, tags, link, type, createdAt} = req.body;
+    
+    new All_Resources({
+        title,
+        description,
+        tags,
+        link,
+        type,
+        createdAt,
+    }).save((err,result)=>{
+        if(err) res.status(400).json({"err" : err , "msg": "A resources cannot be added!"}) ;
+        else res.status(200).json("Resource added succesfully !!!") ; 
+    })
 }
 
 

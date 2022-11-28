@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const resourcesSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -18,7 +19,7 @@ const resourcesSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['blog', 'PDF', 'other'],
+    enum: ['Blog', 'PDF', 'Question Paper', 'other'],
     required: true,
     default: 'PDF',
   },
@@ -28,4 +29,4 @@ const resourcesSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('ResourcesModel', resourcesSchema);
+module.exports = mongoose.model('All_Resources', resourcesSchema);
