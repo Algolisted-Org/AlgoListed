@@ -25,11 +25,27 @@ const CodingCompetitions = () => {
         .then((data) => {
           setList(data);
           setWaitingForData(false);
+        })
+        .then(() => {
+          setList((list) =>
+            list.map((obj) => {
+              const isRegistrationExpired =
+                TimeLeft(
+                  obj.registration_end_date,
+                  obj.registration_end_time_mins
+                ) === "Expired";
+              if (isRegistrationExpired) {
+                return { ...obj, registration_status: "Closed" };
+              }
 
-          console.log(data);
+              return obj;
+            })
+          );
         });
     })();
   }, []);
+
+  console.log(list);
 
   // useEffect(() => {
   //   first

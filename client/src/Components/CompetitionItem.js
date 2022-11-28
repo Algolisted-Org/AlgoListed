@@ -50,19 +50,10 @@ export default function CompetitionItem({ item, index }) {
         <div className="status">{item.registration_status}</div>
         <div className="time-left">
           {item.registration_status === "Open" ? (
-            (
-              <IntervalTimeLeft
-                date={item.registration_end_date}
-                minutes={item.registration_end_time_mins}
-              />
-            ) === "Expired" ? (
-              <>{(item.registration_status = "Closed")}</>
-            ) : (
-              <IntervalTimeLeft
-                date={item.registration_end_date}
-                minutes={item.registration_end_time_mins}
-              />
-            )
+            <IntervalTimeLeft
+              date={item.registration_end_date}
+              minutes={item.registration_end_time_mins}
+            />
           ) : (
             <>Registration Closed</>
           )}
