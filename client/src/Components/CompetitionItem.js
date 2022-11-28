@@ -32,8 +32,23 @@ export default function CompetitionItem({ item, index }) {
       </div>
       <div className="date">
         <div className="date-show">
-          {item.competition_date},{returnHours(item.time_start_mins)}:
-          {returnMins(item.time_start_mins)}
+          {item.competition_date},{" "}
+          <>
+            {
+              (returnHours(item.time_start_mins) < 10) ? (
+                <>{"0"}{returnHours(item.time_start_mins)}</>
+              ):(<>{returnHours(item.time_start_mins)}</>)
+            } 
+          </>
+          :
+          <>
+            {
+              (returnMins(item.time_start_mins) < 10) ? (
+                <>{"0"}{returnMins(item.time_start_mins)}</>
+              ):(<>{returnMins(item.time_start_mins)}</>)
+            } 
+          </>
+          {}
         </div>
         <div className="time-left">
           {
@@ -44,8 +59,14 @@ export default function CompetitionItem({ item, index }) {
           }
         </div>
       </div>
-      <div className="duration">3 hrs</div>
-
+      <div className="duration">
+        {returnHours(item.duration_mins)} Hours{" "} 
+        {
+          returnMins(item.duration_mins) != 0 ? (
+            <>, {returnMins(item.duration_mins)} Mins</>
+          ):(<></>)
+        }
+      </div>
       <div className="registration">
         <div className="status">{item.registration_status}</div>
         <div className="time-left">

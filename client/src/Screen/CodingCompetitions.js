@@ -139,8 +139,7 @@ const CodingCompetitions = () => {
               <LinearProgress />
             ) : (
               <>
-                {list
-                  .filter(
+                {list.filter(
                     (item) =>
                       TimeLeft(
                         item.competition_date,
@@ -277,6 +276,7 @@ const Filters = styled.div`
     border-radius: 500px;
     margin: 0px 5px 5px 0px;
     font-weight: 300;
+    
 
     &:hover {
       border-color: #201f1f;
@@ -363,6 +363,7 @@ const Table = styled.div`
       /* background-color: grey; */
       font-size: 0.9rem;
       font-weight: 300;
+      padding-right: 5px;
     }
 
     .contest {
@@ -374,6 +375,7 @@ const Table = styled.div`
       /* background-color: coral; */
       font-size: 0.9rem;
       font-weight: 300;
+      padding-right: 5px;
     }
 
     .date {
@@ -385,6 +387,7 @@ const Table = styled.div`
       /* background-color: grey; */
       font-size: 0.9rem;
       font-weight: 300;
+      padding-right: 5px;
     }
 
     .duration {
@@ -394,8 +397,9 @@ const Table = styled.div`
       border-right: 1px solid #e0cece;
       height: 100%;
       /* background-color: yellow; */
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 300;
+      padding-right: 5px;
     }
 
     .registration {
@@ -405,6 +409,7 @@ const Table = styled.div`
       height: 100%;
       font-size: 0.9rem;
       font-weight: 300;
+      padding-right: 5px;
     }
   }
 

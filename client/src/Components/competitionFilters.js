@@ -14,39 +14,35 @@ export const competitionFilters = [
     id: 3,
   },
   {
-    text: "Hackathons",
+    text: "Open Source",
     id: 4,
   },
   {
-    text: "Open Source",
+    text: "Development",
     id: 5,
   },
   {
-    text: "Development",
+    text: "Hackathons",
     id: 6,
   },
   {
-    text: "MNC Competitions",
+    text: "Coding Events",
     id: 7,
   },
   {
-    text: "Global",
+    text: "Hiring",
     id: 8,
   },
   {
-    text: "Pan India",
+    text: "Top MNC Organised",
     id: 9,
   },
   {
-    text: "College Level",
+    text: "Teir 1 College Organised",
     id: 10,
   },
   {
-    text: "MAANG",
+    text: "Group Competitions",
     id: 11,
-  },
-  {
-    text: "Coding Event",
-    id: 12,
   },
 ];
