@@ -14,7 +14,7 @@ const corsOptions ={
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
-app.use(cors(corsOptions));
+app.use(cors());
 
 //Middlewares
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +23,7 @@ app.use(morgan('dev'));
 
 //Routes
 app.get('/', (req, res) => {
-  res.send('Hello World, backend has succesfully been started.');
+  res.send('Hello World 2, backend has succesfully been started.');
 });
 
 app.use('/auth', require('./Routers/router_auth'));
