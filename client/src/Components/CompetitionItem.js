@@ -1,8 +1,8 @@
-import React from 'react';
-import IntervalTimeLeft from '../helpers/IntervalTimeLeft';
-import TimeLeft from '../helpers/TimeLeft';
+import React from "react";
+import IntervalTimeLeft from "../helpers/IntervalTimeLeft";
+import TimeLeft from "../helpers/TimeLeft";
 
-export default function CompetitionItem(props) {
+export default function CompetitionItem({ item, index }) {
   const returnHours = (e) => {
     return Math.floor(e / 60);
   };
@@ -15,32 +15,31 @@ export default function CompetitionItem(props) {
     <div
       className={
         TimeLeft(
-          props.item.registration_end_date,
-          props.item.registration_end_time_mins
-        ) === 'Expired'
-          ? 'row ' + 'ongoing'
-          : 'row '
+          item.registration_end_date,
+          item.registration_end_time_mins
+        ) === "Expired"
+          ? "row " + "ongoing"
+          : "row "
       }
-      key={props.index}
+      key={index}
     >
-      <div className="hash">{props.index + 1}</div>
-      <div className="platform">{props.item.platform}</div>
+      <div className="hash">{index + 1}</div>
+      <div className="platform">{item.platform}</div>
       <div className="contest">
-        <a href={`${props.item.competition_link}`} target="_blank">
-          {props.item.competition_name}
+        <a href={`${item.competition_link}`} target="_blank">
+          {item.competition_name}
         </a>
       </div>
       <div className="date">
         <div className="date-show">
-          {props.item.competition_date},
-          {returnHours(props.item.time_start_mins)}:
-          {returnMins(props.item.time_start_mins)}
+          {item.competition_date},{returnHours(item.time_start_mins)}:
+          {returnMins(item.time_start_mins)}
         </div>
         <div className="time-left">
           {
             <IntervalTimeLeft
-              date={props.item.competition_date}
-              minutes={props.item.time_start_mins}
+              date={item.competition_date}
+              minutes={item.time_start_mins}
             />
           }
         </div>
@@ -48,20 +47,20 @@ export default function CompetitionItem(props) {
       <div className="duration">3 hrs</div>
 
       <div className="registration">
-        <div className="status">{props.item.registration_status}</div>
+        <div className="status">{item.registration_status}</div>
         <div className="time-left">
-          {props.item.registration_status === 'Open' ? (
+          {item.registration_status === "Open" ? (
             (
               <IntervalTimeLeft
-                date={props.item.registration_end_date}
-                minutes={props.item.registration_end_time_mins}
+                date={item.registration_end_date}
+                minutes={item.registration_end_time_mins}
               />
-            ) === 'Expired' ? (
-              <>{(props.item.registration_status = 'Closed')}</>
+            ) === "Expired" ? (
+              <>{(item.registration_status = "Closed")}</>
             ) : (
               <IntervalTimeLeft
-                date={props.item.registration_end_date}
-                minutes={props.item.registration_end_time_mins}
+                date={item.registration_end_date}
+                minutes={item.registration_end_time_mins}
               />
             )
           ) : (
