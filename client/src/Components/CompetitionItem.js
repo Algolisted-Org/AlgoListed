@@ -34,38 +34,64 @@ export default function CompetitionItem({ item, index }) {
         <div className="date-show">
           {item.competition_date},{" "}
           <>
-            {
-              (returnHours(item.time_start_mins) < 10) ? (
-                <>{"0"}{returnHours(item.time_start_mins)}</>
-              ):(<>{returnHours(item.time_start_mins)}</>)
-            } 
+            {returnHours(item.time_start_mins) < 10 ? (
+              <>
+                {"0"}
+                {returnHours(item.time_start_mins)}
+              </>
+            ) : (
+              <>{returnHours(item.time_start_mins)}</>
+            )}
           </>
           :
           <>
-            {
-              (returnMins(item.time_start_mins) < 10) ? (
-                <>{"0"}{returnMins(item.time_start_mins)}</>
-              ):(<>{returnMins(item.time_start_mins)}</>)
-            } 
+            {returnMins(item.time_start_mins) < 10 ? (
+              <>
+                {"0"}
+                {returnMins(item.time_start_mins)}
+              </>
+            ) : (
+              <>{returnMins(item.time_start_mins)}</>
+            )}
           </>
           {}
         </div>
         <div className="time-left">
-          {
+          {TimeLeft(
+            item.registration_end_date,
+            item.registration_end_time_mins
+          ) === "Expired" ? (
+            <>
+              <p>competition will start in</p>
+              <IntervalTimeLeft
+                date={item.competition_date}
+                minutes={item.time_start_mins}
+              />
+            </>
+          ) : TimeLeft(item.competition_date, item.time_start_mins) ===
+            "Expired" ? (
+            <>
+              <p>competition running</p>
+              <IntervalTimeLeft
+                date={item.competition_date}
+                minutes={item.time_start_mins + item.duration_mins}
+              />
+            </>
+          ) : (
             <IntervalTimeLeft
               date={item.competition_date}
               minutes={item.time_start_mins}
             />
-          }
+          )}
         </div>
       </div>
       <div className="duration">
-        {returnHours(item.duration_mins)} Hours{" "} 
-        {
-          returnMins(item.duration_mins) != 0 ? (
-            <>, {returnMins(item.duration_mins)} Mins</>
-          ):(<></>)
-        }
+        {returnHours(item.duration_mins)} Hours{" "}
+        {returnMins(item.duration_mins) != 0 ? (
+          <>, {returnMins(item.duration_mins)} Mins</>
+        ) : (
+          <></>
+        )}
       </div>
       <div className="registration">
         <div className="status">{item.registration_status}</div>
