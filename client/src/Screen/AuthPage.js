@@ -17,7 +17,7 @@ const AuthPage = () => {
         setEmail("");
         setPassword("");
 
-        fetch('http://localhost:8000/auth/user-signup', {
+        fetch('https://algorithmist-api.onrender.com/auth/user-signup', {
             method: 'post',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({

@@ -331,11 +331,12 @@ const Table = styled.div`
   .row {
     background-color: white;
     width: 100%;
-    height: 75px;
+    min-height: 75px;
     padding: 0 15px;
     border-top: 1px solid #e0cece;
     display: flex;
     justify-content: space-between;
+    position: relative;
     /* align-items: flex-start; */
 
     .time-left {
@@ -345,10 +346,8 @@ const Table = styled.div`
 
     .hash {
       width: 5%;
-      height: 65px;
       padding: 7.5px 0;
       border-right: 1px solid #e0cece;
-      height: 100%;
       /* background-color: yellow; */
       font-size: 0.9rem;
       font-weight: 300;
@@ -356,10 +355,8 @@ const Table = styled.div`
 
     .platform {
       width: 10%;
-      height: 65px;
       padding: 7.5px 0;
       border-right: 1px solid #e0cece;
-      height: 100%;
       /* background-color: grey; */
       font-size: 0.9rem;
       font-weight: 300;
@@ -368,10 +365,8 @@ const Table = styled.div`
 
     .contest {
       width: 25%;
-      height: 65px;
       padding: 7.5px 0;
       border-right: 1px solid #e0cece;
-      height: 100%;
       /* background-color: coral; */
       font-size: 0.9rem;
       font-weight: 300;
@@ -380,10 +375,8 @@ const Table = styled.div`
 
     .date {
       width: 20%;
-      height: 65px;
       padding: 7.5px 0;
       border-right: 1px solid #e0cece;
-      height: 100%;
       /* background-color: grey; */
       font-size: 0.9rem;
       font-weight: 300;
@@ -392,10 +385,8 @@ const Table = styled.div`
 
     .duration {
       width: 10%;
-      height: 65px;
       padding: 7.5px 0;
       border-right: 1px solid #e0cece;
-      height: 100%;
       /* background-color: yellow; */
       font-size: 0.85rem;
       font-weight: 300;
@@ -404,9 +395,7 @@ const Table = styled.div`
 
     .registration {
       width: 20%;
-      height: 65px;
       padding: 7.5px 0;
-      height: 100%;
       font-size: 0.9rem;
       font-weight: 300;
       padding-right: 5px;
@@ -421,7 +410,7 @@ const Table = styled.div`
     border-top: 1px solid transparent;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
     /* border-radius: 5px; */
 
     .hash,

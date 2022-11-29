@@ -60,24 +60,18 @@ export default function CompetitionItem({ item, index }) {
           {TimeLeft(
             item.registration_end_date,
             item.registration_end_time_mins
-          ) === "Expired" ? (
+          ) === "Expired"  ? (
+            TimeLeft(item.competition_date, item.time_start_mins) !== "Expired" ?(
             <>
               <p>competition will start in</p>
               <IntervalTimeLeft
                 date={item.competition_date}
                 minutes={item.time_start_mins}
               />
-            </>
-          ) : TimeLeft(item.competition_date, item.time_start_mins) ===
-            "Expired" ? (
-            <>
-              <p>competition running</p>
-              <IntervalTimeLeft
-                date={item.competition_date}
-                minutes={item.time_start_mins + item.duration_mins}
-              />
-            </>
-          ) : (
+            </>) : (
+              TimeLeft(item.competition_date, item.time_start_mins + item.duration_mins) !== "Expired" ? 
+              (<><p>competition running, time left</p>{<IntervalTimeLeft date={item.competition_date} minutes={(item.time_start_mins + item.duration_mins)} />}</>):(<></>)
+          )) :(
             <IntervalTimeLeft
               date={item.competition_date}
               minutes={item.time_start_mins}
