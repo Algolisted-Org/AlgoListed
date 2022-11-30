@@ -5,8 +5,21 @@ import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
+import axios from "axios";
+import { LinearProgress } from "@material-ui/core";
 
 const Resources = () => {
+  const [allResources, setAllResources] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://algorithmist-api.onrender.com/resources/all")
+        .then((res) => {
+            setAllResources(res.data);
+            // console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+}, [])
+
   return (
     <GrandContainer>
       <MobContainer>
@@ -47,64 +60,26 @@ const Resources = () => {
             <InfoIcon style={{ fill: '#333' }} />
           </Sort>
 
-          <div className="resources-container">
-            <div className="resource">
-              <a href='http://www.wbuthelp.com/chapter_file/1015.pdf' target={"_blank"} className="title">Introduction to Computer System - Computer Organisation</a>
-              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-              <div className="tags">
-                <div className="main-tag">Computer Org.</div>
-                <div className="tag">PDF</div>
+          {
+            allResources.length === 0 ? (
+              <LinearProgress />
+            ):(
+              <div className="resources-container">
+                {
+                    allResources.map((item, index) => (
+                    <div className="resource" key={index}>
+                      <a href={`${item.link}`} target={"_blank"} className="title">{item.title}</a>
+                      <div className="short-desc">{item.description}</div>
+                      <div className="tags">
+                        <div className="main-tag">{item.tags[0]}</div>
+                        <div className="tag">{item.type}</div>
+                      </div>
+                    </div>
+                  )) 
+                }
               </div>
-            </div>
-            <div className="resource">
-              <a href='http://www.wbuthelp.com/chapter_file/1016.pdf' target={"_blank"} className="title">Arithmetic and Logic Unit - Computer Organisation</a>
-              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-              <div className="tags">
-                <div className="main-tag">Computer Org.</div>
-                <div className="tag">PDF</div>
-              </div>
-            </div>
-            <div className="resource">
-              <a href='http://www.wbuthelp.com/chapter_file/1106.pdf' target={"_blank"} className="title">Memory - Computer Organisation</a>
-              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-              <div className="tags">
-                <div className="main-tag">Computer Org.</div>
-                <div className="tag">PDF</div>
-              </div>
-            </div>
-            <div className="resource">
-              <a href='http://www.wbuthelp.com/chapter_file/1935.pdf' target={"_blank"} className="title">Instruction Set & Addressing Modes - Computer Organisation</a>
-              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-              <div className="tags">
-                <div className="main-tag">Computer Org.</div>
-                <div className="tag">PDF</div>
-              </div>
-            </div>
-            <div className="resource">
-              <a href='http://www.wbuthelp.com/chapter_file/4051.pdf' target={"_blank"} className="title">CPU Design - Computer Organisation</a>
-              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-              <div className="tags">
-                <div className="main-tag">Computer Org.</div>
-                <div className="tag">PDF</div>
-              </div>
-            </div>
-            <div className="resource">
-              <a href='http://www.wbuthelp.com/chapter_file/4052.pdf' target={"_blank"} className="title">Introduction to IO - Computer Organisation</a>
-              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-              <div className="tags">
-                <div className="main-tag">Computer Org.</div>
-                <div className="tag">PDF</div>
-              </div>
-            </div>
-            <div className="resource">
-              <a href='http://www.wbuthelp.com/chapter_file/4054.pdf' target={"_blank"} className="title">Pipelining - Computer Organisation</a>
-              <div className="short-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam expedita ad provident excepturi itaque autem!</div>
-              <div className="tags">
-                <div className="main-tag">Computer Org.</div>
-                <div className="tag">PDF</div>
-              </div>
-            </div>
-          </div>
+            )
+          }
 
         </div>
       </Container>
