@@ -7,18 +7,38 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
+import { resourcesFilters } from '../Components/resourcesFilters'
 
 const Resources = () => {
   const [allResources, setAllResources] = useState([]);
+  const [filter, setFilter] = useState("All Resources");
 
   useEffect(() => {
     axios.get("https://algorithmist-api.onrender.com/resources/all")
-        .then((res) => {
-            setAllResources(res.data);
-            // console.log(res.data);
-        })
-        .catch((err) => console.log(err));
-}, [])
+      .then((res) => {
+        setAllResources(res.data);
+        // console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleFilter = (e) => {
+    setFilter(e.target.textContent);
+  };
+
+  const filters = resourcesFilters.map((item) => {
+    return (
+      <div
+        onClick={(e) => {
+          handleFilter(e);
+        }}
+        key={item.id}
+        className={item.text == filter ? "filter selected" : "filter"}
+      >
+        {item.text}
+      </div>
+    );
+  });
 
   return (
     <GrandContainer>
@@ -33,8 +53,8 @@ const Resources = () => {
         <div className="cc-middle-content">
           <h1 className='main-heading'>Resources</h1>
           <p className="heading-supporter">
-            Here we have resources like notes and other important tools for computer related subjects. We are
-            collecting the resources from students, various websites like linkedin.
+            Here we have resources like notes, question papers from teir 1 colleges like IITs, NITs, JU etc, blogs, youtube playlists and other important tools for computer related subjects. We are
+            collecting the resources from students, teachers,  various websites like linkedin.
           </p>
           <div className="message">
             <div className="icon"></div>
@@ -44,13 +64,7 @@ const Resources = () => {
           </div>
 
           <Filters>
-            <div className="filter selected">Computer Organisation</div>
-            <div className="filter">All Resources</div>
-            <div className="filter">Data Structures and Algorithms</div>
-            <div className="filter">Microprocessor and Assembly</div>
-            <div className="filter">OOPS</div>
-            <div className="filter">Operating System</div>
-            <div className="filter">C Language</div>
+            {filters}
           </Filters>
           <Sort>
             <div className="box">
@@ -63,19 +77,32 @@ const Resources = () => {
           {
             allResources.length === 0 ? (
               <LinearProgress />
-            ):(
+            ) : (
               <div className="resources-container">
+                {/* <div className="resource" key={index}>
+                  <a href={`${item.link}`} target={"_blank"} className="title">{item.title}</a>
+                  <div className="short-desc">{item.description}</div>
+                  <div className="tags">
+                    <div className="main-tag">{item.tags[0]}</div>
+                    <div className="tag">{item.type}</div>
+                  </div>
+                </div> */}
                 {
-                    allResources.map((item, index) => (
-                    <div className="resource" key={index}>
-                      <a href={`${item.link}`} target={"_blank"} className="title">{item.title}</a>
-                      <div className="short-desc">{item.description}</div>
-                      <div className="tags">
-                        <div className="main-tag">{item.tags[0]}</div>
-                        <div className="tag">{item.type}</div>
-                      </div>
-                    </div>
-                  )) 
+                  allResources.map((item, index) => {
+                    if(filter == "All Resources" || item.tags[0] == filter) {
+                      return ( 
+                        <div className="resource" key={index}>
+                          <a href={`${item.link}`} target={"_blank"} className="title">{item.title}</a>
+                          <div className="short-desc">{item.description}</div>
+                          <div className="tags">
+                            <div className="main-tag">{item.tags[0]}</div>
+                            <div className="tag">{item.type}</div>
+                          </div>
+                        </div>
+                      )
+                    }
+                    else return (<></>)
+                  })
                 }
               </div>
             )
@@ -90,7 +117,6 @@ const Resources = () => {
 export default Resources
 
 const GrandContainer = styled.div`
-
 `
 
 const MobContainer = styled.div`
@@ -111,7 +137,6 @@ const MobContainer = styled.div`
     display: none;
   }
 `
-
 
 const Container = styled.div`
     @media only screen and (max-width: 1099px){
@@ -253,11 +278,6 @@ const Container = styled.div`
         }
       }
     }
-`
-
-const GapLine = styled.div`
-  display: block;
-  height: 10px;
 `
 
 const Filters = styled.div`
