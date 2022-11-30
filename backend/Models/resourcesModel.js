@@ -19,13 +19,21 @@ const resourcesSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['Blog', 'PDF', 'Question Paper', 'other'],
+    enum: ['Blog', 'PDF', 'Question Paper', 'Course', 'Other'],
     required: true,
     default: 'PDF',
   },
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  report_count: {
+    type: Number,
+    default: 0,
   },
 });
 

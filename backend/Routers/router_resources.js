@@ -7,7 +7,7 @@ const AdminResource = require("../Controllers/resources/admin_resource");
 
 // Get Routes ------->
 
-router.get('/',(req,res)=>{
+router.get('/all',(req,res)=>{
     UserResource.get_resources(req,res);
 });
 

@@ -12,7 +12,7 @@ const signup = async (req, res) => {
             return res.status(400).json({message : "User with this email, already exists!"});
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10); 
 
         const result = await UsersModel.create({
             email, 

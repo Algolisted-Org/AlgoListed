@@ -11,8 +11,8 @@ const get_resources = async(req,res)=>{
 const get_resource_by_id = async(req,res)=>{
     var req_id = req.params.id;
     console.log(req_id);
-    const resource_ = await All_Resources.findById(req_id); // Make a check position here, otherwise the app crashes
-    res.status(200).json(resource_) ;
+    const result = await All_Resources.findById(req_id); // Make a check position here, otherwise the app crashes
+    res.status(200).json(result) ;
 }
 
 

@@ -1,19 +1,25 @@
 const All_Resources = require("../../Models/resourcesModel");
 
 const create_resource = async(req,res)=>{
-    const { title, description, tags, link, type, createdAt} = req.body;
-    
-    new All_Resources({
-        title,
-        description,
-        tags,
-        link,
-        type,
-        createdAt,
-    }).save((err,result)=>{
-        if(err) res.status(400).json({"err" : err , "msg": "A resources cannot be added!"}) ;
-        else res.status(200).json("Resource added succesfully !!!") ; 
-    })
+    const { title, description, tags, link, type, createdAt, likes, report_count} = req.body;
+
+    try {
+        const result = await All_Resources.create({
+            title,
+            description,
+            tags,
+            link,
+            type,
+            createdAt,
+            likes,
+            report_count,
+        })
+        res.status(200).json({message : "Resource has been added to database."});
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message : "Something went wrong !"});
+    }
 }
 
 
