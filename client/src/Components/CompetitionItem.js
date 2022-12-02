@@ -11,16 +11,37 @@ export default function CompetitionItem({ item, index }) {
     return Math.floor(e % 60);
   };
 
+  const isRegistrationClosed =
+    TimeLeft(item.registration_end_date, item.registration_end_time_mins) ===
+    "Expired";
+
+  const isCompetitionStarted =
+    TimeLeft(item.competition_date, item.time_start_mins) === "Expired";
+
+  const showTimeLeftToCompetition = () => (
+    <IntervalTimeLeft
+      date={item.competition_date}
+      minutes={item.time_start_mins}
+    />
+  );
+
+  const showTimeLeftToCompetitionEnd = () => (
+    <IntervalTimeLeft
+      date={item.competition_date}
+      minutes={item.time_start_mins + item.duration_mins}
+    />
+  );
+
+  const showTimeLeftToRegistrationEnd = () => (
+    <IntervalTimeLeft
+      date={item.registration_end_date}
+      minutes={item.registration_end_time_mins}
+    />
+  );
+
   return (
     <div
-      className={
-        TimeLeft(
-          item.registration_end_date,
-          item.registration_end_time_mins
-        ) === "Expired"
-          ? "row " + "ongoing"
-          : "row "
-      }
+      className={isRegistrationClosed ? "row " + "ongoing" : "row "}
       key={index}
     >
       <div className="hash">{index + 1}</div>
@@ -57,25 +78,18 @@ export default function CompetitionItem({ item, index }) {
           {}
         </div>
         <div className="time-left">
-          {TimeLeft(
-            item.registration_end_date,
-            item.registration_end_time_mins
-          ) === "Expired"  ? (
-            TimeLeft(item.competition_date, item.time_start_mins) !== "Expired" ?(
+          {isRegistrationClosed ? (
             <>
               <p>competition will start in</p>
-              <IntervalTimeLeft
-                date={item.competition_date}
-                minutes={item.time_start_mins}
-              />
-            </>) : (
-              TimeLeft(item.competition_date, item.time_start_mins + item.duration_mins) !== "Expired" ? 
-              (<><p>competition running, time left</p>{<IntervalTimeLeft date={item.competition_date} minutes={(item.time_start_mins + item.duration_mins)} />}</>):(<></>)
-          )) :(
-            <IntervalTimeLeft
-              date={item.competition_date}
-              minutes={item.time_start_mins}
-            />
+              {showTimeLeftToCompetition()}
+            </>
+          ) : isCompetitionStarted ? (
+            <>
+              <p>competition running</p>
+              {showTimeLeftToCompetitionEnd()}
+            </>
+          ) : (
+            showTimeLeftToCompetition()
           )}
         </div>
       </div>
@@ -91,10 +105,7 @@ export default function CompetitionItem({ item, index }) {
         <div className="status">{item.registration_status}</div>
         <div className="time-left">
           {item.registration_status === "Open" ? (
-            <IntervalTimeLeft
-              date={item.registration_end_date}
-              minutes={item.registration_end_time_mins}
-            />
+            showTimeLeftToRegistrationEnd()
           ) : (
             <>Registration Closed</>
           )}
