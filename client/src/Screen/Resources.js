@@ -76,20 +76,15 @@ const Resources = () => {
 
           {
             allResources.length === 0 ? (
-              <LinearProgress />
+              <>
+                <LinearProgress />
+                <RightBottomMessage>This might sometimes take about a minute to load, please be patient and wait.</RightBottomMessage>
+              </>
             ) : (
               <div className="resources-container">
-                {/* <div className="resource" key={index}>
-                  <a href={`${item.link}`} target={"_blank"} className="title">{item.title}</a>
-                  <div className="short-desc">{item.description}</div>
-                  <div className="tags">
-                    <div className="main-tag">{item.tags[0]}</div>
-                    <div className="tag">{item.type}</div>
-                  </div>
-                </div> */}
                 {
                   allResources.map((item, index) => {
-                    if(filter == "All Resources" || item.tags[0] == filter) {
+                    if(filter == "All Resources" || item.tags[0] == filter) { // Later on change tags[0] to search in all the tags
                       return ( 
                         <div className="resource" key={index}>
                           <a href={`${item.link}`} target={"_blank"} className="title">{item.title}</a>
@@ -336,3 +331,16 @@ const Sort = styled.div`
     }
   }
 `;
+
+const RightBottomMessage = styled.div`
+  position: fixed; 
+  right: 10px;
+  bottom: 10px;
+  background-color: black;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 0.75rem;
+  color: white;
+  font-weight: 200;
+  max-width: 300px;
+`
