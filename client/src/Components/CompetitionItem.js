@@ -11,6 +11,10 @@ export default function CompetitionItem({ item, index }) {
     return Math.floor(e % 60);
   };
 
+  const isRegistrationStarted = 
+    TimeLeft(item.registration_start_date, item.registration_start_time_mins) ===
+    "Expired"
+
   const isRegistrationClosed =
     TimeLeft(item.registration_end_date, item.registration_end_time_mins) ===
     "Expired";
@@ -29,6 +33,13 @@ export default function CompetitionItem({ item, index }) {
     <IntervalTimeLeft
       date={item.competition_date}
       minutes={item.time_start_mins + item.duration_mins}
+    />
+  );
+
+  const showTimeLeftToRegistrationStart = () => (
+    <IntervalTimeLeft
+      date={item.registration_start_date}
+      minutes={item.registration_start_time_mins}
     />
   );
 
@@ -102,12 +113,20 @@ export default function CompetitionItem({ item, index }) {
         )}
       </div>
       <div className="registration">
-        <div className="status">{item.registration_status}</div>
-        <div className="time-left">
-          {item.registration_status === "Open" ? (
-            showTimeLeftToRegistrationEnd()
+        <div className="status">
+          {isRegistrationStarted ? (
+            item.registration_status
           ) : (
+            <>Yet to start</>
+          )}
+        </div>
+        <div className="time-left">
+          {isRegistrationClosed ? (
             <>Registration Closed</>
+          ) : !isRegistrationStarted ? (
+            showTimeLeftToRegistrationStart()
+          ) : (
+            showTimeLeftToRegistrationEnd()
           )}
           {/* 05 days, 19 hours, 02 minutes */}
         </div>
