@@ -45,8 +45,6 @@ const CodingCompetitions = () => {
     })();
   }, []);
 
-  console.log(list);
-
   // useEffect(() => {
   //   first
 
