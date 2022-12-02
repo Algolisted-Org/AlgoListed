@@ -7,8 +7,11 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
 import FacebookIcon from '@material-ui/icons/Facebook';
+// import data from '../BlogContent/blogDatabase.json'
 
 const LandingPageReal = () => {
+  // console.log(data);
+
   return (
     <GrandContainer>
       <MobContainer>
@@ -165,6 +168,7 @@ const LandingPageReal = () => {
             <a href='https://github.com/ThorezNS' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/84680745?v=4" alt="" /></a>
             <a href='https://github.com/jinitsuga' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/73081185?v=4" alt="" /></a>
             <a href='https://github.com/RajMhatre20' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/68785723?v=4" alt="" /></a>
+            <a href='https://github.com/adrianmarinwork' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/118568289?v=4" alt="" /></a>
           </div>
         </div>
 

@@ -5,6 +5,8 @@ import BlogsMain from '../Components/BlogsMain'
 import CCHeader from '../Components/CCHeader'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import BlogContent from '../BlogContent/BlogContent';
+import RightMenu from '../Components/RightMenu'
 
 const BlogPage = () => {
     const [constFooter, setConstFooter] = useState(!true);
@@ -22,8 +24,13 @@ const BlogPage = () => {
             </MobContainer>
             <Container>
                 <CCHeader /> 
-                <BlogsMain blogname={blogname}/>
-                <LeftMenu marked={"graph-theory"}/>
+                <LeftMenu marked={"all-blogs"} />
+                <div className="blogs-main">
+                    <BlogContent/>
+                    <RightMenu/>
+                </div>
+
+                {/* <BlogsMain blogname={blogname}/> */}
 
                 {
                     constFooter ? (
@@ -77,6 +84,13 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     padding-left: 200px; // width of left menu
+
+    .blogs-main{
+        flex: 1;
+        min-height: 100vh;
+        display: flex;
+        justify-content: space-between;
+    }
 `
 
 const PageOneFooter = styled.div`

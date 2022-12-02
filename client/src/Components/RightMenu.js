@@ -7,24 +7,18 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 const RightMenu = () => {
   return (
     <Container>
-      <div className="login-btn">
-        <AccountCircleIcon className='icon'/>
-      </div>
-      <div  className="share-img">
-        <img src={image1} alt="" />
-      </div>
-      <div className="buy-me-a-coffee">
-        <div className="text">
-          <b>Message from the founder,</b> <br /> All the blogs are originally written by the founder and contributors. We also have few other sections like
-          beginner level problems for topics, we have used websites like leetcode, interviewbit and other 
-          third party websites to get the best resources and assemble them here. <br />
-          You can help us by becoming a contributor, by sending a PDF of any of the required topic on <a href="/">new blog ideas</a> page
-          and then if selected, you will be considered a <a href="/">technical content writter</a>.
+      <div className="similar-questions">
+        <div className="top-title">Similar Questions</div>
+        <div className="top-desc">
+          Blog contains similar questions to be solved at bottom of the page. The questions are generally taken from
+          highly rated leetcode blogs, linkedin or contributed by our contributors.
         </div>
-        <div className="btn-1">Become a content writter</div>
-      </div>
-      <div className="ad-img">
-        <img src={image2} alt="" />
+        <div className="question">
+          <div className="text">
+            Solve : <a href="/">Number of Islands</a>
+          </div>
+        </div>
+        <div className="show-all-problems">Show All Problems</div>
       </div>
       <div className="subscribe-box">
         <div className="top-title">Subscribe to Algorithmist,</div>
@@ -45,20 +39,12 @@ export default RightMenu
 const Container = styled.div`
   width: calc(100vw - 1100px);
   max-width: 360px;
-  /* height: calc(100vh - 55px); */
-  /* min-height: 630px; */
-  /* height: 1040px; */
   height: 100%;
-  margin-top: 65px;
+  margin-top: 55px;
   position: relative;
   border-left: 1px solid rgba(230, 230, 230, 1);
   background-color: white;
-  /* position: fixed; */
-  /* top: 55px; */
-  /* right: 0px; */
-  padding: 10px 10px 60px 10px;
-  /* overflow-y: scroll; */
-  /* overflow: scroll; */
+  padding: 10px 18px 60px 10px;
   display: flex;
   flex-direction: column;
 
@@ -70,69 +56,45 @@ const Container = styled.div`
       display: none;
   }  
 
-  .login-btn{
-    position: absolute;
-    top: 10px;
-    right: 10px;
 
-    .icon{
-      font-size: 2.75rem;
-      fill: #333f45;
-    }
-  
-  }
+  .similar-questions{
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d6d9de;
 
-  .buy-me-a-coffee{
-    /* border: 1px solid #b7a7a7; */
-    background-color: #ecf0f3;
-    padding: 20px;
-
-    .text{
-      font-size: 0.9rem;
-      font-weight: 200;
-      line-height: 1.75rem;
-
-      b{
+    .top-title{
         font-size: 1.05rem;
         font-weight: 500;
-        margin-bottom: 3.5px;
-      }
-
-      a{
-        color: inherit;
-        text-decoration: underline;
-      }
     }
 
-    .btn-1{
-      width: 100%;
+    .top-desc{
+      font-size: 0.9rem;
+      font-weight: 200;
+    }
+
+    .question{
+      background-color: #eef0f3;
       padding: 10px;
-      font-size: 0.8rem;
-      font-weight: 400;
-      /* letter-spacing: 0.1rem; */
-      text-align: center;
-      cursor: pointer;
-      border: 1px solid #b7a7a7;
-      border-radius: 100px;
-      margin-top: 20px;
-    }
-  }
-
-  .share-img{
-    margin: 10px 0 20px 0;
-    margin-top: 100px;
-
-    img{
-      height: 50px;
-    }
-  }
-
-  .ad-img{
-    margin: 30px 0 30px 0;
-
-    img{
-      width: 100%;
       border-radius: 5px;
+      margin: 10px 0;
+
+      .text{
+        font-size: 0.9rem;
+
+        a{
+          font-weight: 500;
+          color: #6c6bb3;
+          text-decoration: none;
+        }
+      }
+
+    }
+
+    .show-all-problems{
+      font-size: 0.8rem;
+      color: purple;
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
 
@@ -141,7 +103,7 @@ const Container = styled.div`
     width: 100%;
     background-color: #eef0f3;
     padding: 25px;
-    margin: 10px 0;
+    /* margin: 10px 0; */
     position: sticky;
     top: 65px;
 

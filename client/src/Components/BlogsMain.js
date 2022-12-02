@@ -1,19 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 import AllShortestPathAlgorithms from '../BlogContent/AllShortestPathAlgorithms'
+import BlogContent from '../BlogContent/BlogContent'
 import RightMenu from './RightMenu'
 
 const BlogsMain = ({blogname}) => {
   return (
     <Container>
-        {
+        <BlogContent/>
+
+        {/* {
           blogname == "all-shortest-path-algorithms" ? 
           (<><AllShortestPathAlgorithms/></>):(<></>)
         }
         {
           blogname == "this-way-add-others" ? 
           (<><AllShortestPathAlgorithms/></>):(<></>)
-        }
+        } */}
         <RightMenu/>
     </Container>
   )
