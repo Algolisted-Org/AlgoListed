@@ -1,27 +1,35 @@
 import React from 'react'
+import { useState } from 'react';
 import styled from 'styled-components'
 import ShowContributors from '../Components/ShowContributors'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import data from './blogDatabase.json'
 
-const BlogContent = () => {
+const BlogContent = ({blogid}) => {
+    console.log(blogid);
+    console.log(data[blogid]);
+
+    const [blogData, setBlogData] = useState(data[blogid]);
+
+
     return (
         <Container>
             <div className="left">
-                <ShowContributors />
-                <h1 className='main-heading'>All Shortest Path Algorithms - Graph Theory.</h1>
-                <p className="heading-supporter">Explanation, code and interview questions with company tags</p>
+                {/* <ShowContributors /> */}
+                <h1 className='main-heading'>{blogData.title}</h1>
+                <p className="heading-supporter">{blogData.titleSupport}</p>
                 <div className="gap-5px-tb"></div>
                 <div className="tags">
-                    <div className="tag">Algorithms</div>
-                    <div className="tag">Graph Theory</div>
-                    <div className="tag">Dijekstra Algorithm</div>
-                    <div className="tag">DSA</div>
+                    {
+                        blogData.tags.map((item, index) => {
+                            return <div className="tag" key={index}>{item}</div>
+                        })
+                    }
                 </div>
                 <div className="big-margin"></div>
-                <div className="gap-15px-tb"></div>
 
                 {/* Seperate random doc called; */}
-                <iframe height={8200} src="https://docs.google.com/document/d/e/2PACX-1vTz8Mej-Jn5GDoZvmyuw_BxkWoHWBt2G9cD-gapR_eSZYXkeElbgrzdLkgeWNXSb9N2BSdsUadrFOED/pub?embedded=true"></iframe>
+                <iframe height={blogData.docHeightPx} src={`${blogData.docLinkIframe}`}></iframe>
 
                 <div className="beginner-problems">
                     <div className="new-part-heading">Beginner to medium level Problems</div>
@@ -151,15 +159,6 @@ const BlogContent = () => {
                         </div>
                     </div>
                 </div>
-
-                <div className="interiview-problems">
-                    <div className="new-part-heading">Recent Related Inteview Questions</div>
-                    <div className="para-1">
-                        # This will be dynamic component, where users can enter data with respect to a tags
-                        for example it is shortest path and graphs.
-                        <a href="/" target="_blank">http://algorithmist.in/recent-interview-discuss/topics/graphs/shortest-path</a>
-                    </div>
-                </div>
             </div>
             {/* <div className="right">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque harum exercitationem quasi tempore architecto, recusandae excepturi. Libero, possimus distinctio maxime magni neque facilis nulla vel iste itaque in eos animi reprehenderit, quisquam error temporibus soluta voluptates expedita, quibusdam officiis nostrum iure illum! Dolores numquam rerum facilis placeat animi blanditiis eius? Quasi reiciendis cumque at ex eaque aut labore aliquam. Odit alias laborum modi cumque reiciendis quo dolor aspernatur officia exercitationem placeat fugit molestias, mollitia natus ipsam laboriosam maiores atque consequuntur asperiores. Nulla dolore assumenda, repellendus sed officiis tenetur quia in, ullam mollitia non nobis aspernatur! Perspiciatis reprehenderit commodi blanditiis? Vitae.</div> */}
         </Container>
@@ -284,7 +283,7 @@ const Container = styled.div`
         }
 
         .big-margin{
-            height: 30px;
+            height: 50px;
         }
 
         .para-1{
@@ -450,10 +449,6 @@ const Container = styled.div`
                     border-bottom: 1px solid transparent;
                 }
             }
-        }
-
-        .interiview-problems{
-
         }
     }
 

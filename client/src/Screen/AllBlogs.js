@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import CCRightMenu from '../Components/CCRightMenu'
 import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';

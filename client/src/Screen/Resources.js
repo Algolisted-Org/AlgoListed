@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import CCRightMenu from '../Components/CCRightMenu'
 import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -78,7 +77,7 @@ const Resources = () => {
             allResources.length === 0 ? (
               <>
                 <LinearProgress />
-                <RightBottomMessage>This might sometimes take about a minute to load, please be patient and wait.</RightBottomMessage>
+                <RightBottomMessage>We are currently working on the server, this page will not load.</RightBottomMessage>
               </>
             ) : (
               <div className="resources-container">

@@ -1,10 +1,12 @@
 [
     {
-        "doc-link" : "https://docs.google.com/document/d/1cI9f4hRQPhuVVRKcD3hcMfDp9t-l72yalyR73giW_NQ/edit",
-        "doc-link-inspect" : "https://docs.google.com/document/d/e/2PACX-1vTz8Mej-Jn5GDoZvmyuw_BxkWoHWBt2G9cD-gapR_eSZYXkeElbgrzdLkgeWNXSb9N2BSdsUadrFOED/pub?embedded=true",
-        "show-on" : "all-shortest-path-algorithms",
+        "docLink" : "https://docs.google.com/document/d/1cI9f4hRQPhuVVRKcD3hcMfDp9t-l72yalyR73giW_NQ/edit",
+        "docLinkIframe" : "https://docs.google.com/document/d/e/2PACX-1vS0MIfZZWcZwF0NgPiCjqZX_dS-6suJKbNEHDNjs_m4YKwxlHzucNyb4RdNukmtqM7p_EcYb3ytPT1o/pub?embedded=true",
+        "docHeightPx" : 8500,
+        "showOn" : "all-shortest-path-algorithms",
+        "postId" : "001",
         "title" : "All Shortest Path Algorithms - Graph Theory.",
-        "title-support" : "Explanation, code and interview questions with company tags",
+        "titleSupport" : "Explanation, code and interview questions with company tags",
         "tags" : ["Algorithms", "Graph Theory", "Dijekstra Algorithm", "DSA"]
     }
 ]

@@ -1,12 +1,33 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import image1 from '../Images/Global/three.png'
-import image2 from '../Images/Global/fake-ad1.png'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const RightMenu = () => {
   return (
     <Container>
+      <div className="blog-contributors">
+        <div className="top-title">Blog Contributors</div>
+        <div className="top-desc">
+          This blog is has being written by <a href="/">Atanu Nayak</a> and a lot of resources are contributed 
+          by the community.
+        </div>
+        <div className="hold-contributors">
+            <a className="contributor" href='https://github.com/Nayaker/' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/93304796?v=4" alt="" /></a>
+            <a className="contributor" href='https://github.com/Ayushpanditmoto' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/31253617?v=4" alt="" /></a>
+            <a className="contributor" href='https://github.com/Mohit030802' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/80634689?s=100&v=4" alt="" /></a>
+            <a className="contributor" href='https://github.com/ThorezNS' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/84680745?v=4" alt="" /></a>
+            <a className="contributor" href='https://github.com/jinitsuga' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/73081185?v=4" alt="" /></a>
+            <a className="contributor" href='https://github.com/RajMhatre20' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/68785723?v=4" alt="" /></a>
+            <a className="contributor" href='https://github.com/adrianmarinwork' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/118568289?v=4" alt="" /></a>
+            <a className="contributor" href='https://github.com/ThePlugJumbo' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/85082134?v=4" alt="" /></a>
+          </div>
+        
+          <div className="btns">
+            <button className="full-btn cl-2">Add content to this blog or Report a bug</button>
+            <button className="full-btn cl-1">Become a Technical Content Writer</button>
+          </div>
+      </div>
+      
       <div className="similar-questions">
         <div className="top-title">Similar Questions</div>
         <div className="top-desc">
@@ -14,11 +35,15 @@ const RightMenu = () => {
           highly rated leetcode blogs, linkedin or contributed by our contributors.
         </div>
         <div className="question">
-          <div className="text">
-            Solve : <a href="/">Number of Islands</a>
-          </div>
+          <div className="text">Solve : <a href="/">Number of Islands</a></div>
         </div>
-        <div className="show-all-problems">Show All Problems</div>
+        <div className="question">
+          <div className="text">Solve : <a href="/">Course Schedule I</a></div>
+        </div>
+        <div className="question">
+          <div className="text">Solve : <a href="/">Rotting Oranges</a></div>
+        </div>
+        <div className="show-all-problems">Show All Problems, Related to this blog</div>
       </div>
       <div className="subscribe-box">
         <div className="top-title">Subscribe to Algorithmist,</div>
@@ -56,45 +81,64 @@ const Container = styled.div`
       display: none;
   }  
 
-
-  .similar-questions{
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #d6d9de;
-
+  div{
     .top-title{
         font-size: 1.05rem;
         font-weight: 500;
     }
-
+  
     .top-desc{
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 200;
+      margin-top: 5px;
     }
+  }
 
-    .question{
-      background-color: #eef0f3;
-      padding: 10px;
-      border-radius: 5px;
-      margin: 10px 0;
 
-      .text{
-        font-size: 0.9rem;
+  .blog-contributors{
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d6d9de;
 
-        a{
-          font-weight: 500;
-          color: #6c6bb3;
-          text-decoration: none;
+    .hold-contributors{
+      margin-top: 7.5px;
+      display: flex;
+      flex-wrap: wrap;
+
+      .contributor{
+        background-color: pink;
+        overflow: hidden;
+        height: 42px;
+        width: 42px;
+        margin: 0 7.5px 7.5px 0;
+        border-radius: 100px;
+        border: 1px solid #b7a6a6;
+
+        img{
+          height: 100%;
         }
       }
-
     }
 
-    .show-all-problems{
-      font-size: 0.8rem;
-      color: purple;
-      text-decoration: underline;
-      cursor: pointer;
+    .btns{
+      margin-top: 30px;
+
+      .full-btn{
+        padding: 12.5px;
+        font-size: 0.75rem;
+        margin: 10px 0;
+      }
+
+      .cl-1{
+        background-color: black;
+        color: white;
+        font-weight: 200;
+      }
+
+      .cl-2{
+        background-color: #f3f0f0;
+      }
+
     }
   }
 
@@ -105,7 +149,7 @@ const Container = styled.div`
     padding: 25px;
     /* margin: 10px 0; */
     position: sticky;
-    top: 65px;
+    top: 390px;
 
     .top-title{
       font-size: 1.05rem;
@@ -151,4 +195,39 @@ const Container = styled.div`
       }
     }
   }
+
+  .similar-questions{
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d6d9de;
+    position: sticky;
+    top: 65px;
+
+    .question{
+      background-color: #ebf2fd;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+
+      .text{
+        font-size: 0.8rem;
+
+        a{
+          font-weight: 400;
+          color: #6c6bb3;
+          text-decoration: none;
+        }
+      }
+
+    }
+
+    .show-all-problems{
+      font-size: 0.8rem;
+      color: purple;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  
 `

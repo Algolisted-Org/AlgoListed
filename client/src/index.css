@@ -14,6 +14,18 @@ body{
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
+.full-btn{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightpink;
+  border: none;
+  border-radius: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+
 a{
   color: cornflowerblue;
   font-weight: 300;
@@ -50,3 +62,4 @@ input{
   background-color: #335ddc;
   border-radius: 8px;
 }
+

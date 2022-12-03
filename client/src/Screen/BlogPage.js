@@ -11,14 +11,14 @@ import RightMenu from '../Components/RightMenu'
 const BlogPage = () => {
     const [constFooter, setConstFooter] = useState(!true);
     const params = useParams();
-    const { blogname } = params;
+    const { blogname, blogid } = params;
 
-    console.log(blogname);
+    console.log(blogname, blogid);
 
     return (
         <GrandContainer>
             <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with 
+                We are still working on responsive version of the website, please view the site with 
                 width more than 1100px, a standard laptop or tablet landscape. 
                 <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
             </MobContainer>
@@ -26,7 +26,7 @@ const BlogPage = () => {
                 <CCHeader /> 
                 <LeftMenu marked={"all-blogs"} />
                 <div className="blogs-main">
-                    <BlogContent/>
+                    <BlogContent blogid={blogid} />
                     <RightMenu/>
                 </div>
 

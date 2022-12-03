@@ -7,10 +7,11 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
 import FacebookIcon from '@material-ui/icons/Facebook';
-// import data from '../BlogContent/blogDatabase.json'
+import react3dLoader from '../Images/react3dLoader.gif'
+
 
 const LandingPageReal = () => {
-  // console.log(data);
+  
 
   return (
     <GrandContainer>
@@ -38,7 +39,7 @@ const LandingPageReal = () => {
               </div>
               <div className="btn">Learn More</div>
             </div>
-            <div className="right"><img style={{ "width": "100%", }} src="http://31.media.tumblr.com/6c990736af99b276d6de0dcfd1bbfcbf/tumblr_mq968dWKAg1spo3yuo1_500.gif" alt="" /></div>
+            <div className="right"><img style={{ "width": "100%", }} src={react3dLoader} alt="" /></div>
           </div>
         </div>
 
@@ -169,6 +170,7 @@ const LandingPageReal = () => {
             <a href='https://github.com/jinitsuga' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/73081185?v=4" alt="" /></a>
             <a href='https://github.com/RajMhatre20' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/68785723?v=4" alt="" /></a>
             <a href='https://github.com/adrianmarinwork' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/118568289?v=4" alt="" /></a>
+            <a href='https://github.com/ThePlugJumbo' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/85082134?v=4" alt="" /></a>
           </div>
         </div>
 
