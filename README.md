@@ -1,11 +1,24 @@
 # 🚀 Welcome to Algorithmist
+<img src="https://i.ibb.co/DDJqp2J/preview.png" alt="Site preview" />
 
-This project is created with MERN stack. Few other techs used are Google Spread Sheet APIs, Firebase for deployment, Heroku for backend.
+## About
+
+Algorithmist is an open source, educational website for coders.  We are building a community where you can learn and sharpen your data structure skills.  Data structures and algorithms can be difficult, so learning in a community can be one of the best ways to master these techniques.
+
+## Tech Stack
+This project is created with MERN stack.  A few third party APIs and services are used, such as the Google Spread Sheet APIs, Firebase for deployment, and Heroku for the backend.
 
 Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 
 API hosted on Render : https://algorithmist-api.onrender.com/
 
-#### 🔥 Currently Working on auth (https://algorithmist-dev.web.app/auth) : 
+## Bug Report or Feature Request
+If you encounter a bug, or have a request for a new feature, please open a [New Issue](https://github.com/Nayaker/Algorithmist/issues).
 
-<img width="1440" alt="Screenshot 2022-11-28 at 3 24 26 AM" src="https://user-images.githubusercontent.com/93304796/204161667-dfedbd6c-0c14-473c-90b9-5fe7efd24913.png">
+## Want to Contribute?
+This project is looking for new contributors.  If you are interested in contributing, please refer to the [Contributing Guide](https://github.com/Nayaker/Algorithmist/blob/main/WantToContribute.md)
+
+Currently Working on the [Auth Page](https://algorithmist-dev.web.app/auth)
+
+## License
+MIT
