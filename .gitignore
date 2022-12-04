@@ -1,0 +1,5 @@
+node_modules
+client/node_modules
+client/src/firebase.js
+backend/node_modules
+backend/config.env
