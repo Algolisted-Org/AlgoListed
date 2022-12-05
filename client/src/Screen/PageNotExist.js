@@ -2,7 +2,7 @@ import React from 'react'
 
 const PageNotExist = () => {
   return (
-    <div>PageNotExist</div>
+    <div>PageDoesNotExist</div>
   )
 }
 

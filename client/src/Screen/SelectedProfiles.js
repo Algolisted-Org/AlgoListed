@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
 
-const Template = () => {
+const SelectedProfiles = () => {
     return ( 
         <GrandContainer>
             <MobContainer>
@@ -13,16 +13,17 @@ const Template = () => {
             </MobContainer>
             <Container>
                 <CCHeader />
-                <LeftMenu marked={"all-blogs"} /> {/* ---> change this as well */}
+                <LeftMenu marked={"selected-profiles"} />
                 <div className="cc-middle-content">
-                    <h1 className='main-heading'>Template Name Here</h1>
+                    <h1 className='main-heading'>Selected Profiles</h1>
                     <p className="heading-supporter">
-                        Random Text : We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
+                        Here you can see all the resumes that recently got shortlisted for a specific company. You can also read that person’s interview experience with that particular company or fix a one-on-one google meet to ask queries. 
+                        This can be helpful for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular company.
                     </p>
                     <div className="message">
                         <div className="icon"></div>
                         <div className="text">
-                            Text here : We are contantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
+                            We are contantly looking for profiles which got selected on good companies. If want want to help <a href="/">click here</a>
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,7 @@ const Template = () => {
     )
 }
 
-export default Template
+export default SelectedProfiles
 
 const GrandContainer = styled.div`
 

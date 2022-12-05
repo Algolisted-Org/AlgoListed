@@ -18,6 +18,7 @@ import Resources from './Screen/Resources';
 import ContributeSite from './Screen/ContributeSite';
 import BlogAutoCode from './Screen/BlogAutoCode';
 import AuthPage from './Screen/AuthPage';
+import SelectedProfiles from './Screen/SelectedProfiles';
 
 
 
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/aptitude-round" element={<AptitudeRound/>} />
         <Route path="/opportunities" element={<Opportunities/>} />
         <Route path="/get-blog-code" element={<BlogAutoCode/>} />
+        <Route path="/selected-profiles" element={<SelectedProfiles/>} />
         <Route path="/:random" element={<PageNotExist/>} />
       </Routes>
     </div>

@@ -2,14 +2,41 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
 
-const LeftMenu = ({marked}) => {
+const LeftMenu = ({ marked }) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
 
-  const menuItem = [{
-    index : 0, 
-    value : "Show All Blogs",
-    showAt : "/blogs/all"
-  }]
+  const menuItems = [
+    {
+      value: "Show All Blogs",
+      showAt: "all-blogs",
+      link: "/blogs/all",
+    }, 
+    {
+      value: "Resources",
+      showAt: "resources",
+      link: "/resources",
+    },
+    {
+      value: "Selected Profiles",
+      showAt: "selected-profiles",
+      link: "/selected-profiles",
+    },
+    {
+      value: "Aptitude Round",
+      showAt: "aptitude-round",
+      link: "/aptitude-round",
+    },
+    {
+      value: "Coding Competitions",
+      showAt: "all-coding-competitions",
+      link: "/coding-competitions",
+    },
+    {
+      value: "Opportunities",
+      showAt: "opportunities",
+      link: "/opportunities",
+    }
+  ]
 
   return (
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
@@ -17,42 +44,12 @@ const LeftMenu = ({marked}) => {
       <a href='/' className="logo">Algorithmist</a>
       <div className="mid-links">
         {
-          marked == "all-blogs" ? (
-            <a href='/blogs/all' className="link current-link">Show All Blogs</a>
-          ):(
-            <a href='/blogs/all' className="link">Show All Blogs</a>
-          )
-        }
-        {
-          marked == "resources" ? (
-            <a href='/resources' className="link current-link">Resources</a>
-          ):(
-            <a href='/resources' className="link">Resources</a>
-          )
-        }
-        {
-          marked == "aptitude-round" ? (
-            <a href='/aptitude-round' className="link current-link">Aptitude Round</a>
-          ):(
-            <a href='/aptitude-round' className="link">Aptitude Round</a>
-          )
-        }
-        {
-          marked == "all-coding-competitions" ? (
-            <a href='/coding-competitions' className="link current-link">Coding Competitions</a>
-          ):(
-            <a href='/coding-competitions' className="link">Coding Competitions</a>
-          )
-        }
-        {
-          marked == "opportunities" ? (
-            <a href='/opportunities' className="link current-link">Opportunities</a>
-          ):(
-            <a href='/opportunities' className="link">Opportunities</a>
-          )
+          menuItems.map((item, index) => {
+            return <a key={index} href={`${item.link}`} className={item.showAt == marked ? "link current-link" : "link"}>{item.value}</a>
+          })
         }
         {/* <a href='https://jasonfenggit.github.io/Visualizer/' target={"_blank"} className="link">Algorithm Visualizers</a> */}
-        
+
         <div className="flag">
           <div className="line"></div>
           <div className="text">Algorithmist</div>
@@ -64,19 +61,19 @@ const LeftMenu = ({marked}) => {
 
       {
         showMoreInfo ? (
-          <div className="more-model"> 
-            <div><a  className="more-link" href='/organisation-information/core-team'>Core Team</a></div>
-            <div><a  className="more-link" href='/organisation-information/all-contributors'>Contributors</a></div>
-            <div><a  className="more-link" href='/organisation-information/about-us'>About Us</a></div>
-            <div><a  className="more-link" href='/organisation-information/verify-contributor'>Verify Contributor</a></div>
-            <div><a  className="more-link" href='/organisation-information/privacy-policies'>Privacy Policies</a></div>
-            <div><a  className="more-link last-more-link" href='/organisation-information/disclaimer'>Disclaimer</a></div>
+          <div className="more-model">
+            <div><a className="more-link" href='/organisation-information/core-team'>Core Team</a></div>
+            <div><a className="more-link" href='/organisation-information/all-contributors'>Contributors</a></div>
+            <div><a className="more-link" href='/organisation-information/about-us'>About Us</a></div>
+            <div><a className="more-link" href='/organisation-information/verify-contributor'>Verify Contributor</a></div>
+            <div><a className="more-link" href='/organisation-information/privacy-policies'>Privacy Policies</a></div>
+            <div><a className="more-link last-more-link" href='/organisation-information/disclaimer'>Disclaimer</a></div>
           </div>
         ) : (<></>)
       }
 
       <div className="bottom-btns" onClick={() => setShowMetmoreInfo(!showMoreInfo)}>
-        <MenuIcon className='icon'/>
+        <MenuIcon className='icon' />
         <div className="text">More</div>
       </div>
     </Container>
