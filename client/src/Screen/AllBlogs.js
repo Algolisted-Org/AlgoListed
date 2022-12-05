@@ -49,7 +49,7 @@ const AllBlogs = () => {
                     </Sort>
 
                     <BlogsContainer>
-                        <a href='/blogs/all-shortest-path-algorithms' target={"_blank"} className="blog-container">
+                        <a href='/blogs/0/all-shortest-path-algorithms' target={"_blank"} className="blog-container">
                             <div className="last-updated">September 27, 2022</div>
                             <div className="blog-title">All Shortest Path Algorithms</div>
                             <div className="blog-desc">The formulas in Google Sheets may get deleted when new rows are added in the sheet or when new responses come in through Google Forms. The fix is simple!</div>
