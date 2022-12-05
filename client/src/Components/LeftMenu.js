@@ -5,6 +5,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 const LeftMenu = ({marked}) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
 
+  const menuItem = [{
+    index : 0, 
+    value : "Show All Blogs",
+    showAt : "/blogs/all"
+  }]
+
   return (
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
       {/* <div className="logo">Atanu Nayak</div> */}
