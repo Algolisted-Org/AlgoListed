@@ -12,6 +12,15 @@ Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 
 API hosted on Render : https://algorithmist-api.onrender.com/
 
+## Modules of Algorithmist
+<b>Module 1 : </b>  Beginner level blogs with open-sourced content and questions, etc. (Edit Request) <br/><br/>
+<b>Module 2 : </b>  Private API open-ended for all coding-related competitions driven by users' given information. <br/><br/>
+<b>Module 3 : </b>  Brain Teasers - Interview puzzles with UI-like problem sets. <br/><br/>
+<b>Module 4 : </b>  Separate page for all college-related coding resources, like question papers. <br/><br/>
+<b>Module 5 : </b>  Selected profiles page - Students who got selected by a particular company can post on this page their resume and other coding profiles, and users can see what kind of profiles they need to build in order to get selected in a particular category of companies.  <br/><br/>
+<b>Module 6 : </b>  Private API open-ended for all off-campus opportunities driven by users' given information. (Might not work on this for now). <br/><br/>
+
+
 ## Bug Report or Feature Request
 If you encounter a bug, or have a request for a new feature, please open a [New Issue](https://github.com/Nayaker/Algorithmist/issues).
 
