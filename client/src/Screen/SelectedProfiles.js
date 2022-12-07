@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
+import FilterListIcon from '@material-ui/icons/FilterList';
+import InfoIcon from '@material-ui/icons/Info';
+import ApartmentIcon from '@material-ui/icons/Apartment';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const SelectedProfiles = () => {
     return ( 
@@ -11,7 +15,7 @@ const SelectedProfiles = () => {
                 width more than 1100px, a standard laptop or tablet landscape. 
                 <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
             </MobContainer>
-            <Container>
+            <Container> 
                 <CCHeader />
                 <LeftMenu marked={"selected-profiles"} />
                 <div className="cc-middle-content">
@@ -23,9 +27,56 @@ const SelectedProfiles = () => {
                     <div className="message">
                         <div className="icon"></div>
                         <div className="text">
-                            We are constantly looking for profiles which got selected on good companies. If want want to help <a href="/">click here</a>
+                            We are constantly looking for profiles which got selected on good companies. If you want to help <a href="/">click here</a>
                         </div>
                     </div>
+
+                    <Filters>
+                      <div className='filter selected'>SDE Roles</div>
+                      <div className='filter'>UX Developers</div>
+                      <div className='filter'>Indian StartUps</div>
+                      <div className='filter'>Remote StartUps</div>
+                    </Filters>
+
+                    <SearchHelper>
+                      <div className="box select-box">
+                        <div className="icon-1"><ApartmentIcon/></div>
+                        <div className="text">Select Company</div>
+                        <div className="icon-1"><ExpandMoreIcon/></div>
+                      </div>
+                      <div className='box filter-box'>
+                        <div className='text'>By Relevence</div>
+                        <FilterListIcon />
+                      </div>
+                      <InfoIcon className='info-icon' style={{ fill: '#333' }} />
+                    </SearchHelper>
+
+                    <div className="full-width-line"></div>
+
+                    <SearchResults>
+                      <div className="current-search">Showing selected SDEs in all companies</div>
+                      <div className="all-profiles-container">
+                        <div className="profile-card">
+                          <div className="card-header">Abhishek Verma | Google</div>
+                          <div className="exp-desc">
+                            Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which 
+                            were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis
+                            on my open source projects a lot.{" "}<a href="/">read more</a>
+                          </div>
+
+                          <div className="full-width-line"></div>
+      
+                          <div className="btns">
+                            <button className="default-btn">Resume</button>
+                            <button className="default-btn">Linkedin</button> 
+                            <button className="default-btn">Coding Profiles</button>
+                            <button className="default-btn">Blogs - Medium</button>
+                            <button className="default-btn highlight">Ask for Referral</button>
+                            <button className="default-btn highlight">Personal Mentorship</button>
+                          </div>
+                        </div>
+                      </div>
+                    </SearchResults>
                 </div>
             </Container>
         </GrandContainer>
@@ -123,4 +174,141 @@ const Container = styled.div`
         }
       }
     }
+`
+
+const Filters = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 80px 0 10px 0;
+
+  .filter {
+    padding: 7.5px 15px;
+    font-size: 0.8rem;
+    border: 1px solid #b9afaf;
+    border-radius: 500px;
+    margin: 0px 5px 5px 0px;
+    font-weight: 300;
+
+    &:hover {
+      border-color: #201f1f;
+      background-color: #201f1f;
+      color: #ebdddd;
+      transition-duration: 250ms;
+      cursor: pointer;
+    }
+  }
+
+  .selected {
+    /* background-color: #ded7d7;
+    color: #111; */
+    border-color: #201f1f;
+    background-color: #201f1f;
+    color: #ebdddd;
+  }
+`
+const SearchHelper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0 30px 0;
+  position: relative;
+  padding-right: 25px;
+
+  .box {
+    padding: 5px 10px;
+    height: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #b9afaf;
+    box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+    margin-right: 5px;
+  }
+
+  .select-box{
+    border-radius: 5px;
+
+    .text {
+      font-size: 0.8rem;
+      font-weight: 300;
+      margin: 0 7.5px;
+    }
+
+    svg{
+      margin-bottom: -4px;
+    }
+  }
+
+  .filter-box{
+    border-radius: 100px;
+  }
+  
+  
+  .text {
+    font-size: 0.8rem;
+    font-weight: 300;
+    margin: 0 7.5px;
+  }
+
+  .info-icon{
+    position: absolute;
+    right: 0;
+  }
+`
+
+const SearchResults = styled.div`
+  margin-top: 15px;
+
+  .current-search{
+    font-size: 0.85rem;
+    font-weight: 400;
+  } 
+
+  .all-profiles-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+
+    .profile-card{
+      width: 300px;
+      border: 1px solid #e5e5e5;
+      border-radius: 5px;
+      padding: 10px;
+
+
+      .card-header{
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .exp-desc{
+        font-size: 0.8rem;
+        font-weight: 200;
+        margin: 5px 0 20px 0;
+      }
+      
+      .btns{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 15px;
+
+        button{
+          padding: 2.5px 10px;
+          font-size: 0.75rem;
+          font-weight: 300;
+          margin: 0 4px 4px 0;
+          background-color: whitesmoke;
+          border: 1px solid #e5e5e5;
+        }
+        
+        .highlight{
+          background-color: #f3e8ff;
+          color: rgb(107,33,168);
+          font-weight: 400;
+        }
+      }
+
+    }
+  }
 `
