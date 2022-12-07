@@ -23,7 +23,7 @@ const SelectedProfiles = () => {
                     <div className="message">
                         <div className="icon"></div>
                         <div className="text">
-                            We are contantly looking for profiles which got selected on good companies. If want want to help <a href="/">click here</a>
+                            We are constantly looking for profiles which got selected on good companies. If want want to help <a href="/">click here</a>
                         </div>
                     </div>
                 </div>

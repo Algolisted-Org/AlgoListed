@@ -24,7 +24,7 @@ const AllBlogs = () => {
                     <div className="message">
                         <div className="icon"></div>
                         <div className="text">
-                            We are contantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
+                            We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
                         </div>
                     </div>
                     {/* <Filters>

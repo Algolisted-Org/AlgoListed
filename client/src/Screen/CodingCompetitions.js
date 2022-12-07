@@ -96,8 +96,8 @@ const CodingCompetitions = () => {
         <div className="cc-middle-content">
           <h1 className="main-heading">All Upcoming Coding Competitions</h1>
           <p className="heading-supporter">
-            We are not fetching the data from any public API, we have build our
-            own API which is being constantly updated by our the team and users
+            We are not fetching the data from any public API, we have built our
+            own API, which is being constantly updated by our the team and users
             with information.
             {/* <a href="/">I know about a coding competiion which is not mentioned here</a> */}
           </p>

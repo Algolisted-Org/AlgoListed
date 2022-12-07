@@ -3,6 +3,9 @@ client/node_modules
 client/src/firebase.js
 backend/node_modules
 backend/config.env
-client/firebase
+client/.firebase
 client/build
-client/firebaserc
+client/.firebaserc
+.firebase
+.firebaserc
+build

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import TranslateIcon from '@material-ui/icons/Translate';
@@ -8,10 +8,20 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import react3dLoader from '../Images/react3dLoader.gif'
+import axios from "axios";
 
 
 const LandingPageReal = () => {
-  
+  const [contributorsList, setContributorsList] = useState(null);
+
+  useEffect(() => {
+    axios.get("https://api.github.com/repos/Nayaker/Algorithmist/contributors")
+      .then((res) => {
+        setContributorsList(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <GrandContainer>
@@ -163,14 +173,13 @@ const LandingPageReal = () => {
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
           <div className="sub-page-head">Our Contributors</div>
           <div className="hold-contributors">
-            <a href='https://github.com/Nayaker/' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/93304796?v=4" alt="" /></a>
-            <a href='https://github.com/Ayushpanditmoto' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/31253617?v=4" alt="" /></a>
-            <a href='https://github.com/Mohit030802' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/80634689?s=100&v=4" alt="" /></a>
-            <a href='https://github.com/ThorezNS' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/84680745?v=4" alt="" /></a>
-            <a href='https://github.com/jinitsuga' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/73081185?v=4" alt="" /></a>
-            <a href='https://github.com/RajMhatre20' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/68785723?v=4" alt="" /></a>
-            <a href='https://github.com/adrianmarinwork' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/118568289?v=4" alt="" /></a>
-            <a href='https://github.com/ThePlugJumbo' target={"_blank"} className="contributor"><img src="https://avatars.githubusercontent.com/u/85082134?v=4" alt="" /></a>
+            {
+              contributorsList != null && contributorsList.map((item, index) => {
+                return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                  <img src={item.avatar_url} alt="" />
+                </a>
+              })
+            }
           </div>
         </div>
 

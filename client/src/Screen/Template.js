@@ -22,7 +22,7 @@ const Template = () => {
                     <div className="message">
                         <div className="icon"></div>
                         <div className="text">
-                            Text here : We are contantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
+                            Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
                         </div>
                     </div>
                 </div>

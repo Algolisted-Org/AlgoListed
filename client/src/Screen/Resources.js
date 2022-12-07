@@ -58,7 +58,7 @@ const Resources = () => {
           <div className="message">
             <div className="icon"></div>
             <div className="text">
-              Want to contribute a Brain Teaser or have any suggestion about the website <a href="/">click here</a>
+              Want to contribute a resource or have any suggestion about the website <a href="/">click here</a>
             </div>
           </div>
 
