@@ -27,8 +27,7 @@ If you encounter a bug, or have a request for a new feature, please open a [New 
 This project is looking for new contributors.  If you are interested in contributing, please refer to the [Contributing Guide](https://github.com/Nayaker/Algorithmist/blob/main/WantToContribute.md)
 
 Currently Working on the redux part on the frontend.
-
-<br/>
+<br/><br/>
 ## Some Images from the Website
 <img style="width:80%;" alt="Screenshot 2022-12-08 at 12 19 50 AM" src="https://user-images.githubusercontent.com/93304796/206269752-7ab1662b-372b-4c99-a16c-cc23a35812ad.png">
 <img style="width:80%;" alt="Screenshot 2022-12-08 at 12 22 30 AM" src="https://user-images.githubusercontent.com/93304796/206270223-3f77e66a-a7e3-4457-84a8-3a961471a362.png">
