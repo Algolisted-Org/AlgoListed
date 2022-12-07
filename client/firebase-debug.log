@@ -1,0 +1,102 @@
+[debug] [2022-12-07T22:36:38.601Z] ----------------------------------------------------------------------
+[debug] [2022-12-07T22:36:38.602Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2022-12-07T22:36:38.602Z] CLI Version:   9.20.0
+[debug] [2022-12-07T22:36:38.602Z] Platform:      darwin
+[debug] [2022-12-07T22:36:38.602Z] Node Version:  v16.13.1
+[debug] [2022-12-07T22:36:38.604Z] Time:          Thu Dec 08 2022 04:06:38 GMT+0530 (India Standard Time)
+[debug] [2022-12-07T22:36:38.604Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-07T22:36:38.629Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-07T22:36:38.629Z] > authorizing via signed-in user (nayak.primary@gmail.com)
+[debug] [2022-12-07T22:36:38.629Z] [iam] checking project algorithmist-dev for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-12-07T22:36:38.630Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-12-07T22:36:38.630Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-12-07T22:36:38.947Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","date":"Wed, 07 Dec 2022 22:36:39 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-12-07T22:36:38.989Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/algorithmist-dev:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-07T22:36:40.694Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 07 Dec 2022 22:36:40 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1446","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-12-07T22:36:40.695Z] > refreshing access token with scopes: []
+[debug] [2022-12-07T22:36:40.696Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-12-07T22:36:40.977Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","date":"Wed, 07 Dec 2022 22:36:41 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-12-07T22:36:41.021Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/algorithmist-dev [none]
+[debug] [2022-12-07T22:36:41.790Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/algorithmist-dev 200
+[debug] [2022-12-07T22:36:41.790Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/algorithmist-dev {"projectId":"algorithmist-dev","projectNumber":"165480374325","displayName":"Algorithmist","name":"projects/algorithmist-dev","resources":{"hostingSite":"algorithmist-dev"},"state":"ACTIVE","etag":"1_bb7f963b-d309-4753-97b0-b64a5a54bda6"}
+[info] 
+[info] === Deploying to 'algorithmist-dev'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-12-07T22:36:41.794Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-12-07T22:36:41.795Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-12-07T22:36:42.068Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Wed, 07 Dec 2022 22:36:42 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-12-07T22:36:42.112Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/algorithmist-dev/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-12-07T22:36:43.657Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 07 Dec 2022 22:36:43 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting[algorithmist-dev]: beginning deploy... 
+[info] i  hosting[algorithmist-dev]: found 13 files in build 
+[debug] [2022-12-07T22:36:43.862Z] > refreshing access token with scopes: []
+[debug] [2022-12-07T22:36:43.862Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-12-07T22:36:43.864Z] [hosting] hash cache [YnVpbGQ] stored for 13 files
+[debug] [2022-12-07T22:36:43.864Z] [hosting][hash queue][FINAL] {"max":183,"min":7,"avg":26.46153846153846,"active":0,"complete":13,"success":13,"errored":0,"retried":0,"total":13,"elapsed":189}
+[debug] [2022-12-07T22:36:44.157Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","date":"Wed, 07 Dec 2022 22:36:44 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-12-07T22:36:44.201Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/sites/algorithmist-dev/versions/64ef25d17829aa48:populateFiles [none]
+[debug] [2022-12-07T22:36:44.201Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/sites/algorithmist-dev/versions/64ef25d17829aa48:populateFiles {"files":{"/asset-manifest.json":"6c9d9557203db2a3e5a1694c29c93c18b9c9ae4562f03d09941d722338e892c6","/index.html":"542b8ea1feaa48a5c97d012e03f1374da5fb210500cfe780a010effe4408b59c","/manifest.json":"341d52628782f8ac9290bbfc43298afccb47b7cbfcee146ae30cf0f46bc30900","/favicon.ico":"b72f7455f00e4e58792d2bca892abb068e2213838c0316d6b7a0d6d16acd1955","/static/css/main.693834ba.css":"357b134cc8558b27851225701878015fe9ddd6065fd1b627b7328125495097b8","/logo192.png":"caff018b7f1e8fd481eb1c50d75b0ef236bcd5078b1d15c8bb348453fee30293","/logo512.png":"191fc21360b4ccfb1cda11a1efb97f489ed22672ca83f4064316802bbfdd750e","/static/css/main.693834ba.css.map":"e883adc12a271740eeb8f8350bb171aa74672bf7589f44c5f69b8208e3c42847","/robots.txt":"391d14b3c2f8c9143a27a28c7399585142228d4d1bdbe2c87ac946de411fa9a2","/static/js/main.8342f5a3.js.LICENSE.txt":"375f109ff4a1ad3330f0cb139b53ab1cfdfed87192c1a1dad7c973f0f5e63fdb","/static/js/main.8342f5a3.js":"3d1ab84447f4c95044eeae18103c3a0917879fdb0b481d99334000ffed87746e","/static/media/react3dLoader.5283acd308454bcb890e.gif":"afaa58d83ba2dcf65f12508e6a3d27926b74fe3468913ee0131ef2c56cafc0d6","/static/js/main.8342f5a3.js.map":"89396603e38505290bca9d5e1da62d79802083854a0af58afbb187dd1a591516"}}
+[debug] [2022-12-07T22:36:45.447Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/sites/algorithmist-dev/versions/64ef25d17829aa48:populateFiles 200
+[debug] [2022-12-07T22:36:45.448Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/sites/algorithmist-dev/versions/64ef25d17829aa48:populateFiles {"uploadRequiredHashes":["e883adc12a271740eeb8f8350bb171aa74672bf7589f44c5f69b8208e3c42847","3d1ab84447f4c95044eeae18103c3a0917879fdb0b481d99334000ffed87746e","89396603e38505290bca9d5e1da62d79802083854a0af58afbb187dd1a591516","6c9d9557203db2a3e5a1694c29c93c18b9c9ae4562f03d09941d722338e892c6","542b8ea1feaa48a5c97d012e03f1374da5fb210500cfe780a010effe4408b59c","357b134cc8558b27851225701878015fe9ddd6065fd1b627b7328125495097b8"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files"}
+[debug] [2022-12-07T22:36:45.451Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/e883adc12a271740eeb8f8350bb171aa74672bf7589f44c5f69b8208e3c42847 [none]
+[debug] [2022-12-07T22:36:45.451Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/e883adc12a271740eeb8f8350bb171aa74672bf7589f44c5f69b8208e3c42847 [stream]
+[debug] [2022-12-07T22:36:45.455Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/3d1ab84447f4c95044eeae18103c3a0917879fdb0b481d99334000ffed87746e [none]
+[debug] [2022-12-07T22:36:45.455Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/3d1ab84447f4c95044eeae18103c3a0917879fdb0b481d99334000ffed87746e [stream]
+[debug] [2022-12-07T22:36:45.458Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/89396603e38505290bca9d5e1da62d79802083854a0af58afbb187dd1a591516 [none]
+[debug] [2022-12-07T22:36:45.458Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/89396603e38505290bca9d5e1da62d79802083854a0af58afbb187dd1a591516 [stream]
+[debug] [2022-12-07T22:36:45.460Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/6c9d9557203db2a3e5a1694c29c93c18b9c9ae4562f03d09941d722338e892c6 [none]
+[debug] [2022-12-07T22:36:45.460Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/6c9d9557203db2a3e5a1694c29c93c18b9c9ae4562f03d09941d722338e892c6 [stream]
+[debug] [2022-12-07T22:36:45.462Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/542b8ea1feaa48a5c97d012e03f1374da5fb210500cfe780a010effe4408b59c [none]
+[debug] [2022-12-07T22:36:45.462Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/542b8ea1feaa48a5c97d012e03f1374da5fb210500cfe780a010effe4408b59c [stream]
+[debug] [2022-12-07T22:36:45.464Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/357b134cc8558b27851225701878015fe9ddd6065fd1b627b7328125495097b8 [none]
+[debug] [2022-12-07T22:36:45.464Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/357b134cc8558b27851225701878015fe9ddd6065fd1b627b7328125495097b8 [stream]
+[debug] [2022-12-07T22:36:45.465Z] [hosting][populate queue][FINAL] {"max":1589,"min":1589,"avg":1589,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1603}
+[debug] [2022-12-07T22:36:45.465Z] [hosting] uploads queued: 6
+[debug] [2022-12-07T22:36:47.298Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/357b134cc8558b27851225701878015fe9ddd6065fd1b627b7328125495097b8 200
+[debug] [2022-12-07T22:36:47.298Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/357b134cc8558b27851225701878015fe9ddd6065fd1b627b7328125495097b8 [stream]
+[debug] [2022-12-07T22:36:48.113Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/6c9d9557203db2a3e5a1694c29c93c18b9c9ae4562f03d09941d722338e892c6 200
+[debug] [2022-12-07T22:36:48.114Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/6c9d9557203db2a3e5a1694c29c93c18b9c9ae4562f03d09941d722338e892c6 [stream]
+[debug] [2022-12-07T22:36:48.368Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/3d1ab84447f4c95044eeae18103c3a0917879fdb0b481d99334000ffed87746e 200
+[debug] [2022-12-07T22:36:48.369Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/3d1ab84447f4c95044eeae18103c3a0917879fdb0b481d99334000ffed87746e [stream]
+[debug] [2022-12-07T22:36:48.542Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/e883adc12a271740eeb8f8350bb171aa74672bf7589f44c5f69b8208e3c42847 200
+[debug] [2022-12-07T22:36:48.543Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/e883adc12a271740eeb8f8350bb171aa74672bf7589f44c5f69b8208e3c42847 [stream]
+[debug] [2022-12-07T22:36:48.764Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/542b8ea1feaa48a5c97d012e03f1374da5fb210500cfe780a010effe4408b59c 200
+[debug] [2022-12-07T22:36:48.764Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/542b8ea1feaa48a5c97d012e03f1374da5fb210500cfe780a010effe4408b59c [stream]
+[debug] [2022-12-07T22:36:49.700Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/89396603e38505290bca9d5e1da62d79802083854a0af58afbb187dd1a591516 200
+[debug] [2022-12-07T22:36:49.701Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/algorithmist-dev/versions/64ef25d17829aa48/files/89396603e38505290bca9d5e1da62d79802083854a0af58afbb187dd1a591516 [stream]
+[debug] [2022-12-07T22:36:49.701Z] [hosting][upload queue][FINAL] {"max":4251,"min":1848,"avg":3015,"active":0,"complete":6,"success":6,"errored":0,"retried":0,"total":6,"elapsed":4253}
+[info] ✔  hosting[algorithmist-dev]: file upload complete 
+[debug] [2022-12-07T22:36:49.701Z] [hosting] deploy completed after 6041ms
+[debug] [2022-12-07T22:36:49.704Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "algorithmist-dev"
+    },
+    "site": "algorithmist-dev",
+    "version": "sites/algorithmist-dev/versions/64ef25d17829aa48"
+  }
+]
+[info] i  hosting[algorithmist-dev]: finalizing version... 
+[debug] [2022-12-07T22:36:49.704Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-12-07T22:36:49.704Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
