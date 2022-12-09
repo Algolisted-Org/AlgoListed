@@ -8,6 +8,50 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const SelectedProfiles = () => {
+    const randomValues = [
+      {
+        "cardHeader" : "Abhishek Verma | Google",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+      {
+        "cardHeader" : "Atanu Nayak | Uber India",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+      {
+        "cardHeader" : "Striver | Google Warsaw",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+      {
+        "cardHeader" : "Aditiya Singh | Uber UX developer",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+      {
+        "cardHeader" : "Ayush Tripathi | Zomato",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+      {
+        "cardHeader" : "Abhishek Verma | Google",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+      {
+        "cardHeader" : "Atanu Nayak | Uber India",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+      {
+        "cardHeader" : "Striver | Google Warsaw",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+      {
+        "cardHeader" : "Aditiya Singh | Uber UX developer",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+      {
+        "cardHeader" : "Ayush Tripathi | Zomato",
+        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
+      },
+    ];
+    
+
     return ( 
         <GrandContainer>
             <MobContainer>
@@ -56,25 +100,30 @@ const SelectedProfiles = () => {
                     <SearchResults>
                       <div className="current-search">Showing selected SDEs in all companies</div>
                       <div className="all-profiles-container">
-                        <div className="profile-card">
-                          <div className="card-header">Abhishek Verma | Google</div>
-                          <div className="exp-desc">
-                            Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which 
-                            were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis
-                            on my open source projects a lot.{" "}<a href="/">read more</a>
-                          </div>
+                        {
+                          randomValues.map((item) => {
+                            return (
+                              <div className="profile-card">
+                                <div className="card-header">{item.cardHeader}</div>
+                                <div className="exp-desc">{item.expDesc}
+                                  {" "}<a href="/">read more</a>
+                                </div>
 
-                          <div className="full-width-line"></div>
-      
-                          <div className="btns">
-                            <button className="default-btn">Resume</button>
-                            <button className="default-btn">Linkedin</button> 
-                            <button className="default-btn">Coding Profiles</button>
-                            <button className="default-btn">Blogs - Medium</button>
-                            <button className="default-btn highlight">Ask for Referral</button>
-                            <button className="default-btn highlight">Personal Mentorship</button>
-                          </div>
-                        </div>
+                                <div className="full-width-line"></div>
+            
+                                <div className="btns">
+                                  <button className="default-btn">Resume</button>
+                                  <button className="default-btn">Linkedin</button> 
+                                  <button className="default-btn">Coding Profiles</button>
+                                  <button className="default-btn">Blogs - Medium</button>
+                                  <button className="default-btn highlight">Ask for Referral</button>
+                                  <button className="default-btn highlight">Personal Mentorship</button>
+                                </div>
+                              </div>
+                            )
+                        
+                          })
+                        }
                       </div>
                     </SearchResults>
                 </div>
@@ -271,11 +320,13 @@ const SearchResults = styled.div`
     margin: 20px 0;
 
     .profile-card{
-      width: 300px;
+      /* width: max(300px, calc(33% - 10px)); */
+      width: calc(33% - 10px);
+      min-width: 300px;
       border: 1px solid #e5e5e5;
       border-radius: 5px;
       padding: 10px;
-
+      margin: 0 10px 10px 0;
 
       .card-header{
         font-size: 1rem;
@@ -307,6 +358,11 @@ const SearchResults = styled.div`
           color: rgb(107,33,168);
           font-weight: 400;
         }
+      }
+      
+
+      @media only screen and (max-width: 1370px){
+        width: calc(50% - 10px);
       }
 
     }
