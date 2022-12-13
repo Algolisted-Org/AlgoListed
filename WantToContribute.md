@@ -23,3 +23,11 @@
 - Skills: React JS, Node/Express, Firebase, MongoDB
 - Have done a open source contribution before : Nope
 - GitHub: (https://github.com/jinitsuga)
+
+#### Name: [Okeke Dumaga](https://github.com/Lonecloud7)
+
+- Place: Nigeria
+- Bio: IT Manager, Computeer science graduate
+- Skills: React JS, SASS, gATSBYJS
+- Have done a open source contribution before : Nope
+- GitHub: (https://github.com/Lonecloud7)
