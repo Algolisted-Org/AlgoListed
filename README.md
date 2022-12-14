@@ -1,6 +1,7 @@
 # 🚀 Welcome to Algorithmist
 <img src="https://i.ibb.co/DDJqp2J/preview.png" alt="Site preview" />
-![WhatsApp Image 2022-12-14 at 9 40 08 AM](https://user-images.githubusercontent.com/93304796/207503873-be55f35f-84f6-4c4c-a1a1-3b8b4a715493.jpeg) 
+<img width="1199" alt="Screenshot 2022-12-14 at 9 43 39 AM" src="https://user-images.githubusercontent.com/93304796/207504083-38b8dbb0-723a-4aca-a7b5-466987a08dac.png">
+
 
 ## About
 
