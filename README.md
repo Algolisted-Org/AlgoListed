@@ -1,7 +1,5 @@
 # 🚀 Welcome to Algorithmist
 <img src="https://i.ibb.co/DDJqp2J/preview.png" alt="Site preview" />
-<img width="1199" alt="Screenshot 2022-12-14 at 9 43 39 AM" src="https://user-images.githubusercontent.com/93304796/207504083-38b8dbb0-723a-4aca-a7b5-466987a08dac.png">
-
 
 ## About
 
@@ -15,6 +13,8 @@ Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 API hosted on Render : https://algorithmist-api.onrender.com/
 <br/><br/>
 ## Modules of Algorithmist
+<img width="1199" alt="Screenshot 2022-12-14 at 9 43 39 AM" src="https://user-images.githubusercontent.com/93304796/207504083-38b8dbb0-723a-4aca-a7b5-466987a08dac.png">
+
 <b>Module 1 : </b>  Beginner level blogs with open-sourced content and questions, etc. (Edit Request) <br/><br/>
 <b>Module 2 : </b>  Private API open-ended for all coding-related competitions driven by users' given information. <br/><br/>
 <b>Module 3 : </b>  Brain Teasers - Interview puzzles with UI-like problem sets. <br/><br/>
