@@ -40,4 +40,4 @@ Currently Working on the redux part on the frontend.
 
 <br/><br/>
 ## License
-MIT
+Non Commercial Use
