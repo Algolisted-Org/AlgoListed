@@ -14,6 +14,9 @@ const CodingCompetitions = () => {
   const [waitingForData, setWaitingForData] = useState(true);
   const [list, setList] = useState();
   const [filter, setFilter] = useState("All");
+  const [isSortListOpen, setIsSortListOpen] = useState(false);
+  const [sortType, setSortType] = useState("By Relevance");
+  const [listCopy, setListCopy] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -23,26 +26,27 @@ const CodingCompetitions = () => {
         .then((res) => res.json())
         .then((data) => {
           setList(data);
+          setListCopy(data);
           setWaitingForData(false);
         })
         .then(() => {
-          setList((list) =>
-            list.map((obj) => {
-              const isRegistrationExpired =
-                TimeLeft(
-                  obj.registration_end_date,
-                  obj.registration_end_time_mins
-                ) === "Expired";
-              if (isRegistrationExpired) {
-                return { ...obj, registration_status: "Closed" };
-              }
-
-              return obj;
-            })
-          );
+          setList(changeRegistrationStatus);
+          setListCopy(changeRegistrationStatus);
         });
     })();
   }, []);
+
+  const changeRegistrationStatus = (list) =>
+    list.map((obj) => {
+      const isRegistrationExpired =
+        TimeLeft(obj.registration_end_date, obj.registration_end_time_mins) ===
+        "Expired";
+      if (isRegistrationExpired) {
+        return { ...obj, registration_status: "Closed" };
+      }
+
+      return obj;
+    });
 
   // useEffect(() => {
   //   first
@@ -63,6 +67,33 @@ const CodingCompetitions = () => {
 
   const handleFilter = (e) => {
     setFilter(e.target.textContent);
+  };
+
+  const handleSort = (e) => {
+    setIsSortListOpen(!isSortListOpen);
+    const listItemText = e.target.innerText;
+    if (listItemText === "By Relevance") {
+      setList(listCopy);
+      setSortType(listItemText);
+    }
+    if (listItemText === "By Registration") {
+      setList((list) => {
+        // condition to be corrected
+        return [...list].sort((a, b) => {
+          return b.duration_mins - a.duration_mins;
+        });
+      });
+      setSortType(listItemText);
+    }
+    if (listItemText === "By Contest Timing") {
+      setList((list) => {
+        // condition to be corrected
+        return [...list].sort((a, b) => {
+          return a.duration_mins - b.duration_mins;
+        });
+      });
+      setSortType(listItemText);
+    }
   };
 
   const filters = competitionFilters.map((item) => {
@@ -116,12 +147,20 @@ const CodingCompetitions = () => {
           </p>
           <Filters>{filters}</Filters>
           <Sort>
-            <div className="box">
-              <div className="text">By Relevence</div>
+            <div onClick={(e) => handleSort(e)} className="box">
+              <div className="text">{sortType}</div>
               <FilterListIcon />
+              <div className={isSortListOpen ? "list open" : "list"}>
+                <ul>
+                  <li className="item">By Relevance</li>
+                  <li className="item">By Registration</li>
+                  <li className="item">By Contest Timing</li>
+                </ul>
+              </div>
             </div>
             <InfoIcon style={{ fill: "#333" }} />
           </Sort>
+
           <Table>
             <div className="row top-row">
               <div className="hash">#</div>
@@ -136,7 +175,8 @@ const CodingCompetitions = () => {
               <LinearProgress />
             ) : (
               <>
-                {list.filter(
+                {list
+                  .filter(
                     (item) =>
                       TimeLeft(
                         item.competition_date,
@@ -273,7 +313,6 @@ const Filters = styled.div`
     border-radius: 500px;
     margin: 0px 5px 5px 0px;
     font-weight: 300;
-    
 
     &:hover {
       border-color: #201f1f;
@@ -303,6 +342,7 @@ const Sort = styled.div`
     padding: 5px 10px;
     height: 36px;
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
     border-radius: 100px;
@@ -310,12 +350,41 @@ const Sort = styled.div`
     border: 1px solid #b9afaf;
     box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
     margin-right: 5px;
+    cursor: pointer;
+
+    .list {
+      padding: 5px;
+      width: 100%;
+      display: none;
+      position: absolute;
+      top: 36px;
+      left: 0;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+      z-index: 1;
+
+      .item {
+        width: 100%;
+        font-size: 0.8rem;
+        font-weight: 300;
+        margin: 0 7.5px;
+        list-style-type: none;
+      }
+      .item:hover {
+        color: #18489f;
+      }
+    }
 
     .text {
       font-size: 0.8rem;
       font-weight: 300;
       margin: 0 7.5px;
     }
+    .open {
+      display: block;
   }
 `;
 
