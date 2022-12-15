@@ -17,8 +17,8 @@ API hosted on Render : https://algorithmist-api.onrender.com/
 
 <b>Module 1 : </b>  Beginner level blogs with open-sourced content and questions, etc. (Edit Request) <br/><br/>
 <b>Module 2 : </b>  Private API open-ended for all coding-related competitions driven by users' given information. <br/><br/>
-<b>Module 3 : </b>  Brain Teasers - Interview puzzles with UI-like problem sets. <br/><br/>
-<b>Module 4 : </b>  Separate page for all college-related coding resources, like question papers. <br/><br/>
+<b>Module 3 : </b>  Coding Sheets - Since now, in the market we have a bunch of SDE sheets here you get a single place to choose whichever one suits you the most. The discussion section which will be added soon will let you prepare for the potholes while solving a particular sheet. One of the best features we are planning to add is a detailed analysis just like monkeytype. <br/><br/>
+<b>Module 4 : </b>  List notes, codes, and other resources that are related to a particular youtube educator like Striver, Tourist, Priyansh Agarwal, Code with Harry, Love Babbar, Kunal Kushwaha, Anuj Bhaiya, Luv, etc. This would significantly increase the productivity of the students who want to learn from a particular playlist of videos.  <br/><br/>
 <b>Module 5 : </b>  Selected profiles page - Students who got selected by a particular company can post on this page their resume and other coding profiles, and users can see what kind of profiles they need to build in order to get selected in a particular category of companies.  <br/><br/>
 <b>Module 6 : </b>  Private API open-ended for all off-campus opportunities driven by users' given information. (Might not work on this for now). <br/><br/>
 
