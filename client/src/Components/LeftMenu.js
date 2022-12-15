@@ -21,11 +21,16 @@ const LeftMenu = ({ marked }) => {
       showAt: "selected-profiles",
       link: "/selected-profiles",
     },
+    // {
+    //   value: "Aptitude Round",
+    //   showAt: "aptitude-round",
+    //   link: "/aptitude-round",
+    // },
     {
-      value: "Aptitude Round",
-      showAt: "aptitude-round",
-      link: "/aptitude-round",
-    },
+        value: "Coding Sheets",
+        showAt: "coding-sheets",
+        link: "/coding-sheets",
+      },
     {
       value: "Coding Competitions",
       showAt: "all-coding-competitions",

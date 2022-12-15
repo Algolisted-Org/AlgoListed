@@ -19,6 +19,7 @@ import ContributeSite from './Screen/ContributeSite';
 import BlogAutoCode from './Screen/BlogAutoCode';
 import AuthPage from './Screen/AuthPage';
 import SelectedProfiles from './Screen/SelectedProfiles';
+import CodingSheets from './Screen/CodingSheets';
 
 
 
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/opportunities" element={<Opportunities/>} />
         <Route path="/get-blog-code" element={<BlogAutoCode/>} />
         <Route path="/selected-profiles" element={<SelectedProfiles/>} />
+        <Route path="/coding-sheets" element={<CodingSheets/>} />
         <Route path="/:random" element={<PageNotExist/>} />
       </Routes>
     </div>

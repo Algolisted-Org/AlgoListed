@@ -12,14 +12,14 @@ const Resources = () => {
   const [allResources, setAllResources] = useState([]);
   const [filter, setFilter] = useState("All Resources");
 
-  useEffect(() => {
-    axios.get("https://algorithmist-api.onrender.com/resources/all")
-      .then((res) => {
-        setAllResources(res.data);
-        // console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios.get("https://algorithmist-api.onrender.com/resources/all")
+  //     .then((res) => {
+  //       setAllResources(res.data);
+  //       // console.log(res.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   const handleFilter = (e) => {
     setFilter(e.target.textContent);
@@ -52,8 +52,7 @@ const Resources = () => {
         <div className="cc-middle-content">
           <h1 className='main-heading'>Resources</h1>
           <p className="heading-supporter">
-            Here we have resources like notes, question papers from teir 1 colleges like IITs, NITs, JU etc, blogs, youtube playlists and other important tools for computer related subjects. We are
-            collecting the resources from students, teachers,  various websites like linkedin.
+          Here we list notes, codes, and other resources that are related to a particular youtube educator like Striver, Tourist, Priyansh Agarwal, Love Babbar, Kunal Kushwaha, Anuj Bhaiya, Luv, etc. This would significantly increase the productivity of the students who want to learn from a particular playlist of videos.  
           </p>
           <div className="message">
             <div className="icon"></div>
@@ -73,7 +72,7 @@ const Resources = () => {
             <InfoIcon style={{ fill: '#333' }} />
           </Sort>
 
-          {
+          {/* {
             allResources.length === 0 ? (
               <>
                 <LinearProgress />
@@ -100,7 +99,43 @@ const Resources = () => {
                 }
               </div>
             )
-          }
+          } */}
+          
+          <div className="resources-container">
+            <div className="resource">
+              <div className="img-container">
+                <img src="https://i.ytimg.com/vi/M3_pLsDdeuU/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDwWeg_9weeOft2ynrV-NjIQJ-D5Q" alt="" />
+              </div>
+              <a href="https://www.youtube.com/playlist?list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn" target={"_blank"} className="title">Graph Series by Striver | C++ | Java | Interview Centric | Algorithms</a>
+              <div className="short-desc">The playlist aims to teach you Graphs in depth. The focus of the playlist is to cover all the concepts, and then follow it up with a lot of problems so that the concepts go into your head and stay there.</div>
+              <div className="tags">
+                <div className="main-tag">Striver</div>
+                <div className="tag">Handwritten Notes</div>
+              </div>
+            </div>
+            <div className="resource">
+              <div className="img-container">
+                <img src="https://i.ytimg.com/vi/un6PLygfXrA/maxresdefault.jpg" alt="" />
+              </div>
+              <a href="https://www.youtube.com/playlist?list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn" target={"_blank"} className="title">Recursion (Basic to Advanced) and Backtracking Series</a>
+              <div className="short-desc">The playlist aims to teach you Graphs in depth. The focus of the playlist is to cover all the concepts, and then follow it up with a lot of problems so that the concepts go into your head and stay there.</div>
+              <div className="tags">
+                <div className="main-tag">Striver</div>
+                <div className="tag">Handwritten Notes</div>
+              </div>
+            </div>
+            <div className="resource">
+              <div className="img-container">
+                <img src="https://i.ytimg.com/vi/FfXoiwwnxFw/hqdefault.jpg" alt="" />
+              </div>
+              <a href="https://www.youtube.com/playlist?list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn" target={"_blank"} className="title">Learn Dynamic Programming with Striver | C++ | Java | Interview Centric | Algorithms</a>
+              <div className="short-desc">The playlist aims to teach you Graphs in depth. The focus of the playlist is to cover all the concepts, and then follow it up with a lot of problems so that the concepts go into your head and stay there.</div>
+              <div className="tags">
+                <div className="main-tag">Striver</div>
+                <div className="tag">Handwritten Notes</div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </Container>
@@ -217,12 +252,28 @@ const Container = styled.div`
         margin-top: 10px;
 
         .resource{
-          width: calc(50% - 30px);
+          width: calc(33% - 30px);
           min-height: 140px;
           /* background-color: white; */
           border-top: 1px solid rgb(232, 232, 232);
           padding-top: 20px;
           margin: 10px 0 30px 0;
+
+          .img-container{
+            width: 100%;
+            height : 166px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            overflow: hidden;
+            border-radius: 10px;
+
+            img{
+              width: 100%;
+              display: block;
+              border-radius: 10px;
+            }
+          }
 
           .title{
               font-size: 0.85rem;
