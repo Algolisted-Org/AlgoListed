@@ -3,10 +3,16 @@
 
 ## About
 
-Algorithmist is an open source, educational website for coders.  We are building a community where you can learn and sharpen your data structure skills.  Data structures and algorithms can be difficult, so learning in a community can be one of the best ways to master these techniques.
+Welcome to the Algorithmist, a website dedicated to exploring the world of algorithms and data structures. Algorithmist is an open source, educational website for coders.  We are building a community where you can learn and sharpen your data structure skills.  Data structures and algorithms can be difficult, so learning in a community can be one of the best ways to master these techniques.
+
+On our site, you will find a variety of resources and tutorials on topics ranging from basic algorithms to advanced data structures and algorithms. Whether you are a beginner looking to learn the basics or an experienced developer looking to improve your skills, we have something for everyone.
+
+We are constantly working to improve and expand our website, so be sure to check back
+often for new content and updates. We hope you enjoy your time on our site and that you
+find it helpful and informative.
 <br/><br/>
 ## Tech Stack
-This project is created with MERN stack.  A few third party APIs and services are used, such as the Google Spread Sheet APIs, Firebase for deployment, and Heroku for the backend.
+This project is created with MERN stack.  A few third party APIs and services are used, such as the Google Spread Sheet APIs, Firebase for deployment, and Render for the backend.
 
 Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 
