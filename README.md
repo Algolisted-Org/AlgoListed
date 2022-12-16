@@ -19,7 +19,7 @@ Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 API hosted on Render : https://algorithmist-api.onrender.com/
 <br/><br/>
 ## Modules of Algorithmist
-<img width="1199" alt="Screenshot 2022-12-14 at 9 43 39 AM" src="https://user-images.githubusercontent.com/93304796/207504083-38b8dbb0-723a-4aca-a7b5-466987a08dac.png">
+<img width="1222" alt="Screenshot 2022-12-16 at 9 14 38 AM" src="https://user-images.githubusercontent.com/93304796/208017207-37510308-f295-42a0-86dc-1de7fe0e6edf.png">
 
 <b>Module 1 : </b>  Beginner level blogs with open-sourced content and questions, etc. (Edit Request) <br/><br/>
 <b>Module 2 : </b>  Private API open-ended for all coding-related competitions driven by users' given information. <br/><br/>
@@ -27,6 +27,7 @@ API hosted on Render : https://algorithmist-api.onrender.com/
 <b>Module 4 : </b>  List notes, codes, and other resources that are related to a particular youtube educator like Striver, Tourist, Priyansh Agarwal, Code with Harry, Love Babbar, Kunal Kushwaha, Anuj Bhaiya, Luv, etc. This would significantly increase the productivity of the students who want to learn from a particular playlist of videos.  <br/><br/>
 <b>Module 5 : </b>  Selected profiles page - Students who got selected by a particular company can post on this page their resume and other coding profiles, and users can see what kind of profiles they need to build in order to get selected in a particular category of companies.  <br/><br/>
 <b>Module 6 : </b>  Private API open-ended for all off-campus opportunities driven by users' given information. (Might not work on this for now). <br/><br/>
+
 
 ## Bug Report or Feature Request
 If you encounter a bug, or have a request for a new feature, please open a [New Issue](https://github.com/Nayaker/Algorithmist/issues).
