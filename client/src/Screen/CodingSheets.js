@@ -11,176 +11,122 @@ const Template = () => {
     const [filter, setFilter] = useState("Striver's SDE Sheet"); // later on change to Discuss Coding Sheets
 
     const handleFilter = (e) => {
-      setFilter(e.target.textContent);
+        setFilter(e.target.textContent);
     };
-    
+
     const filters = codingSheetsFilters.map((item) => {
-      return (
-        <div
-          onClick={(e) => {
-            handleFilter(e);
-          }}
-          key={item.id}
-          className={item.text == filter ? "filter selected" : "filter"}
-        >
-          {item.text}
-        </div>
-      );
+        return (
+            <div
+                onClick={(e) => {
+                    handleFilter(e);
+                }}
+                key={item.id}
+                className={item.text == filter ? "filter selected" : "filter"}
+            >
+                {item.text}
+            </div>
+        );
     });
 
-    return ( 
+    const sampleData = [
+        {
+            "name": "BFS Implementaion",
+            "link": "https://leetcode.com/problems/number-of-provinces/",
+            "specialTag": "Day 1",
+            "tags": ["GeeksforGeeks", "Implementation", "TCS Ninjs", "Wipro"],
+        },
+        {
+            "name": "01 Matrix",
+            "link": "https://leetcode.com/problems/number-of-provinces/",
+            "specialTag": "Day 1",
+            "tags": ["Leetcode", "Atlassian", "Google", "TCS Ninjs"],
+        },
+        {
+            "name": "Number of Islands",
+            "link": "https://leetcode.com/problems/number-of-provinces/",
+            "specialTag": "Day 2",
+            "tags": ["Leetcode", "Microsoft", "Lyft",],
+        },
+        {
+            "name": "Rotting Oranges",
+            "link": "https://leetcode.com/problems/number-of-provinces/",
+            "specialTag": "Day 2",
+            "tags": ["Leetcode", "Amazon", "Uber", "Salesforce", "Microsoft Engage"],
+        },
+        {
+            "name": "Course Schedule I",
+            "link": "https://leetcode.com/problems/number-of-provinces/",
+            "specialTag": "Day 2",
+            "tags": ["Leetcode", "Twitter", "Facebook"],
+        },
+        {
+            "name": "King Escape",
+            "link": "https://leetcode.com/problems/number-of-provinces/",
+            "specialTag": "Day 3",
+            "tags": ["Codeforces"],
+        },
+    ]
+
+    return (
         <GrandContainer>
             <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with 
-                width more than 1100px, a standard laptop or tablet landscape. 
+                We are still working on Responsive Version of the website, please view the site with
+                width more than 1100px, a standard laptop or tablet landscape.
                 <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
             </MobContainer>
             <Container>
                 <CCHeader />
-                <LeftMenu marked={"coding-sheets"} /> 
+                <LeftMenu marked={"coding-sheets"} />
                 <div className="cc-middle-content">
                     <h1 className='main-heading'>Coding Sheets</h1>
                     <p className="heading-supporter">
-                      Coding Sheets. Since now, in the market we have a bunch of SDE sheets here you get a single place to choose whichever one suits you the most. The discussion section which will be added soon will let you prepare for the potholes while solving a particular sheet. One of the best features we are planning to add is a detailed analysis just like monkeytype website.
+                        Coding Sheets. Since now, in the market we have a bunch of SDE sheets here you get a single place to choose whichever one suits you the most. The discussion section which will be added soon will let you prepare for the potholes while solving a particular sheet. One of the best features we are planning to add is a detailed analysis just like monkeytype website.
                     </p>
                     <div className="message">
                         <div className="icon"></div>
                         <div className="text">
-                          Want to contribute or have any suggestion about the website <a href="/">click here</a>
+                            Want to contribute or have any suggestion about the website <a href="/">click here</a>
                         </div>
                     </div>
-                    
+
                     <Filters>
-                      {filters}
+                        {filters}
                     </Filters>
 
                     <Progress>
-                      <div className="text">Progress : </div>
-                      <div className="value">23%</div>
-                      <div className="bar"><div className="fill"></div></div>
+                        <div className="text">Progress : </div>
+                        <div className="value">23%</div>
+                        <div className="bar"><div className="fill"></div></div>
                     </Progress>
                     <div className="table">
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">1</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">BFS Implementaion</a>
-                                    <div className="tags">
-                                        <div className="tag special-tag">Day 1</div>
-                                        <div className="tag">GeeksforGeeks</div>
-                                        <div className="tag">Implementation</div>
-                                        <div className="tag">TCS Ninjs</div>
-                                        <div className="tag">Wipro</div>
+                        {
+                            sampleData.map((item, index) => {
+                                return (
+                                    <div className="link-row"> {/* Put done-row if marked done. */}
+                                        <div className="link-row-left">
+                                            <div className="count">{index + 1}</div>
+                                            <div className="main-row-content">
+                                                <a href={item.link} target="_blank">{item.name}</a>
+                                                <div className="tags">
+                                                    <div className="tag special-tag">{item.specialTag}</div>
+                                                    {
+                                                        item.tags.map((tagItem, tagIndex) => {
+                                                            return (<div className="tag">{tagItem}</div>)
+                                                        })
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="done-btn">
+                                            <CheckCircleOutlineIcon />
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon className='done' />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">2</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">01 Matrix</a>
-                                    <div className="tags">
-                                        <div className="tag special-tag">Day 1</div>
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Atlassian</div>
-                                        <div className="tag">Google</div>
-                                        <div className="tag">TCS Ninja</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon className='done' />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">3</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">Number of Islands</a>
-                                    <div className="tags">
-                                        <div className="tag special-tag">Day 1</div>
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Bloomberg</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">4</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">Rotting Oranges</a>
-                                    <div className="tags">
-                                        <div className="tag special-tag">Day 2</div>
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Amazon</div>
-                                        <div className="tag">Uber</div>
-                                        <div className="tag">Microsoft Engage</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">5</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">Course Schedule I</a>
-                                    <div className="tags">
-                                        <div className="tag special-tag">Day 2</div>
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Salesforce</div>
-                                        <div className="tag">Twitter</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">6</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">Flood Fill</a>
-                                    <div className="tags">
-                                        <div className="tag special-tag">Day 2</div>
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Uber</div>
-                                        <div className="tag">Microsoft</div>
-                                        <div className="tag">Google</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
-                        <div className="link-row no-bottom-border">
-                            <div className="link-row-left">
-                                <div className="count">7</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">King Escape</a>
-                                    <div className="tags">
-                                        <div className="tag special-tag">Day 2</div>
-                                        <div className="tag">Codeforces</div>
-                                        <div className="tag">Lyft Level 5 Challenge</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
+                                )
+                            })
+                        }
+
+
                     </div>
                 </div>
             </Container>
@@ -281,23 +227,25 @@ const Container = styled.div`
 
       .table{
         margin: 15px 0;
-        min-height: 100px;
-        width: min(850px, 100%);
+        width: 100%;
         /* background-color: #fbf7f7; */
         border: 1px solid #d1d5db;
         border-radius: 5px;
-        padding: 0 15px;
+        /* padding: 0 15px; */
         display: flex;
         flex-direction: column;
         background-color: white;
+        border-bottom-color: transparent;
 
         .link-row{
             padding: 20px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
             border-bottom: 1px solid #d1d5db;
-            
+
             .link-row-left{
                 display: flex;
                 align-items: center;
@@ -338,6 +286,8 @@ const Container = styled.div`
                         .special-tag{
                           /* background-color: #ffeac2; */
                           color: inherit;
+                          /* background-color: black; */
+                          /* color: white; */
                           font-weight: 500;
                           border: 1px solid #111;
                         }
@@ -358,14 +308,30 @@ const Container = styled.div`
                         cursor: pointer;
                     }
                 }
-
-                .done{
-                    fill: orange;
-                }
             }
 
         }
         
+        .done-row{
+            background-color: #dcf8eb;
+
+            .main-row-content{
+                .tags{
+                    .tag{
+                        background-color: black;
+                        border: 1px solid #cac3c3;
+                    }
+                }
+            }
+
+            .done-btn{
+                .MuiSvgIcon-root{
+                    fill: orange;
+                    font-size: 2.25rem;
+                }
+            }
+        }
+
         .no-bottom-border{
             border-bottom: 1px solid transparent;
         }

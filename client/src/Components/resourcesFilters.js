@@ -60,5 +60,9 @@ export const resourcesFilters = [
       text: "Aditya Verma",
       id: 15,
     },
+    {
+      text: "Individual's Notes",
+      id: 16,
+    },
   ];
   
