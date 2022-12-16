@@ -19,7 +19,9 @@ Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 API hosted on Render : https://algorithmist-api.onrender.com/
 <br/><br/>
 ## Modules of Algorithmist
+<br/>
 <img width="1222" alt="Screenshot 2022-12-16 at 9 14 38 AM" src="https://user-images.githubusercontent.com/93304796/208017207-37510308-f295-42a0-86dc-1de7fe0e6edf.png">
+
 
 <b>Module 1 : </b>  Beginner level blogs with open-sourced content and questions, etc. (Edit Request) <br/><br/>
 <b>Module 2 : </b>  Private API open-ended for all coding-related competitions driven by users' given information. <br/><br/>
