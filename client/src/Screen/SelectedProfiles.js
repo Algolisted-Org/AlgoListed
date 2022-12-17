@@ -67,6 +67,8 @@ const SelectedProfiles = () => {
                     <p className="heading-supporter">
                         Here you can see all the resumes that recently got shortlisted for a specific company. You can also read that person’s interview experience with that particular company or fix a one-on-one google meet to ask queries. 
                         This can be helpful for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular company.
+                        <br />
+                        The people who are newly selected on a perticular company can contact each other easily. 
                     </p>
                     <div className="message">
                         <div className="icon"></div>

@@ -1,14 +1,15 @@
 const All_Resources = require("../../Models/resourcesModel");
 
 const create_resource = async(req,res)=>{
-    const { title, description, tags, link, type, createdAt, likes, report_count} = req.body;
+    const { title, description, creator, link, imgLink, type, createdAt, likes, report_count} = req.body;
 
     try {
         const result = await All_Resources.create({
             title,
             description,
-            tags,
+            creator,
             link,
+            imgLink,
             type,
             createdAt,
             likes,

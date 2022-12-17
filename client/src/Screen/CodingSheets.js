@@ -5,7 +5,7 @@ import LeftMenu from '../Components/LeftMenu'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { codingSheetsFilters } from '../Components/codingSheetsFilters'
 
-const Template = () => {
+const CodingSheets = () => {
     const [allFilters, setAllFilters] = useState(codingSheetsFilters);
     console.log(codingSheetsFilters);
     const [filter, setFilter] = useState("Striver's SDE Sheet"); // later on change to Discuss Coding Sheets
@@ -102,7 +102,7 @@ const Template = () => {
                         {
                             sampleData.map((item, index) => {
                                 return (
-                                    <div className="link-row"> {/* Put done-row if marked done. */}
+                                    <div className="link-row"> {/*Put <div className="link-row done-row"> if marked done.*/}
                                         <div className="link-row-left">
                                             <div className="count">{index + 1}</div>
                                             <div className="main-row-content">
@@ -134,7 +134,7 @@ const Template = () => {
     )
 }
 
-export default Template
+export default CodingSheets
 
 const GrandContainer = styled.div`
 

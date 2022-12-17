@@ -9,17 +9,21 @@ const resourcesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  tags: {
-    type: Array,
+  creator: {
+    type: String,
     required: true,
   },
   link: {
     type: String,
     required: true,
   },
+  imgLink: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
-    enum: ['Blog', 'PDF', 'Question Paper', 'Course', 'Other'],
+    enum: ['Blog', 'Handwritten Notes', 'Question Paper', 'Course', 'Other'],
     required: true,
     default: 'PDF',
   },
