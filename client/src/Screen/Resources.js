@@ -91,7 +91,7 @@ const Resources = () => {
               <div className="resources-container">
                 {
                   allResources.map((item, index) => {
-                    if (filter == "All Resources" || item.tags[0] == filter) { // Later on change tags[0] to search in all the tags
+                    if (filter == "All Resources" || item.creator == filter) {
                       return (
                         <div className="resource">
                           <div className="img-container">

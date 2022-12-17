@@ -5,13 +5,15 @@ import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import ApartmentIcon from '@material-ui/icons/Apartment';
-import axios from "axios";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { selectedProfilesFilters } from "../Components/selectedProfilesFilters";
+import axios from "axios";
 
 const SelectedProfiles = () => {
-    const [allResumesData, setAllResumesData] = useState([]);
+  const [allResumesData, setAllResumesData] = useState([]);
+  const [filter, setFilter] = useState("All Profiles");
 
-    useEffect(() => {
+  useEffect(() => {
     axios.get("http://localhost:8000/resumes/all")
       .then((res) => {
         setAllResumesData(res.data);
@@ -19,88 +21,130 @@ const SelectedProfiles = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-    
 
-    return ( 
-        <GrandContainer>
-            <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with 
-                width more than 1100px, a standard laptop or tablet landscape. 
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
-            </MobContainer>
-            <Container> 
-                <CCHeader />
-                <LeftMenu marked={"selected-profiles"} />
-                <div className="cc-middle-content">
-                    <h1 className='main-heading'>Selected Profiles</h1>
-                    <p className="heading-supporter">
-                        Here you can see all the resumes that recently got shortlisted for a specific company. You can also read that person’s interview experience with that particular company or fix a one-on-one google meet to ask queries. 
-                        This can be helpful for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular company.
-                        <br />
-                        The people who are newly selected on a perticular company can contact each other easily. 
-                    </p>
-                    <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            We are constantly looking for profiles which got selected on good companies. If you want to help <a href="/">click here</a>
-                        </div>
-                    </div>
+  const handleFilter = (e) => {
+    setFilter(e.target.textContent);
+  };
 
-                    <Filters>
+  const filters = selectedProfilesFilters.map((item) => {
+    return (
+      <div
+        onClick={(e) => {
+          handleFilter(e);
+        }}
+        key={item.id}
+        className={item.text == filter ? "filter selected" : "filter"}
+      >
+        {item.text}
+      </div>
+    );
+  });
+
+
+  return (
+    <GrandContainer>
+      <MobContainer>
+        We are still working on Responsive Version of the website, please view the site with
+        width more than 1100px, a standard laptop or tablet landscape.
+        <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+      </MobContainer>
+      <Container>
+        <CCHeader />
+        <LeftMenu marked={"selected-profiles"} />
+        <div className="cc-middle-content">
+          <h1 className='main-heading'>Selected Profiles</h1>
+          <p className="heading-supporter">
+            Here you can see all the resumes that recently got shortlisted for a specific company. You can also read that person’s interview experience with that particular company or fix a one-on-one google meet to ask queries.
+            This can be helpful for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular company.
+            <br />
+            The people who are newly selected on a particular company can contact each other easily.
+          </p>
+          <div className="message">
+            <div className="icon"></div>
+            <div className="text">
+              We are constantly looking for profiles which got selected on good companies. If you want to help <a href="/">click here</a>
+            </div>
+          </div>
+
+          {/* <Filters>
                       <div className='filter selected'>SDE Roles</div>
                       <div className='filter'>UX Developers</div>
                       <div className='filter'>Indian StartUps</div>
                       <div className='filter'>Remote StartUps</div>
-                    </Filters>
+                    </Filters> */}
 
-                    <SearchHelper>
-                      <div className="box select-box">
-                        <div className="icon-1"><ApartmentIcon/></div>
-                        <div className="text">Select Company</div>
-                        <div className="icon-1"><ExpandMoreIcon/></div>
+          <Filters>{filters}</Filters>
+
+          <SearchHelper>
+            <div className="box select-box">
+              <div className="icon-1"><ApartmentIcon /></div>
+              <div className="text">Select Company</div>
+              <div className="icon-1"><ExpandMoreIcon /></div>
+            </div>
+            <div className='box filter-box'>
+              <div className='text'>By Relevence</div>
+              <FilterListIcon />
+            </div>
+            <InfoIcon className='info-icon' style={{ fill: '#333' }} />
+          </SearchHelper>
+
+          <div className="full-width-line"></div>
+
+          <SearchResults>
+            <div className="current-search">Showing selected {filter} in all companies</div>
+            <div className="all-profiles-container">
+              {
+                allResumesData.map((item, index) => {
+                  if (filter == "All Profiles") {
+                    return (
+                      <div className="profile-card" key={index}>
+                        <div className="card-header">{item.name} | {item.company}</div>
+                        <div className="exp-desc">{item.description}
+                          {" "}<a href="/">read more</a>
+                        </div>
+
+                        <div className="full-width-line"></div>
+
+                        <div className="btns">
+                          <button className="default-btn">Resume</button>
+                          <button className="default-btn">Linkedin</button>
+                          <button className="default-btn">Coding Profiles</button>
+                          <button className="default-btn">Blogs - Medium</button>
+                          <button className="default-btn highlight">Ask for Referral</button>
+                          <button className="default-btn highlight">Personal Mentorship</button>
+                        </div>
                       </div>
-                      <div className='box filter-box'>
-                        <div className='text'>By Relevence</div>
-                        <FilterListIcon />
+                    );
+                  }
+                  else if (item.category == filter) {
+                    return (
+                      <div className="profile-card" key={index}>
+                        <div className="card-header">{item.name} | {item.company}</div>
+                        <div className="exp-desc">{item.description}
+                          {" "}<a href="/">read more</a>
+                        </div>
+
+                        <div className="full-width-line"></div>
+
+                        <div className="btns">
+                          <button className="default-btn">Resume</button>
+                          <button className="default-btn">Linkedin</button>
+                          <button className="default-btn">Coding Profiles</button>
+                          <button className="default-btn">Blogs - Medium</button>
+                          <button className="default-btn highlight">Ask for Referral</button>
+                          <button className="default-btn highlight">Personal Mentorship</button>
+                        </div>
                       </div>
-                      <InfoIcon className='info-icon' style={{ fill: '#333' }} />
-                    </SearchHelper>
-
-                    <div className="full-width-line"></div>
-
-                    <SearchResults>
-                      <div className="current-search">Showing selected SDEs in all companies</div>
-                      <div className="all-profiles-container">
-                        {
-                          allResumesData.map((item, index) => {
-                            return (
-                              <div className="profile-card" key={index}>
-                                <div className="card-header">{item.name} | {item.company}</div>
-                                <div className="exp-desc">{item.description}
-                                  {" "}<a href="/">read more</a>
-                                </div>
-
-                                <div className="full-width-line"></div>
-            
-                                <div className="btns">
-                                  <button className="default-btn">Resume</button>
-                                  <button className="default-btn">Linkedin</button> 
-                                  <button className="default-btn">Coding Profiles</button>
-                                  <button className="default-btn">Blogs - Medium</button>
-                                  <button className="default-btn highlight">Ask for Referral</button>
-                                  <button className="default-btn highlight">Personal Mentorship</button>
-                                </div>
-                              </div>
-                            )
-                        
-                          })
-                        }
-                      </div>
-                    </SearchResults>
-                </div>
-            </Container>
-        </GrandContainer>
-    )
+                    );
+                  }
+                })
+              }
+            </div>
+          </SearchResults>
+        </div>
+      </Container>
+    </GrandContainer>
+  )
 }
 
 export default SelectedProfiles

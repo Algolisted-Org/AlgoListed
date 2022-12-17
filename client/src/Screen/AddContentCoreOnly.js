@@ -12,8 +12,17 @@ const AddContentCoreOnly = () => {
     const [type, setType] = useState("");
     const [likes, setLikes] = useState("");
 
+    const [name, setName] = useState("");
+    const [company, setCompany] = useState("");
+    const [resume, setResume] = useState("");
+    const [linkedin, setLinkedin] = useState("");
+    const [codingProfiles, setCodingProfiles] = useState("");
+    const [medium, setMedium] = useState("");
+    const [referral, setReferral] = useState("");
+    const [mentorship, setMentorship] = useState("");
+    const [category, setCategory] = useState("");
 
-    const handleSubmit = async() => {
+    const handleSubmit = async () => {
         console.log("handle submit called!");
 
         await fetch('http://localhost:8000/resources/create', {
@@ -32,6 +41,7 @@ const AddContentCoreOnly = () => {
         }).then(response => response.json())
             .then(apiReturn => {
                 console.log(apiReturn);
+                alert(apiReturn.message);
             })
 
         setTitle("");
@@ -41,6 +51,44 @@ const AddContentCoreOnly = () => {
         setImgLink("");
         setType("");
         setLikes("");
+    }
+
+
+    const handleSubmit2 = async () => {
+        console.log("handle submit called!");
+
+        await fetch('http://localhost:8000/resumes/create', {
+            method: 'post',
+            headers: { 'content-type': 'application/json' },
+
+            body: JSON.stringify({
+                name,
+                company,
+                description,
+                resume,
+                linkedin,
+                codingProfiles,
+                medium,
+                referral,
+                mentorship,
+                category,
+            })
+        }).then(response => response.json())
+            .then(apiReturn => {
+                console.log(apiReturn);
+                alert(apiReturn.message);
+            })
+
+        setName("");
+        setCompany("");
+        setResume("");
+        setDescription("");
+        setLinkedin("");
+        setCodingProfiles("");
+        setMedium("");
+        setReferral("");
+        setMentorship("");
+        setCategory("");
     }
 
     return (
@@ -70,6 +118,23 @@ const AddContentCoreOnly = () => {
                             <input type="text" placeholder='Type' value={type} onChange={(e) => setType(e.target.value)} />
                             <input type="text" placeholder='Likes' value={likes} onChange={(e) => setLikes(e.target.value)} />
                             <button onClick={handleSubmit}>Post this on MongoDB</button>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3>Selected Profiles</h3>
+                        <div className="form">
+                            <input type="text" placeholder='name' value={name} onChange={(e) => setName(e.target.value)} />
+                            <input type="text" placeholder='company' value={company} onChange={(e) => setCompany(e.target.value)} />
+                            <input type="text" placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <input type="text" placeholder='resume' value={resume} onChange={(e) => setResume(e.target.value)} />
+                            <input type="text" placeholder='linkedin' value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />
+                            <input type="text" placeholder='codingProfiles' value={codingProfiles} onChange={(e) => setCodingProfiles(e.target.value)} />
+                            <input type="text" placeholder='medium' value={medium} onChange={(e) => setMedium(e.target.value)} />
+                            <input type="text" placeholder='referral' value={referral} onChange={(e) => setReferral(e.target.value)} />
+                            <input type="text" placeholder='mentorship' value={mentorship} onChange={(e) => setMentorship(e.target.value)} />
+                            <input type="text" placeholder='category' value={category} onChange={(e) => setCategory(e.target.value)} />
+                            <button onClick={handleSubmit2}>Post this on MongoDB</button>
                         </div>
                     </section>
                 </div>
