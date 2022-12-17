@@ -25,7 +25,7 @@ const resourcesSchema = new mongoose.Schema({
     type: String,
     enum: ['Blog', 'Handwritten Notes', 'Question Paper', 'Course', 'Other'],
     required: true,
-    default: 'PDF',
+    default: 'Other',
   },
   createdAt: {
     type: Date,

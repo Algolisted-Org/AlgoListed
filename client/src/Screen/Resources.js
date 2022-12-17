@@ -21,6 +21,15 @@ const Resources = () => {
   //     .catch((err) => console.log(err));
   // }, []);
 
+  useEffect(() => {
+    axios.get("http://localhost:8000/resources/all")
+      .then((res) => {
+        setAllResources(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const handleFilter = (e) => {
     setFilter(e.target.textContent);
   };
@@ -52,7 +61,7 @@ const Resources = () => {
         <div className="cc-middle-content">
           <h1 className='main-heading'>Resources</h1>
           <p className="heading-supporter">
-          Here we list notes, codes, and other resources that are related to a particular youtube educator like Striver, Tourist, Priyansh Agarwal, Love Babbar, Kunal Kushwaha, Anuj Bhaiya, Luv, etc. This would significantly increase the productivity of the students who want to learn from a particular playlist of videos.  
+            Here we list notes, codes, and other resources that are related to a particular youtube educator like Striver, Tourist, Priyansh Agarwal, Love Babbar, Kunal Kushwaha, Anuj Bhaiya, Luv, etc. This would significantly increase the productivity of the students who want to learn from a particular playlist of videos.
           </p>
           <div className="message">
             <div className="icon"></div>
@@ -72,7 +81,7 @@ const Resources = () => {
             <InfoIcon style={{ fill: '#333' }} />
           </Sort>
 
-          {/* {
+          {
             allResources.length === 0 ? (
               <>
                 <LinearProgress />
@@ -82,14 +91,17 @@ const Resources = () => {
               <div className="resources-container">
                 {
                   allResources.map((item, index) => {
-                    if(filter == "All Resources" || item.tags[0] == filter) { // Later on change tags[0] to search in all the tags
-                      return ( 
-                        <div className="resource" key={index}>
-                          <a href={`${item.link}`} target={"_blank"} className="title">{item.title}</a>
+                    if (filter == "All Resources" || item.tags[0] == filter) { // Later on change tags[0] to search in all the tags
+                      return (
+                        <div className="resource">
+                          <div className="img-container">
+                            <img src={item.imgLink} alt="" />
+                          </div>
+                          <a href={item.link} target={"_blank"} className="title">{item.title}</a>
                           <div className="short-desc">{item.description}</div>
                           <div className="tags">
-                            <div className="main-tag">{item.tags[0]}</div>
-                            <div className="tag">{item.type}</div>
+                            <div className="main-tag">{item.creator}</div>
+                            <div className="tag">{item.creator}</div>
                           </div>
                         </div>
                       )
@@ -99,44 +111,7 @@ const Resources = () => {
                 }
               </div>
             )
-          } */}
-          
-          <div className="resources-container">
-            <div className="resource">
-              <div className="img-container">
-                <img src="https://i.ytimg.com/vi/M3_pLsDdeuU/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDwWeg_9weeOft2ynrV-NjIQJ-D5Q" alt="" />
-              </div>
-              <a href="https://www.youtube.com/playlist?list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn" target={"_blank"} className="title">Graph Series by Striver | C++ | Java | Interview Centric | Algorithms</a>
-              <div className="short-desc">The playlist aims to teach you Graphs in depth. The focus of the playlist is to cover all the concepts, and then follow it up with a lot of problems so that the concepts go into your head and stay there.</div>
-              <div className="tags">
-                <div className="main-tag">Striver</div>
-                <div className="tag">Handwritten Notes</div>
-              </div>
-            </div>
-            <div className="resource">
-              <div className="img-container">
-                <img src="https://i.ytimg.com/vi/un6PLygfXrA/maxresdefault.jpg" alt="" />
-              </div>
-              <a href="https://www.youtube.com/playlist?list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn" target={"_blank"} className="title">Recursion (Basic to Advanced) and Backtracking Series</a>
-              <div className="short-desc">The playlist aims to teach you Graphs in depth. The focus of the playlist is to cover all the concepts, and then follow it up with a lot of problems so that the concepts go into your head and stay there.</div>
-              <div className="tags">
-                <div className="main-tag">Striver</div>
-                <div className="tag">Handwritten Notes</div>
-              </div>
-            </div>
-            <div className="resource">
-              <div className="img-container">
-                <img src="https://i.ytimg.com/vi/FfXoiwwnxFw/hqdefault.jpg" alt="" />
-              </div>
-              <a href="https://www.youtube.com/playlist?list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn" target={"_blank"} className="title">Learn Dynamic Programming with Striver | C++ | Java | Interview Centric | Algorithms</a>
-              <div className="short-desc">The playlist aims to teach you Graphs in depth. The focus of the playlist is to cover all the concepts, and then follow it up with a lot of problems so that the concepts go into your head and stay there.</div>
-              <div className="tags">
-                <div className="main-tag">Striver</div>
-                <div className="tag">Handwritten Notes</div>
-              </div>
-            </div>
-          </div>
-
+          }
         </div>
       </Container>
     </GrandContainer>

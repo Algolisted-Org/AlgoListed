@@ -5,51 +5,20 @@ import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import ApartmentIcon from '@material-ui/icons/Apartment';
+import axios from "axios";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const SelectedProfiles = () => {
-    const randomValues = [
-      {
-        "cardHeader" : "Abhishek Verma | Google",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-      {
-        "cardHeader" : "Atanu Nayak | Uber India",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-      {
-        "cardHeader" : "Striver | Google Warsaw",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-      {
-        "cardHeader" : "Aditiya Singh | Uber UX developer",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-      {
-        "cardHeader" : "Ayush Tripathi | Zomato",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-      {
-        "cardHeader" : "Abhishek Verma | Google",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-      {
-        "cardHeader" : "Atanu Nayak | Uber India",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-      {
-        "cardHeader" : "Striver | Google Warsaw",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-      {
-        "cardHeader" : "Aditiya Singh | Uber UX developer",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-      {
-        "cardHeader" : "Ayush Tripathi | Zomato",
-        "expDesc" : "Hi there I am Abhishek Verma, I recented cracked Google and Uber. Most of the questions which were asked to me were relatively compairable to codeforces Div 2, and my interview gave emphasis on my open source projects a lot.",
-      },
-    ];
+    const [allResumesData, setAllResumesData] = useState([]);
+
+    useEffect(() => {
+    axios.get("http://localhost:8000/resumes/all")
+      .then((res) => {
+        setAllResumesData(res.data);
+        console.log("All resumes : ", res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
     
 
     return ( 
@@ -103,11 +72,11 @@ const SelectedProfiles = () => {
                       <div className="current-search">Showing selected SDEs in all companies</div>
                       <div className="all-profiles-container">
                         {
-                          randomValues.map((item) => {
+                          allResumesData.map((item, index) => {
                             return (
-                              <div className="profile-card">
-                                <div className="card-header">{item.cardHeader}</div>
-                                <div className="exp-desc">{item.expDesc}
+                              <div className="profile-card" key={index}>
+                                <div className="card-header">{item.name} | {item.company}</div>
+                                <div className="exp-desc">{item.description}
                                   {" "}<a href="/">read more</a>
                                 </div>
 
