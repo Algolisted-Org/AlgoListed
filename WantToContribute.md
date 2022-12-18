@@ -31,3 +31,11 @@
 - Skills: React JS, SASS, gATSBYJS
 - Have done a open source contribution before : Nope
 - GitHub: (https://github.com/Lonecloud7)
+
+#### Name: [Jordan Adair](https://github.com/JordanAdair)
+
+- Place: Canada
+- Bio: Recent CS grad
+- Skills: React, ExpressJS, JavaScript, PHP, SQL, Python, Firebase/MongoDB/mySQL
+- Have done a open source contribution before: No
+- GitHub: https://github.com/JordanAdair
