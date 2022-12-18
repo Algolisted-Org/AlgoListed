@@ -78,17 +78,30 @@ const CodingCompetitions = () => {
     }
     if (listItemText === "By Registration") {
       setList((list) => {
-        // condition to be corrected
         return [...list].sort((a, b) => {
-          return b.duration_mins - a.duration_mins;
+          if (a.registration_status === "Open") {
+            if (a.registration_status === b.registration_status) {
+              // condition to be corrected
+              return a.duration_mins - b.duration_mins;
+            }
+            return -1;
+          } else if (a.registration_status === "Closed") {
+            if (a.registration_status === b.registration_status) {
+              // condition to be corrected
+              return a.duration_mins - b.duration_mins;
+            }
+            return 1;
+          } else {
+            return 0;
+          }
         });
       });
       setSortType(listItemText);
     }
     if (listItemText === "By Contest Timing") {
       setList((list) => {
-        // condition to be corrected
         return [...list].sort((a, b) => {
+          // condition to be corrected
           return a.duration_mins - b.duration_mins;
         });
       });
