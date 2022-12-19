@@ -42,10 +42,17 @@ const AllBlogs = () => {
                         {
                           allBlogsDatabase.map((item, index) => {
                             return (
-                                <a href={item.link} className="blog-container" key={index}>
+                                <div className="blog-container" key={index}>
                                     <div className="last-updated">{item.date}</div>
-                                    <div className="blog-title">{item.title}</div>
-                                    <div className="blog-desc">{item.desc} <a href='/' className="author">by Atanu Nayak + 3 others</a></div>
+                                    <a href={item.link} className="blog-title">{item.title}</a>
+                                    <div className="blog-desc">{item.desc} 
+                                      <div className="author">
+                                        <a href={item.authorLink[0]} target="_blank">
+                                          <img src={item.authorImageLink} alt="" />
+                                        </a>
+                                        <div className="text">Contribution by {item.author[0]} {item.author.length > 1 ? <>+ {item.author.length - 1} others</> : <></>}</div>
+                                      </div>
+                                    </div>
 
                                     <div className="blog-tags">
                                         <div className="main-tag">{item.category}</div>
@@ -57,7 +64,7 @@ const AllBlogs = () => {
                                           } )
                                         }
                                     </div>
-                                </a>
+                                </div>
                             )
                           })
                         }
@@ -258,14 +265,14 @@ const BlogsContainer = styled.div`
             margin: 15px 0 5px 0;
             color: #374151;
             cursor: pointer;
-        }
-
-        &:hover{
-            .blog-title{
-                color: cornflowerblue;
-                transition-duration: 250ms;
+            text-decoration: none;
+            
+            &:hover{
+              color: cornflowerblue;
+              transition-duration: 250ms;
             }
         }
+
 
         .blog-desc{
             font-size: 0.9rem;
@@ -274,13 +281,27 @@ const BlogsContainer = styled.div`
             color: #6b7280;
             
             .author{
-              font-weight: 200;
-              font-size: 0.85rem;
-              font-weight: 200;
-              color: #6b7280;
-              font-style: italic;
-              text-decoration: none;
-              display: block;
+              display: flex;
+              align-items: center;
+              margin-top: 10px;
+
+              img{
+                height: 30px;
+                width: 30px;
+                border-radius: 100px;
+                margin-right: 5px;
+              }
+
+              .text{
+                font-weight: 200;
+                font-size: 0.75rem;
+                font-weight: 200;
+                color: #6b7280;
+                text-decoration: none;
+              }
+              
+              
+
             }
         }
 

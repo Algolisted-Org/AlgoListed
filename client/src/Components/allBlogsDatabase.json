@@ -7,6 +7,7 @@
         "category" : "DSA and CP",
         "author" : ["Atanu Nayak"],
         "authorLink" : ["https://www.linkedin.com/in/atanu-nayak-profile/"],
+        "authorImageLink" : "https://imageio.forbes.com/specials-images/imageserve/626c7cf3616c1112ae834a2b/0x0.jpg?format=jpg&crop=1603,1603,x1533,y577,safe&height=416&width=416&fit=bounds",
         "tags" : ["Shortest Path Algorithm", "Graph Theory", "Dijekstra Algorithm", "Bellman Ford Algorithm"]
     },
     {
@@ -15,8 +16,9 @@
         "desc" : "We have listed down all the resources that you would require to get started on github. This blog is for straight beginners you want to fork a project or wants to make thier first commit. There is a bonus aswell, we have also listed the best beginner friendly open sourced projects. ",
         "link" : "/blogs/1/get-started-with-github",
         "category" : "Open Source",
-        "author" : ["Ayush Pandit", "Atanu Nayak"],
+        "author" : ["Ayush Pandit", "Atanu Nayak", "Anurag Chakraborty"],
         "authorLink" : ["https://www.linkedin.com/in/ayushpanditmoto/", "https://www.linkedin.com/in/atanu-nayak-profile/"],
+        "authorImageLink" : "https://media.licdn.com/dms/image/D4D03AQH5FFvxwII8aw/profile-displayphoto-shrink_400_400/0/1670936222065?e=1677110400&v=beta&t=OTSMyMIjUOOyn-DYS3JFcVAkG9wYK3v4fjN-07hLFsc",
         "tags" : ["Github", "Beginner level projects"]
     },
     {
@@ -24,9 +26,10 @@
         "title" : "Two pointers for Competative Programming",
         "desc" : "We have listed down all the resources that you would require to get started on github. This blog is for straight beginners you want to fork a project or wants to make thier first commit. There is a bonus aswell, we have also listed the best beginner friendly open sourced projects. ",
         "link" : "/blogs/2/get-started-with-github",
-        "category" : "Open Source",
-        "author" : ["Ayush Pandit", "Atanu Nayak"],
+        "category" : "Competitive Programming",
+        "author" : ["Vikash Sangai", "Upayan De"],
         "authorLink" : ["https://www.linkedin.com/in/ayushpanditmoto/", "https://www.linkedin.com/in/atanu-nayak-profile/"],
-        "tags" : ["Github", "Beginner level projects"]
+        "authorImageLink" : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+        "tags" : []
     }
 ]

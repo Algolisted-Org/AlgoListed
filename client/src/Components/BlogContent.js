@@ -4,8 +4,10 @@ import styled from 'styled-components'
 import ShowContributors from './ShowContributors'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import data from './blogDatabase.json'
+import Avatar from '@material-ui/core/Avatar';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
-const BlogContent = ({blogid}) => {
+const BlogContent = ({ blogid }) => {
     console.log(blogid);
     console.log(data[blogid]);
 
@@ -31,7 +33,7 @@ const BlogContent = ({blogid}) => {
                 {/* Seperate random doc called; */}
                 <iframe height={blogData.docHeightPx} src={`${blogData.docLinkIframe}`}></iframe>
 
-                <div className="beginner-problems">
+                <div className="page-section">
                     <div className="new-part-heading">Beginner to medium level Problems</div>
                     <div className="para-1">
                         These question are sorted in a really nice manner. It helps you to start solving the problems from the very basic and then takes you to medium level problems. Here we clubbed the resources we have got from leetcode blogs, codeforces blogs and the knowlege from the contributors of the blog.
@@ -155,6 +157,52 @@ const BlogContent = ({blogid}) => {
                             </div>
                             <div className="done-btn">
                                 <CheckCircleOutlineIcon />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="page-section">
+                    <div className="new-part-heading">Ask doubts to community</div>
+                    <div className="para-1">
+                        You can ask any questions or doubts you have about the blog topic in this section. Please note that this section is for asking questions and seeking clarification, not for making complimentary comments about the blog. If you have a question or doubt, a notification will be sent to the blog creators so they can address it. Please refrain from using this section for flattering comments.
+                    </div>
+                    <div className="my_thread">
+                        <div className="avatar"><Avatar/></div>
+                        <input type="text" placeholder='Create your query thread . . . ' />
+                    </div>
+                    <div className="other-threads">
+                        <div className="thread">
+                            <div className="avatar">
+                            <Avatar src="https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/10/2021_10$largeimg_310424373.jpg"/>
+                            </div>
+                            <div className="text">
+                                <div className="name">Kartik Aryan</div>
+                                <div className="query">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita esse harum quasi as sed tempore necessitatibus alias vel adipisci fuga eligendi, obcaecati animi laudantium unde, porro quis velit soluta ex.</div>
+                                <div className="options">
+                                    <div className="opt">Reply</div>
+                                    <div className="opt">Show 3 Replies</div>
+                                </div>
+                            </div>
+                            <div className="reviews">
+                                <ArrowDropUpIcon/>
+                                <div className="count">12</div>
+                            </div>
+                        </div>
+                        <div className="thread">
+                            <div className="avatar">
+                            <Avatar src="https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/10/2021_10$largeimg_310424373.jpg"/>
+                            </div>
+                            <div className="text">
+                                <div className="name">Freddy Ginwala</div>
+                                <div className="query">Sorry sir kept you waiting. </div>
+                                <div className="options">
+                                    <div className="opt">Reply</div>
+                                    <div className="opt">Show 3 Replies</div>
+                                </div>
+                            </div>
+                            <div className="reviews">
+                                <ArrowDropUpIcon/>
+                                <div className="count">12</div>
                             </div>
                         </div>
                     </div>
@@ -366,7 +414,7 @@ const Container = styled.div`
             }
         }
         
-        .beginner-problems{
+        .page-section{
 
             .table{
                 margin: 15px 0;
@@ -447,6 +495,93 @@ const Container = styled.div`
                 
                 .no-bottom-border{
                     border-bottom: 1px solid transparent;
+                }
+            }
+
+            .my_thread{
+                display: flex;
+                margin: 40px 0 10px 0;
+                align-items: center;
+
+                .avatar{
+                    svg{
+                        font-size: 2rem;
+                        fill: grey;
+                    }    
+                }
+
+                input{
+                    border: none;
+                    border-bottom: 1px solid black;
+                    width: 100%;
+                    font-size: 0.85rem;
+                    margin: 0 10px;
+                    padding-bottom: 5px;
+                }
+            }
+
+            .other-threads{
+                margin: 30px 0 0 0;
+
+                .thread{
+                    display: flex;
+                    margin: 30px 0;
+                    align-items: flex-start;
+                    position: relative;
+
+                    .avatar{
+                        svg{
+                            font-size: 2rem;
+                            fill: grey;
+                        }    
+                    }
+
+                    .text{
+                        margin: 0 35px 0 10px;
+
+                        .name{
+                            font-size: 0.85rem;
+                            font-weight: 500;
+                            display: block;
+                            margin-bottom: 2.5px;
+                        }
+                        .query{
+                            font-size: 0.85rem;
+                            font-weight: 200;
+                        }
+                        .options{
+                            display: flex;
+                            align-items: center;
+
+                            .opt{
+                                font-size: 0.75rem;
+                                margin-right: 15px;
+                                margin-top: 7.5px;
+                            }
+                        }
+                    }
+
+                    .reviews{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: space-around;
+                        width: 20px;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+
+                        svg{
+                            font-size: 3rem;
+                            margin: -12.5px 0;
+                            fill: #c8c8c8;
+                        }
+
+                        .count{
+                            font-size: 0.8rem;
+                            letter-spacing: 0.07rem;
+                        }
+                    }
                 }
             }
         }

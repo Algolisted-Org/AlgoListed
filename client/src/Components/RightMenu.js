@@ -15,11 +15,6 @@ const RightMenu = () => {
             <a className="contributor" href='https://github.com/Nayaker/' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/93304796?v=4" alt="" /></a>
             <a className="contributor" href='https://github.com/Ayushpanditmoto' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/31253617?v=4" alt="" /></a>
             <a className="contributor" href='https://github.com/Mohit030802' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/80634689?s=100&v=4" alt="" /></a>
-            <a className="contributor" href='https://github.com/ThorezNS' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/84680745?v=4" alt="" /></a>
-            <a className="contributor" href='https://github.com/jinitsuga' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/73081185?v=4" alt="" /></a>
-            <a className="contributor" href='https://github.com/RajMhatre20' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/68785723?v=4" alt="" /></a>
-            <a className="contributor" href='https://github.com/adrianmarinwork' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/118568289?v=4" alt="" /></a>
-            <a className="contributor" href='https://github.com/ThePlugJumbo' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/85082134?v=4" alt="" /></a>
           </div>
         
           <div className="btns">
@@ -45,7 +40,7 @@ const RightMenu = () => {
         </div>
         <div className="show-all-problems">Show All Problems, Related to this blog</div>
       </div>
-      <div className="subscribe-box">
+      {/* <div className="subscribe-box">
         <div className="top-title">Subscribe to Algorithmist,</div>
         <div className="top-desc">Get the best, coolest, and latest in design and no-code delivered to your inbox each week.</div>
         <input type="text" className='input-email' placeholder='atanu.nayak03@gmail.com'/>
@@ -54,6 +49,13 @@ const RightMenu = () => {
           You can unsubscribe at any time, no hard feelings.
           <a href="/">Privacy policy</a>
         </div>
+      </div> */}
+      <div className="ask-query">
+        <div className="top-title">Ask query about the topic</div>
+        <div className="top-desc">If you have a question or doubt, other readers may be able to help you. Additionally, a notification will be sent to the creators of the blog, who can address it for you.</div>
+        {/* <input type="text" className='input-query' placeholder='Enter your doubt . . .'/> */}
+        <div className="submit-btn">Ask doubt to community</div>
+        <div className="bottom-desc">Go to<a href='/' >Ask doubts to community</a> section, to ask, discuss and solve queries related to the blog topic.</div>
       </div>
     </Container>
   )
@@ -195,6 +197,58 @@ const Container = styled.div`
       }
     }
   }
+
+  .ask-query{
+    /* display: none; */
+    width: 100%;
+    background-color: #eef0f3;
+    padding: 10px;
+    /* margin: 10px 0; */
+    position: sticky;
+    top: 390px;
+    border-radius: 5px;
+
+    .top-title{
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 3.5px;
+    }
+
+    .top-desc{
+      font-size: 0.8rem;
+      font-weight: 200;
+      margin-top: 5px;
+    }
+
+    .submit-btn{
+      width: 100%;
+      padding: 10px;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.1rem;
+      /* background-color: #dc7070; */
+      background-color: #66a2d3;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+
+    .bottom-desc{
+      font-size: 0.7rem;
+      margin-top: 10px;
+
+      a{
+        color: inherit;
+        text-decoration: underline;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  
+  
 
   .similar-questions{
     margin: 20px 0;
