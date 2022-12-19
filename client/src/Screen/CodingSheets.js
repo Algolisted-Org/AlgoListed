@@ -7,6 +7,7 @@ import { codingSheetsFilters } from "../Components/codingSheetsFilters";
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
+	const [completedCount, setCompletedCount] = useState(0);
 	const [allFilters, setAllFilters] = useState(codingSheetsFilters);
 	console.log(codingSheetsFilters);
 	const [filter, setFilter] = useState("Striver's SDE Sheet"); // later on change to Discuss Coding Sheets
@@ -25,8 +26,12 @@ const CodingSheets = () => {
 		const updatedData = [...data];
 		updatedData[index].completed = !updatedData[index].completed;
 		setData(updatedData);
-		console.log(data);
+		setCompletedCount(
+			(prevCount) => prevCount + (updatedData[index].completed ? 1 : -1)
+		);
 	};
+
+	const progressBarPercent = ((completedCount / data.length) * 100).toFixed(0);
 
 	const filters = codingSheetsFilters.map((item) => {
 		return (
@@ -123,9 +128,12 @@ const CodingSheets = () => {
 
 					<Progress>
 						<div className="text">Progress : </div>
-						<div className="value">23%</div>
+						<div className="value">{`${progressBarPercent}%`}</div>
 						<div className="bar">
-							<div className="fill"></div>
+							<div
+								className="fill"
+								style={{ width: `${progressBarPercent}%` }}
+							></div>
 						</div>
 					</Progress>
 					<div className="table">
@@ -422,7 +430,6 @@ const Progress = styled.div`
 		overflow: hidden;
 
 		.fill {
-			width: 23%;
 			height: 100%;
 			border-radius: 100px;
 			background-color: #ffa500;
