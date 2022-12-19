@@ -1,0 +1,32 @@
+[
+    {
+        "date" : "September 27, 2022",
+        "title" : "All Shortest Path Algorithms",
+        "desc" : "The basic theory behind all the shortest path algorithms are listed here, along with 15+ questions from websites like leetcode that will help you strengthen your grip over shortest path algorithms.",
+        "link" : "/blogs/0/all-shortest-path-algorithms",
+        "category" : "DSA and CP",
+        "author" : ["Atanu Nayak"],
+        "authorLink" : ["https://www.linkedin.com/in/atanu-nayak-profile/"],
+        "tags" : ["Shortest Path Algorithm", "Graph Theory", "Dijekstra Algorithm", "Bellman Ford Algorithm"]
+    },
+    {
+        "date" : "December 18, 2022",
+        "title" : "Get started with Github",
+        "desc" : "We have listed down all the resources that you would require to get started on github. This blog is for straight beginners you want to fork a project or wants to make thier first commit. There is a bonus aswell, we have also listed the best beginner friendly open sourced projects. ",
+        "link" : "/blogs/1/get-started-with-github",
+        "category" : "Open Source",
+        "author" : ["Ayush Pandit", "Atanu Nayak"],
+        "authorLink" : ["https://www.linkedin.com/in/ayushpanditmoto/", "https://www.linkedin.com/in/atanu-nayak-profile/"],
+        "tags" : ["Github", "Beginner level projects"]
+    },
+    {
+        "date" : "December 22, 2022",
+        "title" : "Two pointers for Competative Programming",
+        "desc" : "We have listed down all the resources that you would require to get started on github. This blog is for straight beginners you want to fork a project or wants to make thier first commit. There is a bonus aswell, we have also listed the best beginner friendly open sourced projects. ",
+        "link" : "/blogs/2/get-started-with-github",
+        "category" : "Open Source",
+        "author" : ["Ayush Pandit", "Atanu Nayak"],
+        "authorLink" : ["https://www.linkedin.com/in/ayushpanditmoto/", "https://www.linkedin.com/in/atanu-nayak-profile/"],
+        "tags" : ["Github", "Beginner level projects"]
+    }
+]

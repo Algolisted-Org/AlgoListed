@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import styled from 'styled-components'
-import ShowContributors from '../Components/ShowContributors'
+import ShowContributors from './ShowContributors'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import data from './blogDatabase.json'
 

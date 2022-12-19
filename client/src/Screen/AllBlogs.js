@@ -4,8 +4,11 @@ import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
+import allBlogsDatabase from "../Components/allBlogsDatabase.json"
 
 const AllBlogs = () => {
+    console.log(allBlogsDatabase);
+
     return ( 
         <GrandContainer>
             <MobContainer>
@@ -17,7 +20,7 @@ const AllBlogs = () => {
                 <CCHeader />
                 <LeftMenu marked={"all-blogs"} />
                 <div className="cc-middle-content">
-                    <h1 className='main-heading'>All Blogs</h1>
+                    <h1 className='main-heading'>All Blogs <div className="head-tag">local database</div> </h1>
                     <p className="heading-supporter">
                     We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
                     </p>
@@ -27,19 +30,6 @@ const AllBlogs = () => {
                             We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
                         </div>
                     </div>
-                    {/* <Filters>
-                        <div className="filter selected">DSA competiions</div>
-                        <div className="filter selected">Competative Coding</div>
-                        <div className="filter">All</div>
-                        <div className="filter">Hackethrons</div>
-                        <div className="filter">Open Source</div>
-                        <div className="filter">Development</div>
-                        <div className="filter">MNC competiions</div>
-                        <div className="filter">Global</div>
-                        <div className="filter">Pan India</div>
-                        <div className="filter">College Level</div>
-                        <div className="filter">MAANG</div>
-                    </Filters> */}
                     <Sort>
                         <div className="box">
                         <div className="text">By Relevence</div>
@@ -49,55 +39,28 @@ const AllBlogs = () => {
                     </Sort>
 
                     <BlogsContainer>
-                        <a href='/blogs/0/all-shortest-path-algorithms' target={"_blank"} className="blog-container">
-                            <div className="last-updated">September 27, 2022</div>
-                            <div className="blog-title">All Shortest Path Algorithms</div>
-                            <div className="blog-desc">The formulas in Google Sheets may get deleted when new rows are added in the sheet or when new responses come in through Google Forms. The fix is simple!</div>
-                            <div className="blog-tags">
-                                <div className="main-tag">DSA</div>
-                                <div className="tag">Graph Theory</div>
-                                <div className="tag">Shortest Path Algorithm</div>
-                                <div className="tag">Dijkstra's Algorithm</div>
-                                <div className="tag">Bellman Ford Algorithm</div>
-                            </div>
-                        </a>
-                        <div className="blog-container">
-                            <div className="last-updated">September 27, 2022</div>
-                            <div className="blog-title">Understanding Time Complexity and its Importance in Coding Questions</div>
-                            <div className="blog-desc">The formulas in Google Sheets may get deleted when new rows are added in the sheet or when new responses come in through Google Forms. The fix is simple!</div>
-                            <div className="blog-tags">
-                                <div className="main-tag">DSA</div>
-                                <div className="tag">Time Complexity</div>
-                            </div>
-                        </div>
-                        <div className="blog-container">
-                            <div className="last-updated">September 27, 2022</div>
-                            <div className="blog-title">Baics of Github to get started with open source</div>
-                            <div className="blog-desc">The formulas in Google Sheets may get deleted when new rows are added in the sheet or when new responses come in through Google Forms. The fix is simple!</div>
-                            <div className="blog-tags">
-                                <div className="main-tag">Open Source</div>
-                                <div className="tag">Github</div>
-                                <div className="tag">Web Development</div>
-                            </div>
-                        </div>
-                        <div className="blog-container">
-                            <div className="last-updated">September 27, 2022</div>
-                            <div className="blog-title">Dynamic Programming - Organised</div>
-                            <div className="blog-desc">The formulas in Google Sheets may get deleted when new rows are added in the sheet or when new responses come in through Google Forms. The fix is simple!</div>
-                            <div className="blog-tags">
-                                <div className="main-tag">DSA</div>
-                                <div className="main-tag">Competative Coding</div>
-                            </div>
-                        </div>
-                        <div className="blog-container">
-                            <div className="last-updated">September 27, 2022</div>
-                            <div className="blog-title">Object Oriented Programming (OOPS) - For college semester and interviews</div>
-                            <div className="blog-desc">The formulas in Google Sheets may get deleted when new rows are added in the sheet or when new responses come in through Google Forms. The fix is simple!</div>
-                            <div className="blog-tags">
-                                <div className="main-tag">Theory Subject</div>
-                                <div className="tag">OOPS</div>
-                            </div>
-                        </div>
+                        {
+                          allBlogsDatabase.map((item, index) => {
+                            return (
+                                <a href={item.link} className="blog-container" key={index}>
+                                    <div className="last-updated">{item.date}</div>
+                                    <div className="blog-title">{item.title}</div>
+                                    <div className="blog-desc">{item.desc} <a href='/' className="author">by Atanu Nayak + 3 others</a></div>
+
+                                    <div className="blog-tags">
+                                        <div className="main-tag">{item.category}</div>
+                                        {
+                                          item.tags.map((tag, tagIndex) => {
+                                            return (
+                                              <div className="tag" key={tagIndex}>{tag}</div>
+                                            )
+                                          } )
+                                        }
+                                    </div>
+                                </a>
+                            )
+                          })
+                        }
                     </BlogsContainer>
                 </div>
             </Container>
@@ -163,6 +126,18 @@ const Container = styled.div`
           font-size: 1.65rem;
           font-weight: 600;
           color: #292929;
+          display: flex; 
+          align-items: center;
+
+          .head-tag{
+            display: inline;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.25rem 0.5rem;
+            border-radius: 100px;
+            background-color: #e5e5e5;
+            margin-left: 10px;
+          }
       }
 
       .heading-supporter{
@@ -297,7 +272,18 @@ const BlogsContainer = styled.div`
             font-weight: 200;
             margin-bottom: 25px;
             color: #6b7280;
+            
+            .author{
+              font-weight: 200;
+              font-size: 0.85rem;
+              font-weight: 200;
+              color: #6b7280;
+              font-style: italic;
+              text-decoration: none;
+              display: block;
+            }
         }
+
 
         .blog-tags{
             display: flex;
@@ -322,5 +308,7 @@ const BlogsContainer = styled.div`
                 margin: 5px 5px 0 0;
             }
         }
+
+        
     }
 `

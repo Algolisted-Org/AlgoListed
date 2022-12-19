@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import LeftMenu from '../Components/LeftMenu'
-import BlogsMain from '../Components/BlogsMain'
 import CCHeader from '../Components/CCHeader'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import BlogContent from '../BlogContent/BlogContent';
+import BlogContent from '../Components/BlogContent';
 import RightMenu from '../Components/RightMenu'
 
 const BlogPage = () => {
