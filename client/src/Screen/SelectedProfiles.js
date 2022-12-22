@@ -92,6 +92,12 @@ const SelectedProfiles = () => {
 
           <SearchResults>
             <div className="current-search">Showing selected {filter} in all companies</div>
+            <div className="company-statistics">
+              <div className="topic-heading">Company Statistics</div>
+              <div className="desc">
+              This new feature is coming soon and will provide graphical representations of information about the company you are targeting, including the median CGPA of recently hired employees and the required LeetCode rating for selection. We will have all the information you need.
+              </div>
+            </div>
             <div className="all-profiles-container">
               {
                 allResumesData.map((item, index) => {
@@ -328,6 +334,31 @@ const SearchResults = styled.div`
     font-size: 0.85rem;
     font-weight: 400;
   } 
+
+  .company-statistics{
+    width: 98%;
+    border-radius: 5px;
+    background-color: #dc7d7d;
+    margin: 20px 0 10px 0;
+    padding: 15px;
+
+    .topic-heading{ 
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 7.5px;
+      color: white;
+    }
+
+    .desc{ 
+      font-weight: 200;
+      font-size: 0.85rem;
+      color: white;
+    }
+
+    @media only screen and (max-width: 1370px){
+      width: calc(100% - 10px);
+    }
+  }
 
   .all-profiles-container{
     display: flex;
