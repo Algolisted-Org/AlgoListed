@@ -10,6 +10,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 const BlogContent = ({ blogid }) => {
     console.log(blogid);
     console.log(data[blogid]);
+    const [ShowReply, setShowReply] = useState(false);
 
     const [blogData, setBlogData] = useState(data[blogid]);
 
@@ -39,7 +40,6 @@ const BlogContent = ({ blogid }) => {
                         These question are sorted in a really nice manner. It helps you to start solving the problems from the very basic and then takes you to medium level problems. Here we clubbed the resources we have got from leetcode blogs, codeforces blogs and the knowlege from the contributors of the blog.
                     </div>
                     <div className="message">
-                        <div className="icon"></div>
                         <div className="text">
                             Want add a question link of this topic or point out any wrong info of tags. <a href="/">click here</a>
                         </div>
@@ -166,46 +166,49 @@ const BlogContent = ({ blogid }) => {
                     <div className="para-1">
                         You can ask any questions or doubts you have about the blog topic in this section. Please note that this section is for asking questions and seeking clarification, not for making complimentary comments about the blog. If you have a question or doubt, a notification will be sent to the blog creators so they can address it. Please refrain from using this section for flattering comments.
                     </div>
-                    <div className="my_thread">
-                        <div className="avatar"><Avatar/></div>
+                    <div className="message">
+                        <div className="text">
+                            We are constanly building the site, ask doubts to community feature will be added soon.
+                        </div>
+                    </div>
+                    {/* <div className="my_thread">
+                        <div className="avatar"><Avatar /></div>
                         <input type="text" placeholder='Create your query thread . . . ' />
                     </div>
                     <div className="other-threads">
                         <div className="thread">
                             <div className="avatar">
-                            <Avatar src="https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/10/2021_10$largeimg_310424373.jpg"/>
+                                <Avatar src="https://assets.leetcode.com/users/nero7s/avatar_1630046745.png" />
                             </div>
                             <div className="text">
-                                <div className="name">Kartik Aryan</div>
-                                <div className="query">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita esse harum quasi as sed tempore necessitatibus alias vel adipisci fuga eligendi, obcaecati animi laudantium unde, porro quis velit soluta ex.</div>
+                                <div className="name">Gaurav Prasad</div>
+                                <div className="query">What is the time complexity of Dijikstra's algorithm? I mean I know it O(n^2) how?</div>
                                 <div className="options">
                                     <div className="opt">Reply</div>
                                     <div className="opt">Show 3 Replies</div>
                                 </div>
-                            </div>
-                            <div className="reviews">
-                                <ArrowDropUpIcon/>
-                                <div className="count">12</div>
-                            </div>
-                        </div>
-                        <div className="thread">
-                            <div className="avatar">
-                            <Avatar src="https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/10/2021_10$largeimg_310424373.jpg"/>
-                            </div>
-                            <div className="text">
-                                <div className="name">Freddy Ginwala</div>
-                                <div className="query">Sorry sir kept you waiting. </div>
-                                <div className="options">
-                                    <div className="opt">Reply</div>
-                                    <div className="opt">Show 3 Replies</div>
+                                <div className="my-reply">
+                                    <div className="avatar"><Avatar className='avatar-svg' /></div>
+                                    <input type="text" placeholder='Reply to this thread . . . ' />
+                                </div>
+                                <div className="other-replies">
+                                    <div className="reply">
+                                        <div className="avatar">
+                                            <Avatar src="https://assets.leetcode.com/users/_luser/avatar_1589608245.png" />
+                                        </div>
+                                        <div className="text">
+                                            <div className="name">Varshini Mohan</div>
+                                            <div className="query">Time complexity of Dijkstra's algorithm is O(N2) because of the use of doubly nested for loops. It depends on how the table is manipulated.</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="reviews">
-                                <ArrowDropUpIcon/>
+                                <ArrowDropUpIcon />
                                 <div className="count">12</div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             {/* <div className="right">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque harum exercitationem quasi tempore architecto, recusandae excepturi. Libero, possimus distinctio maxime magni neque facilis nulla vel iste itaque in eos animi reprehenderit, quisquam error temporibus soluta voluptates expedita, quibusdam officiis nostrum iure illum! Dolores numquam rerum facilis placeat animi blanditiis eius? Quasi reiciendis cumque at ex eaque aut labore aliquam. Odit alias laborum modi cumque reiciendis quo dolor aspernatur officia exercitationem placeat fugit molestias, mollitia natus ipsam laboriosam maiores atque consequuntur asperiores. Nulla dolore assumenda, repellendus sed officiis tenetur quia in, ullam mollitia non nobis aspernatur! Perspiciatis reprehenderit commodi blanditiis? Vitae.</div> */}
@@ -537,7 +540,7 @@ const Container = styled.div`
                     }
 
                     .text{
-                        margin: 0 35px 0 10px;
+                        margin: 0 10px 0 10px;
 
                         .name{
                             font-size: 0.85rem;
@@ -557,6 +560,68 @@ const Container = styled.div`
                                 font-size: 0.75rem;
                                 margin-right: 15px;
                                 margin-top: 7.5px;
+                                margin-left: -2.5px;
+                                padding: 2.5px 5px;
+                                border-radius: 5px;
+                                
+                                &:hover{
+                                    background-color: #e5e5e5;
+                                    transition-duration: 250ms;
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+
+                        .my-reply{
+                            display: flex;
+                            margin: 20px 0 10px 0;
+                            align-items: center;
+
+                            .avatar-svg{
+                                font-size: 1rem;
+                                fill: grey;
+                            }
+
+                            input{
+                                border: none;
+                                border-bottom: 1px solid black;
+                                width: 100%;
+                                font-size: 0.85rem;
+                                margin: 0 10px;
+                                padding-bottom: 5px;
+                            }
+                        }
+
+                        .other-replies{
+                            display: flex;
+                            flex-direction: column;
+
+                            .reply{
+                                display: flex;
+                                margin: 10px 0;
+                                align-items: flex-start;
+                                position: relative;
+
+                                .avatar{
+                                    svg{
+                                        font-size: 2rem;
+                                        fill: grey;
+                                    }    
+                                }
+
+                                .text{
+                                    .name{
+                                        font-size: 0.85rem;
+                                        font-weight: 500;
+                                        display: block;
+                                        margin-bottom: 2.5px;
+                                    }
+                                    
+                                    .query{
+                                        font-size: 0.85rem;
+                                        font-weight: 200;
+                                    }
+                                }
                             }
                         }
                     }

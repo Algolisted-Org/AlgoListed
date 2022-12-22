@@ -5,9 +5,11 @@
         "desc" : "The basic theory behind all the shortest path algorithms are listed here, along with 15+ questions from websites like leetcode that will help you strengthen your grip over shortest path algorithms.",
         "link" : "/blogs/0/all-shortest-path-algorithms",
         "category" : "DSA and CP",
-        "author" : ["Atanu Nayak"],
-        "authorLink" : ["https://www.linkedin.com/in/atanu-nayak-profile/"],
-        "authorImageLink" : "https://imageio.forbes.com/specials-images/imageserve/626c7cf3616c1112ae834a2b/0x0.jpg?format=jpg&crop=1603,1603,x1533,y577,safe&height=416&width=416&fit=bounds",
+        "author" : ["Atanu Nayak", "Anurag Chakraborty"],
+        "authorLink" : ["https://www.linkedin.com/in/atanu-nayak-profile/", "https://www.linkedin.com/in/anurag-chakraborty-841827174/"],
+        "authorImageLink" : ["https://media.licdn.com/dms/image/D4D03AQEz19NYwVBUvw/profile-displayphoto-shrink_400_400/0/1671429806743?e=1677110400&v=beta&t=qxXOKIFRxBvo_Yho18Munxf_LnmkXbQbIbk7VFAsi7U", "https://media.licdn.com/dms/image/C5603AQE5GJq21rxvGw/profile-displayphoto-shrink_400_400/0/1627490166142?e=1677110400&v=beta&t=BJKX5q_ohF4Pe2eVbLM2oIoy_2_8DZhutEgUVG_Pc5U"],
+        "resourceType" : 0,
+        "resourceLink" : "linktobegiven.com",
         "tags" : ["Shortest Path Algorithm", "Graph Theory", "Dijekstra Algorithm", "Bellman Ford Algorithm"]
     },
     {
@@ -18,7 +20,9 @@
         "category" : "Open Source",
         "author" : ["Ayush Pandit", "Atanu Nayak", "Anurag Chakraborty"],
         "authorLink" : ["https://www.linkedin.com/in/ayushpanditmoto/", "https://www.linkedin.com/in/atanu-nayak-profile/"],
-        "authorImageLink" : "https://media.licdn.com/dms/image/D4D03AQH5FFvxwII8aw/profile-displayphoto-shrink_400_400/0/1670936222065?e=1677110400&v=beta&t=OTSMyMIjUOOyn-DYS3JFcVAkG9wYK3v4fjN-07hLFsc",
+        "authorImageLink" : ["https://media.licdn.com/dms/image/D4D03AQH5FFvxwII8aw/profile-displayphoto-shrink_400_400/0/1670936222065?e=1677110400&v=beta&t=OTSMyMIjUOOyn-DYS3JFcVAkG9wYK3v4fjN-07hLFsc", "https://media.licdn.com/dms/image/D4D03AQEz19NYwVBUvw/profile-displayphoto-shrink_400_400/0/1671429806743?e=1677110400&v=beta&t=qxXOKIFRxBvo_Yho18Munxf_LnmkXbQbIbk7VFAsi7U"],
+        "resourceType" : 0,
+        "resourceLink" : "linktobegiven.com",
         "tags" : ["Github", "Beginner level projects"]
     },
     {
@@ -29,7 +33,22 @@
         "category" : "Competitive Programming",
         "author" : ["Vikash Sangai", "Upayan De"],
         "authorLink" : ["https://www.linkedin.com/in/ayushpanditmoto/", "https://www.linkedin.com/in/atanu-nayak-profile/"],
-        "authorImageLink" : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+        "authorImageLink" : ["https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"],
+        "resourceType" : 0,
+        "resourceLink" : "linktobegiven.com",
         "tags" : []
+    },
+    {
+        "date" : "December 23, 2022",
+        "title" : "Start Open Source with Web Development",
+        "desc" : "The purpose of this blog is to provide an understanding of how open source operates and the level of web development knowledge needed to get started. It also includes a list of recommended open source projects to begin working on.",
+        "link" : "/blogs/2/get-started-with-github",
+        "category" : "Open Source",
+        "author" : ["Atanu Nayak"],
+        "authorLink" : ["https://www.linkedin.com/in/atanu-nayak-profile/"],
+        "authorImageLink" : ["https://media.licdn.com/dms/image/D4D03AQEz19NYwVBUvw/profile-displayphoto-shrink_400_400/0/1671429806743?e=1677110400&v=beta&t=qxXOKIFRxBvo_Yho18Munxf_LnmkXbQbIbk7VFAsi7U"],
+        "resourceType" : 0,
+        "resourceLink" : "linktobegiven.com",
+        "tags" : ["Github", "Beginner level projects"]
     }
 ]

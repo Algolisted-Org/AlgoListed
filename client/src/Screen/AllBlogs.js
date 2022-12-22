@@ -48,7 +48,7 @@ const AllBlogs = () => {
                                     <div className="blog-desc">{item.desc} 
                                       <div className="author">
                                         <a href={item.authorLink[0]} target="_blank">
-                                          <img src={item.authorImageLink} alt="" />
+                                          <img src={item.authorImageLink[0]} alt="" />
                                         </a>
                                         <div className="text">Contribution by {item.author[0]} {item.author.length > 1 ? <>+ {item.author.length - 1} others</> : <></>}</div>
                                       </div>
@@ -257,6 +257,7 @@ const BlogsContainer = styled.div`
             font-size: 0.8rem;
             font-weight: 200;
             color: #6b7281;
+            margin-bottom: 5px;
         }
 
         .blog-title{
@@ -299,9 +300,6 @@ const BlogsContainer = styled.div`
                 color: #6b7280;
                 text-decoration: none;
               }
-              
-              
-
             }
         }
 

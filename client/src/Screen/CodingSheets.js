@@ -319,6 +319,7 @@ const Container = styled.div`
 								border-radius: 100px;
 								font-size: 0.7rem;
 								margin-right: 5px;
+                                border: 1px solid #cac3c3;
 							}
 
 							.special-tag {
@@ -349,15 +350,6 @@ const Container = styled.div`
 
 			.done-row {
 				background-color: #dcf8eb;
-
-				.main-row-content {
-					.tags {
-						.tag {
-							background-color: black;
-							border: 1px solid #cac3c3;
-						}
-					}
-				}
 
 				.done-btn {
 					.MuiSvgIcon-root {

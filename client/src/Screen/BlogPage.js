@@ -26,7 +26,7 @@ const BlogPage = () => {
                 <LeftMenu marked={"all-blogs"} />
                 <div className="blogs-main">
                     <BlogContent blogid={blogid} />
-                    <RightMenu/>
+                    <RightMenu blogid={blogid} />
                 </div>
 
                 {/* <BlogsMain blogname={blogname}/> */}

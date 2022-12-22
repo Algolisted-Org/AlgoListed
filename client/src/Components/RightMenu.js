@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import data from './allBlogsDatabase.json'
 
-const RightMenu = () => {
+const RightMenu = ({blogid}) => {
+  console.log(blogid);
+  console.log(data[blogid]);
+
   return (
     <Container>
       <div className="blog-contributors">
@@ -12,15 +16,17 @@ const RightMenu = () => {
           by the community.
         </div>
         <div className="hold-contributors">
-            <a className="contributor" href='https://github.com/Nayaker/' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/93304796?v=4" alt="" /></a>
-            <a className="contributor" href='https://github.com/Ayushpanditmoto' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/31253617?v=4" alt="" /></a>
-            <a className="contributor" href='https://github.com/Mohit030802' target={"_blank"}><img src="https://avatars.githubusercontent.com/u/80634689?s=100&v=4" alt="" /></a>
-          </div>
+            {
+              data[blogid].authorImageLink.map((item, index) => {
+                return (<a className="contributor" href={data[blogid].authorLink[index]} target={"_blank"} key={index}><img src={item} alt="" /></a>);
+              })
+            }
+        </div>
         
-          <div className="btns">
-            <button className="full-btn cl-2">Add content to this blog or Report a bug</button>
-            <button className="full-btn cl-1">Become a Technical Content Writer</button>
-          </div>
+        <div className="btns">
+          <button className="full-btn cl-2">Add content to this blog or Report a bug</button>
+          <button className="full-btn cl-1">Become a Technical Content Writer</button>
+        </div>
       </div>
       
       <div className="similar-questions">

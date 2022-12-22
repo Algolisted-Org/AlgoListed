@@ -6,12 +6,31 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonIcon from '@material-ui/icons/Person';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
 import { useState } from 'react';
 
 const CCHeader = () => {
   const [showAccountModel, setShowAccountModel] = useState(false);
+  const [showWebUpdate, setShowWebUpdate] = useState(false);
   const [showNotificationModel, setShowNotificationModel] = useState(false);
   
+  const handleNotification = () => {
+    setShowNotificationModel(!showNotificationModel);
+    setShowAccountModel(false);
+    setShowWebUpdate(false);
+  }
+  
+  const handleWebUpdate = () => {
+    setShowWebUpdate(!showWebUpdate);
+    setShowAccountModel(false);
+    setShowNotificationModel(false);
+  }
+
+  const handleAccount = () => {
+    setShowAccountModel(!showAccountModel);
+    setShowNotificationModel(false);
+    setShowWebUpdate(false);
+  }
 
   return (
     <Container>
@@ -28,10 +47,13 @@ const CCHeader = () => {
             <GitHubIcon/>
           </a>
         </div>
-        <div className="icon-box" onClick={() => setShowNotificationModel(!showNotificationModel)}>
+        <div className="icon-box" onClick={handleWebUpdate}>
+            <WhatshotIcon/>
+        </div>
+        <div className="icon-box" onClick={handleNotification}>
             <NotificationsIcon/>
         </div>
-        <div className="icon-box" onClick={() => setShowAccountModel(!showAccountModel)}>
+        <div className="icon-box" onClick={handleAccount}>
             <PersonIcon/>
         </div>
       </div>
