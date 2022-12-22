@@ -47,13 +47,13 @@ const CCHeader = () => {
             <GitHubIcon/>
           </a>
         </div>
-        <div className="icon-box" onClick={handleWebUpdate}>
+        <div className={showWebUpdate ? "icon-box clicked" : "icon-box"} onClick={handleWebUpdate}>
             <WhatshotIcon/>
         </div>
-        <div className="icon-box" onClick={handleNotification}>
+        <div className={showNotificationModel ? "icon-box clicked" : "icon-box"} onClick={handleNotification}>
             <NotificationsIcon/>
         </div>
-        <div className="icon-box" onClick={handleAccount}>
+        <div className={showAccountModel ? "icon-box clicked" : "icon-box"} onClick={handleAccount}>
             <PersonIcon/>
         </div>
       </div>
@@ -72,6 +72,18 @@ const CCHeader = () => {
             <div className="btn">
               <div className="btn-text">Your account has been successfully created, Welcome to Algorithmist.
               </div>
+            </div>
+          </div>
+        ) : (<></>)
+      }
+
+      {
+        showWebUpdate ? (
+          <div className="nav-model-box">
+            <div className="text">Algorithmist <b>Updates</b></div>
+            <div className="line"></div>
+            <div className="btn">
+              <div className="btn-text">By the end of 2022, we will complete the most features of the website. And in January 2023, we are going to fill real data on the website.</div>
             </div>
           </div>
         ) : (<></>)
@@ -177,6 +189,10 @@ const Container = styled.div`
           background-color: #f2ecf9;
           transition-duration: 250ms;
         }
+      }
+
+      .clicked{
+        background-color: #f2ecf9;
       }
     }
 
