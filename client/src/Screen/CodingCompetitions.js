@@ -39,8 +39,11 @@ const CodingCompetitions = () => {
   const changeRegistrationStatus = (list) =>
     list.map((obj) => {
       const isRegistrationExpired =
-        TimeLeft(obj.registration_end_date, obj.registration_end_time_mins) ===
-        "Expired";
+        TimeLeft(
+          false,
+          obj.registration_end_date,
+          obj.registration_end_time_mins
+        ) === "Expired";
       if (isRegistrationExpired) {
         return { ...obj, registration_status: "Closed" };
       }
@@ -79,16 +82,24 @@ const CodingCompetitions = () => {
     if (listItemText === "By Registration") {
       setList((list) => {
         return [...list].sort((a, b) => {
+          const firstItemTime = TimeLeft(
+            true,
+            a.competition_date,
+            a.time_start_mins
+          );
+          const secondItemTime = TimeLeft(
+            true,
+            b.competition_date,
+            b.time_start_mins
+          );
           if (a.registration_status === "Open") {
             if (a.registration_status === b.registration_status) {
-              // condition to be corrected
-              return a.duration_mins - b.duration_mins;
+              return firstItemTime - secondItemTime;
             }
             return -1;
           } else if (a.registration_status === "Closed") {
             if (a.registration_status === b.registration_status) {
-              // condition to be corrected
-              return a.duration_mins - b.duration_mins;
+              return firstItemTime - secondItemTime;
             }
             return 1;
           } else {
@@ -101,8 +112,17 @@ const CodingCompetitions = () => {
     if (listItemText === "By Contest Timing") {
       setList((list) => {
         return [...list].sort((a, b) => {
-          // condition to be corrected
-          return a.duration_mins - b.duration_mins;
+          const firstItemTime = TimeLeft(
+            true,
+            a.competition_date,
+            a.time_start_mins
+          );
+          const secondItemTime = TimeLeft(
+            true,
+            b.competition_date,
+            b.time_start_mins
+          );
+          return firstItemTime - secondItemTime;
         });
       });
       setSortType(listItemText);
@@ -192,6 +212,7 @@ const CodingCompetitions = () => {
                   .filter(
                     (item) =>
                       TimeLeft(
+                        false,
                         item.competition_date,
                         item.time_start_mins + item.duration_mins
                       ) !== "Expired"

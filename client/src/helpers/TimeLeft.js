@@ -1,4 +1,4 @@
-const TimeLeft = (date, minutes) => {
+const TimeLeft = (num, date, minutes) => {
   let timeLeft;
 
   (() => {
@@ -17,22 +17,26 @@ const TimeLeft = (date, minutes) => {
     m %= 60;
     s %= 60;
 
-    h = h < 10 ? '0' + h : h;
-    m = m < 10 ? '0' + m : m;
-    s = s < 10 ? '0' + s : s;
+    h = h < 10 ? "0" + h : h;
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
     //if day the time is negative then show expired
     if (d < 0 || h < 0 || m < 0 || s < 0) {
-      return (timeLeft = 'Expired');
+      if (num) return (timeLeft = "0");
+      if (!num) return (timeLeft = "Expired");
     }
 
     if (d === 0) {
-      return (timeLeft = `${h} hours ${m} minutes`);
+      if (num) return (timeLeft = `${h}${m}`);
+      if (!num) return (timeLeft = `${h} hours ${m} minutes`);
     } else if (d === 1) {
       // return `${h}h ${m}m ${s}s`
-      return (timeLeft = `${d} day, ${h} hours ${m} minutes`);
+      if (num) return (timeLeft = `${d}${h}${m}`);
+      if (!num) return (timeLeft = `${d} day, ${h} hours ${m} minutes`);
     } else {
       // return `${d}d ${h}h ${m}m ${s}s`
-      return (timeLeft = `${d} days, ${h} hours ${m} minutes`);
+      if (num) return (timeLeft = `${d}${h}${m}`);
+      if (!num) return (timeLeft = `${d} days, ${h} hours ${m} minutes`);
     }
   })();
 
