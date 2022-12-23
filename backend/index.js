@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 app.use('/auth', require('./Routers/router_auth'));
 app.use('/resources', require('./Routers/router_resources'));
 app.use('/resumes', require('./Routers/router_resumes'));
-// app.use('/coding-sheets', require('./Routers/coding_sheets'));
+app.use('/coding-sheets', require('./Routers/coding_sheets'));
 
 const port = process.env.PORT || 8000;
 

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const codingQuestionSchema = new mongoose.Schema({
-  name: {
+  quesName: {
     type: String,
     required: true,
   },
-  link: {
+  quesLink: {
     type: String,
     required: true,
   },
@@ -14,7 +14,7 @@ const codingQuestionSchema = new mongoose.Schema({
     required: true,
   },
   tags: [{
-    type: String,
+    type: Array,
     required: true,
   }],
   createdAt: {
@@ -22,9 +22,13 @@ const codingQuestionSchema = new mongoose.Schema({
     default: Date.now,
   },
   completed: {
-    type: Bool,
+    type: Boolean,
     default: false,
   },
+  connectOn:{
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model('All_Coding_Sheets', codingQuestionSchema);
