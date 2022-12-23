@@ -4,17 +4,23 @@ import CCHeader from "../Components/CCHeader";
 import LeftMenu from "../Components/LeftMenu";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { codingSheetsFilters } from "../Components/codingSheetsFilters";
+import axios from "axios";
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
 	const [completedCount, setCompletedCount] = useState(0);
-	const [allFilters, setAllFilters] = useState(codingSheetsFilters);
-	console.log(codingSheetsFilters);
 	const [filter, setFilter] = useState("Striver's SDE Sheet"); // later on change to Discuss Coding Sheets
 
-	// Load data on first render
+	const len = codingSheetsFilters.length;
+	let segregated = [];
+	
 	useEffect(() => {
-		setData(sampleData);
+	axios.get("http://localhost:8000/coding-sheets/all")
+		.then((res) => {
+		setData(res.data);
+		console.log("All data : ", res.data);
+		})
+		.catch((err) => console.log(err));
 	}, []);
 
 	const handleFilter = (e) => {
@@ -35,62 +41,12 @@ const CodingSheets = () => {
 
 	const filters = codingSheetsFilters.map((item) => {
 		return (
-			<div
-				onClick={(e) => {
-					handleFilter(e);
-				}}
-				key={item.id}
-				className={item.text == filter ? "filter selected" : "filter"}
-			>
+			<div onClick={(e) => { handleFilter(e); }} key={item.id}
+			className={item.text == filter ? "filter selected" : "filter"}>
 				{item.text}
 			</div>
 		);
 	});
-
-	const sampleData = [
-		{
-			name: "BFS Implementaion",
-			link: "https://leetcode.com/problems/number-of-provinces/",
-			specialTag: "Day 1",
-			tags: ["GeeksforGeeks", "Implementation", "TCS Ninjs", "Wipro"],
-			completed: false, // add a "completed" field to track whether the coding sheet has been completed
-		},
-		{
-			name: "01 Matrix",
-			link: "https://leetcode.com/problems/number-of-provinces/",
-			specialTag: "Day 1",
-			tags: ["Leetcode", "Atlassian", "Google", "TCS Ninjs"],
-			completed: false,
-		},
-		{
-			name: "Number of Islands",
-			link: "https://leetcode.com/problems/number-of-provinces/",
-			specialTag: "Day 2",
-			tags: ["Leetcode", "Microsoft", "Lyft"],
-			completed: false,
-		},
-		{
-			name: "Rotting Oranges",
-			link: "https://leetcode.com/problems/number-of-provinces/",
-			specialTag: "Day 2",
-			tags: ["Leetcode", "Amazon", "Uber", "Salesforce", "Microsoft Engage"],
-			completed: false,
-		},
-		{
-			name: "Course Schedule I",
-			link: "https://leetcode.com/problems/number-of-provinces/",
-			specialTag: "Day 2",
-			tags: ["Leetcode", "Twitter", "Facebook"],
-			completed: false,
-		},
-		{
-			name: "King Escape",
-			link: "https://leetcode.com/problems/number-of-provinces/",
-			specialTag: "Day 3",
-			tags: ["Codeforces"],
-			completed: false,
-		},
-	];
 
 	return (
 		<GrandContainer>
@@ -138,33 +94,33 @@ const CodingSheets = () => {
 					</Progress>
 					<div className="table">
 						{data.map((item, index) => {
-							return (
-								<div
-									key={item.name}
-									className={item.completed ? "link-row done-row" : "link-row"}
-								>
-									{" "}
-									<div className="link-row-left">
-										<div className="count">{index + 1}</div>
-										<div className="main-row-content">
-											<a href={item.link} target="_blank" rel="noreferrer">
-												{item.name}
-											</a>
-											<div className="tags">
-												<div className="tag special-tag">{item.specialTag}</div>
-												{item.tags.map((tagItem, tagIndex) => {
-													return <div className="tag">{tagItem}</div>;
-												})}
+							
+								if(filter == item.connectOn){
+									return (
+									<div key={item.name} className={item.completed ? "link-row done-row" : "link-row"} >
+										{" "}
+										<div className="link-row-left">
+											<div className="count">{index + 1}</div>
+											<div className="main-row-content">
+												<a href={item.quesLink} target="_blank" rel="noreferrer">
+													{item.quesName}
+												</a>
+												<div className="tags">
+													{ item.specialTag != "-" ? <div className="tag special-tag">{item.specialTag}</div> : <></> }
+													{item.tags.map((tagItem, tagIndex) => {
+														return <div className="tag" key={tagIndex}>{tagItem}</div>;
+													})}
+												</div>
 											</div>
 										</div>
+										<div className="done-btn">
+											<CheckCircleOutlineIcon
+												onClick={() => toggleCompleted(index)}
+											/>
+										</div>
 									</div>
-									<div className="done-btn">
-										<CheckCircleOutlineIcon
-											onClick={() => toggleCompleted(index)}
-										/>
-									</div>
-								</div>
-							);
+									);
+								}
 						})}
 					</div>
 				</div>
