@@ -12,17 +12,8 @@ const Resources = () => {
   const [allResources, setAllResources] = useState([]);
   const [filter, setFilter] = useState("All Resources");
 
-  // useEffect(() => {
-  //   axios.get("https://algorithmist-api.onrender.com/resources/all")
-  //     .then((res) => {
-  //       setAllResources(res.data);
-  //       // console.log(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
   useEffect(() => {
-    axios.get("http://localhost:8000/resources/all")
+    axios.get("https://algorithmist.cyclic.app/resources/all")
       .then((res) => {
         setAllResources(res.data);
         console.log(res.data);

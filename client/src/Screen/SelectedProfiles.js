@@ -14,7 +14,7 @@ const SelectedProfiles = () => {
   const [filter, setFilter] = useState("All Profiles");
 
   useEffect(() => {
-    axios.get("http://localhost:8000/resumes/all")
+    axios.get("https://algorithmist.cyclic.app/resumes/all")
       .then((res) => {
         setAllResumesData(res.data);
         console.log("All resumes : ", res.data);

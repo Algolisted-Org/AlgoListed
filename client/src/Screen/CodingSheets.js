@@ -15,7 +15,7 @@ const CodingSheets = () => {
 	let segregated = [];
 	
 	useEffect(() => {
-	axios.get("http://localhost:8000/coding-sheets/all")
+	axios.get("https://algorithmist.cyclic.app/coding-sheets/all")
 		.then((res) => {
 		setData(res.data);
 		console.log("All data : ", res.data);
