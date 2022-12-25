@@ -18,7 +18,7 @@ Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 
 API hosted on cyclic.sh : https://algolisted.cyclic.app/
 
-Main Website : <a href="algolisted.com">algolisted.com</a>
+Main Website : <a href="http://algolisted.com/">algolisted.com</a>
 <br/><br/>
 ## Modules of Algorithmist
 <br/>
