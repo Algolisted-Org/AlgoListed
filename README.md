@@ -12,11 +12,13 @@ often for new content and updates. We hope you enjoy your time on our site and t
 find it helpful and informative.
 <br/><br/>
 ## Tech Stack
-This project is created with MERN stack.  A few third party APIs and services are used, such as the Google Spread Sheet APIs, Firebase for deployment, and Render for the backend.
+This project is created with MERN stack.  A few third party APIs and services are used, such as the Google Spread Sheet APIs, Firebase for deployment, and Cyclic for the backend.
 
 Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 
-API hosted on Render : https://algorithmist-api.onrender.com/
+API hosted on cyclic.sh : https://algolisted.cyclic.app/
+
+Main Website : <a href="algolisted.com">algolisted.com</a>
 <br/><br/>
 ## Modules of Algorithmist
 <br/>
