@@ -1,5 +1,4 @@
 import React from "react";
-import IntervalTimeLeft from "../helpers/IntervalTimeLeft";
 import TimeLeft from "../helpers/TimeLeft";
 
 export default function CompetitionItem({ item, index }) {
@@ -28,33 +27,29 @@ export default function CompetitionItem({ item, index }) {
   const isCompetitionStarted =
     TimeLeft(false, item.competition_date, item.time_start_mins) === "Expired";
 
-  const showTimeLeftToCompetition = () => (
-    <IntervalTimeLeft
-      date={item.competition_date}
-      minutes={item.time_start_mins}
-    />
-  );
+  const showTimeLeftToCompetition = () =>
+    TimeLeft(false, item.competition_date, item.time_start_mins);
 
-  const showTimeLeftToCompetitionEnd = () => (
-    <IntervalTimeLeft
-      date={item.competition_date}
-      minutes={item.time_start_mins + item.duration_mins}
-    />
-  );
+  const showTimeLeftToCompetitionEnd = () =>
+    TimeLeft(
+      false,
+      item.competition_date,
+      item.time_start_mins + item.duration_mins
+    );
 
-  const showTimeLeftToRegistrationStart = () => (
-    <IntervalTimeLeft
-      date={item.registration_start_date}
-      minutes={item.registration_start_time_mins}
-    />
-  );
+  const showTimeLeftToRegistrationStart = () =>
+    TimeLeft(
+      false,
+      item.registration_start_date,
+      item.registration_start_time_mins
+    );
 
-  const showTimeLeftToRegistrationEnd = () => (
-    <IntervalTimeLeft
-      date={item.registration_end_date}
-      minutes={item.registration_end_time_mins}
-    />
-  );
+  const showTimeLeftToRegistrationEnd = () =>
+    TimeLeft(
+      false,
+      item.registration_end_date,
+      item.registration_end_time_mins
+    );
 
   return (
     <div
