@@ -13,7 +13,7 @@ const Resources = () => {
   const [filter, setFilter] = useState("All Resources");
 
   useEffect(() => {
-    axios.get("https://algorithmist.cyclic.app/resources/all")
+    axios.get("https://algolisted.cyclic.app/resources/all")
       .then((res) => {
         setAllResources(res.data);
         console.log(res.data);
