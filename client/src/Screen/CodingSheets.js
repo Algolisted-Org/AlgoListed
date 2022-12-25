@@ -10,21 +10,26 @@ const CodingSheets = () => {
 	const [data, setData] = useState([]);
 	const [completedCount, setCompletedCount] = useState(0);
 	const [filter, setFilter] = useState("Striver's SDE Sheet"); // later on change to Discuss Coding Sheets
+	const [filterDomain, setFilterDomain] = useState("striver-sde-sheet"); 
 
 	const len = codingSheetsFilters.length;
 	let segregated = [];
 	
 	useEffect(() => {
-	axios.get("https://algorithmist.cyclic.app/coding-sheets/all")
+	axios.get(`https://algorithmist.cyclic.app/coding-sheets/sheet/${filterDomain}`)
 		.then((res) => {
 		setData(res.data);
 		console.log("All data : ", res.data);
 		})
 		.catch((err) => console.log(err));
-	}, []);
+	}, [filter]);
 
 	const handleFilter = (e) => {
 		setFilter(e.target.textContent);
+	};
+
+	const handleFilterDomain = (item) => {
+		setFilterDomain(item.domainFilter);
 	};
 
 	const toggleCompleted = (index) => {
@@ -37,11 +42,11 @@ const CodingSheets = () => {
 		);
 	};
 
-	const progressBarPercent = ((completedCount / data.length) * 100).toFixed(0);
+	const progressBarPercent = data.length == 0 ? 0 : ((completedCount / data.length) * 100).toFixed(0);
 
 	const filters = codingSheetsFilters.map((item) => {
 		return (
-			<div onClick={(e) => { handleFilter(e); }} key={item.id}
+			<div onClick={(e) => { handleFilter(e); handleFilterDomain(item); }} key={item.id}
 			className={item.text == filter ? "filter selected" : "filter"}>
 				{item.text}
 			</div>
@@ -94,33 +99,30 @@ const CodingSheets = () => {
 					</Progress>
 					<div className="table">
 						{data.map((item, index) => {
-							
-								if(filter == item.connectOn){
-									return (
-									<div key={item.name} className={item.completed ? "link-row done-row" : "link-row"} >
-										{" "}
-										<div className="link-row-left">
-											<div className="count">{index + 1}</div>
-											<div className="main-row-content">
-												<a href={item.quesLink} target="_blank" rel="noreferrer">
-													{item.quesName}
-												</a>
-												<div className="tags">
-													{ item.specialTag != "-" ? <div className="tag special-tag">{item.specialTag}</div> : <></> }
-													{item.tags.map((tagItem, tagIndex) => {
-														return <div className="tag" key={tagIndex}>{tagItem}</div>;
-													})}
-												</div>
+							return (
+								<div key={item.name} className={item.completed ? "link-row done-row" : "link-row"} >
+									{" "}
+									<div className="link-row-left">
+										<div className="count">{index + 1}</div>
+										<div className="main-row-content">
+											<a href={item.quesLink} target="_blank" rel="noreferrer">
+												{item.quesName}
+											</a>
+											<div className="tags">
+												{ item.specialTag != "-" ? <div className="tag special-tag">{item.specialTag}</div> : <></> }
+												{item.tags.map((tagItem, tagIndex) => {
+													return <div className="tag" key={tagIndex}>{tagItem}</div>;
+												})}
 											</div>
 										</div>
-										<div className="done-btn">
-											<CheckCircleOutlineIcon
-												onClick={() => toggleCompleted(index)}
-											/>
-										</div>
 									</div>
-									);
-								}
+									<div className="done-btn">
+										<CheckCircleOutlineIcon
+											onClick={() => toggleCompleted(index)}
+										/>
+									</div>
+								</div>
+							);
 						})}
 					</div>
 				</div>
