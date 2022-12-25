@@ -22,6 +22,7 @@ const CodingSheets = () => {
 		console.log("All data : ", res.data);
 		})
 		.catch((err) => console.log(err));
+		setCompletedCount(0);
 	}, [filter]);
 
 	const handleFilter = (e) => {
