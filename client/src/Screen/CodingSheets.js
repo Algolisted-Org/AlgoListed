@@ -5,6 +5,8 @@ import LeftMenu from "../Components/LeftMenu";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { codingSheetsFilters } from "../Components/codingSheetsFilters";
 import axios from "axios";
+import { LinearProgress } from "@material-ui/core";
+
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -99,32 +101,40 @@ const CodingSheets = () => {
 						</div>
 					</Progress>
 					<div className="table">
-						{data.map((item, index) => {
-							return (
-								<div key={item.name} className={item.completed ? "link-row done-row" : "link-row"} >
-									{" "}
-									<div className="link-row-left">
-										<div className="count">{index + 1}</div>
-										<div className="main-row-content">
-											<a href={item.quesLink} target="_blank" rel="noreferrer">
-												{item.quesName}
-											</a>
-											<div className="tags">
-												{ item.specialTag != "-" ? <div className="tag special-tag">{item.specialTag}</div> : <></> }
-												{item.tags.map((tagItem, tagIndex) => {
-													return <div className="tag" key={tagIndex}>{tagItem}</div>;
-												})}
-											</div>
-										</div>
-									</div>
-									<div className="done-btn">
-										<CheckCircleOutlineIcon
-											onClick={() => toggleCompleted(index)}
-										/>
-									</div>
-								</div>
-							);
-						})}
+						{
+							data.length === 0 ? (
+								<>
+								  <LinearProgress />
+								</>
+							  ) : (
+								  data.map((item, index) => {
+									 return (
+										 <div key={item.name} className={item.completed ? "link-row done-row" : "link-row"} >
+											 {" "}
+											 <div className="link-row-left">
+												 <div className="count">{index + 1}</div>
+												 <div className="main-row-content">
+													 <a href={item.quesLink} target="_blank" rel="noreferrer">
+														 {item.quesName}
+													 </a>
+													 <div className="tags">
+														 { item.specialTag != "-" ? <div className="tag special-tag">{item.specialTag}</div> : <></> }
+														 {item.tags.map((tagItem, tagIndex) => {
+															 return <div className="tag" key={tagIndex}>{tagItem}</div>;
+														 })}
+													 </div>
+												 </div>
+											 </div>
+											 <div className="done-btn">
+												 <CheckCircleOutlineIcon
+													 onClick={() => toggleCompleted(index)}
+												 />
+											 </div>
+										 </div>
+									 );
+								 })
+							  )
+						}
 					</div>
 				</div>
 			</Container>

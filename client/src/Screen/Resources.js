@@ -76,7 +76,6 @@ const Resources = () => {
             allResources.length === 0 ? (
               <>
                 <LinearProgress />
-                <RightBottomMessage>We are currently working on the server, this page will not load.</RightBottomMessage>
               </>
             ) : (
               <div className="resources-container">

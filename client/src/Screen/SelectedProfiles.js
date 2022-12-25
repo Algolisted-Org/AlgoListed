@@ -8,6 +8,7 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { selectedProfilesFilters } from "../Components/selectedProfilesFilters";
 import axios from "axios";
+import { LinearProgress } from "@material-ui/core";
 
 const SelectedProfiles = () => {
   const [allResumesData, setAllResumesData] = useState([]);
@@ -100,50 +101,57 @@ const SelectedProfiles = () => {
             </div>
             <div className="all-profiles-container">
               {
-                allResumesData.map((item, index) => {
-                  if (filter == "All Profiles") {
-                    return (
-                      <div className="profile-card" key={index}>
-                        <div className="card-header">{item.name} | {item.company}</div>
-                        <div className="exp-desc">{item.description}
-                          {" "}<a href="/">read more</a>
-                        </div>
 
-                        <div className="full-width-line"></div>
-
-                        <div className="btns">
-                          <button className="default-btn">Resume</button>
-                          <button className="default-btn">Linkedin</button>
-                          <button className="default-btn">Coding Profiles</button>
-                          <button className="default-btn">Blogs - Medium</button>
-                          <button className="default-btn highlight">Ask for Referral</button>
-                          <button className="default-btn highlight">Personal Mentorship</button>
-                        </div>
-                      </div>
-                    );
-                  }
-                  else if (item.category == filter) {
-                    return (
-                      <div className="profile-card" key={index}>
-                        <div className="card-header">{item.name} | {item.company}</div>
-                        <div className="exp-desc">{item.description}
-                          {" "}<a href="/">read more</a>
-                        </div>
-
-                        <div className="full-width-line"></div>
-
-                        <div className="btns">
-                          <button className="default-btn">Resume</button>
-                          <button className="default-btn">Linkedin</button>
-                          <button className="default-btn">Coding Profiles</button>
-                          <button className="default-btn">Blogs - Medium</button>
-                          <button className="default-btn highlight">Ask for Referral</button>
-                          <button className="default-btn highlight">Personal Mentorship</button>
-                        </div>
-                      </div>
-                    );
-                  }
-                })
+                allResumesData.length === 0 ? (
+                  <>
+                    <LinearProgress />
+                  </>
+                  ) : (
+                    allResumesData.map((item, index) => {
+                      if (filter == "All Profiles") {
+                        return (
+                          <div className="profile-card" key={index}>
+                            <div className="card-header">{item.name} | {item.company}</div>
+                            <div className="exp-desc">{item.description}
+                              {" "}<a href="/">read more</a>
+                            </div>
+    
+                            <div className="full-width-line"></div>
+    
+                            <div className="btns">
+                              <button className="default-btn">Resume</button>
+                              <button className="default-btn">Linkedin</button>
+                              <button className="default-btn">Coding Profiles</button>
+                              <button className="default-btn">Blogs - Medium</button>
+                              <button className="default-btn highlight">Ask for Referral</button>
+                              <button className="default-btn highlight">Personal Mentorship</button>
+                            </div>
+                          </div>
+                        );
+                      }
+                      else if (item.category == filter) {
+                        return (
+                          <div className="profile-card" key={index}>
+                            <div className="card-header">{item.name} | {item.company}</div>
+                            <div className="exp-desc">{item.description}
+                              {" "}<a href="/">read more</a>
+                            </div>
+    
+                            <div className="full-width-line"></div>
+    
+                            <div className="btns">
+                              <button className="default-btn">Resume</button>
+                              <button className="default-btn">Linkedin</button>
+                              <button className="default-btn">Coding Profiles</button>
+                              <button className="default-btn">Blogs - Medium</button>
+                              <button className="default-btn highlight">Ask for Referral</button>
+                              <button className="default-btn highlight">Personal Mentorship</button>
+                            </div>
+                          </div>
+                        );
+                      }
+                    })
+                  )
               }
             </div>
           </SearchResults>
