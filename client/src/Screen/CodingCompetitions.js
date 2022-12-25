@@ -36,6 +36,13 @@ const CodingCompetitions = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => setList((list) => [...list]), 60000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   const changeRegistrationStatus = (list) =>
     list.map((obj) => {
       const isRegistrationExpired =
