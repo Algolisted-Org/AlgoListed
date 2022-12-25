@@ -28,6 +28,10 @@ const codingQuestionSchema = new mongoose.Schema({
   connectOn:{
     type: String,
     required: true,
+  },
+  connectOnDomain:{
+    type: String,
+    required: true,
   }
 });
 

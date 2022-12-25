@@ -15,6 +15,10 @@ router.get('/all',(req,res)=>{
     UserSheet.get_questions(req,res);
 });
 
+router.get('/sheet/:connectOnDomain',(req,res)=>{
+    UserSheet.get_questions_by_sheet(req,res);
+});
+
 // Post Routes ------->
 
 router.post('/create',(req,res)=>{
