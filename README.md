@@ -56,4 +56,4 @@ Currently Working on the redux part on the frontend.
 
 <br/><br/>
 ## License
-MIT
+This license applies only to the use of the Software for non-commercial purposes. Any use of the Software for commercial purposes is strictly prohibited.
