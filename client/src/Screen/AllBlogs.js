@@ -32,7 +32,7 @@ const AllBlogs = () => {
                     </div>
                     <Sort>
                         <div className="box">
-                        <div className="text">By Relevence</div>
+                        <div className="text">By Relevance</div>
                         <FilterListIcon/>
                         </div>
                         <InfoIcon style={{fill: "#333"}}/>

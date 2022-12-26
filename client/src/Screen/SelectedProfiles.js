@@ -83,7 +83,7 @@ const SelectedProfiles = () => {
               <div className="icon-1"><ExpandMoreIcon /></div>
             </div>
             <div className='box filter-box'>
-              <div className='text'>By Relevence</div>
+              <div className='text'>By Relevance</div>
               <FilterListIcon />
             </div>
             <InfoIcon className='info-icon' style={{ fill: '#333' }} />
