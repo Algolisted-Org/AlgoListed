@@ -1,5 +1,5 @@
 import React from "react";
-import TimeLeft from "../helpers/TimeLeft";
+import { timeLeft } from "../helpers/timeLeft";
 
 export default function CompetitionItem({ item, index }) {
   const returnHours = (e) => {
@@ -11,41 +11,41 @@ export default function CompetitionItem({ item, index }) {
   };
 
   const isRegistrationStarted =
-    TimeLeft(
+    timeLeft(
       false,
       item.registration_start_date,
       item.registration_start_time_mins
     ) === "Expired";
 
   const isRegistrationClosed =
-    TimeLeft(
+    timeLeft(
       false,
       item.registration_end_date,
       item.registration_end_time_mins
     ) === "Expired";
 
   const isCompetitionStarted =
-    TimeLeft(false, item.competition_date, item.time_start_mins) === "Expired";
+    timeLeft(false, item.competition_date, item.time_start_mins) === "Expired";
 
   const showTimeLeftToCompetition = () =>
-    TimeLeft(false, item.competition_date, item.time_start_mins);
+    timeLeft(false, item.competition_date, item.time_start_mins);
 
   const showTimeLeftToCompetitionEnd = () =>
-    TimeLeft(
+    timeLeft(
       false,
       item.competition_date,
       item.time_start_mins + item.duration_mins
     );
 
   const showTimeLeftToRegistrationStart = () =>
-    TimeLeft(
+    timeLeft(
       false,
       item.registration_start_date,
       item.registration_start_time_mins
     );
 
   const showTimeLeftToRegistrationEnd = () =>
-    TimeLeft(
+    timeLeft(
       false,
       item.registration_end_date,
       item.registration_end_time_mins
