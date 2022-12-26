@@ -8,6 +8,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonIcon from '@material-ui/icons/Person';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import { useState } from 'react';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const CCHeader = () => {
   const [showAccountModel, setShowAccountModel] = useState(false);
@@ -42,6 +43,10 @@ const CCHeader = () => {
       </div>
 
       <div className="right-icons">
+        <div className="donate-btn">
+          {/* <div className="icon"><FavoriteBorderIcon/></div> */}
+          <div className="text">Buy me a coffee</div>
+        </div>
         <div className="icon-box">
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
             <GitHubIcon/>
@@ -50,12 +55,13 @@ const CCHeader = () => {
         <div className={showWebUpdate ? "icon-box clicked" : "icon-box"} onClick={handleWebUpdate}>
             <WhatshotIcon/>
         </div>
-        <div className={showNotificationModel ? "icon-box clicked" : "icon-box"} onClick={handleNotification}>
+        
+        {/* <div className={showNotificationModel ? "icon-box clicked" : "icon-box"} onClick={handleNotification}>
             <NotificationsIcon/>
         </div>
         <div className={showAccountModel ? "icon-box clicked" : "icon-box"} onClick={handleAccount}>
             <PersonIcon/>
-        </div>
+        </div> */}
       </div>
 
       {
@@ -189,6 +195,30 @@ const Container = styled.div`
           background-color: #f2ecf9;
           transition-duration: 250ms;
         }
+      }
+
+      .donate-btn{
+        height: 32.5px;
+        border-radius: 10px;
+        border: 1px solid #dfe3e7;
+        margin-left: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        /* background-color: #e0ecc7; */
+
+        svg{
+          font-size: 20px;
+          fill: #514d4d;
+          margin-bottom: -5px;
+          margin-right: 2.5px;
+        }
+
+        .text{
+          font-size: 0.7rem;
+        }
+         
       }
 
       .clicked{

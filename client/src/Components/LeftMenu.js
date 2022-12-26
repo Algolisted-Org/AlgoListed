@@ -46,7 +46,7 @@ const LeftMenu = ({ marked }) => {
   return (
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
       {/* <div className="logo">Atanu Nayak</div> */}
-      <a href='/' className="logo">Algorithmist</a>
+      <a href='/' className="logo">AlgoListed</a>
       <div className="mid-links">
         {
           menuItems.map((item, index) => {
@@ -57,7 +57,7 @@ const LeftMenu = ({ marked }) => {
 
         <div className="flag">
           <div className="line"></div>
-          <div className="text">Algorithmist</div>
+          <div className="text">algolisted.com</div>
           <div className="line"></div>
         </div>
         <div className="link">Work with us</div>
