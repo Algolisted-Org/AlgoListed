@@ -5,9 +5,11 @@ import LeftMenu from "../Components/LeftMenu";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import InfoIcon from "@material-ui/icons/Info";
 import { LinearProgress } from "@material-ui/core";
-import TimeLeft from "../helpers/TimeLeft";
+import { timeLeft } from "../helpers/timeLeft";
 import { competitionFilters } from "../Components/competitionFilters";
 import CompetitionItem from "../Components/CompetitionItem";
+import { sortByContestTiming } from "../helpers/sortByContestTiming";
+import { sortByRegistration } from "../helpers/sortByRegistration";
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1]);
@@ -15,8 +17,7 @@ const CodingCompetitions = () => {
   const [list, setList] = useState();
   const [filter, setFilter] = useState("All");
   const [isSortListOpen, setIsSortListOpen] = useState(false);
-  const [sortType, setSortType] = useState("By Relevance");
-  const [listCopy, setListCopy] = useState([]);
+  const [sortType, setSortType] = useState("By Contest Timing");
 
   useEffect(() => {
     (async () => {
@@ -25,13 +26,11 @@ const CodingCompetitions = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          setList(data);
-          setListCopy(data);
+          setList(sortByContestTiming(data));
           setWaitingForData(false);
         })
         .then(() => {
           setList(changeRegistrationStatus);
-          setListCopy(changeRegistrationStatus);
         });
     })();
   }, []);
@@ -46,7 +45,7 @@ const CodingCompetitions = () => {
   const changeRegistrationStatus = (list) =>
     list.map((obj) => {
       const isRegistrationExpired =
-        TimeLeft(
+        timeLeft(
           false,
           obj.registration_end_date,
           obj.registration_end_time_mins
@@ -82,56 +81,12 @@ const CodingCompetitions = () => {
   const handleSort = (e) => {
     setIsSortListOpen(!isSortListOpen);
     const listItemText = e.target.innerText;
-    if (listItemText === "By Relevance") {
-      setList(listCopy);
-      setSortType(listItemText);
-    }
     if (listItemText === "By Registration") {
-      setList((list) => {
-        return [...list].sort((a, b) => {
-          const firstItemTime = TimeLeft(
-            true,
-            a.competition_date,
-            a.time_start_mins
-          );
-          const secondItemTime = TimeLeft(
-            true,
-            b.competition_date,
-            b.time_start_mins
-          );
-          if (a.registration_status === "Open") {
-            if (a.registration_status === b.registration_status) {
-              return firstItemTime - secondItemTime;
-            }
-            return -1;
-          } else if (a.registration_status === "Closed") {
-            if (a.registration_status === b.registration_status) {
-              return firstItemTime - secondItemTime;
-            }
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-      });
+      setList(sortByRegistration(list));
       setSortType(listItemText);
     }
     if (listItemText === "By Contest Timing") {
-      setList((list) => {
-        return [...list].sort((a, b) => {
-          const firstItemTime = TimeLeft(
-            true,
-            a.competition_date,
-            a.time_start_mins
-          );
-          const secondItemTime = TimeLeft(
-            true,
-            b.competition_date,
-            b.time_start_mins
-          );
-          return firstItemTime - secondItemTime;
-        });
-      });
+      setList(sortByContestTiming(list));
       setSortType(listItemText);
     }
   };
@@ -192,7 +147,6 @@ const CodingCompetitions = () => {
               <FilterListIcon />
               <div className={isSortListOpen ? "list open" : "list"}>
                 <ul>
-                  <li className="item">By Relevance</li>
                   <li className="item">By Registration</li>
                   <li className="item">By Contest Timing</li>
                 </ul>
@@ -218,7 +172,7 @@ const CodingCompetitions = () => {
                 {list
                   .filter(
                     (item) =>
-                      TimeLeft(
+                      timeLeft(
                         false,
                         item.competition_date,
                         item.time_start_mins + item.duration_mins

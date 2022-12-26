@@ -1,5 +1,5 @@
 import React from "react";
-import TimeLeft from "../helpers/TimeLeft";
+import { timeLeft } from "../helpers/timeLeft";
 
 export default function CompetitionItem({ item, index }) {
   const returnHours = (e) => {
@@ -10,46 +10,42 @@ export default function CompetitionItem({ item, index }) {
     return Math.floor(e % 60);
   };
 
+  const {
+    competition_date,
+    time_start_mins,
+    duration_mins,
+    registration_start_date,
+    registration_start_time_mins,
+    registration_end_date,
+    registration_end_time_mins,
+    registration_status,
+    platform,
+    competition_link,
+    competition_name,
+  } = item;
+
   const isRegistrationStarted =
-    TimeLeft(
-      false,
-      item.registration_start_date,
-      item.registration_start_time_mins
-    ) === "Expired";
+    timeLeft(false, registration_start_date, registration_start_time_mins) ===
+    "Expired";
 
   const isRegistrationClosed =
-    TimeLeft(
-      false,
-      item.registration_end_date,
-      item.registration_end_time_mins
-    ) === "Expired";
+    timeLeft(false, registration_end_date, registration_end_time_mins) ===
+    "Expired";
 
   const isCompetitionStarted =
-    TimeLeft(false, item.competition_date, item.time_start_mins) === "Expired";
+    timeLeft(false, competition_date, time_start_mins) === "Expired";
 
   const showTimeLeftToCompetition = () =>
-    TimeLeft(false, item.competition_date, item.time_start_mins);
+    timeLeft(false, competition_date, time_start_mins);
 
   const showTimeLeftToCompetitionEnd = () =>
-    TimeLeft(
-      false,
-      item.competition_date,
-      item.time_start_mins + item.duration_mins
-    );
+    timeLeft(false, competition_date, time_start_mins + duration_mins);
 
   const showTimeLeftToRegistrationStart = () =>
-    TimeLeft(
-      false,
-      item.registration_start_date,
-      item.registration_start_time_mins
-    );
+    timeLeft(false, registration_start_date, registration_start_time_mins);
 
   const showTimeLeftToRegistrationEnd = () =>
-    TimeLeft(
-      false,
-      item.registration_end_date,
-      item.registration_end_time_mins
-    );
+    timeLeft(false, registration_end_date, registration_end_time_mins);
 
   return (
     <div
@@ -57,34 +53,34 @@ export default function CompetitionItem({ item, index }) {
       key={index}
     >
       <div className="hash">{index + 1}</div>
-      <div className="platform">{item.platform}</div>
+      <div className="platform">{platform}</div>
       <div className="contest">
-        <a href={`${item.competition_link}`} target="_blank">
-          {item.competition_name}
+        <a href={`${competition_link}`} target="_blank">
+          {competition_name}
         </a>
       </div>
       <div className="date">
         <div className="date-show">
-          {item.competition_date},{" "}
+          {competition_date},{" "}
           <>
-            {returnHours(item.time_start_mins) < 10 ? (
+            {returnHours(time_start_mins) < 10 ? (
               <>
                 {"0"}
-                {returnHours(item.time_start_mins)}
+                {returnHours(time_start_mins)}
               </>
             ) : (
-              <>{returnHours(item.time_start_mins)}</>
+              <>{returnHours(time_start_mins)}</>
             )}
           </>
           :
           <>
-            {returnMins(item.time_start_mins) < 10 ? (
+            {returnMins(time_start_mins) < 10 ? (
               <>
                 {"0"}
-                {returnMins(item.time_start_mins)}
+                {returnMins(time_start_mins)}
               </>
             ) : (
-              <>{returnMins(item.time_start_mins)}</>
+              <>{returnMins(time_start_mins)}</>
             )}
           </>
           {}
@@ -106,16 +102,16 @@ export default function CompetitionItem({ item, index }) {
         </div>
       </div>
       <div className="duration">
-        {returnHours(item.duration_mins)} Hours{" "}
-        {returnMins(item.duration_mins) != 0 ? (
-          <>, {returnMins(item.duration_mins)} Mins</>
+        {returnHours(duration_mins)} Hours{" "}
+        {returnMins(duration_mins) != 0 ? (
+          <>, {returnMins(duration_mins)} Mins</>
         ) : (
           <></>
         )}
       </div>
       <div className="registration">
         <div className="status">
-          {isRegistrationStarted ? item.registration_status : <>Yet to start</>}
+          {isRegistrationStarted ? registration_status : <>Yet to start</>}
         </div>
         <div className="time-left">
           {isRegistrationClosed ? (
