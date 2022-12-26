@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { selectedProfilesFilters } from "../Components/selectedProfilesFilters";
 import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
+import SimpleFooter from '../Components/SimpleFooter';
 
 const SelectedProfiles = () => {
   const [allResumesData, setAllResumesData] = useState([]);
@@ -97,63 +98,64 @@ const SelectedProfiles = () => {
               This new feature is coming soon and will provide graphical representations of information about the company you are targeting, including the median CGPA of recently hired employees and the required LeetCode rating for selection. We will have all the information you need.
               </div>
             </CompanyStatistics>
-
-            <div className="all-profiles-container">
+            
               {
-
                 allResumesData.length === 0 ? (
-                  <>
+                  <div className="linear-progess-holder">
                     <LinearProgress />
-                  </>
+                  </div>
                   ) : (
-                    allResumesData.map((item, index) => {
-                      if (filter == "All Profiles") {
-                        return (
-                          <div className="profile-card" key={index}>
-                            <div className="card-header">{item.name} | {item.company}</div>
-                            <div className="exp-desc">{item.description}
-                              {" "}<a href="/">read more</a>
+                    <div className="all-profiles-container">
+                      {allResumesData.map((item, index) => {
+                        if (filter == "All Profiles") {
+                          return (
+                            <div className="profile-card" key={index}>
+                              <div className="card-header">{item.name} | {item.company}</div>
+                              <div className="exp-desc">{item.description}
+                                {" "}<a href="/">read more</a>
+                              </div>
+      
+                              <div className="full-width-line"></div>
+      
+                              <div className="btns">
+                                <button className="default-btn">Resume</button>
+                                <button className="default-btn">Linkedin</button>
+                                <button className="default-btn">Coding Profiles</button>
+                                <button className="default-btn">Blogs - Medium</button>
+                                <button className="default-btn highlight">Ask for Referral</button>
+                                <button className="default-btn highlight">Personal Mentorship</button>
+                              </div>
                             </div>
-    
-                            <div className="full-width-line"></div>
-    
-                            <div className="btns">
-                              <button className="default-btn">Resume</button>
-                              <button className="default-btn">Linkedin</button>
-                              <button className="default-btn">Coding Profiles</button>
-                              <button className="default-btn">Blogs - Medium</button>
-                              <button className="default-btn highlight">Ask for Referral</button>
-                              <button className="default-btn highlight">Personal Mentorship</button>
+                          );
+                        }
+                        else if (item.category == filter) {
+                          return (
+                            <div className="profile-card" key={index}>
+                              <div className="card-header">{item.name} | {item.company}</div>
+                              <div className="exp-desc">{item.description}
+                                {" "}<a href="/">read more</a>
+                              </div>
+      
+                              <div className="full-width-line"></div>
+      
+                              <div className="btns">
+                                <button className="default-btn">Resume</button>
+                                <button className="default-btn">Linkedin</button>
+                                <button className="default-btn">Coding Profiles</button>
+                                <button className="default-btn">Blogs - Medium</button>
+                                <button className="default-btn highlight">Ask for Referral</button>
+                                <button className="default-btn highlight">Personal Mentorship</button>
+                              </div>
                             </div>
-                          </div>
-                        );
-                      }
-                      else if (item.category == filter) {
-                        return (
-                          <div className="profile-card" key={index}>
-                            <div className="card-header">{item.name} | {item.company}</div>
-                            <div className="exp-desc">{item.description}
-                              {" "}<a href="/">read more</a>
-                            </div>
-    
-                            <div className="full-width-line"></div>
-    
-                            <div className="btns">
-                              <button className="default-btn">Resume</button>
-                              <button className="default-btn">Linkedin</button>
-                              <button className="default-btn">Coding Profiles</button>
-                              <button className="default-btn">Blogs - Medium</button>
-                              <button className="default-btn highlight">Ask for Referral</button>
-                              <button className="default-btn highlight">Personal Mentorship</button>
-                            </div>
-                          </div>
-                        );
-                      }
-                    })
+                          );
+                        }
+                      })}
+                    </div>
                   )
               }
-            </div>
+            
           </SearchResults>
+          <SimpleFooter/>
         </div>
       </Container>
     </GrandContainer>
@@ -202,7 +204,7 @@ const Container = styled.div`
       min-height: 100vh;
       width: 100%;
       /* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
-      padding: 80px 120px 50px 120px;
+      padding: 80px 120px 30px 120px;
       position: relative;
       width: 100%;
       max-width: 1360px;
@@ -210,7 +212,7 @@ const Container = styled.div`
       margin: auto;
       
       @media only screen and (max-width: 1200px){
-        padding: 80px 50px 50px 50px;
+        padding: 80px 50px 30px 50px;
       }   
 
 
@@ -341,6 +343,15 @@ const SearchResults = styled.div`
     font-size: 0.85rem;
     font-weight: 400;
   } 
+
+  .linear-progess-holder{
+    margin-bottom: 30vh;
+    width: calc(100% - 20px);
+
+    @media only screen and (max-width: 1370px){
+      width: calc(100% - 10px);
+    }
+  }
 
   .all-profiles-container{
     display: flex;

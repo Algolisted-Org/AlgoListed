@@ -5,6 +5,7 @@ import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import allBlogsDatabase from "../Components/allBlogsDatabase.json"
+import SimpleFooter from '../Components/SimpleFooter';
 
 const AllBlogs = () => {
     console.log(allBlogsDatabase);
@@ -69,6 +70,8 @@ const AllBlogs = () => {
                           })
                         }
                     </BlogsContainer>
+
+                    <SimpleFooter/>
                 </div>
             </Container>
         </GrandContainer>
@@ -117,7 +120,7 @@ const Container = styled.div`
       min-height: 100vh;
       width: 100%;
       /* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
-      padding: 80px 120px 50px 120px;
+      padding: 80px 120px 30px 120px;
       position: relative;
       width: 100%;
       max-width: 1360px;
@@ -125,7 +128,7 @@ const Container = styled.div`
       margin: auto;
       
       @media only screen and (max-width: 1200px){
-        padding: 80px 50px 50px 50px;
+        padding: 80px 50px 30px 50px;
       }   
 
 

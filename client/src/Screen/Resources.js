@@ -7,6 +7,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
 import { resourcesFilters } from '../Components/resourcesFilters'
+import SimpleFooter from '../Components/SimpleFooter';
 
 const Resources = () => {
   const [allResources, setAllResources] = useState([]);
@@ -74,9 +75,9 @@ const Resources = () => {
 
           {
             allResources.length === 0 ? (
-              <>
+              <div className="linear-progess-holder">
                 <LinearProgress />
-              </>
+              </div>
             ) : (
               <div className="resources-container">
                 {
@@ -102,6 +103,7 @@ const Resources = () => {
               </div>
             )
           }
+          <SimpleFooter/>
         </div>
       </Container>
     </GrandContainer>
@@ -149,7 +151,7 @@ const Container = styled.div`
       min-height: 100vh;
       width: 100%;
       /* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
-      padding: 80px 120px 50px 120px;
+      padding: 80px 120px 30px 120px;
       position: relative;
       width: 100%;
       max-width: 1360px;
@@ -157,7 +159,7 @@ const Container = styled.div`
       margin: auto;
       
       @media only screen and (max-width: 1200px){
-        padding: 80px 50px 50px 50px;
+        padding: 80px 50px 30px 50px;
       }   
 
       .main-heading{
@@ -207,6 +209,10 @@ const Container = styled.div`
             font-weight: 300;
             
         }
+      }
+
+      .linear-progess-holder{
+        margin-bottom: 50vh;
       }
 
       .resources-container{
