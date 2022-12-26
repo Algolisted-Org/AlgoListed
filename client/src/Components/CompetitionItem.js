@@ -1,5 +1,5 @@
 import React from "react";
-import { timeLeft } from "../helpers/timeLeft";
+import { timeLeft } from "../helpers/TimeLeft";
 
 export default function CompetitionItem({ item, index }) {
   const returnHours = (e) => {

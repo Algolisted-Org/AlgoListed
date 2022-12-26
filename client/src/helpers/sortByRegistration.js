@@ -1,4 +1,4 @@
-import { timeLeft } from "./timeLeft";
+import { timeLeft } from "./TimeLeft";
 
 export const sortByRegistration = (array) => {
   return [...array].sort((a, b) => {

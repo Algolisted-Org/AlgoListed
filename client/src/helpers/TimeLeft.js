@@ -1,5 +1,5 @@
 export const timeLeft = (num, date, minutes) => {
-  let timeString;
+  let timeString, timeMainMins;
 
   (() => {
     const now = new Date();

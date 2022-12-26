@@ -5,7 +5,7 @@ import LeftMenu from "../Components/LeftMenu";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import InfoIcon from "@material-ui/icons/Info";
 import { LinearProgress } from "@material-ui/core";
-import { timeLeft } from "../helpers/timeLeft";
+import { timeLeft } from "../helpers/TimeLeft";
 import { competitionFilters } from "../Components/competitionFilters";
 import CompetitionItem from "../Components/CompetitionItem";
 import { sortByContestTiming } from "../helpers/sortByContestTiming";
