@@ -17,8 +17,7 @@ const CodingCompetitions = () => {
   const [list, setList] = useState();
   const [filter, setFilter] = useState("All");
   const [isSortListOpen, setIsSortListOpen] = useState(false);
-  const [sortType, setSortType] = useState("By Relevance");
-  const [listCopy, setListCopy] = useState([]);
+  const [sortType, setSortType] = useState("By Contest Timing");
 
   useEffect(() => {
     (async () => {
@@ -27,13 +26,11 @@ const CodingCompetitions = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          setList(data);
-          setListCopy(data);
+          setList(sortByContestTiming(data));
           setWaitingForData(false);
         })
         .then(() => {
           setList(changeRegistrationStatus);
-          setListCopy(changeRegistrationStatus);
         });
     })();
   }, []);
@@ -84,10 +81,6 @@ const CodingCompetitions = () => {
   const handleSort = (e) => {
     setIsSortListOpen(!isSortListOpen);
     const listItemText = e.target.innerText;
-    if (listItemText === "By Relevance") {
-      setList(listCopy);
-      setSortType(listItemText);
-    }
     if (listItemText === "By Registration") {
       setList(sortByRegistration(list));
       setSortType(listItemText);
@@ -154,7 +147,6 @@ const CodingCompetitions = () => {
               <FilterListIcon />
               <div className={isSortListOpen ? "list open" : "list"}>
                 <ul>
-                  <li className="item">By Relevance</li>
                   <li className="item">By Registration</li>
                   <li className="item">By Contest Timing</li>
                 </ul>
