@@ -45,6 +45,7 @@ const App = () => {
         <Route path="/coding-sheets" element={<CodingSheets/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/:random" element={<PageNotExist/>} />
+        <Route path="/:random/:random" element={<PageNotExist/>} />
       </Routes>
     </div>
   )

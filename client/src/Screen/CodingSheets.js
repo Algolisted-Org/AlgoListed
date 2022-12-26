@@ -12,18 +12,18 @@ const CodingSheets = () => {
 	const [data, setData] = useState([]);
 	const [completedCount, setCompletedCount] = useState(0);
 	const [filter, setFilter] = useState("Striver's SDE Sheet"); // later on change to Discuss Coding Sheets
-	const [filterDomain, setFilterDomain] = useState("striver-sde-sheet"); 
+	const [filterDomain, setFilterDomain] = useState("striver-sde-sheet");
 
-	const len = codingSheetsFilters.length;
-	let segregated = [];
-	
 	useEffect(() => {
-	axios.get(`https://algolisted.cyclic.app/coding-sheets/sheet/${filterDomain}`)
-		.then((res) => {
-		setData(res.data);
-		console.log("All data : ", res.data);
-		})
-		.catch((err) => console.log(err));
+		setData([]);
+		// axios.get(`https://algolisted.cyclic.app/coding-sheets/all`)
+		axios.get(`https://algolisted.cyclic.app/coding-sheets/sheet/${filterDomain}`)
+			.then((res) => {
+				setData(res.data);
+				console.log("searching for ", filterDomain);
+				console.log("All data : ", res.data);
+			})
+			.catch((err) => console.log(err));
 		setCompletedCount(0);
 	}, [filter]);
 
@@ -50,7 +50,7 @@ const CodingSheets = () => {
 	const filters = codingSheetsFilters.map((item) => {
 		return (
 			<div onClick={(e) => { handleFilter(e); handleFilterDomain(item); }} key={item.id}
-			className={item.text == filter ? "filter selected" : "filter"}>
+				className={item.text == filter ? "filter selected" : "filter"}>
 				{item.text}
 			</div>
 		);
@@ -73,12 +73,7 @@ const CodingSheets = () => {
 				<div className="cc-middle-content">
 					<h1 className="main-heading">Coding Sheets</h1>
 					<p className="heading-supporter">
-						Coding Sheets. Since now, in the market we have a bunch of SDE
-						sheets here you get a single place to choose whichever one suits you
-						the most. The discussion section which will be added soon will let
-						you prepare for the potholes while solving a particular sheet. One
-						of the best features we are planning to add is a detailed analysis
-						just like monkeytype website.
+						Coding Sheets is a website that offers a range of software engineering practice sheets to select from in a single location. The discussion section, which will be available soon, will provide support and guidance while working on a specific sheet. Another upcoming feature will be a comprehensive analysis of each sheet, similar to the one found on the Monkeytype website.
 					</p>
 					<div className="message">
 						<div className="icon"></div>
@@ -89,6 +84,21 @@ const CodingSheets = () => {
 					</div>
 
 					<Filters>{filters}</Filters>
+
+
+					{
+						filter == "Two Pointers LC" ? 
+						(
+							<SheetMessage>
+								<div className="text">
+									This section is a set of problems based on a well-known blog post about using the two pointer technique on LeetCode, <a target={"_blank"} href="https://leetcode.com/discuss/study-guide/1688903/Solved-all-two-pointers-problems-in-100-days">show blog on leetcode</a>. The blog post includes a selection of high-quality questions that are organized by similarity.
+								</div>
+							</SheetMessage>
+						) : (
+							<></>
+						)
+						
+					}
 
 					<Progress>
 						<div className="text">Progress : </div>
@@ -104,36 +114,36 @@ const CodingSheets = () => {
 						{
 							data.length === 0 ? (
 								<>
-								  <LinearProgress />
+									<LinearProgress />
 								</>
-							  ) : (
-								  data.map((item, index) => {
-									 return (
-										 <div key={item.name} className={item.completed ? "link-row done-row" : "link-row"} >
-											 {" "}
-											 <div className="link-row-left">
-												 <div className="count">{index + 1}</div>
-												 <div className="main-row-content">
-													 <a href={item.quesLink} target="_blank" rel="noreferrer">
-														 {item.quesName}
-													 </a>
-													 <div className="tags">
-														 { item.specialTag != "-" ? <div className="tag special-tag">{item.specialTag}</div> : <></> }
-														 {item.tags.map((tagItem, tagIndex) => {
-															 return <div className="tag" key={tagIndex}>{tagItem}</div>;
-														 })}
-													 </div>
-												 </div>
-											 </div>
-											 <div className="done-btn">
-												 <CheckCircleOutlineIcon
-													 onClick={() => toggleCompleted(index)}
-												 />
-											 </div>
-										 </div>
-									 );
-								 })
-							  )
+							) : (
+								data.map((item, index) => {
+									return (
+										<div key={item.name} className={item.completed ? "link-row done-row" : "link-row"} >
+											{" "}
+											<div className="link-row-left">
+												<div className="count">{index + 1}</div>
+												<div className="main-row-content">
+													<a href={item.quesLink} target="_blank" rel="noreferrer">
+														{item.quesName}
+													</a>
+													<div className="tags">
+														{item.specialTag != "-" ? <div className="tag special-tag">{item.specialTag}</div> : <></>}
+														{item.tags.map((tagItem, tagIndex) => {
+															return <div className="tag" key={tagIndex}>{tagItem}</div>;
+														})}
+													</div>
+												</div>
+											</div>
+											<div className="done-btn">
+												<CheckCircleOutlineIcon
+													onClick={() => toggleCompleted(index)}
+												/>
+											</div>
+										</div>
+									);
+								})
+							)
 						}
 					</div>
 				</div>
@@ -397,3 +407,16 @@ const Progress = styled.div`
 		}
 	}
 `;
+
+const SheetMessage = styled.div`
+	padding: 10px;
+	margin: 10px 0 0px 0;
+	/* border: 1px solid black; */
+	border-radius: 5px;
+	/* background-color: #c9e8ff; */
+	background-color: #f0f0f0;
+
+	.text{
+		font-size: 0.75rem;
+	}
+`
