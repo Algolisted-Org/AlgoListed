@@ -26,6 +26,11 @@ const CodingSheets = () => {
 						completed: completed === "true",
 					};
 				});
+				// calculate the initial value of completedCount based on the "completed" status of the sheets in updatedData
+				const initialCompletedCount = updatedData.reduce((acc, sheet) => {
+					return acc + (sheet.completed ? 1 : 0);
+				}, 0);
+				setCompletedCount(initialCompletedCount);
 				setData(updatedData);
 			})
 			.catch((err) => console.log(err));
