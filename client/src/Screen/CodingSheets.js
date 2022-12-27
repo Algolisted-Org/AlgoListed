@@ -7,7 +7,6 @@ import { codingSheetsFilters } from "../Components/codingSheetsFilters";
 import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
 
-
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
 	const [completedCount, setCompletedCount] = useState(0);
@@ -15,17 +14,27 @@ const CodingSheets = () => {
 	const [filterDomain, setFilterDomain] = useState("striver-sde-sheet");
 
 	useEffect(() => {
-		setData([]);
-		// axios.get(`https://algolisted.cyclic.app/coding-sheets/all`)
-		axios.get(`https://algolisted.cyclic.app/coding-sheets/sheet/${filterDomain}`)
+		// retrieve the data from the server
+		axios
+			.get(`https://algolisted.cyclic.app/coding-sheets/sheet/${filterDomain}`)
 			.then((res) => {
-				setData(res.data);
-				console.log("searching for ", filterDomain);
-				console.log("All data : ", res.data);
+				// retrieve the "completed" status of each sheet from the local storage
+				const updatedData = res.data.map((sheet) => {
+					const completed = localStorage.getItem(`codingSheet-${sheet._id}`);
+					return {
+						...sheet,
+						completed: completed === "true",
+					};
+				});
+				// calculate the initial value of completedCount based on the "completed" status of the sheets in updatedData
+				const initialCompletedCount = updatedData.reduce((acc, sheet) => {
+					return acc + (sheet.completed ? 1 : 0);
+				}, 0);
+				setCompletedCount(initialCompletedCount);
+				setData(updatedData);
 			})
 			.catch((err) => console.log(err));
-		setCompletedCount(0);
-	}, [filter]);
+	}, [filter, filterDomain]);
 
 	const handleFilter = (e) => {
 		setFilter(e.target.textContent);
@@ -43,14 +52,27 @@ const CodingSheets = () => {
 		setCompletedCount(
 			(prevCount) => prevCount + (updatedData[index].completed ? 1 : -1)
 		);
+
+		// save the "completed" status of the sheet in the local storage
+		localStorage.setItem(
+			`codingSheet-${updatedData[index]._id}`,
+			updatedData[index].completed
+		);
 	};
 
-	const progressBarPercent = data.length == 0 ? 0 : ((completedCount / data.length) * 100).toFixed(0);
+	const progressBarPercent =
+		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(0);
 
 	const filters = codingSheetsFilters.map((item) => {
 		return (
-			<div onClick={(e) => { handleFilter(e); handleFilterDomain(item); }} key={item.id}
-				className={item.text == filter ? "filter selected" : "filter"}>
+			<div
+				onClick={(e) => {
+					handleFilter(e);
+					handleFilterDomain(item);
+				}}
+				key={item.id}
+				className={item.text === filter ? "filter selected" : "filter"}
+			>
 				{item.text}
 			</div>
 		);
@@ -73,7 +95,12 @@ const CodingSheets = () => {
 				<div className="cc-middle-content">
 					<h1 className="main-heading">Coding Sheets</h1>
 					<p className="heading-supporter">
-						Coding Sheets is a website that offers a range of software engineering practice sheets to select from in a single location. The discussion section, which will be available soon, will provide support and guidance while working on a specific sheet. Another upcoming feature will be a comprehensive analysis of each sheet, similar to the one found on the Monkeytype website.
+						Coding Sheets is a website that offers a range of software
+						engineering practice sheets to select from in a single location. The
+						discussion section, which will be available soon, will provide
+						support and guidance while working on a specific sheet. Another
+						upcoming feature will be a comprehensive analysis of each sheet,
+						similar to the one found on the Monkeytype website.
 					</p>
 					<div className="message">
 						<div className="icon"></div>
@@ -85,20 +112,25 @@ const CodingSheets = () => {
 
 					<Filters>{filters}</Filters>
 
-
-					{
-						filter == "Two Pointers LC" ? 
-						(
-							<SheetMessage>
-								<div className="text">
-									This section is a set of problems based on a well-known blog post about using the two pointer technique on LeetCode, <a target={"_blank"} href="https://leetcode.com/discuss/study-guide/1688903/Solved-all-two-pointers-problems-in-100-days">show blog on leetcode</a>. The blog post includes a selection of high-quality questions that are organized by similarity.
-								</div>
-							</SheetMessage>
-						) : (
-							<></>
-						)
-						
-					}
+					{filter === "Two Pointers LC" ? (
+						<SheetMessage>
+							<div className="text">
+								This section is a set of problems based on a well-known blog
+								post about using the two pointer technique on LeetCode,{" "}
+								<a
+									target={"_blank"}
+									href="https://leetcode.com/discuss/study-guide/1688903/Solved-all-two-pointers-problems-in-100-days"
+									rel="noreferrer"
+								>
+									show blog on leetcode
+								</a>
+								. The blog post includes a selection of high-quality questions
+								that are organized by similarity.
+							</div>
+						</SheetMessage>
+					) : (
+						<></>
+					)}
 
 					<Progress>
 						<div className="text">Progress : </div>
@@ -111,40 +143,57 @@ const CodingSheets = () => {
 						</div>
 					</Progress>
 					<div className="table">
-						{
-							data.length === 0 ? (
-								<>
-									<LinearProgress />
-								</>
-							) : (
-								data.map((item, index) => {
-									return (
-										<div key={item.name} className={item.completed ? "link-row done-row" : "link-row"} >
-											{" "}
-											<div className="link-row-left">
-												<div className="count">{index + 1}</div>
-												<div className="main-row-content">
-													<a href={item.quesLink} target="_blank" rel="noreferrer">
-														{item.quesName}
-													</a>
-													<div className="tags">
-														{item.specialTag != "-" ? <div className="tag special-tag">{item.specialTag}</div> : <></>}
-														{item.tags.map((tagItem, tagIndex) => {
-															return <div className="tag" key={tagIndex}>{tagItem}</div>;
-														})}
-													</div>
+						{data.length === 0 ? (
+							<>
+								<LinearProgress />
+							</>
+						) : (
+							data.map((item, index) => {
+								return (
+									<div
+										key={item.name}
+										className={
+											item.completed ? "link-row done-row" : "link-row"
+										}
+									>
+										{" "}
+										<div className="link-row-left">
+											<div className="count">{index + 1}</div>
+											<div className="main-row-content">
+												<a
+													href={item.quesLink}
+													target="_blank"
+													rel="noreferrer"
+												>
+													{item.quesName}
+												</a>
+												<div className="tags">
+													{item.specialTag !== "-" ? (
+														<div className="tag special-tag">
+															{item.specialTag}
+														</div>
+													) : (
+														<></>
+													)}
+													{item.tags.map((tagItem, tagIndex) => {
+														return (
+															<div className="tag" key={tagIndex}>
+																{tagItem}
+															</div>
+														);
+													})}
 												</div>
 											</div>
-											<div className="done-btn">
-												<CheckCircleOutlineIcon
-													onClick={() => toggleCompleted(index)}
-												/>
-											</div>
 										</div>
-									);
-								})
-							)
-						}
+										<div className="done-btn">
+											<CheckCircleOutlineIcon
+												onClick={() => toggleCompleted(index)}
+											/>
+										</div>
+									</div>
+								);
+							})
+						)}
 					</div>
 				</div>
 			</Container>
@@ -298,7 +347,7 @@ const Container = styled.div`
 								border-radius: 100px;
 								font-size: 0.7rem;
 								margin-right: 5px;
-                                border: 1px solid #cac3c3;
+								border: 1px solid #cac3c3;
 							}
 
 							.special-tag {
@@ -416,7 +465,7 @@ const SheetMessage = styled.div`
 	/* background-color: #c9e8ff; */
 	background-color: #f0f0f0;
 
-	.text{
+	.text {
 		font-size: 0.75rem;
 	}
-`
+`;
