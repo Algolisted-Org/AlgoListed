@@ -239,11 +239,11 @@ const Container = styled.div`
             z-index: -100;
             background-color: transparent;
             border: none;
-            width: 100%;
+            /* width: 100%; */
+            width: 660px;
             /* height: 100%; */
             /* height: 9100px; */
             overflow-y: hidden;
-
         }
 
         @media only screen and (max-width: 1380px){
@@ -297,16 +297,6 @@ const Container = styled.div`
                 font-size: 1.05rem;
                 margin-bottom: 10px;
                 font-weight: 400;
-            }
-        }
-
-        .inside-container{
-            padding-left: 21.5px;
-
-            iframe{
-                width: 535px;
-                height: 300px;
-                margin: 20px 0;
             }
         }
 
