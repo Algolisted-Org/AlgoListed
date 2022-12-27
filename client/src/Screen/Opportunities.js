@@ -4,6 +4,7 @@ import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
+import SimpleFooter from "../Components/SimpleFooter";
 
 const Opportunities = () => {
     return (
@@ -16,17 +17,20 @@ const Opportunities = () => {
             <Container>
                 <CCHeader />
                 <LeftMenu marked={"opportunities"} />
-                <div className="cc-middle-content">
-                    <h1 className='main-heading'>All Internship & Job Opportunities <div className="head-tag">coming soon</div> </h1>
-                    <p className="heading-supporter">
-                    We are not fetching the data from any public API, we have build our own API which is being constantly updated by our the team and users with information.
-                    </p>
-                    <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            You know about a internship or job opportunity which is not mentioned here. <a href="/">click here</a>
-                        </div> 
-                    </div> 
+                <div className='show-middle-content'>
+                  <div className="cc-middle-content">
+                      <h1 className='main-heading'>All Internship & Job Opportunities <div className="head-tag">coming soon</div> </h1>
+                      <p className="heading-supporter">
+                      We are not fetching the data from any public API, we have build our own API which is being constantly updated by our the team and users with information.
+                      </p>
+                      <div className="message">
+                          <div className="icon"></div>
+                          <div className="text">
+                              You know about a internship or job opportunity which is not mentioned here. <a href="/">click here</a>
+                          </div> 
+                      </div> 
+                  </div>
+                  <SimpleFooter></SimpleFooter>
                 </div>
             </Container>
         </GrandContainer>
@@ -72,11 +76,15 @@ const Container = styled.div`
       color: #18489f;
     }
 
+    .show-middle-content{
+      margin-bottom: 30px;
+    }
+
     .cc-middle-content{
       min-height: 100vh;
       width: 100%;
       /* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
-      padding: 80px 120px 50px 120px;
+      padding: 80px 120px 30px 120px;
       position: relative;
       width: 100%;
       max-width: 1360px;
@@ -84,7 +92,7 @@ const Container = styled.div`
       margin: auto;
       
       @media only screen and (max-width: 1200px){
-        padding: 80px 50px 50px 50px;
+        padding: 80px 50px 30px 50px;
       }   
 
       .main-heading{

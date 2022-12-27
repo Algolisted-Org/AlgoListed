@@ -10,6 +10,7 @@ import { competitionFilters } from "../Components/competitionFilters";
 import CompetitionItem from "../Components/CompetitionItem";
 import { sortByContestTiming } from "../helpers/sortByContestTiming";
 import { sortByRegistration } from "../helpers/sortByRegistration";
+import SimpleFooter from "../Components/SimpleFooter";
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1]);
@@ -166,7 +167,9 @@ const CodingCompetitions = () => {
             </div>
 
             {waitingForData ? (
-              <LinearProgress />
+              <div className="linear-progess-holder">
+                <LinearProgress />
+              </div>
             ) : (
               <>
                 {list
@@ -200,6 +203,10 @@ const CodingCompetitions = () => {
               </>
             )}
           </Table>
+          {
+            waitingForData ? (<GiveSpace></GiveSpace>) : (<></>)
+          }
+          <SimpleFooter/>
         </div>
         {/* <CCRightMenu/> */}
       </Container>
@@ -247,7 +254,7 @@ const Container = styled.div`
     min-height: 100vh;
     width: 100%;
     /* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
-    padding: 80px 120px 50px 120px;
+    padding: 80px 120px 30px 120px;
     position: relative;
     width: 100%;
     max-width: 1360px;
@@ -255,7 +262,7 @@ const Container = styled.div`
     margin: auto;
 
     @media only screen and (max-width: 1200px) {
-      padding: 80px 50px 50px 50px;
+      padding: 80px 50px 30px 50px;
     }
 
     .main-heading {
@@ -505,3 +512,7 @@ const Table = styled.div`
     border-bottom: 0px solid transparent;
   }
 `;
+
+const GiveSpace = styled.div`
+  margin-bottom: 30vh;
+`

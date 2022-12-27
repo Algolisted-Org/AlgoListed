@@ -6,6 +6,7 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { codingSheetsFilters } from "../Components/codingSheetsFilters";
 import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
+import SimpleFooter from "../Components/SimpleFooter";
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -195,6 +196,10 @@ const CodingSheets = () => {
 							})
 						)}
 					</div>
+					{
+						data.length === 0 ? (<GiveSpace></GiveSpace>) : (<></>)
+					}
+					<SimpleFooter/>
 				</div>
 			</Container>
 		</GrandContainer>
@@ -241,7 +246,7 @@ const Container = styled.div`
 		min-height: 100vh;
 		width: 100%;
 		/* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
-		padding: 80px 120px 50px 120px;
+		padding: 80px 120px 30px 120px;
 		position: relative;
 		width: 100%;
 		max-width: 1360px;
@@ -249,7 +254,7 @@ const Container = styled.div`
 		margin: auto;
 
 		@media only screen and (max-width: 1200px) {
-			padding: 80px 50px 50px 50px;
+			padding: 80px 50px 30px 50px;
 		}
 
 		.main-heading {
@@ -469,3 +474,7 @@ const SheetMessage = styled.div`
 		font-size: 0.75rem;
 	}
 `;
+
+const GiveSpace = styled.div`
+  margin-bottom: 40vh;
+`
