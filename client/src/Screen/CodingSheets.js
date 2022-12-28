@@ -196,10 +196,8 @@ const CodingSheets = () => {
 							})
 						)}
 					</div>
-					{
-						data.length === 0 ? (<GiveSpace></GiveSpace>) : (<></>)
-					}
-					<SimpleFooter/>
+					{data.length === 0 ? <GiveSpace></GiveSpace> : <></>}
+					<SimpleFooter />
 				</div>
 			</Container>
 		</GrandContainer>
@@ -455,6 +453,7 @@ const Progress = styled.div`
 		overflow: hidden;
 
 		.fill {
+			transition: width 0.25s linear;
 			height: 100%;
 			border-radius: 100px;
 			background-color: #ffa500;
@@ -476,5 +475,5 @@ const SheetMessage = styled.div`
 `;
 
 const GiveSpace = styled.div`
-  margin-bottom: 40vh;
-`
+	margin-bottom: 40vh;
+`;
