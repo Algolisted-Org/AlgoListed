@@ -11,14 +11,13 @@ import SimpleFooter from "../Components/SimpleFooter";
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
+	const [dataLoading, setDataLoading] = useState(true);
 	const [completedCount, setCompletedCount] = useState(0);
 	
 	const params = useParams();
     
-	let { sheetname } = params;
-    console.log(sheetname);
-
-	if(sheetname == undefined) sheetname = "striver-sde-sheet";
+	const { sheetname } = params;
+    // console.log(sheetname);
 
 	useEffect(() => {
 		// retrieve the data from the server
@@ -39,9 +38,10 @@ const CodingSheets = () => {
 				}, 0);
 				setCompletedCount(initialCompletedCount);
 				setData(updatedData);
+				setDataLoading(false);
 			})
 			.catch((err) => console.log(err));
-	}, [data]);
+	}, [sheetname]);
 
 
 	const toggleCompleted = (index) => {
@@ -139,7 +139,7 @@ const CodingSheets = () => {
 						</div>
 					</Progress>
 					<div className="table">
-						{data.length === 0 ? (
+						{dataLoading ? (
 							<>
 								<LinearProgress />
 							</>
