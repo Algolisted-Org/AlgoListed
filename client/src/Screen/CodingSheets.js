@@ -6,18 +6,24 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { codingSheetsFilters } from "../Components/codingSheetsFilters";
 import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
+import { useParams } from 'react-router-dom';
 import SimpleFooter from "../Components/SimpleFooter";
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
 	const [completedCount, setCompletedCount] = useState(0);
-	const [filter, setFilter] = useState("Striver's SDE Sheet"); // later on change to Discuss Coding Sheets
-	const [filterDomain, setFilterDomain] = useState("striver-sde-sheet");
+	
+	const params = useParams();
+    
+	let { sheetname } = params;
+    console.log(sheetname);
+
+	if(sheetname == undefined) sheetname = "striver-sde-sheet";
 
 	useEffect(() => {
 		// retrieve the data from the server
 		axios
-			.get(`https://algolisted.cyclic.app/coding-sheets/sheet/${filterDomain}`)
+			.get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
 			.then((res) => {
 				// retrieve the "completed" status of each sheet from the local storage
 				const updatedData = res.data.map((sheet) => {
@@ -35,15 +41,8 @@ const CodingSheets = () => {
 				setData(updatedData);
 			})
 			.catch((err) => console.log(err));
-	}, [filter, filterDomain]);
+	}, [data]);
 
-	const handleFilter = (e) => {
-		setFilter(e.target.textContent);
-	};
-
-	const handleFilterDomain = (item) => {
-		setFilterDomain(item.domainFilter);
-	};
 
 	const toggleCompleted = (index) => {
 		// update the "completed" field for the coding sheet at the specified index
@@ -66,16 +65,12 @@ const CodingSheets = () => {
 
 	const filters = codingSheetsFilters.map((item) => {
 		return (
-			<div
-				onClick={(e) => {
-					handleFilter(e);
-					handleFilterDomain(item);
-				}}
+			<a href={item.domainFilter}
 				key={item.id}
-				className={item.text === filter ? "filter selected" : "filter"}
+				className={item.domainFilter === sheetname ? "filter selected" : "filter"}
 			>
 				{item.text}
-			</div>
+			</a>
 		);
 	});
 
@@ -113,7 +108,7 @@ const CodingSheets = () => {
 
 					<Filters>{filters}</Filters>
 
-					{filter === "Two Pointers LC" ? (
+					{sheetname === "two-pointers-lc" ? (
 						<SheetMessage>
 							<div className="text">
 								This section is a set of problems based on a well-known blog
@@ -408,6 +403,8 @@ const Filters = styled.div`
 		border-radius: 500px;
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
+		text-decoration: none;
+		color: inherit;
 
 		&:hover {
 			border-color: #201f1f;

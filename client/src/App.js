@@ -43,6 +43,7 @@ const App = () => {
         <Route path="/get-blog-code" element={<BlogAutoCode/>} />
         <Route path="/selected-profiles" element={<SelectedProfiles/>} />
         <Route path="/coding-sheets" element={<CodingSheets/>} />
+        <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />

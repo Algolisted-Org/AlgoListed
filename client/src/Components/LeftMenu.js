@@ -29,7 +29,7 @@ const LeftMenu = ({ marked }) => {
     {
         value: "Coding Sheets",
         showAt: "coding-sheets",
-        link: "/coding-sheets",
+        link: "/coding-sheets/striver-sde-sheet",
       },
     {
       value: "Coding Competitions",
