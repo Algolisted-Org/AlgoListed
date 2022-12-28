@@ -9,30 +9,38 @@ const resumesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+  hiringType: {
+    type: String,
+    required: true,
+  },
+  hiringDate: {
+    type: String,
+    required: true,
+  },
+  location: {
     type: String,
     required: true,
   },
   resume: {
     type: String,
-    required: true,
+    required: true, 
   },
   linkedin: {
     type: String,
     required: true,
   },
-  codingProfiles: {
+  workExp: {
     type: String,
-    required: true,
+    required: true, 
   },
-  medium: {
-    type: String,
+  codingProfiles: [{
+    type: Array,
     required: true,
-  },
-  referral: {
-    type: String,
+  }],
+  projects: [{
+    type: Array,
     required: true,
-  },
+  }],
   mentorship: {
     type: String,
     required: true,

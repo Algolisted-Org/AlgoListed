@@ -17,9 +17,9 @@ const LeftMenu = ({ marked }) => {
       link: "/resources",
     },
     {
-      value: "Selected Profiles",
-      showAt: "selected-profiles",
-      link: "/selected-profiles",
+      value: "Coding Competitions",
+      showAt: "all-coding-competitions",
+      link: "/coding-competitions",
     },
     // {
     //   value: "Aptitude Round",
@@ -30,11 +30,11 @@ const LeftMenu = ({ marked }) => {
         value: "Coding Sheets",
         showAt: "coding-sheets",
         link: "/coding-sheets/striver-sde-sheet",
-      },
+    },
     {
-      value: "Coding Competitions",
-      showAt: "all-coding-competitions",
-      link: "/coding-competitions",
+      value: "Selected Profiles",
+      showAt: "selected-profiles",
+      link: "/selected-profiles",
     },
     {
       value: "Opportunities",

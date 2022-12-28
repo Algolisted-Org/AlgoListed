@@ -9,20 +9,28 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { selectedProfilesFilters } from "../Components/selectedProfilesFilters";
 import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
+import { companyFilters } from "../Components/companyFilters";
 import SimpleFooter from '../Components/SimpleFooter';
+import sampleImage from '../Images/sample2.png'
+import sampleImage2 from '../Images/sample3.png'
 
 const SelectedProfiles = () => {
   const [allResumesData, setAllResumesData] = useState([]);
   const [filter, setFilter] = useState("All Profiles");
+  const [showImageModel, setShowImageModel] = useState(false);
+  const [imageValue, setImageValue] = useState(sampleImage);
+  const [comapanyName, setComapanyName] = useState(companyFilters[0].text);
+  const [showComapanyChange, setShowComapanyChange] = useState(false);
+  console.log(companyFilters);
 
-  useEffect(() => {
-    axios.get("https://algolisted.cyclic.app/resumes/all")
-      .then((res) => {
-        setAllResumesData(res.data);
-        console.log("All resumes : ", res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios.get("https://algolisted.cyclic.app/resumes/all")
+  //     .then((res) => {
+  //       setAllResumesData(res.data);
+  //       console.log("All resumes : ", res.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   const handleFilter = (e) => {
     setFilter(e.target.textContent);
@@ -42,6 +50,11 @@ const SelectedProfiles = () => {
     );
   });
 
+  const handleChangeComapnay = (e) => {
+    setComapanyName(e.text);
+    setShowComapanyChange(false);
+  }
+
 
   return (
     <GrandContainer>
@@ -51,10 +64,17 @@ const SelectedProfiles = () => {
         <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
       </MobContainer>
       <Container>
+        {
+          showImageModel ? (
+            <ShowImage onClick={() => setShowImageModel(false)} > 
+              <img src={imageValue} alt="" />
+            </ShowImage>
+          ):(<></>)
+        }
         <CCHeader />
         <LeftMenu marked={"selected-profiles"} />
         <div className="cc-middle-content">
-          <h1 className='main-heading'>Selected Profiles</h1>
+          <h1 className='main-heading'>Selected Profiles <div className="head-tag">coming soon</div> </h1>
           <p className="heading-supporter">
             Our website materials are written in a straightforward style without the use of jargon or unnecessary details. We provide just enough information for first-time readers or those who want to quickly review the subject, as we believe that learning a new language should not be like studying from a dictionary.
           </p>
@@ -65,23 +85,37 @@ const SelectedProfiles = () => {
             </div>
           </div>
 
-          {/* <Filters>
-                      <div className='filter selected'>SDE Roles</div>
-                      <div className='filter'>UX Developers</div>
-                      <div className='filter'>Indian StartUps</div>
-                      <div className='filter'>Remote StartUps</div>
-                    </Filters> */}
-
           <Filters>{filters}</Filters>
 
           <SearchHelper>
-            <div className="box select-box">
-              <div className="icon-1"><ApartmentIcon /></div>
-              <div className="text">Select Company</div>
-              <div className="icon-1"><ExpandMoreIcon /></div>
+            <div className="left-filter">
+              <div className="box select-box" onClick={() => setShowComapanyChange(!showComapanyChange)}>
+                <div className="icon-1"><ApartmentIcon /></div>
+                <div className="text">{comapanyName}</div>
+                <div className="icon-1 icon-drop"><ExpandMoreIcon /></div>
+              </div>
+              {
+                showComapanyChange ? (
+                  <div className="options">
+                    {
+                      companyFilters.map((item) => {
+                        if (item.text == comapanyName) {
+                          return (
+                            <div className="option option-selected">{item.text}</div>
+                          )
+                        }
+                        else return (
+                          <div className="option" onClick={() => handleChangeComapnay(item)}>{item.text}</div>
+                        )
+                      })
+                    }
+                  </div>
+                ) : (<></>)
+              }
             </div>
+
             <div className='box filter-box'>
-              <div className='text'>By Relevance</div>
+              <div className='text'>Recently Added</div>
               <FilterListIcon />
             </div>
             <InfoIcon className='info-icon' style={{ fill: '#333' }} />
@@ -90,72 +124,72 @@ const SelectedProfiles = () => {
           <div className="full-width-line"></div>
 
           <SearchResults>
-            <div className="current-search">Showing selected {filter} in all companies</div>
-            
+            <div className="current-search">Showing selected {filter} in {comapanyName == "Select Company" ? "all Companies" : comapanyName}</div>
+
+
             <CompanyStatistics>
               <div className="topic-heading">Company Statistics</div>
               <div className="desc">
-              This new feature is coming soon and will provide graphical representations of information about the company you are targeting, including the median CGPA of recently hired employees and the required LeetCode rating for selection. We will have all the information you need.
+                This new feature is coming soon and will provide graphical representations of information about the company you are targeting, including the median CGPA of recently hired employees and the required LeetCode rating for selection. We will have all the information you need.
               </div>
+              <br />
+              <div className="desc">
+                We are currently in need of more resumes to improve the accuracy of our machine learning models. If you are currently employed at a company or have access to someone else's resume, we would greatly appreciate it if you could provide it to us. Your help will allow us to continue working on our models and ensuring the best possible results.
+              </div>
+              <br />
+              <div className="desc">
+                Prototype Image of what we are planning to make -
+              </div>
+              <img src={sampleImage} alt="" onClick={() => {setImageValue(sampleImage); setShowImageModel(true);} }/>
+              <img src={sampleImage2} alt="" onClick={() => {setImageValue(sampleImage2); setShowImageModel(true);} }/>
+              <div className="small-gap"></div>
+              <br />
+              <a href="" className='take-data'>
+                Add resume
+              </a>
             </CompanyStatistics>
-            
-              {
-                allResumesData.length === 0 ? (
-                  <div className="linear-progess-holder">
-                    <LinearProgress />
-                  </div>
-                  ) : (
-                    <div className="all-profiles-container">
-                      {allResumesData.map((item, index) => {
-                        if (filter == "All Profiles") {
-                          return (
-                            <div className="profile-card" key={index}>
-                              <div className="card-header">{item.name} | {item.company}</div>
-                              <div className="exp-desc">{item.description}
-                                {" "}<a href="/">read more</a>
-                              </div>
-      
-                              <div className="full-width-line"></div>
-      
-                              <div className="btns">
-                                <button className="default-btn">Resume</button>
-                                <button className="default-btn">Linkedin</button>
-                                <button className="default-btn">Coding Profiles</button>
-                                <button className="default-btn">Blogs - Medium</button>
-                                <button className="default-btn highlight">Ask for Referral</button>
-                                <button className="default-btn highlight">Personal Mentorship</button>
-                              </div>
-                            </div>
-                          );
-                        }
-                        else if (item.category == filter) {
-                          return (
-                            <div className="profile-card" key={index}>
-                              <div className="card-header">{item.name} | {item.company}</div>
-                              <div className="exp-desc">{item.description}
-                                {" "}<a href="/">read more</a>
-                              </div>
-      
-                              <div className="full-width-line"></div>
-      
-                              <div className="btns">
-                                <button className="default-btn">Resume</button>
-                                <button className="default-btn">Linkedin</button>
-                                <button className="default-btn">Coding Profiles</button>
-                                <button className="default-btn">Blogs - Medium</button>
-                                <button className="default-btn highlight">Ask for Referral</button>
-                                <button className="default-btn highlight">Personal Mentorship</button>
-                              </div>
-                            </div>
-                          );
-                        }
-                      })}
-                    </div>
-                  )
-              }
-            
+
+
+            {
+              allResumesData.length === 0 ? (
+                <></>
+                // <div className="linear-progess-holder">
+                //   <LinearProgress />
+                // </div>
+              ) : (
+                <div className="all-profiles-container">
+                  {allResumesData.map((item, index) => {
+                    if (filter == "All Profiles" || item.category == filter) {
+                      return (
+                        <div className="profile-card" key={index}>
+                          <div className="card-header">{item.name} | {item.company}</div>
+
+                          <div className="exp-desc">
+                            {item.hiringType} {" Hiring on "} {item.hiringDate} <br />
+                            {"Location - "} {item.location}
+                            <br />
+                            <div className="small-gap"></div>
+                            {item.location == "-" ? "No previous work experience" : item.workExp}
+                          </div>
+
+                          <div className="full-width-line"></div>
+
+                          <div className="btns">
+                            <a target={"_blank"} className="default-btn">Coding Profiles</a>
+                            <a target={"_blank"} href={item.resume} className="default-btn">Resume</a>
+                            <a target={"_blank"} href={item.linkedin} className="default-btn">Linkedin</a>
+                            <a target={"_blank"} className="default-btn">Projects</a>
+                            <a target={"_blank"} href={item.mentorship} className="default-btn highlight">Personal Mentorship</a>
+                          </div>
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+              )
+            }
           </SearchResults>
-          <SimpleFooter/>
+          <SimpleFooter />
         </div>
       </Container>
     </GrandContainer>
@@ -196,6 +230,21 @@ const Container = styled.div`
     justify-content: space-between;
     padding-left: 200px;
 
+    a.default-btn{
+      color: inherit;
+      font-size: 0.75rem;
+      padding: 2.5px 10px;
+      margin: 2.5px;
+      text-decoration: none;
+      background-color: whitesmoke;
+      border: 1px solid rgb(229, 229, 229);
+    }
+
+    .small-gap{
+      display: block;
+      height: 7.5px;
+    }
+
     a{
       color: #18489f;
     }
@@ -220,6 +269,18 @@ const Container = styled.div`
           font-size: 1.65rem;
           font-weight: 600;
           color: #292929;
+          display: flex; 
+          align-items: center;
+
+          .head-tag{
+            display: inline;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.25rem 0.5rem;
+            border-radius: 100px;
+            background-color: #e5e5e5;
+            margin-left: 10px;
+          }
       }
 
       .heading-supporter{
@@ -290,14 +351,14 @@ const SearchHelper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 15px 0 30px 0;
-  position: relative;
   padding-right: 25px;
+  position: relative;
 
   .box {
     padding: 5px 10px;
     height: 36px;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     background-color: white;
     border: 1px solid #b9afaf;
@@ -307,6 +368,10 @@ const SearchHelper = styled.div`
 
   .select-box{
     border-radius: 5px;
+    min-width: 178px;
+    cursor: pointer;
+    user-select: none;
+    padding-right: 20px;
 
     .text {
       font-size: 0.8rem;
@@ -317,6 +382,51 @@ const SearchHelper = styled.div`
     svg{
       margin-bottom: -4px;
     }
+
+    .icon-drop{
+      position: absolute;
+      right: 10px;
+    }
+  }
+
+  .left-filter{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .options{
+      width: 125%;
+      border-radius: 5px;
+      overflow: hidden;
+      position: absolute;
+      top: 40px;
+      border: 1px solid #b9afaf;
+      box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+      background-color: white;
+  
+      
+      .option{
+        padding: 5px 10px;
+        height: 36px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        font-weight: 300;
+        
+        &:hover{
+          background-color: #f5efef;
+          cursor: pointer;
+          /* transition-duration: 250ms; */
+        }
+      }
+
+      .option-selected{
+          background-color: #f5efef;
+          font-weight: 400;
+      }
+  }
+
   }
 
   .filter-box{
@@ -374,8 +484,10 @@ const SearchResults = styled.div`
 
       .exp-desc{
         font-size: 0.8rem;
-        font-weight: 200;
-        margin: 5px 0 20px 0;
+        font-weight: 400;
+        line-height: 1.5rem;
+        margin: 10px 0 10px 0;
+        color: #766161;
       }
       
       .btns{
@@ -415,6 +527,15 @@ const CompanyStatistics = styled.div`
     margin: 20px 0 10px 0;
     padding: 15px;
 
+    img{
+      margin-top: 15px;
+      /* width: 100%; */
+      height: 100px;
+      background-color: white;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+
     .topic-heading{ 
       font-weight: 500;
       font-size: 0.95rem;
@@ -428,7 +549,35 @@ const CompanyStatistics = styled.div`
       color: white;
     }
 
+    .take-data{
+      font-size: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+      padding: 7.5px 12px;
+      border-radius: 100px;
+      background-color: #d8c2c2;
+      letter-spacing: 0.06rem;
+      color: #000;
+    }
+
     @media only screen and (max-width: 1370px){
       width: calc(100% - 10px);
     }
+`
+
+const ShowImage = styled.div`
+  position: fixed;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000070;
+  left: 0;
+  top: 0;
+
+  display: grid;
+  place-items: center;
+
+  img{
+    height: 70vh;
+  }
 `

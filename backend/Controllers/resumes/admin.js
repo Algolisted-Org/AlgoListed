@@ -1,11 +1,11 @@
 const All_Resumes = require("../../Models/resumesModel");
 
 const create_resume = async (req, res) => {
-    const { name, company, description, resume, linkedin, codingProfiles, medium, referral, mentorship, category } = req.body;
+    const { name, company, hiringType, hiringDate, location, resume, linkedin, workExp, codingProfiles, projects, mentorship, category } = req.body;
 
     try {
         const result = await All_Resumes.create({
-            name, company, description, resume, linkedin, codingProfiles, medium, referral, mentorship, category
+            name, company, hiringType, hiringDate, location, resume, linkedin, workExp, codingProfiles, projects, mentorship, category
         })
         res.status(200).json({ message: "Resume has been added to database." });
 
