@@ -123,11 +123,31 @@ const CodingCompetitions = () => {
         <div className="cc-middle-content">
           <h1 className="main-heading">All Upcoming Coding Competitions</h1>
           <p className="heading-supporter">
-            We are not fetching the data from any public API, we have built our
-            own API, which is being constantly updated by our the team and users
-            with information.
-            {/* <a href="/">I know about a coding competiion which is not mentioned here</a> */}
+            There are several websites, such as CLIST and Unstop, that provide information about upcoming contests. However, our list is specifically geared towards Indians and is curated by an Indian who understands the types of competitions that are most relevant to this audience. As a result, our list only includes contests that are truly relevant and necessary, rather than including any unnecessary or extraneous ones. 
           </p>
+          <div className="all-support-companies">
+          <div className="support-company diff-value">
+              <div className="text">Example Competitions</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Google KickStart</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Codeforces</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Microsoft Engage</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Top College Event</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Codechef</div>
+            </div>
+            <div className="support-company">
+              <div className="text">TCS CodeVita</div>
+            </div>
+          </div>
           <div className="message">
             <div className="icon"></div>
             <div className="text">
@@ -135,12 +155,12 @@ const CodingCompetitions = () => {
               <a href="/">click here</a>
             </div>
           </div>
-          <p className="heading-supporter">
+          {/* <p className="heading-supporter">
             Competitions like - Google Kickstart, Codeforces, Leetcode, CC,
             Hackathons, ICPC, Hackathons, Microsoft Imagine, Microsoft Engage,
             Facebook Hacker Cup, TCS Ninja, Uber Hacktag, Hacktoberfest,
             Girlscript, GSOC, Code jam, Hash Cup.
-          </p>
+          </p> */}
           <Filters>{filters}</Filters>
           <Sort>
             <div onClick={(e) => handleSort(e)} className="box">
@@ -285,6 +305,30 @@ const Container = styled.div`
       }
     }
 
+    .all-support-companies{
+      display: flex;
+      flex-wrap: wrap;
+
+      .support-company{
+        padding: 2.5px 7.5px;
+        background-color: #e5e5e5;
+        border-radius: 5px;
+        margin-right: 5px;
+  
+        .text{
+          font-size: 0.7rem;
+          font-weight: 200;
+        }
+      }
+
+      .diff-value{
+        background-color: #f6f6f6;
+        .text{
+          font-weight: 300;
+        }
+      }
+    }
+
     .message {
       display: inline-block;
       /* display: flex; */
@@ -292,7 +336,7 @@ const Container = styled.div`
       background-color: #d5f7e1;
       border-radius: 5px;
       padding: 10px;
-      margin: 20px 0 10px 0;
+      margin: 30px 0 10px 0;
 
       .text {
         font-size: 0.8rem;

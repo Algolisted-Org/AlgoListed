@@ -12,24 +12,23 @@ const LeftMenu = ({ marked }) => {
       link: "/blogs/all",
     }, 
     {
-      value: "Resources",
+      value: "Coding Resources",
       showAt: "resources",
       link: "/resources",
     },
     {
+      value: "Coding Sheets",
+      showAt: "coding-sheets",
+      link: "/coding-sheets/striver-sde-sheet",
+  },
+  
+    
+    
+    
+    {
       value: "Coding Competitions",
       showAt: "all-coding-competitions",
       link: "/coding-competitions",
-    },
-    // {
-    //   value: "Aptitude Round",
-    //   showAt: "aptitude-round",
-    //   link: "/aptitude-round",
-    // },
-    {
-        value: "Coding Sheets",
-        showAt: "coding-sheets",
-        link: "/coding-sheets/striver-sde-sheet",
     },
     {
       value: "Selected Profiles",
@@ -41,6 +40,11 @@ const LeftMenu = ({ marked }) => {
       showAt: "opportunities",
       link: "/opportunities",
     }
+    // {
+    //   value: "Aptitude Round",
+    //   showAt: "aptitude-round",
+    //   link: "/aptitude-round",
+    // },
   ]
 
   return (

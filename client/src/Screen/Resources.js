@@ -51,9 +51,9 @@ const Resources = () => {
         <CCHeader />
         <LeftMenu marked={"resources"} />
         <div className="cc-middle-content">
-          <h1 className='main-heading'>Resources</h1>
+          <h1 className='main-heading'>Coding Resources</h1>
           <p className="heading-supporter">
-            Here we list notes, codes, and other resources that are related to a particular youtube educator like Striver, Tourist, Priyansh Agarwal, Love Babbar, Kunal Kushwaha, Anuj Bhaiya, Luv, etc. This would significantly increase the productivity of the students who want to learn from a particular playlist of videos.
+            There is a wealth of disorganized notes and other resources available on websites like LinkedIn and Leetcode, but they can be difficult to find because they are not listed in a organized manner. To make your life easier, we have compiled all of these resources by topic in a single location.
           </p>
           <div className="message">
             <div className="icon"></div>
@@ -73,6 +73,8 @@ const Resources = () => {
             <InfoIcon style={{ fill: '#333' }} />
           </Sort>
 
+          
+
           {
             allResources.length === 0 ? (
               <div className="linear-progess-holder">
@@ -82,7 +84,7 @@ const Resources = () => {
               <div className="resources-container">
                 {
                   allResources.map((item, index) => {
-                    if (filter == "All Resources" || item.creator == filter) {
+                    if (filter == "All Resources" || item.mainTag == filter) {
                       return (
                         <div className="resource">
                           <div className="img-container">
@@ -91,8 +93,8 @@ const Resources = () => {
                           <a href={item.link} target={"_blank"} className="title">{item.title}</a>
                           <div className="short-desc">{item.description}</div>
                           <div className="tags">
-                            <div className="main-tag">{item.creator}</div>
-                            <div className="tag">{item.creator}</div>
+                            <div className="main-tag">{item.mainTag}</div>
+                            <div className="tag">{item.type}</div>
                           </div>
                         </div>
                       )

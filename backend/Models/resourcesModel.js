@@ -9,7 +9,7 @@ const resourcesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  creator: {
+  mainTag: {
     type: String,
     required: true,
   },
