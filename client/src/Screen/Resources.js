@@ -14,6 +14,10 @@ const Resources = () => {
   const [filter, setFilter] = useState("All Resources");
 
   useEffect(() => {
+    document.title = "Coding Resources - Algolisted";
+  }, []);
+
+  useEffect(() => {
     axios.get("https://algolisted.cyclic.app/resources/all")
       .then((res) => {
         setAllResources(res.data);

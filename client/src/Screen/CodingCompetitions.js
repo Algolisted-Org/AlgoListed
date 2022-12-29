@@ -21,6 +21,10 @@ const CodingCompetitions = () => {
   const [sortType, setSortType] = useState("By Contest Timing");
 
   useEffect(() => {
+    document.title = "All Upcoming Coding Competitions - Algolisted";
+  }, []);
+
+  useEffect(() => {
     (async () => {
       await fetch(
         `https://script.google.com/macros/s/AKfycbzXyVH1o6CzzJUfLN0qC-EscTKQeKouAUlU3oBs_S85WvB13wPHuawZLK43QJrqBua3Ng/exec`
@@ -57,23 +61,6 @@ const CodingCompetitions = () => {
 
       return obj;
     });
-
-  // useEffect(() => {
-  //   first
-
-  //   return () => {
-  //     second
-  //   }
-  // }, [third])
-
-  const override = {
-    display: "block",
-    margin: "0 auto",
-    borderColor: "red",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
 
   const handleFilter = (e) => {
     setFilter(e.target.textContent);

@@ -23,6 +23,11 @@ const SelectedProfiles = () => {
   const [showComapanyChange, setShowComapanyChange] = useState(false);
   console.log(companyFilters);
 
+  useEffect(() => {
+    document.title = "Selected Profiles - Algolisted";
+  }, []);
+  
+
   // useEffect(() => {
   //   axios.get("https://algolisted.cyclic.app/resumes/all")
   //     .then((res) => {

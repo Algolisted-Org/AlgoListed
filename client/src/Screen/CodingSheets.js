@@ -19,6 +19,8 @@ const CodingSheets = () => {
 	const { sheetname } = params;
     // console.log(sheetname);
 
+	document.title = `Coding Sheets - Algolisted`;
+
 	useEffect(() => {
 		// retrieve the data from the server
 		axios

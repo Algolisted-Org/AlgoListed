@@ -7,6 +7,10 @@ import InfoIcon from '@material-ui/icons/Info';
 import SimpleFooter from "../Components/SimpleFooter";
 
 const Opportunities = () => {
+    useEffect(() => {
+      document.title = "All Internship and Job Opportunities - Algolisted";
+    }, []);
+
     return (
         <GrandContainer>
             <MobContainer>

@@ -10,6 +10,10 @@ import SimpleFooter from '../Components/SimpleFooter';
 const AllBlogs = () => {
     console.log(allBlogsDatabase);
 
+    useEffect(() => {
+      document.title = "Simplified Coding Blogs - Algolisted";
+    }, []);
+
     return ( 
         <GrandContainer>
             <MobContainer>
@@ -21,7 +25,7 @@ const AllBlogs = () => {
                 <CCHeader />
                 <LeftMenu marked={"all-blogs"} />
                 <div className="cc-middle-content">
-                    <h1 className='main-heading'>All Blogs <div className="head-tag">local database</div> </h1>
+                    <h1 className='main-heading'>Simplified Coding Blogs <div className="head-tag">Local Database</div> </h1>
                     <p className="heading-supporter">
                     We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
                     </p>
