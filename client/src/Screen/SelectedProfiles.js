@@ -76,7 +76,10 @@ const SelectedProfiles = () => {
         <div className="cc-middle-content">
           <h1 className='main-heading'>Selected Profiles <div className="head-tag">coming soon</div> </h1>
           <p className="heading-supporter">
-            Our website materials are written in a straightforward style without the use of jargon or unnecessary details. We provide just enough information for first-time readers or those who want to quickly review the subject, as we believe that learning a new language should not be like studying from a dictionary.
+            Here you can see all the resumes that recently got shortlisted for a specific company. You can also read that person's
+            interview experience with that particular company or fix a one-on-one google meet to ask queries. This can be helpful
+            for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular
+            company.
           </p>
           <div className="message">
             <div className="icon"></div>
@@ -132,7 +135,9 @@ const SelectedProfiles = () => {
               <div className="desc">
                 This new feature is coming soon and will provide graphical representations of information about the company you are targeting, including the median CGPA of recently hired employees and the required LeetCode rating for selection. We will have all the information you need.
               </div>
-              <br />
+            </CompanyStatistics>
+
+            <TempDoc>
               <div className="desc">
                 We are currently in need of more resumes to improve the accuracy of our machine learning models. If you are currently employed at a company or have access to someone else's resume, we would greatly appreciate it if you could provide it to us. Your help will allow us to continue working on our models and ensuring the best possible results.
               </div>
@@ -144,10 +149,10 @@ const SelectedProfiles = () => {
               <img src={sampleImage2} alt="" onClick={() => {setImageValue(sampleImage2); setShowImageModel(true);} }/>
               <div className="small-gap"></div>
               <br />
-              <a href="" className='take-data'>
+              <a href="https://forms.gle/oLPuSXBuxCjLZjiYA" target={"_blank"} className='take-data'>
                 Add resume
               </a>
-            </CompanyStatistics>
+            </TempDoc>
 
 
             {
@@ -558,6 +563,66 @@ const CompanyStatistics = styled.div`
       background-color: #d8c2c2;
       letter-spacing: 0.06rem;
       color: #000;
+    }
+
+    @media only screen and (max-width: 1370px){
+      width: calc(100% - 10px);
+    }
+`
+
+const TempDoc = styled.div`
+    width: 98%;
+    border-radius: 5px;
+    /* background-color: #dc7d7d; */
+    margin: 20px 0 10px 0;
+    /* padding: 15px; */
+
+    img{
+      margin-top: 15px;
+      /* width: 100%; */
+      height: 140px;
+      background-color: #e5ebec;
+      padding: 5px;
+      border: 1px solid #b9b1b1;
+      border-radius: 5px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .topic-heading{ 
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 7.5px;
+    }
+
+    .desc{ 
+      font-weight: 200;
+      font-size: 0.85rem;
+    }
+
+    .take-data {
+      width: 400px;
+      width: 80%;
+      height: 36.5px;
+      display: grid;
+      place-items: center;
+      /* padding: 7.5px 115px; */
+      font-size: 0.8rem;
+      border: 1px solid #b9afaf;
+      border-radius: 500px;
+      margin: auto;
+      font-weight: 300;
+      color: inherit;
+      text-decoration: none;
+      
+
+      &:hover {
+        border-color: #201f1f;
+        background-color: #201f1f;
+        color: #ebdddd;
+        transition-duration: 250ms;
+        cursor: pointer;
+      }
     }
 
     @media only screen and (max-width: 1370px){
