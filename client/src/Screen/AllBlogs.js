@@ -6,80 +6,120 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import allBlogsDatabase from "../Components/allBlogsDatabase.json"
 import SimpleFooter from '../Components/SimpleFooter';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import MobileNavbar from "../Components/MobileNavbar";
 
 const AllBlogs = () => {
-    console.log(allBlogsDatabase);
+  console.log(allBlogsDatabase);
 
-    useEffect(() => {
-      document.title = "Simplified Coding Blogs - Algolisted";
-    }, []);
+  useEffect(() => {
+    document.title = "Simplified Coding Blogs - Algolisted";
+  }, []);
 
-    return ( 
-        <GrandContainer>
-            <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with 
-                width more than 1100px, a standard laptop or tablet landscape. 
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
-            </MobContainer>
-            <Container>
-                <CCHeader />
-                <LeftMenu marked={"all-blogs"} />
-                <div className="cc-middle-content">
-                    <h1 className='main-heading'>Simplified Coding Blogs <div className="head-tag">Local Database</div> </h1>
-                    <p className="heading-supporter">
-                    We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
-                    </p>
-                    <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
-                        </div>
+  return (
+    <GrandContainer>
+      <MobContainer>
+        <MobileNavbar />
+        <div className="main-content">
+          <h1 className="main-heading">Simplified Coding Blogs</h1>
+          <p className="heading-supporter">
+            We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
+          </p>
+          <BlogsContainer>
+            {
+              allBlogsDatabase.map((item, index) => {
+                return (
+                  <div className="blog-container" key={index}>
+                    <div className="last-updated">{item.date}</div>
+                    <a href={item.link} className="blog-title">{item.title}</a>
+                    <div className="blog-desc">{item.desc}
+                      <div className="author">
+                        <a href={item.authorLink[0]} target="_blank">
+                          <img src={item.authorImageLink[0]} alt="" />
+                        </a>
+                        <div className="text">Contribution by {item.author[0]} {item.author.length > 1 ? <>+ {item.author.length - 1} others</> : <></>}</div>
+                      </div>
                     </div>
-                    <Sort>
-                        <div className="box">
-                        <div className="text">By Relevance</div>
-                        <FilterListIcon/>
-                        </div>
-                        <InfoIcon style={{fill: "#333"}}/>
-                    </Sort>
 
-                    <BlogsContainer>
-                        {
-                          allBlogsDatabase.map((item, index) => {
-                            return (
-                                <div className="blog-container" key={index}>
-                                    <div className="last-updated">{item.date}</div>
-                                    <a href={item.link} className="blog-title">{item.title}</a>
-                                    <div className="blog-desc">{item.desc} 
-                                      <div className="author">
-                                        <a href={item.authorLink[0]} target="_blank">
-                                          <img src={item.authorImageLink[0]} alt="" />
-                                        </a>
-                                        <div className="text">Contribution by {item.author[0]} {item.author.length > 1 ? <>+ {item.author.length - 1} others</> : <></>}</div>
-                                      </div>
-                                    </div>
+                    <div className="blog-tags">
+                      <div className="main-tag">{item.category}</div>
+                      {
+                        item.tags.map((tag, tagIndex) => {
+                          return (
+                            <div className="tag" key={tagIndex}>{tag}</div>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </BlogsContainer>
 
-                                    <div className="blog-tags">
-                                        <div className="main-tag">{item.category}</div>
-                                        {
-                                          item.tags.map((tag, tagIndex) => {
-                                            return (
-                                              <div className="tag" key={tagIndex}>{tag}</div>
-                                            )
-                                          } )
-                                        }
-                                    </div>
-                                </div>
-                            )
-                          })
-                        }
-                    </BlogsContainer>
+        </div>
+        <SimpleFooter />
+      </MobContainer>
+      <Container>
+        <CCHeader />
+        <LeftMenu marked={"all-blogs"} />
+        <div className="cc-middle-content">
+          <h1 className='main-heading'>Simplified Coding Blogs <div className="head-tag">Local Database</div> </h1>
+          <p className="heading-supporter">
+            We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
+          </p>
+          <div className="message">
+            <div className="icon"></div>
+            <div className="text">
+              We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
+            </div>
+          </div>
+          <Sort>
+            <div className="box">
+              <div className="text">By Relevance</div>
+              <FilterListIcon />
+            </div>
+            <InfoIcon style={{ fill: "#333" }} />
+          </Sort>
 
-                    <SimpleFooter/>
-                </div>
-            </Container>
-        </GrandContainer>
-    )
+          <BlogsContainer>
+            {
+              allBlogsDatabase.map((item, index) => {
+                return (
+                  <div className="blog-container" key={index}>
+                    <div className="last-updated">{item.date}</div>
+                    <a href={item.link} className="blog-title">{item.title}</a>
+                    <div className="blog-desc">{item.desc}
+                      <div className="author">
+                        <a href={item.authorLink[0]} target="_blank">
+                          <img src={item.authorImageLink[0]} alt="" />
+                        </a>
+                        <div className="text">Contribution by {item.author[0]} {item.author.length > 1 ? <>+ {item.author.length - 1} others</> : <></>}</div>
+                      </div>
+                    </div>
+
+                    <div className="blog-tags">
+                      <div className="main-tag">{item.category}</div>
+                      {
+                        item.tags.map((tag, tagIndex) => {
+                          return (
+                            <div className="tag" key={tagIndex}>{tag}</div>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </BlogsContainer>
+
+          <SimpleFooter />
+        </div>
+      </Container>
+    </GrandContainer>
+  )
 }
 
 export default AllBlogs
@@ -90,23 +130,39 @@ const GrandContainer = styled.div`
 
 const MobContainer = styled.div`
   width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+  padding-top: 60px;
 
-  img{
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
+  .main-content{
+    padding: 10px 15px;
+
+    .main-heading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #292929;
+      margin-bottom: 5px;
+    }
+  
+    .heading-supporter {
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: #696168;
+  
+      a {
+        color: #18489f;
+        font-size: 0.75rem;
+        font-weight: 300;
+        margin-left: 0.25rem;
+      }
+    }
+
   }
 
-  @media only screen and (min-width: 1099px){
+
+  @media only screen and (min-width: 1100px) {
     display: none;
   }
-`
-
+`;
 const Container = styled.div`
     @media only screen and (max-width: 1099px){
         display: none;
@@ -334,7 +390,95 @@ const BlogsContainer = styled.div`
                 margin: 5px 5px 0 0;
             }
         }
-
-        
     }
+
+    @media only screen and (max-width: 1100px) {
+      margin-top: 30px;
+      .blog-container{
+          width: 100%;
+          /* border: 1px solid #e5e7ed; */
+          border-top: 1px solid #e5e7ed;
+          min-height: 275px;
+          padding: 10px 10px 10px 5px;
+          color: inherit;
+          text-decoration: none;
+
+          .last-updated{
+              font-size: 0.65rem;
+              font-weight: 200;
+              color: #6b7281;
+              margin-bottom: 5px;
+          }
+
+          .blog-title{
+              font-size: 0.85rem;
+              font-weight: 500;
+              margin: 15px 0 5px 0;
+              color: #374151;
+              cursor: pointer;
+              text-decoration: none;
+              
+              &:hover{
+                color: cornflowerblue;
+                transition-duration: 250ms;
+              }
+          }
+
+
+          .blog-desc{
+              font-size: 0.7rem;
+              font-weight: 200;
+              margin-bottom: 15px;
+              color: #6b7280;
+              
+              .author{
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+
+                img{
+                  height: 30px;
+                  width: 30px;
+                  border-radius: 100px;
+                  margin-right: 5px;
+                }
+
+                .text{
+                  font-weight: 200;
+                  font-size: 0.65rem;
+                  font-weight: 200;
+                  color: #6b7280;
+                  text-decoration: none;
+                }
+              }
+          }
+
+
+          .blog-tags{
+              display: flex;
+              flex-wrap: wrap;
+
+              .main-tag{
+                  font-size: 0.65rem;
+                  padding: 2.5px 7.5px;
+                  border-radius: 100px;
+                  background-color: #f3e8ff;
+                  color: rgb(107, 33, 168);
+                  font-weight: 400;
+                  margin: 5px 5px 0 0;
+              }
+
+              .tag{
+                  font-size: 0.65rem;
+                  padding: 2.5px 7.5px;
+                  border-radius: 100px;
+                  background-color: #eeeeee;
+                  font-weight: 300;
+                  margin: 5px 5px 0 0;
+              }
+          }
+      }
+    }
+
+
 `

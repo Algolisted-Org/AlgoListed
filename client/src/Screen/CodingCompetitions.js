@@ -11,6 +11,9 @@ import CompetitionItem from "../Components/CompetitionItem";
 import { sortByContestTiming } from "../helpers/sortByContestTiming";
 import { sortByRegistration } from "../helpers/sortByRegistration";
 import SimpleFooter from "../Components/SimpleFooter";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import MobileNavbar from "../Components/MobileNavbar";
 
 const CodingCompetitions = () => {
   const [temp, setTemp] = useState([1]);
@@ -19,6 +22,7 @@ const CodingCompetitions = () => {
   const [filter, setFilter] = useState("All");
   const [isSortListOpen, setIsSortListOpen] = useState(false);
   const [sortType, setSortType] = useState("By Contest Timing");
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     document.title = "All Upcoming Coding Competitions - Algolisted";
@@ -96,24 +100,126 @@ const CodingCompetitions = () => {
   return (
     <GrandContainer>
       <MobContainer>
-        We are still working on Responsive Version of the website, please view
-        the site with width more than 1100px, a standard laptop or tablet
-        landscape.
-        <img
-          src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif"
-          alt=""
-        />
+        <MobileNavbar/>
+        <div className="main-content">
+          <h1 className="main-heading">All Upcoming Coding Competitions</h1>
+          <p className="heading-supporter">
+            There are several websites, such as CLIST and Unstop, that provide information about upcoming contests. However, our list is specifically geared towards Indians and is curated by an Indian who understands the types of competitions that are most relevant to this audience. As a result, our list only includes contests that are truly relevant and necessary, rather than including any unnecessary or extraneous ones.
+          </p>
+          <div className="all-support-companies">
+            <div className="support-company diff-value">
+              <div className="text">Example Competitions</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Google KickStart</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Codeforces</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Microsoft Engage</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Top College Event</div>
+            </div>
+            <div className="support-company">
+              <div className="text">Codechef</div>
+            </div>
+            <div className="support-company">
+              <div className="text">TCS CodeVita</div>
+            </div>
+          </div>
+
+          <div className="data-filters">
+            <div className="toggle-filter" onClick={() => setShowFilters(!showFilters)}>
+              {
+                showFilters ? (
+                  <>
+                    <div className="text">Hide Filters</div>
+                    <ExpandLessIcon />
+                  </>
+                ) : (
+                  <>
+                    <div className="text">Show Filters</div>
+                    <ExpandMoreIcon />
+                  </>
+                )
+              }
+            </div>
+            <div className="sort" onClick={() => { setIsSortListOpen(!isSortListOpen) }}>
+              <FilterListIcon />
+            </div>
+            <div className={isSortListOpen ? "sort-type open" : "sort-type"}>
+              <div className="item" onClick={(e) => handleSort(e)}>By Contest Timing</div>
+              <div className="item" onClick={(e) => handleSort(e)}>By Registration</div>
+            </div>
+          </div>
+
+          {
+            showFilters ? (<Filters>{filters}</Filters>) : (<></>)
+          }
+
+          <Table>
+            <div className="row top-row">
+              <div className="hash">#</div>
+              <div className="platform">Platform</div>
+              <div className="contest">Competition</div>
+              <div className="date">Date and Time left</div>
+              <div className="duration">Duration</div>
+              <div className="registration">Registration</div>
+            </div>
+
+            {waitingForData ? (
+              <div className="linear-progess-holder">
+                <LinearProgress />
+              </div>
+            ) : (
+              <>
+                {list
+                  .filter(
+                    (item) =>
+                      timeLeft(
+                        false,
+                        item.competition_date,
+                        item.time_start_mins + item.duration_mins
+                      ) !== "Expired"
+                  )
+                  .map((item, index) => {
+                    if (filter == "All") {
+                      return (
+                        <CompetitionItem
+                          key={index}
+                          index={index}
+                          item={item}
+                        />
+                      );
+                    } else if (item.tags.includes(filter)) {
+                      return (
+                        <CompetitionItem
+                          key={index}
+                          index={index}
+                          item={item}
+                        />
+                      );
+                    }
+                  })}
+              </>
+            )}
+          </Table>
+        </div>
+        <SimpleFooter />
       </MobContainer>
+
       <Container>
         <CCHeader />
         <LeftMenu marked={"all-coding-competitions"} />
         <div className="cc-middle-content">
           <h1 className="main-heading">All Upcoming Coding Competitions</h1>
           <p className="heading-supporter">
-            There are several websites, such as CLIST and Unstop, that provide information about upcoming contests. However, our list is specifically geared towards Indians and is curated by an Indian who understands the types of competitions that are most relevant to this audience. As a result, our list only includes contests that are truly relevant and necessary, rather than including any unnecessary or extraneous ones. 
+            There are several websites, such as CLIST and Unstop, that provide information about upcoming contests. However, our list is specifically geared towards Indians and is curated by an Indian who understands the types of competitions that are most relevant to this audience. As a result, our list only includes contests that are truly relevant and necessary, rather than including any unnecessary or extraneous ones.
           </p>
           <div className="all-support-companies">
-          <div className="support-company diff-value">
+            <div className="support-company diff-value">
               <div className="text">Example Competitions</div>
             </div>
             <div className="support-company">
@@ -155,8 +261,8 @@ const CodingCompetitions = () => {
               <FilterListIcon />
               <div className={isSortListOpen ? "list open" : "list"}>
                 <ul>
-                  <li className="item">By Registration</li>
                   <li className="item">By Contest Timing</li>
+                  <li className="item">By Registration</li>
                 </ul>
               </div>
             </div>
@@ -213,7 +319,7 @@ const CodingCompetitions = () => {
           {
             waitingForData ? (<GiveSpace></GiveSpace>) : (<></>)
           }
-          <SimpleFooter/>
+          <SimpleFooter />
         </div>
         {/* <CCRightMenu/> */}
       </Container>
@@ -227,19 +333,130 @@ const GrandContainer = styled.div``;
 
 const MobContainer = styled.div`
   width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+  padding-top: 60px;
 
-  img {
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
+  .main-content{
+    padding: 10px 15px;
+
+    .main-heading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #292929;
+      margin-bottom: 5px;
+    }
+  
+    .heading-supporter {
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: #696168;
+  
+      a {
+        color: #18489f;
+        font-size: 0.75rem;
+        font-weight: 300;
+        margin-left: 0.25rem;
+      }
+    }
+
+    .all-support-companies{
+      display: flex;
+      flex-wrap: wrap;
+
+      .support-company{
+        padding: 2.5px 7.5px;
+        background-color: #e5e5e5;
+        border-radius: 5px;
+        margin: 0 5px 5px 0;
+  
+        .text{
+          font-size: 0.65rem;
+          font-weight: 200;
+        }
+      }
+
+      .diff-value{
+        background-color: #f6f6f6;
+        .text{
+          font-weight: 300;
+        }
+      }
+    }
+
+    .data-filters{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px 0 10px 0;
+      position: relative;
+
+      .toggle-filter {
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 500px;
+        font-weight: 300;
+        padding: 5px 15px;
+        font-size: 0.7rem;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+  
+  
+  
+        .text{
+          /* color: #ebdddd; */
+        }
+  
+        svg{
+          font-size: 1.15rem;
+          /* fill: #ebdddd; */
+          margin-right: -4px;
+        }
+      }
+
+      .sort{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 500px;
+        padding: 5px;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+
+        svg{
+          font-size: 1.15rem;
+        }
+      }
+
+      .sort-type{
+        position: absolute;
+        top: 35px;
+        right: -5px;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: none;
+        z-index: 100;
+        
+        .item{
+          font-size: 0.7rem;
+          padding: 2.5px 0;
+        }
+      }
+
+      .open{
+        display: inline;
+      }
+    }
   }
 
-  @media only screen and (min-width: 1099px) {
+
+  @media only screen and (min-width: 1100px) {
     display: none;
   }
 `;
@@ -363,6 +580,24 @@ const Filters = styled.div`
     background-color: #201f1f;
     color: #ebdddd;
   }
+
+  @media only screen and (max-width: 1100px) {
+    margin: 10px 0 10px 0;
+
+    .filter {
+      padding: 5px 15px;
+      font-size: 0.7rem;
+      margin: 0px 5px 5px 0px;
+    }
+
+    .selected {
+      /* background-color: #ded7d7;
+      color: #111; */
+      border-color: #201f1f;
+      background-color: #201f1f;
+      color: #ebdddd;
+    }
+  }
 `;
 
 const Sort = styled.div`
@@ -370,6 +605,10 @@ const Sort = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin: 10px 0;
+
+  svg{
+    font-size: 1.25rem;
+  }
 
   .box {
     padding: 5px 10px;
@@ -384,20 +623,23 @@ const Sort = styled.div`
     box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
     margin-right: 5px;
     cursor: pointer;
+    user-select: none;
 
     .list {
       padding: 5px;
       width: 100%;
       display: none;
       position: absolute;
-      top: 36px;
+      top: 40px;
       left: 0;
       justify-content: space-between;
       align-items: center;
       border-radius: 10px;
-      background-color: white;
+      border: 1px solid #b9afaf;
       box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+      background-color: white;
       z-index: 1;
+      user-select: none;
 
       .item {
         width: 100%;
@@ -405,6 +647,8 @@ const Sort = styled.div`
         font-weight: 300;
         margin: 0 7.5px;
         list-style-type: none;
+        padding: 5px 0;
+        user-select: none;
       }
       .item:hover {
         color: #18489f;
@@ -418,7 +662,8 @@ const Sort = styled.div`
     }
     .open {
       display: block;
-  }
+    }
+  } 
 `;
 
 const Table = styled.div`
@@ -444,7 +689,7 @@ const Table = styled.div`
     }
 
     .hash {
-      width: 5%;
+      width: 4%;
       padding: 7.5px 0;
       border-right: 1px solid #e0cece;
       /* background-color: yellow; */
@@ -453,7 +698,7 @@ const Table = styled.div`
     }
 
     .platform {
-      width: 10%;
+      width: 12%;
       padding: 7.5px 0;
       border-right: 1px solid #e0cece;
       /* background-color: grey; */
@@ -463,7 +708,7 @@ const Table = styled.div`
     }
 
     .contest {
-      width: 25%;
+      width: 24%;
       padding: 7.5px 0;
       border-right: 1px solid #e0cece;
       /* background-color: coral; */

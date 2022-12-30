@@ -56,4 +56,16 @@ const Container = styled.div`
             margin: 0 10px;
         }
     }
+
+    @media only screen and (max-width: 1100px) {
+        width: 90%;
+        margin: 20px auto 15px auto;
+        
+        .links, .company-info{
+            a, .text{
+                font-size: 0.55rem;
+                margin-top: 5px;
+            }
+        }
+    }
 `

@@ -11,8 +11,10 @@ import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
 import { companyFilters } from "../Components/companyFilters";
 import SimpleFooter from '../Components/SimpleFooter';
-import sampleImage from '../Images/sample2.png'
-import sampleImage2 from '../Images/sample3.png'
+import sampleImage from '../Images/sample2.png';
+import sampleImage2 from '../Images/sample3.png';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import MobileNavbar from "../Components/MobileNavbar";
 
 const SelectedProfiles = () => {
   const [allResumesData, setAllResumesData] = useState([]);
@@ -21,12 +23,14 @@ const SelectedProfiles = () => {
   const [imageValue, setImageValue] = useState(sampleImage);
   const [comapanyName, setComapanyName] = useState(companyFilters[0].text);
   const [showComapanyChange, setShowComapanyChange] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+
   console.log(companyFilters);
 
   useEffect(() => {
     document.title = "Selected Profiles - Algolisted";
   }, []);
-  
+
 
   // useEffect(() => {
   //   axios.get("https://algolisted.cyclic.app/resumes/all")
@@ -63,19 +67,70 @@ const SelectedProfiles = () => {
 
   return (
     <GrandContainer>
+      {
+        showImageModel ? (
+          <ShowImage onClick={() => setShowImageModel(false)} >
+            <img src={imageValue} alt="" />
+          </ShowImage>
+        ) : (<></>)
+      }
       <MobContainer>
-        We are still working on Responsive Version of the website, please view the site with
-        width more than 1100px, a standard laptop or tablet landscape.
-        <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+        <MobileNavbar />
+        <div className="main-content">
+          <h1 className="main-heading">Selected Profiles</h1>
+          <p className="heading-supporter">
+            Here you can see all the resumes that recently got shortlisted for a specific company. You can also read that person's interview experience with that particular company or fix a one-on-one google meet to ask queries. This can be helpful for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular company.
+          </p>
+
+          <div className="data-filters">
+            <div className="toggle-filter" onClick={() => setShowFilters(!showFilters)}>
+              {
+                showFilters ? (
+                  <>
+                    <div className="text">Hide Filters</div>
+                    <ExpandLessIcon />
+                  </>
+                ) : (
+                  <>
+                    <div className="text">Select Filter</div>
+                    <ExpandMoreIcon />
+                  </>
+                )
+              }
+            </div>
+          </div>
+
+          {
+            showFilters ? (<Filters>{filters}</Filters>) : (<></>)
+          }
+
+          <CompanyStatistics>
+            <div className="topic-heading">Company Statistics</div>
+            <div className="desc">
+              This new feature is coming soon and will provide graphical representations of information about the company you are targeting, including the median CGPA of recently hired employees and the required LeetCode rating for selection. We will have all the information you need.
+            </div>
+          </CompanyStatistics>
+
+          <TempDoc>
+            <div className="desc">
+              We are currently in need of more resumes to improve the accuracy of our machine learning models. If you are currently employed at a company or have access to someone else's resume, we would greatly appreciate it if you could provide it to us. Your help will allow us to continue working on our models and ensuring the best possible results.
+            </div>
+            <br />
+            <div className="desc">
+              Prototype Image of what we are planning to make -
+            </div>
+            <img src={sampleImage} alt="" onClick={() => { setImageValue(sampleImage); setShowImageModel(true); }} />
+            <img src={sampleImage2} alt="" onClick={() => { setImageValue(sampleImage2); setShowImageModel(true); }} />
+            <div className="small-gap"></div>
+            <br />
+            <a href="https://forms.gle/oLPuSXBuxCjLZjiYA" target={"_blank"} className='take-data'>
+              Add resume
+            </a>
+          </TempDoc>
+        </div>
+        <SimpleFooter />
       </MobContainer>
       <Container>
-        {
-          showImageModel ? (
-            <ShowImage onClick={() => setShowImageModel(false)} > 
-              <img src={imageValue} alt="" />
-            </ShowImage>
-          ):(<></>)
-        }
         <CCHeader />
         <LeftMenu marked={"selected-profiles"} />
         <div className="cc-middle-content">
@@ -150,8 +205,8 @@ const SelectedProfiles = () => {
               <div className="desc">
                 Prototype Image of what we are planning to make -
               </div>
-              <img src={sampleImage} alt="" onClick={() => {setImageValue(sampleImage); setShowImageModel(true);} }/>
-              <img src={sampleImage2} alt="" onClick={() => {setImageValue(sampleImage2); setShowImageModel(true);} }/>
+              <img src={sampleImage} alt="" onClick={() => { setImageValue(sampleImage); setShowImageModel(true); }} />
+              <img src={sampleImage2} alt="" onClick={() => { setImageValue(sampleImage2); setShowImageModel(true); }} />
               <div className="small-gap"></div>
               <br />
               <a href="https://forms.gle/oLPuSXBuxCjLZjiYA" target={"_blank"} className='take-data'>
@@ -214,22 +269,109 @@ const GrandContainer = styled.div`
 
 const MobContainer = styled.div`
   width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+  padding-top: 60px;
 
-  img{
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
+  .main-content{
+    padding: 10px 15px;
+
+    .main-heading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #292929;
+      margin-bottom: 5px;
+    }
+  
+    .heading-supporter {
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: #696168;
+  
+      a {
+        color: #18489f;
+        font-size: 0.75rem;
+        font-weight: 300;
+        margin-left: 0.25rem;
+      }
+    }
+
+    .data-filters{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px 0 10px 0;
+      position: relative;
+
+      .toggle-filter {
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 500px;
+        font-weight: 300;
+        padding: 5px 15px;
+        font-size: 0.7rem;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+  
+  
+  
+        .text{
+          /* color: #ebdddd; */
+        }
+  
+        svg{
+          font-size: 1.15rem;
+          /* fill: #ebdddd; */
+          margin-right: -4px;
+        }
+      }
+
+      .sort{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 500px;
+        padding: 5px;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+
+        svg{
+          font-size: 1.15rem;
+        }
+      }
+
+      .sort-type{
+        position: absolute;
+        top: 35px;
+        right: -5px;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: none;
+        z-index: 100;
+        
+        .item{
+          font-size: 0.7rem;
+          padding: 2.5px 0;
+        }
+      }
+
+      .open{
+        display: inline;
+      }
+    }
   }
 
-  @media only screen and (min-width: 1099px){
+
+  @media only screen and (min-width: 1100px) {
     display: none;
   }
-`
+`;
 
 const Container = styled.div`
     @media only screen and (max-width: 1099px){
@@ -338,6 +480,8 @@ const Filters = styled.div`
     border-radius: 500px;
     margin: 0px 5px 5px 0px;
     font-weight: 300;
+	text-decoration: none;
+	color: inherit;
 
     &:hover {
       border-color: #201f1f;
@@ -355,7 +499,25 @@ const Filters = styled.div`
     background-color: #201f1f;
     color: #ebdddd;
   }
-`
+
+  @media only screen and (max-width: 1100px) {
+    margin: 10px 0 10px 0;
+
+    .filter {
+      padding: 5px 15px;
+      font-size: 0.7rem;
+      margin: 0px 5px 5px 0px;
+    }
+
+    .selected {
+      /* background-color: #ded7d7;
+      color: #111; */
+      border-color: #201f1f;
+      background-color: #201f1f;
+      color: #ebdddd;
+    }
+  }
+`;
 const SearchHelper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -573,6 +735,47 @@ const CompanyStatistics = styled.div`
     @media only screen and (max-width: 1370px){
       width: calc(100% - 10px);
     }
+
+    @media only screen and (max-width: 1100px){
+      width: 100%;
+      border-radius: 5px;
+      background-color: #dc7d7d;
+      margin: 15px 0 5px 0;
+      padding: 10px;
+
+      img{
+        margin-top: 15px;
+        /* width: 100%; */
+        height: 100px;
+        background-color: white;
+        border-radius: 5px;
+        margin-right: 5px;
+      }
+
+      .topic-heading{ 
+        font-weight: 500;
+        font-size: 0.85rem;
+        margin-bottom: 7.5px;
+        color: white;
+      }
+
+      .desc{ 
+        font-weight: 200;
+        font-size: 0.7rem;
+        color: white;
+      }
+
+      .take-data{
+        font-size: 0.7rem;
+        text-decoration: none;
+        color: inherit;
+        padding: 7.5px 12px;
+        border-radius: 100px;
+        background-color: #d8c2c2;
+        letter-spacing: 0.06rem;
+        color: #000;
+      }
+    }
 `
 
 const TempDoc = styled.div`
@@ -581,7 +784,6 @@ const TempDoc = styled.div`
     /* background-color: #dc7d7d; */
     margin: 20px 0 10px 0;
     /* padding: 15px; */
-
     img{
       margin-top: 15px;
       /* width: 100%; */
@@ -593,18 +795,15 @@ const TempDoc = styled.div`
       margin-right: 5px;
       cursor: pointer;
     }
-
     .topic-heading{ 
       font-weight: 500;
       font-size: 0.95rem;
       margin-bottom: 7.5px;
     }
-
     .desc{ 
       font-weight: 200;
       font-size: 0.85rem;
     }
-
     .take-data {
       width: 400px;
       width: 80%;
@@ -620,7 +819,6 @@ const TempDoc = styled.div`
       color: inherit;
       text-decoration: none;
       
-
       &:hover {
         border-color: #201f1f;
         background-color: #201f1f;
@@ -629,9 +827,58 @@ const TempDoc = styled.div`
         cursor: pointer;
       }
     }
-
     @media only screen and (max-width: 1370px){
       width: calc(100% - 10px);
+    }
+
+    @media only screen and (max-width: 1100px){
+      width: 100%;
+      border-radius: 5px;
+      /* background-color: #dc7d7d; */
+      margin: 10px 0 10px 0;
+      padding: 5px;
+
+      img{
+        margin-top: 15px;
+        /* width: 100%; */
+        height: 60px;
+        background-color: #e5ebec;
+        padding: 5px;
+        border: 1px solid #b9b1b1;
+        border-radius: 5px;
+        margin-right: 5px;
+        cursor: pointer;
+      }
+
+      .desc{ 
+        font-weight: 200;
+        font-size: 0.7rem;
+      }
+
+      .take-data {
+        width: 400px;
+        width: 60%;
+        height: 30.5px;
+        display: grid;
+        place-items: center;
+        /* padding: 7.5px 115px; */
+        font-size: 0.75rem;
+        border: 1px solid #b9afaf;
+        border-radius: 500px;
+        margin: auto;
+        font-weight: 300;
+        color: inherit;
+        text-decoration: none;
+        
+
+        &:hover {
+          border-color: #201f1f;
+          background-color: #201f1f;
+          color: #ebdddd;
+          transition-duration: 250ms;
+          cursor: pointer;
+        }
+      }
     }
 `
 
@@ -648,6 +895,7 @@ const ShowImage = styled.div`
   place-items: center;
 
   img{
-    height: 70vh;
+    max-height: 70vh;
+    max-width: 90vw;
   }
 `

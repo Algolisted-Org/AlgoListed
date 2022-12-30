@@ -43,10 +43,10 @@ const CCHeader = () => {
       </div>
 
       <div className="right-icons">
-        <div className="donate-btn">
+        <a href='https://www.buymeacoffee.com/nayak' target={"_blank"} className="donate-btn">
           {/* <div className="icon"><FavoriteBorderIcon/></div> */}
           <div className="text">Buy me a coffee</div>
-        </div>
+        </a>
         <div className="icon-box">
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
             <GitHubIcon/>
@@ -206,7 +206,9 @@ const Container = styled.div`
         display: flex;
         align-items: center;
         padding: 10px;
+        user-select: none;
         /* background-color: #e0ecc7; */
+        text-decoration: none;
 
         svg{
           font-size: 20px;
@@ -218,7 +220,11 @@ const Container = styled.div`
         .text{
           font-size: 0.7rem;
         }
-         
+
+        &:hover{
+          background-color: #f2ecf9;
+          transition-duration: 250ms;
+        }         
       }
 
       .clicked{

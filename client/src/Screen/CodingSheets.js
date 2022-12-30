@@ -8,16 +8,20 @@ import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
 import { useParams } from 'react-router-dom';
 import SimpleFooter from "../Components/SimpleFooter";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import MobileNavbar from "../Components/MobileNavbar";
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
 	const [dataLoading, setDataLoading] = useState(true);
 	const [completedCount, setCompletedCount] = useState(0);
-	
+	const [showFilters, setShowFilters] = useState(false);
+
 	const params = useParams();
-    
+
 	const { sheetname } = params;
-    // console.log(sheetname);
+	// console.log(sheetname);
 
 	document.title = `Coding Sheets - Algolisted`;
 
@@ -79,13 +83,91 @@ const CodingSheets = () => {
 	return (
 		<GrandContainer>
 			<MobContainer>
-				We are still working on Responsive Version of the website, please view
-				the site with width more than 1100px, a standard laptop or tablet
-				landscape.
-				<img
-					src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif"
-					alt=""
-				/>
+				<MobileNavbar />
+				<div className="main-content">
+					<h1 className="main-heading">Coding Sheets</h1>
+					<p className="heading-supporter">
+						Coding Sheets is a website that offers a range of software engineering practice sheets to select from in a single location. The discussion section, which will be available soon, will provide support and guidance while working on a specific sheet. Another upcoming feature will be a comprehensive analysis of each sheet, similar to the one found on the Monkeytype website.
+					</p>
+
+					<div className="data-filters">
+						<div className="toggle-filter" onClick={() => setShowFilters(!showFilters)}>
+							{
+								showFilters ? (
+									<>
+										<div className="text">Hide Sheets</div>
+										<ExpandLessIcon />
+									</>
+								) : (
+									<>
+										<div className="text">Select Sheet</div>
+										<ExpandMoreIcon />
+									</>
+								)
+							}
+						</div>
+					</div>
+
+					{
+						showFilters ? (<Filters>{filters}</Filters>) : (<></>)
+					}
+
+					<div className="mob-table">
+						{dataLoading ? (
+							<>
+								<LinearProgress />
+							</>
+						) : (
+							data.map((item, index) => {
+								return (
+									<div
+										key={item.name}
+										className={
+											item.completed ? "link-row done-row" : "link-row"
+										}
+									>
+										{" "}
+										<div className="link-row-left">
+											<div className="count">{index + 1}</div>
+											<div className="main-row-content">
+												<a
+													href={item.quesLink}
+													target="_blank"
+													rel="noreferrer"
+												>
+													{item.quesName}
+												</a>
+												<div className="tags">
+													{item.specialTag !== "-" ? (
+														<div className="tag special-tag">
+															{item.specialTag}
+														</div>
+													) : (
+														<></>
+													)}
+													{item.tags.map((tagItem, tagIndex) => {
+														return (
+															<div className="tag" key={tagIndex}>
+																{tagItem}
+															</div>
+														);
+													})}
+												</div>
+											</div>
+										</div>
+										<div className="done-btn">
+											<CheckCircleOutlineIcon
+												onClick={() => toggleCompleted(index)}
+											/>
+										</div>
+									</div>
+								);
+							})
+						)}
+					</div>
+
+				</div>
+				<SimpleFooter />
 			</MobContainer>
 			<Container>
 				<CCHeader />
@@ -206,23 +288,217 @@ export default CodingSheets;
 const GrandContainer = styled.div``;
 
 const MobContainer = styled.div`
-	width: 100vw;
-	padding: 40px;
-	text-align: center;
-	font-size: 2rem;
-	font-weight: 500;
+  width: 100vw;
+  padding-top: 60px;
 
-	img {
-		width: calc(100% - 80px);
-		margin: 40px;
+  .main-content{
+    padding: 10px 15px;
+
+    .main-heading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #292929;
+      margin-bottom: 5px;
+    }
+  
+    .heading-supporter {
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: #696168;
+  
+      a {
+        color: #18489f;
+        font-size: 0.75rem;
+        font-weight: 300;
+        margin-left: 0.25rem;
+      }
+    }
+
+    .data-filters{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px 0 10px 0;
+      position: relative;
+
+      .toggle-filter {
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 500px;
+        font-weight: 300;
+        padding: 5px 15px;
+        font-size: 0.7rem;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+  
+  
+  
+        .text{
+          /* color: #ebdddd; */
+        }
+  
+        svg{
+          font-size: 1.15rem;
+          /* fill: #ebdddd; */
+          margin-right: -4px;
+        }
+      }
+
+      .sort{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 500px;
+        padding: 5px;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+
+        svg{
+          font-size: 1.15rem;
+        }
+      }
+
+      .sort-type{
+        position: absolute;
+        top: 35px;
+        right: -5px;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: none;
+        z-index: 100;
+        
+        .item{
+          font-size: 0.7rem;
+          padding: 2.5px 0;
+        }
+      }
+
+      .open{
+        display: inline;
+      }
+    }
+
+	.mob-table {
+		margin: 15px 0;
+		width: 100%;
+		/* background-color: #fbf7f7; */
+		border: 1px solid #d1d5db;
 		border-radius: 5px;
-		display: block;
-	}
+		/* padding: 0 15px; */
+		display: flex;
+		flex-direction: column;
+		background-color: white;
+		border-bottom-color: transparent;
 
-	@media only screen and (min-width: 1099px) {
-		display: none;
+		.link-row {
+			padding: 20px 20px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			border-bottom: 1px solid #d1d5db;
+
+			.link-row-left {
+				display: flex;
+				align-items: center;
+
+				.count {
+					font-size: 1rem;
+					font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
+						BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+						Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+						Segoe UI Symbol, Noto Color Emoji;
+					margin-right: 20px;
+					font-weight: 500;
+				}
+
+				.main-row-content {
+					a {
+						font-size: 0.85rem;
+						font-weight: 500;
+						text-decoration: none;
+						/* color: inherit; */
+
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+
+					.tags {
+						margin: 0;
+						margin-top: 5px;
+						display: flex;
+						flex-wrap: wrap;
+
+						.tag {
+							background-color: #f3f4f7;
+							color: inherit;
+							padding: 2.5px 5px;
+							border-radius: 100px;
+							font-size: 0.6rem;
+							margin-right: 5px;
+							border: 1px solid #cac3c3;
+							margin-bottom: 2.5px;
+						}
+
+						.special-tag {
+							/* background-color: #ffeac2; */
+							color: inherit;
+							/* background-color: black; */
+							/* color: white; */
+							font-weight: 400;
+							border: 1px solid #a99c9c;
+						}
+					}
+				}
+			}
+
+			.done-btn {
+				.MuiSvgIcon-root {
+					fill: #b5a6a6;
+					font-size: 1.75rem;
+
+					&:hover {
+						transition-duration: 250ms;
+						fill: orange;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+
+		.done-row {
+			background-color: #dcf8eb;
+
+			.done-btn {
+				.MuiSvgIcon-root {
+					fill: orange;
+					font-size: 1.75rem;
+				}
+			}
+		}
+
+		.no-bottom-border {
+			border-bottom: 1px solid transparent;
+		}
 	}
+  }
+
+
+  @media only screen and (min-width: 1100px) {
+    display: none;
+  }
 `;
+
 
 const Container = styled.div`
 	@media only screen and (max-width: 1099px) {
@@ -393,37 +669,56 @@ const Container = styled.div`
 		}
 	}
 `;
+
 const Filters = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	margin: 80px 0 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 80px 0 10px 0;
 
-	.filter {
-		padding: 7.5px 15px;
-		font-size: 0.8rem;
-		border: 1px solid #b9afaf;
-		border-radius: 500px;
-		margin: 0px 5px 5px 0px;
-		font-weight: 300;
-		text-decoration: none;
-		color: inherit;
+  .filter {
+    padding: 7.5px 15px;
+    font-size: 0.8rem;
+    border: 1px solid #b9afaf;
+    border-radius: 500px;
+    margin: 0px 5px 5px 0px;
+    font-weight: 300;
+	text-decoration: none;
+	color: inherit;
 
-		&:hover {
-			border-color: #201f1f;
-			background-color: #201f1f;
-			color: #ebdddd;
-			transition-duration: 250ms;
-			cursor: pointer;
-		}
-	}
+    &:hover {
+      border-color: #201f1f;
+      background-color: #201f1f;
+      color: #ebdddd;
+      transition-duration: 250ms;
+      cursor: pointer;
+    }
+  }
 
-	.selected {
-		/* background-color: #ded7d7;
+  .selected {
+    /* background-color: #ded7d7;
     color: #111; */
-		border-color: #201f1f;
-		background-color: #201f1f;
-		color: #ebdddd;
-	}
+    border-color: #201f1f;
+    background-color: #201f1f;
+    color: #ebdddd;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    margin: 10px 0 10px 0;
+
+    .filter {
+      padding: 5px 15px;
+      font-size: 0.7rem;
+      margin: 0px 5px 5px 0px;
+    }
+
+    .selected {
+      /* background-color: #ded7d7;
+      color: #111; */
+      border-color: #201f1f;
+      background-color: #201f1f;
+      color: #ebdddd;
+    }
+  }
 `;
 
 const Progress = styled.div`

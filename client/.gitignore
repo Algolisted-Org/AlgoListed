@@ -6,6 +6,10 @@
 .pnp.js
 /build
 
+.firebaserc
+firebaserc
+firebase.json
+
 # misc
 .DS_Store
 .env.local

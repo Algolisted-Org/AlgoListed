@@ -8,10 +8,14 @@ import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
 import { resourcesFilters } from '../Components/resourcesFilters'
 import SimpleFooter from '../Components/SimpleFooter';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import MobileNavbar from "../Components/MobileNavbar";
 
 const Resources = () => {
   const [allResources, setAllResources] = useState([]);
   const [filter, setFilter] = useState("All Resources");
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     document.title = "Coding Resources - Algolisted";
@@ -47,10 +51,64 @@ const Resources = () => {
   return (
     <GrandContainer>
       <MobContainer>
-        We are still working on Responsive Version of the website, please view the site with
-        width more than 1100px, a standard laptop or tablet landscape.
-        <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+        <MobileNavbar />
+        <div className="main-content">
+          <h1 className="main-heading">Coding Resources</h1>
+          <p className="heading-supporter">
+            There is a wealth of disorganized notes and other resources available on websites like LinkedIn and Leetcode, but they can be difficult to find because they are not listed in a organized manner. To make your life easier, we have compiled all of these resources by topic in a single location.
+          </p>
+
+          <div className="data-filters">
+            <div className="toggle-filter" onClick={() => setShowFilters(!showFilters)}>
+              {
+                showFilters ? (
+                  <>
+                    <div className="text">Hide Filters</div>
+                    <ExpandLessIcon />
+                  </>
+                ) : (
+                  <>
+                    <div className="text">Show Filters</div>
+                    <ExpandMoreIcon />
+                  </>
+                )
+              }
+            </div>
+            <div className="sort">
+              <FilterListIcon />
+            </div>
+          </div>
+
+          {
+            showFilters ? (<Filters>{filters}</Filters>) : (<></>)
+          }
+
+          <div className="resources-container">
+            {
+              allResources.map((item, index) => {
+                if (filter == "All Resources" || item.mainTag == filter) {
+                  return (
+                    <div className="resource">
+                      <div className="img-container">
+                        <img src={item.imgLink} alt="" />
+                      </div>
+                      <a href={item.link} target={"_blank"} className="title">{item.title}</a>
+                      <div className="short-desc">{item.description}</div>
+                      <div className="tags">
+                        <div className="main-tag">{item.mainTag}</div>
+                        <div className="tag">{item.type}</div>
+                      </div>
+                    </div>
+                  )
+                }
+                else return (<></>)
+              })
+            }
+          </div>
+        </div>
+        <SimpleFooter />
       </MobContainer>
+
       <Container>
         <CCHeader />
         <LeftMenu marked={"resources"} />
@@ -77,7 +135,7 @@ const Resources = () => {
             <InfoIcon style={{ fill: '#333' }} />
           </Sort>
 
-          
+
 
           {
             allResources.length === 0 ? (
@@ -109,7 +167,7 @@ const Resources = () => {
               </div>
             )
           }
-          <SimpleFooter/>
+          <SimpleFooter />
         </div>
       </Container>
     </GrandContainer>
@@ -123,22 +181,188 @@ const GrandContainer = styled.div`
 
 const MobContainer = styled.div`
   width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+  padding-top: 60px;
 
-  img{
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
+  .main-content{
+    padding: 10px 15px;
+
+    .main-heading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #292929;
+      margin-bottom: 5px;
+    }
+  
+    .heading-supporter {
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: #696168;
+  
+      a {
+        color: #18489f;
+        font-size: 0.75rem;
+        font-weight: 300;
+        margin-left: 0.25rem;
+      }
+    }
+
+    .data-filters{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px 0 10px 0;
+      position: relative;
+
+      .toggle-filter {
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 500px;
+        font-weight: 300;
+        padding: 5px 15px;
+        font-size: 0.7rem;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+  
+  
+  
+        .text{
+          /* color: #ebdddd; */
+        }
+  
+        svg{
+          font-size: 1.15rem;
+          /* fill: #ebdddd; */
+          margin-right: -4px;
+        }
+      }
+
+      .sort{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 500px;
+        padding: 5px;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+
+        svg{
+          font-size: 1.15rem;
+        }
+      }
+
+      .sort-type{
+        position: absolute;
+        top: 35px;
+        right: -5px;
+        background-color: white;
+        border: 1px solid rgb(185, 175, 175);
+        box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: none;
+        z-index: 100;
+        
+        .item{
+          font-size: 0.7rem;
+          padding: 2.5px 0;
+        }
+      }
+
+      .open{
+        display: inline;
+      }
+    }
+
+    .resources-container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+
+        .resource{
+          width: 90%;
+          max-width: 400px;
+          /* background-color: white; */
+          border-top: 1px solid rgb(232, 232, 232);
+          padding-top: 20px;
+          margin: 10px 10px 30px 10px;
+
+          .img-container{
+            width: 100%;
+            max-height : 200px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            overflow: hidden;
+            border-radius: 10px;
+
+            img{
+              width: 100%;
+              display: block;
+              border-radius: 10px;
+            }
+          }
+
+          .title{
+              font-size: 0.85rem;
+              font-weight: 500;
+              color: #374151;
+              cursor: pointer;
+              text-decoration: none;
+              width: 100%;
+              
+              &:hover{
+                color: cornflowerblue;
+                /* transition-duration: 150ms; */
+              }
+          }
+
+
+          .short-desc{
+            font-size: 0.75rem;
+            font-weight: 200;
+            letter-spacing: 0.06rem;
+          }
+
+          .tags{
+              display: flex;
+              flex-wrap: wrap;
+              margin-top: 10px;
+
+              .main-tag{
+                  font-size: 0.7rem;
+                  padding: 2.5px 12.5px;
+                  border-radius: 100px;
+                  background-color: #f3e8ff;
+                  color: rgb(107, 33, 168);
+                  font-weight: 400;
+                  margin: 5px 5px 0 0;
+              }
+
+              .tag{
+                  font-size: 0.7rem;
+                  padding: 2.5px 12.5px;
+                  border-radius: 100px;
+                  background-color: #eeeeee;
+                  font-weight: 300;
+                  margin: 5px 5px 0 0;
+              }
+          }
+        }
+      }
   }
 
-  @media only screen and (min-width: 1099px){
+
+  @media only screen and (min-width: 1100px) {
     display: none;
   }
-`
+`;
 
 const Container = styled.div`
     @media only screen and (max-width: 1099px){
@@ -224,7 +448,7 @@ const Container = styled.div`
       .resources-container{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         width: 100%;
         margin-top: 10px;
 
@@ -234,11 +458,11 @@ const Container = styled.div`
           /* background-color: white; */
           border-top: 1px solid rgb(232, 232, 232);
           padding-top: 20px;
-          margin: 10px 0 30px 0;
+          margin: 10px 10px 30px 10px;
 
           .img-container{
             width: 100%;
-            height : 166px;
+            height : 126px;
             display: flex;
             align-items: center;
             margin-bottom: 10px;
@@ -330,6 +554,24 @@ const Filters = styled.div`
     border-color: #201f1f;
     background-color: #201f1f;
     color: #ebdddd;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    margin: 10px 0 10px 0;
+
+    .filter {
+      padding: 5px 15px;
+      font-size: 0.7rem;
+      margin: 0px 5px 5px 0px;
+    }
+
+    .selected {
+      /* background-color: #ded7d7;
+      color: #111; */
+      border-color: #201f1f;
+      background-color: #201f1f;
+      color: #ebdddd;
+    }
   }
 `;
 
