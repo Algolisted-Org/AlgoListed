@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import BlogContent from '../Components/BlogContent';
 import RightMenu from '../Components/RightMenu'
+import BlogContentMD from '../Components/BlogContentMD';
 
 const BlogPage = () => {
     const [constFooter, setConstFooter] = useState(!true);
@@ -25,7 +26,8 @@ const BlogPage = () => {
                 <CCHeader /> 
                 <LeftMenu marked={"all-blogs"} />
                 <div className="blogs-main">
-                    <BlogContent blogid={blogid} />
+                    {/* <BlogContent blogid={blogid} /> */}
+                    <BlogContentMD blogid={blogid} />
                     <RightMenu blogid={blogid} />
                 </div>
 

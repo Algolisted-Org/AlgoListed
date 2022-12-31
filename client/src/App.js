@@ -23,17 +23,18 @@ import SelectedProfiles from './Screen/SelectedProfiles';
 import CodingSheets from './Screen/CodingSheets';
 import AddContentCoreOnly from './Screen/AddContentCoreOnly';
 import LandingPage2 from './Screen/LandingPage2';
+import Readme from './Screen/Readme';
 
 
 
 const App = () => {
-  console.log("hi");
-  const myfunc = () => {
-    console.clear();
-  }
-  useEffect(() => {
-    myfunc();
-  }, [console]);
+  // console.log("hi");
+  // const myfunc = () => {
+  //   console.clear();
+  // }
+  // useEffect(() => {
+  //   myfunc();
+  // }, [console]);
 
   return (
     <div>
@@ -56,6 +57,7 @@ const App = () => {
         <Route path="/coding-sheets" element={<CodingSheets/>} />
         <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
+        <Route path="/readme" element={<Readme/>} />
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
       </Routes>
