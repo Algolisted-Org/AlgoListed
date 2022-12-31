@@ -31,7 +31,7 @@ const BlogResources = ({ ResourceType }) => {
 
 		// save the "completed" status of the sheet in the local storage
 		localStorage.setItem(
-			`codingSheet-${updatedData[index]._id}`,
+			`blogResource-${updatedData[index]._id}`,
 			updatedData[index].completed
 		);
 	};
@@ -40,11 +40,12 @@ const BlogResources = ({ ResourceType }) => {
     useEffect(() => {
         // retrieve the data from the server
         axios
-            .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
+            // .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
+            .get(`https://algolisted.cyclic.app/blog-resources/blog/backend-with-node-js-for-beginners`)
             .then((res) => {
                 // retrieve the "completed" status of each sheet from the local storage
                 const updatedData = res.data.map((sheet) => {
-                    const completed = localStorage.getItem(`codingSheet-${sheet._id}`);
+                    const completed = localStorage.getItem(`blogResource-${sheet._id}`);
                     return {
                         ...sheet,
                         completed: completed === "true",
@@ -60,6 +61,8 @@ const BlogResources = ({ ResourceType }) => {
             })
             .catch((err) => console.log(err));
     }, [sheetname]);
+    
+    console.log(data);
 
     const contentInformation = [
         {
@@ -71,9 +74,6 @@ const BlogResources = ({ ResourceType }) => {
             "text": "This section includes a collection of resources, such as source codes and links to other relevant blogs, contributed by experienced individuals on the topic. These resources can be useful for those looking to learn more about the topic."
         }
     ]
-
-
-
 
     return (
         <Container>
@@ -221,11 +221,11 @@ const BlogResources = ({ ResourceType }) => {
                                         <div className="count">{index + 1}</div>
                                         <div className="main-row-content">
                                             <a
-                                                href={item.quesLink}
+                                                href={item.resourceLink}
                                                 target="_blank"
                                                 rel="noreferrer"
                                             >
-                                                {item.quesName}
+                                                {item.resourceName}
                                             </a>
                                             <div className="tags">
                                                 {item.specialTag !== "-" ? (
@@ -476,8 +476,5 @@ const Container = styled.div`
             }
             
 		}
-
-
-        
     }
 `

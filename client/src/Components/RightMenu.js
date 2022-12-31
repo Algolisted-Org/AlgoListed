@@ -3,9 +3,24 @@ import styled from 'styled-components'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import data from './allBlogsDatabase.json'
 
-const RightMenu = ({blogid}) => {
+const RightMenu = ({ ResourceType, blogid }) => {
   console.log(blogid);
   console.log(data[blogid]);
+
+  const contentInformation = [
+    {
+        "name": "Similar Questions",
+        "text": "Blog contains similar questions to be solved at bottom of the page. The questions are generally taken from highly rated leetcode blogs, linkedin or contributed by our contributors.",
+        "type": "Solve",
+        "scroll_text": "Show All Problems, Related to this blog",
+    },
+    {
+        "name": "Relevant resources for the blog",
+        "text": "This section includes a collection of resources, such as source codes and links to other relevant blogs, contributed by experienced individuals on the topic.",
+        "type": "Resource",
+        "scroll_text": "Show All Resources, Related to this blog",
+    }
+]
 
   return (
     <Container>
@@ -30,21 +45,20 @@ const RightMenu = ({blogid}) => {
       </div>
       
       <div className="similar-questions">
-        <div className="top-title">Similar Questions</div>
+        <div className="top-title">{contentInformation[ResourceType].name}</div>
         <div className="top-desc">
-          Blog contains similar questions to be solved at bottom of the page. The questions are generally taken from
-          highly rated leetcode blogs, linkedin or contributed by our contributors.
+          {contentInformation[ResourceType].text}
         </div>
         <div className="question">
-          <div className="text">Solve : <a href="/">Number of Islands</a></div>
+          <div className="text">{contentInformation[ResourceType].type} : <a href="/">Number of Islands</a></div>
         </div>
         <div className="question">
-          <div className="text">Solve : <a href="/">Course Schedule I</a></div>
+          <div className="text">{contentInformation[ResourceType].type} : <a href="/">Course Schedule I</a></div>
         </div>
         <div className="question">
-          <div className="text">Solve : <a href="/">Rotting Oranges</a></div>
+          <div className="text">{contentInformation[ResourceType].type} : <a href="/">Rotting Oranges</a></div>
         </div>
-        <div className="show-all-problems">Show All Problems, Related to this blog</div>
+        <div className="show-all-problems">{contentInformation[ResourceType].scroll_text}</div>
       </div>
       {/* <div className="subscribe-box">
         <div className="top-title">Subscribe to Algorithmist,</div>

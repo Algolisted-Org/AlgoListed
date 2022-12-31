@@ -8,6 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 const BlogContent = ({ blogid }) => {
+    console.log("I am Atanu Nayak");
     console.log(blogid);
     console.log(data[blogid]);
     const [ShowReply, setShowReply] = useState(false);

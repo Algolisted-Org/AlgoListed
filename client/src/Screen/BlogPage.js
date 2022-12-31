@@ -18,6 +18,8 @@ const BlogPage = () => {
 
     console.log(blogname, blogid);
 
+    const ResourceType = 1;
+
     return (
         <GrandContainer>
             <MobContainer>
@@ -30,7 +32,7 @@ const BlogPage = () => {
                 <div className="blogs-main">
                     {/* <BlogContent blogid={blogid} /> */}
                     <BlogContentMD blogid={blogid} />
-                    <RightMenu blogid={blogid} />
+                    <RightMenu blogid={blogid} ResourceType={ResourceType}/>
                 </div>
 
                 {/* <BlogsMain blogname={blogname}/> */}
