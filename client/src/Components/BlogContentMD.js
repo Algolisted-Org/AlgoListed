@@ -6,6 +6,7 @@ import data from './mdfileDB.json'
 import Avatar from '@material-ui/core/Avatar';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Markdown from 'markdown-to-jsx';
+import BlogResources from './BlogResources';
 
 const BlogContentMD = ({ blogid }) => {
     const [ShowReply, setShowReply] = useState(false);
@@ -14,8 +15,8 @@ const BlogContentMD = ({ blogid }) => {
     
     const file_name = blogData.file_name;
     
-    console.log(blogid);
-    console.log(data[blogid]);
+    // console.log(blogid);
+    // console.log(data[blogid]);
 
     useEffect(() => {
         import(`../MarkdownFiles/${file_name}`)
@@ -27,7 +28,7 @@ const BlogContentMD = ({ blogid }) => {
             })
             .catch(err => console.log(err));
     });
-    console.log(post);
+    // console.log(post);
 
     return (
         <Container>
@@ -51,133 +52,8 @@ const BlogContentMD = ({ blogid }) => {
                     </Markdown>
                 </div>
 
-                <div className="page-section">
-                    <div className="new-part-heading">Beginner to medium level Problems</div>
-                    <div className="para-1">
-                        These question are sorted in a really nice manner. It helps you to start solving the problems from the very basic and then takes you to medium level problems. Here we clubbed the resources we have got from leetcode blogs, codeforces blogs and the knowlege from the contributors of the blog.
-                    </div>
-                    <div className="message">
-                        <div className="text">
-                            Want add a question link of this topic or point out any wrong info of tags. <a href="/">click here</a>
-                        </div>
-                    </div>
-                    <div className="table">
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">1</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">BFS Implementaion</a>
-                                    <div className="tags">
-                                        <div className="tag">GeeksforGeeks</div>
-                                        <div className="tag">Implementation</div>
-                                        <div className="tag">TCS Ninjs</div>
-                                        <div className="tag">Wipro</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon className='done' />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">2</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">01 Matrix</a>
-                                    <div className="tags">
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Atlassian</div>
-                                        <div className="tag">Google</div>
-                                        <div className="tag">TCS Ninja</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon className='done' />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">3</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">Number of Islands</a>
-                                    <div className="tags">
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Bloomberg</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">4</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">Rotting Oranges</a>
-                                    <div className="tags">
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Amazon</div>
-                                        <div className="tag">Uber</div>
-                                        <div className="tag">Microsoft Engage</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">5</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">Course Schedule I</a>
-                                    <div className="tags">
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Salesforce</div>
-                                        <div className="tag">Twitter</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
-                        <div className="link-row">
-                            <div className="link-row-left">
-                                <div className="count">6</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">Flood Fill</a>
-                                    <div className="tags">
-                                        <div className="tag">Leetcode</div>
-                                        <div className="tag">Uber</div>
-                                        <div className="tag">Microsoft</div>
-                                        <div className="tag">Google</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
-                        <div className="link-row no-bottom-border">
-                            <div className="link-row-left">
-                                <div className="count">7</div>
-                                <div className="main-row-content">
-                                    <a href="https://leetcode.com/problems/friend-circles/">King Escape</a>
-                                    <div className="tags">
-                                        <div className="tag">Codeforces</div>
-                                        <div className="tag">Lyft Level 5 Challenge</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="done-btn">
-                                <CheckCircleOutlineIcon />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <BlogResources ResourceType={1}/>
+
                 <div className="page-section">
                     <div className="new-part-heading">Ask doubts to community</div>
                     <div className="para-1">
@@ -252,17 +128,6 @@ const Container = styled.div`
         padding: 80px 120px 50px 120px;
         overflow: hidden;
 
-        iframe{
-            z-index: -100;
-            background-color: transparent;
-            border: none;
-            /* width: 100%; */
-            width: 660px;
-            /* height: 100%; */
-            /* height: 9100px; */
-            overflow-y: hidden;
-        }
-
         @media only screen and (max-width: 1380px){
             padding: 80px 30px 30px 50px;
             width: 720px;
@@ -272,11 +137,22 @@ const Container = styled.div`
             width : calc(100vw - 200px);
             padding: 80px 120px 50px 120px;
         }
+
+        @media only screen and (max-width: 1100px){
+            width: 100%;
+            padding: 80px 30px 50px 30px;
+            overflow: hidden;
+        }
         
         .main-heading{
             font-size: 1.65rem;
             font-weight: 600;
             color: #292929;
+
+            @media only screen and (max-width: 1100px){
+                font-size: 1.25rem;
+                font-weight: 500;
+            }
         }
 
         .heading-supporter{
@@ -284,6 +160,11 @@ const Container = styled.div`
             margin-bottom: 10px;
             font-weight: 400;
             color: #696168;
+
+            @media only screen and (max-width: 1100px){
+                font-size: 0.85rem;
+                font-weight: 400;
+            }
         }
 
         .theory-blog-part{
@@ -326,11 +207,15 @@ const Container = styled.div`
                 padding: 5px 15px;
                 border-radius: 5px;
                 margin-right: 5px;
-                background-color: #8a89d1;
-                color: white;
+                margin-bottom: 5px;
+                background-color: #eef0f3;
+                /* color: white; */
+            }
+
+            @media only screen and (max-width: 1100px){
+                margin-bottom: -30px;
             }
         }
-
 
         .gap-15px-tb{
             height: 15px;
@@ -345,9 +230,11 @@ const Container = styled.div`
         }
 
         .para-1{
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 200;
             margin-bottom: 5px;
+            letter-spacing: 0.05rem;
+            line-height: 1.45rem;
         }
 
         .para-2{
@@ -427,21 +314,60 @@ const Container = styled.div`
         .mark-down-file-content{
             font-weight: 200;
             font-size: 0.9rem;
+            letter-spacing: 0.05rem;
 
             img{
                 width: 100%;
-                margin: 5px 0;
+                margin: 15px 0;
+                border-radius: 5px;
                 display: block;
             }
 
             .small-img{
                 width: 45%;
                 min-width: 200px;
+
+                @media only screen and (max-width: 1100px){
+                    width: 100%;
+                }
             }
 
             h1, h2, h3, h4, h5, h6, p, div, span, b{
                 font-family: 'Poppins', sans-serif;
+                letter-spacing: 0.03rem;
             }
+
+            code {
+                background-color: #eee;
+                padding: 2.5px 7.5px;
+                border-radius: 5px;
+                font-size: 0.8rem;
+            }
+
+            pre {
+                background-color: #f6f8fa;
+                padding: 16px;
+                border-radius: 15px;
+                font-weight: 200;
+                margin: 20px 0;
+                font-size: 0.8rem;
+                line-height: 1.45rem;
+                letter-spacing: 0.07rem;
+                overflow: hidden;
+                font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+                
+                @media only screen and (max-width: 1100px){
+                    overflow-x: scroll;
+                    border-radius: 5px;
+                }
+
+                code{
+                    background-color: transparent;
+                    padding: 0;
+                }
+            }
+            
+            
 
             h1, h2, h3, h4, h5, h6{
                 font-weight: 500;
@@ -452,7 +378,8 @@ const Container = styled.div`
                 font-weight: 200;
                 font-size: 0.9rem;
                 line-height: 1.5rem;
-                margin-bottom: 5px;
+                margin-bottom: 10px;
+                letter-spacing: 0.05rem;
             }
 
             ul{
@@ -472,89 +399,6 @@ const Container = styled.div`
         }
         
         .page-section{
-
-            .table{
-                margin: 15px 0;
-                min-height: 100px;
-                width: 100%;
-                /* background-color: #fbf7f7; */
-                border: 1px solid #d1d5db;
-                border-radius: 5px;
-                padding: 0 15px;
-                display: flex;
-                flex-direction: column;
-                background-color: white;
-
-                .link-row{
-                    padding: 20px 20px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    border-bottom: 1px solid #d1d5db;
-                    
-                    .link-row-left{
-                        display: flex;
-                        align-items: center;
-                        
-                        .count{
-                            font-size: 1.25rem;
-                            font-family: Inter var,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-                            margin-right: 20px;
-                            font-weight: 500;
-                        }
-
-                        .main-row-content{
-                            a{
-                                font-size: 0.9rem;
-                                font-weight: 500;
-                                text-decoration: none;
-                                /* color: inherit; */
-
-                                &:hover{
-                                    text-decoration: underline;
-                                }
-                            }
-                            
-                            .tags{
-                                margin: 0;
-                                margin-top: 5px;
-                                
-                                .tag{
-                                    background-color: #f3f4f7;
-                                    color: inherit;
-                                    padding: 2.5px 7.5px;
-                                    border-radius: 100px;
-                                }
-                            }
-                        }
-
-                        
-                    }
-
-                    .done-btn{
-                        .MuiSvgIcon-root{
-                            fill: #b5a6a6;
-                            font-size: 2.25rem;
-
-                            &:hover{
-                                transition-duration: 250ms;
-                                fill: orange;
-                                cursor: pointer;
-                            }
-                        }
-
-                        .done{
-                            fill: orange;
-                        }
-                    }
-
-                }
-                
-                .no-bottom-border{
-                    border-bottom: 1px solid transparent;
-                }
-            }
-
             .my_thread{
                 display: flex;
                 margin: 40px 0 10px 0;
