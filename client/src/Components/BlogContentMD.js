@@ -425,9 +425,18 @@ const Container = styled.div`
         }
 
         .mark-down-file-content{
+            font-weight: 200;
+            font-size: 0.9rem;
+
             img{
                 width: 100%;
                 margin: 5px 0;
+                display: block;
+            }
+
+            .small-img{
+                width: 45%;
+                min-width: 200px;
             }
 
             h1, h2, h3, h4, h5, h6, p, div, span, b{
@@ -436,20 +445,30 @@ const Container = styled.div`
 
             h1, h2, h3, h4, h5, h6{
                 font-weight: 500;
-                margin-bottom: 5px;
+                margin: 50px 0 10px 0;
             }
 
-            p{
+            p, li{
                 font-weight: 200;
                 font-size: 0.9rem;
                 line-height: 1.5rem;
                 margin-bottom: 5px;
             }
 
+            ul{
+                margin-left: 5%;
+                width: 95%;
+
+                li{
+                    margin: 15px;
+                }
+            }
+
             b{
                 font-weight: 500;
+                margin: 15px 0;
             }
-            font-weight: 200;
+            
         }
         
         .page-section{
