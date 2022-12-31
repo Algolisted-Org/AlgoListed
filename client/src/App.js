@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
 import {
   Routes,
   Route,
@@ -21,14 +22,24 @@ import AuthPage from './Screen/AuthPage';
 import SelectedProfiles from './Screen/SelectedProfiles';
 import CodingSheets from './Screen/CodingSheets';
 import AddContentCoreOnly from './Screen/AddContentCoreOnly';
+import LandingPage2 from './Screen/LandingPage2';
 
 
 
 const App = () => {
+  console.log("hi");
+  const myfunc = () => {
+    console.clear();
+  }
+  useEffect(() => {
+    myfunc();
+  }, [console]);
+
   return (
     <div>
       <Routes>
-        <Route path="/" element={<LandingPage/>} />
+        {/* <Route path="/" element={<LandingPage/>} /> */}
+        <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/blog/ideas" element={<BlogIdeas/>} />
         <Route path="/coding-competitions" element={<CodingCompetitions/>} />

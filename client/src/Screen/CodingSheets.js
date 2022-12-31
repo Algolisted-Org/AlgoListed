@@ -302,7 +302,7 @@ const MobContainer = styled.div`
     }
   
     .heading-supporter {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       margin-bottom: 10px;
       font-weight: 400;
       color: #696168;

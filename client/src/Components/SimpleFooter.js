@@ -63,8 +63,8 @@ const Container = styled.div`
         
         .links, .company-info{
             a, .text{
-                font-size: 0.55rem;
-                margin-top: 5px;
+                font-size: 0.6rem;
+                margin-top: 10px;
             }
         }
     }

@@ -82,29 +82,36 @@ const Resources = () => {
           {
             showFilters ? (<Filters>{filters}</Filters>) : (<></>)
           }
-
-          <div className="resources-container">
-            {
-              allResources.map((item, index) => {
-                if (filter == "All Resources" || item.mainTag == filter) {
-                  return (
-                    <div className="resource">
-                      <div className="img-container">
-                        <img src={item.imgLink} alt="" />
-                      </div>
-                      <a href={item.link} target={"_blank"} className="title">{item.title}</a>
-                      <div className="short-desc">{item.description}</div>
-                      <div className="tags">
-                        <div className="main-tag">{item.mainTag}</div>
-                        <div className="tag">{item.type}</div>
-                      </div>
-                    </div>
-                  )
+          {
+            allResources.length === 0 ? (
+              <div className="linear-progess-holder">
+                <LinearProgress />
+              </div>
+            ):(
+              <div className="resources-container">
+                {
+                  allResources.map((item, index) => {
+                    if (filter == "All Resources" || item.mainTag == filter) {
+                      return (
+                        <div className="resource">
+                          <div className="img-container">
+                            <img src={item.imgLink} alt="" />
+                          </div>
+                          <a href={item.link} target={"_blank"} className="title">{item.title}</a>
+                          <div className="short-desc">{item.description}</div>
+                          <div className="tags">
+                            <div className="main-tag">{item.mainTag}</div>
+                            <div className="tag">{item.type}</div>
+                          </div>
+                        </div>
+                      )
+                    }
+                    else return (<></>)
+                  })
                 }
-                else return (<></>)
-              })
-            }
-          </div>
+              </div>
+            )
+          }
         </div>
         <SimpleFooter />
       </MobContainer>
@@ -194,7 +201,7 @@ const MobContainer = styled.div`
     }
   
     .heading-supporter {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       margin-bottom: 10px;
       font-weight: 400;
       color: #696168;
@@ -278,6 +285,10 @@ const MobContainer = styled.div`
       }
     }
 
+    .linear-progess-holder{
+      margin-top: 25px;
+    }
+
     .resources-container{
         display: flex;
         flex-wrap: wrap;
@@ -310,7 +321,7 @@ const MobContainer = styled.div`
           }
 
           .title{
-              font-size: 0.85rem;
+              font-size: 0.9rem;
               font-weight: 500;
               color: #374151;
               cursor: pointer;
@@ -325,9 +336,9 @@ const MobContainer = styled.div`
 
 
           .short-desc{
-            font-size: 0.75rem;
-            font-weight: 200;
-            letter-spacing: 0.06rem;
+            font-size: 0.8rem;
+              font-weight: 300;
+              color: #6b7280;
           }
 
           .tags{

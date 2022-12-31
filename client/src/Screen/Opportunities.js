@@ -25,7 +25,7 @@ const Opportunities = () => {
                   <div className="cc-middle-content">
                       <h1 className='main-heading'>All Internship & Job Opportunities <div className="head-tag">coming soon</div> </h1>
                       <p className="heading-supporter">
-                      We are not fetching the data from any public API, we have build our own API which is being constantly updated by our the team and users with information.
+                        This page is very similar to the coding competitions list page, here in this page we will provide information about all available hiring and internship opportunities, including the timing of these opportunities. We are currently in the planning stages and will be launching this page soon.
                       </p>
                       <div className="message">
                           <div className="icon"></div>

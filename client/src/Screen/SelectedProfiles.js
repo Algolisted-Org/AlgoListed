@@ -282,7 +282,7 @@ const MobContainer = styled.div`
     }
   
     .heading-supporter {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       margin-bottom: 10px;
       font-weight: 400;
       color: #696168;
@@ -742,6 +742,12 @@ const CompanyStatistics = styled.div`
       background-color: #dc7d7d;
       margin: 15px 0 5px 0;
       padding: 10px;
+      background: linear-gradient(274deg, #94a9ff, #83e85e, #62c1ee);
+      background-size: 600% 600%;
+
+      -webkit-animation: AnimationName 0s ease infinite;
+      -moz-animation: AnimationName 0s ease infinite;
+      animation: AnimationName 0s ease infinite;
 
       img{
         margin-top: 15px;
@@ -754,15 +760,15 @@ const CompanyStatistics = styled.div`
 
       .topic-heading{ 
         font-weight: 500;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         margin-bottom: 7.5px;
-        color: white;
+        color: black;
       }
 
       .desc{ 
-        font-weight: 200;
-        font-size: 0.7rem;
-        color: white;
+        font-weight: 300;
+        font-size: 0.75rem;
+        color: black;
       }
 
       .take-data{
@@ -775,6 +781,23 @@ const CompanyStatistics = styled.div`
         letter-spacing: 0.06rem;
         color: #000;
       }
+
+    }
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:49% 0%}
+        50%{background-position:52% 100%}
+        100%{background-position:49% 0%}
+    }
+    @-moz-keyframes AnimationName {
+        0%{background-position:49% 0%}
+        50%{background-position:52% 100%}
+        100%{background-position:49% 0%}
+    }
+    @keyframes AnimationName {
+        0%{background-position:49% 0%}
+        50%{background-position:52% 100%}
+        100%{background-position:49% 0%}
     }
 `
 
@@ -797,7 +820,7 @@ const TempDoc = styled.div`
     }
     .topic-heading{ 
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       margin-bottom: 7.5px;
     }
     .desc{ 
@@ -840,25 +863,26 @@ const TempDoc = styled.div`
 
       img{
         margin-top: 15px;
-        /* width: 100%; */
-        height: 60px;
+        /* width: 30%; */
+        /* height: auto; */
+        height: 85px;
         background-color: #e5ebec;
         padding: 5px;
         border: 1px solid #b9b1b1;
         border-radius: 5px;
-        margin-right: 5px;
         cursor: pointer;
       }
 
       .desc{ 
-        font-weight: 200;
-        font-size: 0.7rem;
+        font-weight: 300;
+        font-size: 0.75rem;
+        color: #696169;
       }
 
       .take-data {
-        width: 400px;
-        width: 60%;
-        height: 30.5px;
+        width: 90%;
+        max-width: 400px;
+        height: 36.5px;
         display: grid;
         place-items: center;
         /* padding: 7.5px 115px; */
@@ -869,7 +893,6 @@ const TempDoc = styled.div`
         font-weight: 300;
         color: inherit;
         text-decoration: none;
-        
 
         &:hover {
           border-color: #201f1f;
@@ -879,6 +902,31 @@ const TempDoc = styled.div`
           cursor: pointer;
         }
       }
+
+      .take-data {
+        background: linear-gradient(274deg, #94a9ff, #83e85e, #62c1ee);
+        background-size: 600% 600%;
+
+        -webkit-animation: AnimationName 0s ease infinite;
+        -moz-animation: AnimationName 0s ease infinite;
+        animation: AnimationName 0s ease infinite;
+        }
+
+        @-webkit-keyframes AnimationName {
+            0%{background-position:49% 0%}
+            50%{background-position:52% 100%}
+            100%{background-position:49% 0%}
+        }
+        @-moz-keyframes AnimationName {
+            0%{background-position:49% 0%}
+            50%{background-position:52% 100%}
+            100%{background-position:49% 0%}
+        }
+        @keyframes AnimationName {
+            0%{background-position:49% 0%}
+            50%{background-position:52% 100%}
+            100%{background-position:49% 0%}
+        }
     }
 `
 

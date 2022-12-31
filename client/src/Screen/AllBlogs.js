@@ -10,14 +10,16 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import MobileNavbar from "../Components/MobileNavbar";
 
+console.log(allBlogsDatabase);
+
 const AllBlogs = () => {
-  console.log(allBlogsDatabase);
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     document.title = "Simplified Coding Blogs - Algolisted";
-  }, []);
+  }, []);  
 
-  return (
+return (
     <GrandContainer>
       <MobContainer>
         <MobileNavbar />
@@ -26,13 +28,34 @@ const AllBlogs = () => {
           <p className="heading-supporter">
             We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
           </p>
+          <div className="data-filters">
+            <div className="toggle-filter" onClick={() => setShowFilters(!showFilters)}>
+              {
+                showFilters ? (
+                  <>
+                    <div className="text">Hide Filters</div>
+                    <ExpandLessIcon />
+                  </>
+                ) : (
+                  <>
+                    <div className="text">Show Filters</div>
+                    <ExpandMoreIcon />
+                  </>
+                )
+              }
+            </div>
+            <div className="sort">
+              <FilterListIcon />
+            </div>
+          </div>
+
           <BlogsContainer>
             {
               allBlogsDatabase.map((item, index) => {
                 return (
-                  <div className="blog-container" key={index}>
+                  <a href={item.link} className="blog-container" key={index}>
                     <div className="last-updated">{item.date}</div>
-                    <a href={item.link} className="blog-title">{item.title}</a>
+                    <a className="blog-title">{item.title}</a>
                     <div className="blog-desc">{item.desc}
                       <div className="author">
                         <a href={item.authorLink[0]} target="_blank">
@@ -52,7 +75,7 @@ const AllBlogs = () => {
                         })
                       }
                     </div>
-                  </div>
+                  </a>
                 )
               })
             }
@@ -143,7 +166,7 @@ const MobContainer = styled.div`
     }
   
     .heading-supporter {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       margin-bottom: 10px;
       font-weight: 400;
       color: #696168;
@@ -155,6 +178,77 @@ const MobContainer = styled.div`
         margin-left: 0.25rem;
       }
     }
+
+    .data-filters{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 30px 0 10px 0;
+        position: relative;
+
+        .toggle-filter {
+          width: 120px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-radius: 500px;
+          font-weight: 300;
+          padding: 5px 15px;
+          font-size: 0.7rem;
+          background-color: white;
+          border: 1px solid rgb(185, 175, 175);
+          box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+    
+    
+    
+          .text{
+            /* color: #ebdddd; */
+          }
+    
+          svg{
+            font-size: 1.15rem;
+            /* fill: #ebdddd; */
+            margin-right: -4px;
+          }
+        }
+
+        .sort{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 500px;
+          padding: 5px;
+          background-color: white;
+          border: 1px solid rgb(185, 175, 175);
+          box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+
+          svg{
+            font-size: 1.15rem;
+          }
+        }
+
+        .sort-type{
+          position: absolute;
+          top: 35px;
+          right: -5px;
+          background-color: white;
+          border: 1px solid rgb(185, 175, 175);
+          box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          display: none;
+          z-index: 100;
+          
+          .item{
+            font-size: 0.7rem;
+            padding: 2.5px 0;
+          }
+        }
+
+        .open{
+          display: inline;
+        }
+      }
 
   }
 
@@ -405,15 +499,15 @@ const BlogsContainer = styled.div`
 
           .last-updated{
               font-size: 0.65rem;
-              font-weight: 200;
+              font-weight: 300;
               color: #6b7281;
               margin-bottom: 5px;
           }
 
           .blog-title{
-              font-size: 0.85rem;
+              font-size: 0.9rem;
               font-weight: 500;
-              margin: 15px 0 5px 0;
+              margin: 15px 0 10px 0;
               color: #374151;
               cursor: pointer;
               text-decoration: none;
@@ -426,15 +520,15 @@ const BlogsContainer = styled.div`
 
 
           .blog-desc{
-              font-size: 0.7rem;
-              font-weight: 200;
+              font-size: 0.8rem;
+              font-weight: 300;
               margin-bottom: 15px;
               color: #6b7280;
               
               .author{
                 display: flex;
                 align-items: center;
-                margin-top: 10px;
+                margin-top: 20px;
 
                 img{
                   height: 30px;
@@ -444,9 +538,8 @@ const BlogsContainer = styled.div`
                 }
 
                 .text{
-                  font-weight: 200;
-                  font-size: 0.65rem;
-                  font-weight: 200;
+                  font-size: 0.7rem;
+                  font-weight: 400;
                   color: #6b7280;
                   text-decoration: none;
                 }

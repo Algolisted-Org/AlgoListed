@@ -87,7 +87,7 @@ const Container = styled.div`
         }
         .down-text{
           font-size: 0.6rem;
-          font-weight: 200;
+          font-weight: 300;
         }
       }
     }
