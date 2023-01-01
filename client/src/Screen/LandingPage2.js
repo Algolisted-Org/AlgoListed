@@ -69,7 +69,7 @@ const LandingPage2 = () => {
                   Algolisted is a community-driven platform for learning and improving coding skills. It offers a wealth of information on data structures and algorithms, and allows coders to interact with, modify, and contribute to the content.
                 </div>
                 <div className="btn">Learn More</div>
-                <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/HatefulHollowLangur-size_restricted.gif" alt="" /></div>
+                {/* <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/HatefulHollowLangur-size_restricted.gif" alt="" /></div> */}
                 <DancerDownIcon>
                   <ExpandMoreIcon style={{ fontSize: '2rem', fill: '#333' }} />
                 </DancerDownIcon>
@@ -247,7 +247,14 @@ const LandingPage2 = () => {
               <div className="btn">Learn More</div>
             </Fade>
             </div>
-            <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/HatefulHollowLangur-size_restricted.gif" alt="" /></div>
+            {/* <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/CharmingMilkyHamster-size_restricted.gif" alt="" /></div> */}
+            <div className="right">
+              <Fade>
+                <div className="img-container">
+                  <img src="https://assets.website-files.com/624ac40503a5277051af4162/6346dab74a46df9125bf12bf_Speed%20up%20your%20annotation%20work%20with%20the%20help%20of%20AI.gif" alt="" />
+                </div>
+              </Fade>
+            </div>
           </div>
           <DancerDownIcon>
             <ExpandMoreIcon style={{ fontSize: '2rem', fill: '#333' }} />
@@ -302,11 +309,11 @@ const LandingPage2 = () => {
             {
               contributorsList != null && contributorsList.map((item, index) => {
                 return (
-                  <Wobble>
+                  <Fade up>
                     <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
                       <img src={item.avatar_url} alt="" />
                     </a>
-                  </Wobble>
+                  </Fade>
                 )
               })
             }
@@ -383,8 +390,8 @@ const LandingPage2 = () => {
           </div>
 
           <div className="bottom">
-            // Open Source Project, by <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank">Atanu Nayak</a> and Community
-            All commercial rights reserved, Open Source Project.
+            {/* Open Source Project, by <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank">Atanu Nayak</a> and Community */}
+            Open Source Project, all commercial rights reserved.
           </div>
         </PageThreeFooter>
       </Container>
@@ -750,29 +757,32 @@ const MobContainer = styled.div`
 
 const Container = styled.div`
   width: 100vw;
-  min-height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   
   /* background-color: pink; */
   margin: 0;
-  /* padding-top: 70px; */
 
   
 
   .hero-page{
-    /* height: calc(100vh - 70px); */
-    height: 100vh;
     width: 100vw;
-    min-height: 540px;
+    min-height: max(100vh, 540px);
+    height: auto;
     /* background: linear-gradient( rgba(0, 0, 0, 0.4),  rgba(0, 0, 0, 0.4) ), url("https://i.gifer.com/OsLU.gif") center top / cover no-repeat fixed; */
     margin: 0;
     position: relative;
     /* background-color: #111; */
-    padding: 0 120px;
+    padding: 70px 120px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     
     .responsive-1700{
+        /* border: 1px solid black; */
         width: 100%;
         height: 100%;
         max-width: 1600px;
@@ -812,6 +822,23 @@ const Container = styled.div`
             margin: 30px 0;
             line-height: 2.25rem;
             letter-spacing: 0.1rem;
+        }
+
+        .right{
+          .img-container{
+            height: 300px;
+            width: 300px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            margin-left: 30px;
+            
+            
+            img{
+              height: 100%;
+              width: auto;
+            }
+          }
         }
     }
 
@@ -1050,12 +1077,12 @@ const Container = styled.div`
 
     // btn is continued from top
     .btn{
-      background: linear-gradient(270deg,#56f238,#56f238,#c5c5ef,#56f238,#56f238);
+      background: linear-gradient(316deg,#84e472,#84e472,#ffffff,#84e472,#84e472);
       background-size: 400% 400%;
 
-      -webkit-animation: AnimationName 10s ease infinite;
-      -moz-animation: AnimationName 10s ease infinite;
-      animation: AnimationName 10s ease infinite;
+      -webkit-animation: AnimationName 10s cubic-bezier(0.25, 0.1, 0, 1.47) infinite;
+      -moz-animation: AnimationName 10s cubic-bezier(0.25, 0.1, 0, 1.47) infinite;
+      animation: AnimationName 10s cubic-bezier(0.25, 0.1, 0, 1.47) infinite;
       border-color: transparent;
       color: #333;  
       cursor: pointer;
@@ -1105,8 +1132,12 @@ const Navbar = styled.div`
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(233, 229, 229);
-    background-color: rgb(255, 255, 255);
     padding: 0 35px;
+    /* background-color: rgb(255, 255, 255); */
+    background-color: #ffffffd4;
+    box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 5%);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 
     .logo{
       display: flex;
@@ -1137,15 +1168,32 @@ const Navbar = styled.div`
         display: flex;
         align-items: center;
 
+        /* background-color: #f3ec78;
+          background-image: linear-gradient(300deg,#a0bc42,#066df9);
+          background-size: 100%;
+          -webkit-background-clip: text;
+          -moz-background-clip: text;
+          -webkit-text-fill-color: transparent; 
+          -moz-text-fill-color: transparent; */
+        
         .item{
-            font-size: 0.85rem;
-            margin: 0 15px;
-            font-weight: 300;
-            text-decoration: none;
-            color: inherit;
+          font-size: 0.85rem;
+          margin: 0 15px;
+          font-weight: 400;
+          text-decoration: none;
+          color: inherit;
+          
+          
 
             &:hover{
                 color: cornflowerblue;
+                background-color: #f3ec78;
+                background-image: linear-gradient(300deg,#a0bc42,#066df9);
+                background-size: 100%;
+                -webkit-background-clip: text;
+                -moz-background-clip: text;
+                -webkit-text-fill-color: transparent; 
+                -moz-text-fill-color: transparent;
             }
         }
     }
@@ -1433,10 +1481,11 @@ const PageThreeFooter = styled.div`
 const DancerDownIcon = styled.div`
     position: absolute;
     bottom: 30px;
-    width: 98%;
-    display: grid;
-    place-items: center;
+
+    left: calc(50vw - 15px);
+    
     animation: animateDown infinite 1.5s;
+
     @keyframes animateDown{
         0%, 20%, 50%, 80%, 100%{
             transform: translateY(0);
@@ -1448,7 +1497,8 @@ const DancerDownIcon = styled.div`
             transform: translateY(3p);
         }
     }
-    @media only screen and (max-width: 600px){
+    /* @media only screen and (max-width: 1000px){
         bottom: 60px;
-    }
+        left: calc(50vw - 30px);
+    } */
 `

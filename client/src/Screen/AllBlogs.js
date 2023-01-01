@@ -505,9 +505,9 @@ const BlogsContainer = styled.div`
           }
 
           .blog-title{
-              font-size: 0.9rem;
-              font-weight: 500;
-              margin: 15px 0 10px 0;
+              font-size: 1.1rem;
+              font-weight: 600;
+              margin: 15px 0 50px 0;
               color: #374151;
               cursor: pointer;
               text-decoration: none;
@@ -522,7 +522,7 @@ const BlogsContainer = styled.div`
           .blog-desc{
               font-size: 0.8rem;
               font-weight: 300;
-              margin-bottom: 15px;
+              margin: 5px 0 15px 0;
               color: #6b7280;
               
               .author{
@@ -553,7 +553,7 @@ const BlogsContainer = styled.div`
 
               .main-tag{
                   font-size: 0.65rem;
-                  padding: 2.5px 7.5px;
+                  padding: 5px 10px;
                   border-radius: 100px;
                   background-color: #f3e8ff;
                   color: rgb(107, 33, 168);
@@ -563,7 +563,7 @@ const BlogsContainer = styled.div`
 
               .tag{
                   font-size: 0.65rem;
-                  padding: 2.5px 7.5px;
+                  padding: 5px 10px;
                   border-radius: 100px;
                   background-color: #eeeeee;
                   font-weight: 300;

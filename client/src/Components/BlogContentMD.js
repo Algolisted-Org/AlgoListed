@@ -150,8 +150,8 @@ const Container = styled.div`
             color: #292929;
 
             @media only screen and (max-width: 1100px){
-                font-size: 1.25rem;
-                font-weight: 500;
+                font-size: 1.5rem;
+                font-weight: 600;
             }
         }
 
@@ -162,7 +162,7 @@ const Container = styled.div`
             color: #696168;
 
             @media only screen and (max-width: 1100px){
-                font-size: 0.85rem;
+                font-size: 1rem;
                 font-weight: 400;
             }
         }
@@ -312,6 +312,7 @@ const Container = styled.div`
         }
 
         .mark-down-file-content{
+            min-height: 1000px;
             font-weight: 200;
             font-size: 0.9rem;
             letter-spacing: 0.05rem;
