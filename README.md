@@ -1,5 +1,7 @@
 # 🚀 Welcome to Algorithmist
-<img src="https://i.ibb.co/DDJqp2J/preview.png" alt="Site preview" />
+
+
+<img width="1440" alt="Screenshot 2023-01-02 at 2 25 53 AM" src="https://user-images.githubusercontent.com/93304796/210184355-8a328a4c-191e-44c4-b36f-a98a26ffe49e.png">
 
 ## About
 
