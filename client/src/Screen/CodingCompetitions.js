@@ -172,21 +172,13 @@ const CodingCompetitions = () => {
 					</div>
 
 					{showFilters ? <Filters>{filters}</Filters> : <></>}
-
+					
+					{waitingForData ? <><br /><LinearProgress /><br/></> : <></>}
+					
+					
 					<Table className="table">
-						<div className="row top-row">
-							<div className="hash label">#</div>
-							<div className="platform label">Platform</div>
-							<div className="contest label">Competition</div>
-							<div className="date label">Date and Time left</div>
-							<div className="duration label">Duration</div>
-							<div className="registration label">Registration</div>
-						</div>
-
-						{waitingForData ? (
-							<div className="linear-progess-holder">
-								<LinearProgress />
-							</div>
+						{waitingForData == true ? (
+							<></>
 						) : (
 							<>
 								{list
@@ -355,6 +347,13 @@ const MobContainer = styled.div`
 
 	.main-content {
 		padding: 10px 15px;
+
+		.linear-progess-holder{
+			.MuiLinearProgress-colorPrimary{
+				visibility: visible;
+			}
+			margin-bottom: 30px;
+		}
 
 		.main-heading {
 			font-size: 1.25rem;
@@ -822,16 +821,18 @@ const Table = styled.div`
 			flex-wrap: wrap;
 			justify-content: center;
 			margin: 5px 2px;
-			padding: 10px 20px;
-			border-radius: 5px;
-			max-width: 80%;
-			min-width: 350px;
-			filter: drop-shadow(0 0.1rem 0.2rem grey);
+			padding: 20px;
+			width: 100%;
+			min-width: 320px;
+			border-radius: 10px;
+			border: 1px solid rgb(232, 232, 232);
+    		box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+			/* filter: drop-shadow(0 0.1rem 0.2rem grey); */
 
 			.contest {
 				width: 95%;
 				order: -1;
-				font-size: 1.1rem;
+				font-size: 1rem;
 				padding: 5px 0;
 				border: none;
 
@@ -848,7 +849,7 @@ const Table = styled.div`
 				border: none;
 				width: 5%;
 				order: 0;
-				font-size: 1rem;
+				font-size: 0.8rem;
 				text-align: right;
 			}
 
@@ -856,7 +857,7 @@ const Table = styled.div`
 				width: 100%;
 				order: 2;
 				margin-bottom: 5px;
-				font-size: 0.9rem;
+				font-size: 0.85rem;
 				font-weight: 400;
 				color: #656565;
 
@@ -869,9 +870,9 @@ const Table = styled.div`
 				::before {
 					content: "Date & Time left: ";
 					font-weight: 500;
-					font-size: 0.9rem;
+					font-size: 0.85rem;
 				}
-				font-size: 0.9rem;
+				font-size: 0.85rem;
 				font-weight: 300;
 				color: #656565;
 				width: 100%;
@@ -882,11 +883,11 @@ const Table = styled.div`
 				::before {
 					content: "Platform: ";
 					font-weight: 500;
-					font-size: 0.9rem;
+					font-size: 0.85rem;
 				}
 				width: 100%;
 				order: 3;
-				font-size: 0.9rem;
+				font-size: 0.85rem;
 				font-weight: 500;
 				padding: 5px 0;
 				color: #656565;
@@ -897,11 +898,11 @@ const Table = styled.div`
 				::before {
 					content: "Duration: ";
 					font-weight: 500;
-					font-size: 0.9rem;
+					font-size: 0.85rem;
 				}
 				width: 100%;
 				order: 4;
-				font-size: 0.9rem;
+				font-size: 0.85rem;
 				font-weight: 400;
 				color: #656565;
 				border: none;
@@ -910,7 +911,7 @@ const Table = styled.div`
 			.registration {
 				width: 100%;
 				order: 5;
-				font-size: 0.9rem;
+				font-size: 0.85rem;
 				font-weight: 400;
 				color: #656565;
 			}
