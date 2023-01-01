@@ -7,6 +7,9 @@ import { useParams } from 'react-router-dom';
 import BlogContent from '../Components/BlogContent';
 import RightMenu from '../Components/RightMenu'
 import BlogContentMD from '../Components/BlogContentMD';
+import logo from "../Images/logo.png";
+import MobileNavbar from '../Components/MobileNavbar'
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const BlogPage = () => {
     const [constFooter, setConstFooter] = useState(!true);
@@ -15,12 +18,13 @@ const BlogPage = () => {
 
     console.log(blogname, blogid);
 
+    const ResourceType = 1;
+
     return (
         <GrandContainer>
             <MobContainer>
-                We are still working on responsive version of the website, please view the site with 
-                width more than 1100px, a standard laptop or tablet landscape. 
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+                <MobileNavbar/>
+                <BlogContentMD blogid={blogid} />
             </MobContainer>
             <Container>
                 <CCHeader /> 
@@ -28,7 +32,7 @@ const BlogPage = () => {
                 <div className="blogs-main">
                     {/* <BlogContent blogid={blogid} /> */}
                     <BlogContentMD blogid={blogid} />
-                    <RightMenu blogid={blogid} />
+                    <RightMenu blogid={blogid} blogname={blogname} ResourceType={ResourceType}/>
                 </div>
 
                 {/* <BlogsMain blogname={blogname}/> */}
@@ -59,20 +63,9 @@ const GrandContainer = styled.div`
 `
 
 const MobContainer = styled.div`
-  width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+  
 
-  img{
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
-  }
-
-  @media only screen and (min-width: 1099px){
+  @media only screen and (min-width: 1101px){
     display: none;
   }
 `

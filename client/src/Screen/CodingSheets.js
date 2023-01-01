@@ -22,7 +22,7 @@ const CodingSheets = () => {
 
 	const { sheetname } = params;
 	// console.log(sheetname);
-
+	
 	document.title = `Coding Sheets - Algolisted`;
 
 	useEffect(() => {

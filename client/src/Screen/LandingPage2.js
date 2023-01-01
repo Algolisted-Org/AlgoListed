@@ -12,6 +12,8 @@ import axios from "axios";
 import logo from "../Images/logo.png";
 import MobileNavbar from '../Components/MobileNavbar'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Fade from 'react-reveal/Fade';
+import Wobble from 'react-reveal/Wobble';
 
 const LandingPage2 = () => {
   const [contributorsList, setContributorsList] = useState(null);
@@ -57,144 +59,159 @@ const LandingPage2 = () => {
     <GrandContainer>
       <MobContainer>
         <MobileNavbar/>
-          <div className="top-page">
-            <div className="heading">
-              <h1 className='gradient-text'>Open Community.</h1>
-              <h1>Better Information.</h1>
-            </div>
-            <div className="small-desc">
-              Algolisted is a community-driven platform for learning and improving coding skills. It offers a wealth of information on data structures and algorithms, and allows coders to interact with, modify, and contribute to the content.
-            </div>
-            <div className="btn">Learn More</div>
-            <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/HatefulHollowLangur-size_restricted.gif" alt="" /></div>
-            <DancerDownIcon>
-              <ExpandMoreIcon style={{ fontSize: '2rem', fill: '#333' }} />
-            </DancerDownIcon>
-          </div>
-          <div className="page2">
-            <div className="content">
-                <h1>Speed up your Learning and Development with Algolisted today</h1>
-                <div className="desc">
-                    We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
-                    learning models for get info about a company and applications web scraping to get you the questions from
-                    other website at one place. 
+            <Fade>
+              <div className="top-page">
+                <div className="heading">
+                  <h1 className='gradient-text'>Open Community.</h1>
+                  <h1>Better Information.</h1>
                 </div>
-            </div>
-            <div className="modules">
-                {
-                    modules.map((item, index) => {
-                        return (
-                            <a href={item.link} target={"_blank"} className="module">
-                                <div className="count">{index + 1}</div>
-                                <div className="name">{item.name}</div>
-                                <div className="desc">{item.desc}</div>
-                                <ArrowForwardIcon/>
-                            </a>
-                        )
-                    })
-                }
-                {/* <a href='/' className="module">
-                    <div className="count">1</div>
-                    <div className="name">Beginner Friendly Blogs</div>
-                    <div className="desc">We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.</div>
-                    <ArrowForwardIcon/>
-                </a> */}
-            </div>
-          </div>
-          <div className="open-source-page">
-            <div className="content">
-                <h1>Open Source Contribution</h1>
-                <div className="desc">
-                    Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
+                <div className="small-desc">
+                  Algolisted is a community-driven platform for learning and improving coding skills. It offers a wealth of information on data structures and algorithms, and allows coders to interact with, modify, and contribute to the content.
                 </div>
+                <div className="btn">Learn More</div>
+                <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/HatefulHollowLangur-size_restricted.gif" alt="" /></div>
+                <DancerDownIcon>
+                  <ExpandMoreIcon style={{ fontSize: '2rem', fill: '#333' }} />
+                </DancerDownIcon>
+              </div>
+            </Fade>
+            <Fade></Fade>
+            <div className="page2">
+              <div className="content">
+                  <Fade>
+                    <h1>Speed up your Learning and Development with Algolisted today</h1>
+                  </Fade>
+                  <Fade>
+                    <div className="desc">
+                        We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
+                        learning models for get info about a company and applications web scraping to get you the questions from
+                        other website at one place. 
+                    </div>
+                  </Fade>
+              </div>
+              <div className="modules">
+                  {
+                      modules.map((item, index) => {
+                          return (
+                              <Fade>
+                                <a href={item.link} target={"_blank"} className="module">
+                                    <div className="count">{index + 1}</div>
+                                    <div className="name">{item.name}</div>
+                                    <div className="desc">{item.desc}</div>
+                                    <ArrowForwardIcon/>
+                                </a>
+                              </Fade>
+                          )
+                      })
+                  }
+                  {/* <a href='/' className="module">
+                      <div className="count">1</div>
+                      <div className="name">Beginner Friendly Blogs</div>
+                      <div className="desc">We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.</div>
+                      <ArrowForwardIcon/>
+                  </a> */}
+              </div>
             </div>
-          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
-          <h1 className="sub-page-head">Our Contributors</h1>
-          <div className="hold-contributors">
-            {
-              contributorsList != null && contributorsList.map((item, index) => {
-                return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
-                  <img src={item.avatar_url} alt="" />
-                </a>
-              })
-            }
-          </div>
-        </div>
-        <PageThreeFooter>
-          <div className="top">
-            <p>
-              connect with us
-            </p>
-            <input type="email" placeholder="Email Address" />
-            <div className="social-icons">
-              <a className="social-icon">
-                <GitHubIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-              </a>
-              <a className="social-icon">
-                <EmailIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-              </a>
-              <a className="social-icon">
-                <InstagramIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-              </a>
-              <a className="social-icon">
-                <FacebookIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-              </a>
+            <div className="open-source-page">
+              <div className="content">
+                  <Fade>
+                    <h1>Open Source Contribution</h1>  
+                  </Fade>
+                  <Fade>
+                    <div className="desc">
+                        Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
+                    </div>
+                  </Fade>
+                  
+              </div>
+            <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
+            <h1 className="sub-page-head">Our Contributors</h1>
+            <div className="hold-contributors">
+              {
+                contributorsList != null && contributorsList.map((item, index) => {
+                  return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                    <img src={item.avatar_url} alt="" />
+                  </a>
+                })
+              }
+            </div>
+            </div>
+            <PageThreeFooter>
+              <div className="top">
+                <p>
+                  connect with us
+                </p>
+                <input type="email" placeholder="Email Address" />
+                <div className="social-icons">
+                  <a className="social-icon">
+                    <GitHubIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+                  </a>
+                  <a className="social-icon">
+                    <EmailIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+                  </a>
+                  <a className="social-icon">
+                    <InstagramIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+                  </a>
+                  <a className="social-icon">
+                    <FacebookIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+                  </a>
 
-            </div>
-          </div>
-
-          <div className="middle">
-            <div className="left">
-              <div className="left-content">
-                <div className="title">
-                  Algolisted
-                </div>
-                <div className="points">
-                  <a href="/" className="link">About us</a>
-                  <a href="/" className="link">Team</a>
-                  <a href="/" className="link">Our Mission</a>
-                  <a href="/" className="link">Contact</a>
-                  <a href="/" className="link">Future Vision</a>
                 </div>
               </div>
 
-              <div className="left-content">
-                <div className="title">
-                  General
+              <div className="middle">
+                <div className="left">
+                  <div className="left-content">
+                    <div className="title">
+                      Algolisted
+                    </div>
+                    <div className="points">
+                      <a href="/" className="link">About us</a>
+                      <a href="/" className="link">Team</a>
+                      <a href="/" className="link">Our Mission</a>
+                      <a href="/" className="link">Contact</a>
+                      <a href="/" className="link">Future Vision</a>
+                    </div>
+                  </div>
+
+                  <div className="left-content">
+                    <div className="title">
+                      General
+                    </div>
+                    <div className="points">
+                      <a href="/" className="link">Terms and Conditions</a>
+                      <a href="/" className="link">Data protection</a>
+                      <a href="/" className="link">Trust and Security</a>
+                    </div>
+                  </div>
+
+                  <div className="left-content">
+                    <div className="title">
+                      Account
+                    </div>
+                    <div className="points">
+                      <a href="/" className="link">Login</a>
+                      <a href="/" className="link">Create account</a>
+                      <a href="/" className="link">Request API access</a>
+                    </div>
+                  </div>
+
                 </div>
-                <div className="points">
-                  <a href="/" className="link">Terms and Conditions</a>
-                  <a href="/" className="link">Data protection</a>
-                  <a href="/" className="link">Trust and Security</a>
+                <div className="right">
+                  <h1>Algolisted.</h1>
+                  <span>
+                    Get organized listed information. Get productive.
+                  </span>
                 </div>
               </div>
 
-              <div className="left-content">
-                <div className="title">
-                  Account
-                </div>
-                <div className="points">
-                  <a href="/" className="link">Login</a>
-                  <a href="/" className="link">Create account</a>
-                  <a href="/" className="link">Request API access</a>
-                </div>
+              <div className="bottom">
+                {/* Open Source Project, by 
+                <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank">Atanu Nayak</a> and Community */}
+                All commercial rights reserved, Open Source Project.
               </div>
-
-            </div>
-            <div className="right">
-              <h1>Algolisted.</h1>
-              <span>
-                Get organized listed information. Get productive.
-              </span>
-            </div>
-          </div>
-
-          <div className="bottom">
-            {/* Open Source Project, by 
-            <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank">Atanu Nayak</a> and Community */}
-            All commercial rights reserved, Open Source Project.
-          </div>
-        </PageThreeFooter>
+            </PageThreeFooter>
+          
       </MobContainer>
       <Container>
         <Navbar>
@@ -205,26 +222,30 @@ const LandingPage2 = () => {
                 </div>
             </div>
             <div className="menu-list">
-                <a href='/coding-competitions' className="item">Competitions</a>
-                <a href='/coding-sheets/striver-sde-sheet' className="item">Coding Sheets</a>
+                <a href='/blogs/all' className="item">All Blogs</a>
                 <a href='/resources' className="item">Resources</a>
+                <a href='/coding-sheets/striver-sde-sheet' className="item">Coding Sheets</a>
+                <a href='/coding-competitions' className="item">Competitions</a>
                 <a href='/selected-profiles' className="item">Selected Resumes</a>
-                <a href='/blogs/all' className="item">Blogs</a>
             </div>
-          
         </Navbar>
-
-        <div className="top-page">
+        <div className="hero-page">
           <div className="responsive-1700">
             <div className="left">
+            <Fade>
               <div className="heading">
                 <h1 className='gradient-text'>Open Community.</h1>
                 <h1>Better Information.</h1>
               </div>
+            </Fade>
+            <Fade>
               <div className="small-desc">
                 Algolisted is a community-driven platform for learning and improving coding skills. It offers a wealth of information on data structures and algorithms, and allows coders to interact with, modify, and contribute to the content.
               </div>
+            </Fade>
+            <Fade left>
               <div className="btn">Learn More</div>
+            </Fade>
             </div>
             <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/HatefulHollowLangur-size_restricted.gif" alt="" /></div>
           </div>
@@ -235,50 +256,58 @@ const LandingPage2 = () => {
 
         <div className="page2">
             <div className="content">
-                <h1>Speed up your Learning and Development with Algolisted today</h1>
-                <div className="desc">
-                    We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
-                    learning models for get info about a company and applications web scraping to get you the questions from
-                    other website at one place. 
-                </div>
+                <Fade bottom>
+                  <h1>Speed up your Learning and Development with Algolisted today</h1>
+                </Fade>
+                <Fade bottom>
+                  <div className="desc">
+                      We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
+                      learning models for get info about a company and applications web scraping to get you the questions from
+                      other website at one place. 
+                  </div>
+                </Fade>
             </div>
             <div className="modules">
                 {
                     modules.map((item, index) => {
                         return (
-                            <a href={item.link} target={"_blank"} className="module">
-                                <div className="count">{index + 1}</div>
-                                <div className="name">{item.name}</div>
-                                <div className="desc">{item.desc}</div>
-                                <ArrowForwardIcon/>
-                            </a>
+                            <Fade bottom>
+                              <a href={item.link} target={"_blank"} className="module">
+                                  <div className="count">{index + 1}</div>
+                                  <div className="name">{item.name}</div>
+                                  <div className="desc">{item.desc}</div>
+                                  <ArrowForwardIcon/>
+                              </a>
+                            </Fade>
                         )
                     })
                 }
-                {/* <a href='/' className="module">
-                    <div className="count">1</div>
-                    <div className="name">Beginner Friendly Blogs</div>
-                    <div className="desc">We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.</div>
-                    <ArrowForwardIcon/>
-                </a> */}
             </div>
         </div>
 
         <div className="open-source-page">
             <div className="content">
-                <h1>Open Source Contribution</h1>
-                <div className="desc">
-                    Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
-                </div>
+                <Fade bottom>
+                  <h1>Open Source Contribution</h1>
+                </Fade>
+                <Fade bottom>
+                  <div className="desc">
+                      Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
+                  </div>
+                </Fade>
             </div>
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
           <div className="sub-page-head">Our Contributors</div>
           <div className="hold-contributors">
             {
               contributorsList != null && contributorsList.map((item, index) => {
-                return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
-                  <img src={item.avatar_url} alt="" />
-                </a>
+                return (
+                  <Wobble>
+                    <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                      <img src={item.avatar_url} alt="" />
+                    </a>
+                  </Wobble>
+                )
               })
             }
           </div>
@@ -354,8 +383,7 @@ const LandingPage2 = () => {
           </div>
 
           <div className="bottom">
-            {/* Open Source Project, by 
-            <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank">Atanu Nayak</a> and Community */}
+            // Open Source Project, by <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank">Atanu Nayak</a> and Community
             All commercial rights reserved, Open Source Project.
           </div>
         </PageThreeFooter>
@@ -367,6 +395,9 @@ const LandingPage2 = () => {
 export default LandingPage2
 
 const GrandContainer = styled.div`
+  width: 100vw;
+  overflow: hidden;
+
   .btn{
     border: 1px solid #c2b1b1;
     color: white;
@@ -394,7 +425,7 @@ const MobContainer = styled.div`
     height: 100vh;
     width: 100vw;
     /* background-color: #111; */
-    padding: 60px 25px;
+    /* padding: 60px 25px; */
     padding: 120px 25px;
     position: relative;
     
@@ -433,7 +464,7 @@ const MobContainer = styled.div`
     }
 
     .btn{
-      background: linear-gradient(270deg,#c5c5ef,#56f238);
+      background: linear-gradient(270deg,#56f238,#56f238,#c5c5ef,#56f238,#56f238);
       background-size: 400% 400%;
 
       -webkit-animation: AnimationName 10s ease infinite;
@@ -633,7 +664,7 @@ const MobContainer = styled.div`
     }
 
     .btn{
-      background: linear-gradient(270deg,#c5c5ef,#56f238);
+      background: linear-gradient(270deg,#56f238,#56f238,#c5c5ef,#56f238,#56f238);
       background-size: 400% 400%;
 
       -webkit-animation: AnimationName 10s ease infinite;
@@ -718,34 +749,38 @@ const MobContainer = styled.div`
 `
 
 const Container = styled.div`
-  @media only screen and (max-width: 1100px){
-    display: none;
-  }
-
   width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  /* background-color: pink; */
+  margin: 0;
   /* padding-top: 70px; */
 
   
 
-  .top-page{
+  .hero-page{
     /* height: calc(100vh - 70px); */
     height: 100vh;
+    width: 100vw;
     min-height: 540px;
     /* background: linear-gradient( rgba(0, 0, 0, 0.4),  rgba(0, 0, 0, 0.4) ), url("https://i.gifer.com/OsLU.gif") center top / cover no-repeat fixed; */
-    width: 100vw;
+    margin: 0;
+    position: relative;
     /* background-color: #111; */
-    padding: 0 50px;
+    padding: 0 120px;
 
     
     .responsive-1700{
         width: 100%;
+        height: 100%;
         max-width: 1600px;
         margin: auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
 
-        height: 100%;
         
         .left{
             width: 70vw;
@@ -781,15 +816,41 @@ const Container = styled.div`
     }
 
     .btn{
-        background-color: whitesmoke;
-        color: #333;
-        cursor: pointer;
+      background: linear-gradient(102deg,#87a9dc,#5dff00,#5dff00);
+      background-size: 400% 400%;
 
-        &:hover{
-            border-color: black;
-        }
+      -webkit-animation: AnimationName 10s ease infinite;
+      -moz-animation: AnimationName 10s ease infinite;
+      animation: AnimationName 10s ease infinite;
+      border-color: transparent;
+      color: #333;  
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 10px 15px;
+      margin: auto;
+
+      /* border: 1px solid #bfa6a6; */
+      &:hover{
+      }
     }
-    
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+
+    @-moz-keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+
+    @keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
   }
 
   .page2{
@@ -989,24 +1050,53 @@ const Container = styled.div`
 
     // btn is continued from top
     .btn{
-      color: inherit;
-      margin: 10px 0;
+      background: linear-gradient(270deg,#56f238,#56f238,#c5c5ef,#56f238,#56f238);
+      background-size: 400% 400%;
+
+      -webkit-animation: AnimationName 10s ease infinite;
+      -moz-animation: AnimationName 10s ease infinite;
+      animation: AnimationName 10s ease infinite;
+      border-color: transparent;
+      color: #333;  
+      cursor: pointer;
+      margin: 10px auto;
       font-size: 0.85rem;
       padding: 10px 20px;
       letter-spacing: 0.07rem;
       margin-bottom: 50px;
 
+      border: 1px solid #bfa6a6;
       &:hover{
-        background-color: #222;
-        color: whitesmoke;
       }
     }
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+
+    @-moz-keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+
+    @keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+  }
+
+  @media only screen and (max-width: 1100px){
+    display: none;
   }
 `
 
 const Navbar = styled.div`
     height: 70px;
-    width: 100vw;
+    width: 100%;
     position: fixed;
     top: 0;
     left: 0;
@@ -1220,7 +1310,7 @@ const PageThreeFooter = styled.div`
     }
 
 
-    @media only screen and (max-width: 600px){
+    @media only screen and (max-width: 1100px){
         height: auto;
         padding-top: 36px;
         display: flex;
