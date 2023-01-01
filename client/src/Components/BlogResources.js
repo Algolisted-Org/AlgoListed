@@ -256,6 +256,10 @@ const BlogResources = ({ ResourceType }) => {
                     )}
                 </div>
 
+                <AddResource>
+                    <a href="/">Add Resource</a>
+                </AddResource>
+
             </div>
         </Container>
     )
@@ -371,110 +375,134 @@ const Container = styled.div`
 
             @media only screen and (max-width: 1100px) {
                 margin: 15px 0;
-		width: 100%;
-		/* background-color: #fbf7f7; */
-		border: 1px solid #d1d5db;
-		border-radius: 5px;
-		/* padding: 0 15px; */
-		display: flex;
-		flex-direction: column;
-		background-color: white;
-		border-bottom-color: transparent;
+                width: 100%;
+                /* background-color: #fbf7f7; */
+                border: 1px solid #d1d5db;
+                border-radius: 5px;
+                /* padding: 0 15px; */
+                display: flex;
+                flex-direction: column;
+                background-color: white;
+                border-bottom-color: transparent;
 
-		.link-row {
-			padding: 20px 20px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-			border-bottom: 1px solid #d1d5db;
+                .link-row {
+                    padding: 20px 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;
+                    border-bottom: 1px solid #d1d5db;
 
-			.link-row-left {
-				display: flex;
-				align-items: center;
+                    .link-row-left {
+                        display: flex;
+                        align-items: center;
 
-				.count {
-					font-size: 1rem;
-					font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
-						BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
-						Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-						Segoe UI Symbol, Noto Color Emoji;
-					margin-right: 20px;
-					font-weight: 500;
-				}
+                        .count {
+                            font-size: 1rem;
+                            font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
+                                BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+                                Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+                                Segoe UI Symbol, Noto Color Emoji;
+                            margin-right: 20px;
+                            font-weight: 500;
+                        }
 
-				.main-row-content {
-					a {
-						font-size: 0.85rem;
-						font-weight: 500;
-						text-decoration: none;
-						/* color: inherit; */
+                        .main-row-content {
+                            a {
+                                font-size: 0.85rem;
+                                font-weight: 500;
+                                text-decoration: none;
+                                /* color: inherit; */
 
-						&:hover {
-							text-decoration: underline;
-						}
-					}
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
 
-					.tags {
-						margin: 0;
-						margin-top: 5px;
-						display: flex;
-						flex-wrap: wrap;
+                            .tags {
+                                margin: 0;
+                                margin-top: 5px;
+                                display: flex;
+                                flex-wrap: wrap;
 
-						.tag {
-							background-color: #f3f4f7;
-							color: inherit;
-							padding: 2.5px 5px;
-							border-radius: 100px;
-							font-size: 0.6rem;
-							margin-right: 5px;
-							border: 1px solid #cac3c3;
-							margin-bottom: 2.5px;
-						}
+                                .tag {
+                                    background-color: #f3f4f7;
+                                    color: inherit;
+                                    padding: 2.5px 5px;
+                                    border-radius: 100px;
+                                    font-size: 0.6rem;
+                                    margin-right: 5px;
+                                    border: 1px solid #cac3c3;
+                                    margin-bottom: 2.5px;
+                                }
 
-						.special-tag {
-							/* background-color: #ffeac2; */
-							color: inherit;
-							/* background-color: black; */
-							/* color: white; */
-							font-weight: 400;
-							border: 1px solid #a99c9c;
-						}
-					}
-				}
-			}
+                                .special-tag {
+                                    /* background-color: #ffeac2; */
+                                    color: inherit;
+                                    /* background-color: black; */
+                                    /* color: white; */
+                                    font-weight: 400;
+                                    border: 1px solid #a99c9c;
+                                }
+                            }
+                        }
+                    }
 
-			.done-btn {
-				.MuiSvgIcon-root {
-					fill: #b5a6a6;
-					font-size: 1.75rem;
+                    .done-btn {
+                        .MuiSvgIcon-root {
+                            fill: #b5a6a6;
+                            font-size: 1.75rem;
 
-					&:hover {
-						transition-duration: 250ms;
-						fill: orange;
-						cursor: pointer;
-					}
-				}
-			}
-		}
+                            &:hover {
+                                transition-duration: 250ms;
+                                fill: orange;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
 
-		.done-row {
-			background-color: #dcf8eb;
+                .done-row {
+                    background-color: #dcf8eb;
 
-			.done-btn {
-				.MuiSvgIcon-root {
-					fill: orange;
-					font-size: 1.75rem;
-				}
-			}
-		}
+                    .done-btn {
+                        .MuiSvgIcon-root {
+                            fill: orange;
+                            font-size: 1.75rem;
+                        }
+                    }
+                }
 
-		.no-bottom-border {
-			border-bottom: 1px solid transparent;
-		}
+                .no-bottom-border {
+                    border-bottom: 1px solid transparent;
+                }
             }
             
 		}
+    }
+`
+
+const AddResource = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    a{  
+        user-select: none;
+        padding: 7.5px 15px;
+        font-size: 0.75rem;
+        background-color: white;
+        border-radius: 5px;
+        color: inherit;
+        border: 1px solid #d1d5db;
+        text-decoration: none;
+
+        @media only screen and (max-width: 1100px) {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+        }
     }
 `

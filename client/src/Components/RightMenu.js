@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
+import { React, useState, useEffect } from 'react';
 import styled from 'styled-components'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import axios from "axios";
 import data from './allBlogsDatabase.json'
 
-const RightMenu = ({ ResourceType, blogid }) => {
+const RightMenu = ({ blogid, blogname, ResourceType }) => {
+  const [resourceData, setResourceData] = useState([]);
   console.log(blogid);
   console.log(data[blogid]);
+  console.log(resourceData);
+
+
+  useEffect(() => {
+    axios
+        .get(`https://algolisted.cyclic.app/blog-resources/blog/${blogname}`)
+        .then((res) => {
+            setResourceData(res.data);
+        })
+        .catch((err) => console.log(err));
+}, []);
 
   const contentInformation = [
     {
@@ -39,26 +52,44 @@ const RightMenu = ({ ResourceType, blogid }) => {
         </div>
         
         <div className="btns">
-          <button className="full-btn cl-2">Add content to this blog or Report a bug</button>
+          <a href={`https://github.com/Nayaker/AlgoListed/blob/main/client/src/MarkdownFiles/Blog${blogid}.md`} target={"_blank"} className="full-btn cl-2">Add content to this blog or Report a bug</a>
           <button className="full-btn cl-1">Become a Technical Content Writer</button>
         </div>
       </div>
       
-      <div className="similar-questions">
-        <div className="top-title">{contentInformation[ResourceType].name}</div>
-        <div className="top-desc">
-          {contentInformation[ResourceType].text}
+      <div className="sticky-top">
+        <div className="similar-questions">
+          <div className="top-title">{contentInformation[ResourceType].name}</div>
+          <div className="top-desc">
+            {contentInformation[ResourceType].text}
+          </div>
+          {
+            resourceData.length > 0 && resourceData.map((item, index) => {
+              if(index < 3){
+                return (
+                  <div className="question">
+                    <div className="text">{contentInformation[ResourceType].type} : <a href="/">{item.resourceName}</a></div>
+                  </div>
+                )
+              }
+              else return (<></>)
+            })
+          }
+          {/* <div className="question">
+            <div className="text">{contentInformation[ResourceType].type} : <a href="/">Course Schedule I</a></div>
+          </div>
+          <div className="question">
+            <div className="text">{contentInformation[ResourceType].type} : <a href="/">Rotting Oranges</a></div>
+          </div> */}
+          <div className="show-all-problems">{contentInformation[ResourceType].scroll_text}</div>
         </div>
-        <div className="question">
-          <div className="text">{contentInformation[ResourceType].type} : <a href="/">Number of Islands</a></div>
+        <div className="ask-query">
+          <div className="top-title">Ask query about the topic</div>
+          <div className="top-desc">If you have a question or doubt, other readers may be able to help you. Additionally, a notification will be sent to the creators of the blog, who can address it for you.</div>
+          {/* <input type="text" className='input-query' placeholder='Enter your doubt . . .'/> */}
+          <div className="submit-btn">Ask doubt to community</div>
+          <div className="bottom-desc">Go to<a href='/' >Ask doubts to community</a> section, to ask, discuss and solve queries related to the blog topic.</div>
         </div>
-        <div className="question">
-          <div className="text">{contentInformation[ResourceType].type} : <a href="/">Course Schedule I</a></div>
-        </div>
-        <div className="question">
-          <div className="text">{contentInformation[ResourceType].type} : <a href="/">Rotting Oranges</a></div>
-        </div>
-        <div className="show-all-problems">{contentInformation[ResourceType].scroll_text}</div>
       </div>
       {/* <div className="subscribe-box">
         <div className="top-title">Subscribe to Algorithmist,</div>
@@ -70,13 +101,7 @@ const RightMenu = ({ ResourceType, blogid }) => {
           <a href="/">Privacy policy</a>
         </div>
       </div> */}
-      <div className="ask-query">
-        <div className="top-title">Ask query about the topic</div>
-        <div className="top-desc">If you have a question or doubt, other readers may be able to help you. Additionally, a notification will be sent to the creators of the blog, who can address it for you.</div>
-        {/* <input type="text" className='input-query' placeholder='Enter your doubt . . .'/> */}
-        <div className="submit-btn">Ask doubt to community</div>
-        <div className="bottom-desc">Go to<a href='/' >Ask doubts to community</a> section, to ask, discuss and solve queries related to the blog topic.</div>
-      </div>
+      
     </Container>
   )
 }
@@ -149,12 +174,36 @@ const Container = styled.div`
         padding: 12.5px;
         font-size: 0.75rem;
         margin: 10px 0;
+        text-decoration: none;
+        color: inherit;
       }
 
       .cl-1{
-        background-color: black;
+        /* background-color: black; */
         color: white;
         font-weight: 200;
+        background: linear-gradient(135deg,#000000,#000000,#000000,#686866,#000000,#000000,#000000,#000000);
+        background-size: 600% 600%;
+
+        -webkit-animation: AnimationName 20s ease infinite;
+        -moz-animation: AnimationName 20s ease infinite;
+        animation: AnimationName 20s ease infinite;
+      }
+
+      @-webkit-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+      @-moz-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+      @keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
       }
 
       .cl-2{
@@ -224,8 +273,8 @@ const Container = styled.div`
     background-color: #eef0f3;
     padding: 10px;
     /* margin: 10px 0; */
-    position: sticky;
-    top: 390px;
+    /* position: sticky; */
+    /* top: 390px; */
     border-radius: 5px;
 
     .top-title{
@@ -268,14 +317,15 @@ const Container = styled.div`
   }
 
   
-  
-
-  .similar-questions{
-    margin: 20px 0;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #d6d9de;
+  .sticky-top{
     position: sticky;
     top: 65px;
+  }
+
+  .similar-questions{
+    margin: 5px 0 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d6d9de;
 
     .question{
       background-color: #ebf2fd;

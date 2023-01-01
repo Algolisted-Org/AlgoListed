@@ -32,7 +32,7 @@ const BlogPage = () => {
                 <div className="blogs-main">
                     {/* <BlogContent blogid={blogid} /> */}
                     <BlogContentMD blogid={blogid} />
-                    <RightMenu blogid={blogid} ResourceType={ResourceType}/>
+                    <RightMenu blogid={blogid} blogname={blogname} ResourceType={ResourceType}/>
                 </div>
 
                 {/* <BlogsMain blogname={blogname}/> */}
