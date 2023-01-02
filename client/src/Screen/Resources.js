@@ -94,9 +94,9 @@ const Resources = () => {
                     if (filter == "All Resources" || item.mainTag == filter) {
                       return (
                         <div className="resource">
-                          <div className="img-container">
-                            <img src={item.imgLink} alt="" />
-                          </div>
+                          <a className="img-container" href={item.link} target="_blank" >
+                            <img src={item.imgLink}  target="_blank" alt="" />
+                          </a>
                           <a href={item.link} target={"_blank"} className="title">{item.title}</a>
                           <div className="short-desc">{item.description}</div>
                           <div className="tags">
@@ -157,9 +157,9 @@ const Resources = () => {
                       return (
                         <div className="resource">
                           <div className="top-part">
-                            <div className="img-container">
-                              <img src={item.imgLink} alt="" />
-                            </div>
+                            <a href={item.link} target="_blank" className="img-container">
+                              <img src={item.imgLink} target="_blank" alt="" />
+                            </a>
                             <a href={item.link} target={"_blank"} className="title">{item.title}</a>
                             <div className="short-desc">{item.description}</div>
                           </div>
@@ -169,7 +169,7 @@ const Resources = () => {
                               <div className="tag">{item.type}</div>
                             </div>
                             <div className="follow-me-link">
-                              <a href="/">Follow me for more</a>
+                              <a href={item.promotionLink} target={"_blank"}>Follow me for more</a>
                             </div>
                           </div>
                         </div>
@@ -319,6 +319,7 @@ const MobContainer = styled.div`
             margin-bottom: 10px;
             overflow: hidden;
             border-radius: 10px;
+            border: 1px solid #f3e4e4;
 
             img{
               width: 100%;
@@ -493,6 +494,7 @@ const Container = styled.div`
             margin-bottom: 10px;
             overflow: hidden;
             border-radius: 10px;
+            border: 1px solid #f3e4e4;
 
             img{
               width: 100%;
@@ -631,6 +633,7 @@ const Sort = styled.div`
     border: 1px solid #b9afaf;
     box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
     margin-right: 5px;
+    user-select: none;
 
     .text {
       font-size: 0.8rem;

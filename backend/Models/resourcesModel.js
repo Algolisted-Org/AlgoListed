@@ -21,11 +21,13 @@ const resourcesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  promotionLink: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
-    enum: ['Blog', 'Handwritten Notes', 'Question Paper', 'Course', 'Other'],
     required: true,
-    default: 'Other',
   },
   createdAt: {
     type: Date,
