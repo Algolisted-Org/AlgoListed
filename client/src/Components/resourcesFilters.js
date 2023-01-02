@@ -5,28 +5,48 @@ export const resourcesFilters = [
       id: 1,
     },
     {
-      text: "Array",
+      text: "Complete DSA",
       id: 2,
     },
     {
-      text: "String",
+      text: "Dynamic Programming",
       id: 3,
     },
     {
-      text: "Linked List",
+      text: "Linear Data Structures",
       id: 4,
     },
     {
-      text: "Dynamic Programming",
+      text: "Non-Linear Data Structures",
       id: 5,
     },
+    // {
+    //   text: "Tree",
+    //   id: 6,
+    // },
+    // {
+    //   text: "Graph Theory",
+    //   id: 7,
+    // },
+    // {
+    //   text: "",
+    //   id: 8,
+    // },
     {
-      text: "Tree",
-      id: 6,
+      text: "Web Development",
+      id: 9,
     },
     {
-      text: "Graph Theory",
-      id: 7,
+      text: "Github",
+      id: 10,
+    },
+    {
+      text: "Theory Subjects",
+      id: 11,
+    },
+    {
+      text: "Interview PDFs",
+      id: 12,
     },
     
   ];

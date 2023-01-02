@@ -156,14 +156,21 @@ const Resources = () => {
                     if (filter == "All Resources" || item.mainTag == filter) {
                       return (
                         <div className="resource">
-                          <div className="img-container">
-                            <img src={item.imgLink} alt="" />
+                          <div className="top-part">
+                            <div className="img-container">
+                              <img src={item.imgLink} alt="" />
+                            </div>
+                            <a href={item.link} target={"_blank"} className="title">{item.title}</a>
+                            <div className="short-desc">{item.description}</div>
                           </div>
-                          <a href={item.link} target={"_blank"} className="title">{item.title}</a>
-                          <div className="short-desc">{item.description}</div>
-                          <div className="tags">
-                            <div className="main-tag">{item.mainTag}</div>
-                            <div className="tag">{item.type}</div>
+                          <div className="bottom-part">
+                            <div className="tags">
+                              <div className="main-tag">{item.mainTag}</div>
+                              <div className="tag">{item.type}</div>
+                            </div>
+                            <div className="follow-me-link">
+                              <a href="/">Follow me for more</a>
+                            </div>
                           </div>
                         </div>
                       )
@@ -460,16 +467,23 @@ const Container = styled.div`
         display: flex;
         flex-wrap: wrap;
         /* justify-content: space-between; */
+        align-items: stretch;
+        height: auto;
         width: 100%;
         margin-top: 10px;
 
         .resource{
           width: calc(33% - 30px);
-          min-height: 140px;
+          height: auto;
+          /* min-height: 280px; */
           /* background-color: white; */
           border-top: 1px solid rgb(232, 232, 232);
+          /* border: 1px solid rgb(232, 232, 232); */
           padding-top: 20px;
-          margin: 10px 10px 30px 10px;
+          margin: 10px 15px 30px 15px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
 
           .img-container{
             width: 100%;
@@ -531,6 +545,20 @@ const Container = styled.div`
                   font-weight: 300;
                   margin: 5px 5px 0 0;
               }
+          }
+
+          .follow-me-link{
+            margin: 10px 5px;
+
+            a{
+              font-size: 0.75rem;
+              /* text-decoration: none; */
+              /* color: inherit; */
+
+              &:hover{
+                text-decoration: underline;
+              }
+            }
           }
         }
       }
