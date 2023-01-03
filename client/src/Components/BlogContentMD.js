@@ -228,7 +228,7 @@ const Container = styled.div`
         }
 
         .big-margin{
-            height: 50px;
+            height: 20px;
         }
 
         .para-1{
