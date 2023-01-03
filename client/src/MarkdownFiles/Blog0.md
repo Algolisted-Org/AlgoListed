@@ -6,7 +6,8 @@ This blog is meant to help you create a REST API that can read and write data in
   - Setting up the backend on a browser
   - Displaying information on a browser through an API 
   - Understanding the index.js file
-  - Local database GET/POST methods (in a future blog)
+  - Local database GET methods 
+  - Local database POST methods using Thunder Client (Next Blog)
   
 
 <b> Prerequisites : </b> Make sure you have node installed in your system. if not watch <a href="https://www.youtube.com/watch?v=3F5IaPqj7ds" target="_blank">this video</a> and then return to the blog. 
@@ -64,7 +65,89 @@ application). It's something like you are creating an object of a class to use i
 
 The `app.listen()` function is used to bind and listen to the connections on the specified host and port.
 
-To learn how to create get/post requests, you can read the next blog and follow the instructions on how to modify the index.js file.
+
+## 4. Local database GET methods 
+GET and POST are the two most commonly HTTP methods used in web development to retrieve or send data to a server. In this section, we'll learn how to use these methods in your own projects. Let's get started!
+
+There are mainly two types of Get requests
+- Sending static information
+- Information based on custum API route
+- Using local Array database
+
+
+#### Sending static information
+The code which we whote above was also using a get request. Evenever we call the API a hello world message would be shown. 
+```
+app.get('/', (req, res) => {
+   res.send('Hello World, our first API is running');
+});
+```
+
+We can change the route and play around to give specific values at specific routes. For example `We are in name route` will be visible on http://localhost:8000/name
+```
+app.get('/name', (req, res) => {
+   res.send('We are in name route');
+});
+```
+
+#### Information based on custum API route
+An example for custum API route can be `https://www.instagram.com/zuck` - I know this is a URL and not an API but it is a good example :) 
+
+<img width="982" alt="Screenshot 2023-01-04 at 1 01 08 AM" src="https://user-images.githubusercontent.com/93304796/210427927-7e73243c-d855-441f-a322-5dae382211fe.png">
+
+Here zuck is the username with respect to which a perticular profile on page will be show, if you change the username to your handle you will see your profile. 
+
+Now, if we go deep into thinking how are they showing the data on screen - they are calling an API based on the username which is also custom. We can think like they are calling `no-instagram-api/zuck` which is bringing data for zuck username.  The actaul API looks like `no-instagram-api/:username`. 
+
+`:username` is known as <b>param</b>, meaning parameters - which is the variable part of an API. 
+
+```
+app.get('/hello/:username', (req, res) => {
+  const username = req.params.username;
+  res.send(`Hello ${username}, nice to meet you.`);
+});
+```
+#### Using local Array database
+In basic terms, you can think of a database as information stacked together. For example if we talk interms of instagram, their database will have one cluster containing user information like username, name, bio, etc. And, all the data in this set can be seperated by username as it is unique. 
+
+Let's make a dummy instgram user database. Below is a JSON code, don't worry if you don't know about it as you will learn it soon. It's easy, basically array of objects. 
+
+```
+const allUsers = [
+    {
+        "username" : "zuck",
+        "name" : "Mark Zuckerburg",
+        "bio" : "I keep passwords as plain texts",
+    },
+    {
+        "username" : "esaverin",
+        "name" : "Eduardo Saverin",
+        "bio" : "Hello World!",
+    },
+]
+
+```
+
+We have created a simple database. Let's create a simple code to display user information. Our task is to find username in the database which will be provided to us as a parameter. 
+
+```
+app.get('/user/:username', (req, res) => {
+  const username = req.params.username;
+  for(let i = 0; i<allUsers.length; i++){
+    if(allUsers[i].username === username){
+      res.send(allUsers[i]);
+      break;
+    }
+  }
+  res.send("No user found with given username");
+});
+```
+Play around with this code on your system. To get the whole code you can check the resources section or directly go to https://github.com/Nayaker/Node-JS---Codes/tree/node-setup.
+
+
+## Next Blog
+In the next blog we will learn how to post content to the local database. It's like creating a new user on instagram. 
+
 
 
 

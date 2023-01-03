@@ -9,18 +9,20 @@ import Markdown from 'markdown-to-jsx';
 import BlogResources from './BlogResources';
 
 
+
 const BlogContentMD = ({ blogid,  blogname }) => {
     const [ShowReply, setShowReply] = useState(false);
     const [post, setPost] = useState("");
     const [blogData, setBlogData] = useState(data[blogid]);
     
     const file_name = blogData.file_name;
+    console.log(file_name);
     
     // console.log(blogid);
     // console.log(data[blogid]);
 
     useEffect(() => {
-        import(`../MarkdownFiles/${file_name}`)
+        import(`../MarkdownFiles/${file_name}`) 
             .then(res => {
             fetch(res.default)
                 .then(res => res.text())
@@ -29,7 +31,6 @@ const BlogContentMD = ({ blogid,  blogname }) => {
             })
             .catch(err => console.log(err));
     });
-    // console.log(post);
 
     return (
         <Container>
@@ -320,7 +321,7 @@ const Container = styled.div`
 
             img{
                 width: 100%;
-                margin: 15px 0;
+                margin: 25px 0;
                 display: block;
             }
 
@@ -352,8 +353,8 @@ const Container = styled.div`
                 font-weight: 200;
                 margin: 20px 0;
                 font-size: 0.8rem;
-                line-height: 1.45rem;
-                letter-spacing: 0.07rem;
+                line-height: 1.75rem;
+                letter-spacing: 0.08rem;
                 overflow: hidden;
                 font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
                 
