@@ -238,7 +238,7 @@ const LandingPageReal = () => {
                 Algorithmist is an open software for coders. We contain information about Data structures and Algorithms in the 
                 best way possible. Community can learn, comment, modify, and add information.
               </div>
-              <div className="btn">Learn More</div>
+              <div className="btn">Learn Moredsadas</div>
             </div>
             <div className="right"><img style={{ "width": "100%", }} src={react3dLoader} alt="" /></div>
           </div>

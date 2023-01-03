@@ -8,6 +8,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Markdown from 'markdown-to-jsx';
 import BlogResources from './BlogResources';
 
+
 const BlogContentMD = ({ blogid }) => {
     const [ShowReply, setShowReply] = useState(false);
     const [post, setPost] = useState("");
@@ -55,7 +56,7 @@ const BlogContentMD = ({ blogid }) => {
                 <BlogResources ResourceType={1}/>
 
                 <div className="page-section">
-                    <div className="new-part-heading">Ask doubts to community</div>
+                    <div className="new-part-heading" id='ask'>Ask doubts to community</div>
                     <div className="para-1">
                         You can ask any questions or doubts you have about the blog topic in this section. Please note that this section is for asking questions and seeking clarification, not for making complimentary comments about the blog. If you have a question or doubt, a notification will be sent to the blog creators so they can address it. Please refrain from using this section for flattering comments.
                     </div>

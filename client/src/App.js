@@ -24,7 +24,7 @@ import CodingSheets from './Screen/CodingSheets';
 import AddContentCoreOnly from './Screen/AddContentCoreOnly';
 import LandingPage2 from './Screen/LandingPage2';
 import Readme from './Screen/Readme';
-
+import GoToTop from './Components/GoToTop';
 
 
 const App = () => {
@@ -37,7 +37,10 @@ const App = () => {
   // }, [console]);
 
   return (
+    
     <div>
+      
+      
       <Routes>
         {/* <Route path="/" element={<LandingPage/>} /> */}
         <Route path="/" element={<LandingPage2/>} />
@@ -61,6 +64,8 @@ const App = () => {
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
       </Routes>
+      <GoToTop/>
+     
     </div>
   )
 }
