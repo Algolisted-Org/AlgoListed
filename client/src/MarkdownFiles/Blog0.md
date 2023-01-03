@@ -107,14 +107,44 @@ app.get('/hello/:username', (req, res) => {
   res.send(`Hello ${username}, nice to meet you.`);
 });
 ```
+#### Using local Array database
+In basic terms, you can think of a database as information stacked together. For example if we talk interms of instagram, their database will have one cluster containing user information like username, name, bio, etc. And, all the data in this set can be seperated by username as it is unique. 
 
-<img className="small-img" width="326" alt="Screenshot 2023-01-04 at 1 11 40 AM" src="https://user-images.githubusercontent.com/93304796/210429455-91ffe8cc-3443-4a82-8f28-82106bc5862f.png">
+Let's make a dummy instgram user database. Below is a JSON code, don't worry if you don't know about it as you will learn it soon. It's easy, basically array of objects. 
+```
+const allUsers = [
+    {
+        "username" : "zuck",
+        "name" : "Mark Zuckerburg",
+        "bio" : "I keep passwords as plain texts",
+    },
+    {
+        "username" : "esaverin",
+        "name" : "Eduardo Saverin",
+        "bio" : "Hello World!",
+    },
+]
+```
+
+We have created a simple database. Let's create a simple code to display user information. Our task is to find username in the database which will be provided to us as a parameter. 
+
+```
+app.get('/user/:username', (req, res) => {
+  const username = req.params.username;
+  for(let i = 0; i<allUsers.length; i++){
+    if(allUsers[i].username === username){
+      res.send(allUsers[i]);
+      break;
+    }
+  }
+  res.send("No user found with given username");
+});
+```
+Play around with this code on your system. To get the whole code you can check the resources section or directly go to https://github.com/Nayaker/Node-JS---Codes/tree/node-setup.
 
 
-
-
-
-
+## Next Blog
+In the next blog we will learn how to post content to the local database. It's like creating a new user on instagram. 
 
 
 
