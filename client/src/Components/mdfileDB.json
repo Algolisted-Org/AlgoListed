@@ -3,9 +3,18 @@
         "docLink" : "https://docs.google.com/document/d/1cI9f4hRQPhuVVRKcD3hcMfDp9t-l72yalyR73giW_NQ/edit",
         "file_name" : "Blog0.md",
         "url" : "backend-with-node-js-for-beginners",
-        "postCount" : "1",
         "title" : "Backend with Node JS for beginners",
         "titleSupport" : "Learn to start your backend with node.js",
         "tags" : ["Algorithms", "Graph Theory", "Dijekstra Algorithm", "DSA"]
+    },
+    {},
+    {},
+    {
+        "docLink" : "-",
+        "file_name" : "Blog3.md",
+        "url" : "get-started-with-github",
+        "title" : "Get started with Github, learn the basics",
+        "titleSupport" : "Learn to create your first project on Github",
+        "tags" : ["Open Source", "Github", "Beginner Friendly"]
     }
 ]

@@ -27,7 +27,7 @@
     },
     {
         "date" : "December 18, 2022",
-        "title" : "Get started with Github",
+        "title" : "Connect your Github with Local System",
         "desc" : "We have listed down all the resources that you would require to get started on github. This blog is for straight beginners you want to fork a project or wants to make thier first commit. There is a bonus aswell, we have also listed the best beginner friendly open sourced projects. ",
         "link" : "/blogs/1/get-started-with-github",
         "category" : "Open Source",
@@ -37,6 +37,19 @@
         "resourceType" : 0,
         "resourceLink" : "linktobegiven.com",
         "tags" : ["Github", "Beginner level projects"]
+    },
+    {
+        "date" : "January 4, 2023",
+        "title" : "Get started with Github",
+        "desc" : "We have listed down all the resources that you would require to get started on github. This blog is for straight beginners you want to fork a project or wants to make thier first commit. There is a bonus aswell, we have also listed the best beginner friendly open sourced projects. ",
+        "link" : "/blogs/3/get-started-with-github",
+        "category" : "Open Source",
+        "author" : ["Yashika Jain", "Aayushi Nayak"],
+        "authorLink" : ["https://github.com/Yashika1410", ""],
+        "authorImageLink" : ["https://avatars.githubusercontent.com/u/33375917?v=4", "https://avatars.githubusercontent.com/u/61237800?v=4"],
+        "resourceType" : 0,
+        "resourceLink" : "linktobegiven.com",
+        "tags" : []
     },
     {
         "date" : "December 22, 2022",
