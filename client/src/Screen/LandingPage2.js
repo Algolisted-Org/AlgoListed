@@ -14,6 +14,7 @@ import MobileNavbar from '../Components/MobileNavbar'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Fade from 'react-reveal/Fade';
 import Wobble from 'react-reveal/Wobble';
+import {Link} from 'react-scroll';
 
 const LandingPage2 = () => {
   const [contributorsList, setContributorsList] = useState(null);
@@ -68,7 +69,7 @@ const LandingPage2 = () => {
                 <div className="small-desc">
                   Algolisted is a community-driven platform for learning and improving coding skills. It offers a wealth of information on data structures and algorithms, and allows coders to interact with, modify, and contribute to the content.
                 </div>
-                <div className="btn">Learn More</div>
+                <div className="btn"><Link to='content' spy={true} smooth={true} offset={30} duration={1000}>Learn More</Link></div>
                 {/* <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/HatefulHollowLangur-size_restricted.gif" alt="" /></div> */}
                 <DancerDownIcon>
                   <ExpandMoreIcon style={{ fontSize: '2rem', fill: '#333' }} />
@@ -76,7 +77,7 @@ const LandingPage2 = () => {
               </div>
             </Fade>
             <Fade></Fade>
-            <div className="page2">
+            <div className="page2" id='content'>
               <div className="content">
                   <Fade>
                     <h1>Speed up your Learning and Development with Algolisted today</h1>
@@ -244,7 +245,12 @@ const LandingPage2 = () => {
               </div>
             </Fade>
             <Fade left>
+              <div className="learn">
+                <Link to='content' spy={true} smooth={true} offset={700} duration={1000}>
               <div className="btn">Learn More</div>
+              </Link>
+              </div>
+              
             </Fade>
             </div>
             {/* <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/CharmingMilkyHamster-size_restricted.gif" alt="" /></div> */}

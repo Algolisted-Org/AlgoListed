@@ -77,7 +77,7 @@ const BlogResources = ({ ResourceType }) => {
 
     return (
         <Container>
-            <div className="page-section">
+            <div className="page-section" id="rev">
                 <div className="new-part-heading">{contentInformation[ResourceType].name}</div>
                 <div className="para-1">{contentInformation[ResourceType].text}</div>
                 <div className="message">
