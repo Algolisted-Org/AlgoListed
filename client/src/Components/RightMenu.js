@@ -69,7 +69,7 @@ const RightMenu = ({ blogid, blogname, ResourceType }) => {
               if(index < 3){
                 return (
                   <div className="question">
-                    <div className="text">{contentInformation[ResourceType].type} : <a href="/">{item.resourceName}</a></div>
+                    <div className="text">{contentInformation[ResourceType].type} : <a href={item.resourceLink}>{item.resourceName}</a></div>
                   </div>
                 )
               }

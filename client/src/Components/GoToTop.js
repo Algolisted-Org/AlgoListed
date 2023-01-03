@@ -67,6 +67,22 @@ const Wrapper = styled.section`
       font-size: 30px;
       /* animation: gototop 1.2s linear infinite alternate-reverse; */
     }
+
+    @media only screen and (max-width: 1100px) {
+      width: 45px;
+      height: 45px;
+      bottom: 20px;
+      right: 20px;
+      border-bottom: 1px solid rgb(233, 229, 229);
+background-color: #ffffffd4;
+box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 5%);
+-webkit-backdrop-filter: blur(8px);
+backdrop-filter: blur(8px);
+      
+      &--icon {
+        font-size: 25px;
+      }
+    }
   }
 `;
 

@@ -9,7 +9,7 @@ import Markdown from 'markdown-to-jsx';
 import BlogResources from './BlogResources';
 
 
-const BlogContentMD = ({ blogid }) => {
+const BlogContentMD = ({ blogid,  blogname }) => {
     const [ShowReply, setShowReply] = useState(false);
     const [post, setPost] = useState("");
     const [blogData, setBlogData] = useState(data[blogid]);
@@ -53,7 +53,7 @@ const BlogContentMD = ({ blogid }) => {
                     </Markdown>
                 </div>
 
-                <BlogResources ResourceType={1}/>
+                <BlogResources ResourceType={1}  blogname={blogname}/>
 
                 <div className="page-section">
                     <div className="new-part-heading" id='ask'>Ask doubts to community</div>

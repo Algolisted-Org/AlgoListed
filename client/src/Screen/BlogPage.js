@@ -24,14 +24,14 @@ const BlogPage = () => {
         <GrandContainer>
             <MobContainer>
                 <MobileNavbar/>
-                <BlogContentMD blogid={blogid} />
+                <BlogContentMD blogid={blogid} blogname={blogname}/>
             </MobContainer>
             <Container>
                 <CCHeader /> 
                 <LeftMenu marked={"all-blogs"} />
                 <div className="blogs-main">
                     {/* <BlogContent blogid={blogid} /> */}
-                    <BlogContentMD blogid={blogid} />
+                    <BlogContentMD blogid={blogid} blogname={blogname}/>
                     <RightMenu blogid={blogid} blogname={blogname} ResourceType={ResourceType}/>
                 </div>
 

@@ -9,7 +9,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import { LinearProgress } from "@material-ui/core";
 import Markdown from 'markdown-to-jsx';
 
-const BlogResources = ({ ResourceType }) => {
+const BlogResources = ({ ResourceType,  blogname }) => {
     console.log(ResourceType);
     const [contentName, setContentName] = useState("");
     const [contentText, setContentText] = useState("");
@@ -17,8 +17,6 @@ const BlogResources = ({ ResourceType }) => {
     const [data, setData] = useState([]);
     const [dataLoading, setDataLoading] = useState(true);
     const [completedCount, setCompletedCount] = useState(0);
-
-    const sheetname = "two-pointers-lc";
 
     const toggleCompleted = (index) => {
 		// update the "completed" field for the coding sheet at the specified index
@@ -36,12 +34,13 @@ const BlogResources = ({ ResourceType }) => {
 		);
 	};
     
-
+    console.log(blogname);
+    
     useEffect(() => {
         // retrieve the data from the server
         axios
             // .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
-            .get(`https://algolisted.cyclic.app/blog-resources/blog/backend-with-node-js-for-beginners`)
+            .get(`https://algolisted.cyclic.app/blog-resources/blog/${blogname}`)
             .then((res) => {
                 // retrieve the "completed" status of each sheet from the local storage
                 const updatedData = res.data.map((sheet) => {
@@ -60,7 +59,7 @@ const BlogResources = ({ ResourceType }) => {
                 setDataLoading(false);
             })
             .catch((err) => console.log(err));
-    }, [sheetname]);
+    }, []);
     
     console.log(data);
 
@@ -257,7 +256,7 @@ const BlogResources = ({ ResourceType }) => {
                 </div>
 
                 <AddResource>
-                    <a href="/">Add Resource</a>
+                    <a>Add Resource</a>
                 </AddResource>
 
             </div>
@@ -487,6 +486,7 @@ const AddResource = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    cursor: pointer;
 
     a{  
         user-select: none;
