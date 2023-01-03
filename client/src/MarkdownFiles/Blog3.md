@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/93304796/210441476-5b3ed964-b694-4526-8de9-a8dca37dc2e0.png)
+![image](https://user-images.githubusercontent.com/93304796/210444905-a90cbdc3-7a09-419b-b3bd-d8a679f639a1.png)
 
 If you are someone who doesn’t know how to use GitHub, then this blog is for you. Github is a web-based platform used for version control. Git simplifies the process of working with other people and makes it easy to collaborate on projects.
 
