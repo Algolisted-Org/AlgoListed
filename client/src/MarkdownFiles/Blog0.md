@@ -125,7 +125,6 @@ const allUsers = [
         "bio" : "Hello World!",
     },
 ]
-
 ```
 
 We have created a simple database. Let's create a simple code to display user information. Our task is to find username in the database which will be provided to us as a parameter. 
@@ -142,6 +141,7 @@ app.get('/user/:username', (req, res) => {
   res.send("No user found with given username");
 });
 ```
+
 Play around with this code on your system. To get the whole code you can check the resources section or directly go to https://github.com/Nayaker/Node-JS---Codes/tree/node-setup.
 
 
