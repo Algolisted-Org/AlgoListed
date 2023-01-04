@@ -9,8 +9,18 @@ require('dotenv').config({
   path: './config.env',
 });
 
+var whitelist = ['https://algolisted.com'] // add more urls in this array , from where the api will be called
 const corsOptions ={
   // origin: 'http://localhost:3000/', 
+  origin: function (origin, callback) {
+      console.log(origin) ;
+      if (whitelist.indexOf(origin) !== -1 ) {
+        console.log(origin)
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    } ,
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
