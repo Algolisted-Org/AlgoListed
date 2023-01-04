@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import styled from 'styled-components'
 import ShowContributors from './ShowContributors'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import data from './mdfileDB.json'
+import data from './allBlogsDatabase.json'
 import axios from "axios";
 import Avatar from '@material-ui/core/Avatar';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
@@ -81,7 +81,7 @@ const BlogResources = ({ ResourceType,  blogname }) => {
                 <div className="para-1">{contentInformation[ResourceType].text}</div>
                 <div className="message">
                     <div className="text">
-                        Want add a question link of this topic or point out any wrong info of tags. <a href="/">click here</a>
+                        Feature will be added soon for : Edit request of the following content
                     </div>
                 </div>
                 {/* <div className="table">

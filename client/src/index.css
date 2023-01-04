@@ -72,11 +72,12 @@ input{
 }
  
 ::-webkit-scrollbar-track {
-  background-color: #aaa;
+  background-color: #f0e9e9;
+  border-left: 1px solid #e9e5e5;
 }
  
 ::-webkit-scrollbar-thumb {
   background-color: #335ddc;
-  border-radius: 8px;
+  border-radius: 100px;
 }
 

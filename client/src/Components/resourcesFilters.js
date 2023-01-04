@@ -5,7 +5,7 @@ export const resourcesFilters = [
       id: 1,
     },
     {
-      text: "Complete DSA",
+      text: "DSA Topic",
       id: 2,
     },
     {
@@ -13,7 +13,7 @@ export const resourcesFilters = [
       id: 3,
     },
     {
-      text: "Linear Data Structures",
+      text: "Data Structures",
       id: 4,
     },
     {
@@ -45,9 +45,12 @@ export const resourcesFilters = [
       id: 11,
     },
     {
-      text: "Interview PDFs",
+      text: "Interview Preparation",
       id: 12,
     },
-    
+    {
+      text: "Machine Learning",
+      id: 13,
+    },
   ];
   

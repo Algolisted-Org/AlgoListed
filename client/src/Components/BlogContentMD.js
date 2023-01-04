@@ -2,12 +2,12 @@ import { React, useState, useEffect } from 'react';
 import styled from 'styled-components'
 import ShowContributors from './ShowContributors'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import data from './mdfileDB.json'
+// import data from './mdfileDB.json'
+import data from './allBlogsDatabase.json'
 import Avatar from '@material-ui/core/Avatar';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Markdown from 'markdown-to-jsx';
 import BlogResources from './BlogResources';
-
 
 
 const BlogContentMD = ({ blogid,  blogname }) => {
@@ -16,7 +16,7 @@ const BlogContentMD = ({ blogid,  blogname }) => {
     const [blogData, setBlogData] = useState(data[blogid]);
     
     const file_name = blogData.file_name;
-    console.log(file_name);
+    // console.log(file_name);
     
     // console.log(blogid);
     // console.log(data[blogid]);

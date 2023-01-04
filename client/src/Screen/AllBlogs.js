@@ -10,7 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import MobileNavbar from "../Components/MobileNavbar";
 
-console.log(allBlogsDatabase);
+// console.log(allBlogsDatabase);
 
 const AllBlogs = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -95,7 +95,8 @@ return (
           <div className="message">
             <div className="icon"></div>
             <div className="text">
-              We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
+              To create new blogs on a topic or edit existing contect you can visit the markdown 
+              files on our github. <a href="https://github.com/Nayaker/AlgoListed/tree/main/client/src/MarkdownFiles" target={"_blank"}>click here</a>
             </div>
           </div>
           <Sort>

@@ -66,7 +66,7 @@ const CodingSheets = () => {
 	};
 
 	const progressBarPercent =
-		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(0);
+		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed( data.length > 100 ? 1 : 0 );
 
 	const filters = codingSheetsFilters.map((item) => {
 		return (
@@ -151,13 +151,9 @@ const CodingSheets = () => {
 													) : (
 														<></>
 													)}
-													{item.tags.map((tagItem, tagIndex) => {
-														return (
-															<div className="tag" key={tagIndex}>
-																{tagItem}
-															</div>
-														);
-													})}
+													<div className="tag">
+														{item.tags[0][0]}
+													</div>
 												</div>
 											</div>
 										</div>
@@ -261,11 +257,16 @@ const CodingSheets = () => {
 														<></>
 													)}
 													{item.tags.map((tagItem, tagIndex) => {
-														return (
-															<div className="tag" key={tagIndex}>
-																{tagItem}
-															</div>
-														);
+														if(tagItem[0]==undefined ||tagItem[0]==''){
+															return (<></>);
+														}
+														else {
+															return (
+																<div className="tag" key={tagIndex}>
+																	{tagItem}
+																</div>
+															);
+														}
 													})}
 												</div>
 											</div>
@@ -598,6 +599,8 @@ const Container = styled.div`
 							Segoe UI Symbol, Noto Color Emoji;
 						margin-right: 20px;
 						font-weight: 500;
+						width: 32.5px;
+						text-align: center;
 					}
 
 					.main-row-content {
@@ -614,8 +617,8 @@ const Container = styled.div`
 
 						.tags {
 							margin: 0;
-							margin-top: 5px;
 							display: flex;
+							flex-wrap: wrap;
 
 							.tag {
 								background-color: #f3f4f7;
@@ -623,6 +626,7 @@ const Container = styled.div`
 								padding: 2.5px 7.5px;
 								border-radius: 100px;
 								font-size: 0.7rem;
+								margin-top: 5px;
 								margin-right: 5px;
 								border: 1px solid #cac3c3;
 							}
@@ -735,16 +739,22 @@ const Progress = styled.div`
 	.value {
 		margin: 0 10px;
 		font-size: 0.8rem;
-		font-weight: 500;
-		letter-spacing: 0.1rem;
+		font-weight: 400;
+		letter-spacing: 0.15rem;
+		padding: 5px 10px;
+		width: 70px;
+		text-align: center;
+		background-color: #f3f4f7;
+		border-radius: 50px;
 	}
 
 	.bar {
-		width: 400px;
+		/* width: 400px; */
 		height: 10px;
 		border-radius: 100px;
 		background-color: whitesmoke;
 		border: 1px solid pink;
+		flex: 1;
 		overflow: hidden;
 
 		.fill {

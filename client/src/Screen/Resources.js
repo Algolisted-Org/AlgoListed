@@ -139,7 +139,7 @@ const Resources = () => {
               <div className="text">By Relevance</div>
               <FilterListIcon />
             </div>
-            <InfoIcon style={{ fill: '#333' }} />
+            {/* <InfoIcon style={{ fill: '#333' }} /> */}
           </Sort>
 
 

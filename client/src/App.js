@@ -34,7 +34,7 @@ const App = () => {
   // }
   // useEffect(() => {
   //   myfunc();
-  // }, [console]);
+  // }, []);
 
   return (
     
@@ -42,7 +42,7 @@ const App = () => {
       
       
       <Routes>
-        {/* <Route path="/" element={<LandingPage/>} /> */}
+        <Route path="/temp" element={<LandingPage/>} />
         <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/blog/ideas" element={<BlogIdeas/>} />

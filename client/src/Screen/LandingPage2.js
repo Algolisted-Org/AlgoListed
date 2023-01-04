@@ -95,7 +95,7 @@ const LandingPage2 = () => {
                       modules.map((item, index) => {
                           return (
                               <Fade>
-                                <a href={item.link} target={"_blank"} className="module">
+                                <a href={item.link} className="module">
                                     <div className="count">{index + 1}</div>
                                     <div className="name">{item.name}</div>
                                     <div className="desc">{item.desc}</div>
@@ -285,7 +285,7 @@ const LandingPage2 = () => {
                     modules.map((item, index) => {
                         return (
                             <Fade bottom>
-                              <a href={item.link} target={"_blank"} className="module">
+                              <a href={item.link} className="module">
                                   <div className="count">{index + 1}</div>
                                   <div className="name">{item.name}</div>
                                   <div className="desc">{item.desc}</div>

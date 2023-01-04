@@ -4,7 +4,7 @@ import LeftMenu from '../Components/LeftMenu'
 import CCHeader from '../Components/CCHeader'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import BlogContent from '../Components/BlogContent';
+// import BlogContent from '../Components/BlogContent';
 import RightMenu from '../Components/RightMenu'
 import BlogContentMD from '../Components/BlogContentMD';
 import logo from "../Images/logo.png";

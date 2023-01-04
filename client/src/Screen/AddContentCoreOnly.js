@@ -29,13 +29,13 @@ const AddContentCoreOnly = () => {
 
     const selectCategory = [
           {
-            "name" : "Complete DSA",
+            "name" : "DSA Topic",
           },
           {
             "name" : "Dynamic Programming",
           },
           {
-            "name" : "Linear Data Structures",
+            "name" : "Data Structures",
           },
           {
             "name" : "Non-Linear Data Structures",
@@ -50,7 +50,10 @@ const AddContentCoreOnly = () => {
             "name" : "Theory Subjects",
           },
           {
-            "name" : "Interview PDFs",
+            "name" : "Interview Preparation",
+          },
+          {
+            "name" : "Machine Learning",
           },
     ]
 
@@ -66,6 +69,10 @@ const AddContentCoreOnly = () => {
         },
         {
             "name" : "Linkedin Post",
+        },
+        {
+            "name" : "Other",
+            
         }
     ]
 
@@ -123,7 +130,7 @@ const AddContentCoreOnly = () => {
             selectTypeValue
         );
 
-        await fetch('http://localhost:8000/resources/create', {
+        await fetch('https://algolisted.cyclic.app/resources/create', {
             method: 'post',
             headers: { 'content-type': 'application/json' },
 

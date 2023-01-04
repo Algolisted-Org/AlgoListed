@@ -66,7 +66,7 @@ const RightMenu = ({ blogid, blogname, ResourceType }) => {
           </div>
           {
             resourceData.length > 0 && resourceData.map((item, index) => {
-              if(index < 3){
+              if(index < 2){
                 return (
                   <div className="question">
                     <div className="text">{contentInformation[ResourceType].type} : <a href={item.resourceLink}>{item.resourceName}</a></div>
