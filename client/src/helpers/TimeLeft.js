@@ -3,7 +3,7 @@ export const timeLeft = (num, date, minutes) => {
 
   (() => {
     const now = new Date();
-    const eventDate = new Date(date);
+    const eventDate = new Date( `${ date } 00:00:00 GMT+0530` );
     const currentTime = now.getTime();
     const eventTime = eventDate.getTime();
     const remTime = eventTime - currentTime;
