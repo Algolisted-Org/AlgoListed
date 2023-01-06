@@ -1,6 +1,7 @@
 import React from "react";
 import { timeLeft } from "../helpers/TimeLeft";
 
+
 export default function CompetitionItem({ item, index }) {
   const returnHours = (e) => {
     return Math.floor(e / 60);
@@ -24,6 +25,24 @@ export default function CompetitionItem({ item, index }) {
     competition_name,
   } = item;
 
+  const months = {
+    0: 'Jan',
+    1: 'Feb',
+    2: 'Mar',
+    3: 'Apr',
+    4: 'May',
+    5: 'Jun',
+    6: 'Jul',
+    7: 'Aug',
+    8: 'Sep',
+    9: 'Oct',
+    10: 'Nov',
+    11: 'Dec'
+  }
+
+
+  // const regionalTime = timeConvertor( competition_date , time_start_mins );
+
   const isRegistrationStarted =
     timeLeft(false, registration_start_date, registration_start_time_mins) ===
     "Expired";
@@ -35,7 +54,7 @@ export default function CompetitionItem({ item, index }) {
   const isCompetitionStarted =
     timeLeft(false, competition_date, time_start_mins) === "Expired";
 
-  const showTimeLeftToCompetition = () =>
+  const showTimeLeftToCompetition = () => 
     timeLeft(false, competition_date, time_start_mins);
 
   const showTimeLeftToCompetitionEnd = () =>
@@ -46,6 +65,12 @@ export default function CompetitionItem({ item, index }) {
 
   const showTimeLeftToRegistrationEnd = () =>
     timeLeft(false, registration_end_date, registration_end_time_mins);
+  
+  const getIST = () =>{
+    const ISTString =  `${ competition_date } ${ returnHours(time_start_mins).toString()}:${ returnMins(time_start_mins).toString()}:00 GMT+0530`;
+    console.log( ISTString);
+    return new Date( ISTString );     
+  }  
 
   return (
     <div
@@ -61,26 +86,21 @@ export default function CompetitionItem({ item, index }) {
       </div>
       <div className="date">
         <div className="date-show">
-          {competition_date},{" "}
+         { months[ getIST().getMonth() ] + " " + getIST().getDate() + " " + getIST().getFullYear() + " "}
+        
           <>
-            {returnHours(time_start_mins) < 10 ? (
-              <>
-                {"0"}
-                {returnHours(time_start_mins)}
-              </>
+            {( getIST().getHours() ) < 10 ? (
+              <>{`0${ getIST().getHours() }`}</>
             ) : (
-              <>{returnHours(time_start_mins)}</>
+              <>{ getIST().getHours() }</>
             )}
           </>
           :
           <>
-            {returnMins(time_start_mins) < 10 ? (
-              <>
-                {"0"}
-                {returnMins(time_start_mins)}
-              </>
+            { getIST().getMinutes() < 10 ? (
+              <>{`0${ getIST().getMinutes() }`}</>
             ) : (
-              <>{returnMins(time_start_mins)}</>
+              <>{ getIST().getMinutes() }</>
             )}
           </>
           {}
