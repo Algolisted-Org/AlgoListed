@@ -42,6 +42,10 @@ const CCHeader = () => {
         <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
       </div>
 
+      {/* <div className="top-header">
+        <div className="semi-bold">Advertise with Us : </div>Promote your Linkedin profile, posts or Projects. 
+      </div> */}
+
       <div className="right-icons">
         <a href='https://www.buymeacoffee.com/nayak' target={"_blank"} className="donate-btn">
           {/* <div className="icon"><FavoriteBorderIcon/></div> */}
@@ -135,7 +139,8 @@ const Container = styled.div`
     height: 55px;
     width: calc(100vw - 200px);
     /* background-color: orange; */
-    border-bottom: 1px solid rgba(230, 230, 230, 1);
+    border-bottom: 1px solid rgb(233, 229, 229);
+    box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
     position: fixed;
     top: 0;
     left: 200px;
@@ -162,6 +167,26 @@ const Container = styled.div`
         border: none;
         flex: 1;
         font-weight: 400;
+      }
+    }
+
+    .top-header{
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.07rem;
+      width: 50%;
+      border-radius: 100px;
+      height: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f7f5f5;
+      border: 1px solid rgba(230, 230, 230, 1);
+
+      .semi-bold{
+        font-weight: 500;
+        display: inline;
+        margin-right: 7.5px;
       }
     }
 

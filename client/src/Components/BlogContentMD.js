@@ -106,7 +106,6 @@ const BlogContentMD = ({ blogid,  blogname }) => {
                     </div> */}
                 </div>
             </div>
-            {/* <div className="right">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque harum exercitationem quasi tempore architecto, recusandae excepturi. Libero, possimus distinctio maxime magni neque facilis nulla vel iste itaque in eos animi reprehenderit, quisquam error temporibus soluta voluptates expedita, quibusdam officiis nostrum iure illum! Dolores numquam rerum facilis placeat animi blanditiis eius? Quasi reiciendis cumque at ex eaque aut labore aliquam. Odit alias laborum modi cumque reiciendis quo dolor aspernatur officia exercitationem placeat fugit molestias, mollitia natus ipsam laboriosam maiores atque consequuntur asperiores. Nulla dolore assumenda, repellendus sed officiis tenetur quia in, ullam mollitia non nobis aspernatur! Perspiciatis reprehenderit commodi blanditiis? Vitae.</div> */}
         </Container>
     )
 }

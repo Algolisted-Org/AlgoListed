@@ -25,7 +25,7 @@ const SelectedProfiles = () => {
   const [showComapanyChange, setShowComapanyChange] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
 
-  console.log(companyFilters);
+  // console.log(companyFilters);
 
   useEffect(() => {
     document.title = "Selected Profiles - Algolisted";

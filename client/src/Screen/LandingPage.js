@@ -12,7 +12,18 @@ import axios from "axios";
 
 
 const LandingPageReal = () => {
-  
+  const [upcoming, setUpcoming] = useState([]);
+
+  const func = () => {
+    axios.get("https://script.googleusercontent.com/macros/echo?user_content_key=a56I_yl4r_8flvpqviaNoTr8NGjpWCOMqYZOVn-beuGZ5Znt-_hwzajuUbKaB1DSQKy-SClurBH9udf52CwrOnpGZ7vHlrPKm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnKHEc-aLaltP9O2ASeUMZJtNW8cSVOyBKfY-TYR-eBoFpxgG6pQf-WNCoQiDIy2FPoojkiKnZSLlVfrVGTwpv_T6zC8ya0Mestz9Jw9Md8uu&lib=M_adtjhtYqTY4x3CHvLkZEzxNTvjCbw04")
+      .then((res) => {
+        console.log(res.data);
+      })
+  }
+
+  useEffect(() => {
+    // setInterval(func, 100);
+  }, []);
 
   
 

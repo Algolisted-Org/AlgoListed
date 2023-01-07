@@ -37,10 +37,7 @@ const App = () => {
   // }, []);
 
   return (
-    
     <div>
-      
-      
       <Routes>
         <Route path="/temp" element={<LandingPage/>} />
         <Route path="/" element={<LandingPage2/>} />
@@ -65,7 +62,6 @@ const App = () => {
         <Route path="/:random/:random" element={<PageNotExist/>} />
       </Routes>
       <GoToTop/>
-     
     </div>
   )
 }

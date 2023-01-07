@@ -68,7 +68,7 @@ export default function CompetitionItem({ item, index }) {
   
   const getIST = () =>{
     const ISTString =  `${ competition_date } ${ returnHours(time_start_mins).toString()}:${ returnMins(time_start_mins).toString()}:00 GMT+0530`;
-    console.log( ISTString);
+    // console.log( ISTString);
     return new Date( ISTString );     
   }  
 

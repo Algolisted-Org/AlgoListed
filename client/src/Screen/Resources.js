@@ -11,6 +11,7 @@ import SimpleFooter from '../Components/SimpleFooter';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import MobileNavbar from "../Components/MobileNavbar";
+import AddIcon from '@material-ui/icons/Add';
 
 const Resources = () => {
   const [allResources, setAllResources] = useState([]);
@@ -25,7 +26,7 @@ const Resources = () => {
     axios.get("https://algolisted.cyclic.app/resources/all")
       .then((res) => {
         setAllResources(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -134,7 +135,11 @@ const Resources = () => {
           <Filters>
             {filters}
           </Filters>
+          
           <Sort>
+            <div className="box">
+              <AddIcon />
+            </div>
             <div className="box">
               <div className="text">By Relevance</div>
               <FilterListIcon />
@@ -169,7 +174,7 @@ const Resources = () => {
                               <div className="tag">{item.type}</div>
                             </div>
                             <div className="follow-me-link">
-                              <a href={item.promotionLink} target={"_blank"}>Follow me for more</a>
+                              <a href={item.promotionLink} target={"_blank"}>Support contributor</a>
                             </div>
                           </div>
                         </div>
@@ -467,14 +472,13 @@ const Container = styled.div`
       .resources-container{
         display: flex;
         flex-wrap: wrap;
-        /* justify-content: space-between; */
         align-items: stretch;
         height: auto;
         width: 100%;
         margin-top: 10px;
 
         .resource{
-          width: calc(33% - 30px);
+          width: calc(33.33% - 30px);
           height: auto;
           /* min-height: 280px; */
           /* background-color: white; */
@@ -623,6 +627,7 @@ const Sort = styled.div`
   margin: 10px 0;
 
   .box {
+    cursor: pointer;
     padding: 5px 10px;
     height: 36px;
     display: flex;
@@ -640,7 +645,14 @@ const Sort = styled.div`
       font-weight: 300;
       margin: 0 7.5px;
     }
+    
+    &:hover{
+      background-color: #f4f3f3d6;
+      transition-duration: 250ms;
+      transition-timing-function: ease-in-out;
+    }
   }
+
 `;
 
 const RightBottomMessage = styled.div`

@@ -530,6 +530,7 @@ const Container = styled.div`
 				padding: 2.5px 7.5px;
 				background-color: #e5e5e5;
 				border-radius: 5px;
+				
 				margin-right: 5px;
 
 				.text {
@@ -826,7 +827,7 @@ const Table = styled.div`
 			min-width: 320px;
 			border-radius: 10px;
 			border: 1px solid rgb(232, 232, 232);
-    		box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+    		/* box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px; */
 			/* filter: drop-shadow(0 0.1rem 0.2rem grey); */
 
 			.contest {
@@ -915,6 +916,10 @@ const Table = styled.div`
 				font-weight: 400;
 				color: #656565;
 			}
+		}
+		
+		.ongoing {
+			background-color: #ffe0e0;
 		}
 	}
 `;

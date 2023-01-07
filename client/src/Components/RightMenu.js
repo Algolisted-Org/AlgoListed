@@ -19,7 +19,7 @@ const RightMenu = ({ blogid, blogname, ResourceType }) => {
             setResourceData(res.data);
         })
         .catch((err) => console.log(err));
-}, []);
+  }, []);
 
   const contentInformation = [
     {
@@ -34,7 +34,7 @@ const RightMenu = ({ blogid, blogname, ResourceType }) => {
         "type": "Resource",
         "scroll_text": "Show All Resources, Related to this blog",
     }
-]
+  ]
 
   return (
     <Container>

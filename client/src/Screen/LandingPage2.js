@@ -489,6 +489,10 @@ const MobContainer = styled.div`
       font-size: 0.8rem;
       padding: 10px 15px;
       margin: auto;
+
+      a{
+        color: #333; 
+      }
     }
 
     @-webkit-keyframes AnimationName {

@@ -91,10 +91,11 @@ const Container = styled.div`
   width: 200px;
   border-right: 1px solid rgba(230, 230, 230, 1);
   height: 100vh;
-  min-height: 580px;
+  min-height: 600px;
   background-color: white;
   z-index: 3;
   position: fixed;
+  /* overflow-y: scroll; */
   top: 0;
   left: 0;
   padding: 10px;

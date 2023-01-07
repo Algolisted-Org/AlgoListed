@@ -1,0 +1,201 @@
+<style>pre{white-space:pre-wrap;background:#f7f9fa;padding:10px 15px;color:#263238;line-height:1.6;font-size:13px;border-radius:3px margin-top: 0;margin-bottom:1em;overflow:auto}b,strong{font-weight:bolder}#title{font-size:16px;color:#212121;font-weight:600;margin-bottom:10px}hr{height:10px;border:0;box-shadow:0 10px 10px -10px #8c8b8b inset}</style>**********<div id="title">1. Two Sum</div>
+**********<div class="content__u3I1 question-content__JfgR"><div><p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they add up to a specific target.</p>
+<p>You may assume that each input would have <strong><em>exactly</em></strong> one solution, and you may not use the <em>same</em> element twice.</p>
+<p><strong>Example:</strong></p>
+<pre>Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[<strong>0</strong>] + nums[<strong>1</strong>] = 2 + 7 = 9,
+return [<strong>0</strong>, <strong>1</strong>].
+</pre>
+</div></div><br><br><hr><br>******************<div id="title">7. Reverse Integer</div>
+******************<div class="content__u3I1 question-content__JfgR"><div><p>Given a 32-bit signed integer, reverse digits of an integer.</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> 123
+<strong>Output:</strong> 321
+</pre>
+<p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> -123
+<strong>Output:</strong> -321
+</pre>
+<p><strong>Example 3:</strong></p>
+<pre><strong>Input:</strong> 120
+<strong>Output:</strong> 21
+</pre>
+<p><strong>Note:</strong><br/>
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2<sup>31</sup>,  2<sup>31 </sup>− 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
+</div></div><br><br><hr><br>********************<div id="title">9. Palindrome Number</div>
+********************<div class="content__u3I1 question-content__JfgR"><div><p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> 121
+<strong>Output:</strong> true
+</pre>
+<p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> -121
+<strong>Output:</strong> false
+<strong>Explanation:</strong> From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+</pre>
+<p><strong>Example 3:</strong></p>
+<pre><strong>Input:</strong> 10
+<strong>Output:</strong> false
+<strong>Explanation:</strong> Reads 01 from right to left. Therefore it is not a palindrome.
+</pre>
+<p><strong>Follow up:</strong></p>
+<p>Coud you solve it without converting the integer to a string?</p>
+</div></div><br><br><hr><br>********************<div id="title">13. Roman to Integer</div>
+********************<div class="content__u3I1 question-content__JfgR"><div><p>Roman numerals are represented by seven different symbols: <code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.</p>
+<pre><strong>Symbol</strong>       <strong>Value</strong>
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000</pre>
+<p>For example, two is written as <code>II</code> in Roman numeral, just two one's added together. Twelve is written as, <code>XII</code>, which is simply <code>X</code> + <code>II</code>. The number twenty seven is written as <code>XXVII</code>, which is <code>XX</code> + <code>V</code> + <code>II</code>.</p>
+<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:</p>
+<ul>
+<li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9. </li>
+<li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90. </li>
+<li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
+</ul>
+<p>Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> "III"
+<strong>Output:</strong> 3</pre>
+<p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> "IV"
+<strong>Output:</strong> 4</pre>
+<p><strong>Example 3:</strong></p>
+<pre><strong>Input:</strong> "IX"
+<strong>Output:</strong> 9</pre>
+<p><strong>Example 4:</strong></p>
+<pre><strong>Input:</strong> "LVIII"
+<strong>Output:</strong> 58
+<strong>Explanation:</strong> L = 50, V= 5, III = 3.
+</pre>
+<p><strong>Example 5:</strong></p>
+<pre><strong>Input:</strong> "MCMXCIV"
+<strong>Output:</strong> 1994
+<strong>Explanation:</strong> M = 1000, CM = 900, XC = 90 and IV = 4.</pre>
+</div></div><br><br><hr><br>*************************<div id="title">14. Longest Common Prefix</div>
+*************************<div class="content__u3I1 question-content__JfgR"><div><p>Write a function to find the longest common prefix string amongst an array of strings.</p>
+<p>If there is no common prefix, return an empty string <code>""</code>.</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input: </strong>["flower","flow","flight"]
+<strong>Output:</strong> "fl"
+</pre>
+<p><strong>Example 2:</strong></p>
+<pre><strong>Input: </strong>["dog","racecar","car"]
+<strong>Output:</strong> ""
+<strong>Explanation:</strong> There is no common prefix among the input strings.
+</pre>
+<p><strong>Note:</strong></p>
+<p>All given inputs are in lowercase letters <code>a-z</code>.</p>
+</div></div><br><br><hr><br>*********************<div id="title">20. Valid Parentheses</div>
+*********************<div class="content__u3I1 question-content__JfgR"><div><p>Given a string containing just the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code> and <code>']'</code>, determine if the input string is valid.</p>
+<p>An input string is valid if:</p>
+<ol>
+<li>Open brackets must be closed by the same type of brackets.</li>
+<li>Open brackets must be closed in the correct order.</li>
+</ol>
+<p>Note that an empty string is also considered valid.</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> "()"
+<strong>Output:</strong> true
+</pre>
+<p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> "()[]{}"
+<strong>Output:</strong> true
+</pre>
+<p><strong>Example 3:</strong></p>
+<pre><strong>Input:</strong> "(]"
+<strong>Output:</strong> false
+</pre>
+<p><strong>Example 4:</strong></p>
+<pre><strong>Input:</strong> "([)]"
+<strong>Output:</strong> false
+</pre>
+<p><strong>Example 5:</strong></p>
+<pre><strong>Input:</strong> "{[]}"
+<strong>Output:</strong> true
+</pre>
+</div></div><br><br><hr><br>**************************<div id="title">21. Merge Two Sorted Lists</div>
+**************************<div class="content__u3I1 question-content__JfgR"><div><p>Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.</p>
+<p><b>Example:</b>
+</p><pre><b>Input:</b> 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+<b>Output:</b> 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
+</pre>
+<p></p></div></div><br><br><hr><br>***************************************<div id="title">26. Remove Duplicates from Sorted Array</div>
+***************************************<div class="content__u3I1 question-content__JfgR"><div><p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank"><strong>in-place</strong></a> such that each element appear only <em>once</em> and return the new length.</p>
+<p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank">in-place</a></strong> with O(1) extra memory.</p>
+<p><strong>Example 1:</strong></p>
+<pre>Given <em>nums</em> = <strong>[1,1,2]</strong>,
+
+Your function should return length = <strong><code>2</code></strong>, with the first two elements of <em><code>nums</code></em> being <strong><code>1</code></strong> and <strong><code>2</code></strong> respectively.
+
+It doesn't matter what you leave beyond the returned length.</pre>
+<p><strong>Example 2:</strong></p>
+<pre>Given <em>nums</em> = <strong>[0,0,1,1,1,2,2,3,3,4]</strong>,
+
+Your function should return length = <strong><code>5</code></strong>, with the first five elements of <em><code>nums</code></em> being modified to <strong><code>0</code></strong>, <strong><code>1</code></strong>, <strong><code>2</code></strong>, <strong><code>3</code></strong>, and <strong><code>4</code></strong> respectively.
+
+It doesn't matter what values are set beyond the returned length.
+</pre>
+<p><strong>Clarification:</strong></p>
+<p>Confused why the returned value is an integer but your answer is an array?</p>
+<p>Note that the input array is passed in by <strong>reference</strong>, which means modification to the input array will be known to the caller as well.</p>
+<p>Internally you can think of this:</p>
+<pre>// <strong>nums</strong> is passed in by reference. (i.e., without making a copy)
+int len = removeDuplicates(nums);
+
+// any modification to <strong>nums</strong> in your function would be known by the caller.
+// using the length returned by your function, it prints the first <strong>len</strong> elements.
+for (int i = 0; i &lt; len; i++) {
+    print(nums[i]);
+}</pre>
+</div></div><br><br><hr><br>******************<div id="title">27. Remove Element</div>
+******************<div class="content__u3I1 question-content__JfgR"><div><p>Given an array <em>nums</em> and a value <em>val</em>, remove all instances of that value <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank"><strong>in-place</strong></a> and return the new length.</p>
+<p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank">in-place</a></strong> with O(1) extra memory.</p>
+<p>The order of elements can be changed. It doesn't matter what you leave beyond the new length.</p>
+<p><strong>Example 1:</strong></p>
+<pre>Given <em>nums</em> = <strong>[3,2,2,3]</strong>, <em>val</em> = <strong>3</strong>,
+
+Your function should return length = <strong>2</strong>, with the first two elements of <em>nums</em> being <strong>2</strong>.
+
+It doesn't matter what you leave beyond the returned length.
+</pre>
+<p><strong>Example 2:</strong></p>
+<pre>Given <em>nums</em> = <strong>[0,1,2,2,3,0,4,2]</strong>, <em>val</em> = <strong>2</strong>,
+
+Your function should return length = <strong><code>5</code></strong>, with the first five elements of <em><code>nums</code></em> containing <strong><code>0</code></strong>, <strong><code>1</code></strong>, <strong><code>3</code></strong>, <strong><code>0</code></strong>, and <strong>4</strong>.
+
+Note that the order of those five elements can be arbitrary.
+
+It doesn't matter what values are set beyond the returned length.</pre>
+<p><strong>Clarification:</strong></p>
+<p>Confused why the returned value is an integer but your answer is an array?</p>
+<p>Note that the input array is passed in by <strong>reference</strong>, which means modification to the input array will be known to the caller as well.</p>
+<p>Internally you can think of this:</p>
+<pre>// <strong>nums</strong> is passed in by reference. (i.e., without making a copy)
+int len = removeElement(nums, val);
+
+// any modification to <strong>nums</strong> in your function would be known by the caller.
+// using the length returned by your function, it prints the first <strong>len</strong> elements.
+for (int i = 0; i &lt; len; i++) {
+    print(nums[i]);
+}</pre>
+</div></div><br><br><hr><br>**********************<div id="title">28. Implement strStr()</div>
+**********************<div class="content__u3I1 question-content__JfgR"><div><p>Implement <a href="http://www.cplusplus.com/reference/cstring/strstr/" target="_blank">strStr()</a>.</p>
+<p>Return the index of the first occurrence of needle in haystack, or <strong>-1</strong> if needle is not part of haystack.</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> haystack = "hello", needle = "ll"
+<strong>Output:</strong> 2
+</pre>
+<p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> haystack = "aaaaa", needle = "bba"
+<strong>Output:</strong> -1
+</pre>
+<p><strong>Clarification:</strong></p>
+<p>What should we return when <code>needle</code> is an empty string? This is a great question to ask during an interview.</p>
+<p>For the purpose of this problem, we will return 0 when <code>needle</code> is an empty string. This is consistent to C's <a href="http://www.cplusplus.com/reference/cstring/strstr/" target="_blank">strstr()</a> and Java's <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#indexOf(java.lang.String)" target="_blank">indexOf()</a>.</p>
+</div></div><br><br><hr><br>**************************
