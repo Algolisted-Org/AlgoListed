@@ -153,7 +153,7 @@ const CodingSheets = () => {
 														<></>
 													)}
 													<div className="tag">
-														{item.tags[0][0]}
+														{item.tags[0]}
 													</div>
 												</div>
 											</div>

@@ -12,7 +12,10 @@ const VerifyContributor = () => {
                 also writes down the work they have done. It helpful for contributor to have a kind
                 of e-certificate of their work which they later can put on linkedin and resume.
             </p>
-            <VerifyUser />
+            <p className="heading-supporter">
+                This will be starting soon.
+            </p>
+            {/* <VerifyUser /> */}
         </Container>
     )
 }

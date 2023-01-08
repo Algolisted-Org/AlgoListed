@@ -8,7 +8,7 @@ const OILeftMenu = ({marked}) => {
   return (
     <Container>
       {/* <div className="logo">Atanu Nayak</div> */}
-      <div className="logo">Algorithmist</div>
+      <a href='/' className="logo">AlgoListed</a>
       <div className="mid-links">
         <a href='/blogs/all' className="link">Home Page</a>
         <div className="flag">
@@ -61,6 +61,10 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+
+  a{
+    text-decoration: none;
+  }
 
   .logo{
     width: 100%;

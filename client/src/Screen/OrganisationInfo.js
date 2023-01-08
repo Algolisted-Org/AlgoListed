@@ -113,17 +113,18 @@ const Container = styled.div`
       }
 
       .heading-supporter{
-          font-size: 1.05rem;
-          margin-bottom: 10px;
-          font-weight: 400;
-          color: #696168;
+        font-size: 0.85rem;
+        font-weight: 200;
+        line-height: 1.5rem;
+        letter-spacing: 0.07rem;
+        margin-bottom: 10px;
 
-          a{
+          /* a{
             color: #18489f;
             font-size: 0.95rem;
             font-weight: 300;
             margin-left: 0.25rem;
-          }
+          } */
       }
 
       .sub-heading{

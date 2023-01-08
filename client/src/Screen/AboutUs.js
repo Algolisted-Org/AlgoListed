@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import groupPhoto from '../Images/aboutUsImg.jpeg'
 
 const AboutUs = () => {
     return (
@@ -7,34 +8,31 @@ const AboutUs = () => {
             {/* The below classes are being used from the parent */}
             <h1 className='main-heading'>About Us</h1>
             <p className="heading-supporter">
-                We are an Open Source community of coders. Lorem ipsum random text now, A remarkable about page is genuine, approachable, and distinguished. It should give the visitor a glimpse into what working with you might be like. You can include personal interests, stories, and photos that convey the unique story of your business. You may also include information about who’s on your team and what their roles are. 
+                Welcome to Algolisted! We are a group of top college students from institutions such as Jadavpur University, IITs, and BITs in India. Our passion for technology and drive to succeed led us to create Algolisted, a productivity tool for coders.
+            </p>
+            <p className="heading-supporter">
+                But we don't just stop there. We also offer a range of resources to help coders improve their skills and stay up-to-date with the latest industry trends. From coding tutorials to expert insights, we provide everything you need to succeed in the world of programming.
+            </p>
+            <p className="heading-supporter">
+                So why choose Algolisted? It's simple. We are a team of dedicated and talented individuals who are committed to delivering the best possible experience to our users. We are constantly updating and improving our website to ensure that it meets the needs of the modern coder.
             </p>
 
-            <div className="sub-heading">What do we do ?</div>
             <p className="heading-supporter">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, dolor voluptate! Voluptate nostrum beatae, modi, vero dolorem cum, fuga recusandae odio sapiente ipsum labore quam.
+                Additionally, we believe that every coder should have access to high quality resources and tools, regardless of their background or financial status. That's why we offer all of our resources for free. Whether you're just starting out in coding or are a seasoned professional, we have something for everyone.
             </p>
+            
+            <img src={groupPhoto} alt="" />
+
             <p className="heading-supporter">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, dolor voluptate! Voluptate nostrum beatae, modi, vero dolorem cum, fuga recusandae odio sapiente ipsum labore quam.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, dolor voluptate! Voluptate nostrum beatae, modi, vero dolorem cum, fuga recusandae odio sapiente ipsum labore quam.
-            </p>
-            <p className="heading-supporter">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, unde.
+                We also understand that coding can be a challenging and time-consuming pursuit. That's why we've designed Algolisted to be as user-friendly and efficient as possible. Our easy-to-use interface and comprehensive resources will help you get the most out of your time, so you can focus on what matters most: becoming a better coder.
             </p>
 
-            <div className="sub-heading">Types of contributors we have</div>
-            <img src="https://external-preview.redd.it/qAinwhq9CP_hMz93BBh5dFEexYRJH4V7zHrhdWIswes.jpg?auto=webp&s=bc4459faf8abfeea29c104bcbfd4ed555075ace0" alt="" />
             <p className="heading-supporter">
-                We have mainly three types of contributors, namely open source contributors, blogs contributor - Technical Content Writer and resources contributors.
-            </p>
-            <p className="heading-supporter">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, repudiandae voluptates nulla a repellendus quis voluptatem? Perferendis tempora libero porro alias reiciendis mollitia vel magnam ipsam qui. Officiis nemo, quod magnam ab maiores corrupti similique quia sit tenetur rerum ad eaque, error quas natus blanditiis, quam iusto? Ullam, voluptatibus consequatur.
+                So if you're looking to improve your coding skills, stay up-to-date with the latest industry trends, or just want to find a better way to manage your productivity, look no further than Algolisted. We're here to help you succeed in the exciting world of coding.
             </p>
 
-            <div className="sub-heading">Our core team</div>
             <p className="heading-supporter">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem blanditiis est molestiae suscipit, nihil perferendis!
-                <br /> <a href="/organisation-information/core-team">Know more about the Core Team</a>
+                Thank you for choosing Algolisted. We hope that our website helps you achieve all of your coding goals and we look forward to supporting you on your journey to success.
             </p>
 
 
@@ -49,7 +47,7 @@ const Container = styled.div`
     width: 100%;
 
     img{
-        height: 300px;
+        width: 440px;
         margin: 20px 0;
     }
 `

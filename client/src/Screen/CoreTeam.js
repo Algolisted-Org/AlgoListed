@@ -10,10 +10,9 @@ const CoreTeam = () => {
             {/* The below classes are being used from the parent */}
             <h1 className='main-heading'>Core Team</h1>
             <p className="heading-supporter">
-                The main job of the core team is to verify and review the content on the website. The core team is the base for the website quality.
-                Core team has different sections which are - <b>tech team</b>, <b>resources team</b> and <b>blogs team</b>. 
+                This page is dedicated to showcasing the members of our core team, who have played a vital role in the development and success of our project. Here, you will find information about each member of the team, including their specific areas of expertise, responsibilities within the project, and past experiences and accomplishments.
             </p>
-            <div className="users">
+            {/* <div className="users">
                 <div className="user">
                     <img className='user-img' src="https://finclubju.com/assets/profile/team/atanu-nayak.jpg" alt="" />
                     <div className="profile-links">
@@ -62,7 +61,7 @@ const CoreTeam = () => {
                     <div className="name">Soumyajit Naskar</div>
                     <div className="team">Resources Section Head <br /> CSE Jadavpur University</div>
                 </div>
-            </div>
+            </div> */}
         </Container>
     )
 }

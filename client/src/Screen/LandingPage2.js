@@ -945,7 +945,7 @@ const Container = styled.div`
             width: calc(33.33% - 20px);
             border-radius: 50px;
             background-color: white;
-            margin: 50px 10px;
+            margin: 35px 10px;
             position: relative;
             display: flex;
             flex-direction: column;
