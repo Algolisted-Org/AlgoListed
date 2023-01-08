@@ -33,9 +33,4 @@ export const codingSheetsFilters = [
   //   domainFilter: "striver-cp-sheet",
   //   id: 6,
   // },
-  {
-    text: "Two Pointers LC",
-    domainFilter: "two-pointers-lc",
-    id: 7,
-  },
 ];

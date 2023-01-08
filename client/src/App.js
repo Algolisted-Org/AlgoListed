@@ -25,6 +25,7 @@ import AddContentCoreOnly from './Screen/AddContentCoreOnly';
 import LandingPage2 from './Screen/LandingPage2';
 import Readme from './Screen/Readme';
 import GoToTop from './Components/GoToTop';
+import PushDataToMongoDB from './Screen/PushDataToMongoDB';
 
 
 const App = () => {
@@ -39,7 +40,7 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/temp" element={<LandingPage/>} />
+        <Route path="/temp" element={<PushDataToMongoDB/>} />
         <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/blog/ideas" element={<BlogIdeas/>} />

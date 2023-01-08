@@ -7,13 +7,11 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
 import FacebookIcon from '@material-ui/icons/Facebook';
-import react3dLoader from '../Images/react3dLoader.gif'
 import axios from "axios";
 import logo from "../Images/logo.png";
 import MobileNavbar from '../Components/MobileNavbar'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Fade from 'react-reveal/Fade';
-import Wobble from 'react-reveal/Wobble';
 import {Link} from 'react-scroll';
 
 const LandingPage2 = () => {
@@ -934,7 +932,7 @@ const Container = styled.div`
     .modules{
         width: 100%;
         max-width: 1000px;
-        margin: 20px auto;
+        margin: 50px auto;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
@@ -947,7 +945,7 @@ const Container = styled.div`
             width: calc(33.33% - 20px);
             border-radius: 50px;
             background-color: white;
-            margin: 20px 10px;
+            margin: 50px 10px;
             position: relative;
             display: flex;
             flex-direction: column;

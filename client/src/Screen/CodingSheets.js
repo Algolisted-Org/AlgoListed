@@ -28,7 +28,8 @@ const CodingSheets = () => {
 	useEffect(() => {
 		// retrieve the data from the server
 		axios
-			.get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
+			// .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
+			.get(`https://algolisted.cyclic.app/coding-questions/question/${sheetname}`)
 			.then((res) => {
 				// retrieve the "completed" status of each sheet from the local storage
 				const updatedData = res.data.map((sheet) => {
@@ -193,25 +194,16 @@ const CodingSheets = () => {
 
 					<Filters>{filters}</Filters>
 
-					{sheetname === "two-pointers-lc" ? (
-						<SheetMessage>
-							<div className="text">
-								This section is a set of problems based on a well-known blog
-								post about using the two pointer technique on LeetCode,{" "}
-								<a
-									target={"_blank"}
-									href="https://leetcode.com/discuss/study-guide/1688903/Solved-all-two-pointers-problems-in-100-days"
-									rel="noreferrer"
-								>
-									show blog on leetcode
-								</a>
-								. The blog post includes a selection of high-quality questions
-								that are organized by similarity.
-							</div>
-						</SheetMessage>
-					) : (
-						<></>
-					)}
+					<SheetMessage>
+						<div className="text">
+							Hey there! With this tool, you can easily see a visual representation of the coding sheet you are working on and track your progress as you go. It also gives you an idea of the types of questions you can expect to find on the sheet. Cool, huh?
+						</div>
+						<div className="open-btn">
+							<div className="desc">Open Visualiser</div>
+							<ExpandMoreIcon/>
+						</div>
+					</SheetMessage>
+					
 
 					<Progress>
 						<div className="text">Progress : </div>
@@ -257,16 +249,11 @@ const CodingSheets = () => {
 														<></>
 													)}
 													{item.tags.map((tagItem, tagIndex) => {
-														if(tagItem[0]==undefined ||tagItem[0]==''){
-															return (<></>);
-														}
-														else {
-															return (
-																<div className="tag" key={tagIndex}>
-																	{tagItem}
-																</div>
-															);
-														}
+														return (
+															<div className="tag" key={tagIndex}>
+																{tagItem}
+															</div>
+														)
 													})}
 												</div>
 											</div>
@@ -775,7 +762,17 @@ const SheetMessage = styled.div`
 	background-color: #f0f0f0;
 
 	.text {
-		font-size: 0.75rem;
+		font-size: 0.8rem;
+	}
+
+	.open-btn{
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		
+		font-size: 0.8rem;
+		font-weight: 500;
+		margin-top: 15px;
 	}
 `;
 
