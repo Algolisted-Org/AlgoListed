@@ -1,11 +1,16 @@
 import { React, useState, useEffect } from 'react';
-import {Link} from 'react-scroll'
+
 import styled from 'styled-components'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import axios from "axios";
 import data from './allBlogsDatabase.json'
 
+
+
 const RightMenu = ({ blogid, blogname, ResourceType }) => {
+  
+
+  
   const [resourceData, setResourceData] = useState([]);
   console.log(blogid);
   console.log(data[blogid]);
@@ -82,19 +87,17 @@ const RightMenu = ({ blogid, blogname, ResourceType }) => {
           <div className="question">
             <div className="text">{contentInformation[ResourceType].type} : <a href="/">Rotting Oranges</a></div>
           </div> */}
-          <div className="show-all-problems"><Link to='rev' spy={true} smooth={true} offset={2600} duration={1000}>{contentInformation[ResourceType].scroll_text}</Link></div>
+          <div className="show-all-problems"><a href="#rev">{contentInformation[ResourceType].scroll_text}</a></div>
         </div>
         <div className="ask-query">
           <div className="top-title">Ask query about the topic</div>
           <div className="top-desc">If you have a question or doubt, other readers may be able to help you. Additionally, a notification will be sent to the creators of the blog, who can address it for you.</div>
           {/* <input type="text" className='input-query' placeholder='Enter your doubt . . .'/> */}
-          <div className="btn"><Link to='ask'spy={true} smooth={true} offset={3000} duration={1000}>
+          
           <div className="submit-btn" >Ask doubt to community</div>
-          </Link>
           
-          </div>
           
-          <div className="bottom-desc">Go to<Link to='ask' spy={true} smooth={true} offset={3000} duration={1000}>Ask doubts to community</Link> section, to ask, discuss and solve queries related to the blog topic.</div>
+          <div className="bottom-desc" >Go to Ask doubts to community section, to ask, discuss and solve queries related to the blog topic.</div>
         </div>
       </div>
       {/* <div className="subscribe-box">

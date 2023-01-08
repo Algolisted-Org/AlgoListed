@@ -13,8 +13,18 @@ import MobileNavbar from '../Components/MobileNavbar';
 import axios from "axios";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import data from '../Components/allBlogsDatabase.json'
+import { useRef } from 'react';
+import BlogResources from '../Components/BlogResources';
 
 const BlogPage = () => {
+  const ask=useRef(null);
+  const handleask=()=>{
+ask.current?.scrollIntoView({behavior:'smooth'})
+  }
+  const ress=useRef(null);
+  const handleres=()=>{
+ress.current?.scrollIntoView({behavior:'smooth'})
+  }
     const [constFooter, setConstFooter] = useState(!true);
     const [resourceData, setResourceData] = useState([]);
     const params = useParams();
@@ -59,7 +69,9 @@ const BlogPage = () => {
                 <LeftMenu marked={"all-blogs"} />
                 <div className="blogs-main">
                     {/* <BlogContent blogid={blogid} /> */}
-                    <BlogContentMD blogid={blogid} blogname={blogname}/>
+                    <BlogContentMD ref={ask} blogid={blogid} blogname={blogname}/>
+                    
+                   
                     <RightMenu>
                         <div className="blog-contributors">
                             <div className="top-title">Blog Contributors</div>
@@ -105,19 +117,18 @@ const BlogPage = () => {
                             <div className="question">
                                 <div className="text">{contentInformation[ResourceType].type} : <a href="/">Rotting Oranges</a></div>
                             </div> */}
-                            <div className="show-all-problems"><Link to='rev' spy={true} smooth={true} offset={2600} duration={1000}>{contentInformation[ResourceType].scroll_text}</Link></div>
+                            
+                            <div className="show-all-problems" onClick={handleres} >{contentInformation[ResourceType].scroll_text}</div>
                             </div>
                             <div className="ask-query">
                             <div className="top-title">Ask query about the topic</div>
                             <div className="top-desc">If you have a question or doubt, other readers may be able to help you. Additionally, a notification will be sent to the creators of the blog, who can address it for you.</div>
                             {/* <input type="text" className='input-query' placeholder='Enter your doubt . . .'/> */}
-                            <div className="btn"><Link to='ask'spy={true} smooth={true} offset={3000} duration={1000}>
-                            <div className="submit-btn" >Ask doubt to community</div>
-                            </Link>
                             
-                            </div>
+                            <div className="submit-btn" onClick={handleask}>Ask doubt to community</div>
                             
-                            <div className="bottom-desc">Go to<Link to='ask' spy={true} smooth={true} offset={3000} duration={1000}>Ask doubts to community</Link> section, to ask, discuss and solve queries related to the blog topic.</div>
+                            
+                            <div className="bottom-desc" >Go to <a onClick={handleask}> Ask doubts to community</a> section, to ask, discuss and solve queries related to the blog topic.</div>
                             </div>
                         </div>
                     </RightMenu>

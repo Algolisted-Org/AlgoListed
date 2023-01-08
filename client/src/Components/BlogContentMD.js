@@ -8,9 +8,10 @@ import Avatar from '@material-ui/core/Avatar';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Markdown from 'markdown-to-jsx';
 import BlogResources from './BlogResources';
+import { forwardRef } from 'react';
 
 
-const BlogContentMD = ({ blogid,  blogname }) => {
+const BlogContentMD = ({ blogid,  blogname },ask) => {
     const [ShowReply, setShowReply] = useState(false);
     const [post, setPost] = useState("");
     const [blogData, setBlogData] = useState(data[blogid]);
@@ -54,10 +55,12 @@ const BlogContentMD = ({ blogid,  blogname }) => {
                     </Markdown>
                 </div>
 
-                <BlogResources ResourceType={1}  blogname={blogname}/>
+                <BlogResources ResourceType={1}  blogname={blogname} />
+                
 
-                <div className="page-section">
-                    <div className="new-part-heading" id='ask'>Ask doubts to community</div>
+
+                <div className="page-section" ref={ask}>
+                    <div className="new-part-heading"  >Ask doubts to community</div>
                     <div className="para-1">
                         You can ask any questions or doubts you have about the blog topic in this section. Please note that this section is for asking questions and seeking clarification, not for making complimentary comments about the blog. If you have a question or doubt, a notification will be sent to the blog creators so they can address it. Please refrain from using this section for flattering comments.
                     </div>
@@ -110,7 +113,7 @@ const BlogContentMD = ({ blogid,  blogname }) => {
     )
 }
 
-export default BlogContentMD
+export default forwardRef(BlogContentMD);
 
 const Container = styled.div`
     min-height: 100vh;

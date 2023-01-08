@@ -9,6 +9,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import { LinearProgress } from "@material-ui/core";
 import Markdown from 'markdown-to-jsx';
 
+
 const BlogResources = ({ ResourceType,  blogname }) => {
     console.log(ResourceType);
     const [contentName, setContentName] = useState("");
@@ -76,7 +77,7 @@ const BlogResources = ({ ResourceType,  blogname }) => {
 
     return (
         <Container>
-            <div className="page-section" id="rev">
+            <div className="page-section" >
                 <div className="new-part-heading">{contentInformation[ResourceType].name}</div>
                 <div className="para-1">{contentInformation[ResourceType].text}</div>
                 <div className="message">
@@ -264,7 +265,7 @@ const BlogResources = ({ ResourceType,  blogname }) => {
     )
 }
 
-export default BlogResources
+export default BlogResources;
 
 const Container = styled.div`
     width: 100%;
