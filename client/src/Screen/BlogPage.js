@@ -21,10 +21,12 @@ const BlogPage = () => {
   const handleask=()=>{
 ask.current?.scrollIntoView({behavior:'smooth'})
   }
-  const ress=useRef(null);
-  const handleres=()=>{
-ress.current?.scrollIntoView({behavior:'smooth'})
+  const ers=useRef(null);
+  const handleers=()=>{
+ers.current?.scrollIntoView({behavior:'smooth'})
   }
+  
+  
     const [constFooter, setConstFooter] = useState(!true);
     const [resourceData, setResourceData] = useState([]);
     const params = useParams();
@@ -68,8 +70,11 @@ ress.current?.scrollIntoView({behavior:'smooth'})
                 <CCHeader /> 
                 <LeftMenu marked={"all-blogs"} />
                 <div className="blogs-main">
+                 
                     {/* <BlogContent blogid={blogid} /> */}
                     <BlogContentMD ref={ask} blogid={blogid} blogname={blogname}/>
+                    
+                    {/* insert here */}
                     
                    
                     <RightMenu>
@@ -103,7 +108,8 @@ ress.current?.scrollIntoView({behavior:'smooth'})
                                 resourceData.length > 0 && resourceData.map((item, index) => {
                                 if(index < 2){
                                     return (
-                                    <div className="question">
+                                    <div className="question"> 
+                                    
                                         <div className="text">{contentInformation[ResourceType].type} : <a href={item.resourceLink}>{item.resourceName}</a></div>
                                     </div>
                                     )
@@ -118,7 +124,7 @@ ress.current?.scrollIntoView({behavior:'smooth'})
                                 <div className="text">{contentInformation[ResourceType].type} : <a href="/">Rotting Oranges</a></div>
                             </div> */}
                             
-                            <div className="show-all-problems" onClick={handleres} >{contentInformation[ResourceType].scroll_text}</div>
+                            <div className="show-all-problems" onClick={handleers}>{contentInformation[ResourceType].scroll_text}</div>
                             </div>
                             <div className="ask-query">
                             <div className="top-title">Ask query about the topic</div>

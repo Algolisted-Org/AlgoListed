@@ -54,6 +54,7 @@ const BlogContentMD = ({ blogid,  blogname },ask) => {
                         {post}  
                     </Markdown>
                 </div>
+            
 
                 <BlogResources ResourceType={1}  blogname={blogname} />
                 
