@@ -31,19 +31,92 @@ const CodingSheets = () => {
 	const [completedCount, setCompletedCount] = useState(0);
 	const [showFilters, setShowFilters] = useState(false);
 	const [sortedTopicTagsKeys, setSortedTopicTagsKeys] = useState([]);
-    const [sortedTopicTagsValues, setSortedTopicTagsValues] = useState([]);
-    const [difficulty, setDifficulty] = useState({});
-    const [userDifficulty, setUserDifficulty] = useState({});
-    const [difficultyPercentage, setDifficultyPercentage] = useState([0, 0, 0]);
+	const [sortedTopicTagsValues, setSortedTopicTagsValues] = useState([]);
+	const [difficulty, setDifficulty] = useState({});
+	const [userDifficulty, setUserDifficulty] = useState({});
+	const [difficultyPercentage, setDifficultyPercentage] = useState([0, 0, 0]);
 	const [openVisualiser, setOpenVisualiser] = useState(true);
 	const [toggleEffect, setToggleEffect] = useState(true);
 
 	const params = useParams();
-
 	const { sheetname } = params;
 	// console.log(sheetname);
-	
+
 	document.title = `Coding Sheets - Algolisted`;
+
+	const allowedProblemTags = [
+		"Array",
+		"String",
+		"Hash Table",
+		"Dynamic Programming",
+		"Math",
+		"Sorting",
+		"Greedy",
+		"Depth-First Search",
+		"Database",
+		"Breadth-First Search",
+		"Binary Search",
+		"Tree",
+		"Matrix",
+		"Binary Tree",
+		"Two Pointers",
+		"Bit Manipulation",
+		"Stack",
+		"Heap (Priority Queue)",
+		"Design",
+		"Graph",
+		"Prefix Sum",
+		"Simulation",
+		"Counting",
+		"Backtracking",
+		"Sliding Window",
+		"Union Find",
+		"Linked List",
+		"Ordered Set",
+		"Monotonic Stack",
+		"Enumeration",
+		"Recursion",
+		"Trie",
+		"Divide and Conquer",
+		"Binary Search Tree",
+		"Bitmask",
+		"Queue",
+		"Memoization",
+		"Geometry",
+		"Segment Tree",
+		"Topological Sort",
+		"Number Theory",
+		"Hash Function",
+		"Binary Indexed Tree",
+		"Game Theory",
+		"Data Stream",
+		"Interactive",
+		"String Matching",
+		"Rolling Hash",
+		"Shortest Path",
+		"Combinatorics",
+		"Randomized",
+		"Brainteaser",
+		"Monotonic Queue",
+		"Merge Sort",
+		"Iterator",
+		"Concurrency",
+		"Doubly-Linked List",
+		"Probability and Statistics",
+		"Quickselect",
+		"Bucket Sort",
+		"Suffix Array",
+		"Minimum Spanning Tree",
+		"Counting Sort",
+		"Shell",
+		"Line Sweep",
+		"Reservoir Sampling",
+		"Eulerian Circuit",
+		"Radix Sort",
+		"Strongly Connected Component",
+		"Rejection Sampling",
+		"Biconnected Component"
+	];
 
 	useEffect(() => {
 		// retrieve the data from the server
@@ -52,17 +125,20 @@ const CodingSheets = () => {
 			.get(`https://algolisted.cyclic.app/coding-questions/question/${sheetname}`)
 			.then((res) => {
 				// retrieve the "completed" status of each sheet from the local storage
-				const updatedData = res.data.map((sheet) => {
-					const completed = localStorage.getItem(`codingSheet-${sheet._id}`);
+				let updatedData = res.data.map((sheet) => {
+					const completed = localStorage.getItem(`completedSheetQuestion-${sheet._id}`);
+					const marked = localStorage.getItem(`markedSheetQuestion-${sheet._id}`);
 					return {
 						...sheet,
 						completed: completed === "true",
+						marked: marked === "true",
 					};
 				});
+
 				var solvedQuestions = [];
 				let len = updatedData.length;
-				for(let i = 0; i<len; i++){
-					if(updatedData[i].completed) solvedQuestions.push(updatedData[i]);
+				for (let i = 0; i < len; i++) {
+					if (updatedData[i].completed) solvedQuestions.push(updatedData[i]);
 				}
 				setSolvedData(solvedQuestions);
 
@@ -77,6 +153,8 @@ const CodingSheets = () => {
 			.catch((err) => console.log(err));
 	}, [sheetname]);
 
+	console.log(data);
+
 	const toggleCompleted = (index) => {
 		// update the "completed" field for the coding sheet at the specified index
 		const updatedData = [...data];
@@ -87,21 +165,33 @@ const CodingSheets = () => {
 		);
 		var solvedQuestions = [];
 		let len = updatedData.length;
-		for(let i = 0; i<len; i++){
-			if(updatedData[i].completed == true) solvedQuestions.push(updatedData[i]);
+		for (let i = 0; i < len; i++) {
+			if (updatedData[i].completed == true) solvedQuestions.push(updatedData[i]);
 		}
 		setSolvedData(solvedQuestions);
 		setToggleEffect(!toggleEffect);
 
 		// save the "completed" status of the sheet in the local storage
 		localStorage.setItem(
-			`codingSheet-${updatedData[index]._id}`,
+			`completedSheetQuestion-${updatedData[index]._id}`,
 			updatedData[index].completed
 		);
 	};
 
+	const toggleMarked = (index) => {
+		// update the "completed" field for the coding sheet at the specified index
+		const updatedData = [...data];
+		updatedData[index].marked = !updatedData[index].marked;
+		setData(updatedData);
+
+		localStorage.setItem(
+			`markedSheetQuestion-${updatedData[index]._id}`,
+			updatedData[index].marked
+		);
+	};
+
 	const progressBarPercent =
-		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed( data.length > 100 ? 1 : 0 );
+		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
 	const filters = codingSheetsFilters.map((item) => {
 		return (
@@ -117,158 +207,133 @@ const CodingSheets = () => {
 		);
 	});
 
-	
+
 	// console.log(data);
 
-    const colors = [
-        '#FF877C', '#FF77A9', '#DF79EF', '#DF79EF', '#B085F5', '#8E99F3', '#7FD6FF', '#74E7FF', '#6FF9FF', '#63D8CB', '#98EE99', '#CFFF95', '#FFFF89'
-    ];
+	const colors = [
+		'#FF877C', '#FF77A9', '#DF79EF', '#DF79EF', '#B085F5', '#8E99F3', '#7FD6FF', '#74E7FF', '#6FF9FF', '#63D8CB', '#98EE99', '#CFFF95', '#FFFF89'
+	];
 
-    const borderColors = [
-        '#fff'
-    ];
-    
-    var chartData = {
-        title: { text: 'Chart Title', display: true },
-        labels: sortedTopicTagsKeys.map((items) => {return (items)}),
-        datasets: [{
-            label: "Number of questions by Tag", 
-            data: sortedTopicTagsValues.map((items) => {return (items)}),
-            backgroundColor: colors,
-            borderColor: borderColors,
-            borderWidth: 1,
-        }],
-    };
+	const borderColors = [
+		'#fff'
+	];
 
-    const options = {
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-    };
+	var chartData = {
+		title: { text: 'Chart Title', display: true },
+		labels: sortedTopicTagsKeys.map((items) => { return (items) }),
+		datasets: [{
+			label: "Number of questions by Tag",
+			data: sortedTopicTagsValues.map((items) => { return (items) }),
+			backgroundColor: colors,
+			borderColor: borderColors,
+			borderWidth: 1,
+		}],
+	};
 
-    useEffect(() => { // finding unique tags
-        let len = data.length;
-        let ProblemsTags = [];
-        for(let i = 0; i < len; i++){
-            let tagsLen = data[i].tags.length;
-            for(let j = 1; j<tagsLen; j++){
-                ProblemsTags.push(data[i].tags[j]);
-            }
-        }
-        
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Amazon');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Microsoft');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Google');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Adobe');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Accolite');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Oracle');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Flipkart');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Paytm');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Samsung');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Snapdeal');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Walmart');
+	const options = {
+		plugins: {
+			legend: {
+				display: false,
+			},
+		},
+	};
 
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Easy');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Medium');
-        ProblemsTags = ProblemsTags.filter(string => string !== 'Hard');
-        
-        const allTagsLen = ProblemsTags.length;
-        const elementCounts = {};
-        for (let i = 0; i < allTagsLen; i++) {
-            const element = ProblemsTags[i];
-            if (elementCounts[element]) {
-            elementCounts[element]++;
-            } else {
-            elementCounts[element] = 1;
-            }
-        }
-        const sortedElementCounts = {};
-        Object.keys(elementCounts).sort((a, b) => elementCounts[b] - elementCounts[a]).forEach(function(key) {
-            sortedElementCounts[key] = elementCounts[key];
-        });
+	useEffect(() => { // finding unique tags
+		let len = data.length;
+		let ProblemsTags = [];
+		for (let i = 0; i < len; i++) {
+			let tagsLen = data[i].tags.length;
+			for (let j = 1; j < tagsLen; j++) {
+				ProblemsTags.push(data[i].tags[j]);
+			}
+		}
 
-        let count = 0;
-        const top10SortedElementCounts = {};
-        for (const element in sortedElementCounts) {
-            if (count >= 10) {
-            break;
-            }
-            top10SortedElementCounts[element] = sortedElementCounts[element];
-            count++;
-        }
+		// ProblemsTags = ProblemsTags.filter(string => string !== 'Amazon');
 
-        // console.log(ProblemsTags);
-        // console.log(elementCounts);
-        // console.log(sortedElementCounts);
-        // console.log(top10SortedElementCounts);
-        setSortedTopicTagsKeys(Object.keys(top10SortedElementCounts));
-        setSortedTopicTagsValues(Object.values(top10SortedElementCounts));
-    }, [data])
+		const filteredTags = ProblemsTags.filter(tag => allowedProblemTags.includes(tag));
+        ProblemsTags = filteredTags;
+
+		const allTagsLen = ProblemsTags.length;
+		const elementCounts = {};
+		for (let i = 0; i < allTagsLen; i++) {
+			const element = ProblemsTags[i];
+			if (elementCounts[element]) {
+				elementCounts[element]++;
+			} else {
+				elementCounts[element] = 1;
+			}
+		}
+		const sortedElementCounts = {};
+		Object.keys(elementCounts).sort((a, b) => elementCounts[b] - elementCounts[a]).forEach(function (key) {
+			sortedElementCounts[key] = elementCounts[key];
+		});
+
+		setSortedTopicTagsKeys(Object.keys(sortedElementCounts));
+		setSortedTopicTagsValues(Object.values(sortedElementCounts));
+	}, [data])
 
 
-    useEffect(() => {
-        let len = data.length;
-        const elementCounts = {};
-        elementCounts['Easy'] = 0;
-        elementCounts['Medium'] = 0;
-        elementCounts['Hard'] = 0;
-        for (let i = 0; i < len; i++) {
-            let element = data[i].tags[0];
-            if(element == 'Basic') element = 'Easy';
-            if (elementCounts[element]) {
-                elementCounts[element]++;
-            } else {
-                elementCounts[element] = 1;
-            }
-        }
-        console.log(elementCounts);
-        setDifficulty(elementCounts);
-    }, [data])
+	useEffect(() => {
+		let len = data.length;
+		const elementCounts = {};
+		elementCounts['Easy'] = 0;
+		elementCounts['Medium'] = 0;
+		elementCounts['Hard'] = 0;
+		for (let i = 0; i < len; i++) {
+			let element = data[i].tags[0];
+			if (element == 'Basic') element = 'Easy';
+			if (elementCounts[element]) {
+				elementCounts[element]++;
+			} else {
+				elementCounts[element] = 1;
+			}
+		}
+		// console.log(elementCounts);
+		setDifficulty(elementCounts);
+	}, [data])
 
 	const difficultyColors = ["#9ed0fa", "#ffb800", "#ef4643"];
 
 	useEffect(() => {
 		let len = solvedData.length;
-		console.log(solvedData);
-        const elementCounts = {};
-        elementCounts['Easy'] = 0;
-        elementCounts['Medium'] = 0;
-        elementCounts['Hard'] = 0;
+		// console.log(solvedData);
+		const elementCounts = {};
+		elementCounts['Easy'] = 0;
+		elementCounts['Medium'] = 0;
+		elementCounts['Hard'] = 0;
 
 		for (let i = 0; i < len; i++) {
-            let element = solvedData[i].tags[0];
-			console.log(element);
-            if(element == 'Basic') element = 'Easy';
-            if (elementCounts[element]) {
-                elementCounts[element]++;
-            } else {
-                elementCounts[element] = 1;
-            }
-        }
+			let element = solvedData[i].tags[0];
+			// console.log(element);
+			if (element == 'Basic') element = 'Easy';
+			if (elementCounts[element]) {
+				elementCounts[element]++;
+			} else {
+				elementCounts[element] = 1;
+			}
+		}
 
-		console.log(elementCounts);
-        setUserDifficulty(elementCounts);
+		// console.log(elementCounts);
+		setUserDifficulty(elementCounts);
 	}, [solvedData, data, toggleEffect])
 
 	useEffect(() => {
 		let num1 = (userDifficulty.Easy / difficulty.Easy) * 100;
 		let num2 = (userDifficulty.Medium / difficulty.Medium) * 100;
 		let num3 = (userDifficulty.Hard / difficulty.Hard) * 100;
-		
-		console.log(num1, num2, num3);
-		let difficultyPercentageArray = []; 
+
+		// console.log(num1, num2, num3);
+		let difficultyPercentageArray = [];
 		difficultyPercentageArray.push(num1.toFixed(2));
 		difficultyPercentageArray.push(num2.toFixed(2));
 		difficultyPercentageArray.push(num3.toFixed(2));
-		console.log(difficultyPercentageArray);
+		// console.log(difficultyPercentageArray);
 
 		setDifficultyPercentage(difficultyPercentageArray);
 	}, [difficulty, userDifficulty])
-	
-	console.log(userDifficulty);
-	
+
+	// console.log(userDifficulty);
+
 	return (
 		<GrandContainer>
 			<MobContainer>
@@ -380,14 +445,14 @@ const CodingSheets = () => {
 										<div className="desc">
 											Close Visualiser
 										</div>
-										<ExpandLessIcon/>
+										<ExpandLessIcon />
 									</>
 								) : (
 									<>
 										<div className="desc">
 											Open Visualiser
 										</div>
-										<ExpandMoreIcon/>
+										<ExpandMoreIcon />
 									</>
 								)
 							}
@@ -407,9 +472,9 @@ const CodingSheets = () => {
 											<div className="graph-labels">
 												{
 													sortedTopicTagsKeys.map((item, index) => {
-														return(
-															<div className="label">
-																<div className="color" style={{"backgroundColor" : `${colors[index]}`}}></div>
+														return (
+															<div className="label" key={index}>
+																<div className="color" style={{ "backgroundColor": `${colors[index]}` }}></div>
 																<div className="label-key">{sortedTopicTagsKeys[index]} : </div>
 																<div className="label-value">{sortedTopicTagsValues[index]}</div>
 															</div>
@@ -444,10 +509,10 @@ const CodingSheets = () => {
 													</div>
 												</div>
 												<div className="line">
-												<div className="fill" style={{
-													"width" : `${difficultyPercentage[0]}%`,
-													"backgroundColor" : `${difficultyColors[0]}`
-												}}></div>
+													<div className="fill" style={{
+														"width": `${difficultyPercentage[0]}%`,
+														"backgroundColor": `${difficultyColors[0]}`
+													}}></div>
 												</div>
 											</div>
 											<div className="category">
@@ -460,8 +525,8 @@ const CodingSheets = () => {
 												</div>
 												<div className="line">
 													<div className="fill" style={{
-														"width" : `${difficultyPercentage[1]}%`,
-														"backgroundColor" : `${difficultyColors[1]}`
+														"width": `${difficultyPercentage[1]}%`,
+														"backgroundColor": `${difficultyColors[1]}`
 													}}></div>
 												</div>
 											</div>
@@ -474,9 +539,9 @@ const CodingSheets = () => {
 													</div>
 												</div>
 												<div className="line">
-												<div className="fill" style={{
-														"width" : `${difficultyPercentage[2]}%`,
-														"backgroundColor" : `${difficultyColors[2]}`
+													<div className="fill" style={{
+														"width": `${difficultyPercentage[2]}%`,
+														"backgroundColor": `${difficultyColors[2]}`
 													}}></div>
 												</div>
 											</div>
@@ -487,7 +552,7 @@ const CodingSheets = () => {
 						}
 
 					</SheetMessage>
-					
+
 					<Progress>
 						<div className="text">Progress : </div>
 						<div className="value">{`${progressBarPercent}%`}</div>
@@ -507,12 +572,12 @@ const CodingSheets = () => {
 							data.map((item, index) => {
 								return (
 									<div
-										key={item.name}
+										key={index}
 										className={
-											item.completed ? (
-												item.marked ? "review-row link-row done-row" : "link-row done-row"
+											item.marked ? (
+												item.completed ? "review-row link-row done-row" : "review-row link-row"
 											) : (
-												"link-row"
+												item.completed ? "link-row done-row" : "link-row"
 											)
 										}
 									>
@@ -556,7 +621,7 @@ const CodingSheets = () => {
 											<Tooltip title={item.marked ? "UnMark" : "Mark for Later"}>
 												<div className="review-btn">
 													<UpdateIcon
-														// onClick={() => toggleCompleted(index)}
+														onClick={() => toggleMarked(index)}
 													/>
 												</div>
 											</Tooltip>
@@ -977,7 +1042,7 @@ const Container = styled.div`
 			}
 
 			.review-row {
-				background-color: #fae4e4;
+				background-color: #ffe3e2;
 				border-radius: 0;
 				
 				.right-icons{
@@ -1128,17 +1193,16 @@ const VisualiserConatiner = styled.div`
             background-color: rgba(255, 255, 255, 0.83);
             box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
             border-radius: 5px;
-            padding: 10px 50px;
-			padding-top: 50px;
+            padding: 50px 10px 10px 50px;
             width: 65%;
             position: relative;
     
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
     
             .canvas-graph{
-                width: 50%;
+                width: 45%;
                 display: inline;
                 /* border: 1px solid black; */
             }
@@ -1146,10 +1210,30 @@ const VisualiserConatiner = styled.div`
             .graph-labels{
                 display: flex;
                 flex-direction: column;
+				height: 220px;
+				overflow-y: scroll;
+				padding: 0 20px;
+
+				::-webkit-scrollbar {
+					width: 2px;
+				}
+				
+				::-webkit-scrollbar-track {
+					background-color: #f0e9e9;
+					border-left: 1px solid #e9e5e5;
+				}
+				
+				::-webkit-scrollbar-thumb {
+					background-color: #335ddc;
+					border-radius: 100px;
+				}
+
+
     
                 .label{
                     display: flex;
                     align-items: center;
+					flex-wrap: wrap;
 					margin: 1px 0;
     
                     .color{
@@ -1162,7 +1246,7 @@ const VisualiserConatiner = styled.div`
                     } 
     
                     .label-key{
-                        font-size: 0.8rem;
+                        font-size: 0.7rem;
                         font-weight: 500;
                         margin-right: 5px;
                     }
