@@ -12,6 +12,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import MobileNavbar from "../Components/MobileNavbar";
 import AddIcon from '@material-ui/icons/Add';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const Resources = () => {
   const [allResources, setAllResources] = useState([]);
@@ -137,9 +138,11 @@ const Resources = () => {
           </Filters>
           
           <Sort>
-            <div className="box">
-              <AddIcon />
-            </div>
+            <Tooltip title="Under Development">
+              <div className="box">
+                <AddIcon />
+              </div>
+            </Tooltip>
             <div className="box">
               <div className="text">By Relevance</div>
               <FilterListIcon />
@@ -161,6 +164,13 @@ const Resources = () => {
                     if (filter == "All Resources" || item.mainTag == filter) {
                       return (
                         <div className="resource">
+                          {
+                            item.topRated ? (
+                              <div className="top-tag">
+                                Top Rated
+                              </div>
+                            ):(<></>)
+                          }
                           <div className="top-part">
                             <a href={item.link} target="_blank" className="img-container">
                               <img src={item.imgLink} target="_blank" alt="" />
@@ -489,6 +499,21 @@ const Container = styled.div`
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          position: relative;
+
+          .top-tag{
+            position: absolute;
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            font-weight: 300;
+            background-color: white;
+            border: 1px solid #b9afaf;
+            box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+            top: 5px;
+            right: -10px;
+            border-radius: 100px;
+            user-select: none;
+          }
 
           .img-container{
             width: 100%;

@@ -14,6 +14,8 @@ import SimpleFooter from "../Components/SimpleFooter";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MobileNavbar from "../Components/MobileNavbar";
+import AddIcon from '@material-ui/icons/Add';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const CodingCompetitions = () => {
 	const [temp, setTemp] = useState([1]);
@@ -257,7 +259,13 @@ const CodingCompetitions = () => {
             Girlscript, GSOC, Code jam, Hash Cup.
           </p> */}
 					<Filters>{filters}</Filters>
+
 					<Sort>
+						<Tooltip title="Under Development">
+							<div className="box">
+								<AddIcon />
+							</div>
+						</Tooltip>
 						<div onClick={(e) => handleSort(e)} className="box">
 							<div className="text">{sortType}</div>
 							<FilterListIcon />
