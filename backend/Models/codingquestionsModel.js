@@ -25,6 +25,10 @@ const newCodingQuestionSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  marked: {
+    type: Boolean,
+    default: false,
+  },
   connectOn:{
     type: String,
     required: true,

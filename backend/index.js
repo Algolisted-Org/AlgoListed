@@ -23,7 +23,7 @@ app.use(morgan('dev'));
 
 //Routes
 app.get('/', (req, res) => {
-  res.send('Hello World 2, backend has succesfully been started.');
+  res.send('You are using Algolisted APIs. - a Atanu Nayak production');
 });
 
 app.use('/auth', require('./Routers/router_auth'));
