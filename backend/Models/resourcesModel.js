@@ -37,6 +37,10 @@ const resourcesSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  topRated:{
+    type: Boolean,
+    default: false,
+  },
   report_count: {
     type: Number,
     default: 0,
