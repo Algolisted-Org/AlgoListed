@@ -12,6 +12,10 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MobileNavbar from "../Components/MobileNavbar";
 import DoughnutChart from '../Components/DoughnutChart';
+import Tooltip from '@material-ui/core/Tooltip';
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
+import UpdateIcon from '@material-ui/icons/Update';
 
 import {
 	CircularProgressbar,
@@ -366,8 +370,6 @@ const CodingSheets = () => {
 
 					<Filters>{filters}</Filters>
 
-					
-
 					<SheetMessage>
 						<div className="text">
 							Hey there! With this tool, you can easily see a visual representation of the coding sheet you are working on and track your progress as you go. It also gives you an idea of the types of questions you can expect to find on the sheet. Cool, huh?
@@ -508,7 +510,11 @@ const CodingSheets = () => {
 									<div
 										key={item.name}
 										className={
-											item.completed ? "link-row done-row" : "link-row"
+											item.completed ? (
+												item.marked ? "review-row link-row done-row" : "link-row done-row"
+											) : (
+												"link-row"
+											)
 										}
 									>
 										{" "}
@@ -540,10 +546,21 @@ const CodingSheets = () => {
 												</div>
 											</div>
 										</div>
-										<div className="done-btn">
-											<CheckCircleOutlineIcon
-												onClick={() => toggleCompleted(index)}
-											/>
+										<div className="right-icons">
+											<Tooltip title={item.completed ? "Mark as Uncompleted" : "Mark as Completed"}>
+												<div className="done-btn">
+													<CheckCircleOutlineIcon
+														onClick={() => toggleCompleted(index)}
+													/>
+												</div>
+											</Tooltip>
+											<Tooltip title={item.marked ? "UnMark" : "Mark for Later"}>
+												<div className="review-btn">
+													<UpdateIcon
+														// onClick={() => toggleCompleted(index)}
+													/>
+												</div>
+											</Tooltip>
 										</div>
 									</div>
 								);
@@ -912,31 +929,69 @@ const Container = styled.div`
 					}
 				}
 
-				.done-btn {
-					.MuiSvgIcon-root {
-						fill: #b5a6a6;
-						font-size: 2.25rem;
+				.right-icons{
+					display: flex;
+					align-items: center;
 
-						&:hover {
-							transition-duration: 250ms;
+					.done-btn {
+						.MuiSvgIcon-root {
+							fill: #b5a6a6;
+							font-size: 2rem;
+	
+							&:hover {
+								transition-duration: 250ms;
+								fill: orange;
+								cursor: pointer;
+							}
+						}
+					}
+
+					.review-btn {
+						.MuiSvgIcon-root {
+							fill: #b5a6a6;
+							font-size: 2rem;
+							margin-left: 10px;
+	
+							&:hover {
+								transition-duration: 250ms;
+								fill: #cf5f5f;
+								cursor: pointer;
+							}
+						}
+					}
+				}
+
+			}
+
+			.done-row {
+				background-color: #dcf8eb;
+				
+				.right-icons{
+					display: flex;
+					
+					.done-btn {
+						.MuiSvgIcon-root {
 							fill: orange;
-							cursor: pointer;
 						}
 					}
 				}
 			}
 
-			.done-row {
-				background-color: #dcf8eb;
+			.review-row {
+				background-color: #fae4e4;
+				border-radius: 0;
+				
+				.right-icons{
+					display: flex;
 
-				.done-btn {
-					.MuiSvgIcon-root {
-						fill: orange;
-						font-size: 2.25rem;
+					.review-btn {
+						.MuiSvgIcon-root {
+							fill: #cf5f5f;
+						}
 					}
 				}
 			}
-
+			
 			.no-bottom-border {
 				border-bottom: 1px solid transparent;
 			}
