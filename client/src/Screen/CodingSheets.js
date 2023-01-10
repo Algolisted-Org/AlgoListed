@@ -363,8 +363,7 @@ const CodingSheets = () => {
 					<div className="message">
 						<div className="icon"></div>
 						<div className="text">
-							Want to contribute or have any suggestion about the website{" "}
-							<a href="/">click here</a>
+							As we continue to develop our platform, we do not currently require users to create accounts. As a result, any progress made is saved locally in your device's storage. Therefore, it's recommended to not clear your browser's cache.
 						</div>
 					</div>
 

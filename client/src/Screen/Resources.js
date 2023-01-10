@@ -128,7 +128,7 @@ const Resources = () => {
           <div className="message">
             <div className="icon"></div>
             <div className="text">
-              Want to contribute a resource or have any suggestion about the website <a href="/">click here</a>
+              If you believe that someone has posted your content on our site without giving you proper credit, we encourage you to bring it to our attention with any evidence you may have. We take copyright violations very seriously and will be happy to address this issue for you. If you are the rightful owner of the content and provide us with a complaint, we will promptly remove it from the site.
             </div>
           </div>
 
