@@ -15,9 +15,8 @@ import DoughnutChart from '../Components/DoughnutChart';
 
 import {
 	CircularProgressbar,
-	CircularProgressbarWithChildren,
 	buildStyles
-  } from "react-circular-progressbar";
+} from "react-circular-progressbar";
 
 import "react-circular-progressbar/dist/styles.css";
 
@@ -33,6 +32,7 @@ const CodingSheets = () => {
     const [userDifficulty, setUserDifficulty] = useState({});
     const [difficultyPercentage, setDifficultyPercentage] = useState([0, 0, 0]);
 	const [openVisualiser, setOpenVisualiser] = useState(true);
+	const [toggleEffect, setToggleEffect] = useState(true);
 
 	const params = useParams();
 
@@ -81,6 +81,13 @@ const CodingSheets = () => {
 		setCompletedCount(
 			(prevCount) => prevCount + (updatedData[index].completed ? 1 : -1)
 		);
+		var solvedQuestions = [];
+		let len = updatedData.length;
+		for(let i = 0; i<len; i++){
+			if(updatedData[i].completed == true) solvedQuestions.push(updatedData[i]);
+		}
+		setSolvedData(solvedQuestions);
+		setToggleEffect(!toggleEffect);
 
 		// save the "completed" status of the sheet in the local storage
 		localStorage.setItem(
@@ -218,15 +225,17 @@ const CodingSheets = () => {
 
 	const difficultyColors = ["#9ed0fa", "#ffb800", "#ef4643"];
 
-	const handleSolvedQuestionsExtraction = () => {
+	useEffect(() => {
 		let len = solvedData.length;
+		console.log(solvedData);
         const elementCounts = {};
         elementCounts['Easy'] = 0;
         elementCounts['Medium'] = 0;
         elementCounts['Hard'] = 0;
 
 		for (let i = 0; i < len; i++) {
-            let element = data[i].tags[0];
+            let element = solvedData[i].tags[0];
+			console.log(element);
             if(element == 'Basic') element = 'Easy';
             if (elementCounts[element]) {
                 elementCounts[element]++;
@@ -237,11 +246,7 @@ const CodingSheets = () => {
 
 		console.log(elementCounts);
         setUserDifficulty(elementCounts);
-	}
-
-	useEffect(() => {
-		handleSolvedQuestionsExtraction();
-	}, [solvedData, data])
+	}, [solvedData, data, toggleEffect])
 
 	useEffect(() => {
 		let num1 = (userDifficulty.Easy / difficulty.Easy) * 100;
@@ -258,6 +263,7 @@ const CodingSheets = () => {
 		setDifficultyPercentage(difficultyPercentageArray);
 	}, [difficulty, userDifficulty])
 	
+	console.log(userDifficulty);
 	
 	return (
 		<GrandContainer>
@@ -390,7 +396,10 @@ const CodingSheets = () => {
 								<VisualiserConatiner>
 									<div className="visualiser-conatiner">
 										<div className="canvas-container">
-											<div className="top-label">Top 10 Problem Tags in Sheet</div>
+											<div className="top-label">
+												<div className="label-item selected">Problem Tags in Sheet</div>
+												<div className="label-item" onClick={() => alert("Under development, Men at work")}>Solved Tags</div>
+											</div>
 											<div className="canvas-graph">
 												<DoughnutChart chartData={chartData} options={options}></DoughnutChart>
 											</div>
@@ -406,15 +415,12 @@ const CodingSheets = () => {
 														)
 													})
 												}
-												<div className="label">
-													<div className="color"></div>
-													<div className="label-key">Dynamic Programming : </div>
-													<div className="label-value">11</div>
-												</div>
 											</div>
 										</div>
 										<div className="learn-self-graph">
-											<div className="top-label">Track Progress</div>
+											<div className="top-label">
+												<div className="label-item selected">Track Progress</div>
+											</div>
 											<div className="circular-chart">
 												<CircularProgressbar
 													value={progressBarPercent}
@@ -1191,13 +1197,22 @@ const VisualiserConatiner = styled.div`
 
 		.top-label{
 			position: absolute;
-			top: 5px;
-			left: 5px;
-			padding: 5px 10px;
-			font-size: 0.7rem;
-			border: 1px solid #d0d5db;
-			background-color: #f0f0f0;
-			border-radius: 3px;
+			display: flex;
+			top: 10px;
+			left: 10px;
+			
+			.label-item{
+				padding: 5px 10px;
+				font-size: 0.7rem;
+				border: 1px solid #d0d5db;
+				border-radius: 3px;
+				margin-right: 5px;
+				cursor: pointer;
+			}
+			
+			.selected{
+				background-color: #f0f0f0;
+			}
 		}
     }
 
