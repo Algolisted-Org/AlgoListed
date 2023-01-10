@@ -60,7 +60,7 @@ const LeftMenu = ({ marked }) => {
           <div className="text">algolisted.com</div>
           <div className="line"></div>
         </div>
-        <div className="link">Work with us</div>
+        <a href='https://github.com/Nayaker/AlgoListed/tree/main/client/src/MarkdownFiles' target={"_blank"} className="link">Contribute Blog Content</a>
         <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link">Report an Issue</a>
       </div>
 

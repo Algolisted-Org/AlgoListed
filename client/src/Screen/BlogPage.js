@@ -58,8 +58,8 @@ const BlogPage = () => {
                 <CCHeader /> 
                 <LeftMenu marked={"all-blogs"} />
                 <div className="blogs-main">
-                    {/* <BlogContent blogid={blogid} /> */}
                     <BlogContentMD blogid={blogid} blogname={blogname}/>
+
                     <RightMenu>
                         <div className="blog-contributors">
                             <div className="top-title">Blog Contributors</div>

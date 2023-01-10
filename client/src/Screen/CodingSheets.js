@@ -11,12 +11,28 @@ import SimpleFooter from "../Components/SimpleFooter";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MobileNavbar from "../Components/MobileNavbar";
+import DoughnutChart from '../Components/DoughnutChart';
+
+import {
+	CircularProgressbar,
+	CircularProgressbarWithChildren,
+	buildStyles
+  } from "react-circular-progressbar";
+
+import "react-circular-progressbar/dist/styles.css";
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
+	const [solvedData, setSolvedData] = useState([]);
 	const [dataLoading, setDataLoading] = useState(true);
 	const [completedCount, setCompletedCount] = useState(0);
 	const [showFilters, setShowFilters] = useState(false);
+	const [sortedTopicTagsKeys, setSortedTopicTagsKeys] = useState([]);
+    const [sortedTopicTagsValues, setSortedTopicTagsValues] = useState([]);
+    const [difficulty, setDifficulty] = useState({});
+    const [userDifficulty, setUserDifficulty] = useState({});
+    const [difficultyPercentage, setDifficultyPercentage] = useState([0, 0, 0]);
+	const [openVisualiser, setOpenVisualiser] = useState(true);
 
 	const params = useParams();
 
@@ -39,6 +55,13 @@ const CodingSheets = () => {
 						completed: completed === "true",
 					};
 				});
+				var solvedQuestions = [];
+				let len = updatedData.length;
+				for(let i = 0; i<len; i++){
+					if(updatedData[i].completed) solvedQuestions.push(updatedData[i]);
+				}
+				setSolvedData(solvedQuestions);
+
 				// calculate the initial value of completedCount based on the "completed" status of the sheets in updatedData
 				const initialCompletedCount = updatedData.reduce((acc, sheet) => {
 					return acc + (sheet.completed ? 1 : 0);
@@ -83,6 +106,159 @@ const CodingSheets = () => {
 		);
 	});
 
+	
+	// console.log(data);
+
+    const colors = [
+        '#FF877C', '#FF77A9', '#DF79EF', '#DF79EF', '#B085F5', '#8E99F3', '#7FD6FF', '#74E7FF', '#6FF9FF', '#63D8CB', '#98EE99', '#CFFF95', '#FFFF89'
+    ];
+
+    const borderColors = [
+        '#fff'
+    ];
+    
+    var chartData = {
+        title: { text: 'Chart Title', display: true },
+        labels: sortedTopicTagsKeys.map((items) => {return (items)}),
+        datasets: [{
+            label: "Number of questions by Tag", 
+            data: sortedTopicTagsValues.map((items) => {return (items)}),
+            backgroundColor: colors,
+            borderColor: borderColors,
+            borderWidth: 1,
+        }],
+    };
+
+    const options = {
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+    };
+
+    useEffect(() => { // finding unique tags
+        let len = data.length;
+        let ProblemsTags = [];
+        for(let i = 0; i < len; i++){
+            let tagsLen = data[i].tags.length;
+            for(let j = 1; j<tagsLen; j++){
+                ProblemsTags.push(data[i].tags[j]);
+            }
+        }
+        
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Amazon');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Microsoft');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Google');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Adobe');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Accolite');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Oracle');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Flipkart');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Paytm');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Samsung');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Snapdeal');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Walmart');
+
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Easy');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Medium');
+        ProblemsTags = ProblemsTags.filter(string => string !== 'Hard');
+        
+        const allTagsLen = ProblemsTags.length;
+        const elementCounts = {};
+        for (let i = 0; i < allTagsLen; i++) {
+            const element = ProblemsTags[i];
+            if (elementCounts[element]) {
+            elementCounts[element]++;
+            } else {
+            elementCounts[element] = 1;
+            }
+        }
+        const sortedElementCounts = {};
+        Object.keys(elementCounts).sort((a, b) => elementCounts[b] - elementCounts[a]).forEach(function(key) {
+            sortedElementCounts[key] = elementCounts[key];
+        });
+
+        let count = 0;
+        const top10SortedElementCounts = {};
+        for (const element in sortedElementCounts) {
+            if (count >= 10) {
+            break;
+            }
+            top10SortedElementCounts[element] = sortedElementCounts[element];
+            count++;
+        }
+
+        // console.log(ProblemsTags);
+        // console.log(elementCounts);
+        // console.log(sortedElementCounts);
+        // console.log(top10SortedElementCounts);
+        setSortedTopicTagsKeys(Object.keys(top10SortedElementCounts));
+        setSortedTopicTagsValues(Object.values(top10SortedElementCounts));
+    }, [data])
+
+
+    useEffect(() => {
+        let len = data.length;
+        const elementCounts = {};
+        elementCounts['Easy'] = 0;
+        elementCounts['Medium'] = 0;
+        elementCounts['Hard'] = 0;
+        for (let i = 0; i < len; i++) {
+            let element = data[i].tags[0];
+            if(element == 'Basic') element = 'Easy';
+            if (elementCounts[element]) {
+                elementCounts[element]++;
+            } else {
+                elementCounts[element] = 1;
+            }
+        }
+        console.log(elementCounts);
+        setDifficulty(elementCounts);
+    }, [data])
+
+	const difficultyColors = ["#9ed0fa", "#ffb800", "#ef4643"];
+
+	const handleSolvedQuestionsExtraction = () => {
+		let len = solvedData.length;
+        const elementCounts = {};
+        elementCounts['Easy'] = 0;
+        elementCounts['Medium'] = 0;
+        elementCounts['Hard'] = 0;
+
+		for (let i = 0; i < len; i++) {
+            let element = data[i].tags[0];
+            if(element == 'Basic') element = 'Easy';
+            if (elementCounts[element]) {
+                elementCounts[element]++;
+            } else {
+                elementCounts[element] = 1;
+            }
+        }
+
+		console.log(elementCounts);
+        setUserDifficulty(elementCounts);
+	}
+
+	useEffect(() => {
+		handleSolvedQuestionsExtraction();
+	}, [solvedData, data])
+
+	useEffect(() => {
+		let num1 = (userDifficulty.Easy / difficulty.Easy) * 100;
+		let num2 = (userDifficulty.Medium / difficulty.Medium) * 100;
+		let num3 = (userDifficulty.Hard / difficulty.Hard) * 100;
+		
+		console.log(num1, num2, num3);
+		let difficultyPercentageArray = []; 
+		difficultyPercentageArray.push(num1.toFixed(2));
+		difficultyPercentageArray.push(num2.toFixed(2));
+		difficultyPercentageArray.push(num3.toFixed(2));
+		console.log(difficultyPercentageArray);
+
+		setDifficultyPercentage(difficultyPercentageArray);
+	}, [difficulty, userDifficulty])
+	
+	
 	return (
 		<GrandContainer>
 			<MobContainer>
@@ -90,12 +266,7 @@ const CodingSheets = () => {
 				<div className="main-content">
 					<h1 className="main-heading">Coding Sheets</h1>
 					<p className="heading-supporter">
-						Coding Sheets is a website that offers a range of software
-						engineering practice sheets to select from in a single location. The
-						discussion section, which will be available soon, will provide
-						support and guidance while working on a specific sheet. Another
-						upcoming feature will be a comprehensive analysis of each sheet,
-						similar to the one found on the Monkeytype website.
+						Looking for a convenient way to access a variety of coding practice sheets from different sources? Look no further than Coding Sheets, a feature on the Algolisted website. Not only can you find a wide range of sheets all in one place, but the included analysis graphs make solving them even more enjoyable by allowing you to track your progress. Plus, a discussion section is coming soon to provide support and guidance as you work through each sheet. Happy coding!
 					</p>
 
 					<div className="data-filters">
@@ -177,12 +348,7 @@ const CodingSheets = () => {
 				<div className="cc-middle-content">
 					<h1 className="main-heading">Coding Sheets</h1>
 					<p className="heading-supporter">
-						Coding Sheets is a website that offers a range of software
-						engineering practice sheets to select from in a single location. The
-						discussion section, which will be available soon, will provide
-						support and guidance while working on a specific sheet. Another
-						upcoming feature will be a comprehensive analysis of each sheet,
-						similar to the one found on the Monkeytype website.
+						Looking for a convenient way to access a variety of coding practice sheets from different sources? Look no further than Coding Sheets, a feature on the Algolisted website. Not only can you find a wide range of sheets all in one place, but the included analysis graphs make solving them even more enjoyable by allowing you to track your progress. Plus, a discussion section is coming soon to provide support and guidance as you work through each sheet. Happy coding!
 					</p>
 					<div className="message">
 						<div className="icon"></div>
@@ -194,17 +360,127 @@ const CodingSheets = () => {
 
 					<Filters>{filters}</Filters>
 
+					
+
 					<SheetMessage>
 						<div className="text">
 							Hey there! With this tool, you can easily see a visual representation of the coding sheet you are working on and track your progress as you go. It also gives you an idea of the types of questions you can expect to find on the sheet. Cool, huh?
 						</div>
-						<div className="open-btn">
-							<div className="desc">Open Visualiser</div>
-							<ExpandMoreIcon/>
+						<div className="open-btn" onClick={() => setOpenVisualiser(!openVisualiser)}>
+							{
+								openVisualiser ? (
+									<>
+										<div className="desc">
+											Close Visualiser
+										</div>
+										<ExpandLessIcon/>
+									</>
+								) : (
+									<>
+										<div className="desc">
+											Open Visualiser
+										</div>
+										<ExpandMoreIcon/>
+									</>
+								)
+							}
 						</div>
+						{
+							openVisualiser ? (
+								<VisualiserConatiner>
+									<div className="visualiser-conatiner">
+										<div className="canvas-container">
+											<div className="top-label">Top 10 Problem Tags in Sheet</div>
+											<div className="canvas-graph">
+												<DoughnutChart chartData={chartData} options={options}></DoughnutChart>
+											</div>
+											<div className="graph-labels">
+												{
+													sortedTopicTagsKeys.map((item, index) => {
+														return(
+															<div className="label">
+																<div className="color" style={{"backgroundColor" : `${colors[index]}`}}></div>
+																<div className="label-key">{sortedTopicTagsKeys[index]} : </div>
+																<div className="label-value">{sortedTopicTagsValues[index]}</div>
+															</div>
+														)
+													})
+												}
+												<div className="label">
+													<div className="color"></div>
+													<div className="label-key">Dynamic Programming : </div>
+													<div className="label-value">11</div>
+												</div>
+											</div>
+										</div>
+										<div className="learn-self-graph">
+											<div className="top-label">Track Progress</div>
+											<div className="circular-chart">
+												<CircularProgressbar
+													value={progressBarPercent}
+													text={`${progressBarPercent}%`}
+													strokeWidth={5}
+													styles={buildStyles({
+														textColor: "red",
+														textSize: "18px",
+														pathColor: "orange",
+														trailColor: "#f0f0f0"
+													})}
+												/>
+											</div>
+											<div className="category">
+												<div className="cat-data">
+													<div className="name">Easy</div>
+													<div className="completed">
+														<div className="text">Completed : </div>
+														<div className="value">{userDifficulty.Easy} / {difficulty.Easy}</div>
+													</div>
+												</div>
+												<div className="line">
+												<div className="fill" style={{
+													"width" : `${difficultyPercentage[0]}%`,
+													"backgroundColor" : `${difficultyColors[0]}`
+												}}></div>
+												</div>
+											</div>
+											<div className="category">
+												<div className="cat-data">
+													<div className="name">Medium</div>
+													<div className="completed">
+														<div className="text">Completed : </div>
+														<div className="value">{userDifficulty.Medium} / {difficulty.Medium}</div>
+													</div>
+												</div>
+												<div className="line">
+													<div className="fill" style={{
+														"width" : `${difficultyPercentage[1]}%`,
+														"backgroundColor" : `${difficultyColors[1]}`
+													}}></div>
+												</div>
+											</div>
+											<div className="category">
+												<div className="cat-data">
+													<div className="name">Hard</div>
+													<div className="completed">
+														<div className="text">Completed : </div>
+														<div className="value">{userDifficulty.Hard} / {difficulty.Hard}</div>
+													</div>
+												</div>
+												<div className="line">
+												<div className="fill" style={{
+														"width" : `${difficultyPercentage[2]}%`,
+														"backgroundColor" : `${difficultyColors[2]}`
+													}}></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</VisualiserConatiner>
+							) : (<></>)
+						}
+
 					</SheetMessage>
 					
-
 					<Progress>
 						<div className="text">Progress : </div>
 						<div className="value">{`${progressBarPercent}%`}</div>
@@ -779,3 +1055,156 @@ const SheetMessage = styled.div`
 const GiveSpace = styled.div`
 	margin-bottom: 40vh;
 `;
+
+const VisualiserConatiner = styled.div`
+	margin: 10px 0 0 0;
+    .visualiser-conatiner{
+        display: flex;
+		align-items: stretch;
+        justify-content: space-between;
+        
+        .canvas-container{
+            border: 1px solid #d1d5db;
+            background-color: rgba(255, 255, 255, 0.83);
+            box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
+            border-radius: 5px;
+            padding: 10px 50px;
+			padding-top: 50px;
+            width: 65%;
+            position: relative;
+    
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+    
+            .canvas-graph{
+                width: 50%;
+                display: inline;
+                /* border: 1px solid black; */
+            }
+    
+            .graph-labels{
+                display: flex;
+                flex-direction: column;
+    
+                .label{
+                    display: flex;
+                    align-items: center;
+					margin: 1px 0;
+    
+                    .color{
+                        height: 15px;
+                        width: 15px;
+                        /* border-radius: 2px; */
+                        background-color: cornflowerblue;
+                        margin-right: 10px;
+                        border: 0.5px solid #444;
+                    } 
+    
+                    .label-key{
+                        font-size: 0.8rem;
+                        font-weight: 500;
+                        margin-right: 5px;
+                    }
+    
+                    .label-value{
+                        font-size: 0.8rem;
+                        letter-spacing: 0.07rem;
+                        font-weight: 300;
+                        font-family: verdana,arial,sans-serif;
+                    }
+                }
+            }
+        }
+        
+        .learn-self-graph{
+			flex-grow: 1;
+            padding: 10px 30px;
+            margin-left: 7.5px;
+            border: 1px solid #d1d5db;
+            background-color: rgba(255, 255, 255, 0.83);
+            box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
+            border-radius: 5px;
+			position: relative;
+			
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: flex-end;
+			
+            .category{
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+				justify-content: center;
+                width: 100%;
+
+                .cat-data{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 5px;
+    
+                    .name{
+                        font-size: 0.9rem;
+                        font-weight: 500;
+                    }
+    
+                    .completed{
+                        display: flex;
+                        align-items: center;
+    
+                        .text{
+                            font-size: 0.7rem;
+                            font-weight: 300;
+                            color: grey;
+                            margin: 0 7.5px;
+                        }
+                        .value{
+                            font-size: 0.9rem;
+                            font-weight: 400;
+                            font-family: sans-serif;
+                        }
+                    }
+                }
+    
+                .line{
+                    height: 7.5px;
+                    width: 100%;
+                    border-radius: 50px;
+                    background-color: #f1f6f1;
+                    border: 1px solid #dbd5d5;
+					overflow: hidden;
+
+					.fill{
+						background-color: #b5b3b0;
+						height: 100%;
+						border-radius: 50px;
+					}
+                }
+            }
+			
+			.circular-chart{
+				width: 80px;
+			}
+        }
+
+		.top-label{
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			padding: 5px 10px;
+			font-size: 0.7rem;
+			border: 1px solid #d0d5db;
+			background-color: #f0f0f0;
+			border-radius: 3px;
+		}
+    }
+
+    
+    
+    p{
+        font-size: 0.8rem;
+        letter-spacing: 0.07rem;
+    }
+`

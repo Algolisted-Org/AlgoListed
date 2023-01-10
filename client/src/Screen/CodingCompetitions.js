@@ -104,13 +104,8 @@ const CodingCompetitions = () => {
 				<div className="main-content">
 					<h1 className="main-heading">All Upcoming Coding Competitions</h1>
 					<p className="heading-supporter">
-						There are several websites, such as CLIST and Unstop, that provide
-						information about upcoming contests. However, our list is
-						specifically geared towards Indians and is curated by an Indian who
-						understands the types of competitions that are most relevant to this
-						audience. As a result, our list only includes contests that are
-						truly relevant and necessary, rather than including any unnecessary
-						or extraneous ones.
+						While there are other websites, such as CLIST and Unstop, that provide information about contests, our list only includes the ones that are truly relevant and necessary, rather than unnecessary or extraneous ones.
+						Currently, our list of upcoming contests is specifically geared towards Indians and curated by an Indian who understands the types of competitions that are most relevant to this audience. 
 					</p>
 					<div className="all-support-companies">
 						<div className="support-company diff-value">
@@ -222,13 +217,8 @@ const CodingCompetitions = () => {
 				<div className="cc-middle-content">
 					<h1 className="main-heading">All Upcoming Coding Competitions</h1>
 					<p className="heading-supporter">
-						There are several websites, such as CLIST and Unstop, that provide
-						information about upcoming contests. However, our list is
-						specifically geared towards Indians and is curated by an Indian who
-						understands the types of competitions that are most relevant to this
-						audience. As a result, our list only includes contests that are
-						truly relevant and necessary, rather than including any unnecessary
-						or extraneous ones.
+						While there are other websites, such as CLIST and Unstop, that provide information about contests, our list only includes the ones that are truly relevant and necessary, rather than unnecessary or extraneous ones.
+						Currently, our list of upcoming contests is specifically geared towards Indians and curated by an Indian who understands the types of competitions that are most relevant to this audience. 
 					</p>
 					<div className="all-support-companies">
 						<div className="support-company diff-value">

@@ -26,7 +26,7 @@ return (
         <div className="main-content">
           <h1 className="main-heading">Simplified Coding Blogs</h1>
           <p className="heading-supporter">
-            We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
+            At Algolisted, we pride ourselves on our ability to compile helpful lists of content for both revision and general understanding of a variety of topics. Our blogs offer a mix of practical information and links to more theoretical resources. We also provide curated lists of relevant resources, such as open source projects for beginners and dynamic programming questions, to aid in focused learning. Whether you're looking to refresh your knowledge or dive into a new subject, Algolisted has you covered with our comprehensive lists.
           </p>
           <div className="data-filters">
             <div className="toggle-filter" onClick={() => setShowFilters(!showFilters)}>
@@ -90,7 +90,7 @@ return (
         <div className="cc-middle-content">
           <h1 className='main-heading'>Simplified Coding Blogs <div className="head-tag">Verified Blogs</div> </h1>
           <p className="heading-supporter">
-            We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
+            At Algolisted, we pride ourselves on our ability to compile helpful lists of content for both revision and general understanding of a variety of topics. Our blogs offer a mix of practical information and links to more theoretical resources. We also provide curated lists of relevant resources, such as open source projects for beginners and dynamic programming questions, to aid in focused learning. Whether you're looking to refresh your knowledge or dive into a new subject, Algolisted has you covered with our comprehensive lists.
           </p>
           <div className="message">
             <div className="icon"></div>

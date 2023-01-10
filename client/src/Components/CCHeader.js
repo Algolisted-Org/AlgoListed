@@ -215,10 +215,12 @@ const Container = styled.div`
           font-size: 20px;
           fill: #514d4d;
         }
-
+        
         &:hover{
-          background-color: #f2ecf9;
+          background-color: #eaeaea;
+          border-color: #d8c8c8;
           transition-duration: 250ms;
+          
         }
       }
 
@@ -244,10 +246,11 @@ const Container = styled.div`
 
         .text{
           font-size: 0.7rem;
-        }
-
+        } 
+        
         &:hover{
-          background-color: #f2ecf9;
+          border-color: #d8c8c8;
+          background-color: #eaeaea;
           transition-duration: 250ms;
         }         
       }
