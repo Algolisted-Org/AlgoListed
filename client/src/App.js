@@ -41,7 +41,7 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/temp" element={<ChartTemp/>} />
+        <Route path="/temp" element={<PushDataToMongoDB/>} />
         <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/blog/ideas" element={<BlogIdeas/>} />

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import data from '../Components/striverSDEsheetScrapedData.json'
-import babbarData from '../Components/babbarSDEsheetData.json'
+import data from '../ScrapedData/striverSDEsheetScrapedData.json'
+// import data2 from '../ScrapedData/babbarSDEsheetData.json'
+import babbarData from '../ScrapedData/babbarSDEnew.json'
 import axios from "axios";
 
 const PushDataToMongoDB = () => {
-    console.log(33, babbarData[33]);
-    console.log(34, babbarData[34]);
-    console.log(35, babbarData[35]);
     const [newData, setnewData] = useState();
 
     const len = data.length;
@@ -53,23 +51,68 @@ const PushDataToMongoDB = () => {
     }
 
     const babbarLen = babbarData.length;
+    useEffect(() => {
+        for(let i = 0; i<babbarLen; i++){
+            if(babbarData[i].difficulty == undefined){
+            // if(babbarData[i].problemTag == undefined){
+                babbarData[i].difficulty = 'Medium'
+                // console.log(babbarData[i]);
+            }
+        }
+        for(let i = 0; i<babbarLen; i++){
+            if(babbarData[i].companyTag == undefined){
+            // if(babbarData[i].problemTag == undefined){
+                babbarData[i].companyTag = [];
+                // console.log(babbarData[i]);
+            }
+        }
+        // console.log(babbarData);
+        // tagsArray.length = 0;
+        // let tagsLen = babbarData[i].tags.length;
+        // for(let j = 0; j<tagsLen; j++){
+        //     tagsArray.push(babbarData[i].tags[j][0]);
+        // }
+    }, [])
+
+    useEffect(() => {
+        let babbarLen = babbarData.length;
+        let elem = {};
+        for(let i = 0; i<babbarLen; i++){
+            let tagsLen = babbarData[i].problemTag.length;
+            for(let j = 0; j<tagsLen; j++){
+                if(elem[babbarData[i].problemTag[j]]) {
+                    elem[babbarData[i].problemTag[j]]++; 
+                }
+                else elem[babbarData[i].problemTag[j]] = 1;
+            }
+                
+        }
+        console.log(elem);
+    }, [babbarData])
+    
+
+    
+
+    
     const handlePostBabbar = async() => {
         for(let i = 0; i<babbarLen; i++){
             tagsArray.length = 0;
-            let tagsLen = babbarData[i].tags.length;
-            for(let j = 0; j<tagsLen; j++){
-                tagsArray.push(babbarData[i].tags[j][0]);
+            tagsArray.push(babbarData[i].difficulty);
+            let tagsLen = babbarData[i].problemTag.length;
+            for(let j = 1; j<tagsLen; j++){
+                tagsArray.push(babbarData[i].problemTag[j]);
             }
+            // console.log("Position : ", i, " -> ", babbarData[i].title, babbarData[i].problemlink, babbarData[i].problemTag[0], tagsArray);
+
             // console.log(tagsArray);
             await fetch('http://localhost:8000/coding-questions/create', {
-                // await fetch('http://localhost:8000/coding-questions/create', {
                 method: 'post',
                 headers: { 'content-type': 'application/json' },
     
                 body: JSON.stringify({
-                    quesName : babbarData[i].quesName, 
-                    quesLink : babbarData[i].quesLink,
-                    specialTag : babbarData[i].specialTag,
+                    quesName : babbarData[i].title, 
+                    quesLink : babbarData[i].problemlink,
+                    specialTag : babbarData[i].problemTag[0],
                     tags : tagsArray,
                     "connectOn": "Love Babbar",
                     "connectOnDomain": "love-babbar",
@@ -87,30 +130,30 @@ const PushDataToMongoDB = () => {
     //     await axios.get("http://localhost:8000/coding-questions/question/striver-sde-sheet")
     //     .then((res) => {
     //         setnewData(res.data);
-    //         console.log(res.data);
+    //         // console.log(res.data);
     //     })
     //     .catch((err) => console.log(err));
     // }, [])
     
 
-    let same = true;
-    const handleCheckSame = () => {
-        for(let i = 0; i<len; i++){
-            console.log(data[i].title, newData[i].quesName, data[i].title == newData[i].quesName);
-            same &= data[i].title == newData[i].quesName;
-        }
+    // let same = true;
+    // const handleCheckSame = () => {
+    //     for(let i = 0; i<len; i++){
+    //         console.log(data[i].title, newData[i].quesName, data[i].title == newData[i].quesName);
+    //         same &= data[i].title == newData[i].quesName;
+    //     }
 
-        console.log("All data same : ", same);
-    }
+    //     console.log("All data same : ", same);
+    // }
 
   return (
     <Conatiner>
         <h1>Push Data To MongoDB</h1>
-        <button onClick={() => handlePost()}>Click me</button>
-        <button onClick={() => handleCheckSame()}>Click me to check</button>
+        {/* <button onClick={() => handlePost()}>Click me Striver SDE</button> */}
+        {/* <button onClick={() => handleCheckSame()}>Click me to check</button> */}
 
-        <button onClick={() => handlePostBabbar()}>Click me to post for babbar</button>
-        <button onClick={() => handleCheckSame()}>Click me to check for babbar</button>
+        {/* <button onClick={() => handlePostBabbar()}>Click me for Babbar SDE</button> */}
+        {/* <button onClick={() => handleCheckSame()}>Click me to check for babbar</button> */}
     </Conatiner>
   )
 }

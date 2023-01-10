@@ -115,6 +115,11 @@ const CodingSheets = () => {
 		"Radix Sort",
 		"Strongly Connected Component",
 		"Rejection Sampling",
+		"Advanced Data Structure",
+		"Algorithms",
+		"BFS",
+		"Data Structures",
+		"circular-linked-list",
 		"Biconnected Component"
 	];
 
