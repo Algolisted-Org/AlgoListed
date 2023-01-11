@@ -10,6 +10,8 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import { useState } from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
+import BuyMeACoffee from './BuyMeACoffee';
+import Fade from 'react-reveal/Fade';
 
 const CCHeader = () => {
   const [showAccountModel, setShowAccountModel] = useState(false);
@@ -33,9 +35,14 @@ const CCHeader = () => {
     setShowNotificationModel(false);
     setShowWebUpdate(false);
   }
-
+  
+  const [showModelCoffee, setshowModelCoffee] = useState(false);
+  
   return (
     <Container>
+        {
+          showModelCoffee ? <BuyMeACoffee showModelCoffee={showModelCoffee} setshowModelCoffee={setshowModelCoffee}/> : <></>
+        }
         <div className="search-box">
           <div className="icon"> 
             <SearchIcon/>
@@ -48,10 +55,12 @@ const CCHeader = () => {
       </div> */}
 
       <div className="right-icons">
-        <a href='https://www.buymeacoffee.com/nayak' target={"_blank"} className="donate-btn">
-          {/* <div className="icon"><FavoriteBorderIcon/></div> */}
+        {/* <a href='https://www.buymeacoffee.com/nayak' target={"_blank"} className="donate-btn">
           <div className="text">Buy me a coffee</div>
-        </a>
+        </a> */}
+        <div className="donate-btn" onClick={() => {setshowModelCoffee(!showModelCoffee)}}>
+          <div className="text">Buy me a coffee</div>
+        </div>
         <div className="icon-box">
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
             <GitHubIcon/>
@@ -138,13 +147,16 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     height: 55px;
-    width: calc(100vw - 200px);
+    /* width: calc(100vw - 200px); */
+    width: 100vw;
     /* background-color: orange; */
     border-bottom: 1px solid rgb(233, 229, 229);
     box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
     position: fixed;
     top: 0;
-    left: 200px;
+    /* left: 200px; */
+    left: 0;
+    padding-left: 200px;
     z-index: 2;
     background-color: white;
     align-items: center;

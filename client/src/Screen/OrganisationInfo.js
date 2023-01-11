@@ -9,6 +9,7 @@ import PrivacyPolicies from './PrivacyPolicies'
 import Disclaimer from './Disclaimer'
 import CoreTeam from './CoreTeam'
 import Contributors from './Contributors'
+import BuyMeACoffee from '../Components/BuyMeACoffee'
 
 const OrganisationInfo = () => {
     const params = useParams();
@@ -44,8 +45,6 @@ const OrganisationInfo = () => {
                   {
                     showpage == "disclaimer" ? (<Disclaimer/>) : (<></>)
                   }
-                  
-                  
                 </div>
             </Container>
         </GrandContainer>

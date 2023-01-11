@@ -27,6 +27,8 @@ import Readme from './Screen/Readme';
 import GoToTop from './Components/GoToTop';
 import PushDataToMongoDB from './Screen/PushDataToMongoDB';
 import ChartTemp from './Screen/ChartTemp';
+import BuyMeACoffee from './Components/BuyMeACoffee';
+import CCHeader from './Components/CCHeader';
 
 
 const App = () => {
@@ -37,11 +39,13 @@ const App = () => {
   // useEffect(() => {
   //   myfunc();
   // }, []);
+  
+  
 
   return (
     <div>
       <Routes>
-        <Route path="/temp" element={<PushDataToMongoDB/>} />
+        {/* <Route path="/temp" element={<PushDataToMongoDB/>} /> */}
         <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/blog/ideas" element={<BlogIdeas/>} />
@@ -56,7 +60,7 @@ const App = () => {
         <Route path="/opportunities" element={<Opportunities/>} />
         <Route path="/get-blog-code" element={<BlogAutoCode/>} />
         <Route path="/selected-profiles" element={<SelectedProfiles/>} />
-        <Route path="/coding-sheets" element={<CodingSheets/>} />
+        {/* <Route path="/coding-sheets" element={<CodingSheets/>} /> */}
         <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />

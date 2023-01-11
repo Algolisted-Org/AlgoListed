@@ -26,7 +26,7 @@ return (
         <div className="main-content">
           <h1 className="main-heading">Simplified Coding Blogs</h1>
           <p className="heading-supporter">
-            At Algolisted, we pride ourselves on our ability to compile helpful lists of content for both revision and general understanding of a variety of topics. Our blogs offer a mix of practical information and links to more theoretical resources. We also provide curated lists of relevant resources, such as open source projects for beginners and dynamic programming questions, to aid in focused learning. Whether you're looking to refresh your knowledge or dive into a new subject, Algolisted has you covered with our comprehensive lists.
+            Algolisted creates helpful lists of content for revision and understanding various topics, including practical information and resource links. They also offer curated lists of resources like open source projects and programming questions for focused learning.
           </p>
           <div className="data-filters">
             <div className="toggle-filter" onClick={() => setShowFilters(!showFilters)}>
@@ -90,7 +90,7 @@ return (
         <div className="cc-middle-content">
           <h1 className='main-heading'>Simplified Coding Blogs <div className="head-tag">Verified Blogs</div> </h1>
           <p className="heading-supporter">
-            At Algolisted, we pride ourselves on our ability to compile helpful lists of content for both revision and general understanding of a variety of topics. Our blogs offer a mix of practical information and links to more theoretical resources. We also provide curated lists of relevant resources, such as open source projects for beginners and dynamic programming questions, to aid in focused learning. Whether you're looking to refresh your knowledge or dive into a new subject, Algolisted has you covered with our comprehensive lists.
+          Algolisted creates helpful lists of content for revision and understanding various topics, including practical information and resource links. They also offer curated lists of resources like open source projects and programming questions for focused learning.
           </p>
           <div className="message">
             <div className="icon"></div>
