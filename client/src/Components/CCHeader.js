@@ -9,6 +9,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import { useState } from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const CCHeader = () => {
   const [showAccountModel, setShowAccountModel] = useState(false);
@@ -35,12 +36,12 @@ const CCHeader = () => {
 
   return (
     <Container>
-      <div className="search-box">
-        <div className="icon">
-          <SearchIcon/>
+        <div className="search-box">
+          <div className="icon"> 
+            <SearchIcon/>
+          </div>
+          <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
         </div>
-        <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
-      </div>
 
       {/* <div className="top-header">
         <div className="semi-bold">Advertise with Us : </div>Promote your Linkedin profile, posts or Projects. 
@@ -165,6 +166,7 @@ const Container = styled.div`
 
       input{
         border: none;
+        background-color: transparent;
         flex: 1;
         font-weight: 400;
       }

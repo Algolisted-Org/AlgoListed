@@ -1161,7 +1161,7 @@ const Progress = styled.div`
 
 const SheetMessage = styled.div`
 	padding: 10px;
-	margin: 10px 0 0px 0;
+	margin: 20px 0 0px 0;
 	/* border: 1px solid black; */
 	border-radius: 5px;
 	/* background-color: #c9e8ff; */

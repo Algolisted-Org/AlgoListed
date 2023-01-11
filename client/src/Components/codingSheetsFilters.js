@@ -13,4 +13,24 @@ export const codingSheetsFilters = [
     domainFilter: "love-babbar",
     id: 2,
   },
+  {
+    text: "Apna College",
+    domainFilter: "apna-college",
+    id: 3,
+  },
+  {
+    text: "Fraz SDE Sheet",
+    domainFilter: "fraz-sde-sheet",
+    id: 4,
+  },
+  {
+    text: "Blind 75",
+    domainFilter: "blind-75",
+    id: 5,
+  },
+  {
+    text: "Leetcode Top Interview Questions",
+    domainFilter: "leetcode-top-interview-questions",
+    id: 6,
+  },
 ];
