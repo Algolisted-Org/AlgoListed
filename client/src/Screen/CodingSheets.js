@@ -13,9 +13,10 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MobileNavbar from "../Components/MobileNavbar";
 import DoughnutChart from '../Components/DoughnutChart';
 import Tooltip from '@material-ui/core/Tooltip';
-import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 import UpdateIcon from '@material-ui/icons/Update';
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
 
 import {
 	CircularProgressbar,
@@ -275,8 +276,22 @@ const CodingSheets = () => {
 			sortedElementCounts[key] = elementCounts[key];
 		});
 
-		setSortedTopicTagsKeys(Object.keys(sortedElementCounts));
-		setSortedTopicTagsValues(Object.values(sortedElementCounts));
+		const filteredCounts = {};
+		let otherValue = 0;
+		for (let key in sortedElementCounts) {
+		if (sortedElementCounts[key] >= data.length * 0.015) {
+			filteredCounts[key] = sortedElementCounts[key];
+		} else {
+			otherValue += sortedElementCounts[key];
+		}
+		}
+		filteredCounts["others"] = otherValue;
+
+		setSortedTopicTagsKeys(Object.keys(filteredCounts));
+		setSortedTopicTagsValues(Object.values(filteredCounts));
+
+		// setSortedTopicTagsKeys(Object.keys(sortedElementCounts));
+		// setSortedTopicTagsValues(Object.values(sortedElementCounts));
 	}, [data])
 
 
