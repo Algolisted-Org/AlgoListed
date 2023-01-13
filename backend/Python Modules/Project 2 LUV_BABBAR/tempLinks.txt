@@ -1,0 +1,8 @@
+https://www.geeksforgeeks.org/rearrange-array-alternating-positive-negative-items-o1-extra-space/
+https://www.geeksforgeeks.org/find-a-specific-pair-in-matrix/
+https://www.geeksforgeeks.org/print-all-the-duplicates-in-the-input-string/
+https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/
+https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/
+https://www.geeksforgeeks.org/convert-sentence-equivalent-mobile-numeric-keypad-sequence/
+https://www.geeksforgeeks.org/boyer-moore-algorithm-for-pattern-searching/
+https://www.geeksforgeeks.org/function-to-find-number-of-customers-who-could-not-get-a-computer/

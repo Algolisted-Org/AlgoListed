@@ -1,0 +1,3527 @@
+[
+  {
+    "title": "Max Min",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/max-min/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Greedy", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Reverse a String",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/reverse-the-string/0",
+    "difficulty": "Basic",
+    "problemTag": ["Strings", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Maximum Subarray",
+    "problemlink": "https://leetcode.com/problems/maximum-subarray/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Divide and Conquer", "Dynamic Programming"]
+  },
+  {
+    "title": "Contains Duplicate",
+    "problemlink": "https://leetcode.com/problems/contains-duplicate/",
+    "difficulty": "Easy",
+    "problemTag": ["Array", "Hash Table", "Sorting"]
+  },
+  {
+    "title": "Chocolate Distribution Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/chocolate-distribution-problem/0",
+    "difficulty": "Easy",
+    "problemTag": ["Sorting", "Algorithms"],
+    "companyTag": ["Flipkart"]
+  },
+  {
+    "title": "Search in Rotated Sorted Array",
+    "problemlink": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Binary Search"]
+  },
+  {
+    "title": "Next Permutation",
+    "problemlink": "https://leetcode.com/problems/next-permutation/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Two Pointers"]
+  },
+  {
+    "title": "Best Time to Buy and Sell Stock",
+    "problemlink": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+    "difficulty": "Easy",
+    "problemTag": ["Array", "Dynamic Programming"]
+  },
+  {
+    "title": "Repeat and Missing Number Array",
+    "problemlink": "https://www.interviewbit.com/problems/repeat-and-missing-number-array/",
+    "difficulty": "Medium",
+    "problemTag": ["Amazon"]
+  },
+  {
+    "title": "Kth Largest Element in an Array",
+    "problemlink": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Array",
+      "Divide and Conquer",
+      "Sorting",
+      "Heap (Priority Queue)",
+      "Quickselect"
+    ]
+  },
+  {
+    "title": "Trapping Rain Water",
+    "problemlink": "https://leetcode.com/problems/trapping-rain-water/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Array",
+      "Two Pointers",
+      "Dynamic Programming",
+      "Stack",
+      "Monotonic Stack"
+    ]
+  },
+  {
+    "title": "Product of Array Except Self",
+    "problemlink": "https://leetcode.com/problems/product-of-array-except-self/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Prefix Sum"]
+  },
+  {
+    "title": "Maximum Product Subarray",
+    "problemlink": "https://leetcode.com/problems/maximum-product-subarray/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Dynamic Programming"]
+  },
+  {
+    "title": "Find Minimum in Rotated Sorted Array",
+    "problemlink": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Binary Search"]
+  },
+  {
+    "title": "Find if there is a pair with a given sum in the rotated sorted Array",
+    "problemlink": "https://www.geeksforgeeks.org/given-a-sorted-and-rotated-array-find-if-there-is-a-pair-with-a-given-sum/?ref=lbp",
+    "difficulty": "Medium",
+    "problemTag": ["Searching"]
+  },
+  {
+    "title": "3Sum",
+    "problemlink": "https://leetcode.com/problems/3sum/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Two Pointers", "Sorting"]
+  },
+  {
+    "title": "Container With Most Water",
+    "problemlink": "https://leetcode.com/problems/container-with-most-water/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Two Pointers", "Greedy"]
+  },
+  {
+    "title": "Find if there is a pair with a given sum in the rotated sorted Array",
+    "problemlink": "https://www.geeksforgeeks.org/given-a-sorted-and-rotated-array-find-if-there-is-a-pair-with-a-given-sum/",
+    "difficulty": "Medium",
+    "problemTag": ["Searching"]
+  },
+  {
+    "title": "Kth smallest element",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/kth-smallest-element5635/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Searching",
+      "Sorting",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "ABCO",
+      "Accolite",
+      "Amazon",
+      "Cisco",
+      "Hike",
+      "Microsoft",
+      "Snapdeal",
+      "VMWare",
+      "Google",
+      "Adobe"
+    ]
+  },
+  {
+    "title": "Overlapping Intervals",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/8a644e94faaa94968d8665ba9e0a80d1ae3e0a2d/1/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Sorting",
+      "Hash",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon", "Google", "Nutanix", "Microsoft"]
+  },
+  {
+    "title": "Find minimum number of merge operations to make an array palindrome",
+    "problemlink": "https://www.geeksforgeeks.org/find-minimum-number-of-merge-operations-to-make-an-array-palindrome/",
+    "difficulty": "Medium",
+    "problemTag": ["Amazon", "Arrays", "Mathematical"]
+  },
+  {
+    "title": "Largest Number formed from an Array",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/largest-number-formed-from-an-array1117/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Data Structures"],
+    "companyTag": ["Amazon", "MakeMyTrip", "Microsoft", "Paytm", "Zoho"]
+  },
+  {
+    "title": "Space optimization using bit manipulations",
+    "problemlink": "https://www.geeksforgeeks.org/space-optimization-using-bit-manipulations/",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Bit Magic"]
+  },
+  {
+    "title": "Longest subarray with sum divisible by K",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/longest-subarray-with-sum-divisible-by-k1259/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Hash",
+      "prefix-sum",
+      "sliding-window",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Snapdeal", "Microsoft"]
+  },
+  {
+    "title": "Print all possible combinations of r elements in a given array of size n",
+    "problemlink": "https://geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/",
+    "difficulty": "Hard",
+    "problemTag": ["Mathematical", "Recursion"]
+  },
+  {
+    "title": "Interesting Queries",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/interesting-queries4742/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Sqrt Decomposition", "Map", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Valid Palindrome",
+    "problemlink": "https://leetcode.com/problems/valid-palindrome/",
+    "difficulty": "Easy",
+    "problemTag": ["Two Pointers", "String"]
+  },
+  {
+    "title": "Valid Anagram",
+    "problemlink": "https://leetcode.com/problems/valid-anagram/",
+    "difficulty": "Easy",
+    "problemTag": ["Hash Table", "String", "Sorting"]
+  },
+  {
+    "title": "Valid Parentheses",
+    "problemlink": "https://leetcode.com/problems/valid-parentheses/",
+    "difficulty": "Easy",
+    "problemTag": ["String", "Stack"]
+  },
+  {
+    "title": "Remove Consecutive Characters",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/consecutive-elements2306/1",
+    "difficulty": "Basic",
+    "problemTag": ["Strings", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Longest Common Prefix",
+    "problemlink": "https://leetcode.com/problems/longest-common-prefix/",
+    "difficulty": "Easy",
+    "problemTag": ["String", "Trie"]
+  },
+  {
+    "title": "Convert a sentence into its equivalent mobile numeric keypad sequence",
+    "problemlink": "https://www.geeksforgeeks.org/convert-sentence-equivalent-mobile-numeric-keypad-sequence/",
+    "difficulty": "Easy",
+    "problemTag": ["Hash", "Strings"]
+  },
+  {
+    "title": "Print all the duplicates in the input string",
+    "problemlink": "https://www.geeksforgeeks.org/print-all-the-duplicates-in-the-input-string/",
+    "difficulty": "Easy",
+    "problemTag": ["Strings"]
+  },
+  {
+    "title": "Longest Substring Without Repeating Characters",
+    "problemlink": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+    "difficulty": "Medium",
+    "problemTag": ["Hash Table", "String", "Sliding Window"]
+  },
+  {
+    "title": "Longest Repeating Character Replacement",
+    "problemlink": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+    "difficulty": "Medium",
+    "problemTag": ["Hash Table", "String", "Sliding Window"]
+  },
+  {
+    "title": "Group Anagrams",
+    "problemlink": "https://leetcode.com/problems/group-anagrams/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Hash Table", "String", "Sorting"]
+  },
+  {
+    "title": "Longest Palindromic Substring",
+    "problemlink": "https://leetcode.com/problems/longest-palindromic-substring/",
+    "difficulty": "Medium",
+    "problemTag": ["String", "Dynamic Programming"]
+  },
+  {
+    "title": "Palindromic Substrings",
+    "problemlink": "https://leetcode.com/problems/palindromic-substrings/",
+    "difficulty": "Medium",
+    "problemTag": ["String", "Dynamic Programming"]
+  },
+  {
+    "title": "Next Permutation",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/next-permutation5226/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "permutation",
+      "constructive algo",
+      "Arrays",
+      "Data Structures"
+    ],
+    "companyTag": [
+      "FactSet",
+      "Hike",
+      "Amazon",
+      "MakeMyTrip",
+      "Qualcomm",
+      "Infosys",
+      "Microsoft",
+      "Google",
+      "Salesforce",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Count Palindromic Subsequences",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/count-palindromic-subsequences/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Smallest window in a string containing all the characters of another string",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string-1587115621/1",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Hash",
+      "sliding-window",
+      "Strings",
+      "Dynamic Programming",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Amazon",
+      "Google",
+      "MakeMyTrip",
+      "Streamoid Technologies",
+      "Microsoft",
+      "Media.net ",
+      "Atlassian",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Wildcard string matching",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/wildcard-string-matching1126/1",
+    "difficulty": "Hard",
+    "problemTag": ["Strings", "Data Structures"],
+    "companyTag": ["Amazon", "Ola Cabs"]
+  },
+  {
+    "title": "Longest Prefix Suffix",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/longest-prefix-suffix2527/1",
+    "difficulty": "Medium",
+    "problemTag": ["Strings", "Data Structures"],
+    "companyTag": ["Accolite", "Amazon", "MakeMyTrip", "Microsoft"]
+  },
+  {
+    "title": "Rabin-Karp Algorithm for Pattern Searching",
+    "problemlink": "https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/",
+    "difficulty": "Medium",
+    "problemTag": ["Modular Arithmetic", "Pattern Searching"]
+  },
+  {
+    "title": "Transform String",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/transform-string5648/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Strings", "Hash", "Map", "Data Structures"],
+    "companyTag": ["Directi"]
+  },
+  {
+    "title": "Minimum Window Substring",
+    "problemlink": "https://leetcode.com/problems/minimum-window-substring/",
+    "difficulty": "Hard",
+    "problemTag": ["Hash Table", "String", "Sliding Window"]
+  },
+  {
+    "title": "Boyer Moore Algorithm for Pattern Searching",
+    "problemlink": "https://www.geeksforgeeks.org/boyer-moore-algorithm-for-pattern-searching/",
+    "difficulty": "Hard",
+    "problemTag": ["Pattern Searching", "Strings"]
+  },
+  {
+    "title": "Word Wrap",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/word-wrap1646/1",
+    "difficulty": "Hard",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": ["Microsoft", "Flipkart"]
+  },
+  {
+    "title": "Zigzag (or diagonal) traversal of Matrix",
+    "problemlink": "https://www.geeksforgeeks.org/zigzag-or-diagonal-traversal-of-matrix/",
+    "difficulty": "Medium",
+    "problemTag": ["Amazon", "Matrix", "Misc", "pattern-printing"]
+  },
+  {
+    "title": "Set Matrix Zeroes",
+    "problemlink": "https://leetcode.com/problems/set-matrix-zeroes/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Hash Table", "Matrix"]
+  },
+  {
+    "title": "Spiral Matrix",
+    "problemlink": "https://leetcode.com/problems/spiral-matrix/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Matrix", "Simulation"]
+  },
+  {
+    "title": "Rotate Image",
+    "problemlink": "https://leetcode.com/problems/rotate-image/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Math", "Matrix"]
+  },
+  {
+    "title": "Word Search",
+    "problemlink": "https://leetcode.com/problems/word-search/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Backtracking", "Matrix"]
+  },
+  {
+    "title": "Find the number of islands",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/find-the-number-of-islands/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["DFS", "Graph", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Amazon",
+      "Citrix",
+      "D-E-Shaw",
+      "Informatica",
+      "Intuit ",
+      "Linkedin",
+      "Microsoft",
+      "Ola Cabs",
+      "One97",
+      "Opera",
+      "OYO Rooms",
+      "Paytm",
+      "Samsung",
+      "Snapdeal",
+      "Streamoid Technologies",
+      "Visa",
+      "Google",
+      "MakeMyTrip",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Replace O's with X's",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/replace-os-with-xs0052/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Graph",
+      "Matrix",
+      "Recursion",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Google"]
+  },
+  {
+    "title": "Find a common element in all rows of a given row-wise sorted matrix",
+    "problemlink": "https://www.geeksforgeeks.org/find-common-element-rows-row-wise-sorted-matrix/",
+    "difficulty": "Medium",
+    "problemTag": ["Matrix"]
+  },
+  {
+    "title": "Create a matrix with alternating rectangles of O and X",
+    "problemlink": "https://www.geeksforgeeks.org/create-a-matrix-with-alternating-rectangles-of-0-and-x/",
+    "difficulty": "Medium",
+    "problemTag": ["Matrix"]
+  },
+  {
+    "title": "Max  rectangle",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/max-rectangle/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Matrix",
+      "Stack",
+      "Dynamic Programming",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Amazon",
+      "Directi",
+      "Intuit ",
+      "MakeMyTrip",
+      "Microsoft",
+      "Samsung",
+      "Google",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Permutations in array",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/permutations-in-array1747/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Basic",
+    "problemTag": ["Arrays", "Sorting", "Data Structures", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Counting Sort",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/counting-sort/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Sorting", "Algorithms"],
+    "companyTag": ["Cisco", "Goldman Sachs", "Microsoft"]
+  },
+  {
+    "title": "Common elements",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/common-elements1132/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Searching", "Algorithms"],
+    "companyTag": ["MAQ Software", "Microsoft", "VMWare"]
+  },
+  {
+    "title": "Searching in an array where adjacent differ by at most k",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/searching-in-an-array-where-adjacent-differ-by-at-most-k0456/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Arrays",
+      "CPP",
+      "Searching",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": []
+  },
+  {
+    "title": "Ceiling in a sorted array",
+    "problemlink": "https://www.geeksforgeeks.org/ceiling-in-a-sorted-array/",
+    "difficulty": "Easy",
+    "problemTag": ["Arrays", "Binary Search", "Searching"]
+  },
+  {
+    "title": "Find Pair Given Difference",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/find-pair-given-difference1559/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Binary Search", "Sorting", "Algorithms"],
+    "companyTag": ["Amazon", "Visa"]
+  },
+  {
+    "title": "Majority Element",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/majority-element-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Searching",
+      "Greedy",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "D-E-Shaw",
+      "Microsoft",
+      "Nagarro",
+      "Google",
+      "Atlassian",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Count triplets with sum smaller than X",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/count-triplets-with-sum-smaller-than-x5549/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "two-pointer-algorithm",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon", "SAP Labs"]
+  },
+  {
+    "title": "Stickler Thief",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/stickler-theif-1587115621/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Dynamic Programming",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Amazon",
+      "OYO Rooms",
+      "Paytm",
+      "Walmart",
+      "Google",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Merge Without Extra Space",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/merge-two-sorted-arrays-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Mathematical", "Sorting", "Algorithms"],
+    "companyTag": [
+      "Amdocs",
+      "Brocade",
+      "Goldman Sachs",
+      "Juniper Networks",
+      "Linkedin",
+      "Microsoft",
+      "Quikr",
+      "Snapdeal",
+      "Synopsys",
+      "Zoho",
+      "Adobe"
+    ]
+  },
+  {
+    "title": "Count Inversions",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/inversion-of-array-1587115620/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Sorting",
+      "Divide and Conquer",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "BankBazaar",
+      "Flipkart",
+      "Microsoft",
+      "Myntra",
+      "MakeMyTrip"
+    ]
+  },
+  {
+    "title": "Find duplicates in an array",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/find-duplicates-in-an-array/1",
+    "difficulty": "Easy",
+    "problemTag": ["Arrays", "Data Structures"],
+    "companyTag": [
+      "Amazon",
+      "D-E-Shaw",
+      "Flipkart",
+      "Paytm",
+      "Qualcomm",
+      "Zoho"
+    ]
+  },
+  {
+    "title": "Radix Sort",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/radix-sort/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Sorting", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Product array puzzle",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/product-array-puzzle4525/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Arrays", "Mathematical", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "D-E-Shaw",
+      "Intuit ",
+      "Morgan Stanley",
+      "Opera",
+      "Microsoft",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Make all array elements equal with minimum cost",
+    "problemlink": "https://www.geeksforgeeks.org/make-array-elements-equal-minimum-cost/",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Searching"]
+  },
+  {
+    "title": "Check if reversing a sub array make the array sorted",
+    "problemlink": "https://www.geeksforgeeks.org/check-reversing-sub-array-make-array-sorted/",
+    "difficulty": "Medium",
+    "problemTag": ["Searching", "Sorting"]
+  },
+  {
+    "title": "Find All Four Sum Numbers",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/find-all-four-sum-numbers/0",
+    "difficulty": "Medium",
+    "problemTag": ["Hash", "Sorting", "Data Structures", "Algorithms"],
+    "companyTag": ["Adobe", "Amazon", "Google", "Microsoft", "OYO Rooms"]
+  },
+  {
+    "title": "Median of 2 Sorted Arrays of Different Sizes",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/median-of-2-sorted-arrays-of-different-sizes/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Arrays", "Searching", "Data Structures", "Algorithms"],
+    "companyTag": ["Amazon", "Samsung", "Microsoft", "Google"]
+  },
+  {
+    "title": "Find median in a stream",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/find-median-in-a-stream-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Heap", "Design-Pattern", "Data Structures"],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "Apple",
+      "Belzabar",
+      "D-E-Shaw",
+      "Facebook",
+      "Flipkart",
+      "Google",
+      "Intuit ",
+      "Microsoft",
+      "Morgan Stanley",
+      "Ola Cabs",
+      "Oracle",
+      "Samsung",
+      "SAP Labs",
+      "Yahoo"
+    ]
+  },
+  {
+    "title": "Zero Sum Subarrays",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/zero-sum-subarrays1825/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Hash", "Data Structures"],
+    "companyTag": ["Amazon", "Microsoft", "OYO Rooms"]
+  },
+  {
+    "title": "AGGRCOW - Aggressive cows",
+    "problemlink": "https://www.spoj.com/problems/AGGRCOW/",
+    "problemTag": ["binary-search"]
+  },
+  {
+    "title": "Allocate minimum number of pages",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1",
+    "difficulty": "Hard",
+    "problemTag": ["Divide and Conquer", "Searching", "Algorithms"],
+    "companyTag": ["Google", "Infosys", "Codenation", "Amazon", "Microsoft"]
+  },
+  {
+    "title": "Minimum Swaps to Sort",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/minimum-swaps/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Graph",
+      "Sorting",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Microsoft"]
+  },
+  {
+    "title": "Rat in a Maze Problem - I",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1",
+    "difficulty": "Medium",
+    "problemTag": ["Backtracking", "Algorithms"],
+    "companyTag": ["Amazon", "Microsoft"]
+  },
+  {
+    "title": "Combination Sum",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/combination-sum-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Backtracking", "Recursion", "Algorithms"],
+    "companyTag": ["Adobe", "Amazon", "Microsoft"]
+  },
+  {
+    "title": "Crossword Puzzle",
+    "problemlink": "https://www.hackerrank.com/challenges/crossword-puzzle/problem",
+    "difficulty": "Medium",
+    "problemTag": [""]
+  },
+  {
+    "title": "Longest Possible Route in a Matrix with Hurdles",
+    "problemlink": "https://www.geeksforgeeks.org/longest-possible-route-in-a-matrix-with-hurdles/",
+    "difficulty": "Medium",
+    "problemTag": ["Backtracking", "Matrix"]
+  },
+  {
+    "title": "N-Queen Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/n-queen-problem0315/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Backtracking", "Algorithms"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "Amdocs",
+      "D-E-Shaw",
+      "MAQ Software",
+      "Twitter",
+      "Visa",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Solve the Sudoku",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/solve-the-sudoku-1587115621/1",
+    "difficulty": "Hard",
+    "problemTag": ["Backtracking", "Matrix", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Amazon",
+      "Directi",
+      "Flipkart",
+      "MakeMyTrip",
+      "MAQ Software",
+      "Microsoft",
+      "Ola Cabs",
+      "Oracle",
+      "PayPal",
+      "Zoho"
+    ]
+  },
+  {
+    "title": "Partition Equal Subset Sum",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "subset", "Algorithms"],
+    "companyTag": [
+      "Accolite",
+      "Adobe",
+      "Amazon",
+      "Drishti-Soft",
+      "OYO Rooms",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "M-Coloring Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1",
+    "difficulty": "Medium",
+    "problemTag": ["Backtracking", "Algorithms"],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "The Knight’s tour problem | Backtracking-1",
+    "problemlink": "https://www.geeksforgeeks.org/the-knights-tour-problem-backtracking-1/",
+    "difficulty": "Hard",
+    "problemTag": ["Amazon", "Backtracking", "Mathematical"]
+  },
+  {
+    "title": "Solve the Sudoku",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/solve-the-sudoku-1587115621/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Backtracking", "Matrix", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Amazon",
+      "Directi",
+      "Flipkart",
+      "MakeMyTrip",
+      "MAQ Software",
+      "Microsoft",
+      "Ola Cabs",
+      "Oracle",
+      "PayPal",
+      "Zoho"
+    ]
+  },
+  {
+    "title": "Remove Invalid Parentheses",
+    "problemlink": "https://leetcode.com/problems/remove-invalid-parentheses/",
+    "difficulty": "Hard",
+    "problemTag": ["String", "Backtracking", "Breadth-First Search"]
+  },
+  {
+    "title": "Word Break - Part 2",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/word-break-part-23249/1/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Recursion",
+      "Backtracking",
+      "Dynamic Programming",
+      "Algorithms"
+    ],
+    "companyTag": ["Google", "IBM"]
+  },
+  {
+    "title": "Find all possible palindromic partitions of a String",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/find-all-possible-palindromic-partitions-of-a-string/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Strings",
+      "palindrome",
+      "Recursion",
+      "Backtracking",
+      "Dynamic Programming",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Facebook", "Amazon", "Microsoft"]
+  },
+  {
+    "title": "Find shortest safe route in a path with landmines",
+    "problemlink": "https://www.geeksforgeeks.org/find-shortest-safe-route-in-a-path-with-landmines/",
+    "difficulty": "Hard",
+    "problemTag": ["Backtracking", "Matrix", "Shortest Path"]
+  },
+  {
+    "title": "Partition array to K subsets",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/partition-array-to-k-subsets/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Backtracking", "Dynamic Programming", "Algorithms"],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Hamiltonian Path",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/hamiltonian-path/0",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Backtracking",
+      "DFS",
+      "Graph",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Tug of War",
+    "problemlink": "https://www.geeksforgeeks.org/tug-of-war/",
+    "difficulty": "Hard",
+    "problemTag": ["Backtracking"]
+  },
+  {
+    "title": "Largest number in K swaps",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/largest-number-in-k-swaps-1587115620/1/",
+    "difficulty": "Medium",
+    "problemTag": ["Backtracking", "Strings", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Amazon",
+      "MakeMyTrip",
+      "Walmart",
+      "Microsoft",
+      "Google",
+      "Intuit "
+    ]
+  },
+  {
+    "title": "Solving Cryptarithmetic Puzzles | Backtracking-8",
+    "problemlink": "https://www.geeksforgeeks.org/solving-cryptarithmetic-puzzles-backtracking-8/",
+    "difficulty": "Hard",
+    "problemTag": ["Backtracking"]
+  },
+  {
+    "title": "Find paths from corner cell to middle cell in maze",
+    "problemlink": "https://www.geeksforgeeks.org/find-paths-from-corner-cell-to-middle-cell-in-maze/",
+    "difficulty": "Hard",
+    "problemTag": ["Backtracking"]
+  },
+  {
+    "title": "Arithmetic Expressions",
+    "problemlink": "https://www.hackerrank.com/challenges/arithmetic-expressions/problem",
+    "difficulty": "Hard",
+    "problemTag": [""]
+  },
+  {
+    "title": "Reverse Linked List",
+    "problemlink": "https://leetcode.com/problems/reverse-linked-list/",
+    "difficulty": "Easy",
+    "problemTag": ["Linked List", "Recursion"]
+  },
+  {
+    "title": "Linked List Cycle",
+    "problemlink": "https://leetcode.com/problems/linked-list-cycle/",
+    "difficulty": "Easy",
+    "problemTag": ["Hash Table", "Linked List", "Two Pointers"]
+  },
+  {
+    "title": "Merge Two Sorted Lists",
+    "problemlink": "https://leetcode.com/problems/merge-two-sorted-lists/",
+    "difficulty": "Easy",
+    "problemTag": ["Linked List", "Recursion"]
+  },
+  {
+    "title": "Delete nodes having greater value on right",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": ["Amazon "]
+  },
+  {
+    "title": "Remove duplicates from an unsorted linked list",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/remove-duplicates-from-an-unsorted-linked-list/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": ["Amazon", "Intuit "]
+  },
+  {
+    "title": "Given a linked list of 0s, 1s and 2s, sort it.",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1",
+    "difficulty": "Easy",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": ["Amazon", "MakeMyTrip", "Microsoft"]
+  },
+  {
+    "title": "Multiply two linked lists",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/multiply-two-linked-lists/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Linked List",
+      "Modular Arithmetic",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Remove Nth Node From End of List",
+    "problemlink": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List", "Two Pointers"]
+  },
+  {
+    "title": "Reorder List",
+    "problemlink": "https://leetcode.com/problems/reorder-list/",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List", "Two Pointers", "Stack", "Recursion"]
+  },
+  {
+    "title": "Remove loop in Linked List",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Linked List",
+      "two-pointer-algorithm",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "Goldman Sachs",
+      "Kuliza",
+      "MakeMyTrip",
+      "Microsoft",
+      "Morgan Stanley",
+      "Netskope ",
+      "Oracle",
+      "Qualcomm",
+      "Snapdeal",
+      "VMWare",
+      "Walmart"
+    ]
+  },
+  {
+    "title": "Intersection Point in Y Shapped Linked Lists",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/intersection-point-in-y-shapped-linked-lists/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": [
+      "Accolite",
+      "Adobe",
+      "Amazon",
+      "D-E-Shaw",
+      "FactSet",
+      "Flipkart",
+      "Goldman Sachs",
+      "MakeMyTrip",
+      "MAQ Software",
+      "Microsoft",
+      "Qualcomm",
+      "Snapdeal",
+      "Visa",
+      "VMWare"
+    ]
+  },
+  {
+    "title": "Flatten a multilevel linked list",
+    "problemlink": "https://www.geeksforgeeks.org/flatten-a-linked-list-with-next-and-child-pointers/",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List"]
+  },
+  {
+    "title": "Rearrange a Linked List in Zig-Zag fashion",
+    "problemlink": "https://www.geeksforgeeks.org/linked-list-in-zig-zag-fashion/",
+    "difficulty": "Medium",
+    "problemTag": ["Amazon", "Linked List"]
+  },
+  {
+    "title": "Reverse a Doubly Linked List",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/reverse-a-doubly-linked-list/1",
+    "difficulty": "Easy",
+    "problemTag": ["doubly-linked-list", "Linked List", "Data Structures"],
+    "companyTag": ["Adobe", "D-E-Shaw"]
+  },
+  {
+    "title": "Delete nodes having greater value on right",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": ["Amazon "]
+  },
+  {
+    "title": "Segregate even and odd nodes in a Link List",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/segregate-even-and-odd-nodes-in-a-linked-list/0",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Point to next higher value node in a linked list with an arbitrary pointer",
+    "problemlink": "https://www.geeksforgeeks.org/point-to-next-higher-value-node-in-a-linked-list-with-an-arbitrary-pointer/",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List"]
+  },
+  {
+    "title": "Reorder List",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/reorder-list/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": ["Amazon", "Microsoft", "OYO Rooms", "Intuit "]
+  },
+  {
+    "title": "Sort the biotonic doubly linked list",
+    "problemlink": "https://www.geeksforgeeks.org/sort-biotonic-doubly-linked-list/",
+    "difficulty": "Easy",
+    "problemTag": ["Linked List", "Sorting"]
+  },
+  {
+    "title": "Merge k Sorted Lists",
+    "problemlink": "https://leetcode.com/problems/merge-k-sorted-lists/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Linked List",
+      "Divide and Conquer",
+      "Heap (Priority Queue)",
+      "Merge Sort"
+    ]
+  },
+  {
+    "title": "Merge Sort for Linked List",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/sort-a-linked-list/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Linked List",
+      "Merge Sort",
+      "Sorting",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Accolite",
+      "Adobe",
+      "Amazon",
+      "MAQ Software",
+      "Microsoft",
+      "Paytm",
+      "Veritas"
+    ]
+  },
+  {
+    "title": "Quick Sort on Linked List",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/quick-sort-on-linked-list/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": ["Paytm"]
+  },
+  {
+    "title": "Sum of two numbers represented as arrays",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/sum-of-two-numbers-represented-as-arrays3110/1/",
+    "difficulty": "Easy",
+    "problemTag": ["Arrays", "Data Structures"],
+    "companyTag": ["Accolite", "Amazon", "Zoho"]
+  },
+  {
+    "title": "Flattening a Linked List",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": [
+      "24*7 Innovation Labs",
+      "Amazon",
+      "Drishti-Soft",
+      "Flipkart",
+      "Goldman Sachs",
+      "Microsoft",
+      "Paytm",
+      "Payu",
+      "Qualcomm",
+      "Snapdeal",
+      "Visa"
+    ]
+  },
+  {
+    "title": "Clone a linked list with next and random pointer",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/clone-a-linked-list-with-next-and-random-pointer/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "BankBazaar",
+      "D-E-Shaw",
+      "MakeMyTrip",
+      "Microsoft",
+      "Morgan Stanley",
+      "Ola Cabs",
+      "OYO Rooms",
+      "Snapdeal",
+      "Walmart",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Subtraction in Linked List",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/subtraction-in-linked-list/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Linked List", "Data Structures"],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Implement two stacks in an array",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/implement-two-stacks-in-an-array/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Arrays", "Stack", "Data Structures"],
+    "companyTag": ["24*7 Innovation Labs", "Microsoft", "Samsung", "Snapdeal"]
+  },
+  {
+    "title": "Evaluation of Postfix Expression",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/evaluation-of-postfix-expression1735/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Stack", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Implement Stack using Queues",
+    "problemlink": "https://leetcode.com/problems/implement-stack-using-queues/",
+    "difficulty": "Easy",
+    "problemTag": ["Stack", "Design", "Queue"]
+  },
+  {
+    "title": "Queue Reversal",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/queue-reversal/1",
+    "difficulty": "Basic",
+    "problemTag": ["Queue", "Stack", "Data Structures"],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Implement Stack and Queue using Deque",
+    "problemlink": "https://www.geeksforgeeks.org/implement-stack-queue-using-deque/",
+    "difficulty": "Easy",
+    "problemTag": ["Queue", "Stack"]
+  },
+  {
+    "title": "Reverse First K elements of Queue",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/reverse-first-k-elements-of-queue/1",
+    "difficulty": "Easy",
+    "problemTag": ["Queue", "Stack", "Data Structures"],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Design a stack with operations on middle element",
+    "problemlink": "https://www.geeksforgeeks.org/design-a-stack-with-find-middle-operation/",
+    "difficulty": "Medium",
+    "problemTag": ["Stack"]
+  },
+  {
+    "title": "Infix to Postfix",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/infix-to-postfix-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Stack", "Data Structures"],
+    "companyTag": ["Paytm", "VMWare", "Microsoft"]
+  },
+  {
+    "title": "Special Stack",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/special-stack/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Stack", "STL", "Data Structures"],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "FactSet",
+      "Goldman Sachs",
+      "Intuit ",
+      "Linkedin",
+      "MakeMyTrip",
+      "Paytm",
+      "SAP Labs",
+      "VMWare",
+      "Walmart",
+      "Microsoft",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Longest valid Parentheses",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/longest-valid-parentheses5657/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Stack",
+      "Strings",
+      "Dynamic Programming",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Google", "Microsoft"]
+  },
+  {
+    "title": "Find if an expression has duplicate parenthesis or not",
+    "problemlink": "https://www.geeksforgeeks.org/find-expression-duplicate-parenthesis-not/",
+    "difficulty": "Medium",
+    "problemTag": ["Stack"]
+  },
+  {
+    "title": "Stack Permutations",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/stack-permutations/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Stack",
+      "Queue",
+      "implementation",
+      "Arrays",
+      "Data Structures"
+    ],
+    "companyTag": []
+  },
+  {
+    "title": "Count natural numbers whose all permutation are greater than that number",
+    "problemlink": "https://www.geeksforgeeks.org/count-natural-numbers-whose-permutation-greater-number/",
+    "difficulty": "Medium",
+    "problemTag": ["Stack"]
+  },
+  {
+    "title": "Sort a stack",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/sort-a-stack/1",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Recursion",
+      "Stack",
+      "STL",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Amazon",
+      "Goldman Sachs",
+      "IBM",
+      "Intuit ",
+      "Kuliza",
+      "Yahoo",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "First non-repeating character in a stream",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Hash", "Linked List", "Queue", "Data Structures"],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "FactSet",
+      "Flipkart",
+      "Microsoft",
+      "Payu",
+      "Yahoo"
+    ]
+  },
+  {
+    "title": "The Celebrity Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/the-celebrity-problem/1",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Stack", "Data Structures"],
+    "companyTag": [
+      "Amazon",
+      "Fab.com",
+      "Flipkart",
+      "Google",
+      "Microsoft",
+      "One97",
+      "United Health Group",
+      "Zoho"
+    ]
+  },
+  {
+    "title": "Next Greater Element",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/next-larger-element-1587115620/1",
+    "difficulty": "Medium",
+    "problemTag": ["Stack", "Data Structures"],
+    "companyTag": ["Flipkart", "Amazon", "Microsoft", "Adobe", "MakeMyTrip"]
+  },
+  {
+    "title": "Distance of nearest cell having 1",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1-1587115620/1",
+    "difficulty": "Medium",
+    "problemTag": ["BFS", "Graph", "Matrix", "Data Structures", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Rotten Oranges",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/rotten-oranges2536/1",
+    "difficulty": "Medium",
+    "problemTag": ["Graph", "Matrix", "Queue", "Data Structures"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "MakeMyTrip",
+      "Microsoft",
+      "OYO Rooms",
+      "Samsung",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Help Classmates",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/fab3dbbdce746976ba35c7b9b24afde40eae5a04/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Stack", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Circular tour",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/circular-tour/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Queue",
+      "two-pointer-algorithm",
+      "sliding-window",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Amazon",
+      "FactSet",
+      "Microsoft",
+      "Morgan Stanley",
+      "Zoho",
+      "Google",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "How to efficiently implement k stacks in a single array?",
+    "problemlink": "https://www.geeksforgeeks.org/efficiently-implement-k-stacks-single-array/",
+    "difficulty": "Hard",
+    "problemTag": ["Stack"]
+  },
+  {
+    "title": "The Celebrity Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/the-celebrity-problem/1",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Stack", "Data Structures"],
+    "companyTag": [
+      "Amazon",
+      "Fab.com",
+      "Flipkart",
+      "Google",
+      "Microsoft",
+      "One97",
+      "United Health Group",
+      "Zoho"
+    ]
+  },
+  {
+    "title": "Iterative Tower of Hanoi",
+    "problemlink": "https://www.geeksforgeeks.org/iterative-tower-of-hanoi/",
+    "difficulty": "Hard",
+    "problemTag": ["Divide and Conquer", "Stack"]
+  },
+  {
+    "title": "Maximum of minimum for every window size",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/maximum-of-minimum-for-every-window-size3453/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["sliding-window", "Stack", "Data Structures", "Algorithms"],
+    "companyTag": ["Amazon", "Microsoft", "Flipkart"]
+  },
+  {
+    "title": "LRU Cache",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/lru-cache/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "doubly-linked-list",
+      "Hash",
+      "Queue",
+      "Design-Pattern",
+      "Data Structures"
+    ],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "Flipkart",
+      "Goldman Sachs",
+      "Hike",
+      "MakeMyTrip",
+      "Morgan Stanley",
+      "Ola Cabs",
+      "OYO Rooms",
+      "Paytm",
+      "Samsung",
+      "Snapdeal",
+      "Visa",
+      "Walmart",
+      "Yahoo",
+      "Zoho",
+      "Microsoft",
+      "Google"
+    ]
+  },
+  {
+    "title": "Circular tour",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/circular-tour-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Queue",
+      "two-pointer-algorithm",
+      "sliding-window",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Amazon",
+      "FactSet",
+      "Microsoft",
+      "Morgan Stanley",
+      "Zoho",
+      "Google",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Activity Selection",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/activity-selection-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Dynamic Programming", "Binary Search", "Algorithms"],
+    "companyTag": ["Facebook", "Morgan Stanley", "Flipkart"]
+  },
+  {
+    "title": "Minimum number of Coins",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/-minimum-number-of-coins4426/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Greedy", "Algorithms"],
+    "companyTag": ["Visa"]
+  },
+  {
+    "title": "Min sum formed by digits",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/min-sum-formed-by-digits3551/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Arrays", "Heap", "Queue", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Minimum Sum of Absolute Differences of Pairs",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/minimum-sum-of-absolute-differences-of-pairs/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Sorting",
+      "Greedy",
+      "Arrays",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": []
+  },
+  {
+    "title": "Find maximum height pyramid from the given array of objects",
+    "problemlink": "https://www.geeksforgeeks.org/find-maximum-height-pyramid-from-the-given-array-of-objects/",
+    "difficulty": "Easy",
+    "problemTag": ["Greedy", "Sorting"]
+  },
+  {
+    "title": "Minimum cost for acquiring all coins with k extra coins allowed with every coin",
+    "problemlink": "https://www.geeksforgeeks.org/minimum-cost-for-acquiring-all-coins-with-k-extra-coins-allowed-with-every-coin/",
+    "difficulty": "Easy",
+    "problemTag": ["Greedy", "prefix-sum"]
+  },
+  {
+    "title": "Find Maximum Equal sum of Three Stacks",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/find-maximum-equal-sum-of-three-stacks/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Stack", "Greedy", "Data Structures", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Job Sequencing Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1/",
+    "difficulty": "Medium",
+    "problemTag": ["Greedy", "Dynamic Programming", "Algorithms"],
+    "companyTag": ["Accolite", "Microsoft", "Flipkart"]
+  },
+  {
+    "title": "Greedy Algorithm for Egyptian Fraction",
+    "problemlink": "https://www.geeksforgeeks.org/greedy-algorithm-egyptian-fraction/",
+    "difficulty": "Medium",
+    "problemTag": ["Greedy", "Mathematical"]
+  },
+  {
+    "title": "Fractional Knapsack",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Greedy", "Algorithms"],
+    "companyTag": ["Microsoft"]
+  },
+  {
+    "title": "Max length chain",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/max-length-chain/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Greedy", "Algorithms"],
+    "companyTag": ["Amazon", "Microsoft"]
+  },
+  {
+    "title": "Smallest number",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/smallest-number5829/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Greedy", "Algorithms"],
+    "companyTag": ["MAQ Software", "OYO Rooms"]
+  },
+  {
+    "title": "Swap and Maximize",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/swap-and-maximize5859/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Basic",
+    "problemTag": [
+      "Arrays",
+      "Greedy",
+      "Sorting",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": []
+  },
+  {
+    "title": "Cutting Rectangles",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/cutting-rectangles3659/1/",
+    "difficulty": "Easy",
+    "problemTag": ["Combinatorial", "Mathematical", "Algorithms"],
+    "companyTag": ["Amdocs"]
+  },
+  {
+    "title": "Lexicographically smallest array after at-most K consecutive swaps",
+    "problemlink": "https://www.geeksforgeeks.org/lexicographically-smallest-array-k-consecutive-swaps/",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Greedy"]
+  },
+  {
+    "title": "CHOCOLA - Chocolate",
+    "problemlink": "https://www.spoj.com/problems/CHOCOLA/",
+    "problemTag": []
+  },
+  {
+    "title": "Find minimum time to finish all jobs with given constraints",
+    "problemlink": "https://www.geeksforgeeks.org/find-minimum-time-to-finish-all-jobs-with-given-constraints/",
+    "difficulty": "Hard",
+    "problemTag": ["Binary Search", "Greedy"]
+  },
+  {
+    "title": "Job Sequencing Problem using Disjoint Set",
+    "problemlink": "https://www.geeksforgeeks.org/job-sequencing-problem-using-disjoint-set/",
+    "difficulty": "Hard",
+    "problemTag": ["Accolite", "Greedy", "union-find"]
+  },
+  {
+    "title": "Rearrange characters",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/rearrange-characters4649/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Heap", "STL", "Strings", "Data Structures"],
+    "companyTag": ["Amazon", "Microsoft"]
+  },
+  {
+    "title": "Minimum edges to reverse to make path from a source to a destination",
+    "problemlink": "https://www.geeksforgeeks.org/minimum-edges-reverse-make-path-source-destination/",
+    "difficulty": "Hard",
+    "problemTag": ["Graph", "Greedy", "Reverse"]
+  },
+  {
+    "title": "Minimize Cash Flow among a given set of friends who have borrowed money from each other",
+    "problemlink": "https://www.geeksforgeeks.org/minimize-cash-flow-among-given-set-friends-borrowed-money/",
+    "difficulty": "Hard",
+    "problemTag": ["Amazon", "Graph", "Greedy"]
+  },
+  {
+    "title": "Minimum Cost to cut a board into squares",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/minimum-cost-to-cut-a-board-into-squares/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Greedy", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Maximum Depth of Binary Tree",
+    "problemlink": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Tree",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Binary Tree"
+    ]
+  },
+  {
+    "title": "Reverse Level Order Traversal",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/reverse-level-order-traversal/1",
+    "difficulty": "Easy",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "Cisco",
+      "FactSet",
+      "Flipkart",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Subtree of Another Tree",
+    "problemlink": "https://leetcode.com/problems/subtree-of-another-tree/",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Tree",
+      "Depth-First Search",
+      "String Matching",
+      "Binary Tree",
+      "Hash Function"
+    ]
+  },
+  {
+    "title": "Invert Binary Tree",
+    "problemlink": "https://leetcode.com/problems/invert-binary-tree/",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Tree",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Binary Tree"
+    ]
+  },
+  {
+    "title": "Binary Tree Level Order Traversal",
+    "problemlink": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Breadth-First Search", "Binary Tree"]
+  },
+  {
+    "title": "Left View of Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1",
+    "difficulty": "Easy",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "Flipkart",
+      "Knowlarity",
+      "MakeMyTrip",
+      "Ola Cabs",
+      "Open Solutions",
+      "OYO Rooms",
+      "Paytm",
+      "Qualcomm",
+      "Samsung",
+      "Snapdeal",
+      "Twitter",
+      "Adobe"
+    ]
+  },
+  {
+    "title": "Right View of Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/right-view-of-binary-tree/1",
+    "difficulty": "Easy",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": ["Accolite", "Adobe", "Amazon", "MakeMyTrip", "Snapdeal"]
+  },
+  {
+    "title": "ZigZag Tree Traversal",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/zigzag-tree-traversal/1",
+    "difficulty": "Easy",
+    "problemTag": ["Traversal", "Tree", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Amazon",
+      "Cisco",
+      "FactSet",
+      "Hike",
+      "Snapdeal",
+      "Walmart",
+      "Microsoft",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Create a mirror tree from the given binary tree",
+    "problemlink": "https://www.geeksforgeeks.org/create-a-mirror-tree-from-the-given-binary-tree/",
+    "difficulty": "Easy",
+    "problemTag": ["Tree"]
+  },
+  {
+    "title": "Leaf at same level",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/leaf-at-same-level/1",
+    "difficulty": "Easy",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Check for Balanced Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/check-for-balanced-tree/1",
+    "difficulty": "Easy",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": ["Amazon", "Walmart", "Microsoft"]
+  },
+  {
+    "title": "Transform to Sum Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/transform-to-sum-tree/1",
+    "difficulty": "Easy",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": ["Amazon", "FactSet", "Microsoft", "Samsung", "Walmart"]
+  },
+  {
+    "title": "Check if Tree is Isomorphic",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/check-if-tree-is-isomorphic/1",
+    "difficulty": "Easy",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": ["Amazon", "Microsoft"]
+  },
+  {
+    "title": "Same Tree",
+    "problemlink": "https://leetcode.com/problems/same-tree/",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Tree",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Binary Tree"
+    ]
+  },
+  {
+    "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+    "problemlink": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Array",
+      "Hash Table",
+      "Divide and Conquer",
+      "Tree",
+      "Binary Tree"
+    ]
+  },
+  {
+    "title": "Height of Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/height-of-binary-tree/1",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": [
+      "Amazon",
+      "Cadence India",
+      "CouponDunia",
+      "D-E-Shaw",
+      "FactSet",
+      "FreeCharge",
+      "MakeMyTrip",
+      "Monotype Solutions",
+      "Snapdeal",
+      "Synopsys",
+      "Teradata",
+      "VMWare",
+      "Zoho",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Diameter of a Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/diameter-of-binary-tree/1",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": ["Amazon", "Microsoft", "OYO Rooms"]
+  },
+  {
+    "title": "Top View of Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/top-view-of-binary-tree/1",
+    "difficulty": "Medium",
+    "problemTag": ["Binary Search Tree", "Tree", "Data Structures"],
+    "companyTag": ["Walmart", "Ola Cabs", "Paytm"]
+  },
+  {
+    "title": "Bottom View of Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "CouponDunia",
+      "Flipkart",
+      "OYO Rooms",
+      "Paytm",
+      "Walmart"
+    ]
+  },
+  {
+    "title": "Diagonal Traversal of Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/diagonal-traversal-of-binary-tree/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": ["Amazon", "Microsoft"]
+  },
+  {
+    "title": "Boundary Traversal of binary tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/boundary-traversal-of-binary-tree/1",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "FactSet",
+      "Hike",
+      "Kritikal Solutions",
+      "Microsoft",
+      "Morgan Stanley",
+      "OYO Rooms",
+      "Payu",
+      "Samsung",
+      "Snapdeal",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Construct Binary Tree from String with bracket representation",
+    "problemlink": "https://www.geeksforgeeks.org/construct-binary-tree-string-bracket-representation/",
+    "difficulty": "Medium",
+    "problemTag": ["Stack", "Strings", "Tree"]
+  },
+  {
+    "title": "Minimum swap required to convert binary tree to binary search tree",
+    "problemlink": "https://www.geeksforgeeks.org/minimum-swap-required-convert-binary-tree-binary-search-tree/",
+    "difficulty": "Hard",
+    "problemTag": ["Sorting", "Tree"]
+  },
+  {
+    "title": "Duplicate subtree in Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/duplicate-subtree-in-binary-tree/1",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": ["Google"]
+  },
+  {
+    "title": "Check if a given graph is tree or not",
+    "problemlink": "https://www.geeksforgeeks.org/check-given-graph-tree/",
+    "difficulty": "Medium",
+    "problemTag": ["BFS", "DFS", "Graph", "Tree"]
+  },
+  {
+    "title": "Lowest Common Ancestor in a Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-binary-tree/1",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "American Express",
+      "Cisco",
+      "Expedia",
+      "Flipkart",
+      "MakeMyTrip",
+      "Microsoft",
+      "OYO Rooms",
+      "PayPal",
+      "Payu",
+      "Snapdeal",
+      "Times Internet",
+      "Twitter",
+      "Google"
+    ]
+  },
+  {
+    "title": "Min distance between two given nodes of a Binary Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/min-distance-between-two-given-nodes-of-a-binary-tree/1",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": [
+      "Amazon",
+      "Linkedin",
+      "MakeMyTrip",
+      "Ola Cabs",
+      "Qualcomm",
+      "Samsung"
+    ]
+  },
+  {
+    "title": "Duplicate Subtrees",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/duplicate-subtrees/1",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Kth ancestor of a node in binary tree | Set 2",
+    "problemlink": "https://www.geeksforgeeks.org/kth-ancestor-node-binary-tree-set-2/",
+    "difficulty": "Medium",
+    "problemTag": ["Tree"]
+  },
+  {
+    "title": "Binary Tree Maximum Path Sum",
+    "problemlink": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Dynamic Programming",
+      "Tree",
+      "Depth-First Search",
+      "Binary Tree"
+    ]
+  },
+  {
+    "title": "Serialize and Deserialize Binary Tree",
+    "problemlink": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "String",
+      "Tree",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Design",
+      "Binary Tree"
+    ]
+  },
+  {
+    "title": "Binary Tree  to DLL",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1",
+    "difficulty": "Hard",
+    "problemTag": ["Linked List", "Tree", "Data Structures"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "Goldman Sachs",
+      "Microsoft",
+      "Morgan Stanley",
+      "Salesforce",
+      "Snapdeal"
+    ]
+  },
+  {
+    "title": "Print all k-sum paths in a binary tree",
+    "problemlink": "https://www.geeksforgeeks.org/print-k-sum-paths-binary-tree/",
+    "difficulty": "Hard",
+    "problemTag": ["Amazon", "Tree"]
+  },
+  {
+    "title": "Lowest Common Ancestor of a Binary Search Tree",
+    "problemlink": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Tree",
+      "Depth-First Search",
+      "Binary Search Tree",
+      "Binary Tree"
+    ]
+  },
+  {
+    "title": "Insert a node in a BST",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/insert-a-node-in-a-bst/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Binary Search Tree", "Design-Pattern", "Data Structures"],
+    "companyTag": ["Accolite", "Amazon", "Microsoft", "Paytm", "Samsung"]
+  },
+  {
+    "title": "Minimum element in BST",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/minimum-element-in-bst/1",
+    "difficulty": "Basic",
+    "problemTag": ["Binary Search Tree", "Tree", "Data Structures"],
+    "companyTag": ["Microsoft"]
+  },
+  {
+    "title": "Predecessor and Successor",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/predecessor-and-successor/1",
+    "difficulty": "Medium",
+    "problemTag": ["Binary Search Tree", "Tree", "Data Structures"],
+    "companyTag": ["Ola Cabs"]
+  },
+  {
+    "title": "Check whether BST contains Dead End",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/check-whether-bst-contains-dead-end/1",
+    "difficulty": "Easy",
+    "problemTag": ["Binary Search Tree", "Tree", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Binary Tree to BST",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/binary-tree-to-bst/1",
+    "difficulty": "Easy",
+    "problemTag": ["Binary Search Tree", "Tree", "Data Structures"],
+    "companyTag": ["Adobe", "Amazon"]
+  },
+  {
+    "title": "Kth largest element in BST",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/kth-largest-element-in-bst/1",
+    "difficulty": "Easy",
+    "problemTag": ["Binary Search Tree", "Tree", "Data Structures"],
+    "companyTag": ["Accolite", "Amazon", "Samsung", "SAP Labs", "Microsoft"]
+  },
+  {
+    "title": "Validate Binary Search Tree",
+    "problemlink": "https://leetcode.com/problems/validate-binary-search-tree/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Tree",
+      "Depth-First Search",
+      "Binary Search Tree",
+      "Binary Tree"
+    ]
+  },
+  {
+    "title": "Kth Smallest Element in a BST",
+    "problemlink": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Tree",
+      "Depth-First Search",
+      "Binary Search Tree",
+      "Binary Tree"
+    ]
+  },
+  {
+    "title": "Delete Node in a BST",
+    "problemlink": "https://leetcode.com/problems/delete-node-in-a-bst/",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Binary Search Tree", "Binary Tree"]
+  },
+  {
+    "title": "Flatten BST to sorted list | Increasing order",
+    "problemlink": "https://www.geeksforgeeks.org/flatten-bst-to-sorted-list-increasing-order/",
+    "difficulty": "Medium",
+    "problemTag": ["Algorithms", "Binary Search Tree", "Tree"]
+  },
+  {
+    "title": "Preorder to BST",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/preorder-to-postorder4423/1",
+    "difficulty": "Medium",
+    "problemTag": ["Binary Search Tree", "Stack", "Tree", "Data Structures"],
+    "companyTag": ["Amazon", "Linkedin", "Flipkart"]
+  },
+  {
+    "title": "Count BST nodes that lie in a given range",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/count-bst-nodes-that-lie-in-a-given-range/1",
+    "difficulty": "Medium",
+    "problemTag": ["Binary Search Tree", "Tree", "Data Structures"],
+    "companyTag": ["D-E-Shaw", "Google"]
+  },
+  {
+    "title": "Populate Inorder Successor for all nodes",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/populate-inorder-successor-for-all-nodes/1",
+    "difficulty": "Medium",
+    "problemTag": ["Tree", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Normal BST to Balanced BST",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/normal-bst-to-balanced-bst/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Binary Search Tree", "Data Structures"],
+    "companyTag": ["Paytm"]
+  },
+  {
+    "title": "Merge Two Balanced Binary Search Trees",
+    "problemlink": "https://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/",
+    "difficulty": "Medium",
+    "problemTag": ["Binary Search Tree"]
+  },
+  {
+    "title": "Given n appointments, find all conflicting appointments",
+    "problemlink": "https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/",
+    "difficulty": "Hard",
+    "problemTag": ["Binary Search Tree"]
+  },
+  {
+    "title": "Replace every element with the least greater element on its right",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/replace-every-element-with-the-least-greater-element-on-its-right/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "set", "Binary Search Tree", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Construct Tree from Preorder Traversal",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/construct-tree-from-preorder-traversal/1",
+    "difficulty": "Medium",
+    "problemTag": ["Traversal", "Tree", "Data Structures", "Algorithms"],
+    "companyTag": ["Amazon", "Hike"]
+  },
+  {
+    "title": "Median of BST",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/median-of-bst/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Binary Search Tree",
+      "Traversal",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Largest BST in a Binary Tree | Set 2",
+    "problemlink": "https://www.geeksforgeeks.org/largest-bst-binary-tree-set-2/",
+    "difficulty": "Hard",
+    "problemTag": ["Amazon", "Binary Search Tree", "Tree"]
+  },
+  {
+    "title": "Minimum Difference among K",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/minimum-difference-among-k5805/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Basic",
+    "problemTag": ["Arrays", "Sorting", "Data Structures", "Algorithms"],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Heap Sort",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/heap-sort/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Heap", "Sorting", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "24*7 Innovation Labs",
+      "Amazon",
+      "Belzabar",
+      "Intuit",
+      "Oracle",
+      "Samsung",
+      "SAP Labs",
+      "Visa",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Top K Frequent Elements",
+    "problemlink": "https://leetcode.com/problems/top-k-frequent-elements/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Array",
+      "Hash Table",
+      "Divide and Conquer",
+      "Sorting",
+      "Heap (Priority Queue)",
+      "Bucket Sort",
+      "Counting",
+      "Quickselect"
+    ]
+  },
+  {
+    "title": "k largest elements",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/k-largest-elements4206/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Heap",
+      "Sorting",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon", "Google", "Microsoft", "Samsung", "Walmart"]
+  },
+  {
+    "title": "Next Greater Element",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/next-larger-element-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Stack", "Data Structures"],
+    "companyTag": ["Flipkart", "Amazon", "Microsoft", "Adobe", "MakeMyTrip"]
+  },
+  {
+    "title": "Kth smallest element",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/kth-smallest-element5635/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Searching",
+      "Sorting",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "ABCO",
+      "Accolite",
+      "Amazon",
+      "Cisco",
+      "Hike",
+      "Microsoft",
+      "Snapdeal",
+      "VMWare",
+      "Google",
+      "Adobe"
+    ]
+  },
+  {
+    "title": "Maximum repeating number",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/maximum-repeating-number4858/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Basic",
+    "problemTag": ["Arrays", "Data Structures"],
+    "companyTag": ["Accolite", "Amazon"]
+  },
+  {
+    "title": "K-th smallest element after removing some integers from natural numbers",
+    "problemlink": "https://www.geeksforgeeks.org/k-th-smallest-element-removing-integers-natural-numbers/",
+    "difficulty": "Medium",
+    "problemTag": ["Sorting"]
+  },
+  {
+    "title": "K closest elements",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/k-closest-elements3619/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Arrays", "Data Structures"],
+    "companyTag": ["Amazon", "OYO Rooms"]
+  },
+  {
+    "title": "Kth largest element in a stream",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/kth-largest-element-in-a-stream2220/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Heap", "Data Structures"],
+    "companyTag": [
+      "Amazon",
+      "Cisco",
+      "Hike",
+      "OYO Rooms",
+      "Walmart",
+      "Microsoft",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Connect n ropes with minimum cost",
+    "problemlink": "https://www.geeksforgeeks.org/connect-n-ropes-minimum-cost/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Amazon",
+      "Goldman Sachs",
+      "OYO Rooms",
+      "Greedy",
+      "Heap",
+      "Queue"
+    ]
+  },
+  {
+    "title": "Cuckoo Hashing – Worst case O(1) Lookup!",
+    "problemlink": "https://www.geeksforgeeks.org/cuckoo-hashing/",
+    "difficulty": "Hard",
+    "problemTag": ["Hash"]
+  },
+  {
+    "title": "Find Itinerary from a given list of tickets",
+    "problemlink": "https://geeksforgeeks.org/find-itinerary-from-a-given-list-of-tickets/",
+    "difficulty": "Medium",
+    "problemTag": ["Hash"]
+  },
+  {
+    "title": "Largest subarray with 0 sum",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Arrays", "Hash", "Data Structures"],
+    "companyTag": ["Amazon", "MakeMyTrip", "Microsoft"]
+  },
+  {
+    "title": "Count distinct elements in every window",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/count-distinct-elements-in-every-window/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Hash", "sliding-window", "Data Structures", "Algorithms"],
+    "companyTag": ["Accolite", "Amazon", "Microsoft"]
+  },
+  {
+    "title": "Group Shifted String",
+    "problemlink": "https://www.geeksforgeeks.org/group-shifted-string/",
+    "difficulty": "Medium",
+    "problemTag": ["Hash", "Strings"]
+  },
+  {
+    "title": "Merge k Sorted Lists",
+    "problemlink": "https://leetcode.com/problems/merge-k-sorted-lists/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Linked List",
+      "Divide and Conquer",
+      "Heap (Priority Queue)",
+      "Merge Sort"
+    ]
+  },
+  {
+    "title": "Find Median from Data Stream",
+    "problemlink": "https://leetcode.com/problems/find-median-from-data-stream/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Two Pointers",
+      "Design",
+      "Sorting",
+      "Heap (Priority Queue)",
+      "Data Stream"
+    ]
+  },
+  {
+    "title": "IPL 2021 - Match Day 2",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/deee0e8cf9910e7219f663c18d6d640ea0b87f87/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Arrays",
+      "Queue",
+      "sliding-window",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon", "Directi", "Flipkart", "Microsoft"]
+  },
+  {
+    "title": "Smallest Positive missing number",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/smallest-positive-missing-number-1587115621/1/",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Searching", "Data Structures", "Algorithms"],
+    "companyTag": ["Accolite", "Amazon", "Samsung", "Snapdeal"]
+  },
+  {
+    "title": "Surpasser Count",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/surpasser-count0615/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Data Structures"],
+    "companyTag": ["Google", "Yahoo"]
+  },
+  {
+    "title": "Tournament Tree (Winner Tree) and Binary Heap",
+    "problemlink": "https://www.geeksforgeeks.org/tournament-tree-and-binary-heap/",
+    "difficulty": "Hard",
+    "problemTag": ["Advanced Data Structure", "Heap"]
+  },
+  {
+    "title": "Online algorithm for checking palindrome in a stream",
+    "problemlink": "https://www.geeksforgeeks.org/online-algorithm-for-checking-palindrome-in-a-stream/",
+    "difficulty": "Expert",
+    "problemTag": ["palindrome", "Pattern Searching", "Strings"]
+  },
+  {
+    "title": "Length of the largest subarray with contiguous elements | Set 2",
+    "problemlink": "https://www.geeksforgeeks.org/length-largest-subarray-contiguous-elements-set-2/",
+    "difficulty": "Hard",
+    "problemTag": ["Hash"]
+  },
+  {
+    "title": "Palindrome Substring Queries",
+    "problemlink": "https://www.geeksforgeeks.org/palindrome-substring-queries/",
+    "difficulty": "Hard",
+    "problemTag": ["Dynamic Programming", "Hash", "palindrome", "Strings"]
+  },
+  {
+    "title": "Sum of length",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/sum-of-length3345/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Arrays", "Hash", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Find Recurring Sequence in a Fraction",
+    "problemlink": "https://www.geeksforgeeks.org/find-recurring-sequence-fraction/",
+    "difficulty": "Hard",
+    "problemTag": ["Amazon", "Microsoft", "Hash", "Mathematical"]
+  },
+  {
+    "title": "K maximum sum combinations from two arrays",
+    "problemlink": "https://www.geeksforgeeks.org/k-maximum-sum-combinations-two-arrays/",
+    "difficulty": "Hard",
+    "problemTag": ["Arrays", "Heap"]
+  },
+  {
+    "title": "BFS of graph",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1",
+    "difficulty": "Easy",
+    "problemTag": ["BFS", "Graph", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "Flipkart",
+      "Microsoft",
+      "Ola Cabs",
+      "Samsung",
+      "SAP Labs"
+    ]
+  },
+  {
+    "title": "DFS of Graph",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["DFS", "Graph", "Data Structures", "Algorithms"],
+    "companyTag": ["Accolite", "Amazon", "Intuit ", "Samsung"]
+  },
+  {
+    "title": "Flood Fill",
+    "problemlink": "https://leetcode.com/problems/flood-fill/",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Array",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Matrix"
+    ]
+  },
+  {
+    "title": "Number of Triangles in Directed and Undirected Graphs",
+    "problemlink": "https://www.geeksforgeeks.org/number-of-triangles-in-directed-and-undirected-graphs/",
+    "difficulty": "Medium",
+    "problemTag": ["Graph"]
+  },
+  {
+    "title": "Detect cycle in a directed graph",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1/",
+    "difficulty": "Medium",
+    "problemTag": ["Graph", "Data Structures"],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "BankBazaar",
+      "Flipkart",
+      "Goldman Sachs",
+      "MakeMyTrip",
+      "Microsoft",
+      "Oracle",
+      "Rockstand",
+      "Samsung"
+    ]
+  },
+  {
+    "title": "Detect cycle in an undirected graph",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "DFS",
+      "Graph",
+      "union-find",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "Flipkart",
+      "MakeMyTrip",
+      "Oracle",
+      "Samsung",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Rat in a Maze Problem - I",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1",
+    "difficulty": "Medium",
+    "problemTag": ["Backtracking", "Algorithms"],
+    "companyTag": ["Amazon", "Microsoft"]
+  },
+  {
+    "title": "Steps by Knight",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/steps-by-knight5927/1",
+    "difficulty": "Medium",
+    "problemTag": ["BFS", "Graph", "Queue", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Amazon",
+      "Goldman Sachs",
+      "Intuit ",
+      "Linkedin",
+      "MakeMyTrip",
+      "OYO Rooms",
+      "Microsoft",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Clone Graph",
+    "problemlink": "https://leetcode.com/problems/clone-graph/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Hash Table",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Graph"
+    ]
+  },
+  {
+    "title": "Number of Operations to Make Network Connected",
+    "problemlink": "https://leetcode.com/problems/number-of-operations-to-make-network-connected/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Union Find",
+      "Graph"
+    ]
+  },
+  {
+    "title": "Implementing Dijkstra Algorithm",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Graph", "Data Structures", "Algorithms"],
+    "companyTag": ["Microsoft", "Flipkart"]
+  },
+  {
+    "title": "Topological sort",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/topological-sort/1",
+    "difficulty": "Medium",
+    "problemTag": ["Graph", "Data Structures"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "Flipkart",
+      "Microsoft",
+      "Moonfrog Labs",
+      "Morgan Stanley",
+      "OYO Rooms",
+      "Samsung",
+      "Visa",
+      "D-E-Shaw"
+    ]
+  },
+  {
+    "title": "Oliver and the Game",
+    "problemlink": "https://www.hackerearth.com/practice/algorithms/graphs/topological-sort/practice-problems/algorithm/oliver-and-the-game-3/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Algorithms",
+      "Approved",
+      "Data Structures",
+      "Depth First Search",
+      "Graphs",
+      "Open",
+      "Sorting"
+    ]
+  },
+  {
+    "title": "Minimum time taken by each job to be completed given by a Directed Acyclic Graph",
+    "problemlink": "https://www.geeksforgeeks.org/minimum-time-taken-by-each-job-to-be-completed-given-by-a-directed-acyclic-graph/",
+    "difficulty": "Medium",
+    "problemTag": ["BFS", "Graph", "Greedy"]
+  },
+  {
+    "title": "Prerequisite Tasks",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/prerequisite-tasks/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Graph", "Data Structures"],
+    "companyTag": [
+      "Amazon",
+      "Apple",
+      "Facebook",
+      "Google",
+      "Microsoft",
+      "Twitter"
+    ]
+  },
+  {
+    "title": "Find the number of islands",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/find-the-number-of-islands/1",
+    "difficulty": "Medium",
+    "problemTag": ["DFS", "Graph", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Amazon",
+      "Citrix",
+      "D-E-Shaw",
+      "Informatica",
+      "Intuit ",
+      "Linkedin",
+      "Microsoft",
+      "Ola Cabs",
+      "One97",
+      "Opera",
+      "OYO Rooms",
+      "Paytm",
+      "Samsung",
+      "Snapdeal",
+      "Streamoid Technologies",
+      "Visa",
+      "Google",
+      "MakeMyTrip",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Minimum Spanning Tree",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/minimum-spanning-tree/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Graph", "Greedy", "Data Structures", "Algorithms"],
+    "companyTag": ["Amazon", "Cisco", "Samsung", "Microsoft", "Flipkart"]
+  },
+  {
+    "title": "Negative weight cycle",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/negative-weight-cycle3504/1",
+    "difficulty": "Medium",
+    "problemTag": ["Graph", "Data Structures"],
+    "companyTag": ["Cisco"]
+  },
+  {
+    "title": "Floyd Warshall",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/implementing-floyd-warshall2042/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Dynamic Programming",
+      "Graph",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Samsung"]
+  },
+  {
+    "title": "Graph Coloring | Set 1 (Introduction and Applications)",
+    "problemlink": "https://www.geeksforgeeks.org/graph-coloring-applications/",
+    "difficulty": "Medium",
+    "problemTag": ["Graph"]
+  },
+  {
+    "title": "Snakes and Ladders",
+    "problemlink": "https://leetcode.com/problems/snakes-and-ladders/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Breadth-First Search", "Matrix"]
+  },
+  {
+    "title": "Strongly Connected Components (Kosaraju's Algo)",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1",
+    "difficulty": "Medium",
+    "problemTag": ["DFS", "Graph", "Data Structures", "Algorithms"],
+    "companyTag": ["Visa", "Amazon", "Microsoft"]
+  },
+  {
+    "title": "Introduction and Approximate Solution for Vertex Cover Problem",
+    "problemlink": "https://www.geeksforgeeks.org/introduction-and-approximate-solution-for-vertex-cover-problem/",
+    "difficulty": "Medium",
+    "problemTag": ["Graph"]
+  },
+  {
+    "title": "Journey to the Moon",
+    "problemlink": "https://www.hackerrank.com/challenges/journey-to-the-moon/problem",
+    "difficulty": "Medium",
+    "problemTag": [""]
+  },
+  {
+    "title": "M-Coloring Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1",
+    "difficulty": "Medium",
+    "problemTag": ["Backtracking", "Algorithms"],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Cheapest Flights Within K Stops",
+    "problemlink": "https://leetcode.com/problems/cheapest-flights-within-k-stops/description/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Dynamic Programming",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Graph",
+      "Heap (Priority Queue)",
+      "Shortest Path"
+    ]
+  },
+  {
+    "title": "Find if there is a path of more than k length from a source",
+    "problemlink": "https://www.geeksforgeeks.org/find-if-there-is-a-path-of-more-than-k-length-from-a-source/",
+    "difficulty": "Medium",
+    "problemTag": ["Backtracking", "Graph"]
+  },
+  {
+    "title": "Detect a negative cycle in a Graph | (Bellman Ford)",
+    "problemlink": "https://www.geeksforgeeks.org/detect-negative-cycle-graph-bellman-ford/",
+    "difficulty": "Medium",
+    "problemTag": ["Graph"]
+  },
+  {
+    "title": "Bipartite Graph",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/bipartite-graph/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["BFS", "DFS", "Graph", "Data Structures", "Algorithms"],
+    "companyTag": ["Samsung", "Microsoft", "Flipkart"]
+  },
+  {
+    "title": "Word Ladder",
+    "problemlink": "https://leetcode.com/problems/word-ladder/",
+    "difficulty": "Hard",
+    "problemTag": ["Hash Table", "String", "Breadth-First Search"]
+  },
+  {
+    "title": "Alien Dictionary",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/alien-dictionary/1",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Graph",
+      "Sorting",
+      "Strings",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Amazon",
+      "Google",
+      "Microsoft",
+      "OYO Rooms",
+      "Walmart",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Kruskal's Minimum Spanning Tree Algorithm | Greedy Algo-2",
+    "problemlink": "https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/",
+    "difficulty": "Medium",
+    "problemTag": ["Graph", "Greedy"]
+  },
+  {
+    "title": "Total number of Spanning Trees in a Graph",
+    "problemlink": "https://www.geeksforgeeks.org/total-number-spanning-trees-graph/",
+    "difficulty": "Hard",
+    "problemTag": ["Graph"]
+  },
+  {
+    "title": "Travelling Salesman Problem using Dynamic Programming",
+    "problemlink": "https://www.geeksforgeeks.org/travelling-salesman-problem-using-dynamic-programming/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Google",
+      "Microsoft",
+      "Opera",
+      "Bit Magic",
+      "Dynamic Programming",
+      "Graph"
+    ]
+  },
+  {
+    "title": "Longest Path in a Directed Acyclic Graph",
+    "problemlink": "https://www.geeksforgeeks.org/find-longest-path-directed-acyclic-graph/",
+    "difficulty": "Hard",
+    "problemTag": ["Graph", "Shortest Path"]
+  },
+  {
+    "title": "Two Clique Problem (Check if Graph can be divided in two Cliques)",
+    "problemlink": "https://www.geeksforgeeks.org/two-clique-problem-check-graph-can-divided-two-cliques/",
+    "difficulty": "Hard",
+    "problemTag": ["Graph"]
+  },
+  {
+    "title": "Minimize Cash Flow among a given set of friends who have borrowed money from each other",
+    "problemlink": "https://www.geeksforgeeks.org/minimize-cash-flow-among-given-set-friends-borrowed-money/",
+    "difficulty": "Hard",
+    "problemTag": ["Amazon", "Graph", "Greedy"]
+  },
+  {
+    "title": "Chinese Postman or Route Inspection | Set 1 (introduction)",
+    "problemlink": "https://www.geeksforgeeks.org/chinese-postman-route-inspection-set-1-introduction/",
+    "difficulty": "Hard",
+    "problemTag": ["Graph"]
+  },
+  {
+    "title": "Water Jug problem using BFS",
+    "problemlink": "https://www.geeksforgeeks.org/water-jug-problem-using-bfs/",
+    "difficulty": "Hard",
+    "problemTag": ["BFS", "Graph"]
+  },
+  {
+    "title": "Water Jug problem using BFS",
+    "problemlink": "https://www.geeksforgeeks.org/water-jug-problem-using-bfs/",
+    "difficulty": "Hard",
+    "problemTag": ["BFS", "Graph"]
+  },
+  {
+    "title": "Trie | (Insert and Search)",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/trie-insert-and-search0651/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Trie", "Design-Pattern", "Advanced Data Structure"],
+    "companyTag": ["Accolite", "Amazon", "D-E-Shaw", "FactSet", "Microsoft"]
+  },
+  {
+    "title": "Unique rows in boolean matrix",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/unique-rows-in-boolean-matrix/1",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Matrix",
+      "set",
+      "Trie",
+      "Data Structures",
+      "Advanced Data Structure"
+    ],
+    "companyTag": ["Amazon", "Zoho"]
+  },
+  {
+    "title": "Word Break (Trie)",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/d857113143f69fab217cf5dab978535542f3cbb1/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Trie", "Advanced Data Structure"],
+    "companyTag": [
+      "Amazon",
+      "Google",
+      "Hike",
+      "IBM",
+      "MAQ Software",
+      "Microsoft",
+      "Walmart",
+      "Zoho"
+    ]
+  },
+  {
+    "title": "Print Anagrams Together",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/k-anagrams-1/0",
+    "difficulty": "Medium",
+    "problemTag": ["Hash", "Strings", "Data Structures"],
+    "companyTag": [
+      "Amazon",
+      "D-E-Shaw",
+      "Goldman Sachs",
+      "Morgan Stanley",
+      "Snapdeal",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Shortest Unique prefix for every word",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/shortest-unique-prefix-for-every-word/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": ["Trie", "Advanced Data Structure"],
+    "companyTag": ["Microsoft", "Google"]
+  },
+  {
+    "title": "Phone directory",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/phone-directory/0",
+    "difficulty": "Hard",
+    "problemTag": ["Map", "Trie", "Data Structures", "Advanced Data Structure"],
+    "companyTag": ["Amazon", "Microsoft", "Snapdeal"]
+  },
+  {
+    "title": "Knapsack with Duplicate Items",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1",
+    "difficulty": "Easy",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": ["Amazon", "Google"]
+  },
+  {
+    "title": "BBT counter",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/bbt-counter4914/1",
+    "difficulty": "Easy",
+    "problemTag": ["Mathematical", "Tree", "Data Structures", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Reach a given score",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/reach-a-given-score-1587115621/1",
+    "difficulty": "Easy",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Maximum difference of zeros and ones in binary string",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/maximum-difference-of-zeros-and-ones-in-binary-string4111/1",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Dynamic Programming",
+      "Kadane",
+      "Strings",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": []
+  },
+  {
+    "title": "Climbing Stairs",
+    "problemlink": "https://leetcode.com/problems/climbing-stairs/",
+    "difficulty": "Easy",
+    "problemTag": ["Math", "Dynamic Programming", "Memoization"]
+  },
+  {
+    "title": "Permutation Coefficient",
+    "problemlink": "https://www.geeksforgeeks.org/permutation-coefficient/",
+    "difficulty": "Easy",
+    "problemTag": ["Dynamic Programming", "permutation"]
+  },
+  {
+    "title": "Longest Repeating Subsequence",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/longest-repeating-subsequence2004/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Dynamic Programming",
+      "Strings",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon", "Google"]
+  },
+  {
+    "title": "Pairs with specific difference",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/pairs-with-specific-difference1533/1",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Arrays",
+      "Dynamic Programming",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": []
+  },
+  {
+    "title": "Longest subsequence-1",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/longest-subsequence-such-that-difference-between-adjacents-is-one4724/1",
+    "difficulty": "Easy",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": ["Flipkart"]
+  },
+  {
+    "title": "Coin Change",
+    "problemlink": "https://leetcode.com/problems/coin-change/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Dynamic Programming", "Breadth-First Search"]
+  },
+  {
+    "title": "Longest Increasing Subsequence",
+    "problemlink": "https://leetcode.com/problems/longest-increasing-subsequence/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Binary Search", "Dynamic Programming"]
+  },
+  {
+    "title": "Longest Common Subsequence",
+    "problemlink": "https://leetcode.com/problems/longest-common-subsequence/",
+    "difficulty": "Medium",
+    "problemTag": ["String", "Dynamic Programming"]
+  },
+  {
+    "title": "Word Break",
+    "problemlink": "https://leetcode.com/problems/word-break/",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Hash Table",
+      "String",
+      "Dynamic Programming",
+      "Trie",
+      "Memoization"
+    ]
+  },
+  {
+    "title": "Combination Sum IV",
+    "problemlink": "https://leetcode.com/problems/combination-sum-iv/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Dynamic Programming"]
+  },
+  {
+    "title": "House Robber",
+    "problemlink": "https://leetcode.com/problems/house-robber/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Dynamic Programming"]
+  },
+  {
+    "title": "House Robber II",
+    "problemlink": "https://leetcode.com/problems/house-robber-ii/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Dynamic Programming"]
+  },
+  {
+    "title": "Decode Ways",
+    "problemlink": "https://leetcode.com/problems/decode-ways/",
+    "difficulty": "Medium",
+    "problemTag": ["String", "Dynamic Programming"]
+  },
+  {
+    "title": "Unique Paths",
+    "problemlink": "https://leetcode.com/problems/unique-paths/",
+    "difficulty": "Medium",
+    "problemTag": ["Math", "Dynamic Programming", "Combinatorics"]
+  },
+  {
+    "title": "Jump Game",
+    "problemlink": "https://leetcode.com/problems/jump-game/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Dynamic Programming", "Greedy"]
+  },
+  {
+    "title": "0 - 1 Knapsack Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": [
+      "Amazon",
+      "Directi",
+      "Flipkart",
+      "GreyOrange ",
+      "Microsoft",
+      "Mobicip",
+      "Morgan Stanley",
+      "Oracle",
+      "Payu",
+      "Snapdeal",
+      "Visa"
+    ]
+  },
+  {
+    "title": "nCr",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/ncr1019/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Mathematical", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Nth catalan number",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/nth-catalan-number0817/1",
+    "difficulty": "Easy",
+    "problemTag": ["Dynamic Programming", "Mathematical", "Algorithms"],
+    "companyTag": ["Amazon"]
+  },
+  {
+    "title": "Edit Distance",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/edit-distance3702/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Dynamic Programming",
+      "Strings",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon", "Goldman Sachs", "Microsoft", "Google"]
+  },
+  {
+    "title": "Partition Equal Subset Sum",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "subset", "Algorithms"],
+    "companyTag": [
+      "Accolite",
+      "Adobe",
+      "Amazon",
+      "Drishti-Soft",
+      "OYO Rooms",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Gold Mine Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/gold-mine-problem2608/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": ["Amazon", "Flipkart", "Samsung"]
+  },
+  {
+    "title": "Assembly Line Scheduling | DP-34",
+    "problemlink": "https://www.geeksforgeeks.org/assembly-line-scheduling-dp-34/",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming"]
+  },
+  {
+    "title": "Maximize The Cut Segments",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/cutted-segments1642/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": ["Amazon", "OYO Rooms", "Microsoft"]
+  },
+  {
+    "title": "Maximum sum increasing subsequence",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/maximum-sum-increasing-subsequence4749/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": ["Amazon", "Morgan Stanley", "Microsoft"]
+  },
+  {
+    "title": "Count all subsequences having product less than K",
+    "problemlink": "https://www.geeksforgeeks.org/count-subsequences-product-less-k/",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Dynamic Programming"]
+  },
+  {
+    "title": "Maximum subsequence sum such that no three are consecutive",
+    "problemlink": "https://www.geeksforgeeks.org/maximum-subsequence-sum-such-that-no-three-are-consecutive/",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Dynamic Programming"]
+  },
+  {
+    "title": "Egg Dropping Puzzle",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/egg-dropping-puzzle-1587115620/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": [
+      "Amazon",
+      "D-E-Shaw",
+      "Goldman Sachs",
+      "Google",
+      "Hike",
+      "MakeMyTrip",
+      "MAQ Software",
+      "Myntra",
+      "nearbuy",
+      "Opera",
+      "Oracle",
+      "Philips",
+      "Samsung",
+      "Service Now",
+      "Unisys",
+      "VMWare",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Max length chain",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/max-length-chain/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Greedy", "Algorithms"],
+    "companyTag": ["Amazon", "Microsoft"]
+  },
+  {
+    "title": "Largest square formed in a matrix",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/largest-square-formed-in-a-matrix0806/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": ["Amazon", "Samsung"]
+  },
+  {
+    "title": "Maximum path sum in matrix",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/path-in-matrix3805/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Dynamic Programming",
+      "Matrix",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": [
+      "Amazon",
+      "Flipkart",
+      "MakeMyTrip",
+      "OYO Rooms",
+      "Samsung",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Minimum number of jumps",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/minimum-number-of-jumps-1587115620/1",
+    "difficulty": "Medium",
+    "problemTag": ["Arrays", "Greedy", "Data Structures", "Algorithms"],
+    "companyTag": [
+      "Adobe",
+      "Amazon",
+      "Housing.com",
+      "Moonfrog Labs",
+      "Walmart",
+      "Microsoft",
+      "Google",
+      "Flipkart"
+    ]
+  },
+  {
+    "title": "Array Removals",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/array-removals/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Dynamic Programming",
+      "Arrays",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": []
+  },
+  {
+    "title": "Longest Common Substring",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/longest-common-substring1452/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Dynamic Programming",
+      "Strings",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon", "Microsoft", "Morgan Stanley"]
+  },
+  {
+    "title": "Partition Equal Subset Sum",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "subset", "Algorithms"],
+    "companyTag": [
+      "Accolite",
+      "Adobe",
+      "Amazon",
+      "Drishti-Soft",
+      "OYO Rooms",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Longest Palindromic Subsequence",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/longest-palindromic-subsequence-1612327878/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Strings",
+      "Dynamic Programming",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Amazon", "Google"]
+  },
+  {
+    "title": "Count Palindromic Subsequences",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/count-palindromic-subsequences/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Longest Palindromic Substring",
+    "problemlink": "https://leetcode.com/problems/longest-palindromic-substring/",
+    "difficulty": "Medium",
+    "problemTag": ["String", "Dynamic Programming"]
+  },
+  {
+    "title": "Longest alternating subsequence",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/longest-alternating-subsequence5951/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Job Sequencing Problem",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1/",
+    "difficulty": "Medium",
+    "problemTag": ["Greedy", "Dynamic Programming", "Algorithms"],
+    "companyTag": ["Accolite", "Microsoft", "Flipkart"]
+  },
+  {
+    "title": "Geek and its Game of Coins",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/geek-and-its-game-of-coins4043/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": []
+  },
+  {
+    "title": "Disarrangement of balls",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/dearrangement-of-balls0918/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Combinatorial"],
+    "companyTag": []
+  },
+  {
+    "title": "Optimal Strategy For A Game",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/optimal-strategy-for-a-game-1587115620/1",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Data Structures and Algorithms - Self Paced",
+      "Complete Interview Preparation - Self Paced",
+      "Data Structures & Algorithms in Python - Self Paced",
+      "Must Do Coding Questions - Self Paced",
+      "Complete Test Series for Product-Based Companies",
+      "DSA Live for Working Professionals - Live",
+      "Competitive Programming - Live"
+    ],
+    "companyTag": []
+  },
+  {
+    "title": "Word Wrap",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/word-wrap1646/1",
+    "difficulty": "Hard",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": ["Microsoft", "Flipkart"]
+  },
+  {
+    "title": "Mobile numeric keypad",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/mobile-numeric-keypad5456/1",
+    "difficulty": "Medium",
+    "problemTag": ["Dynamic Programming", "Algorithms"],
+    "companyTag": ["Flipkart", "MAQ Software", "Microsoft", "Sprinklr"]
+  },
+  {
+    "title": "Maximum Length of Pair Chain",
+    "problemlink": "https://leetcode.com/problems/maximum-length-of-pair-chain/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Dynamic Programming", "Greedy", "Sorting"]
+  },
+  {
+    "title": "Matrix Chain Multiplication",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Dynamic Programming",
+      "Matrix",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["FactSet", "Flipkart", "Microsoft"]
+  },
+  {
+    "title": "Buy and Sell a Share at most twice",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/buy-and-sell-a-share-at-most-twice/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": [
+      "Dynamic Programming",
+      "Arrays",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Facebook", "Amazon"]
+  },
+  {
+    "title": "Optimal Binary Search Tree | DP-24",
+    "problemlink": "https://www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/",
+    "difficulty": "Hard",
+    "problemTag": ["Binary Search Tree", "Dynamic Programming"]
+  },
+  {
+    "title": "Largest rectangular sub-matrix whose sum is 0",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/largest-rectangular-sub-matrix-whose-sum-is-0/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Dynamic Programming",
+      "prefix-sum",
+      "Matrix",
+      "Hash",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": []
+  },
+  {
+    "title": "Largest area rectangular sub-matrix with equal number of 1\u2019s and 0\u2019s",
+    "problemlink": "https://www.geeksforgeeks.org/largest-area-rectangular-sub-matrix-equal-number-1s-0s/",
+    "difficulty": "Hard",
+    "problemTag": ["Dynamic Programming", "Matrix"]
+  },
+  {
+    "title": "Number of 1 Bits",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/set-bits0143/1",
+    "difficulty": "Easy",
+    "problemTag": ["Bit Magic", "Data Structures"],
+    "companyTag": [
+      "Adobe",
+      "Brocade",
+      "Cisco",
+      "Juniper Networks",
+      "Qualcomm",
+      "Samsung",
+      "Wipro",
+      "Microsoft"
+    ]
+  },
+  {
+    "title": "Non Repeating Numbers",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/finding-the-numbers0215/1",
+    "difficulty": "Medium",
+    "problemTag": ["Bit Magic", "Data Structures"],
+    "companyTag": [
+      "Accolite",
+      "Amazon",
+      "FactSet",
+      "Google",
+      "MakeMyTrip",
+      "Microsoft",
+      "Qualcomm",
+      "Samsung"
+    ]
+  },
+  {
+    "title": "Power of 2",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/power-of-2/0",
+    "difficulty": "Basic",
+    "problemTag": ["Bit Magic", "Data Structures"],
+    "companyTag": ["Adobe"]
+  },
+  {
+    "title": "Find position of set bit",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/find-position-of-set-bit3706/1",
+    "difficulty": "Basic",
+    "problemTag": ["Bit Magic", "Data Structures"],
+    "companyTag": ["Microsoft"]
+  },
+  {
+    "title": "Bit Difference",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/bit-difference/0",
+    "difficulty": "Basic",
+    "problemTag": ["Bit Magic", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Count total set bits",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/count-total-set-bits/0",
+    "difficulty": "Medium",
+    "problemTag": ["Bit Magic", "Data Structures"],
+    "companyTag": []
+  },
+  {
+    "title": "Copy Set Bits in Range",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/copy-set-bits-in-range0623/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Easy",
+    "problemTag": ["Bit Magic", "Data Structures"],
+    "companyTag": ["Adobe", "D-E-Shaw"]
+  },
+  {
+    "title": "Division without using multiplication, division and mod operator",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/division-without-using-multiplication-division-and-mod-operator/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article",
+    "difficulty": "Medium",
+    "problemTag": ["Bit Magic", "Data Structures"],
+    "companyTag": ["Microsoft"]
+  },
+  {
+    "title": "Power Set",
+    "problemlink": "https://practice.geeksforgeeks.org/problems/power-set4302/1",
+    "difficulty": "Easy",
+    "problemTag": [
+      "Bit Magic",
+      "Mathematical",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "companyTag": ["Snapdeal"]
+  },
+  {
+    "title": "Range Sum Query - Immutable",
+    "problemlink": "https://leetcode.com/problems/range-sum-query-immutable/",
+    "difficulty": "Easy",
+    "problemTag": ["Array", "Design", "Prefix Sum"]
+  },
+  {
+    "title": "Range Minimum Query",
+    "problemlink": "https://cp-algorithms.com/sequences/rmq.html",
+    "difficulty": "Medium",
+    "problemTag": [""]
+  },
+  {
+    "title": "Range Sum Query - Mutable",
+    "problemlink": "https://leetcode.com/problems/range-sum-query-mutable/",
+    "difficulty": "Medium",
+    "problemTag": ["Array", "Design", "Binary Indexed Tree", "Segment Tree"]
+  },
+  {
+    "title": "Create Sorted Array through Instructions",
+    "problemlink": "https://leetcode.com/problems/create-sorted-array-through-instructions/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Array",
+      "Binary Search",
+      "Divide and Conquer",
+      "Binary Indexed Tree",
+      "Segment Tree",
+      "Merge Sort",
+      "Ordered Set"
+    ]
+  },
+  {
+    "title": "Count of Range Sum",
+    "problemlink": "https://leetcode.com/problems/count-of-range-sum/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Array",
+      "Binary Search",
+      "Divide and Conquer",
+      "Binary Indexed Tree",
+      "Segment Tree",
+      "Merge Sort",
+      "Ordered Set"
+    ]
+  },
+  {
+    "title": "Count of Smaller Numbers After Self",
+    "problemlink": "https://leetcode.com/problems/count-of-smaller-numbers-after-self/",
+    "difficulty": "Hard",
+    "problemTag": [
+      "Array",
+      "Binary Search",
+      "Divide and Conquer",
+      "Binary Indexed Tree",
+      "Segment Tree",
+      "Merge Sort",
+      "Ordered Set"
+    ]
+  }
+]
