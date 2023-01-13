@@ -38,6 +38,16 @@ const CodingSheets = () => {
 	const [difficultyPercentage, setDifficultyPercentage] = useState([0, 0, 0]);
 	const [openVisualiser, setOpenVisualiser] = useState(true);
 	const [toggleEffect, setToggleEffect] = useState(true);
+	const [filteredData, setFilteredData] = useState(data);
+	const [showTags, setShowTags] = useState(false);
+
+	const [selectedLabel, setSelectedLabel] = useState('All');
+	console.log(selectedLabel);
+	console.log(data);
+
+	const handleLabelClick = (label) => {
+		setSelectedLabel(label);
+	}
 
 	const params = useParams();
 	const { sheetname } = params;
@@ -303,7 +313,7 @@ const CodingSheets = () => {
 		elementCounts['Hard'] = 0;
 		for (let i = 0; i < len; i++) {
 			let element = data[i].tags[0];
-			if(element != 'Easy' && element != 'Medium' && element != 'Hard'){
+			if (element != 'Easy' && element != 'Medium' && element != 'Hard') {
 				element = data[i].specialTag;
 			}
 			if (element == 'Basic') element = 'Easy';
@@ -329,7 +339,7 @@ const CodingSheets = () => {
 
 		for (let i = 0; i < len; i++) {
 			let element = solvedData[i].tags[0];
-			if(element != 'Easy' && element != 'Medium' && element != 'Hard'){
+			if (element != 'Easy' && element != 'Medium' && element != 'Hard') {
 				element = solvedData[i].specialTag;
 			}
 			console.log(element);
@@ -359,6 +369,17 @@ const CodingSheets = () => {
 
 		setDifficultyPercentage(difficultyPercentageArray);
 	}, [difficulty, userDifficulty])
+
+	useEffect(() => {
+		if (selectedLabel === 'All') {
+			setFilteredData(data);
+		} else {
+			setFilteredData(
+				data.filter(item => item.specialTag == selectedLabel || item.tags.includes(selectedLabel))
+			);
+		}
+	}, [selectedLabel, data]);
+
 
 	// console.log(userDifficulty);
 
@@ -591,13 +612,31 @@ const CodingSheets = () => {
 							></div>
 						</div>
 					</Progress>
+
+					<EffectiveFilter>
+						<div className="left">
+							<input type="checkbox" id="all" checked={selectedLabel === 'All'} onChange={() => handleLabelClick('All')} />
+							<label htmlFor="all">All</label>
+							<input type="checkbox" id="easy" checked={selectedLabel === 'Easy'} onChange={() => handleLabelClick('Easy')} />
+							<label htmlFor="easy">Easy</label>
+							<input type="checkbox" id="medium" checked={selectedLabel === 'Medium'} onChange={() => handleLabelClick('Medium')} />
+							<label htmlFor="medium">Medium</label>
+							<input type="checkbox" id="hard" checked={selectedLabel === 'Hard'} onChange={() => handleLabelClick('Hard')} />
+							<label htmlFor="hard">Hard</label>
+						</div>
+						<div className="right">
+							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+							{/* <div className="filter-item">Show Unsolved</div> */}
+						</div>
+					</EffectiveFilter>
+
 					<div className="table">
 						{dataLoading ? (
 							<>
 								<LinearProgress />
 							</>
 						) : (
-							data.map((item, index) => {
+							filteredData.map((item, index) => {
 								return (
 									<div
 										key={index}
@@ -629,11 +668,16 @@ const CodingSheets = () => {
 														<></>
 													)}
 													{item.tags.map((tagItem, tagIndex) => {
-														return (
-															<div className="tag" key={tagIndex}>
-																{tagItem}
-															</div>
-														)
+														if(showTags){
+															return (
+																<div className="tag" key={tagIndex}>
+																	{tagItem}
+																</div>
+															)
+														}
+														else {
+															return <></>
+														}
 													})}
 												</div>
 											</div>
@@ -1388,4 +1432,53 @@ const VisualiserConatiner = styled.div`
         font-size: 0.8rem;
         letter-spacing: 0.07rem;
     }
+`
+
+const EffectiveFilter = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 20px 0;
+
+	.left{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		label{
+			font-size: 0.75rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-right: 15px;
+			font-weight: 400;
+		}
+		
+		input{
+			cursor: pointer;
+			margin-right: 5px;
+		}
+
+		input[type="checkbox"]:checked + label {
+			color: #333;
+		}
+		/* Change the color of the checkboxes when they are not selected */
+		input[type="checkbox"] + label {
+			color: gray;
+		}
+	}
+
+	.right{
+		display: flex;
+		align-items: center;
+
+		.filter-item{
+			padding: 5px 10px;
+			font-size: 0.7rem;
+			border: 1px solid #d0d5db;
+			border-radius: 3px;
+			margin-right: 5px;
+			cursor: pointer;
+		}
+	}
 `
