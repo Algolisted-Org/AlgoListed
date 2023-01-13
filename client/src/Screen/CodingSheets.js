@@ -13,9 +13,10 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MobileNavbar from "../Components/MobileNavbar";
 import DoughnutChart from '../Components/DoughnutChart';
 import Tooltip from '@material-ui/core/Tooltip';
-import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 import UpdateIcon from '@material-ui/icons/Update';
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
 
 import {
 	CircularProgressbar,
@@ -219,6 +220,8 @@ const CodingSheets = () => {
 		'#FF877C', '#FF77A9', '#DF79EF', '#DF79EF', '#B085F5', '#8E99F3', '#7FD6FF', '#74E7FF', '#6FF9FF', '#63D8CB', '#98EE99', '#CFFF95', '#FFFF89'
 	];
 
+	// const colors = ["#de79ef", "#df6cf7", "#e061ff", "#e15754", "#e24d08", "#e3430c", "#e4390f", "#e53011", "#e6281a", "#e72122", "#e81b29", "#e91730", "#ea123c", "#eb0f4c", "#ec0c5e", "#ed0974", "#ee0695", "#ef03bb", "#f000e4", "#cfff95"];
+
 	const borderColors = [
 		'#fff'
 	];
@@ -273,8 +276,22 @@ const CodingSheets = () => {
 			sortedElementCounts[key] = elementCounts[key];
 		});
 
-		setSortedTopicTagsKeys(Object.keys(sortedElementCounts));
-		setSortedTopicTagsValues(Object.values(sortedElementCounts));
+		const filteredCounts = {};
+		let otherValue = 0;
+		for (let key in sortedElementCounts) {
+		if (sortedElementCounts[key] >= data.length * 0.015) {
+			filteredCounts[key] = sortedElementCounts[key];
+		} else {
+			otherValue += sortedElementCounts[key];
+		}
+		}
+		filteredCounts["others"] = otherValue;
+
+		setSortedTopicTagsKeys(Object.keys(filteredCounts));
+		setSortedTopicTagsValues(Object.values(filteredCounts));
+
+		// setSortedTopicTagsKeys(Object.keys(sortedElementCounts));
+		// setSortedTopicTagsValues(Object.values(sortedElementCounts));
 	}, [data])
 
 

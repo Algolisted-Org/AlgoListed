@@ -8,17 +8,17 @@ const OILeftMenu = ({marked}) => {
   return (
     <Container>
       {/* <div className="logo">Atanu Nayak</div> */}
-      <a href='/' className="logo">AlgoListed</a>
+      <div className="logo">Beta Version</div>
       <div className="mid-links">
-        <a href='/blogs/all' className="link">Home Page</a>
+        <a href='/blogs/all' className="link">Explore Features</a>
         <div className="flag">
           <div className="line"></div>
           <div className="text">Organisation Info</div>
           <div className="line"></div>
         </div>
-        {
+        {/* {
           marked == "core-team" ? (<a href='/organisation-information/core-team' className="link current-link">Core Team</a>) : (<a href='/organisation-information/core-team' className="link">Core Team</a>)
-        }
+        } */}
         {
           marked == "all-contributors" ? (<a href='/organisation-information/all-contributors' className="link current-link">Contributors</a>) : (<a href='/organisation-information/all-contributors' className="link">Contributors</a>)
         }
@@ -36,8 +36,8 @@ const OILeftMenu = ({marked}) => {
         }
       </div>
       <div className="bottom-btns">
-        <MenuIcon className='icon'/>
-        <div className="text">More</div>
+        {/* <MenuIcon className='icon'/> */}
+        {/* <div className="text">More</div> */}
       </div>
     </Container>
   )

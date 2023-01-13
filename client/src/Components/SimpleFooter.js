@@ -5,12 +5,12 @@ const SimpleFooter = () => {
   return (
     <Container>
         <div className="links">
-            <a href="" className="link">Core Team</a>
-            <a href="" className="link">Contributors</a>
-            <a href="" className="link">About Us</a>
-            <a href="" className="link">Verify Contributors</a>
-            <a href="" className="link">Privacy Policies</a>
-            <a href="" className="link">Disclaimer</a>
+            {/* <a href="" className="link">Core Team</a> */}
+            <a href="/organisation-information/all-contributors" className="link">Contributors</a>
+            <a href="/organisation-information/about-us" className="link">About Us</a>
+            <a href="/organisation-information/verify-contributor" className="link">Verify Contributors</a>
+            <a href="/organisation-information/privacy-policies" className="link">Privacy Policies</a>
+            <a href="/organisation-information/disclaimer" className="link">Disclaimer</a>
         </div>
         {/* <div className="company-info">
             <a className="text">English (IN)</a>

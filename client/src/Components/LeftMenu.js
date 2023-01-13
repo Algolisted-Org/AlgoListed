@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const LeftMenu = ({ marked }) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
@@ -45,8 +46,14 @@ const LeftMenu = ({ marked }) => {
 
   return (
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
-      {/* <div className="logo">Atanu Nayak</div> */}
-      <a href='/' className="logo">AlgoListed</a>
+      {/* <a href='/' className="logo">AlgoListed</a> */}
+      
+      <Tooltip title="Website under Development">
+        <div className="logo">
+          Beta Version
+          {/* <div className="small-top">V2.17</div> */}
+        </div>
+      </Tooltip>
       <div className="mid-links">
         {
           menuItems.map((item, index) => {
@@ -67,7 +74,7 @@ const LeftMenu = ({ marked }) => {
       {
         showMoreInfo ? (
           <div className="more-model">
-            <div><a className="more-link" href='/organisation-information/core-team'>Core Team</a></div>
+            {/* <div><a className="more-link" href='/organisation-information/core-team'>Core Team</a></div> */}
             <div><a className="more-link" href='/organisation-information/all-contributors'>Contributors</a></div>
             <div><a className="more-link" href='/organisation-information/about-us'>About Us</a></div>
             <div><a className="more-link" href='/organisation-information/verify-contributor'>Verify Contributor</a></div>
@@ -93,7 +100,7 @@ const Container = styled.div`
   height: 100vh;
   min-height: 600px;
   background-color: white;
-  z-index: 3;
+  z-index: 2;
   position: fixed;
   /* overflow-y: scroll; */
   top: 0;
@@ -103,8 +110,10 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  user-select: none;
 
   .logo{
+    user-select: none;
     width: 100%;
     font-size: 0.8rem;
     font-weight: 300;
@@ -120,11 +129,17 @@ const Container = styled.div`
     /* border: 1px solid #f7d59d; */
     border-radius: 100px;
     cursor: pointer;
+    position: relative;;
 
-    &:hover{
-      /* background-color: #e0f7e1; */
-      transition-duration: 250ms;
+    .small-top{
+      position: absolute;
+      font-size: 0.5rem;
+      font-weight: 200; 
+      top: 3.5px;
+      right: 100px;
+      color: white;
     }
+
   }
 
   .mid-links{
