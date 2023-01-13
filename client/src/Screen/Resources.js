@@ -27,7 +27,7 @@ const Resources = () => {
     axios.get("https://algolisted.cyclic.app/resources/all")
       .then((res) => {
         setAllResources(res.data);
-        // console.log(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -117,7 +117,7 @@ const Resources = () => {
         </div>
         <SimpleFooter />
       </MobContainer>
-
+ 
       <Container>
         <CCHeader />
         <LeftMenu marked={"resources"} />
@@ -350,6 +350,7 @@ const MobContainer = styled.div`
               cursor: pointer;
               text-decoration: none;
               width: 100%;
+              font-family: 'Poppins', sans-serif;
               
               &:hover{
                 color: cornflowerblue;
@@ -360,8 +361,9 @@ const MobContainer = styled.div`
 
           .short-desc{
             font-size: 0.8rem;
-              font-weight: 300;
-              color: #6b7280;
+            font-weight: 300;
+            color: #6b7280;
+            font-family: 'Poppins', sans-serif;
           }
 
           .tags{
@@ -539,6 +541,8 @@ const Container = styled.div`
               cursor: pointer;
               text-decoration: none;
               width: 100%;
+              font-family: 'Poppins', sans-serif;
+              font-family: "Poppins" !important;
               
               &:hover{
                 color: cornflowerblue;
@@ -551,6 +555,7 @@ const Container = styled.div`
             font-size: 0.75rem;
             font-weight: 200;
             letter-spacing: 0.06rem;
+            font-family: 'Poppins', sans-serif;
           }
 
           .tags{

@@ -9,9 +9,12 @@
   color: #000;
 }
 
+input, textarea, select { font-family: 'Poppins', sans-serif; }
+
 body{
   background-color: #fefdff;
   overflow-x: hidden; /* Hide horizontal scrollbar */
+  font-family: 'Poppins', sans-serif;
 }
 
 .full-btn{

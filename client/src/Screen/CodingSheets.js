@@ -159,7 +159,7 @@ const CodingSheets = () => {
 			.catch((err) => console.log(err));
 	}, [sheetname]);
 
-	console.log(data);
+	// console.log(data);
 
 	const toggleCompleted = (index) => {
 		// update the "completed" field for the coding sheet at the specified index
@@ -259,7 +259,7 @@ const CodingSheets = () => {
 		// ProblemsTags = ProblemsTags.filter(string => string !== 'Amazon');
 
 		const filteredTags = ProblemsTags.filter(tag => allowedProblemTags.includes(tag));
-        ProblemsTags = filteredTags;
+		ProblemsTags = filteredTags;
 
 		const allTagsLen = ProblemsTags.length;
 		const elementCounts = {};
@@ -279,11 +279,11 @@ const CodingSheets = () => {
 		const filteredCounts = {};
 		let otherValue = 0;
 		for (let key in sortedElementCounts) {
-		if (sortedElementCounts[key] >= data.length * 0.015) {
-			filteredCounts[key] = sortedElementCounts[key];
-		} else {
-			otherValue += sortedElementCounts[key];
-		}
+			if (sortedElementCounts[key] >= data.length * 0.015) {
+				filteredCounts[key] = sortedElementCounts[key];
+			} else {
+				otherValue += sortedElementCounts[key];
+			}
 		}
 		filteredCounts["others"] = otherValue;
 
@@ -303,6 +303,9 @@ const CodingSheets = () => {
 		elementCounts['Hard'] = 0;
 		for (let i = 0; i < len; i++) {
 			let element = data[i].tags[0];
+			if(element != 'Easy' && element != 'Medium' && element != 'Hard'){
+				element = data[i].specialTag;
+			}
 			if (element == 'Basic') element = 'Easy';
 			if (elementCounts[element]) {
 				elementCounts[element]++;
@@ -318,7 +321,7 @@ const CodingSheets = () => {
 
 	useEffect(() => {
 		let len = solvedData.length;
-		// console.log(solvedData);
+		console.log(solvedData);
 		const elementCounts = {};
 		elementCounts['Easy'] = 0;
 		elementCounts['Medium'] = 0;
@@ -326,7 +329,10 @@ const CodingSheets = () => {
 
 		for (let i = 0; i < len; i++) {
 			let element = solvedData[i].tags[0];
-			// console.log(element);
+			if(element != 'Easy' && element != 'Medium' && element != 'Hard'){
+				element = solvedData[i].specialTag;
+			}
+			console.log(element);
 			if (element == 'Basic') element = 'Easy';
 			if (elementCounts[element]) {
 				elementCounts[element]++;

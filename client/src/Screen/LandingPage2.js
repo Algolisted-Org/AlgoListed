@@ -1065,7 +1065,9 @@ const Container = styled.div`
     .hold-contributors{
       display: flex;
       flex-wrap: wrap;
-      margin-top: 10px;
+      width: 700px;
+      justify-content: center;
+      margin-top: 30px;
 
       .contributor{
         background-color: pink;

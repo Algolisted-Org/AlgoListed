@@ -177,7 +177,7 @@ const AddContentCoreOnly = () => {
                     <div className="feed-data-container">
                         <div className="row">
                             <div className="left">Resource Title</div>
-                            <input type="text" className="right" placeholder='Max characters 40' value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <input style={{ fontFamily: 'Arial' }} type="text" className="right" placeholder='Max characters 40' value={title} onChange={(e) => setTitle(e.target.value)} />
                         </div>
                         <div className="row">
                             <div className="left">Resource Description</div>
@@ -326,6 +326,8 @@ const NewContainer = styled.div`
                 
                 input{
                     letter-spacing: 0.07rem;
+                    font-family: "Poppins" !important;
+                    /* font-family: 'Poppins', sans-serif; */
                 }
 
                 .drop-down{
