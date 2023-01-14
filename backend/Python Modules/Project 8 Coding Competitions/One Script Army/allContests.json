@@ -1,0 +1,140 @@
+[
+  {
+    "contest_name": "Weekly Contest 328",
+    "link": "https://leetcode.com/contest/weekly-contest-328",
+    "time": "Sunday 8:00 AM GMT+5:30",
+    "duration": 90
+  },
+  {
+    "contest_name": "Biweekly Contest 96",
+    "link": "https://leetcode.com/contest/biweekly-contest-96",
+    "time": "Saturday 8:00 PM GMT+5:30",
+    "duration": 90
+  },
+  {
+    "contest_name": "Codeforces Round #844 (Div. 1 + Div. 2, based on VK Cup 2022 - Elimination Round)",
+    "link": "https://codeforces.com/contests",
+    "time": "Jan/15/2023 17:35",
+    "duration": 180
+  },
+  {
+    "contest_name": "Codeforces Round (Div. 2)",
+    "link": "https://codeforces.com/contests",
+    "time": "Jan/21/2023 20:05",
+    "duration": 120
+  },
+  {
+    "contest_name": "Codeforces Round (Div. 2)",
+    "link": "https://codeforces.com/contests",
+    "time": "Jan/25/2023 20:05",
+    "duration": 120
+  },
+  {
+    "contest_name": "TypeDB Forces 2023 (Div. 1 + Div. 2, Rated, Prizes!)",
+    "link": "https://codeforces.com/contests",
+    "time": "Jan/29/2023 20:05",
+    "duration": 180
+  },
+  {
+    "contest_name": "Codeforces Round (Div. 2)",
+    "link": "https://codeforces.com/contests",
+    "time": "Feb/01/2023 20:05",
+    "duration": 120
+  },
+  {
+    "contest_name": "Codeforces Round (Div. 1, based on VK Cup 2022 - Final Round)",
+    "link": "https://codeforces.com/contests",
+    "time": "Feb/05/2023 17:35",
+    "duration": 180
+  },
+  {
+    "contest_name": "Codeforces Round (Div. 2, based on VK Cup 2022 - Final Round)",
+    "link": "https://codeforces.com/contests",
+    "time": "Feb/05/2023 17:35",
+    "duration": 180
+  },
+  {
+    "contest_name": "Codeforces Round (Div. 2)",
+    "link": "https://codeforces.com/contests",
+    "time": "Feb/09/2023 20:05",
+    "duration": 120
+  },
+  {
+    "contest_name": "SWERC 2022-2023 - Online Mirror (Unrated, ICPC Rules, Teams Preferred)",
+    "link": "https://codeforces.com/contests",
+    "time": "Feb/19/2023 16:35",
+    "duration": 300
+  },
+  {
+    "contest_name": "Codeforces Round (Div. 2)",
+    "link": "https://codeforces.com/contests",
+    "time": "Feb/26/2023 00:05",
+    "duration": 120
+  },
+  {
+    "contest_name": "January Long 2022 (Rated for Divs 3 & 4)",
+    "link": "https://www.codechef.com/JAN231",
+    "time": "14 Jan 2023 Sat 20:00",
+    "duration": 2580
+  },
+  {
+    "contest_name": "Starters 74 (Rated till 6 Stars)",
+    "link": "https://www.codechef.com/START74",
+    "time": "18 Jan 2023 Wed 20:00",
+    "duration": 180
+  },
+  {
+    "contest_name": "Starters 75",
+    "link": "https://www.codechef.com/START75",
+    "time": "25 Jan 2023 Wed 20:00",
+    "duration": 180
+  },
+  {
+    "contest_name": "AtCoder Regular Contest 153",
+    "link": "https://atcoder.jp/contests/arc153",
+    "time": "2023-01-14(Sat) 17:30",
+    "duration": 120
+  },
+  {
+    "contest_name": "AtCoder Beginner Contest 285",
+    "link": "https://atcoder.jp/contests/abc285",
+    "time": "2023-01-15(Sun) 17:30",
+    "duration": 100
+  },
+  {
+    "contest_name": "UL Systems Programming Contest 2023(AtCoder Beginner Contest 286)",
+    "link": "https://atcoder.jp/contests/abc286",
+    "time": "2023-01-21(Sat) 17:30",
+    "duration": 100
+  },
+  {
+    "contest_name": "AtCoder Regular Contest 154",
+    "link": "https://atcoder.jp/contests/arc154",
+    "time": "2023-01-22(Sun) 17:30",
+    "duration": 120
+  },
+  {
+    "contest_name": "AtCoder Heuristic Contest 017",
+    "link": "https://atcoder.jp/contests/ahc017",
+    "time": "2023-01-28(Sat) 08:30",
+    "duration": 480
+  },
+  {
+    "contest_name": "UNIQUE VISION Programming Contest 2023 New Year (AtCoder Beginner Contest 287)",
+    "link": "https://atcoder.jp/contests/abc287",
+    "time": "2023-01-28(Sat) 17:30",
+    "duration": 100
+  },
+  {
+    "contest_name": "AtCoder Regular Contest 155",
+    "link": "https://atcoder.jp/contests/arc155",
+    "time": "2023-01-29(Sun) 17:30",
+    "duration": 120
+  },
+  {
+    "contest_name": "AtCoder Grand Contest 061",
+    "link": "https://atcoder.jp/contests/agc061",
+    "time": "2023-02-12(Sun) 17:30",
+    "duration": 180
+  }
+]
