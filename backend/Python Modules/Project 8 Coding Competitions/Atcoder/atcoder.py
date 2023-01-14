@@ -10,8 +10,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
-from time import sleep
-import os
+from datetime import timedelta
 
 list_of_contests = []
 
@@ -80,10 +79,23 @@ def getdataAtcoder(siteUrl):
                             else:
                                 contest_name = None
 
+                            # contest duration
+                            duration_elements = ok7.find_all(
+                                "td", class_="text-center")
+                            if duration_elements:
+                                # Get the second td element
+                                duration = duration_elements[1].text
+                                duration = timedelta(hours=int(duration.split(
+                                    ':')[0]), minutes=int(duration.split(':')[1]))
+                                # get the minutes
+                                minutes = duration.seconds // 60
+                            else:
+                                duration = None
                             temp = {
                                 "contest_name": contest_name,
                                 "link": "https://atcoder.jp"+contest_link,
-                                "time": time1
+                                "time": time1,
+                                "duration": minutes
                             }
 
                             list_of_contests.append(temp)
@@ -94,5 +106,5 @@ atCoderLink = "https://atcoder.jp/contests/"
 getdataAtcoder(atCoderLink)
 
 
-with open('Contests.json', 'w') as f:
+with open('Atcoder.json', 'w') as f:
     json.dump(list_of_contests, f)
