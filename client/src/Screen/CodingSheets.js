@@ -39,7 +39,7 @@ const CodingSheets = () => {
 	const [openVisualiser, setOpenVisualiser] = useState(true);
 	const [toggleEffect, setToggleEffect] = useState(true);
 	const [filteredData, setFilteredData] = useState(data);
-	const [showTags, setShowTags] = useState(false);
+	const [showTags, setShowTags] = useState(true);
 
 	const [selectedLabel, setSelectedLabel] = useState('All');
 	console.log(selectedLabel);
@@ -171,16 +171,22 @@ const CodingSheets = () => {
 
 	// console.log(data);
 
-	const toggleCompleted = (index) => {
+	const toggleCompleted = (id) => {
 		// update the "completed" field for the coding sheet at the specified index
 		const updatedData = [...data];
+		let index = 0, len = data.length;
+		
+		for(; index < len; index++) {
+			if(updatedData[index]._id == id) break;
+		}
+
 		updatedData[index].completed = !updatedData[index].completed;
-		setData(updatedData);
+
 		setCompletedCount(
 			(prevCount) => prevCount + (updatedData[index].completed ? 1 : -1)
 		);
+		
 		var solvedQuestions = [];
-		let len = updatedData.length;
 		for (let i = 0; i < len; i++) {
 			if (updatedData[i].completed == true) solvedQuestions.push(updatedData[i]);
 		}
@@ -196,9 +202,9 @@ const CodingSheets = () => {
 
 	const toggleMarked = (index) => {
 		// update the "completed" field for the coding sheet at the specified index
-		const updatedData = [...data];
+		const updatedData = [...filteredData];
 		updatedData[index].marked = !updatedData[index].marked;
-		setData(updatedData);
+		setFilteredData(updatedData);
 
 		localStorage.setItem(
 			`markedSheetQuestion-${updatedData[index]._id}`,
@@ -455,7 +461,7 @@ const CodingSheets = () => {
 										</div>
 										<div className="done-btn">
 											<CheckCircleOutlineIcon
-												onClick={() => toggleCompleted(index)}
+												onClick={() => toggleCompleted(item._id)}
 											/>
 										</div>
 									</div>
@@ -626,7 +632,7 @@ const CodingSheets = () => {
 						</div>
 						<div className="right">
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
-							{/* <div className="filter-item">Show Unsolved</div> */}
+							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
 					</EffectiveFilter>
 
@@ -686,11 +692,11 @@ const CodingSheets = () => {
 											<Tooltip title={item.completed ? "Mark as Uncompleted" : "Mark as Completed"}>
 												<div className="done-btn">
 													<CheckCircleOutlineIcon
-														onClick={() => toggleCompleted(index)}
+														onClick={() => toggleCompleted(item._id)}
 													/>
 												</div>
 											</Tooltip>
-											<Tooltip title={item.marked ? "UnMark" : "Mark for Later"}>
+											<Tooltip title={item.marked ? "Unmark" : "Mark for Later"}>
 												<div className="review-btn">
 													<UpdateIcon
 														onClick={() => toggleMarked(index)}
