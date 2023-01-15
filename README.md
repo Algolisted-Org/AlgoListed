@@ -53,7 +53,11 @@ Currently Working on the redux part on the frontend.
 
 <img width="1440" alt="Screenshot 2022-12-15 at 11 20 21 PM" src="https://user-images.githubusercontent.com/93304796/207932113-29d7fd9b-bc63-4009-9988-f0a5954bb095.png">
 
-<img width="1440" alt="Screenshot 2022-12-15 at 11 21 07 PM" src="https://user-images.githubusercontent.com/93304796/207932280-cc32c74a-a758-4d2a-a115-4248d1dd1aa5.png">
+<img width="1430" alt="Screenshot 2023-01-15 at 10 46 05 AM" src="https://user-images.githubusercontent.com/93304796/212524069-cafc7d82-8184-4e9b-a575-b8ed0a618e58.png">
+
+<img width="1430" alt="Screenshot 2023-01-15 at 10 46 37 AM" src="https://user-images.githubusercontent.com/93304796/212524091-d737a6ee-32d0-417d-be8f-1635abed6958.png">
+
+<img width="1430" alt="Screenshot 2023-01-15 at 10 47 58 AM" src="https://user-images.githubusercontent.com/93304796/212524134-539c1420-fcaa-40f8-ae78-d1757bfb1641.png">
 
 
 <br/><br/>
