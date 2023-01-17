@@ -1,7 +1,11 @@
 import React from 'react'
+import {useEffect} from 'react'
 import styled from 'styled-components'
 
 const PrivacyPolicies = () => {
+  useEffect(() => {
+    document.title = "Privacy Policies | Organisation Information - Algolisted";
+}, []);
   return (
     <Container>
       {/* The below classes are being used from the parent */}

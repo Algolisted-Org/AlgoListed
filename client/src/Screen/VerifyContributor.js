@@ -1,8 +1,13 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import VerifyUser from '../Components/VerifyUser'
 
 const VerifyContributor = () => {
+    useEffect(() => {
+        document.title = "Verify Contributor | Organisation Information - Algolisted";
+    }, []);
+
     return (
         <Container>
             {/* The below classes are being used from the parent */}

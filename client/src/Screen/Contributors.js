@@ -1,9 +1,13 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 const Contributors = () => {
     const [temp, setTemp] = useState([1, 2, 2,3,3,4,4, 3,3,2,2,1]);
+    
+    useEffect(() => {
+      document.title = "Contributors | Organisation Information - Algolisted";
+    }, []);
 
     return (
         <Container>

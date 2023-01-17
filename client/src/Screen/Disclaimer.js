@@ -1,7 +1,11 @@
 import React from 'react'
+import {useEffect} from 'react'
 import styled from 'styled-components'
 
 const Disclaimer = () => {
+  useEffect(() => {
+    document.title = "Disclaimer | Organisation Information - Algolisted";
+}, []);
     return (
         <Container>
             {/* The below classes are being used from the parent */}

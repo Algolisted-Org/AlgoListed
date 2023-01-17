@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
 import groupPhoto from '../Images/aboutUsImg.jpeg'
 
 const AboutUs = () => {
+    useEffect(() => {
+		document.title = "About Us | Organisation Information - Algolisted";
+	}, []);
     return (
         <Container>
             {/* The below classes are being used from the parent */}

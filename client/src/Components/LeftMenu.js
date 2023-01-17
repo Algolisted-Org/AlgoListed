@@ -48,7 +48,7 @@ const LeftMenu = ({ marked }) => {
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
       {/* <a href='/' className="logo">AlgoListed</a> */}
       
-      <Tooltip title="Website under Development">
+      <Tooltip title="Version - v0.12">
         <div className="logo">
           Beta Version
           {/* <div className="small-top">V2.17</div> */}
@@ -139,7 +139,6 @@ const Container = styled.div`
       right: 100px;
       color: white;
     }
-
   }
 
   .mid-links{

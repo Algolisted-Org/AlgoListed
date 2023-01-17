@@ -36,6 +36,8 @@ const OILeftMenu = ({marked}) => {
         }
       </div>
       <div className="bottom-btns">
+        Open Source Project <br />
+        Version - v0.12 <br />
         {/* <MenuIcon className='icon'/> */}
         {/* <div className="text">More</div> */}
       </div>
@@ -140,8 +142,12 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     height: 45px;
-    
-    cursor: pointer;
+    text-align: center;
+    font-weight: 400;
+    color: #494545;
+    /* cursor: pointer; */
+
+    font-size: 0.6rem;
 
     .icon{
 
