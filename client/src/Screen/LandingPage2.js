@@ -21,7 +21,7 @@ const LandingPage2 = () => {
     axios.get("https://api.github.com/repos/Nayaker/Algorithmist/contributors")
       .then((res) => {
         setContributorsList(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -42,10 +42,15 @@ const LandingPage2 = () => {
         "desc" : "There is a wealth of disorganized notes and other resources available on websites like LinkedIn and Leetcode, but they can be difficult to find because they are not listed in a organized manner. To make your life easier, we have compiled all of these resources by topic in a single location.",
         "link" : "/resources"
     },
+    // {
+    //     "name" : "Selected Profiles",
+    //     "desc" : "This can be helpful for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular company. This will also be machine learning model based that would enable you to get the hiring infographics for a perticular company.",
+    //     "link" : "/selected-profiles"
+    // },
     {
-        "name" : "Selected Profiles",
-        "desc" : "This can be helpful for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular company. This will also be machine learning model based that would enable you to get the hiring infographics for a perticular company.",
-        "link" : "/selected-profiles"
+      "name" : "All Internship & Job Opportunities",
+      "desc" : "This page is very similar to the coding competitions list page, here in this page we will provide information about all available hiring and internship opportunities, including the timing of these opportunities. We are currently in the planning stages and will be launching this page soon.",
+      "link" : "/opportunities"
     },
     {
         "name" : "Beginner Friendly Blogs",
@@ -225,7 +230,8 @@ const LandingPage2 = () => {
                 <a href='/resources' className="item">Resources</a>
                 <a href='/coding-sheets/striver-sde-sheet' className="item">Coding Sheets</a>
                 <a href='/coding-competitions' className="item">Competitions</a>
-                <a href='/selected-profiles' className="item">Selected Resumes</a>
+                {/* <a href='/selected-profiles' className="item">Selected Resumes</a> */}
+                <a href='/opportunities' className="item">Opportunities</a>
             </div>
         </Navbar>
         <div className="hero-page">
@@ -255,7 +261,7 @@ const LandingPage2 = () => {
             <div className="right">
               <Fade>
                 <div className="img-container">
-                  <img src="https://assets.website-files.com/624ac40503a5277051af4162/6346dab74a46df9125bf12bf_Speed%20up%20your%20annotation%20work%20with%20the%20help%20of%20AI.gif" alt="" />
+                  <img src="https://assets.website-files.com/624ac40503a5277051af4162/6346dab74a46df9125bf12bf_Speed%20up%20your%20annotation%20work%20with%20the%20help%20of%20AI.gif" alt="" draggable="false"/>
                 </div>
               </Fade>
             </div>
@@ -840,11 +846,12 @@ const Container = styled.div`
             display: flex;
             justify-content: center;
             margin-left: 30px;
-            
+            user-select: none;
             
             img{
               height: 100%;
               width: auto;
+              user-select: none;
             }
           }
         }

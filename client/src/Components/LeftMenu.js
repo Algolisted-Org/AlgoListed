@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
 import Tooltip from '@material-ui/core/Tooltip';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const LeftMenu = ({ marked }) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
@@ -27,11 +28,16 @@ const LeftMenu = ({ marked }) => {
       showAt: "all-coding-competitions",
       link: "/coding-competitions",
     },
-    {
-      value: "Selected Profiles",
-      showAt: "selected-profiles",
-      link: "/selected-profiles",
-    },
+    // {
+    //   value: "Selected Profiles",
+    //   showAt: "selected-profiles",
+    //   link: "/selected-profiles",
+    // },
+    // {
+    //   value: "Community Help",
+    //   showAt: "community",
+    //   link: "/community",
+    // },
     {
       value: "Opportunities",
       showAt: "opportunities",
@@ -57,7 +63,9 @@ const LeftMenu = ({ marked }) => {
       <div className="mid-links">
         {
           menuItems.map((item, index) => {
-            return <a key={index} href={`${item.link}`} className={item.showAt == marked ? "link current-link" : "link"}>{item.value}</a>
+            return <a key={index} href={`${item.link}`} className={item.showAt == marked ? "link current-link" : "link"}>{item.value}
+              {/* <ChevronRightIcon/> */}
+            </a>
           })
         }
         {/* <a href='https://jasonfenggit.github.io/Visualizer/' target={"_blank"} className="link">Algorithm Visualizers</a> */}
@@ -179,6 +187,10 @@ const Container = styled.div`
       color: inherit;
       text-decoration: none;
       
+      svg{
+        display: none;
+      }
+
       &:hover{
         background-color: #e5e5e5;
         transition-duration: 250ms;
@@ -187,6 +199,13 @@ const Container = styled.div`
     
     .current-link{
       background-color: #e5e5e5;
+
+      svg{
+        display: block;
+        font-size: 1rem;
+        position: absolute;
+        right: -25px;
+      }
     }
   }
 
@@ -195,7 +214,7 @@ const Container = styled.div`
     position: absolute;
     left: 10px;
     bottom: 50px;
-    border-radius: 5px;
+    border-radius: 15px;
     border: 1px solid #e5e5e5;
     box-shadow: rgb(28 28 28 / 26%) 0px 2px 20px;
     background-color: white;
@@ -212,7 +231,7 @@ const Container = styled.div`
       border-bottom: 1px solid #e5e5e5;
 
       &:hover{
-        background-color: #eeeeee;
+        background-color: #eeeeee6c;
         transition-duration: 250ms;
         color: black;
       }

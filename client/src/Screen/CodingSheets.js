@@ -42,8 +42,8 @@ const CodingSheets = () => {
 	const [showTags, setShowTags] = useState(true);
 
 	const [selectedLabel, setSelectedLabel] = useState('All');
-	console.log(selectedLabel);
-	console.log(data);
+	// console.log(selectedLabel);
+	// console.log(data);
 
 	const handleLabelClick = (label) => {
 		setSelectedLabel(label);
@@ -337,7 +337,7 @@ const CodingSheets = () => {
 
 	useEffect(() => {
 		let len = solvedData.length;
-		console.log(solvedData);
+		// console.log(solvedData);
 		const elementCounts = {};
 		elementCounts['Easy'] = 0;
 		elementCounts['Medium'] = 0;
@@ -348,7 +348,7 @@ const CodingSheets = () => {
 			if (element != 'Easy' && element != 'Medium' && element != 'Hard') {
 				element = solvedData[i].specialTag;
 			}
-			console.log(element);
+			// console.log(element);
 			if (element == 'Basic') element = 'Easy';
 			if (elementCounts[element]) {
 				elementCounts[element]++;

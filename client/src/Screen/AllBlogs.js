@@ -88,7 +88,7 @@ return (
         <CCHeader />
         <LeftMenu marked={"all-blogs"} />
         <div className="cc-middle-content">
-          <h1 className='main-heading'>Simplified Coding Blogs <div className="head-tag">Verified Blogs</div> </h1>
+          <h1 className='main-heading'>Simplified Coding Blogs <div className="head-tag">Open Source</div> </h1>
           <p className="heading-supporter">
           Algolisted creates helpful lists of content for revision and understanding various topics, including practical information and resource links. They also offer curated lists of resources like open source projects and programming questions for focused learning.
           </p>

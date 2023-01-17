@@ -135,8 +135,6 @@ const CCHeader = () => {
           </div>
         ) : (<></>)
       }
-      
-
     </Container>
   )
 }
@@ -160,12 +158,18 @@ const Container = styled.div`
     z-index: 2;
     background-color: white;
     align-items: center;
+    border-bottom: 1px solid rgb(233, 229, 229);
+    background-color: #ffffffd4;
+    box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 5%);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     
     .search-box{
       width: 50%;
       border-radius: 100px;
       border: 1px solid rgba(230, 230, 230, 1);
       height: 80%;
+      background-color: #fff;
 
       display: flex;
       align-items: center;
@@ -224,6 +228,7 @@ const Container = styled.div`
         border: 1px solid #dfe3e7;
         margin-left: 10px;
         cursor: pointer;
+        background-color: #fff;
 
         svg{
           font-size: 20px;
@@ -248,7 +253,7 @@ const Container = styled.div`
         align-items: center;
         padding: 10px;
         user-select: none;
-        /* background-color: #e0ecc7; */
+        background-color: #fff;
         text-decoration: none;
 
         svg{

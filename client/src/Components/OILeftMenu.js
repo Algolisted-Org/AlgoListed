@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import Tooltip from '@material-ui/core/Tooltip';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const OILeftMenu = ({marked}) => {
   console.log(marked);
@@ -8,9 +11,14 @@ const OILeftMenu = ({marked}) => {
   return (
     <Container>
       {/* <div className="logo">Atanu Nayak</div> */}
-      <div className="logo">Beta Version</div>
+      <Tooltip title="Version - v0.12">
+        <div className="logo">Beta Version</div>
+      </Tooltip>
       <div className="mid-links">
-        <a href='/blogs/all' className="link">Explore Features</a>
+        <a href='/blogs/all' className="link">
+          <ArrowBackIosIcon/>
+          Explore Features
+        </a>
         <div className="flag">
           <div className="line"></div>
           <div className="text">Organisation Info</div>
@@ -124,6 +132,11 @@ const Container = styled.div`
       margin-bottom: 7.5px;
       text-decoration: none;
       color: inherit;
+
+      svg{
+        font-size: 0.8rem;
+        margin-right: 10px;
+      }
       
       &:hover{
         background-color: #e5e5e5;
