@@ -1,3 +1,5 @@
+//add all the export statements in this file for the import statements(in App.js ) from Screen => App.js
+
 export { default as BlogPage } from './BlogPage'
 export { default as AboutUs } from './AboutUs';
 export { default as Contact  }from './Contact';
