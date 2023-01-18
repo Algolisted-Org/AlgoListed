@@ -13,6 +13,10 @@ import MobileNavbar from '../Components/MobileNavbar'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Fade from 'react-reveal/Fade';
 import {Link} from 'react-scroll';
+import { Link as RouterLink }from 'react-router-dom';
+
+
+
 
 const LandingPage2 = () => {
   const [contributorsList, setContributorsList] = useState(null);
@@ -354,11 +358,11 @@ const LandingPage2 = () => {
                   Algolisted
                 </div>
                 <div className="points">
-                  <a href="/" className="link">About us</a>
-                  <a href="/" className="link">Team</a>
-                  <a href="/" className="link">Our Mission</a>
-                  <a href="/" className="link">Contact</a>
-                  <a href="/" className="link">Future Vision</a>
+                  <RouterLink to="about-us" className="link">About us</RouterLink>                  
+                  <RouterLink to="core-team" className="link">Team</RouterLink>            
+                  <RouterLink to="mission" className="link">Our Mission</RouterLink>  
+                  <RouterLink to="contact" className="link">Contact</RouterLink>  
+                  <RouterLink to="future-vision" className="link">Future Vision</RouterLink>                  
                 </div>
               </div>
 
@@ -378,9 +382,9 @@ const LandingPage2 = () => {
                   Account
                 </div>
                 <div className="points">
-                  <a href="/" className="link">Login</a>
-                  <a href="/" className="link">Create account</a>
-                  <a href="/" className="link">Request API access</a>
+                  <RouterLink to="sign-in" className="link">Login</RouterLink>                  
+                  <RouterLink to="create-account"  className="link">Create account</RouterLink>      
+                  <RouterLink to="request-api"  className="link">Request API access</RouterLink>
                 </div>
               </div>
 
