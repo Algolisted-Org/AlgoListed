@@ -1,7 +1,7 @@
 [
   {
-    "contest_name": "Weekly Contest 328",
-    "link": "https://leetcode.com/contest/weekly-contest-328",
+    "contest_name": "Weekly Contest 329",
+    "link": "https://leetcode.com/contest/weekly-contest-329",
     "time": "Sunday 8:00 AM GMT+5:30",
     "duration": 90
   },
@@ -12,22 +12,28 @@
     "duration": 90
   },
   {
-    "contest_name": "Codeforces Round #844 (Div. 1 + Div. 2, based on VK Cup 2022 - Elimination Round)",
-    "link": "https://codeforces.com/contests",
-    "time": "Jan/15/2023 17:35",
-    "duration": 180
-  },
-  {
-    "contest_name": "Codeforces Round (Div. 2)",
+    "contest_name": "Codeforces Round #845 (Div. 2)",
     "link": "https://codeforces.com/contests",
     "time": "Jan/21/2023 20:05",
     "duration": 120
   },
   {
-    "contest_name": "Codeforces Round (Div. 2)",
+    "contest_name": "Educational Codeforces Round 142 (Rated for Div. 2)",
+    "link": "https://codeforces.com/contests",
+    "time": "Jan/24/2023 20:05",
+    "duration": 120
+  },
+  {
+    "contest_name": "Codeforces Round #846 (Div. 2)",
     "link": "https://codeforces.com/contests",
     "time": "Jan/25/2023 20:05",
     "duration": 120
+  },
+  {
+    "contest_name": "Codeforces Round #847 (Div. 3)",
+    "link": "https://codeforces.com/contests",
+    "time": "Jan/27/2023 20:05",
+    "duration": 135
   },
   {
     "contest_name": "TypeDB Forces 2023 (Div. 1 + Div. 2, Rated, Prizes!)",
@@ -36,19 +42,25 @@
     "duration": 180
   },
   {
-    "contest_name": "Codeforces Round (Div. 2)",
+    "contest_name": "Codeforces Round #848 (Div. 2)",
     "link": "https://codeforces.com/contests",
     "time": "Feb/01/2023 20:05",
     "duration": 120
   },
   {
-    "contest_name": "Codeforces Round (Div. 1, based on VK Cup 2022 - Final Round)",
+    "contest_name": "Codeforces Round #849 (Div. 4)",
+    "link": "https://codeforces.com/contests",
+    "time": "Feb/03/2023 20:05",
+    "duration": 145
+  },
+  {
+    "contest_name": "Codeforces Round #850 (Div. 1, based on VK Cup 2022 - Final Round)",
     "link": "https://codeforces.com/contests",
     "time": "Feb/05/2023 17:35",
     "duration": 180
   },
   {
-    "contest_name": "Codeforces Round (Div. 2, based on VK Cup 2022 - Final Round)",
+    "contest_name": "Codeforces Round #850 (Div. 2, based on VK Cup 2022 - Final Round)",
     "link": "https://codeforces.com/contests",
     "time": "Feb/05/2023 17:35",
     "duration": 180
@@ -72,12 +84,6 @@
     "duration": 120
   },
   {
-    "contest_name": "January Long 2022 (Rated for Divs 3 & 4)",
-    "link": "https://www.codechef.com/JAN231",
-    "time": "14 Jan 2023 Sat 20:00",
-    "duration": 2580
-  },
-  {
     "contest_name": "Starters 74 (Rated till 6 Stars)",
     "link": "https://www.codechef.com/START74",
     "time": "18 Jan 2023 Wed 20:00",
@@ -88,18 +94,6 @@
     "link": "https://www.codechef.com/START75",
     "time": "25 Jan 2023 Wed 20:00",
     "duration": 180
-  },
-  {
-    "contest_name": "AtCoder Regular Contest 153",
-    "link": "https://atcoder.jp/contests/arc153",
-    "time": "2023-01-14(Sat) 17:30",
-    "duration": 120
-  },
-  {
-    "contest_name": "AtCoder Beginner Contest 285",
-    "link": "https://atcoder.jp/contests/abc285",
-    "time": "2023-01-15(Sun) 17:30",
-    "duration": 100
   },
   {
     "contest_name": "UL Systems Programming Contest 2023(AtCoder Beginner Contest 286)",
@@ -136,5 +130,53 @@
     "link": "https://atcoder.jp/contests/agc061",
     "time": "2023-02-12(Sun) 17:30",
     "duration": 180
+  },
+  {
+    "contest_name": "Round A 2023",
+    "link": "https://codingcompetitions.withgoogle.com/kickstart/schedule",
+    "time": "Mar 19 2023, 04:00",
+    "duration": "3 hrs"
+  },
+  {
+    "contest_name": "Round B 2023",
+    "link": "https://codingcompetitions.withgoogle.com/kickstart/schedule",
+    "time": "Apr 15 2023, 17:00",
+    "duration": "3 hrs"
+  },
+  {
+    "contest_name": "Round C 2023",
+    "link": "https://codingcompetitions.withgoogle.com/kickstart/schedule",
+    "time": "May 21 2023, 14:00",
+    "duration": "3 hrs"
+  },
+  {
+    "contest_name": "Round D 2023",
+    "link": "https://codingcompetitions.withgoogle.com/kickstart/schedule",
+    "time": "Jul 8 2023, 05:00",
+    "duration": "3 hrs"
+  },
+  {
+    "contest_name": "Round E 2023",
+    "link": "https://codingcompetitions.withgoogle.com/kickstart/schedule",
+    "time": "Aug 19 2023, 10:00",
+    "duration": "3 hrs"
+  },
+  {
+    "contest_name": "Round F 2023",
+    "link": "https://codingcompetitions.withgoogle.com/kickstart/schedule",
+    "time": "Sep 17 2023, 23:00",
+    "duration": "3 hrs"
+  },
+  {
+    "contest_name": "Round G 2023",
+    "link": "https://codingcompetitions.withgoogle.com/kickstart/schedule",
+    "time": "Oct 14 2023, 12:00",
+    "duration": "3 hrs"
+  },
+  {
+    "contest_name": "Round H 2023",
+    "link": "https://codingcompetitions.withgoogle.com/kickstart/schedule",
+    "time": "Nov 4 2023, 03:00",
+    "duration": "3 hrs"
   }
 ]
