@@ -5,31 +5,16 @@ import {
   Route,
 } from "react-router-dom";
 import styled from 'styled-components'
-import BlogPage from './Screen/BlogPage'
-import BlogIdeas from './Screen/BlogIdeas'
-import CodingCompetitions from './Screen/CodingCompetitions'
-import Issues from './Screen/Issues'
-import PageNotExist from './Screen/PageNotExist';
-import LandingPage from './Screen/LandingPage';
-import OrganisationInfo from './Screen/OrganisationInfo';
-import AllBlogs from './Screen/AllBlogs';
-import AptitudeRound from './Screen/AptitudeRound';
-import Opportunities from './Screen/Opportunities';
-import Resources from './Screen/Resources';
-import ContributeSite from './Screen/ContributeSite';
-import BlogAutoCode from './Screen/BlogAutoCode';
-import AuthPage from './Screen/AuthPage';
-import SelectedProfiles from './Screen/SelectedProfiles';
-import CodingSheets from './Screen/CodingSheets';
-import AddContentCoreOnly from './Screen/AddContentCoreOnly';
-import LandingPage2 from './Screen/LandingPage2';
-import Readme from './Screen/Readme';
+
+import { BlogPage , AboutUs , Contact , FutureVision ,BlogIdeas, CodingCompetitions , Issues ,
+PageNotExist ,LandingPage ,OrganisationInfo ,AllBlogs ,AptitudeRound ,Opportunities ,Resources,
+ContributeSite ,BlogAutoCode ,AuthPage , SelectedProfiles, CodingSheets ,AddContentCoreOnly ,LandingPage2, 
+Readme, CoreTeam ,Mission , RequestAPI,ChartTemp,PushDataToMongoDB } from './Screen'
+
 import GoToTop from './Components/GoToTop';
-import PushDataToMongoDB from './Screen/PushDataToMongoDB';
-import ChartTemp from './Screen/ChartTemp';
 import BuyMeACoffee from './Components/BuyMeACoffee';
 import CCHeader from './Components/CCHeader';
-
+;
 
 const App = () => {
   // console.log("hi");
@@ -48,6 +33,14 @@ const App = () => {
         {/* <Route path="/temp" element={<PushDataToMongoDB/>} /> */}
         <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
+        <Route path="/sign-in" element={<AuthPage/>} />
+        <Route path="/create-account" element={<AuthPage/>} />
+        <Route path="/about-us" element={<AboutUs/>} />
+        <Route path="/core-team" element={<CoreTeam/>} />
+        <Route path="/contact" element={<Contact/>} />
+        <Route path="/mission" element={<Mission/>} />
+        <Route path="/future-vision" element={<FutureVision/>} />
+        <Route path="/request-api" element={<RequestAPI/>} />
         <Route path="/blog/ideas" element={<BlogIdeas/>} />
         <Route path="/coding-competitions" element={<CodingCompetitions/>} />
         <Route path="/organisation-information/:showpage" element={<OrganisationInfo/>} />
@@ -66,6 +59,7 @@ const App = () => {
         <Route path="/readme" element={<Readme/>} />
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
+        
       </Routes>
       <GoToTop/>
     </div>
