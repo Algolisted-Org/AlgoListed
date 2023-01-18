@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Cutive&family=Poppins:wght@700&display=swap');
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins',sans-serif;
+}
+.container{
+    width: 400px;
+    border-top: 4.5px solid rgb(29, 29, 219);
+    border-bottom: 4.5px solid rgb(29, 29, 219);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 3px solid rgb(106, 106, 218);
+    justify-content: space-around;
+}
+.header-logo{
+    width: 17%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.header-text{
+    width: 70%;
+}
+.header-text h2,h3{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.header div img{
+    width: 100%;
+    height: 100%;
+}
+.coding-list{
+    width: 100%;
+    display: flex;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.serial-no{
+    width: 10%;
+    font-size: 1.2rem;
+    text-align: center;
+}
+.details{
+    width: 85%;
+}
+.comp-name{
+    font-size: 1.1rem;
+}
+.comp-details{
+    font-family: sans-serif;
+}
+.coding-list:hover{
+    cursor: pointer;
+}
+.suggestAdditon{
+    text-align: center;
+    font-size: 1.4rem;
+}
+.suggestAdditon h5{
+    margin: 3%;
+}
+.coding-list:hover{
+    background-color: rgb(195, 252, 252);
+}
