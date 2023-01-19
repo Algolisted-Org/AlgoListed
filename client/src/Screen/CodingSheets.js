@@ -17,6 +17,7 @@ import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 import UpdateIcon from '@material-ui/icons/Update';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
+import { Link as RouterLink }from 'react-router-dom';
 
 import {
 	CircularProgressbar,
@@ -33,6 +34,8 @@ const CodingSheets = () => {
 	const [showFilters, setShowFilters] = useState(false);
 	const [sortedTopicTagsKeys, setSortedTopicTagsKeys] = useState([]);
 	const [sortedTopicTagsValues, setSortedTopicTagsValues] = useState([]);
+	const [sortedSolvedTopicTagsKeys, setSortedSolvedTopicTagsKeys] = useState([]);
+	const [sortedSolvedTopicTagsValues, setSortedSolvedTopicTagsValues] = useState([]);
 	const [difficulty, setDifficulty] = useState({});
 	const [userDifficulty, setUserDifficulty] = useState({});
 	const [difficultyPercentage, setDifficultyPercentage] = useState([0, 0, 0]);
@@ -40,7 +43,8 @@ const CodingSheets = () => {
 	const [toggleEffect, setToggleEffect] = useState(true);
 	const [filteredData, setFilteredData] = useState(data);
 	const [showTags, setShowTags] = useState(true);
-
+	const [showSolvedChart, setShowSolvedChart] = useState(false);
+	
 	const [selectedLabel, setSelectedLabel] = useState('All');
 	// console.log(selectedLabel);
 	// console.log(data);
@@ -217,7 +221,7 @@ const CodingSheets = () => {
 
 	const filters = codingSheetsFilters.map((item) => {
 		return (
-			<a
+			<a 
 				href={item.domainFilter}
 				key={item.id}
 				className={
@@ -248,6 +252,18 @@ const CodingSheets = () => {
 		datasets: [{
 			label: "Number of questions by Tag",
 			data: sortedTopicTagsValues.map((items) => { return (items) }),
+			backgroundColor: colors,
+			borderColor: borderColors,
+			borderWidth: 1,
+		}],
+	};
+
+	var chartDataSolved = {
+		title: { text: 'Chart Title', display: true },
+		labels: sortedSolvedTopicTagsKeys.map((items) => { return (items) }),
+		datasets: [{
+			label: "Number of questions by Tag",
+			data: sortedSolvedTopicTagsValues.map((items) => { return (items) }),
 			backgroundColor: colors,
 			borderColor: borderColors,
 			borderWidth: 1,
@@ -386,8 +402,52 @@ const CodingSheets = () => {
 		}
 	}, [selectedLabel, data]);
 
+	useEffect(() => { // finding unique tags
+		let len = solvedData.length;
+		let ProblemsTags = [];
+		for (let i = 0; i < len; i++) {
+			let tagsLen = solvedData[i].tags.length;
+			for (let j = 1; j < tagsLen; j++) {
+				ProblemsTags.push(solvedData[i].tags[j]);
+			}
+		}
 
-	// console.log(userDifficulty);
+		const filteredTags = ProblemsTags.filter(tag => allowedProblemTags.includes(tag));
+		ProblemsTags = filteredTags;
+
+		const allTagsLen = ProblemsTags.length;
+		const elementCounts = {};
+		for (let i = 0; i < allTagsLen; i++) {
+			const element = ProblemsTags[i];
+			if (elementCounts[element]) {
+				elementCounts[element]++;
+			} else {
+				elementCounts[element] = 1;
+			}
+		}
+		const sortedElementCounts = {};
+		Object.keys(elementCounts).sort((a, b) => elementCounts[b] - elementCounts[a]).forEach(function (key) {
+			sortedElementCounts[key] = elementCounts[key];
+		});
+
+		const filteredCounts = {};
+		// let otherValue = 0;
+		for (let key in sortedElementCounts) {
+			filteredCounts[key] = sortedElementCounts[key];
+
+			// if (sortedElementCounts[key] >= data.length * 0.015) {
+			// 	filteredCounts[key] = sortedElementCounts[key];
+			// } else {
+			// 	otherValue += sortedElementCounts[key];
+			// }
+		}
+		// filteredCounts["others"] = otherValue;
+
+		setSortedSolvedTopicTagsKeys(Object.keys(filteredCounts));
+		setSortedSolvedTopicTagsValues(Object.values(filteredCounts));
+	}, [solvedData])
+
+	// console.log(sortedSolvedTopicTagsKeys);
 
 	return (
 		<GrandContainer>
@@ -419,6 +479,16 @@ const CodingSheets = () => {
 					</div>
 
 					{showFilters ? <Filters>{filters}</Filters> : <></>}
+
+					<Progress>
+						<div className="value">{`${progressBarPercent}%`}</div>
+						<div className="bar">
+							<div
+								className="fill"
+								style={{ width: `${progressBarPercent}%` }}
+							></div>
+						</div>
+					</Progress>
 
 					<div className="mob-table">
 						{dataLoading ? (
@@ -518,25 +588,53 @@ const CodingSheets = () => {
 									<div className="visualiser-conatiner">
 										<div className="canvas-container">
 											<div className="top-label">
-												<div className="label-item selected">Problem Tags in Sheet</div>
-												<div className="label-item" onClick={() => alert("Under development, Men at work")}>Solved Tags</div>
+												<div className={showSolvedChart ? "label-item" : "label-item selected"} onClick={() => setShowSolvedChart(false)}>Problem Tags in Sheet</div>
+												<div className={!showSolvedChart ? "label-item" : "label-item selected"} 
+													onClick={solvedData.length > 0 ? () => setShowSolvedChart(true) : () => alert("You need to solve atleast one problem to use this feature.")}
+												>Solved Tags</div>
 											</div>
-											<div className="canvas-graph">
-												<DoughnutChart chartData={chartData} options={options}></DoughnutChart>
-											</div>
-											<div className="graph-labels">
-												{
-													sortedTopicTagsKeys.map((item, index) => {
-														return (
-															<div className="label" key={index}>
-																<div className="color" style={{ "backgroundColor": `${colors[index]}` }}></div>
-																<div className="label-key">{sortedTopicTagsKeys[index]} : </div>
-																<div className="label-value">{sortedTopicTagsValues[index]}</div>
-															</div>
-														)
-													})
-												}
-											</div>
+											{
+												showSolvedChart ? (
+													<>
+														<div className="canvas-graph">
+															<DoughnutChart chartData={chartDataSolved} options={options}></DoughnutChart>
+														</div>
+														<div className="graph-labels">
+															{
+																sortedSolvedTopicTagsKeys.map((item, index) => {
+																	return (
+																		<div className="label" key={index}>
+																			<div className="color" style={{ "backgroundColor": `${colors[index]}` }}></div>
+																			<div className="label-key">{sortedSolvedTopicTagsKeys[index]} : </div>
+																			<div className="label-value">{sortedSolvedTopicTagsValues[index]}</div>
+																		</div>
+																	)
+																})
+															}
+														</div>
+													</>
+												):(
+													<>
+														<div className="canvas-graph">
+															<DoughnutChart chartData={chartData} options={options}></DoughnutChart>
+														</div>
+														<div className="graph-labels">
+															{
+																sortedTopicTagsKeys.map((item, index) => {
+																	return (
+																		<div className="label" key={index}>
+																			<div className="color" style={{ "backgroundColor": `${colors[index]}` }}></div>
+																			<div className="label-key">{sortedTopicTagsKeys[index]} : </div>
+																			<div className="label-value">{sortedTopicTagsValues[index]}</div>
+																		</div>
+																	)
+																})
+															}
+														</div>
+													</>
+												)
+											}
+											
 										</div>
 										<div className="learn-self-graph">
 											<div className="top-label">
@@ -1230,6 +1328,41 @@ const Progress = styled.div`
 			background-color: #ffa500;
 		}
 	}
+
+	@media only screen and (max-width: 1100px) {
+		margin: 20px 0 0 0;
+
+		.value {
+			margin: 0 10px 0 0;
+			font-size: 0.7rem;
+			font-weight: 500;
+			letter-spacing: 0.15rem;
+			padding: 5px 7px;
+			width: 70px;
+			text-align: center;
+			background-color: #f3f4f7;
+			border-radius: 50px;
+		}
+
+		.bar {
+			/* width: 400px; */
+			height: 8px;
+			border-radius: 100px;
+			background-color: whitesmoke;
+			border: 1px solid pink;
+			flex: 1;
+			overflow: hidden;
+
+			.fill {
+				transition: width 0.25s linear;
+				height: 100%;
+				border-radius: 100px;
+				background-color: #ffa500;
+			}
+		}
+	}	
+
+
 `;
 
 const SheetMessage = styled.div`

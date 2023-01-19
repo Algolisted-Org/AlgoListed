@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
 import Tooltip from '@material-ui/core/Tooltip';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { Link as RouterLink }from 'react-router-dom';
 
 const LeftMenu = ({ marked }) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
@@ -63,9 +64,9 @@ const LeftMenu = ({ marked }) => {
       <div className="mid-links">
         {
           menuItems.map((item, index) => {
-            return <a key={index} href={`${item.link}`} className={item.showAt == marked ? "link current-link" : "link"}>{item.value}
+            return <RouterLink key={index} to={`${item.link}`} className={item.showAt == marked ? "link current-link" : "link"}>{item.value}
               {/* <ChevronRightIcon/> */}
-            </a>
+            </RouterLink>
           })
         }
         {/* <a href='https://jasonfenggit.github.io/Visualizer/' target={"_blank"} className="link">Algorithm Visualizers</a> */}
@@ -83,11 +84,11 @@ const LeftMenu = ({ marked }) => {
         showMoreInfo ? (
           <div className="more-model">
             {/* <div><a className="more-link" href='/organisation-information/core-team'>Core Team</a></div> */}
-            <div><a className="more-link" href='/organisation-information/all-contributors'>Contributors</a></div>
-            <div><a className="more-link" href='/organisation-information/about-us'>About Us</a></div>
-            <div><a className="more-link" href='/organisation-information/verify-contributor'>Verify Contributor</a></div>
-            <div><a className="more-link" href='/organisation-information/privacy-policies'>Privacy Policies</a></div>
-            <div><a className="more-link last-more-link" href='/organisation-information/disclaimer'>Disclaimer</a></div>
+            <div><RouterLink className="more-link" to='/organisation-information/all-contributors'>Contributors</RouterLink></div>
+            <div><RouterLink className="more-link" to='/organisation-information/about-us'>About Us</RouterLink></div>
+            <div><RouterLink className="more-link" to='/organisation-information/verify-contributor'>Verify Contributor</RouterLink></div>
+            <div><RouterLink className="more-link" to='/organisation-information/privacy-policies'>Privacy Policies</RouterLink></div>
+            <div><RouterLink className="more-link last-more-link" to='/organisation-information/disclaimer'>Disclaimer</RouterLink></div>
           </div>
         ) : (<></>)
       }

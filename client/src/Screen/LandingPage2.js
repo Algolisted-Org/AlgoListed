@@ -15,9 +15,6 @@ import Fade from 'react-reveal/Fade';
 import {Link} from 'react-scroll';
 import { Link as RouterLink }from 'react-router-dom';
 
-
-
-
 const LandingPage2 = () => {
   const [contributorsList, setContributorsList] = useState(null);
 
@@ -364,11 +361,11 @@ const LandingPage2 = () => {
                   Algolisted
                 </div>
                 <div className="points">
-                  <RouterLink to="about-us" className="link">About us</RouterLink>                  
-                  <RouterLink to="core-team" className="link">Team</RouterLink>            
-                  <RouterLink to="mission" className="link">Our Mission</RouterLink>  
-                  <RouterLink to="contact" className="link">Contact</RouterLink>  
-                  <RouterLink to="future-vision" className="link">Future Vision</RouterLink>                  
+                  <RouterLink to="organisation-information/about-us" className="link">About us</RouterLink>                  
+                  <RouterLink to="organisation-information/core-team" className="link">Team</RouterLink>            
+                  <RouterLink to="organisation-information/mission" className="link">Our Mission</RouterLink>  
+                  <RouterLink to="organisation-information/contact" className="link">Contact</RouterLink>  
+                  <RouterLink to="organisation-information/future-vision" className="link">Future Vision</RouterLink>                  
                 </div>
               </div>
 

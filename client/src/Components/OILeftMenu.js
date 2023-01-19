@@ -4,6 +4,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Tooltip from '@material-ui/core/Tooltip';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { Link as RouterLink }from 'react-router-dom';
 
 const OILeftMenu = ({marked}) => {
   console.log(marked);
@@ -28,19 +29,19 @@ const OILeftMenu = ({marked}) => {
           marked == "core-team" ? (<a href='/organisation-information/core-team' className="link current-link">Core Team</a>) : (<a href='/organisation-information/core-team' className="link">Core Team</a>)
         } */}
         {
-          marked == "all-contributors" ? (<a href='/organisation-information/all-contributors' className="link current-link">Contributors</a>) : (<a href='/organisation-information/all-contributors' className="link">Contributors</a>)
+          marked == "all-contributors" ? (<RouterLink to='/organisation-information/all-contributors' className="link current-link">Contributors</RouterLink>) : (<RouterLink to='/organisation-information/all-contributors' className="link">Contributors</RouterLink>)
         }
         {
-          marked == "about-us" ? (<a href='/organisation-information/about-us' className="link current-link">About Us</a>) : (<a href='/organisation-information/about-us' className="link">About Us</a>)
+          marked == "about-us" ? (<RouterLink to='/organisation-information/about-us' className="link current-link">About Us</RouterLink>) : (<RouterLink to='/organisation-information/about-us' className="link">About Us</RouterLink>)
         }
         {
-          marked == "verify-contributor" ? (<a href='/organisation-information/verify-contributor' className="link current-link">Verify Contributor</a>) : (<a href='/organisation-information/verify-contributor' className="link">Verify Contributor</a>)
+          marked == "verify-contributor" ? (<RouterLink to='/organisation-information/verify-contributor' className="link current-link">Verify Contributor</RouterLink>) : (<RouterLink to='/organisation-information/verify-contributor' className="link">Verify Contributor</RouterLink>)
         }
         {
-          marked == "privacy-policies" ? (<a href='/organisation-information/privacy-policies' className="link current-link">Privacy Policies</a>) : (<a href='/organisation-information/privacy-policies' className="link">Privacy Policies</a>)
+          marked == "privacy-policies" ? (<RouterLink to='/organisation-information/privacy-policies' className="link current-link">Privacy Policies</RouterLink>) : (<RouterLink to='/organisation-information/privacy-policies' className="link">Privacy Policies</RouterLink>)
         }
         {
-          marked == "disclaimer" ? (<a href='/organisation-information/disclaimer' className="link current-link">Disclaimer</a>) : (<a href='/organisation-information/disclaimer' className="link">Disclaimer</a>)
+          marked == "disclaimer" ? (<RouterLink to='/organisation-information/disclaimer' className="link current-link">Disclaimer</RouterLink>) : (<RouterLink to='/organisation-information/disclaimer' className="link">Disclaimer</RouterLink>)
         }
       </div>
       <div className="bottom-btns">

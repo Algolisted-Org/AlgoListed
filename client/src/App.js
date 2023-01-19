@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import { BlogPage , AboutUs , Contact , FutureVision ,BlogIdeas, CodingCompetitions , Issues ,
 PageNotExist ,LandingPage ,OrganisationInfo ,AllBlogs ,AptitudeRound ,Opportunities ,Resources,
 ContributeSite ,BlogAutoCode ,AuthPage , SelectedProfiles, CodingSheets ,AddContentCoreOnly ,LandingPage2, 
-Readme, CoreTeam ,Mission , RequestAPI,ChartTemp,PushDataToMongoDB } from './Screen'
+Readme, CoreTeam ,Mission , RequestAPI, ChartTemp, PushDataToMongoDB } from './Screen'
 
 import GoToTop from './Components/GoToTop';
 import BuyMeACoffee from './Components/BuyMeACoffee';
@@ -17,16 +17,6 @@ import CCHeader from './Components/CCHeader';
 ;
 
 const App = () => {
-  // console.log("hi");
-  // const myfunc = () => {
-  //   console.clear();
-  // }
-  // useEffect(() => {
-  //   myfunc();
-  // }, []);
-  
-  
-
   return (
     <div>
       <Routes>

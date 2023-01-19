@@ -13,7 +13,7 @@ const MobileDownMenu = () => {
       <a href="/" className="logo">
         <img src={logo} alt="" />
         <div className="text">
-          <div className="up-text">Algolisted</div>
+          <div className="up-text gradient-text">Algolisted</div>
           <div className="down-text">Get organised listed information.</div>
         </div>
       </a>
@@ -67,6 +67,8 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    border-bottom: 1px solid rgb(233, 229, 229);
+    box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
 
     .logo{
       display: flex;
@@ -91,6 +93,16 @@ const Container = styled.div`
           font-size: 0.6rem;
           font-weight: 300;
         }
+      }
+
+      .gradient-text {
+          background-color: #f3ec78;
+          background-image: linear-gradient(92deg,#0066ff,#5dff00);
+          background-size: 100%;
+          -webkit-background-clip: text;
+          -moz-background-clip: text;
+          -webkit-text-fill-color: transparent; 
+          -moz-text-fill-color: transparent;
       }
     }
 
