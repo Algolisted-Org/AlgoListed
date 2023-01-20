@@ -10,7 +10,7 @@ import { BlogPage , AboutUs , Contact , FutureVision ,BlogIdeas, CodingCompetiti
 PageNotExist ,LandingPage ,OrganisationInfo ,AllBlogs ,AptitudeRound ,Opportunities ,Resources,
 ContributeSite ,BlogAutoCode ,AuthPage , SelectedProfiles, CodingSheets ,AddContentCoreOnly ,LandingPage2, 
 Readme, CoreTeam ,Mission , RequestAPI, ChartTemp, PushDataToMongoDB } from './Screen'
-
+import ScrollToTop from './Components/ScrollToTop';
 import GoToTop from './Components/GoToTop';
 import BuyMeACoffee from './Components/BuyMeACoffee';
 import CCHeader from './Components/CCHeader';
@@ -19,6 +19,7 @@ import CCHeader from './Components/CCHeader';
 const App = () => {
   return (
     <div>
+      <ScrollToTop/>
       <Routes>
         {/* <Route path="/temp" element={<PushDataToMongoDB/>} /> */}
         <Route path="/" element={<LandingPage2/>} />
@@ -49,8 +50,8 @@ const App = () => {
         <Route path="/readme" element={<Readme/>} />
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
-        
       </Routes>
+      
       <GoToTop/>
     </div>
   )

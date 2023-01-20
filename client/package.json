@@ -25,6 +25,7 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "^5.0.1",
     "react-scroll": "^1.8.9",
+    "react-scroll-to-top": "^3.0.0",
     "react-spinners": "^0.13.6",
     "redux": "^4.2.0",
     "styled-components": "^5.3.6",
