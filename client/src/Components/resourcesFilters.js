@@ -5,6 +5,10 @@ export const resourcesFilters = [
       id: 1,
     },
     {
+      text: "Language Basics",
+      id: 1.99,
+    },
+    {
       text: "DSA Topic",
       id: 2,
     },
@@ -16,10 +20,10 @@ export const resourcesFilters = [
       text: "Data Structures",
       id: 4,
     },
-    {
-      text: "Non-Linear Data Structures",
-      id: 5,
-    },
+    // {
+    //   text: "Non-Linear Data Structures",
+    //   id: 5,
+    // },
     // {
     //   text: "Tree",
     //   id: 6,

@@ -16,6 +16,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MobileNavbar from "../Components/MobileNavbar";
 import AddIcon from '@material-ui/icons/Add';
 import Tooltip from '@material-ui/core/Tooltip';
+// import localContestData from '../Components/localContestData';
 
 const CodingCompetitions = () => {
 	const [temp, setTemp] = useState([1]);
@@ -45,6 +46,8 @@ const CodingCompetitions = () => {
 				});
 		})();
 	}, []);
+
+	console.log(list);
 
 	useEffect(() => {
 		const interval = setInterval(() => setList((list) => [...list]), 60000);
@@ -261,11 +264,11 @@ const CodingCompetitions = () => {
 					<Filters>{filters}</Filters>
 
 					<Sort>
-						<Tooltip title="Under Development">
-							<div className="box">
+						{/* <Tooltip title="Under Development"> */}
+							<a href="https://docs.google.com/forms/d/e/1FAIpQLSeMogvmpnRIg0MWh50H9xIGq5aSdzH3sbMtRENc_3r7sZpAOw/viewform" target={"_blank"} className="box">
 								<AddIcon />
-							</div>
-						</Tooltip>
+							</a>
+						{/* </Tooltip> */}
 						<div onClick={(e) => handleSort(e)} className="box">
 							<div className="text">{sortType}</div>
 							<FilterListIcon />

@@ -161,7 +161,7 @@ const Resources = () => {
               <div className="resources-container">
                 {
                   allResources.map((item, index) => {
-                    if (filter == "All Resources" || item.mainTag == filter) {
+                    if (item.likes > 0 && (filter == "All Resources" || item.mainTag == filter)) {
                       return (
                         <div className="resource">
                           {
