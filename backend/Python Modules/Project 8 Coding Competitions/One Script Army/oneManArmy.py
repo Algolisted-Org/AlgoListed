@@ -223,6 +223,35 @@ def getdataAtcoder(siteUrl):
                             print(temp)
 
 
+def getDataKickstart(siteUrl):
+    browser = openBrowser(siteUrl)
+    time.sleep(5)
+    pageSource = browser.page_source
+    WebDriverWait(browser, 5)
+    soup = bs(pageSource, 'html.parser')
+
+    schedule = soup.find_all('div', class_="schedule")
+    schedule = schedule[2]
+
+    for row in schedule.find_all('div', class_='schedule-row schedule-row__upcoming'):
+        contest_name = row.find(
+            'span', text=lambda x: x and x.startswith('Round')).text
+        start_time = row.find_all(
+            class_='schedule-row-cell')[1].text.replace(' (UTC)', '')
+        duration = row.find_all('span')[-1].text
+
+        temp = {
+            "contest_name": contest_name,
+            "link": "https://codingcompetitions.withgoogle.com/kickstart/schedule",
+            "time": start_time.replace('\u00a0', ''),
+            "duration": duration
+        }
+
+        list_of_contests.append(temp)
+        print(temp)
+        
+        
+
 leetcodeLink = "https://leetcode.com/contest/"
 getDataLeetcode(leetcodeLink)
 
@@ -234,6 +263,9 @@ getdataCodeshef(codesheflink)
 
 atCoderLink = "https://atcoder.jp/contests/"
 getdataAtcoder(atCoderLink)
+
+kickstartLink = "https://codingcompetitions.withgoogle.com/kickstart/schedule"
+getDataKickstart(kickstartLink)
 
 with open('allContests.json', 'w') as f:
     json.dump(list_of_contests, f)
