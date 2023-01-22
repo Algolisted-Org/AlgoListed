@@ -34,6 +34,9 @@ const BlogContentMD = ({ blogid,  blogname }) => {
 
     return (
         <Container>
+            {/* <Alert>
+                fafanfafkfa
+            </Alert> */}
             <div className="left">
                 {/* <ShowContributors /> */}
                 <h1 className='main-heading'>{blogData.title}</h1>
@@ -557,4 +560,16 @@ const Container = styled.div`
         padding: 80px 20px;
     } */
     
+`
+
+const Alert = styled.div`
+    position: fixed;
+    height: 280px;
+    width: 540px;
+    margin-left: calc(50vw - 270px);
+    left: 0;
+    top: 10px;
+    background-color: black;
+    z-index: 1000;
+    border-radius: 10px;
 `

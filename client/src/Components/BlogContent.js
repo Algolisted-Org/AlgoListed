@@ -18,6 +18,9 @@ const BlogContent = ({ blogid }) => {
 
     return (
         <Container>
+            {/* <Alert>
+                fafanfafkfa
+            </Alert> */}
             <div className="left">
                 {/* <ShowContributors /> */}
                 <h1 className='main-heading'>{blogData.title}</h1>
@@ -649,4 +652,13 @@ const Container = styled.div`
         padding: 80px 20px;
     } */
     
+`
+
+const Alert = styled.div`
+    position: fixed;
+    height: 400px;
+    width: 780px;
+    left: 0;
+    top: 0;
+    background-color: black;
 `

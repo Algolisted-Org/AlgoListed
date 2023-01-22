@@ -241,6 +241,9 @@ const CodingSheets = () => {
 	];
 
 	// const colors = ["#de79ef", "#df6cf7", "#e061ff", "#e15754", "#e24d08", "#e3430c", "#e4390f", "#e53011", "#e6281a", "#e72122", "#e81b29", "#e91730", "#ea123c", "#eb0f4c", "#ec0c5e", "#ed0974", "#ee0695", "#ef03bb", "#f000e4", "#cfff95"];
+	
+	// const colors = ["#F5F5DC", "#F8F8FF", "#FAEBD7", "#FFF0F5", "#FFF5EE", "#FFF8DC", "#FFFACD", "#FFFAF0", "#FFFAFA", "#FFFFF0", "#FFFFFF", "#F0F8FF", "#F0FFFF", "#F4F4F4", "#F5F5F5", "#F5FFFA", "#F7F7F7", "#F8F8F8", "#FAF0E6", "#FAFAD2", "#FBFBFB", "#FCFCFC", "#FDF5E6", "#FFEFD5"];
+
 
 	const borderColors = [
 		'#fff'
