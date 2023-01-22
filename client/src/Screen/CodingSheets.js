@@ -407,11 +407,10 @@ const CodingSheets = () => {
 		let ProblemsTags = [];
 		for (let i = 0; i < len; i++) {
 			let tagsLen = solvedData[i].tags.length;
-			for (let j = 1; j < tagsLen; j++) {
+			for (let j = 0; j < tagsLen; j++) {
 				ProblemsTags.push(solvedData[i].tags[j]);
 			}
 		}
-
 		const filteredTags = ProblemsTags.filter(tag => allowedProblemTags.includes(tag));
 		ProblemsTags = filteredTags;
 

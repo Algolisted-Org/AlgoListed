@@ -22,7 +22,7 @@ export const competitionFilters = [
     id: 5,
   },
   {
-    text: "Hackathons",
+    text: "Top Hackathons",
     id: 6,
   },
   {
