@@ -279,7 +279,7 @@ const CodingCompetitions = () => {
 								</ul>
 							</div>
 						</div>
-						<InfoIcon style={{ fill: "#333" }} />
+						{/* <InfoIcon style={{ fill: "#333" }} /> */}
 					</Sort>
 
 					<Table>

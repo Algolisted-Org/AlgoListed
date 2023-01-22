@@ -21,10 +21,10 @@ const AddContentCoreOnly = () => {
     const filterList = [
         {
             "name" : "Resources",
-        },
-        {
-            "name" : "Question",
         }
+        // ,{
+        //     "name" : "Question",
+        // }
     ]
 
     const selectCategory = [
@@ -38,7 +38,7 @@ const AddContentCoreOnly = () => {
             "name" : "Data Structures",
           },
           {
-            "name" : "Non-Linear Data Structures",
+            "name" : "Language Basics",
           },
           {
             "name" : "Web Development",
@@ -170,7 +170,7 @@ const AddContentCoreOnly = () => {
 
             <NewContainer>
                 <div className="top-header-full">
-                    <h1>Feed Data to Algolisted</h1>
+                    <h1>Thankyou for Feeding Data to Algolisted</h1>
                 </div>
                 <div className="main-content">
                     <Filters>{filters}</Filters>
@@ -188,7 +188,7 @@ const AddContentCoreOnly = () => {
                             <input type="text" className="right" placeholder='Enter link here' value={imgLink} onChange={(e) => setImgLink(e.target.value)} />
                         </div>
                         <div className="row">
-                            <div className="left">Google Drive - Make sure to have it private</div>
+                            <div className="left">Google Drive - Make sure to have it public</div>
                             <input type="text" className="right" placeholder='Enter link here' value={link} onChange={(e) => setLink(e.target.value)} />
                         </div>
                         <div className="row">
@@ -399,7 +399,7 @@ const Filters = styled.div`
 		padding: 7.5px 15px;
 		font-size: 0.8rem;
 		border: 1px solid #b9afaf;
-		/* border-radius: 500px; */
+		border-radius: 500px;
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
 		text-decoration: none;

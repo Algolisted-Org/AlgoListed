@@ -138,11 +138,11 @@ const Resources = () => {
           </Filters>
           
           <Sort>
-            <Tooltip title="Under Development">
-              <div className="box">
+            {/* <Tooltip title="Under Development"> */}
+              <a href='/add-content-core-only' className="box">
                 <AddIcon />
-              </div>
-            </Tooltip>
+              </a>
+            {/* </Tooltip> */}
             <div className="box">
               <div className="text">By Relevance</div>
               <FilterListIcon />

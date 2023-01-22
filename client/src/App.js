@@ -14,14 +14,14 @@ import ScrollToTop from './Components/ScrollToTop';
 import GoToTop from './Components/GoToTop';
 import BuyMeACoffee from './Components/BuyMeACoffee';
 import CCHeader from './Components/CCHeader';
-;
+import CompetitionApi from './DevelopmentLocal/CompetitionApi';
 
 const App = () => {
   return (
     <div>
       <ScrollToTop/>
       <Routes>
-        {/* <Route path="/temp" element={<PushDataToMongoDB/>} /> */}
+        <Route path="/development" element={<CompetitionApi/>} />
         <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/sign-in" element={<AuthPage/>} />

@@ -43,12 +43,12 @@ const CCHeader = () => {
         {
           showModelCoffee ? <BuyMeACoffee showModelCoffee={showModelCoffee} setshowModelCoffee={setshowModelCoffee}/> : <></>
         }
-        <div className="search-box">
+        {/* <div className="search-box">
           <div className="icon"> 
             <SearchIcon/>
           </div>
           <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
-        </div>
+        </div> */}
 
       {/* <div className="top-header">
         <div className="semi-bold">Advertise with Us : </div>Promote your Linkedin profile, posts or Projects. 

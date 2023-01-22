@@ -9,7 +9,7 @@ import SimpleFooter from '../Components/SimpleFooter';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import MobileNavbar from "../Components/MobileNavbar";
-
+import Tooltip from '@material-ui/core/Tooltip';
 // console.log(allBlogsDatabase);
 
 const AllBlogs = () => {
@@ -99,13 +99,16 @@ return (
               files on our github. <a href="https://github.com/Nayaker/AlgoListed/tree/main/client/src/MarkdownFiles" target={"_blank"}>click here</a>
             </div>
           </div>
-          <Sort>
-            <div className="box">
-              <div className="text">By Relevance</div>
-              <FilterListIcon />
-            </div>
-            <InfoIcon style={{ fill: "#333" }} />
-          </Sort>
+
+            <Sort>
+              <Tooltip title="Under Development">
+                <div className="box">
+                  <div className="text">By Relevance</div>
+                  <FilterListIcon />
+                </div>
+              </Tooltip>
+              <InfoIcon style={{ fill: "#333" }} />
+            </Sort>
 
           <BlogsContainer>
             {
@@ -384,8 +387,8 @@ const Sort = styled.div`
     align-items: center;
     border-radius: 100px;
     background-color: white;
-    border: 1px solid #e5e7ed;
     box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
+    border: 1px solid #b9afaf;
     margin-right: 5px;
     
     .text{
