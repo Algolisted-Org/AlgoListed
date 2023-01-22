@@ -54,7 +54,7 @@ const CCHeader = () => {
 
         <a className="nav-adv" href='https://www.codingninjas.com/codestudio/interview-experiences' target={"_blank"}>
           <div className="text">Read interview experiences of popular companies on <b>coding ninjas</b></div>
-          <div className="promotion-tag">Promotion</div>
+          <div className="promotion-tag linear-gradient">Promotion</div>
         </a>
 
       {/* <div className="top-header">
@@ -113,10 +113,33 @@ const CCHeader = () => {
       {
         showWebUpdate ? (
           <div className="nav-model-box">
-            <div className="text">Algorithmist <b>Updates</b></div>
-            <div className="line"></div>
-            <div className="btn">
-              <div className="btn-text">By the end of 2022, we will complete the most features of the website. And in January 2023, we are going to fill real data on the website.</div>
+            <div className="text">Algolisted <b>Updates</b></div>
+            <div className='update-container'>
+              <div className="line"></div>
+              <div className="btn">
+                <div className="btn-text">
+                The majority of bugs have been fixed, and version 1 of the beta release is now available as a production build. If you encounter any issues, please visit GitHub.
+                </div>
+              </div>
+              <div className="small">Version - v0.12, 22 Jan 2023</div>
+            </div>
+            <div className='update-container'>
+              <div className="line"></div>
+              <div className="btn">
+                <div className="btn-text">
+                  Coding competitions page was automated for frequent API based competitions.
+                </div>
+              </div>
+              <div className="small">Version - v0.11, 19 Jan 2023</div>
+            </div>
+            <div className='update-container'>
+              <div className="line"></div>
+              <div className="btn">
+                <div className="btn-text">
+                  The coding sheet page was populated using a Python-based web scraping technique, and visualization was added using Chart.js. Local storage is being used temporarily to store the solved problems.
+                </div>
+              </div>
+              <div className="small">Version - v0.10, 12 Jan 2023</div>
             </div>
           </div>
         ) : (<></>)
@@ -143,8 +166,6 @@ const CCHeader = () => {
               <div className="icon"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" /></div>
               <div className="btn-text">Github</div>
             </div>
-            <div className="line"></div>
-            <div className="text small">Don't have an account ? <a>sign up</a></div>
           </div>
         ) : (<></>)
       }
@@ -206,7 +227,7 @@ const Container = styled.div`
       border-radius: 10px;
       border: 1px solid rgba(230, 230, 230, 1);
       height: 60%;
-      background-color: #f2f2f2;
+      background-color: #f1f1f1;
       position: relative;
 
       display: flex;
@@ -236,6 +257,40 @@ const Container = styled.div`
         font-weight: 400;
         font-size: 0.6rem;
       }
+
+      &:hover{
+        background-color: rgba(230, 230, 230, 1);
+        transition-duration: 250ms;
+      }
+    }
+
+    .linear-gradient{
+      background: linear-gradient(316deg,#e89898,#e89898,#e89898,#e89898,#e89898,#e89898,#f2f2f2,#e89898,#e89898,#e89898,#e89898,#e89898,#e89898);
+      background-size: 400% 400%;
+
+      -webkit-animation: AnimationName 15s cubic-bezier(0.25, 0.1, 0, 1.47) infinite;
+      -moz-animation: AnimationName 15s cubic-bezier(0.25, 0.1, 0, 1.47) infinite;
+      animation: AnimationName 15s cubic-bezier(0.25, 0.1, 0, 1.47) infinite;
+      &:hover{
+      }
+    }
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+
+    @-moz-keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+
+    @keyframes AnimationName {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
     }
 
     .top-header{
@@ -340,62 +395,71 @@ const Container = styled.div`
       box-shadow: rgb(28 28 28 / 28%) 0px 11px 18px;
       padding: 10px;
 
-      .line{
-        width: 100%;
-        height: 1px;
-        background-color: #e5e7ed;
-        margin: 10px 0;
-      }
-
       .text{
         font-size: 0.9rem;
         font-weight: 200;
+        margin-bottom: 15px;
 
         b{
           font-weight: 500;
         }
       }
 
-      .small{
-        font-size: 0.75rem;
+      .update-container{
+        position: relative;
 
-        a{
-          text-decoration: none;
+        .line{
+          width: 100%;
+          height: 1px;
+          background-color: #e5e7ed;
+          margin: 20px 0 10px 0;
         }
-      }
-
-      .btn{
-        display: flex;
-        align-items: center;
-        padding: 10px;
         
-        &:hover{
-          background-color: #e5e5e5;
-          border-radius: 10px;
-          transition-duration: 250ms;
-          cursor: pointer;
-        }
-
-        .icon{
-          height: 100%;
-          display: grid;
-          place-items: center;
-          margin-right: 10px;
-
-          img{
-            height: 30px;
+        .btn{
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          
+          &:hover{
+            background-color: #e5e5e5;
+            border-radius: 10px;
+            transition-duration: 250ms;
+            cursor: pointer;
+          }
+  
+          .icon{
+            height: 100%;
+            display: grid;
+            place-items: center;
+            margin-right: 10px;
+  
+            img{
+              height: 30px;
+            }
+          }
+  
+          .btn-text{
+            font-size: 0.8rem;
+            font-weight: 200;
+  
+            b{
+              font-weight: 500;
+            }
           }
         }
-
-        .btn-text{
-          font-size: 0.85rem;
-          font-weight: 200;
-
-          b{
-            font-weight: 500;
-          }
+        
+  
+        .small{
+          position: absolute;
+          font-size: 0.65rem;
+          background-color: white;
+          /* width: 180px; */
+          top: -0.5rem;
+          right: 0;
         }
+
       }
+
 
     }
 
