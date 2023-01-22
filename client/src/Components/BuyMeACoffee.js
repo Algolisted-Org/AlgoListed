@@ -2,7 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import groupPhoto from '../Images/aboutUsImg.jpeg'
 import scanMeImage from '../Images/gpayScan.jpeg'
-import gpayImage from '../Images/gpay.png'
+// import gpayImage from '../Images/gpay.png'
+import gpayImage from '../Images/upi.png'
+import leftImage from '../Images/bmc1.png'
+import rightImage from '../Images/bmc2.png'
 import Fade from 'react-reveal/Fade';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from 'react-reveal/Slide';
@@ -18,36 +21,25 @@ const BuyMeACoffee = ({showModelCoffee, setshowModelCoffee}) => {
                         <CloseIcon/>
                     </div>
                     <div className="center">
-                        <div className="small-header">Become a supporter to Algolisted</div>
-                        <div className="header">A supporter is worth a thousand followers.</div>
-
-                        <div className="images">
-                            <img className='scanner' src={scanMeImage} draggable="false" alt="" />
-                            <img className='company' src={gpayImage} draggable="false" alt="" />
-                        </div>
-
-                        <div className="progress">
-                            <div className="cat-data">
-                                <div className="name">32% towards 100 supporters goal</div>
-                                {/* <div className="completed">
-                                    <div className="text">Completed : </div>
-                                    <div className="value">31 / 412</div>
-                                </div> */}
+                        <div className="left">
+                            <div>
+                                <div className="title">Buy Me a Coffee</div>
+                                <div className="small-title">Every sip helps me create more</div>
+                                <p>Your support will help us increase our infrastructure capabilities allowing us to serve more users and improve performance by purchasing additional servers.</p>
+                                <p>Your contributions will also help us invest in marketing efforts to increase visibility and attract more users to the platform</p>
                             </div>
-                            <div className="line">
-                                <div className="fill" style={{
-                                    "width": `${percentage}%`,
-                                }}></div>
-                            </div>
+                            <img className='bottom-img' src={leftImage} alt="" />
                         </div>
-
-                        <ul>
-                            <li>Your support will help us increase our infrastructure capabilities, allowing us to serve more users and improve performance by purchasing additional servers.</li>
-                            {/* <li>By supporting Algolisted, you're enabling us to implement machine learning techniques to personalize content for individual users and improve the validation process for all content on the platform.</li> */}
-                            <li>Your contributions will also help us invest in marketing efforts to increase visibility and attract more users to the platform.</li>
-                        </ul>
-                        
-                        
+                        <div className="right">
+                            <div>
+                                <div className="small-title">Please scan Below</div>
+                                <div className="images">
+                                    <img className='scanner' src={scanMeImage} draggable="false" alt="" />
+                                    <img className='company' src={gpayImage} draggable="false" alt="" />
+                                </div>
+                            </div>
+                            <img className='bottom-img' src={rightImage} alt="" />
+                        </div>
                     </div>
                 </div>
             </Slide>
@@ -75,7 +67,7 @@ const Container = styled.div`
     .main-content{
         width: calc(100vw - 260px);
         height: 95vh;
-        padding: 20px;
+        padding: 40px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -84,6 +76,7 @@ const Container = styled.div`
         background-color: #fff;
         border-radius: 10px;
         position: relative;
+        min-height: 500px;
 
         .closer{
             position: absolute;
@@ -105,106 +98,92 @@ const Container = styled.div`
         }
 
         .center{    
-            width: 700px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
+            height: 100%;
+            width: 100%;
+            min-height: 500px;
 
-            .small-header{
-                font-size: 0.9rem;
-                font-weight: 500;
-                text-align: center;
-            }
-    
-            .header{
-                font-size: 1.95rem;
-                font-weight: 600;
-                margin: 10px 0;
-                color: #222222;
-                text-align: center;
-            }
 
-            ul{
-                li{
-                    font-size: 0.85rem;
-                    font-weight: 300;
-                    letter-spacing: 0.07rem;
-                    line-height: 1.75rem;
-                    margin: 10px;
-                }
-            }
-
-            .images{
-                user-select: none;
+            .left{
+                flex: 1;
+                padding: 50px 50px 0 50px;
+                height: 100%;
                 display: flex;
                 flex-direction: column;
+                justify-content: space-between;
+                
+                .title{
+                    font-size: 3rem;
+                    font-weight: 600;
+                    color: #222222;
+                    /* letter-spacing: 0.1rem; */
+                }
+
+                .small-title{
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    color: #222222;
+                    letter-spacing: 0.07rem;
+                    margin-bottom: 40px;
+                }
+
+                p{
+                    font-size: 0.9rem;
+                    font-weight: 200;
+                    letter-spacing: 0.07rem;
+                    margin: 20px 0;
+                    width: 80%;
+                }
+            }
+            
+            .right{
+                width: 35%;
+                min-width: 380px;
+                height: 100%;
+                background-color: black;
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
                 align-items: center;
-                margin: 40px 0;
-                padding: 20px 20px;
-                border-radius: 5px;
-                border: 1px solid rgb(209, 213, 219);
-                background-color: rgba(255, 255, 255, 0.83);
-                box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
-            }
+                padding-top: 50px;
 
-            .scanner{   
-                user-select: none;
-                height: 200px;
-            }
-
-            .company{
-                user-select: none;
-                height: 20px;
-            }
-
-            .progress{
-                width: 500px;
-                margin: 0 0 50px 0;
-
-                .cat-data{
+                .small-title{
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    color: #fff;
+                    letter-spacing: 0.07rem;
+                    text-align: center;
+                }
+                
+                .images{
+                    user-select: none;
                     display: flex;
+                    flex-direction: column;
                     align-items: center;
-                    justify-content: space-between;
-                    margin-bottom: 5px;
-    
-                    .name{
-                        font-size: 0.8rem;
-                        font-weight: 500;
-                        margin-bottom: 5px;
-                    }
-    
-                    .completed{
-                        display: flex;
-                        align-items: center;
-    
-                        .text{
-                            font-size: 0.7rem;
-                            font-weight: 300;
-                            color: grey;
-                            margin: 0 7.5px;
-                        }
-                        .value{
-                            font-size: 0.9rem;
-                            font-weight: 400;
-                            font-family: sans-serif;
-                        }
-                    }
+                    margin: 20px 0;
+                    padding: 20px 20px;
+                    border-radius: 20px;
+                    border: 1px solid rgb(209, 213, 219);
+                    background-color: #fff;
+                    box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
                 }
     
-                .line{
-                    height: 7.5px;
-                    width: 100%;
-                    border-radius: 50px;
-                    background-color: #f1f6f1;
-                    border: 1px solid #dbd5d5;
-                    overflow: hidden;
-    
-                    .fill{
-                        background-color: #8eb3df;
-                        height: 100%;
-                        /* border-radius: 50px; */
-                    }
+                .scanner{   
+                    user-select: none;
+                    height: 200px;
                 }
+    
+                .company{
+                    user-select: none;
+                    height: 20px;
+                }
+            }
+            
+            .bottom-img{
+                width: calc(100% - 30px);
+                margin: 0 auto;
             }
 
         }
