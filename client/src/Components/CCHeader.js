@@ -12,6 +12,8 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import BuyMeACoffee from './BuyMeACoffee';
 import Fade from 'react-reveal/Fade';
+import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 
 const CCHeader = () => {
   const [showAccountModel, setShowAccountModel] = useState(false);
@@ -50,16 +52,24 @@ const CCHeader = () => {
           <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
         </div> */}
 
+        <a className="nav-adv" href='https://www.codingninjas.com/codestudio/interview-experiences' target={"_blank"}>
+          <div className="text">Read interview experiences of popular companies on <b>coding ninjas</b></div>
+          <div className="promotion-tag">Promotion</div>
+        </a>
+
       {/* <div className="top-header">
         <div className="semi-bold">Advertise with Us : </div>Promote your Linkedin profile, posts or Projects. 
       </div> */}
 
       <div className="right-icons">
-        {/* <a href='https://www.buymeacoffee.com/nayak' target={"_blank"} className="donate-btn">
+        {/* <a href='https://www.buymeacoffee.com/nayak' target={"_blank"} className="icontext-btn">
           <div className="text">Buy me a coffee</div>
         </a> */}
-        <div className="donate-btn" onClick={() => {setshowModelCoffee(!showModelCoffee)}}>
-          <div className="text">Buy me a coffee</div>
+        <div className="icontext-btn" onClick={() => {setshowModelCoffee(!showModelCoffee)}}>
+          <div className="text">
+            <FreeBreakfastIcon/>
+            Buy me a coffee
+          </div>
         </div>
         <div className="icon-box">
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
@@ -69,6 +79,9 @@ const CCHeader = () => {
         <div className={showWebUpdate ? "icon-box clicked" : "icon-box"} onClick={handleWebUpdate}>
             <WhatshotIcon/>
         </div>
+        {/* <div className="icon-box" >
+            <Brightness4Icon/>
+        </div> */}
         
         {/* <div className={showNotificationModel ? "icon-box clicked" : "icon-box"} onClick={handleNotification}>
             <NotificationsIcon/>
@@ -188,6 +201,43 @@ const Container = styled.div`
       }
     }
 
+    .nav-adv{
+      /* width: 50%; */
+      border-radius: 10px;
+      border: 1px solid rgba(230, 230, 230, 1);
+      height: 60%;
+      background-color: #f2f2f2;
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 50px;
+      text-decoration: none;
+
+      .text{
+        font-size: 0.8rem;
+        text-decoration: none;
+        font-weight: 400;
+
+        b{
+          font-weight: 500;
+        }
+      }
+
+      .promotion-tag{
+        position: absolute;
+        top: -7.5px;
+        left: -20px;
+        padding: 3.5px 8.5px;
+        background-color: #e89898;
+        color: white;
+        border-radius: 10px;
+        font-weight: 400;
+        font-size: 0.6rem;
+      }
+    }
+
     .top-header{
       font-size: 0.8rem;
       font-weight: 300;
@@ -243,7 +293,7 @@ const Container = styled.div`
         }
       }
 
-      .donate-btn{
+      .icontext-btn{
         height: 32.5px;
         border-radius: 10px;
         border: 1px solid #dfe3e7;
@@ -259,8 +309,8 @@ const Container = styled.div`
         svg{
           font-size: 20px;
           fill: #514d4d;
-          margin-bottom: -5px;
-          margin-right: 2.5px;
+          margin-bottom: -6.5px;
+          margin-right: 3.5px;
         }
 
         .text{
