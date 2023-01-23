@@ -27,7 +27,7 @@ const Resources = () => {
     axios.get("https://algolisted.cyclic.app/resources/all")
       .then((res) => {
         setAllResources(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);

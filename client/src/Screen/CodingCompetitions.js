@@ -38,6 +38,7 @@ const CodingCompetitions = () => {
 			)
 				.then((res) => res.json())
 				.then((data) => {
+					// console.log(data);
 					setList(sortByContestTiming(data));
 					setWaitingForData(false);
 				})
@@ -47,7 +48,7 @@ const CodingCompetitions = () => {
 		})();
 	}, []);
 
-	console.log(list);
+	// console.log(list);
 
 	useEffect(() => {
 		const interval = setInterval(() => setList((list) => [...list]), 60000);

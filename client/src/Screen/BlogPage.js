@@ -20,7 +20,7 @@ const BlogPage = () => {
     const params = useParams();
     const { blogname, blogid } = params;
 
-    console.log(blogname, blogid);
+    // console.log(blogname, blogid);
 
     const ResourceType = 1;
 

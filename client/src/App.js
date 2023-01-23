@@ -21,7 +21,7 @@ const App = () => {
     <div>
       <ScrollToTop/>
       <Routes>
-        <Route path="/development" element={<CompetitionApi/>} />
+        {/* <Route path="/development" element={<CompetitionApi/>} /> */}
         <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/sign-in" element={<AuthPage/>} />

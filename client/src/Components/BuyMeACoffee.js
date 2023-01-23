@@ -24,7 +24,7 @@ const BuyMeACoffee = ({showModelCoffee, setshowModelCoffee}) => {
                         <div className="left">
                             <div>
                                 <div className="title">Buy Me a Coffee</div>
-                                <div className="small-title">Every sip helps me create more</div>
+                                <div className="small-title">Every sip helps us create more</div>
                                 <p>Your support will help us increase our infrastructure capabilities allowing us to serve more users and improve performance by purchasing additional servers.</p>
                                 <p>Your contributions will also help us invest in marketing efforts to increase visibility and attract more users to the platform</p>
                             </div>
