@@ -88,7 +88,11 @@ export default function CompetitionItem({ item, index }) {
         <div className="time-left">
           {isRegistrationClosed ? (
             <>
-              <p>competition will start in</p>
+              <p>
+                {showTimeLeftToCompetition() !== "Expired"
+                  ? "competition will start in"
+                  : ""}
+              </p>
               {showTimeLeftToCompetition()}
             </>
           ) : isCompetitionStarted ? (
