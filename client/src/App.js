@@ -15,13 +15,14 @@ import GoToTop from './Components/GoToTop';
 import BuyMeACoffee from './Components/BuyMeACoffee';
 import CCHeader from './Components/CCHeader';
 import CompetitionApi from './DevelopmentLocal/CompetitionApi';
+import CoursesReview from './Screen/CoursesReview';
 
 const App = () => {
   return (
     <div>
       <ScrollToTop/>
       <Routes>
-        {/* <Route path="/development" element={<CompetitionApi/>} /> */}
+        <Route path="/development" element={<CompetitionApi/>} />
         <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/sign-in" element={<AuthPage/>} />
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />
+        <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
       </Routes>

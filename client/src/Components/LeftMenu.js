@@ -34,11 +34,11 @@ const LeftMenu = ({ marked }) => {
     //   showAt: "selected-profiles",
     //   link: "/selected-profiles",
     // },
-    // {
-    //   value: "Community Help",
-    //   showAt: "community",
-    //   link: "/community",
-    // },
+    {
+      value: "Courses Review",
+      showAt: "courses-review",
+      link: "/courses-review",
+    },
     {
       value: "Opportunities",
       showAt: "opportunities",

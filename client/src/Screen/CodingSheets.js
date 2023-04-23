@@ -599,6 +599,7 @@ const CodingSheets = () => {
 												showSolvedChart ? (
 													<>
 														<div className="canvas-graph">
+															
 															<DoughnutChart chartData={chartDataSolved} options={options}></DoughnutChart>
 														</div>
 														<div className="graph-labels">
