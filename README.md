@@ -63,3 +63,9 @@ Currently Working on the redux part on the frontend.
 <br/><br/>
 ## License
 This license applies only to the use of the Software for non-commercial purposes. Any use of the Software for commercial purposes is strictly prohibited.
+
+---
+
+# Supported by
+
+[![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://jb.gg/OpenSourceSupport)
