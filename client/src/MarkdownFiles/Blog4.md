@@ -13,7 +13,7 @@
 
 ![image](https://github.com/Nayaker/AlgoListed/assets/93304796/265f4fca-fad4-4d4c-a635-6d85e0b2de88)
 
-In this blog, I will elaborate on fundamental Object-Oriented Programming (OOP) concepts and provide illustrative code snippets to facilitate comprehension. Additionally, I have included a set of OOP-related questions aimed at assisting you in preparing for interviews.
+In this blog, I will elaborate on fundamental Object-Oriented Programming (OOP) concepts in C++ and provide illustrative code snippets to facilitate comprehension. Additionally, I have included a set of OOP-related questions aimed at assisting you in preparing for interviews.
 
 <b> What will you learn : </b>
   - Class and Object
@@ -24,10 +24,13 @@ In this blog, I will elaborate on fundamental Object-Oriented Programming (OOP) 
   - Inheritance
   - PolyMorphism
   - Destructor
+  - Deep copy and Shallow copy
   - Static Keyword
+  - Virtual Keyword
+  - Abstract Class
   - Friend Function
   - Base Class Pointer Derived Class Object
-  - OOPS Interview Questions
+  - OOPS Interview Questions (Next Blog)
   
 
 <b> Prerequisites : </b> All you need is a basic understanding of OOP concepts at the college studies level. While I intend to develop this blog starting from the fundamental concepts, I suggest considering a brief YouTube video for a more enhanced understanding.
@@ -129,3 +132,126 @@ public:
 };
 ```
 In the given code, the function startBatteryDrain() facilitates battery depletion. However, users are shielded from the underlying process of battery drainage, exemplifying the principle of abstraction.
+
+## 6. Inheritance
+Inheritance facilitates the notion of "Code Reusability." It provides a mechanism through which a class can inherit the characteristics (data members and member functions) of another class.
+```
+class Samsung_Mobile : public Mobile {
+    // Class definition for Samsung_Mobile inheriting from Mobile
+};
+```
+
+<b> There are 5 Types of Inheritance in C++ : </b> 
+1. Single Inheritance.
+2. Multiple Inheritance.
+3. Multilevel Inheritance.
+4. Hierarchical Inheritance.
+5. Hybrid Inheritance.
+
+<img width="982" alt="Screenshot 2023-08-18 at 2 04 39 PM" src="https://github.com/Nayaker/AlgoListed/assets/93304796/44e685ad-f444-4e27-a976-b4101694275f">
+
+## 7. Polymorphism
+The term polymorphism signifies having multiple forms. It emerges within a hierarchical inheritance structure. In C++, polymorphism entails that invoking a member function will lead to distinct function executions based on the invoking object's type.
+
+Polymorphism is categorized into two types:
+1. Compile-time Polymorphism - function overloading and operator overloading.
+2. Runtime Polymorphism - function overriding and virtual functions.
+
+```
+class Mobile {
+public: 
+    void open_camera(){
+        cout<<"Camera Opened"<<endl;
+    }
+
+    void open_camera(int mp){ // function overloading - compile time
+        cout<<mp<<"MP Camera Opened"<<endl;
+    }
+};
+
+class Samsung_Mobile : public Mobile {
+public : 
+    void open_camera(){ // function overriding - run time
+        cout<<"128MP Camera Opened"<<endl;
+    }
+};
+```
+
+## 8. Destructor
+A destructor, similar to a constructor, is a special member function responsible for the cleanup of class objects initiated by constructors. It bears the class name preceded by a tilde (~) symbol, and its role is to release resources or perform necessary cleanup when objects are no longer in scope or are explicitly deleted.
+
+<b> Characteristics of the destructor: </b>
+  - Memory Deallocation: For dynamically allocated objects, destructors must be called using delete to release memory. In contrast, statically allocated objects handle memory deallocation automatically upon going out of scope.
+  - Automatic Invocation: The compiler triggers a destructor when its corresponding constructor's scope ends, releasing unnecessary memory space.
+  - No Arguments or Return: Destructors lack arguments and return values, preventing overloading.
+  - Static and Const Constraints: Destructors can't be marked as static or const.
+  - Public Declaration: Destructors should be declared in the public section of the program.
+
+## 9. Deep copy and Shallow copy
+Deep copy and Shallow copy : A shallow copy shares attribute references, while a deep copy creates a new, independent copy of the entire object structure, including nested objects. 
+
+```
+Mobile(const Mobile &other) {
+    battery_ptr = other.battery_ptr; // Shallow copy (same memory address)
+}
+
+Mobile(const Mobile &other) {
+    battery_ptr = other.battery_ptr; // Deep copy (copying the value)
+}
+```
+
+## 10. Static Keyword 
+The static keyword is used to declare class-level variables and methods that are shared among all instances of the class. The scope resolution operator (::) is used to explicitly specify the scope in which a particular class, variable, or function is defined or accessed. 
+
+```
+class Mobile {
+public:
+    static int totalMobiles; // Class-level variable
+
+    Mobile() {
+        totalMobiles++; // Increment the class-level variable
+    }
+};
+
+int Mobile::totalMobiles = 0; // Initialize the class-level variable
+```
+
+## 11. Virtual Keyword
+You can override a function in a derived class without explicitly using the virtual keyword. However, using the virtual keyword serves an important purpose and is recommended for maintaining code clarity and ensuring the intended behavior of polymorphism.
+
+```
+class Mobile {
+public: 
+    virtual void open_camera(){
+        cout<<"Camera Opened"<<endl;
+    }
+};
+
+class Samsung_Mobile : public Mobile {
+public : 
+    void open_camera(){ // function overridding - run time
+        cout<<"128MP Camera Opened"<<endl;
+    }
+};
+```
+
+## 12. Abstract Class
+An abstract class in C++ is a class that cannot be instantiated on its own and is meant to serve as a base for other classes. It contains at least one pure virtual function, making it impossible to create objects directly from it. The purpose of an abstract class is to provide a common interface or blueprint that derived classes must implement.
+
+<b>Key points about abstract classes:</b>
+  1. Pure Virtual Function: An abstract class contains at least one pure virtual function, which is declared using the virtual keyword followed by = 0 as an initializer. This function has no implementation in the abstract class and must be overridden in derived classes.
+  2. Cannot be Instantiated: You cannot create objects of an abstract class directly. It serves as a template for other classes to inherit from.
+  3. Derived Class Implementation: Derived classes that inherit from an abstract class must provide implementations for all the pure virtual functions of the base class. This ensures that instances of derived classes can be created and used.
+```
+class Mobile {
+public: 
+    virtual void open_camera() = 0; // Pure virtual function
+};
+
+class Samsung_Mobile : public Mobile {
+public : 
+    void open_camera() {
+        cout << "128MP Camera Opened" << endl;
+    }
+};
+```
