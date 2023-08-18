@@ -28,7 +28,7 @@ In this blog, I will elaborate on fundamental Object-Oriented Programming (OOP) 
   - Static Keyword
   - Virtual Keyword
   - Abstract Class
-  - Friend Function
+  - Friend Class
   - Base Class Pointer Derived Class Object
   - OOPS Interview Questions (Next Blog)
   
@@ -255,3 +255,58 @@ public :
     }
 };
 ```
+
+## 13. Friend Class
+A class declared as a friend can reach private and protected components of another class. This is beneficial when you need to grant specific access to certain class members, permitting one class to interact with the private elements of another.
+
+<b>Important points about friend functions and classes: </b>
+  1. Friendship is not mutual. If class A is a friend of B, then B doesn’t become a friend of A automatically.
+  2. Friendship is not inherited.
+  3. The concept of friends is not there in Java.
+
+```
+class Mobile {
+private:
+    int privateValue = 42; // Private member
+
+    friend class CameraFriend; // Declaring CameraFriend as a friend class
+};
+
+class CameraFriend {
+public:
+    void accessMobilePrivateValue(Mobile& mobile) {
+        cout << "Accessing private value: " << mobile.privateValue << endl;
+    }
+};
+```
+
+## 14. Base Class Pointer Derived Class Object
+The concept "Base Class Pointer Derived Class Object" means that you can use a pointer of the base class type to point to an object of a derived class. This is possible because a derived class object includes all the members and functionalities of its base class, in addition to its own unique members and functionalities. But if you try "Derived Class Pointer Base Class Object" if would give an error.
+```
+class Mobile {
+public: 
+    virtual void open_camera() = 0; // Pure virtual function
+};
+
+class Samsung_Mobile : public Mobile {
+public : 
+    void open_camera() {
+        cout << "128MP Camera Opened" << endl;
+    }
+};
+
+int main(){
+    Samsung_Mobile *my_samsung_mobile1 = new Samsung_Mobile();
+
+    Mobile* basePtr1 = my_samsung_mobile1; // Base class pointer to derived class object
+
+    basePtr1->open_camera(); // Calls the overridden open_camera() in Samsung_Mobile
+
+    delete my_samsung_mobile1;
+
+    return 0;
+}
+```
+
+## Next Blog 
+The upcoming blog will feature interview questions sourced from various interview experiences, organized in ascending order of complexity.
