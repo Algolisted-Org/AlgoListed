@@ -53,7 +53,7 @@ const CCHeader = () => {
         </div> */}
 
         <a className="nav-adv" href='https://bit.ly/3H1Wf7F' target={"_blank"}>
-          <div className="text">Participate in the <b>Grand Republic 100% Scholarship Test</b> by <b>Coding Ninjas</b></div>
+          <div className="text">Master complete DSA as a beginner <b>absolutely free</b> with <b>Love Babbar</b></div>
           <div className="promotion-tag linear-gradient">Promotion</div>
         </a>
 
@@ -240,18 +240,20 @@ const Container = styled.div`
         font-size: 0.8rem;
         text-decoration: none;
         font-weight: 400;
+        color: cornflowerblue;
       
 
         b{
           font-weight: 600;
           margin: 0 3.5px;
-          background-color: #f3ec78;
-          background-image: linear-gradient(92deg, #927272, orange);
+          color: #7c7acf;
+          /* background-color: #f3ec78; */
+          /* background-image: linear-gradient(92deg,#6e93db,#819b81); */
             background-size: 100%;
-            -webkit-background-clip: text;
-            -moz-background-clip: text;
-            -webkit-text-fill-color: transparent; 
-            -moz-text-fill-color: transparent;
+            /* -webkit-background-clip: text; */
+            /* -moz-background-clip: text; */
+            /* -webkit-text-fill-color: transparent;  */
+            /* -moz-text-fill-color: transparent; */
         }
       }
 

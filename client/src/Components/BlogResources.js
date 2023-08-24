@@ -81,7 +81,7 @@ const BlogResources = ({ ResourceType,  blogname }) => {
                 <div className="para-1">{contentInformation[ResourceType].text}</div>
                 <div className="message">
                     <div className="text">
-                        Feature will be added soon for : Edit request of the following content
+                        Feature for adding resources will be added soon!
                     </div>
                 </div>
                 {/* <div className="table">

@@ -12,5 +12,19 @@
         "file_name" : "Blog0.md",
         "url" : "backend-with-node-js-for-beginners",
         "titleSupport" : "Learn to start your backend with node.js"
+    }, 
+    {
+        "date" : "August 18, 2023",
+        "title" : "OOPS for Interview Revision - Useful and Short topics for interviews",
+        "desc" : "In this blog, I will elaborate on fundamental Object-Oriented Programming (OOP) concepts and provide illustrative code snippets to facilitate comprehension. Additionally, I have included a set of OOP-related questions aimed at assisting you in preparing for interviews. Basically, useful and Short topics for interviews",
+        "link" : "/blogs/1/OOPS-for-interview-revision",
+        "category" : "Core Subjects",
+        "author" : ["Atanu Nayak"],
+        "authorLink" : ["https://www.linkedin.com/in/atanu-nayak-profile/"],
+        "authorImageLink" : ["https://avatars.githubusercontent.com/u/93304796?v=4"],
+        "tags" : ["OOPS", "Core Subjects", "CS Fundamental", "Interview"],
+        "file_name" : "Blog1.md",
+        "url" : "OOPS-for-interview-revision",
+        "titleSupport" : "OOPS for Interview Revision"
     }
 ]

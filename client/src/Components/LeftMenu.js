@@ -34,16 +34,21 @@ const LeftMenu = ({ marked }) => {
     //   showAt: "selected-profiles",
     //   link: "/selected-profiles",
     // },
-    {
-      value: "Courses Review",
-      showAt: "courses-review",
-      link: "/courses-review",
-    },
+    // {
+    //   value: "Online Assessment",
+    //   showAt: "online-assessment",
+    //   link: "/online-assessment",
+    // },
+    // {
+    //   value: "Resume Shortlisting",
+    //   showAt: "resume-shortlisting",
+    //   link: "/resume-shortlisting",
+    // },
     {
       value: "Opportunities",
       showAt: "opportunities",
       link: "/opportunities",
-    }
+    },
     // {
     //   value: "Aptitude Round",
     //   showAt: "aptitude-round",
@@ -76,7 +81,7 @@ const LeftMenu = ({ marked }) => {
           <div className="text">algolisted.com</div>
           <div className="line"></div>
         </div>
-        <a href='https://github.com/Nayaker/AlgoListed/tree/main/client/src/MarkdownFiles' target={"_blank"} className="link">Contribute Blog Content</a>
+        <a className="link">Services and Assistance</a>
         <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link">Report an Issue</a>
       </div>
 

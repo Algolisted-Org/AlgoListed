@@ -15,6 +15,7 @@ import DoughnutChart from '../Components/DoughnutChart';
 import Tooltip from '@material-ui/core/Tooltip';
 import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 import UpdateIcon from '@material-ui/icons/Update';
+import CreateIcon from '@material-ui/icons/Create';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
 import { Link as RouterLink }from 'react-router-dom';
@@ -804,6 +805,11 @@ const CodingSheets = () => {
 													/>
 												</div>
 											</Tooltip>
+											{/* <Tooltip title="Notes">
+												<div className="review-btn">
+													<CreateIcon/>
+												</div>
+											</Tooltip> */}
 										</div>
 									</div>
 								);

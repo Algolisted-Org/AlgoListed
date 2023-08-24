@@ -20,7 +20,7 @@ const BlogPage = () => {
     const params = useParams();
     const { blogname, blogid } = params;
 
-    // console.log(blogname, blogid);
+    console.log(blogname, blogid);
 
     const ResourceType = 1;
 
@@ -38,6 +38,7 @@ const BlogPage = () => {
             "scroll_text": "Show All Resources, Related to this blog",
         }
       ]
+
 
       useEffect(() => {
         axios
@@ -59,13 +60,12 @@ const BlogPage = () => {
                 <LeftMenu marked={"all-blogs"} />
                 <div className="blogs-main">
                     <BlogContentMD blogid={blogid} blogname={blogname}/>
-
                     <RightMenu>
                         <div className="blog-contributors">
                             <div className="top-title">Blog Contributors</div>
                             <div className="top-desc">
-                            This blog is has being written by <a href="/">Atanu Nayak</a> and a lot of resources are contributed 
-                            by the community.
+                              This blog is has being written by <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target='_blank'>Atanu Nayak</a> and a lot of resources are contributed 
+                              by the community.
                             </div>
                             <div className="hold-contributors">
                                 {
@@ -80,7 +80,6 @@ const BlogPage = () => {
                             <button className="full-btn cl-1">Become a Technical Content Writer</button>
                             </div>
                         </div>
-                        
                         <div className="sticky-top">
                             <div className="similar-questions">
                             <div className="top-title">{contentInformation[ResourceType].name}</div>
@@ -99,18 +98,11 @@ const BlogPage = () => {
                                 else return (<></>)
                                 })
                             }
-                            {/* <div className="question">
-                                <div className="text">{contentInformation[ResourceType].type} : <a href="/">Course Schedule I</a></div>
-                            </div>
-                            <div className="question">
-                                <div className="text">{contentInformation[ResourceType].type} : <a href="/">Rotting Oranges</a></div>
-                            </div> */}
                             <div className="show-all-problems"><Link to='rev' spy={true} smooth={true} offset={2600} duration={1000}>{contentInformation[ResourceType].scroll_text}</Link></div>
                             </div>
                             <div className="ask-query">
                             <div className="top-title">Ask query about the topic</div>
                             <div className="top-desc">If you have a question or doubt, other readers may be able to help you. Additionally, a notification will be sent to the creators of the blog, who can address it for you.</div>
-                            {/* <input type="text" className='input-query' placeholder='Enter your doubt . . .'/> */}
                             <div className="btn"><Link to='ask'spy={true} smooth={true} offset={3000} duration={1000}>
                             <div className="submit-btn" >Ask doubt to community</div>
                             </Link>

@@ -1,12 +1,24 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import axios from "axios";
 
 const Contributors = () => {
     const [temp, setTemp] = useState([1, 2, 2,3,3,4,4, 3,3,2,2,1]);
     
     useEffect(() => {
       document.title = "Contributors | Organisation Information - Algolisted";
+    }, []);
+
+    const [contributorsList, setContributorsList] = useState(null);
+
+    useEffect(() => {
+      axios.get("https://api.github.com/repos/Nayaker/Algorithmist/contributors")
+        .then((res) => {
+          setContributorsList(res.data);
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
     }, []);
 
     return (
@@ -20,6 +32,17 @@ const Contributors = () => {
                 <br /><br />
                 Thank you to all of our contributors for your invaluable support. We look forward to continuing to work with you and to the many great things we will accomplish together in the future.
             </p>
+            <div className="hold-contributors">
+            {
+              contributorsList != null && contributorsList.map((item, index) => {
+                return (
+                  <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                    <img src={item.avatar_url} alt="" />
+                  </a>
+                )
+              })
+            }
+          </div>
 
 
         </Container>
@@ -38,8 +61,8 @@ const Container = styled.div`
     .hold-contributors{
       display: flex;
       flex-wrap: wrap;
-      margin-top: 10px;
-      max-width: 60%;
+      margin-top: 40px;
+      max-width: 75%;
 
       .contributor{
         background-color: pink;

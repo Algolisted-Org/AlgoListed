@@ -9,13 +9,14 @@ import styled from 'styled-components'
 import { BlogPage , AboutUs , Contact , FutureVision ,BlogIdeas, CodingCompetitions , Issues ,
 PageNotExist ,LandingPage ,OrganisationInfo ,AllBlogs ,AptitudeRound ,Opportunities ,Resources,
 ContributeSite ,BlogAutoCode ,AuthPage , SelectedProfiles, CodingSheets ,AddContentCoreOnly ,LandingPage2, 
-Readme, CoreTeam ,Mission , RequestAPI, ChartTemp, PushDataToMongoDB } from './Screen'
+Readme, CoreTeam ,Mission , RequestAPI, ChartTemp, PushDataToMongoDB }  from './Screen'
 import ScrollToTop from './Components/ScrollToTop';
 import GoToTop from './Components/GoToTop';
 import BuyMeACoffee from './Components/BuyMeACoffee';
 import CCHeader from './Components/CCHeader';
 import CompetitionApi from './DevelopmentLocal/CompetitionApi';
 import CoursesReview from './Screen/CoursesReview';
+import OnlineAssessment from './Screen/OnlineAssessment';
 
 const App = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />
         <Route path="/courses-review" element={<CoursesReview/>} />
+        <Route path="/online-assessment" element={<OnlineAssessment/>} />
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
       </Routes>

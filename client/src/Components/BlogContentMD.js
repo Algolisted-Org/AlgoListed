@@ -18,7 +18,7 @@ const BlogContentMD = ({ blogid,  blogname }) => {
     const file_name = blogData.file_name;
     // console.log(file_name);
     
-    // console.log(blogid);
+    // console.log(blogid, blogname);
     // console.log(data[blogid]);
 
     useEffect(() => {
@@ -35,8 +35,8 @@ const BlogContentMD = ({ blogid,  blogname }) => {
     return (
         <Container>
             {/* <Alert>
-                fafanfafkfa
-            </Alert> */}
+                This is an Alert
+            </Alert>  */}
             <div className="left">
                 {/* <ShowContributors /> */}
                 <h1 className='main-heading'>{blogData.title}</h1>

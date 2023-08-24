@@ -405,6 +405,7 @@ const BlogsContainer = styled.div`
     flex-wrap: wrap;
 
     .blog-container{
+        /* border: 1px solid black; */
         width: calc(50% - 30px);
         /* border: 1px solid #e5e7ed; */
         border-top: 1px solid #e5e7ed;
@@ -437,6 +438,7 @@ const BlogsContainer = styled.div`
 
 
         .blog-desc{
+            margin-top: 5px;
             font-size: 0.9rem;
             font-weight: 200;
             margin-bottom: 25px;
