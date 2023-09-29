@@ -13,6 +13,9 @@
     "chart.js": "^4.1.2",
     "d3": "^7.8.0",
     "d3-scale-chromatic": "^3.0.0",
+    "easy-resume-parser": "^1.0.1",
+    "form-data": "^4.0.0",
+    "fs": "^0.0.1-security",
     "markdown-to-jsx": "^7.1.8",
     "react": "^18.2.0",
     "react-chartjs": "^1.2.0",
@@ -29,7 +32,8 @@
     "react-spinners": "^0.13.6",
     "redux": "^4.2.0",
     "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "website-scraper": "^5.3.1"
   },
   "scripts": {
     "start": "set PORT=4000 && react-scripts start",

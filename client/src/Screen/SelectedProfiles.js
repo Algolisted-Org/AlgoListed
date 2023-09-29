@@ -15,6 +15,8 @@ import sampleImage from '../Images/sample2.png';
 import sampleImage2 from '../Images/sample3.png';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import MobileNavbar from "../Components/MobileNavbar";
+const ResumeParser = require("../Screen");
+
 
 const SelectedProfiles = () => {
   const [allResumesData, setAllResumesData] = useState([]);
@@ -24,7 +26,28 @@ const SelectedProfiles = () => {
   const [comapanyName, setComapanyName] = useState(companyFilters[0].text);
   const [showComapanyChange, setShowComapanyChange] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  // const ResumeParser = require('');
 
+  // const resume = new ResumeParser("../Images/my_resume");
+
+  //Convert to JSON Object
+//   resume.parseToJSON()
+//   .then(data => {
+//     console.log('Yay! ', data);
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });
+
+// //Save to JSON File
+// resume.parseToFile('../Images') //output subdirectory
+//   .then(file => {
+//     console.log('Yay! ', file);
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });
+  
   // console.log(companyFilters);
 
   useEffect(() => {
@@ -44,6 +67,9 @@ const SelectedProfiles = () => {
   const handleFilter = (e) => {
     setFilter(e.target.textContent);
   };
+
+  
+
 
   const filters = selectedProfilesFilters.map((item) => {
     return (

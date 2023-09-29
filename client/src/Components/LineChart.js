@@ -1,17 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Doughnut } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { Chart as chartJS } from "chart.js/auto";
 
-const DoughnutChart = ({chartData, options}) => {
+const LineChart = ({chartData, options}) => {
   return ( 
     <Container>
-      <Doughnut data={chartData} options={options}></Doughnut>
+      <Line data={chartData} options={options}></Line>
     </Container>
   )
 }
 
-export default DoughnutChart
+export default LineChart
 
 const Container = styled.div`
 `

@@ -24,10 +24,15 @@ const LeftMenu = ({ marked }) => {
       showAt: "coding-sheets",
       link: "/coding-sheets/striver-sde-sheet",
     },
+    // {
+    //   value: "Coding Competitions",
+    //   showAt: "all-coding-competitions",
+    //   link: "/coding-competitions",
+    // },
     {
-      value: "Coding Competitions",
-      showAt: "all-coding-competitions",
-      link: "/coding-competitions",
+      value: "Contest Analysis",
+      showAt: "contest-analysis",
+      link: "/contest-analysis",
     },
     // {
     //   value: "Selected Profiles",
