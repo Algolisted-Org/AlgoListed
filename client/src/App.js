@@ -20,6 +20,7 @@ import OnlineAssessment from './Screen/OnlineAssessment';
 import CodeClub from './Screen/CodeClub';
 import ContestAnalysis from './Screen/ContestAnalysis';
 import ContestAnalysisList from './Screen/ContestAnalysisList';
+import InterviewSummaries from './Screen/InterviewSummaries';
 
 const App = () => {
   
@@ -59,6 +60,7 @@ const App = () => {
         <Route path="/contest-analysis/:contestName" element={<ContestAnalysis/>} />
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
+        <Route path="/interview-summaries" element={<InterviewSummaries/>} />
         <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} />
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />

@@ -6,8 +6,8 @@ import LeftMenu from '../Components/LeftMenu';
 import axios from 'axios';
 import { contestAnalysisFilters } from '../Components/contestAnalysisFilters';
 import LockIcon from '@material-ui/icons/Lock';
-import LineChart from '../Components/LineChart';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import LineChart from '../Components/LineChart';
 import { Bar } from 'react-chartjs-2';
 
 const ContestAnalysis = () => {
@@ -177,7 +177,7 @@ const ContestAnalysis = () => {
 
 
   const predictRating = () => {
-    const url = `http://127.0.0.1:5000/get-prediction`;
+    const url = `https://nayak-leetcode-api.vercel.app/?username=${username}`;
 
     axios.get(url)
     .then((res) => {
@@ -218,7 +218,7 @@ const ContestAnalysis = () => {
             <div className="back-btn">
               <ArrowBackIosIcon />
             </div>
-            <div className="main-display">Leetcode Weekly Contest 362</div>
+            <div className="main-display">Leetcode Weekly Contest Analysis</div>
           </div>
 
           <div className="feature-title">1. Question Finished Count</div>

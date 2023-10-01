@@ -26,7 +26,7 @@ return (
         <div className="main-content">
           <h1 className="main-heading">Simplified Coding Blogs</h1>
           <p className="heading-supporter">
-            Algolisted creates helpful lists of content for revision and understanding various topics, including practical information and resource links. They also offer curated lists of resources like open source projects and programming questions for focused learning.
+            Algolisted generates informative lists for studying and comprehending a wide range of subjects, encompassing practical data and links to valuable resources. The platform's AI-powered blogs extract information from diverse sources such as LeetCode blogs, GeeksforGeeks, Codeforces, and more, and subsequently provide concise summaries alongside pertinent resources pertaining to the blog's subject matter.
           </p>
           <div className="data-filters">
             <div className="toggle-filter" onClick={() => setShowFilters(!showFilters)}>
@@ -88,16 +88,17 @@ return (
         <CCHeader />
         <LeftMenu marked={"all-blogs"} />
         <div className="cc-middle-content">
-          <h1 className='main-heading'>Simplified Coding Blogs <div className="head-tag">Open Source</div> </h1>
+          <h1 className='main-heading'>AI Summarization of Blogs <div className="head-tag">Under Development Phase 0.90-C</div> </h1>
           <p className="heading-supporter">
-          Algolisted creates helpful lists of content for revision and understanding various topics, including practical information and resource links. They also offer curated lists of resources like open source projects and programming questions for focused learning.
+            Algolisted generates informative lists for studying and comprehending a wide range of subjects, encompassing practical data and links to valuable resources. The platform's AI-powered blogs extract information from diverse sources such as LeetCode blogs, GeeksforGeeks, Codeforces, and more, and subsequently provide concise summaries alongside pertinent resources pertaining to the blog's subject matter.
           </p>
           <div className="message">
-            <div className="icon"></div>
-            <div className="text">
-              To create new blogs on a topic or edit existing contect you can visit the markdown 
-              files on our github. <a href="https://github.com/Nayaker/AlgoListed/tree/main/client/src/MarkdownFiles" target={"_blank"}>click here</a>
-            </div>
+              <div className="icon"></div>
+              <div className="text">
+                  <b>Under Development : </b> Our primary goal is to streamline the procedure of searching for a company's name, extracting approximately 25-50 recent and pertinent interview experiences, and utilizing this as input for our machine learning model. Subsequently, our model produces results, which we store for a 30-day period. Consequently, you consistently receive the most up-to-date information, ensuring that you are always provided with current data instead of outdated information. Have an idea in this feature
+                  {" "}
+                  <a href="https://github.com/Nayaker/AlgoListed/issues/new" target={"_blank"}>click here</a>
+              </div>
           </div>
 
             <Sort>

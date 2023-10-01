@@ -12,8 +12,8 @@ const OILeftMenu = ({marked}) => {
   return (
     <Container>
       {/* <div className="logo">Atanu Nayak</div> */}
-      <Tooltip title="Version - v0.12">
-        <div className="logo">Beta Version</div>
+      <Tooltip title="Version - v2.10">
+        <div className="logo">Dev Mode</div>
       </Tooltip>
       <div className="mid-links">
         <a href='/blogs/all' className="link">
@@ -35,7 +35,7 @@ const OILeftMenu = ({marked}) => {
           marked == "about-us" ? (<RouterLink to='/organisation-information/about-us' className="link current-link">About Us</RouterLink>) : (<RouterLink to='/organisation-information/about-us' className="link">About Us</RouterLink>)
         }
         {
-          marked == "verify-contributor" ? (<RouterLink to='/organisation-information/verify-contributor' className="link current-link">Verify Contributor</RouterLink>) : (<RouterLink to='/organisation-information/verify-contributor' className="link">Verify Contributor</RouterLink>)
+          marked == "contributor-work" ? (<RouterLink to='/organisation-information/contributor-work' className="link current-link">Contributor Work</RouterLink>) : (<RouterLink to='/organisation-information/contributor-work' className="link">Contributor Work</RouterLink>)
         }
         {
           marked == "privacy-policies" ? (<RouterLink to='/organisation-information/privacy-policies' className="link current-link">Privacy Policies</RouterLink>) : (<RouterLink to='/organisation-information/privacy-policies' className="link">Privacy Policies</RouterLink>)
@@ -46,7 +46,7 @@ const OILeftMenu = ({marked}) => {
       </div>
       <div className="bottom-btns">
         Open Source Project <br />
-        Version - v0.12 <br />
+        Version - v2.10 <br />
         {/* <MenuIcon className='icon'/> */}
         {/* <div className="text">More</div> */}
       </div>

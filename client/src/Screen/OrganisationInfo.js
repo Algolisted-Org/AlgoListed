@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import CCHeader from '../Components/CCHeader'
 import OILeftMenu from '../Components/OILeftMenu'
-import VerifyContributor from './VerifyContributor'
+import ContributorWork from './ContributorWork'
 import { useParams } from 'react-router-dom';
 import AboutUs from './AboutUs'
 import PrivacyPolicies from './PrivacyPolicies'
@@ -34,7 +34,7 @@ const OrganisationInfo = () => {
                     showpage == "all-contributors" ? (<Contributors/>) : (<></>)
                   }
                   {
-                    showpage == "verify-contributor" ? (<VerifyContributor/>) : (<></>)
+                    showpage == "contributor-work" ? (<ContributorWork/>) : (<></>)
                   }
                   {
                     showpage == "about-us" ? (<AboutUs/>) : (<></>)

@@ -13,17 +13,23 @@ const LeftMenu = ({ marked }) => {
       value: "Show All Blogs",
       showAt: "all-blogs",
       link: "/blogs/all",
-    }, 
+    },
     {
       value: "Coding Resources",
       showAt: "resources",
       link: "/resources",
+    }, 
+    {
+      value: "Interview Summaries",
+      showAt: "interview-summaries",
+      link: "/interview-summaries",
     },
     {
       value: "Coding Sheets",
       showAt: "coding-sheets",
       link: "/coding-sheets/striver-sde-sheet",
     },
+    
     // {
     //   value: "Coding Competitions",
     //   showAt: "all-coding-competitions",
@@ -34,6 +40,11 @@ const LeftMenu = ({ marked }) => {
       showAt: "contest-analysis",
       link: "/contest-analysis",
     },
+    // {
+    //   value: "Contest Archive",
+    //   showAt: "contest-archive",
+    //   link: "/contest-archive",
+    // },
     // {
     //   value: "Selected Profiles",
     //   showAt: "selected-profiles",
@@ -49,11 +60,11 @@ const LeftMenu = ({ marked }) => {
     //   showAt: "resume-shortlisting",
     //   link: "/resume-shortlisting",
     // },
-    {
-      value: "Opportunities",
-      showAt: "opportunities",
-      link: "/opportunities",
-    },
+    // {
+    //   value: "Opportunities",
+    //   showAt: "opportunities",
+    //   link: "/opportunities",
+    // },
     // {
     //   value: "Aptitude Round",
     //   showAt: "aptitude-round",
@@ -65,9 +76,10 @@ const LeftMenu = ({ marked }) => {
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
       {/* <a href='/' className="logo">AlgoListed</a> */}
       
-      <Tooltip title="Version - v0.12">
+      <Tooltip title="Version - v2.10">
         <div className="logo">
-          Beta Version
+          {/* Alpha Version */}
+            Dev Mode
           {/* <div className="small-top">V2.17</div> */}
         </div>
       </Tooltip>
@@ -86,7 +98,7 @@ const LeftMenu = ({ marked }) => {
           <div className="text">algolisted.com</div>
           <div className="line"></div>
         </div>
-        <a className="link">Services and Assistance</a>
+        <a href='mailto:nayak.primary@gmail.com' target={"_blank"} className="link">Request API Access</a>
         <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link">Report an Issue</a>
       </div>
 
@@ -96,7 +108,7 @@ const LeftMenu = ({ marked }) => {
             {/* <div><a className="more-link" href='/organisation-information/core-team'>Core Team</a></div> */}
             <div><RouterLink className="more-link" to='/organisation-information/all-contributors'>Contributors</RouterLink></div>
             <div><RouterLink className="more-link" to='/organisation-information/about-us'>About Us</RouterLink></div>
-            <div><RouterLink className="more-link" to='/organisation-information/verify-contributor'>Verify Contributor</RouterLink></div>
+            <div><RouterLink className="more-link" to='/organisation-information/contributor-work'>Contributor Work</RouterLink></div>
             <div><RouterLink className="more-link" to='/organisation-information/privacy-policies'>Privacy Policies</RouterLink></div>
             <div><RouterLink className="more-link last-more-link" to='/organisation-information/disclaimer'>Disclaimer</RouterLink></div>
           </div>
