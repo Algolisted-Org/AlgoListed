@@ -1,0 +1,75 @@
+[
+  {
+    "user_name": "ThorezNS",
+    "name": "Maciej Niemiec",
+    "avatar_url": "https://avatars.githubusercontent.com/u/84680745?v=4",
+    "pull_requests": [
+      {
+        "id": 91,
+        "title":
+          "fix the name conflict bug regarding the start time of the competition",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/91",
+        "created_on": "Apr 23, 2023"
+      },
+      {
+        "id": 60,
+        "title":
+          "correct the way of sorting by the time remaining to the end of regist…",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/60",
+        "created_on": "Dec 29, 2022"
+      }
+    ]
+  },
+  {
+    "user_name": "saurabh-sen",
+    "name": "Saurabh Sen",
+    "avatar_url": "https://avatars.githubusercontent.com/u/68960038?v=4",
+    "pull_requests": [
+      {
+        "id": 93,
+        "title": "add readme for installation",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/93",
+        "created_on": "Apr 23, 2023"
+      }
+    ]
+  },
+  {
+    "user_name": "skshahnawaz",
+    "name": "Sk Shahnawaz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/52563824?v=4",
+    "pull_requests": [
+      {
+        "id": 82,
+        "title": "Update index.html",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/82",
+        "created_on": "Jan 12, 2023"
+      }
+    ]
+  },
+  {
+    "user_name": "sailikpandey22",
+    "name": "SAILIK PANDEY",
+    "avatar_url": "https://avatars.githubusercontent.com/u/102276321?v=4",
+    "pull_requests": [
+      {
+        "id": 89,
+        "title": "Added Kickstart Script",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/89",
+        "created_on": "Jan 18, 2023"
+      }
+    ]
+  },
+  {
+    "user_name": "dineshigdd",
+    "name": "Daminda Dinesh W Imaduwa Gamage",
+    "avatar_url": "https://avatars.githubusercontent.com/u/10340892?v=4",
+    "pull_requests": [
+      {
+        "id": 88,
+        "title": "Enter proper links in Landing Page Footer",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/88",
+        "created_on": "Jan 18, 2023"
+      }
+    ]
+  }
+]
