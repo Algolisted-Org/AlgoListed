@@ -1,5 +1,8 @@
-# 🚀 Welcome to Algolisted
+![image](https://github.com/Nayaker/AlgoListed/assets/93304796/04728c3e-f51e-49c8-86cf-dfda1f9efa72)
 
+
+
+# 🚀 Welcome to Algolisted
 
 <img width="1440" alt="Screenshot 2023-01-02 at 2 25 53 AM" src="https://user-images.githubusercontent.com/93304796/210184355-8a328a4c-191e-44c4-b36f-a98a26ffe49e.png">
 
