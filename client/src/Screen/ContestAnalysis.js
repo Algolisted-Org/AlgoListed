@@ -17,15 +17,16 @@ const ContestAnalysis = () => {
   const [barData, setBarData] = useState([]);
   const [IdToProblem, setIdToProblem] = useState({});
   const [wholeLeetcodeData, setWholeLeetcodeData] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState('all countries');
+  const [selectedCountry, setSelectedCountry] = useState('Select Country');
   const [searchUsername, setSearchUsername] = useState('');
   const [rankings, setRankings] = useState([]);
   const [countryOptions, setCountryOptions] = useState([]);
   const [username, setUsername] = useState('');
   const [prediction, setPrediction] = useState(null);
-  
+  const [problemLabels, setProblemLabels] = useState([]);
   const { contestName } = useParams(); 
   console.log(contestName);
+  const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
 
   useEffect(() => {
     axios
@@ -66,11 +67,11 @@ const ContestAnalysis = () => {
             datasets: [
               {
                 label: 'Fail Count',
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(149, 164, 252, 1)',
+                borderColor: 'rgba(149, 164, 252, 1)',
                 borderWidth: 1,
-                hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
-                hoverBorderColor: 'rgba(75, 192, 192, 1)',
+                hoverBackgroundColor: 'rgba(129, 142, 219, 0.8)',
+                innerWidth: '20px',
                 data,
               },
             ],
@@ -84,9 +85,10 @@ const ContestAnalysis = () => {
         const problemLabels = problemIds.map(
           (problemId) => idToProblem[problemId]
         );
+        setProblemLabels(problemLabels)
 
         problemLabels.sort();
-        const chartDatasets = problemLabels.map((problemLabel) => {
+        const chartDatasets = problemLabels.map((problemLabel, index) => {
           const problemId = problemIds.find(
             (id) => idToProblem[id] === problemLabel
           );
@@ -96,10 +98,12 @@ const ContestAnalysis = () => {
           return {
             label,
             data,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: lineGraphColours[index],
+            borderRadius: 3,
+            backgroundColor: lineGraphColours[index],
             borderWidth: 3,
-            pointRadius: 1.5,
-            pointHoverRadius: 10,
+            pointStyle: false,
+            lineTension: 0,
           };
         });
 
@@ -128,24 +132,86 @@ const ContestAnalysis = () => {
     );
   });
 
+  const barOptions = {
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        }
+      }
+    },
+    datasets: {
+      bar: {
+        barPercentage: 0.3,
+        borderRadius: 4,
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          generateLabels: function () {
+              return [
+                {
+                text: `Fail Count`,
+                borderRadius: 4,
+                fillStyle: 'rgba(149, 164, 252, 1)',
+                strokeStyle: 'rgba(149, 164, 252, 1)',
+              }
+            ]
+          },
+        },
+      },
+    },
+  };
+
   // Render the bar graphs for each problem's fail count
   const barGraphs = barData.map((data, index) => (
     <div key={index} className='problem'>
       <div className="problem-title">Problem {IdToProblem[questions[index].question_id]} : {questions[index].title}</div>
       <div className="bar-chart">
-        <Bar data={data} />
+        <Bar data={data} options={barOptions}/>
       </div>
-      <div>Problem credit : {questions[index].credit}</div>
-      <div>Predicted codeforces_rating : {questions[index].codeforces_rating}</div>
-      <div>Problem Inspiration : {questions[index].inspired_from}</div>
-      <div>Problem Author : {questions[index].author}</div>
+      <div className='bar-stats'>
+        <div className='stats'>
+          <div className='stat'>Problem credit : {questions[index].credit}</div>
+          <div className='stat'>Predicted codeforces rating : {questions[index].codeforces_rating}</div>
+          </div>
+        <div className='stats'>
+          <div className='stat'>Problem Inspiration : {questions[index].inspired_from}</div>
+          <div className='stat'>Author : {questions[index].author}</div>
+        </div>
+      </div>
     </div>
   ));
 
-  const options = {
+  const chartOptions = {
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
     plugins: {
       legend: {
         display: true,
+        labels: {
+          generateLabels: function () {
+            return problemLabels.map(function (label, index) {
+              return {
+                text: `Problem ${label}       `,
+                borderRadius: 4,
+                fillStyle: lineGraphColours[index],
+                strokeStyle: lineGraphColours[index],
+                boxHeight: 16,
+                boxWidth: 10,
+                paddingRight: 20,
+              };
+            });
+          },
+          padding: 10,
+        },
       },
     },
   };
@@ -157,7 +223,7 @@ const ContestAnalysis = () => {
   
       let filteredRankings = [];
   
-      if (selectedCountry === 'all countries') {
+      if (selectedCountry === 'all countries' || selectedCountry === 'Select Country') {
         // Combine data from all countries
         filteredRankings = Object.values(rankByCountry).flat();
       } else {
@@ -223,7 +289,7 @@ const ContestAnalysis = () => {
 
           <div className="feature-title">1. Question Finished Count</div>
           <div className="line-chart">
-            {chartData && <LineChart chartData={chartData} options={options} />}
+            {chartData && <LineChart chartData={chartData} options={chartOptions} />}
           </div>
           <div className="feature-title">2. Problem Stats</div>
           <div className="problems">
@@ -232,31 +298,43 @@ const ContestAnalysis = () => {
           <div className="feature-title">3. Country-wise Rank</div>
           {
             countryOptions.length > 1 ? <div>
-            <div>
-              <label>Select Country: </label>
-              <select value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
-                {countryOptions.map((country, index) => (
-                  <option key={index} value={country}>
-                    {country === "" ? 'No Country' : country}
-                  </option>
-                ))}
-              </select>
+            <div className='rank-inputs'>
+              <div>
+                <select
+                  className='select-input' 
+                  value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
+                    <option disabled selected value={"Select Country"}>Select Country</option>
+                  {countryOptions.map((country, index) => (
+                    <option key={index} value={country}>
+                      {country === "" ? 'No Country' : country}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className='input'
+                  value={searchUsername}
+                  placeholder='Search Username'
+                  onChange={(e) => setSearchUsername(e.target.value)}
+                  />
+              </div>
             </div>
-            <div>
-              <label>Search Username: </label>
-              <input
-                type="text"
-                value={searchUsername}
-                onChange={(e) => setSearchUsername(e.target.value)}
-              />
-            </div>
-            <div>
-              <h4>Rankings</h4>
-              
-              <ul className='rankings-holder'>
+            <div className='rankings-holder'>
+              <div className='ranking-title'>
+                <div>Name</div>
+                <div>Country</div>
+                <div>Country Rank</div>
+                <div>Real Rank</div>
+              </div>
+              <ul className='list-of-rankings'>
                 {rankings.map((ranking, index) => (
-                  <li key={index}>
-                    {ranking.username} - Country {ranking.country_name} Rank: {ranking.country_rank} and Real Rank {ranking.realrank}
+                  <li className='ranking' key={index}>
+                    <div>{ranking.username}</div>
+                    <div>{ranking.country_name}</div>
+                    <div>{ranking.country_rank}</div>
+                    <div>{ranking.realrank}</div>
                   </li>
                 ))}
               </ul>
@@ -267,12 +345,17 @@ const ContestAnalysis = () => {
           <div className="feature-title">4. Predict Rating</div>
           <div>
             <input
+              className='input'
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder='Enter your username'
             />
-            <button onClick={() => predictRating()}>Search</button>
+            <button 
+              className='search-btn' 
+              onClick={() => predictRating()}>
+                Search
+            </button>
             {
               prediction != null ? <div>
                 <p>delta_rating : {prediction.delta_rating}</p>
@@ -414,56 +497,157 @@ const Container = styled.div`
 
       }
       .feature-title{
-        font-size: 0.95rem;
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 70px 0 30px 0;
+      }
+
+      .rank-inputs {
+        display: flex;
+        column-gap: 20px;
+      }
+
+      .select-input {
+        padding: 10px 15px;
+        border-radius: 20px;
+        border-color: #9899A3;
+        margin-left: 30px;
+        width: 380px;
+        font-size: 15px;
         font-weight: 400;
-        margin: 40px 0 10px 0;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+          background-repeat: no-repeat, repeat;
+          background-position: right .7em top 50%, 0 0;
+          background-size: .65em auto, 100%;
+
+        ::-ms-expand {
+          display: none;
+        }
+      }
+
+      .input {
+        padding: 10px 15px;
+        border-radius: 20px;
+        border-color: #9899A3;
+        margin-left: 30px;
+        width: 380px;
+        font-size: 15px;
+        font-weight: 400;
+      }
+
+      .search-btn {
+        padding: 10px 15px;
+        margin-left: 10px;
+        border-radius: 20px;
+        width: 165px;
+        border: 1px solid #E5E6ED;
+        background-color: #6C7BFF;
+        color: #FFF;
+        font-size: 15px;
+
+          &:hover{
+            cursor: pointer;
+            box-shadow: rgba(171, 202, 255, 0.5) 0px 7px 29px 0px;
+          }
       }
 
       .line-chart{
-        /* width: 80%; */
+        width: 93%;
       }
 
       .problems{
         display: flex;
         flex-wrap: wrap;
-        border-left: 1px solid #e5e5e5;
-        border-top: 1px solid #e5e5e5;
+        gap: 15px;
         
         .problem{
           height: 400px;
-          width: 50%;
-          border-right: 1px solid #e5e5e5;
-          border-bottom: 1px solid #e5e5e5;
-          padding: 10px;
+          width: 45%;
+          box-shadow: 0 4px 8px 4px rgba(167, 180, 251, 0.1);
+          border-radius: 10px;
+          padding: 30px;
           font-size: 0.9rem;
           line-height: 1.5rem;
 
           .problem-title{
             font-size: 0.9rem;
             margin-bottom: 10px;
+            font-weight: 600;
+          }
 
+          .bar-stats{
+            font-size: 0.75rem;
+            margin-top: 10px;
+
+            .stats{
+              display: flex;
+              margin-bottom: 10px;
+              column-gap: 5px;
+
+              .stat{
+                padding: 5px 10px;
+                border: 1px solid #95A4FC;
+                border-radius: 8px;
+              }
+            }
           }
         }
       }
-
+      
       .rankings-holder{
         max-height: 400px;
-        overflow-y: scroll;
-        border: 1px solid black;
-        padding: 10px 25px;
+        width: 816px;
+        border: 2px solid #4E65FF;
+        padding: 10px 10px 10px 15px;
+        border-radius: 20px;
+        margin-left: 30px;
+        margin-top: 30px;
+        
+        .ranking-title {
+          display: grid;
+          grid-template-columns: 3fr 2fr 2fr 1fr;
+          color: #46515C;
+          font-weight: 700;
+          padding: 5px 8px;
+          margin-right: 35px;
+          border-bottom: 2px solid #E5E6ED;
+        }
 
-        ::-webkit-scrollbar {
-          width: 2px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background-color: #f0e9e9;
-          border-left: 1px solid #e9e5e5;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background-color: #335ddc;
-          border-radius: 100px;
+        .list-of-rankings {
+          overflow-y: scroll;
+          max-height: 345px;
+          
+          &::-webkit-scrollbar {
+            width: 20px;
+          }
+          
+          &::-webkit-scrollbar-track {
+            border: 2px solid #ABCAFF;
+            border-radius: 20px;
+            background-color: #FFF;
+          }
+          
+          &::-webkit-scrollbar-thumb {
+            background-color: #95A4FC;
+            border-radius: 20px;
+            height: 92px;
+          }
+
+          .ranking {
+            display: grid;
+            grid-template-columns: 3fr 2fr 2fr 1fr;
+            padding: 5px 8px;
+            margin-right: 15px;
+            
+            &:hover {
+              background-color: #6C7BFF;
+              color: #FFF;
+              border-radius: 10px;
+            }
+          }
         }
       }
     }
