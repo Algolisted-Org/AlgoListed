@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; 
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CCHeader from '../Components/CCHeader';
 import LeftMenu from '../Components/LeftMenu';
@@ -9,10 +9,13 @@ import LockIcon from '@material-ui/icons/Lock';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import LineChart from '../Components/LineChart';
 import { Bar } from 'react-chartjs-2';
+import { LinearProgress } from '@material-ui/core';
+import InfoIcon from '@material-ui/icons/Info';
 
 const ContestAnalysis = () => {
   const [platformName, setPlatformName] = useState('leetcode');
   const [chartData, setChartData] = useState(null);
+  const [showVisuals, setShowVisuals] = useState(false)
   const [questions, setQuestions] = useState([]);
   const [barData, setBarData] = useState([]);
   const [IdToProblem, setIdToProblem] = useState({});
@@ -24,7 +27,9 @@ const ContestAnalysis = () => {
   const [username, setUsername] = useState('');
   const [prediction, setPrediction] = useState(null);
   const [problemLabels, setProblemLabels] = useState([]);
-  const { contestName } = useParams(); 
+
+  const { contestName } = useParams();
+
   console.log(contestName);
   const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
 
@@ -67,10 +72,10 @@ const ContestAnalysis = () => {
             datasets: [
               {
                 label: 'Fail Count',
-                backgroundColor: 'rgba(149, 164, 252, 1)',
-                borderColor: 'rgba(149, 164, 252, 1)',
+                backgroundColor: '#5ab097',
+                borderColor: '#444',
                 borderWidth: 1,
-                hoverBackgroundColor: 'rgba(129, 142, 219, 0.8)',
+                hoverBackgroundColor: '#5ab097',
                 innerWidth: '20px',
                 data,
               },
@@ -99,7 +104,7 @@ const ContestAnalysis = () => {
             label,
             data,
             borderColor: lineGraphColours[index],
-            borderRadius: 3,
+            borderRadius: 10,
             backgroundColor: lineGraphColours[index],
             borderWidth: 3,
             pointStyle: false,
@@ -113,9 +118,27 @@ const ContestAnalysis = () => {
           labels: labels,
           datasets: chartDatasets,
         });
+
+        setShowVisuals(true);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleAnalysisName = () => {
+    let analysis_heading = "Leetcode ";
+    for (let index = 0; index < contestName.length; index++) {
+      const element = contestName[index];
+      if (element == '-') {
+        analysis_heading += " ";
+      }
+      else {
+        analysis_heading += element;
+      }
+    }
+    analysis_heading += " Analysis";
+    // console.log(analysis_heading);
+    return analysis_heading;
+  }
 
 
   const filters = contestAnalysisFilters.map((item) => {
@@ -151,12 +174,12 @@ const ContestAnalysis = () => {
         display: true,
         labels: {
           generateLabels: function () {
-              return [
-                {
-                text: `Fail Count`,
+            return [
+              {
+                text: `Not Accepted Count of Participants`,
                 borderRadius: 4,
-                fillStyle: 'rgba(149, 164, 252, 1)',
-                strokeStyle: 'rgba(149, 164, 252, 1)',
+                fillStyle: '#5ab097',
+                strokeStyle: '#5ab097',
               }
             ]
           },
@@ -168,15 +191,21 @@ const ContestAnalysis = () => {
   // Render the bar graphs for each problem's fail count
   const barGraphs = barData.map((data, index) => (
     <div key={index} className='problem'>
-      <div className="problem-title">Problem {IdToProblem[questions[index].question_id]} : {questions[index].title}</div>
+      <div className="problem-title">Problem {IdToProblem[questions[index].question_id]} : <br /> <i>{questions[index].title}</i></div>
       <div className="bar-chart">
-        <Bar data={data} options={barOptions}/>
+        <Bar data={data} options={barOptions} />
+      </div>
+      <div className="info">
+        <InfoIcon/>
+        <div className="text">
+          The above represents the count of unsuccessful attempts a user made before their solution was finally accepted.
+        </div>
       </div>
       <div className='bar-stats'>
         <div className='stats'>
           <div className='stat'>Problem credit : {questions[index].credit}</div>
           <div className='stat'>Predicted codeforces rating : {questions[index].codeforces_rating}</div>
-          </div>
+        </div>
         <div className='stats'>
           <div className='stat'>Problem Inspiration : {questions[index].inspired_from}</div>
           <div className='stat'>Author : {questions[index].author}</div>
@@ -220,41 +249,41 @@ const ContestAnalysis = () => {
     if (wholeLeetcodeData != null) {
       const rankByCountry = wholeLeetcodeData.rank_by_country;
       setCountryOptions(['all countries', ...Object.keys(rankByCountry)]);
-  
+
       let filteredRankings = [];
-  
+
       if (selectedCountry === 'all countries' || selectedCountry === 'Select Country') {
         // Combine data from all countries
         filteredRankings = Object.values(rankByCountry).flat();
       } else {
         filteredRankings = rankByCountry[selectedCountry] || [];
       }
-  
+
       if (searchUsername) {
         filteredRankings = filteredRankings.filter((ranking) =>
           ranking.username.toLowerCase().includes(searchUsername.toLowerCase())
         );
       }
-  
+
       setRankings(filteredRankings);
     }
   }, [wholeLeetcodeData, selectedCountry, searchUsername]);
-  
+
 
 
   const predictRating = () => {
     const url = `https://nayak-leetcode-api.vercel.app/?username=${username}`;
 
     axios.get(url)
-    .then((res) => {
-      console.log(res.data);
-      setPrediction(res.data[0]);
-      console.log(prediction);
-    })
-    .catch((error) => {
-      // Handle errors here
-      console.error(error);
-    });
+      .then((res) => {
+        console.log(res.data);
+        setPrediction(res.data[0]);
+        console.log(prediction);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+      });
   }
 
   return (
@@ -280,70 +309,81 @@ const ContestAnalysis = () => {
           </div>
           <Filters>{filters}</Filters>
           <CleanLine />
-          <div className="contest-btns">
-            <div className="back-btn">
-              <ArrowBackIosIcon />
-            </div>
-            <div className="main-display">Leetcode Weekly Contest Analysis</div>
-          </div>
+          <Filters2>
+            <div className="filter selected">Contests Analysis</div>
+            <div className="filter">Contests Archive</div>
+          </Filters2>
 
+          <div className="contest-btns">
+            <a href='http://localhost:3000/contest-analysis' className="back-btn">
+              <ArrowBackIosIcon />
+            </a>
+            <div className="main-display">{handleAnalysisName()}</div>
+          </div>
           <div className="feature-title">1. Question Finished Count</div>
           <div className="line-chart">
-            {chartData && <LineChart chartData={chartData} options={chartOptions} />}
+            {
+              showVisuals ? (<LineChart chartData={chartData} options={chartOptions} />) : (<LinearProgress />)
+            }
           </div>
           <div className="feature-title">2. Problem Stats</div>
-          <div className="problems">
-            {barGraphs}
-          </div>
+          {
+            showVisuals ? (
+              <div className="problems">
+                {barGraphs}
+              </div>
+            ) : (<LinearProgress />)
+          }
           <div className="feature-title">3. Country-wise Rank</div>
           {
-            countryOptions.length > 1 ? <div>
-            <div className='rank-inputs'>
+            countryOptions.length > 1 ?
               <div>
-                <select
-                  className='select-input' 
-                  value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
-                    <option disabled selected value={"Select Country"}>Select Country</option>
-                  {countryOptions.map((country, index) => (
-                    <option key={index} value={country}>
-                      {country === "" ? 'No Country' : country}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  className='input'
-                  value={searchUsername}
-                  placeholder='Search Username'
-                  onChange={(e) => setSearchUsername(e.target.value)}
-                  />
-              </div>
-            </div>
-            <div className='rankings-holder'>
-              <div className='ranking-title'>
-                <div>Name</div>
-                <div>Country</div>
-                <div>Country Rank</div>
-                <div>Real Rank</div>
-              </div>
-              <ul className='list-of-rankings'>
-                {rankings.map((ranking, index) => (
-                  <li className='ranking' key={index}>
-                    <div>{ranking.username}</div>
-                    <div>{ranking.country_name}</div>
-                    <div>{ranking.country_rank}</div>
-                    <div>{ranking.realrank}</div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div> : <></>
+                <div className='rank-inputs'>
+                  <div>
+                    <select
+                      className='select-input'
+                      value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
+                      <option disabled selected value={"Select Country"}>Select Country</option>
+                      {countryOptions.map((country, index) => (
+                        <option key={index} value={country}>
+                          {country === "" ? 'No Country' : country}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      className='input'
+                      value={searchUsername}
+                      placeholder='Search Username'
+                      onChange={(e) => setSearchUsername(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className='rankings-holder'>
+                  <div className='ranking-title'>
+                    <div>Name</div>
+                    <div>Country</div>
+                    <div>Country Rank</div>
+                    <div>Real Rank</div>
+                  </div>
+                  <ul className='list-of-rankings'>
+                    {rankings.map((ranking, index) => (
+                      <li className='ranking' key={index}>
+                        <div>{ranking.username}</div>
+                        <div>{ranking.country_name}</div>
+                        <div>{ranking.country_rank}</div>
+                        <div>{ranking.realrank}</div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div> : <LinearProgress />
           }
 
           <div className="feature-title">4. Predict Rating</div>
-          <div>
+          <div className='predict-rating'>
             <input
               className='input'
               type="text"
@@ -351,10 +391,10 @@ const ContestAnalysis = () => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder='Enter your username'
             />
-            <button 
-              className='search-btn' 
+            <button
+              className='search-btn'
               onClick={() => predictRating()}>
-                Search
+              Search
             </button>
             {
               prediction != null ? <div>
@@ -465,18 +505,20 @@ const Container = styled.div`
       }
 
       .contest-btns{
-        margin: 50px 0 20px 0;
+        margin: 20px 0 10px 0;
         display: flex;
         
         
         .back-btn{
           height: 34px;
+          width: 34px;
           padding: 0 10px;
           background-color: #e5e5e5;
           border-radius: 7.5px;
           display: flex;
           align-items: center;
           justify-content: center;
+          cursor: pointer;
           
           svg{
             font-size: 1.25rem;
@@ -487,31 +529,49 @@ const Container = styled.div`
         .main-display{
           font-size: 1rem;
           margin: 0 10px;
-          font-weight: 500;
-          background-color: #e5e5e5;
+          font-weight: 400;
+          /* background-color: #dfdff9; */
           display: inline-block;
+          border: 1px solid #b9afaf;
           padding: 5px 10px;
           border-radius: 7.5px;
-          color: cornflowerblue;
         }
 
       }
+      
       .feature-title{
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 600;
         margin: 70px 0 30px 0;
       }
 
-      .rank-inputs {
+      .predict-rating{
+        width: 100%;
+        /* border: 1px solid black; */
         display: flex;
-        column-gap: 20px;
+        justify-content: space-between;
+
+        input{
+          margin: 0;
+          width: auto;
+          flex: 1;
+          margin-left: 20px;
+        }
+      }
+
+      .rank-inputs {
+        width: 100%;
+        /* border: 1px solid black; */
+        display: flex;
+        justify-content: space-between;
+        /* column-gap: 20px; */
       }
 
       .select-input {
         padding: 10px 15px;
-        border-radius: 20px;
+        border-radius: 50px;
         border-color: #9899A3;
-        margin-left: 30px;
+        /* margin-left: 30px; */
         width: 380px;
         font-size: 15px;
         font-weight: 400;
@@ -519,9 +579,9 @@ const Container = styled.div`
         -webkit-appearance: none;
         appearance: none;
         background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-          background-repeat: no-repeat, repeat;
-          background-position: right .7em top 50%, 0 0;
-          background-size: .65em auto, 100%;
+        background-repeat: no-repeat, repeat;
+        background-position: right .7em top 50%, 0 0;
+        background-size: .65em auto, 100%;
 
         ::-ms-expand {
           display: none;
@@ -530,7 +590,7 @@ const Container = styled.div`
 
       .input {
         padding: 10px 15px;
-        border-radius: 20px;
+        border-radius: 50px;
         border-color: #9899A3;
         margin-left: 30px;
         width: 380px;
@@ -555,41 +615,66 @@ const Container = styled.div`
       }
 
       .line-chart{
-        width: 93%;
+        width: 100%;
+        padding: 10px;
       }
 
       .problems{
+        padding-left: 20px;
         display: flex;
         flex-wrap: wrap;
         gap: 15px;
         
         .problem{
-          height: 400px;
-          width: 45%;
-          box-shadow: 0 4px 8px 4px rgba(167, 180, 251, 0.1);
+          /* height: 400px; */
+          width: calc(50% - 10px);
+          /* box-shadow: 0 4px 8px 4px rgba(167, 180, 251, 0.1); */
+          border: 1px solid #b9afaf;
           border-radius: 10px;
-          padding: 30px;
+          padding: 20px;
           font-size: 0.9rem;
           line-height: 1.5rem;
 
           .problem-title{
             font-size: 0.9rem;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             font-weight: 600;
+
+            b{
+              color: black;
+            }
+          }
+
+          .info{
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+
+            svg{
+              margin-right: 10px;
+              fill: #333;
+            }
+
+            .text{
+              font-size: 0.75rem;
+              font-weight: 200;
+              line-height: 1.15rem;
+            }
+            
           }
 
           .bar-stats{
             font-size: 0.75rem;
-            margin-top: 10px;
+            margin-top: 20px;
 
             .stats{
               display: flex;
-              margin-bottom: 10px;
+              margin-top: 5px;
               column-gap: 5px;
 
               .stat{
                 padding: 5px 10px;
-                border: 1px solid #95A4FC;
+                border: 1px solid #b9afaf;
                 border-radius: 8px;
               }
             }
@@ -599,11 +684,11 @@ const Container = styled.div`
       
       .rankings-holder{
         max-height: 400px;
-        width: 816px;
-        border: 2px solid #4E65FF;
+        width: 100%;
+        border: 1px solid #9899a3;
         padding: 10px 10px 10px 15px;
         border-radius: 20px;
-        margin-left: 30px;
+        /* margin-left: 30px; */
         margin-top: 30px;
         
         .ranking-title {
@@ -621,17 +706,17 @@ const Container = styled.div`
           max-height: 345px;
           
           &::-webkit-scrollbar {
-            width: 20px;
+            width: 5px;
           }
           
           &::-webkit-scrollbar-track {
-            border: 2px solid #ABCAFF;
+            border: 1px solid #555;
             border-radius: 20px;
             background-color: #FFF;
           }
           
           &::-webkit-scrollbar-thumb {
-            background-color: #95A4FC;
+            background-color: pink;
             border-radius: 20px;
             height: 92px;
           }
@@ -720,3 +805,66 @@ const CleanLine = styled.div`
   width: 100%;
   background-color: grey;
 `
+
+const Filters2 = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	margin: 10px 0 10px 0;
+
+	.filter {
+		padding: 7.5px 15px;
+		font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07rem;
+		border: 1px solid #b9afaf;
+		border-radius: 10px;
+		margin: 0px 5px 5px 0px;
+		font-weight: 300;
+		text-decoration: none;
+		color: inherit;
+
+    svg{
+      font-size: 1rem;
+      margin-bottom: -0.2rem;
+      margin-left: 5px;
+      fill: #71c929;
+    }
+
+		&:hover {
+			transition-duration: 250ms;
+			cursor: pointer;
+      border-color: rgb(185, 175, 175);
+      background-color: #e5e5e5;
+      color: #201f1f;
+		}
+	}
+
+	.selected {
+		/* background-color: #ded7d7;
+    color: #111; */
+		border-color: rgb(185, 175, 175);
+		background-color: #e5e5e5;
+		color: #201f1f;
+	}
+
+
+	@media only screen and (max-width: 1100px) {
+		margin: 10px 0 10px 0;
+
+		.filter {
+			padding: 5px 15px;
+			font-size: 0.7rem;
+			margin: 0px 5px 5px 0px;
+		}
+
+		.selected {
+			/* background-color: #ded7d7;
+      color: #111; */
+			border-color: #201f1f;
+			background-color: #201f1f;
+			color: #ebdddd;
+		}
+	}
+
+  
+`;

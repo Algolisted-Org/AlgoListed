@@ -38,7 +38,7 @@ export const competitionFilters = [
     id: 9,
   },
   {
-    text: "Teir 1 College Organised",
+    text: "Tier 1 College Organised",
     id: 10,
   },
   {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import CCHeader from '../Components/CCHeader'
-import codeclublogo from '../Images/jucc-logo.png'
+// import codeclublogo from '../Images/jucc-logo.png'
 import LeftMenuCodeClub from '../Components/LeftMenuCodeClub'
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';

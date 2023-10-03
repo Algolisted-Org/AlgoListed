@@ -14,10 +14,10 @@ import ScrollToTop from './Components/ScrollToTop';
 import GoToTop from './Components/GoToTop';
 import BuyMeACoffee from './Components/BuyMeACoffee';
 import CCHeader from './Components/CCHeader';
-import CompetitionApi from './DevelopmentLocal/CompetitionApi';
+// import CompetitionApi from './DevelopmentLocal/CompetitionApi';
 import CoursesReview from './Screen/CoursesReview';
 import OnlineAssessment from './Screen/OnlineAssessment';
-import CodeClub from './Screen/CodeClub';
+// import CodeClub from './Screen/CodeClub';
 import ContestAnalysis from './Screen/ContestAnalysis';
 import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
@@ -29,7 +29,7 @@ const App = () => {
     <div>
       <ScrollToTop/>
       <Routes>
-        <Route path="/development" element={<CompetitionApi/>} />
+        {/* <Route path="/development" element={<CompetitionApi/>} /> */}
         <Route path="/" element={<LandingPage2/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/sign-in" element={<AuthPage/>} />
@@ -61,7 +61,7 @@ const App = () => {
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
-        <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} />
+        {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
       </Routes>
