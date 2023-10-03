@@ -11,6 +11,8 @@ import LineChart from '../Components/LineChart';
 import { Bar } from 'react-chartjs-2';
 import { LinearProgress } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
+import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const ContestAnalysis = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -315,7 +317,7 @@ const ContestAnalysis = () => {
           </Filters2>
 
           <div className="contest-btns">
-            <a href='http://localhost:3000/contest-analysis' className="back-btn">
+            <a href='/contest-analysis' className="back-btn">
               <ArrowBackIosIcon />
             </a>
             <div className="main-display">{handleAnalysisName()}</div>
@@ -334,55 +336,171 @@ const ContestAnalysis = () => {
               </div>
             ) : (<LinearProgress />)
           }
+          
           <div className="feature-title">3. Country-wise Rank</div>
-          {
-            countryOptions.length > 1 ?
-              <div>
-                <div className='rank-inputs'>
-                  <div>
-                    <select
-                      className='select-input'
-                      value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
-                      <option disabled selected value={"Select Country"}>Select Country</option>
-                      {countryOptions.map((country, index) => (
-                        <option key={index} value={country}>
-                          {country === "" ? 'No Country' : country}
-                        </option>
+          <div className="country-wise-rank">
+            {
+              countryOptions.length > 1 ?
+                <div>
+                  <div className='rank-inputs'>
+                    <div>
+                      <select
+                        className='select-input'
+                        value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
+                        <option disabled selected value={"Select Country"}>Select Country</option>
+                        {countryOptions.map((country, index) => (
+                          <option key={index} value={country}>
+                            {country === "" ? 'No Country' : country}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        className='input'
+                        value={searchUsername}
+                        placeholder='Search Username'
+                        onChange={(e) => setSearchUsername(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className='rankings-holder'>
+                    <div className='ranking-title'>
+                      <div>Username</div>
+                      <div>User's Country</div>
+                      <div>Country Rank</div>
+                      <div>Real Rank</div>
+                    </div>
+                    <ul className='list-of-rankings'>
+                      {rankings.map((ranking, index) => (
+                        <li className='ranking' key={index}>
+                          <a href={`https://leetcode.com/${ranking.username}`}>{ranking.username}</a>
+                          <div>{ranking.country_name}</div>
+                          <div>{ranking.country_rank}</div>
+                          <div>{ranking.realrank}</div>
+                        </li>
                       ))}
-                    </select>
+                    </ul>
                   </div>
-                  <div>
-                    <input
-                      type="text"
-                      className='input'
-                      value={searchUsername}
-                      placeholder='Search Username'
-                      onChange={(e) => setSearchUsername(e.target.value)}
-                    />
-                  </div>
+                </div> : <LinearProgress />
+            }
+            <div className="info">
+              <InfoIcon/>
+              <div className="text">
+              If your username doesn't align with your country, it could be because you haven't specified your country in your LeetCode account settings.
+              Visit the following URL: <a href="https://leetcode.com/profile/" target='_blank'>https://leetcode.com/profile/</a> and update your location information.
+              </div>
+            </div>
+            <div className="pinned-users">
+              <h4>Pinned Friend's Rankings</h4>
+              <div className="collection">
+                <div className="add-btn">
+                  <AddIcon/>
                 </div>
-                <div className='rankings-holder'>
-                  <div className='ranking-title'>
-                    <div>Name</div>
-                    <div>Country</div>
-                    <div>Country Rank</div>
-                    <div>Real Rank</div>
+                <a href='https://leetcode.com/NayakPenguin/' className="friend">
+                  <img className="profile-pic" src="https://i.scdn.co/image/ab6761610000e5eb056f821a5186892979410deb" alt="" />
+                  <div className="user-data">
+                    <div className="username">
+                      @NayakPenguin
+                    </div>
+                    <div className="global-rank">
+                      Global Rank : <b>#1269</b> and Solved : <b>3</b>
+                    </div>
                   </div>
-                  <ul className='list-of-rankings'>
-                    {rankings.map((ranking, index) => (
-                      <li className='ranking' key={index}>
-                        <div>{ranking.username}</div>
-                        <div>{ranking.country_name}</div>
-                        <div>{ranking.country_rank}</div>
-                        <div>{ranking.realrank}</div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div> : <LinearProgress />
-          }
+                  <div className="clear-btn">
+                    <ClearIcon/>
+                  </div>
+                </a>
+                <a href='https://leetcode.com/penguinhacker/' className="friend">
+                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
+                  <div className="user-data">
+                    <div className="username">
+                      @penguinhacker
+                    </div>
+                    <div className="global-rank">
+                      <i>Did not Attempt</i>
+                    </div>
+                  </div>
+                  <div className="clear-btn">
+                    <ClearIcon/>
+                  </div>
+                </a>
+                <a href='https://leetcode.com/penguinhacker/' className="friend">
+                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
+                  <div className="user-data">
+                    <div className="username">
+                      @penguinhacker
+                    </div>
+                    <div className="global-rank">
+                      <i>Did not Attempt</i>
+                    </div>
+                  </div>
+                  <div className="clear-btn">
+                    <ClearIcon/>
+                  </div>
+                </a>
+                <a href='https://leetcode.com/penguinhacker/' className="friend">
+                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
+                  <div className="user-data">
+                    <div className="username">
+                      @penguinhacker
+                    </div>
+                    <div className="global-rank">
+                      <i>Did not Attempt</i>
+                    </div>
+                  </div>
+                  <div className="clear-btn">
+                    <ClearIcon/>
+                  </div>
+                </a>
+                <a href='https://leetcode.com/penguinhacker/' className="friend">
+                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
+                  <div className="user-data">
+                    <div className="username">
+                      @penguinhacker
+                    </div>
+                    <div className="global-rank">
+                      <i>Did not Attempt</i>
+                    </div>
+                  </div>
+                  <div className="clear-btn">
+                    <ClearIcon/>
+                  </div>
+                </a>
+                <a href='https://leetcode.com/penguinhacker/' className="friend">
+                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
+                  <div className="user-data">
+                    <div className="username">
+                      @penguinhacker
+                    </div>
+                    <div className="global-rank">
+                      <i>Did not Attempt</i>
+                    </div>
+                  </div>
+                  <div className="clear-btn">
+                    <ClearIcon/>
+                  </div>
+                </a>
+                <a href='https://leetcode.com/penguinhacker/' className="friend">
+                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
+                  <div className="user-data">
+                    <div className="username">
+                      @penguinhacker
+                    </div>
+                    <div className="global-rank">
+                      <i>Did not Attempt</i>
+                    </div>
+                  </div>
+                  <div className="clear-btn">
+                    <ClearIcon/>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
 
-          <div className="feature-title">4. Predict Rating</div>
+          <div className="feature-title">4. Predict Rating Change</div>
           <div className='predict-rating'>
             <input
               className='input'
@@ -394,8 +512,12 @@ const ContestAnalysis = () => {
             <button
               className='search-btn'
               onClick={() => predictRating()}>
-              Search
+              Predict
             </button>
+            <div
+              className='virtual-btn'>
+              Virtual contest ?
+            </div>
             {
               prediction != null ? <div>
                 <p>delta_rating : {prediction.delta_rating}</p>
@@ -513,7 +635,7 @@ const Container = styled.div`
           height: 34px;
           width: 34px;
           padding: 0 10px;
-          background-color: #e5e5e5;
+          /* background-color: #e5e5e5; */
           border-radius: 7.5px;
           display: flex;
           align-items: center;
@@ -545,9 +667,124 @@ const Container = styled.div`
         margin: 70px 0 30px 0;
       }
 
+      .country-wise-rank{
+        padding-left: 20px;
+
+        .info{
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
+
+          svg{
+            margin-right: 10px;
+            fill: #333;
+          }
+
+          .text{
+            font-size: 0.8rem;
+            font-weight: 200;
+            line-height: 1.15rem;
+          }
+          
+        }
+
+        .pinned-users{
+          margin-top: 35px;
+
+          h4{
+            font-size: 1rem;
+            font-weight: 500;
+          }
+
+          .collection{
+            display: flex;
+            flex-wrap: wrap;
+
+            .add-btn{
+              height: 42px;
+              aspect-ratio: 1/1;
+              border-radius: 50%;
+              border: 1px solid black;
+              display: grid;
+              place-items: center;
+              margin-top: 10px;
+              /* box-shadow: #c9b9b9 0px 7px 29px 0px; */
+              cursor: pointer;
+              
+              
+              &:hover{
+                /* box-shadow: transparent 0px 7px 29px 0px; */
+                /* transition-duration: 250ms; */
+              }
+            }
+
+            .friend{
+              height: 42px;
+              min-width: 200px;
+              border-radius: 20px;
+              border: 1px solid black;
+              margin-left: 10px;
+              margin-top: 10px;
+              padding: 2.5px;
+              padding-right: 15px;
+              display: flex;
+              align-items: center;
+              background-color: #f8f8f8;
+              text-decoration: none;
+              position: relative;
+
+              .profile-pic{
+                height: 35px;
+                width: 35px;
+                border-radius: 100%;
+                border: 1px solid black;
+              }
+              
+              .user-data{
+                margin: 0 5px;
+                
+                .username{
+                  font-size: 0.7rem;
+                  font-weight: 600;
+                  color: cornflowerblue;
+                }
+  
+                .global-rank{
+                  font-size: 0.7rem;
+                }
+              }
+
+              &:hover{
+                cursor: pointer;
+                box-shadow: #00000021 0px 7px 29px 0px;
+                transition-duration: 250ms;
+              }
+
+              .clear-btn{
+                position: absolute;
+                right: -3.5px;
+                top: -5px;
+                height: 20px;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                border: 1px solid black;
+                display: grid;
+                place-items: center;
+                background-color: white;
+
+                svg{
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+
       .predict-rating{
         width: 100%;
         /* border: 1px solid black; */
+        margin-left: 20px;
         display: flex;
         justify-content: space-between;
 
@@ -555,7 +792,6 @@ const Container = styled.div`
           margin: 0;
           width: auto;
           flex: 1;
-          margin-left: 20px;
         }
       }
 
@@ -571,9 +807,9 @@ const Container = styled.div`
         padding: 10px 15px;
         border-radius: 50px;
         border-color: #9899A3;
-        /* margin-left: 30px; */
+        
         width: 380px;
-        font-size: 15px;
+        font-size: 0.85rem;
         font-weight: 400;
         -moz-appearance: none;
         -webkit-appearance: none;
@@ -594,24 +830,39 @@ const Container = styled.div`
         border-color: #9899A3;
         margin-left: 30px;
         width: 380px;
-        font-size: 15px;
+        font-size: 0.85rem;
         font-weight: 400;
       }
 
       .search-btn {
         padding: 10px 15px;
         margin-left: 10px;
-        border-radius: 20px;
+        border-radius: 200px;
         width: 165px;
-        border: 1px solid #E5E6ED;
-        background-color: #6C7BFF;
-        color: #FFF;
-        font-size: 15px;
+        border: 1px solid #333;
+        font-size: 0.85rem;
+        font-weight: 300;
+        letter-spacing: 0.07rem;
 
           &:hover{
             cursor: pointer;
             box-shadow: rgba(171, 202, 255, 0.5) 0px 7px 29px 0px;
           }
+      }
+
+      .virtual-btn {
+        padding: 10px 15px;
+        margin-left: 10px;
+        border-radius: 200px;
+        width: 165px;
+        /* border: 1px solid #333; */
+        border: none;
+        font-size: 0.75rem;
+        font-weight: 300;
+        letter-spacing: 0.07rem;
+        background-color: white;
+        margin-left: 20%;
+        color: cornflowerblue;
       }
 
       .line-chart{
@@ -698,26 +949,35 @@ const Container = styled.div`
           font-weight: 700;
           padding: 5px 8px;
           margin-right: 35px;
-          border-bottom: 2px solid #E5E6ED;
+          padding-bottom: 5px;
+          border-bottom: 1px solid #e5e6ed;
+
+          div{
+            font-size: 1rem;
+            font-weight: 600;
+          }
         }
 
         .list-of-rankings {
           overflow-y: scroll;
-          max-height: 345px;
+          max-height: 330px;
+          /* border: 1px solid black; */
+          margin-bottom: 10px;
+          
           
           &::-webkit-scrollbar {
             width: 5px;
           }
           
           &::-webkit-scrollbar-track {
-            border: 1px solid #555;
-            border-radius: 20px;
-            background-color: #FFF;
+            /* border: 1px solid #555; */
+            border-radius: 200px;
+            background-color: #f0e9e9;
           }
           
           &::-webkit-scrollbar-thumb {
-            background-color: pink;
-            border-radius: 20px;
+            background-color: #335ddc;
+            border-radius: 100px;
             height: 92px;
           }
 
@@ -726,9 +986,19 @@ const Container = styled.div`
             grid-template-columns: 3fr 2fr 2fr 1fr;
             padding: 5px 8px;
             margin-right: 15px;
+            /* border-bottom: 1px solid #ece3e3; */
+            /* background-color: #d9d0d1; */
             
+            div{
+              font-size: 0.85rem;
+            }
+
+            a{
+              font-size: 0.85rem;
+            }
+
             &:hover {
-              background-color: #6C7BFF;
+              background-color: #e5e5e5;
               color: #FFF;
               border-radius: 10px;
             }
