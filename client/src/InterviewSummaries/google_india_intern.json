@@ -1,9 +1,0 @@
-{
-    "process" : "The hiring process for interns in Google India typically consists of the following steps: \n Resume screening: Google recruiters review resumes to identify candidates who meet the basic qualifications for the internship roles. \n Phone interview: Shortlisted candidates participate in a phone interview with a recruiter to discuss their experience, skills, and interest in the internship. \n On-site interviews: Candidates who advance to the on-site interview stage typically participate in two technical interviews, each lasting 45 minutes. These interviews assess the candidate's problem-solving skills, knowledge of data structures and algorithms, and ability to design and implement code. \n Hiring decision: After the on-site interviews, the hiring committee evaluates the candidates' performance and makes an offer to the most qualified candidates.",
-    "rounds" : ["Phone Round", "Technical Interviews", "Behavioral interviews"],
-    "rounds-explained" : {
-        [
-            
-        ]
-    }
-}

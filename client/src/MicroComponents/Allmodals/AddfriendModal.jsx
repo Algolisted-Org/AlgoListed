@@ -11,9 +11,7 @@ function AdduserModal({
   setretrivestorage,
 }) {
   const [validation, setvalidation] = useState(false);
-  const finduser = allcountries?.find(
-    (eachuser) => eachuser.username === "dbdo"
-  );
+ 
 
   const onclose = () => {
     setadduser(false);
@@ -56,7 +54,12 @@ function AdduserModal({
         setretrivestorage(updatedArray);
         localStorage.setItem("myArray", JSON.stringify(updatedArray));
        alert("added user")
+       setcredential({
+        name:"",
+        imgurl:""
+       })
        setadduser(false)
+
       } else {
         alert("alread present")
       }
