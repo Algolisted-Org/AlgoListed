@@ -18,6 +18,11 @@ const LeftMenu = ({ marked }) => {
       value: "Coding Resources",
       showAt: "resources",
       link: "/resources",
+    },
+    {
+      value: "Showdown Server",
+      showAt: "showdown-server",
+      link: "/showdown-server",
     }, 
     {
       value: "Interview Summaries",

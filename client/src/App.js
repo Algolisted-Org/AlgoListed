@@ -21,6 +21,7 @@ import OnlineAssessment from './Screen/OnlineAssessment';
 import ContestAnalysis from './Screen/ContestAnalysis';
 import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
+import ShowdownServer from './Screen/showdownServer';
 
 const App = () => {
   
@@ -61,6 +62,7 @@ const App = () => {
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
+        <Route path="/showdown-server" element={<ShowdownServer/>} />
         {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
