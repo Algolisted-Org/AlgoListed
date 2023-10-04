@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { json, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CCHeader from '../Components/CCHeader';
 import LeftMenu from '../Components/LeftMenu';
@@ -13,6 +13,7 @@ import { LinearProgress } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
+import AdduserModal from '../MicroComponents/Allmodals/AddfriendModal';
 
 const ContestAnalysis = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -29,12 +30,25 @@ const ContestAnalysis = () => {
   const [username, setUsername] = useState('');
   const [prediction, setPrediction] = useState(null);
   const [problemLabels, setProblemLabels] = useState([]);
-
+  const [addUser, setadduser] = useState(false)
+  const [Allcountries, setcounteries] = useState([])
+  const [retrivelocalstorage, setretrivestorage] = useState([])
   const { contestName } = useParams();
 
-  console.log(contestName);
+  console.log(Allcountries)
   const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
+  useEffect(() => {
+    const storedArray = localStorage.getItem('myArray');
 
+    if (storedArray) {
+      setretrivestorage(JSON.parse(storedArray));
+    }
+  }, [retrivelocalstorage])
+  const removeuser = (username) => {
+    const updatedArray = retrivelocalstorage.filter((eachuser) => eachuser.username !== username);
+    localStorage.setItem("myArray", JSON.stringify(updatedArray));
+  }
+  console.log(retrivelocalstorage)
   useEffect(() => {
     axios
       .get(`https://nayak-leetcode-api.vercel.app/?weekly_contest=${contestName}`)
@@ -43,7 +57,7 @@ const ContestAnalysis = () => {
         setWholeLeetcodeData(res.data);
         console.log(res.data);
         const questionData = res.data.questions || [];
-
+        setcounteries(res.data.rank_by_country["All Countries"])
         setQuestions(questionData);
 
         const data = questionData.map((question) => ({
@@ -198,7 +212,7 @@ const ContestAnalysis = () => {
         <Bar data={data} options={barOptions} />
       </div>
       <div className="info">
-        <InfoIcon/>
+        <InfoIcon />
         <div className="text">
           The above represents the count of unsuccessful attempts a user made before their solution was finally accepted.
         </div>
@@ -290,6 +304,14 @@ const ContestAnalysis = () => {
 
   return (
     <GrandContainer>
+      <AdduserModal
+        addUser={addUser}
+        setadduser={setadduser}
+        allcountries={Allcountries}
+        retrivelocalstorage={retrivelocalstorage}
+        setretrivestorage={setretrivestorage}
+      />
+
       <MobContainer>
         We are still working on Responsive Version of the website, please view the site with
         width more than 1100px, a standard laptop or tablet landscape.
@@ -336,7 +358,7 @@ const ContestAnalysis = () => {
               </div>
             ) : (<LinearProgress />)
           }
-          
+
           <div className="feature-title">3. Country-wise Rank</div>
           <div className="country-wise-rank">
             {
@@ -386,30 +408,50 @@ const ContestAnalysis = () => {
                 </div> : <LinearProgress />
             }
             <div className="info">
-              <InfoIcon/>
+              <InfoIcon />
               <div className="text">
-              If your username doesn't align with your country, it could be because you haven't specified your country in your LeetCode account settings.
-              Visit the following URL: <a href="https://leetcode.com/profile/" target='_blank'>https://leetcode.com/profile/</a> and update your location information.
+                If your username doesn't align with your country, it could be because you haven't specified your country in your LeetCode account settings.
+                Visit the following URL: <a href="https://leetcode.com/profile/" target='_blank'>https://leetcode.com/profile/</a> and update your location information.
               </div>
             </div>
             <div className="pinned-users">
               <h4>Pinned Friend's Rankings</h4>
               <div className="collection">
-                <div className="add-btn">
-                  <AddIcon/>
+                <div className="add-btn" onClick={() => setadduser(true)}>
+                  <AddIcon />
                 </div>
-                <a href='https://leetcode.com/NayakPenguin/' className="friend">
-                  <img className="profile-pic" src="https://i.scdn.co/image/ab6761610000e5eb056f821a5186892979410deb" alt="" />
+                {retrivelocalstorage.length > 0 ?
+                  retrivelocalstorage.map((eachuser, index) => (
+                    <div className="friend">
+                      <img className="profile-pic" src={eachuser.image_url ? eachuser.image_url : "https://i.scdn.co/image/ab6761610000e5eb056f821a5186892979410deb"} alt="" />
+                      <div className="user-data">
+                        <a href={`https://leetcode.com/${eachuser.username}/`} className="username">
+                          {eachuser.username}
+                        </a>
+                        <div className="global-rank">
+                          Global Rank : <b>#{eachuser.global_rank}</b> and Solved : <b>{eachuser.solved}</b>
+                        </div>
+                      </div>
+                      <div className="clear-btn" onClick={() => removeuser(eachuser.username)}>
+                        <ClearIcon />
+                      </div>
+                    </div>
+
+                  ))
+                  : <h1 className="warning">You have Not added any friend yet</h1>
+                }
+                <a href='https://leetcode.com/penguinhacker/' className="friend">
+                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
                   <div className="user-data">
                     <div className="username">
-                      @NayakPenguin
+                      @penguinhacker
                     </div>
                     <div className="global-rank">
-                      Global Rank : <b>#1269</b> and Solved : <b>3</b>
+                      <i>Did not Attempt</i>
                     </div>
                   </div>
                   <div className="clear-btn">
-                    <ClearIcon/>
+                    <ClearIcon />
                   </div>
                 </a>
                 <a href='https://leetcode.com/penguinhacker/' className="friend">
@@ -423,7 +465,7 @@ const ContestAnalysis = () => {
                     </div>
                   </div>
                   <div className="clear-btn">
-                    <ClearIcon/>
+                    <ClearIcon />
                   </div>
                 </a>
                 <a href='https://leetcode.com/penguinhacker/' className="friend">
@@ -437,7 +479,7 @@ const ContestAnalysis = () => {
                     </div>
                   </div>
                   <div className="clear-btn">
-                    <ClearIcon/>
+                    <ClearIcon />
                   </div>
                 </a>
                 <a href='https://leetcode.com/penguinhacker/' className="friend">
@@ -451,7 +493,7 @@ const ContestAnalysis = () => {
                     </div>
                   </div>
                   <div className="clear-btn">
-                    <ClearIcon/>
+                    <ClearIcon />
                   </div>
                 </a>
                 <a href='https://leetcode.com/penguinhacker/' className="friend">
@@ -465,7 +507,7 @@ const ContestAnalysis = () => {
                     </div>
                   </div>
                   <div className="clear-btn">
-                    <ClearIcon/>
+                    <ClearIcon />
                   </div>
                 </a>
                 <a href='https://leetcode.com/penguinhacker/' className="friend">
@@ -479,21 +521,7 @@ const ContestAnalysis = () => {
                     </div>
                   </div>
                   <div className="clear-btn">
-                    <ClearIcon/>
-                  </div>
-                </a>
-                <a href='https://leetcode.com/penguinhacker/' className="friend">
-                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                  <div className="user-data">
-                    <div className="username">
-                      @penguinhacker
-                    </div>
-                    <div className="global-rank">
-                      <i>Did not Attempt</i>
-                    </div>
-                  </div>
-                  <div className="clear-btn">
-                    <ClearIcon/>
+                    <ClearIcon />
                   </div>
                 </a>
               </div>
@@ -699,6 +727,10 @@ const Container = styled.div`
           .collection{
             display: flex;
             flex-wrap: wrap;
+            h1{
+              margin-top:10px;
+              margin-left:15px;
+            }
 
             .add-btn{
               height: 42px;
@@ -732,7 +764,7 @@ const Container = styled.div`
               background-color: #f8f8f8;
               text-decoration: none;
               position: relative;
-
+              cursor:pointer;
               .profile-pic{
                 height: 35px;
                 width: 35px;
