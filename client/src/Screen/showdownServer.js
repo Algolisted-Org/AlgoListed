@@ -30,20 +30,20 @@ const ShowdownServer = () => {
                     </div>
 
                     <div className="form">
-                        <div className="input-container username">
+                        <div className="input-container-server username">
                             <input type="text" placeholder='Username' />
                             <ArrowForwardIosIcon />
                         </div>
-                        <div className="input-container create-room">
+                        <div className="input-container-server create-room">
                             <input type="text" placeholder='Server Name' />
                             <ArrowForwardIosIcon />
                         </div>
-                        <div className="input-container join-room">
+                        <div className="input-container-server join-room">
                             <input type="text" placeholder='Server-ID' />
                             <ArrowForwardIosIcon />
                         </div>
                         <div className="play-btn">
-                            <div className="btn">
+                            <div className="btn-server">
                                 Go to Server!
                             </div>
                             <div className="info">
@@ -188,7 +188,7 @@ const Container = styled.div`
       }
 
       .form{
-        .input-container{
+        .input-container-server{
             height: 40px;
             width: 500px;
             background-color: #e5e5e5;
@@ -226,7 +226,7 @@ const Container = styled.div`
             width: 100%;
             height: 40px;
 
-            .btn{
+            .btn-server{
                 height: 100%;
                 width: 150px;
                 background-color: #e5e5e5;
