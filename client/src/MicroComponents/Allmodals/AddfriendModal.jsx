@@ -33,6 +33,7 @@ function AdduserModal({
     if (credential.name.trim() === "") {
       setvalidation(true);
     }
+    else{
     const finduser = allcountries?.find(
       (eachuser) => eachuser.username === credential.name
     );
@@ -54,12 +55,18 @@ function AdduserModal({
         ];
         setretrivestorage(updatedArray);
         localStorage.setItem("myArray", JSON.stringify(updatedArray));
+       alert("added user")
+       setadduser(false)
       } else {
-        alert("already-added");
+        alert("alread present")
       }
     } else {
-      alert("not present");
+    
+       alert("not present")
+     
     }
+}
+    
   };
   const body = (
     <>
@@ -70,7 +77,7 @@ function AdduserModal({
         name="name"
         onChange={chnagecred}
       />
-      {validation && <h6>Enter the name</h6>}
+      {validation && <h6>Enter User name</h6>}
       <Input
         type="url"
         label="Image-url"
