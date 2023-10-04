@@ -99,7 +99,7 @@
   opacity: 0;
   transform: translateY(-100%);
 } */
-.btn{
+.modal-btn{
   padding: 0.25rem; 
   border: none;
   transition: opacity 0.3s ease;
@@ -108,7 +108,7 @@
   cursor: pointer;
 }
  
-  .body{
+  .modal-body{
     display: flex;
   position: relative;
   padding: 1.5rem; 

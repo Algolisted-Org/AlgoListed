@@ -20,13 +20,13 @@ export const Modal = ({ isOpen, body, footer, label, onClose }) => {
               className={`boxmodal ${showModal ? 'show-modal' : 'hide-modal'}`}
            
             >
-              <button className="btn" onClick={onClose}>
+              <button className="modal-btn" onClick={onClose}>
                 <IoMdClose size={18} />
               </button>
               <div className="custom-text">{label}</div>
             </div>
             {/*body*/}
-            <div className="body">{body}</div>
+            <div className="modal-body">{body}</div>
             {/*footer*/}
             <div className="biggerfooter">
               <div
