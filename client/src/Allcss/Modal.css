@@ -1,5 +1,5 @@
 
-.container {
+.global-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,10 +16,10 @@
     background-color:   rgba(38,38,38,0.7);
   }
   
-  .container:focus {
+  .global-container:focus {
     outline: none;
   }
-  .custom-container {
+  .global-custom-container {
     position: relative;
     width: 100%;
     height: 100%;
@@ -35,51 +35,51 @@
   
   /* Responsive widths */
   @media (min-width: 640px) {
-    .custom-container {
+    .global-custom-container {
       width: 66.66667%; /* md:w-4/6 */
     }
   }
   
   @media (min-width: 768px) {
-    .custom-container {
+    .global-custom-container {
       width: 50%; /* lg:w-3/6 */
     }
   }
   
   @media (min-width: 1024px) {
-    .custom-container {
+    .global-custom-container {
       width: 40%; /* xl:w-2/5 */
     }
   }
   
   /* Responsive heights */
   @media (min-width: 768px) {
-    .custom-container {
+    .global-custom-container {
       height: auto; /* lg:h-auto */
     }
   }
   
   @media (min-width: 640px) {
-    .custom-container {
+    .global-custom-container {
       height: auto; /* md:h-auto */
     }
   }
   
-  .custom-container:focus {
+  .global-custom-container:focus {
     outline: none;
   }
   
-  .custom-container.show-modal {
+  .global-custom-container.show-modal {
     transform: translateY(0);
     opacity: 1;
   }
   
-  .custom-container.hide-modal {
+  .global-custom-container.hide-modal {
     transform: translateY(-100%);
     opacity: 0;
   }
   
-.boxmodal{
+.global-boxmodal{
     display: flex;
     align-items: center;
     padding: 1.5rem;
@@ -99,7 +99,7 @@
   opacity: 0;
   transform: translateY(-100%);
 } */
-.btn{
+.global-btn{
   padding: 0.25rem; 
   border: none;
   transition: opacity 0.3s ease;
@@ -108,7 +108,7 @@
   cursor: pointer;
 }
  
-  .body{
+  .global-body{
     display: flex;
   position: relative;
   padding: 1.5rem; 
@@ -118,10 +118,8 @@
 
 
   }
-  .biggerfooter{
-
-  }
-  .footer{
+  
+  .global-footer{
     display: flex;
   flex-direction: row;
   align-items: center;
@@ -129,13 +127,13 @@
   width: 100%; 
 
   }
-  .custom-text {
+  .global-custom-text {
     font-size: 1.25rem; 
     font-weight: 600; 
   }
   
   /* ////addfriend css */
-  .Add{
+  .global-Add{
     height:40px;
     background-color:#0a53e4 ;
     font-weight:500;
