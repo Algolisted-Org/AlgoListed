@@ -19,7 +19,9 @@ const ContestAnalysisList = () => {
       <div
         key={item.id}
         className={
-          item.domainFilter === platformName ? 'filter selected' : 'filter'
+          item.domainFilter === platformName ? 'filter selected' : (
+            item.lock === true ? 'locked-feature filter' : 'filter'
+          )
         }
       >
         {item.text}
@@ -304,6 +306,13 @@ const Filters = styled.div`
 			cursor: pointer;
 		}
 	}
+
+  .locked-feature{
+    &:hover{
+      background-color: #f1f1f1;
+      color: #333;
+    }
+  }
 
 	.selected {
 		/* background-color: #ded7d7;

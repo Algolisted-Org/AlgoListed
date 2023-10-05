@@ -14,6 +14,10 @@ import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 import AdduserModal from '../MicroComponents/Allmodals/AddfriendModal';
+import * as calcA from '../Components/DummyPredictRatingforLC/calcA'
+import * as calcB from '../Components/DummyPredictRatingforLC/calcA'
+import * as calcC from '../Components/DummyPredictRatingforLC/calcA'
+import * as calcD from '../Components/DummyPredictRatingforLC/calcA'
 
 const ContestAnalysis = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -34,6 +38,11 @@ const ContestAnalysis = () => {
   const [Allcountries, setcounteries] = useState([])
   const [retrivelocalstorage, setretrivestorage] = useState([])
   const { contestName } = useParams();
+
+  console.log(calcA.calculateValue(5000));
+  console.log(calcB.calculateValue(5000));
+  console.log(calcC.calculateValue(5000));
+  console.log(calcD.calculateValue(5000));
 
   // console.log(Allcountries);
   const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
@@ -165,7 +174,9 @@ const ContestAnalysis = () => {
       <div
         key={item.id}
         className={
-          item.domainFilter === platformName ? 'filter selected' : 'filter'
+          item.domainFilter === platformName ? 'filter selected' : (
+            item.lock === true ? 'locked-feature filter' : 'filter'
+          )
         }
       >
         {item.text}
@@ -354,7 +365,7 @@ const ContestAnalysis = () => {
             ) : (<LinearProgress />)
           }
           <div className="feature-title">2. Problem Stats</div>
-          
+
           {
             showVisuals ? (
               <div className="problems">
@@ -401,7 +412,7 @@ const ContestAnalysis = () => {
                     <ul className='list-of-rankings'>
                       {rankings.map((ranking, index) => (
                         <li className='ranking' key={index}>
-                          <a href={`https://leetcode.com/${ranking.username}`}>{ranking.username}</a>
+                          <div><a href={`https://leetcode.com/${ranking.username}`}>{ranking.username}</a></div>
                           <div>{ranking.country_name}</div>
                           <div>{ranking.country_rank}</div>
                           <div>{ranking.realrank}</div>
@@ -537,31 +548,39 @@ const ContestAnalysis = () => {
 
           <div className="feature-title">4. Predict Rating Change</div>
           <div className='predict-rating'>
-            <input
-              className='input'
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder='Enter your username'
-            />
-            <button
-              className='search-btn'
-              onClick={() => predictRating()}>
-              Predict
-            </button>
-            <div
-              className='virtual-btn'>
-              Virtual contest ?
-            </div>
-            {
-              prediction != null ? <div>
-                <p>delta_rating : {prediction.delta_rating}</p>
-                <p>old_rating : {prediction.old_rating}</p>
-                <p>new_rating : {prediction.new_rating}</p>
-              </div> : <></>
-            }
+            <div className='predict-rating-form'>
+              <input
+                className='input'
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder='Enter your username'
+              />
+              <button
+                className='search-btn'
+                onClick={() => predictRating()}>
+                Predict
+              </button>
+              <div className='virtual-btn'>
+                {/* Virtual contest ? */}
+              </div>
+              {
+                prediction != null ? <div>
+                  <p>delta_rating : {prediction.delta_rating}</p>
+                  <p>old_rating : {prediction.old_rating}</p>
+                  <p>new_rating : {prediction.new_rating}</p>
+                </div> : <></>
+              }
           </div>
-        </div>
+          <div className="info">
+            <InfoIcon />
+            <div className="text">
+              Because the machine learning model is resource-intensive, it takes some time to initialize its weights. {" "}
+              <b>Consequently, this feature may not function properly within the first 30 minutes of the contest.</b>
+            </div>
+          </div>
+          </div>
+      </div>
 
 
 
@@ -607,6 +626,8 @@ const Container = styled.div`
     a{
       color: #18489f;
     }
+
+    
 
     .cc-middle-content{
       min-height: 100vh;
@@ -821,18 +842,46 @@ const Container = styled.div`
       }
 
       .predict-rating{
-        width: 100%;
-        /* border: 1px solid black; */
         margin-left: 20px;
-        display: flex;
-        justify-content: space-between;
+        width: 100%;
+        
+        .predict-rating-form{
+          width: 100%;
+          /* border: 1px solid black; */
+          display: flex;
+          justify-content: space-between;
 
-        input{
-          margin: 0;
-          width: auto;
-          flex: 1;
+          input{
+            margin: 0;
+            width: auto;
+            flex: 1;
+          }
         }
+
+
+        .info{
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+  
+            svg{
+              margin-right: 10px;
+              fill: #333;
+            }
+  
+            .text{
+              font-size: 0.8rem;
+              font-weight: 200;
+              line-height: 1.15rem;
+            }
+
+            b{
+              font-weight: 500;
+            }
+            
+          }
       }
+
 
       .rank-inputs {
         width: 100%;
@@ -1035,6 +1084,8 @@ const Container = styled.div`
 
             a{
               font-size: 0.85rem;
+              width: auto;
+              display: inline-block;
             }
 
             &:hover {
@@ -1079,6 +1130,13 @@ const Filters = styled.div`
 		}
 	}
 
+  .locked-feature{
+    &:hover{
+      background-color: #f1f1f1;
+      color: #333;
+    }
+  }
+
 	.selected {
 		/* background-color: #ded7d7;
     color: #111; */
@@ -1086,8 +1144,6 @@ const Filters = styled.div`
 		background-color: #201f1f;
 		color: #ebdddd;
 	}
-
-  
 
 	@media only screen and (max-width: 1100px) {
 		margin: 10px 0 10px 0;
@@ -1109,7 +1165,6 @@ const Filters = styled.div`
 
   
 `;
-
 const CleanLine = styled.div`
   height: 1px;
   width: 100%;
