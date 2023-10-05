@@ -43,9 +43,9 @@ const ShowdownServer = () => {
                             <ArrowForwardIosIcon />
                         </div>
                         <div className="play-btn">
-                            <div className="btn-server">
+                            <a href='showdown-server/id-4398921a-iamatanunayak' className="btn-server">
                                 Go to Server!
-                            </div>
+                            </a>
                             <div className="info">
                                 <InfoIcon />
                                 <div className="text">
@@ -225,6 +225,7 @@ const Container = styled.div`
             margin-top: 30px;
             width: 100%;
             height: 40px;
+            
 
             .btn-server{
                 height: 100%;
@@ -241,6 +242,8 @@ const Container = styled.div`
                 text-transform: uppercase;
                 font-weight: 600;
                 cursor: pointer;
+                text-decoration: none;
+                color: black;
             }
 
             .info{
