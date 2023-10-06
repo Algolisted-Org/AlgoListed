@@ -47,11 +47,7 @@ function AdduserModal({
       setvalidation(true);
     }
     else{
-    const finduser = allcountries?.find(
-      (eachuser) => eachuser.username === credential.name
-    );
-
-  
+    
       const ispresent = retrivelocalstorage.some(
         (user) => user.username === credential.name
       );
@@ -60,10 +56,9 @@ function AdduserModal({
         const updatedArray = [
           ...retrivelocalstorage,
           {
-            username: finduser.username,
+            username: credential.username,
             image_url:credential.imgurl,
             
-            solved: 1,
           },
         ];
         setretrivestorage(updatedArray);
