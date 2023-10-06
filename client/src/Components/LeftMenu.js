@@ -132,10 +132,12 @@ export default LeftMenu
 
 const Container = styled.div`
   width: 200px;
-  border-right: 1px solid rgba(230, 230, 230, 1);
+  /* border-right: 0.5px solid rgba(230, 230, 230, 1); */
+  border-right: 0.5px solid var(--body_borderright);
   height: 100vh;
   min-height: 600px;
-  background-color: white;
+  /* background-color: white; */
+  background-color: var(--body_menubgcolor);
   z-index: 2;
   position: fixed;
   /* overflow-y: scroll; */
@@ -157,9 +159,11 @@ const Container = styled.div`
     /* text-transform: uppercase; */
     letter-spacing: 0.15rem;
     height: 45px;
-    background-color: #211f1f;
+    /* background-color: #211f1f; */
+    background-color: var(--body_logobg);
+    /* color: white; */
+    color: var(--body_logocolor);
     display: flex;
-    color: white;
     align-items: center;
     justify-content: center;
     /* border: 1px solid #f7d59d; */
@@ -179,6 +183,7 @@ const Container = styled.div`
 
   .mid-links{
     margin-top: 15px;
+    color: var(--body_menulinks);
    
 
     .flag{
@@ -191,12 +196,14 @@ const Container = styled.div`
       .line{
         width: 20%;
         height: 1px;
-        background-color: black;
+        /* background-color: black; */
+        background-color: var(--body_color);
       }
 
       .text{
         font-size: 0.8rem;
         font-weight: 400;
+        color: var(--body_color);
       }
     }
 
@@ -220,13 +227,17 @@ const Container = styled.div`
       }
 
       &:hover{
-        background-color: #e5e5e5;
+        /* background-color: #e5e5e5; */
+        background-color: var(--body_menuhoverbg);
+        color: var(--body_menuhovercolor);
         transition-duration: 250ms;
       }
     }
     
     .current-link{
-      background-color: #e5e5e5;
+      /* background-color: #e5e5e5; */
+      background-color: var(--body_menuhoverbg);
+      color: var(--body_menuhovercolor);
 
       svg{
         display: block;
@@ -259,7 +270,7 @@ const Container = styled.div`
       border-bottom: 1px solid #e5e5e5;
 
       &:hover{
-        background-color: #eeeeee6c;
+        background-color: #eeeeee6c; 
         transition-duration: 250ms;
         color: black;
       }
@@ -280,13 +291,14 @@ const Container = styled.div`
     cursor: pointer;
 
     .icon{
-
+      color: var(--body_menubtncolor);
     }
 
     .text{
       font-weight: 300;
       font-size: 0.85rem;
       margin-left: 5px;
+      color: var(--body_menubtncolor);
     }
   }
 `
