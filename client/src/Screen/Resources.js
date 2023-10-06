@@ -206,7 +206,9 @@ const Resources = () => {
 export default Resources
 
 const GrandContainer = styled.div`
-`
+  background-color: var(--body_background);
+  color: var(--body_color);
+`;
 
 const MobContainer = styled.div`
   width: 100vw;
@@ -218,7 +220,8 @@ const MobContainer = styled.div`
     .main-heading {
       font-size: 1.25rem;
       font-weight: 600;
-      color: #292929;
+      /*color: #292929;*/ /* --body_heading */
+      color: var(--body_heading);
       margin-bottom: 5px;
     }
   
@@ -226,10 +229,12 @@ const MobContainer = styled.div`
       font-size: 0.85rem;
       margin-bottom: 10px;
       font-weight: 400;
-      color: #696168;
+      /*color: #696168;*/ /* --body_heading2 */
+      color: var(--body_heading2);
   
       a {
-        color: #18489f;
+        /*color: #18489f;*/ /* --body_link */
+        color: var(--body_link);
         font-size: 0.75rem;
         font-weight: 300;
         margin-left: 0.25rem;
@@ -252,7 +257,8 @@ const MobContainer = styled.div`
         font-weight: 300;
         padding: 5px 15px;
         font-size: 0.7rem;
-        background-color: white;
+        /*background-color: white;*/ /* --body_background2 */
+        background-color: var(--body_background2);
         border: 1px solid rgb(185, 175, 175);
         box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
   
@@ -275,7 +281,8 @@ const MobContainer = styled.div`
         justify-content: center;
         border-radius: 500px;
         padding: 5px;
-        background-color: white;
+        /*background-color: white;*/ /* --body_background2 */
+        background-color: var(--body_background2);
         border: 1px solid rgb(185, 175, 175);
         box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
 
@@ -288,7 +295,8 @@ const MobContainer = styled.div`
         position: absolute;
         top: 35px;
         right: -5px;
-        background-color: white;
+        /*background-color: white;*/ /* --body_background2 */
+        background-color: var(--body_background2);
         border: 1px solid rgb(185, 175, 175);
         box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
         padding: 5px 10px;
@@ -346,7 +354,8 @@ const MobContainer = styled.div`
           .title{
               font-size: 0.9rem;
               font-weight: 500;
-              color: #374151;
+              /*color: #374151;*/ /* --body_title */
+              color: var(--body_title);
               cursor: pointer;
               text-decoration: none;
               width: 100%;
@@ -362,7 +371,8 @@ const MobContainer = styled.div`
           .short-desc{
             font-size: 0.8rem;
             font-weight: 300;
-            color: #6b7280;
+            /*color: #6b7280;*/ /* --body_color2 */
+            color: var(--body_color2);
             font-family: 'Poppins', sans-serif;
           }
 
@@ -375,8 +385,10 @@ const MobContainer = styled.div`
                   font-size: 0.7rem;
                   padding: 2.5px 12.5px;
                   border-radius: 100px;
-                  background-color: #f3e8ff;
-                  color: rgb(107, 33, 168);
+                  /*background-color: #f3e8ff;*/ /* --body_tagbackground1 */
+                  background-color: var(--body_tagbackground1);
+                  /*color: rgb(107, 33, 168);*/ /* --body_tagcolor1 */
+                  color: var(--body_tagcolor1);
                   font-weight: 400;
                   margin: 5px 5px 0 0;
               }
@@ -385,7 +397,8 @@ const MobContainer = styled.div`
                   font-size: 0.7rem;
                   padding: 2.5px 12.5px;
                   border-radius: 100px;
-                  background-color: #eeeeee;
+                  /*background-color: #eeeeee;*/ /* --body_tagbackground2 */
+                  background-color: var(--body_tagbackground2);
                   font-weight: 300;
                   margin: 5px 5px 0 0;
               }
@@ -410,7 +423,8 @@ const Container = styled.div`
     padding-left: 200px;
 
     a{
-      color: #18489f;
+      /*color: #18489f;*/ /* --body_link */
+      color: var(--body_link);
     }
 
     .cc-middle-content{
@@ -431,7 +445,8 @@ const Container = styled.div`
       .main-heading{
           font-size: 1.65rem;
           font-weight: 600;
-          color: #292929;
+          /*color: #292929;*/ /* --body_heading */
+          color: var(--body_heading);
           display: flex; 
           align-items: center;
 
@@ -441,7 +456,8 @@ const Container = styled.div`
             font-weight: 500;
             padding: 0.25rem 0.5rem;
             border-radius: 100px;
-            background-color: #e5e5e5;
+            /*background-color: #e5e5e5;*/ /* --body_background3 */
+            background-color: var(--body_background3);
             margin-left: 10px;
           }
       }
@@ -450,10 +466,12 @@ const Container = styled.div`
           font-size: 1.05rem;
           margin-bottom: 10px;
           font-weight: 400;
-          color: #696168;
+          /*color: #696168;*/ /* --body_heading2 */
+          color: var(--body_heading2);
 
           a{
-            color: #18489f;
+            /*color: #18489f;*/ /* --body_link */
+            color: var(--body_link);
             font-size: 0.95rem;
             font-weight: 300;
             margin-left: 0.25rem;
@@ -464,14 +482,16 @@ const Container = styled.div`
         display: inline-block;
         /* display: flex; */
         /* align-items: center; */
-        background-color: #d5f7e1;
+        /*background-color: #d5f7e1;*/ /* --body_background4 */
+        background-color: var(--body_background4);
         border-radius: 5px;
         padding: 10px;
         margin: 20px 0 10px 0;
 
         .text{
             font-size: 0.8rem;
-            color: #13803b;
+            /*color: #13803b;*/ /* --body_color3 */
+            color: var(--body_color3);
             font-weight: 300;
             
         }
@@ -508,7 +528,8 @@ const Container = styled.div`
             padding: 5px 10px;
             font-size: 0.7rem;
             font-weight: 300;
-            background-color: white;
+            /*background-color: white;*/ /* --body_background2 */
+            background-color: var(--body_background2);
             border: 1px solid #b9afaf;
             box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
             top: 5px;
@@ -537,7 +558,8 @@ const Container = styled.div`
           .title{
               font-size: 0.85rem;
               font-weight: 500;
-              color: #374151;
+              /*color: #374151;*/ /* --body_title */
+              color: var(--body_title);
               cursor: pointer;
               text-decoration: none;
               width: 100%;
@@ -556,6 +578,7 @@ const Container = styled.div`
             font-weight: 200;
             letter-spacing: 0.06rem;
             font-family: 'Poppins', sans-serif;
+            color: var(--body_heading2);
           }
 
           .tags{
@@ -567,8 +590,10 @@ const Container = styled.div`
                   font-size: 0.7rem;
                   padding: 2.5px 12.5px;
                   border-radius: 100px;
-                  background-color: #f3e8ff;
-                  color: rgb(107, 33, 168);
+                  /*background-color: #f3e8ff;*/ /* --body_tagbackground1 */
+                  background-color: var(--body_tagbackground1);
+                  /*color: rgb(107, 33, 168);*/ /* --body_tagcolor1 */
+                  color: var(--body_tagcolor1);
                   font-weight: 400;
                   margin: 5px 5px 0 0;
               }
@@ -577,7 +602,8 @@ const Container = styled.div`
                   font-size: 0.7rem;
                   padding: 2.5px 12.5px;
                   border-radius: 100px;
-                  background-color: #eeeeee;
+                  /*background-color: #eeeeee;*/ /* --body_tagbackground2 */
+                  background-color: var(--body_tagbackground2);
                   font-weight: 300;
                   margin: 5px 5px 0 0;
               }
@@ -613,11 +639,15 @@ const Filters = styled.div`
     border-radius: 500px;
     margin: 0px 5px 5px 0px;
     font-weight: 300;
+    color: var(--body_hoverbgcolor);
 
     &:hover {
-      border-color: #201f1f;
-      background-color: #201f1f;
-      color: #ebdddd;
+      /*border-color: #201f1f;*/ /*--body_hoverbgcolor*/
+      border-color: var(--body_hoverbgcolor);
+      /*background-color: #201f1f;*/ /*--body_hoverbgcolor*/
+      background-color: var(--body_hoverbgcolor);
+      /*color: #ebdddd;*/ /*--body_hovercolor*/
+      color: var(--body_hovercolor);
       transition-duration: 250ms;
       cursor: pointer;
     }
@@ -626,9 +656,12 @@ const Filters = styled.div`
   .selected {
     /* background-color: #ded7d7;
     color: #111; */
-    border-color: #201f1f;
-    background-color: #201f1f;
-    color: #ebdddd;
+    /*border-color: #201f1f;*/ /*--body_hoverbgcolor*/
+    border-color: var(--body_hoverbgcolor);
+    /*background-color: #201f1f;*/ /*--body_hoverbgcolor*/
+    background-color: var(--body_hoverbgcolor);
+    /*color: #ebdddd;*/ /*--body_hovercolor*/
+    color: var(--body_hovercolor);
   }
 
   @media only screen and (max-width: 1100px) {
@@ -643,9 +676,12 @@ const Filters = styled.div`
     .selected {
       /* background-color: #ded7d7;
       color: #111; */
-      border-color: #201f1f;
-      background-color: #201f1f;
-      color: #ebdddd;
+      /*border-color: #201f1f;*/ /*--body_hoverbgcolor*/
+      border-color: var(--body_hoverbgcolor);
+      /*background-color: #201f1f;*/ /*--body_hoverbgcolor*/
+      background-color: var(--body_hoverbgcolor);
+      /*color: #ebdddd;*/ /*--body_hovercolor*/
+      color: var(--body_hovercolor);
     }
   }
 `;
@@ -664,7 +700,8 @@ const Sort = styled.div`
     justify-content: space-between;
     align-items: center;
     border-radius: 100px;
-    background-color: white;
+    /*background-color: white;*/ /* --body_background2 */
+    background-color: var(--body_background2);
     border: 1px solid #b9afaf;
     box-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
     margin-right: 5px;
@@ -677,7 +714,7 @@ const Sort = styled.div`
     }
     
     &:hover{
-      background-color: #f4f3f3d6;
+      background-color: #f4f3f3d6; /* wrong color code*/
       transition-duration: 250ms;
       transition-timing-function: ease-in-out;
     }
@@ -689,11 +726,13 @@ const RightBottomMessage = styled.div`
   position: fixed; 
   right: 10px;
   bottom: 10px;
-  background-color: black;
+  /*background-color: black;*/ /* --body_background5 */
+  background-color: var(--body_background5);
   border-radius: 4px;
   padding: 10px;
   font-size: 0.75rem;
-  color: white;
+  /*color: white;*/ /* --body_color4 */
+  color: var(--body_color4);
   font-weight: 200;
   max-width: 300px;
 `
