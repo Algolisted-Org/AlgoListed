@@ -142,8 +142,8 @@ const CodingSheets = () => {
 	useEffect(() => {
 		// retrieve the data from the server
 		axios
-			// .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
-			.get(`https://algolisted.cyclic.app/coding-questions/question/${sheetname}`)
+			
+			.get(`${process.env.REACT_APP_BACKEND_API}/coding-questions/question/${sheetname}`)
 			.then((res) => {
 				// retrieve the "completed" status of each sheet from the local storage
 				let updatedData = res.data.map((sheet) => {

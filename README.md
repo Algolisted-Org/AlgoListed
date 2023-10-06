@@ -23,7 +23,7 @@ This project is created with MERN stack.  A few third party APIs and services ar
 
 Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 
-API hosted on cyclic.sh : https://algolisted.cyclic.app/
+API hosted on cyclic.sh : **NOT AVAILABLE PUBLICLY YET
 
 Main Website : <a href="http://algolisted.com/">algolisted.com</a>
 <br/><br/>

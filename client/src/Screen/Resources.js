@@ -24,7 +24,7 @@ const Resources = () => {
   }, []);
 
   useEffect(() => {
-    axios.get("https://algolisted.cyclic.app/resources/all")
+    axios.get(`${process.env.REACT_APP_BACKEND_API}/resources/all`)
       .then((res) => {
         setAllResources(res.data);
         // console.log(res.data);

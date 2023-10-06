@@ -21,8 +21,8 @@ import OnlineAssessment from './Screen/OnlineAssessment';
 import ContestAnalysis from './Screen/ContestAnalysis';
 import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
-import ShowdownServer from './Screen/ShowdownServer';
-import ShowdownServerOpened from './Screen/ShowdownServerOpened';
+import ShowdownServer from './Screen/showdownServer';
+import ShowdownServerOpened from './Screen/showdownServerOpened';
 
 const App = () => {
   

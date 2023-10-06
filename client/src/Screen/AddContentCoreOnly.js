@@ -130,7 +130,7 @@ const AddContentCoreOnly = () => {
             selectTypeValue
         );
 
-        await fetch('https://algolisted.cyclic.app/resources/create', {
+        await fetch(`${process.env.REACT_APP_BACKEND_API}/resources/create`, {
             method: 'post',
             headers: { 'content-type': 'application/json' },
 
