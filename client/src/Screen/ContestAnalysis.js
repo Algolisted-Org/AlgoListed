@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { json, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CCHeader from '../Components/CCHeader';
@@ -36,30 +36,29 @@ const ContestAnalysis = () => {
   const [problemLabels, setProblemLabels] = useState([]);
   const [addUser, setadduser] = useState(false)
   const [Allcountries, setcounteries] = useState([])
-  const [retrivelocalstorage, setretrivestorage] = useState([])
+  const [retrivelocalstorage, setretrivestorage] = useState([]);
+  const [SessionUserCountChange, setSessionUserCountChange] = useState(0)
   const { contestName } = useParams();
-
-  console.log(calcA.calculateValue(5000));
-  console.log(calcB.calculateValue(5000));
-  console.log(calcC.calculateValue(5000));
-  console.log(calcD.calculateValue(5000));
+  
+  // console.log(calcA.calculateValue(5000));
+  // console.log(calcB.calculateValue(5000));
+  // console.log(calcC.calculateValue(5000));
+  // console.log(calcD.calculateValue(5000));
 
   // console.log(Allcountries);
   const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
-
-  useEffect(() => {
-    const storedArray = localStorage.getItem('myArray');
-
-    if (storedArray) {
-      setretrivestorage(JSON.parse(storedArray));
-    }
-  }, [])
-
+  
   const removeuser = (username) => {
     const updatedArray = retrivelocalstorage.filter((eachuser) => eachuser.username !== username);
     localStorage.setItem("myArray", JSON.stringify(updatedArray));
   }
   // console.log(retrivelocalstorage);
+useEffect(()=>{
+  const storedArray = localStorage.getItem('myArray');
+  const parsedArray = JSON.parse(storedArray);
+   
+  setretrivestorage(parsedArray);
+},[SessionUserCountChange])
 
   useEffect(() => {
     axios
@@ -150,6 +149,13 @@ const ContestAnalysis = () => {
         setShowVisuals(true);
       })
       .catch((err) => console.log(err));
+
+
+
+   
+
+
+
   }, []);
 
   const handleAnalysisName = () => {
@@ -218,7 +224,7 @@ const ContestAnalysis = () => {
     },
   };
 
-  // Render the bar graphs for each problem's fail count
+  
   const barGraphs = barData.map((data, index) => (
     <div key={index} className='problem'>
       <div className="problem-title">Problem {IdToProblem[questions[index].question_id]} : <br /> <i>{questions[index].title}</i></div>
@@ -431,114 +437,57 @@ const ContestAnalysis = () => {
                 <div className="pinned-users">
                   <h4>Pinned Friend's Rankings</h4>
                   <div className="collection">
-                    <div className="add-btn" onClick={() => setadduser(true)}>
+                    <div className="add-btn" onClick={() => {  setadduser(true); setSessionUserCountChange(SessionUserCountChange + 1);}}>
                       <AddIcon />
                     </div>
                     {retrivelocalstorage.length > 0 ?
-                      retrivelocalstorage.map((eachuser, index) => (
-                        <div className="friend">
+                      retrivelocalstorage.map((eachuser, index) => {
+                        const userExists = Allcountries.find(user => user.username === eachuser.username);
+                         if(userExists){
+                          return(
+                            <div className="friend">
                           <img className="profile-pic" src={eachuser.image_url ? eachuser.image_url : "https://i.scdn.co/image/ab6761610000e5eb056f821a5186892979410deb"} alt="" />
                           <div className="user-data">
                             <a href={`https://leetcode.com/${eachuser.username}/`} className="username">
                               {eachuser.username}
                             </a>
                             <div className="global-rank">
-                              {/* Global Rank : <b>#{eachuser.global_rank}</b> and Solved : <b>{eachuser.solved}</b> */}
-                              Global Rank : <b>#{eachuser.global_rank}</b>
+                             
+                              Global Rank : <b>#{userExists.realrank}</b>
+                            </div>
+                          </div>
+                          <div className="clear-btn" onClick={() => {removeuser(eachuser.username); setSessionUserCountChange(SessionUserCountChange + 1);}}>
+                            <ClearIcon />
+                          </div>
+                        </div>
+                      )}else{
+                        return(
+                          <div  className="friend">
+                          <img className="profile-pic" src={eachuser.image_url ? eachuser.image_url : "https://i.scdn.co/image/ab6761610000e5eb056f821a5186892979410deb"} alt="" />
+                          <div className="user-data">
+                            <a href={`https://leetcode.com/${eachuser.username}/`}className="username">
+                            {eachuser.username}
+                            </a>
+                            <div className="global-rank">
+                              <i>Did not Attempt</i>
                             </div>
                           </div>
                           <div className="clear-btn" onClick={() => removeuser(eachuser.username)}>
                             <ClearIcon />
                           </div>
                         </div>
-
-                      ))
+                        )
+                      
+                    }
+                          
+                         })
+                        
+                      
                       : <h1 className="warning">You have Not added any friend yet</h1>
                     }
-                    <a href='https://leetcode.com/penguinhacker/' className="friend">
-                      <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                      <div className="user-data">
-                        <div className="username">
-                          @penguinhacker
-                        </div>
-                        <div className="global-rank">
-                          <i>Did not Attempt</i>
-                        </div>
-                      </div>
-                      <div className="clear-btn">
-                        <ClearIcon />
-                      </div>
-                    </a>
-                    <a href='https://leetcode.com/penguinhacker/' className="friend">
-                      <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                      <div className="user-data">
-                        <div className="username">
-                          @penguinhacker
-                        </div>
-                        <div className="global-rank">
-                          <i>Did not Attempt</i>
-                        </div>
-                      </div>
-                      <div className="clear-btn">
-                        <ClearIcon />
-                      </div>
-                    </a>
-                    <a href='https://leetcode.com/penguinhacker/' className="friend">
-                      <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                      <div className="user-data">
-                        <div className="username">
-                          @penguinhacker
-                        </div>
-                        <div className="global-rank">
-                          <i>Did not Attempt</i>
-                        </div>
-                      </div>
-                      <div className="clear-btn">
-                        <ClearIcon />
-                      </div>
-                    </a>
-                    <a href='https://leetcode.com/penguinhacker/' className="friend">
-                      <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                      <div className="user-data">
-                        <div className="username">
-                          @penguinhacker
-                        </div>
-                        <div className="global-rank">
-                          <i>Did not Attempt</i>
-                        </div>
-                      </div>
-                      <div className="clear-btn">
-                        <ClearIcon />
-                      </div>
-                    </a>
-                    <a href='https://leetcode.com/penguinhacker/' className="friend">
-                      <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                      <div className="user-data">
-                        <div className="username">
-                          @penguinhacker
-                        </div>
-                        <div className="global-rank">
-                          <i>Did not Attempt</i>
-                        </div>
-                      </div>
-                      <div className="clear-btn">
-                        <ClearIcon />
-                      </div>
-                    </a>
-                    <a href='https://leetcode.com/penguinhacker/' className="friend">
-                      <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                      <div className="user-data">
-                        <div className="username">
-                          @penguinhacker
-                        </div>
-                        <div className="global-rank">
-                          <i>Did not Attempt</i>
-                        </div>
-                      </div>
-                      <div className="clear-btn">
-                        <ClearIcon />
-                      </div>
-                    </a>
+                    
+                   
+                    
                   </div>
                 </div>
               </div>
@@ -612,7 +561,7 @@ const MobContainer = styled.div`
   @media only screen and (min-width: 1099px){
     display: none;
   }
-`
+`;
 
 const Container = styled.div`
     @media only screen and (max-width: 1099px){
@@ -1097,7 +1046,7 @@ const Container = styled.div`
         }
       }
     }
-`
+`;
 
 const Filters = styled.div`
 	display: flex;
@@ -1165,11 +1114,12 @@ const Filters = styled.div`
 
   
 `;
+
 const CleanLine = styled.div`
   height: 1px;
   width: 100%;
   background-color: grey;
-`
+`;
 
 const Filters2 = styled.div`
 	display: flex;
