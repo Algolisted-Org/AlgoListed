@@ -36,15 +36,16 @@ const ContestAnalysis = () => {
   const [problemLabels, setProblemLabels] = useState([]);
   const [addUser, setadduser] = useState(false)
   const [Allcountries, setcounteries] = useState([])
-  const [retrivelocalstorage, setretrivestorage] = useState([])
+  const [retrivelocalstorage, setretrivestorage] = useState([]);
+  const [SessionUserCountChange, setSessionUserCountChange] = useState(0)
   const { contestName } = useParams();
   
-  console.log(calcA.calculateValue(5000));
-  console.log(calcB.calculateValue(5000));
-  console.log(calcC.calculateValue(5000));
-  console.log(calcD.calculateValue(5000));
+  // console.log(calcA.calculateValue(5000));
+  // console.log(calcB.calculateValue(5000));
+  // console.log(calcC.calculateValue(5000));
+  // console.log(calcD.calculateValue(5000));
 
-  console.log(Allcountries);
+  // console.log(Allcountries);
   const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
   
   const removeuser = (username) => {
@@ -55,15 +56,10 @@ const ContestAnalysis = () => {
 useEffect(()=>{
   const storedArray = localStorage.getItem('myArray');
   const parsedArray = JSON.parse(storedArray);
-
-    
-    
-
-    
    
-      setretrivestorage(parsedArray);
-    
-},[retrivelocalstorage])
+  setretrivestorage(parsedArray);
+},[SessionUserCountChange])
+
   useEffect(() => {
     axios
       .get(`https://nayak-leetcode-api.vercel.app/?weekly_contest=${contestName}`)
@@ -441,7 +437,7 @@ useEffect(()=>{
                 <div className="pinned-users">
                   <h4>Pinned Friend's Rankings</h4>
                   <div className="collection">
-                    <div className="add-btn" onClick={() => setadduser(true)}>
+                    <div className="add-btn" onClick={() => {  setadduser(true); setSessionUserCountChange(SessionUserCountChange + 1);}}>
                       <AddIcon />
                     </div>
                     {retrivelocalstorage.length > 0 ?
@@ -460,7 +456,7 @@ useEffect(()=>{
                               Global Rank : <b>#{userExists.realrank}</b>
                             </div>
                           </div>
-                          <div className="clear-btn" onClick={() => removeuser(eachuser.username)}>
+                          <div className="clear-btn" onClick={() => {removeuser(eachuser.username); setSessionUserCountChange(SessionUserCountChange + 1);}}>
                             <ClearIcon />
                           </div>
                         </div>
