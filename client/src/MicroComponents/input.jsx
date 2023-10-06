@@ -1,12 +1,12 @@
 import React from 'react'
 import "../../src/Allcss/input.css"
-import { useState,useEffect } from 'react';
-function Input({label,type,value,setValue,onChange,name,onKeyPress,refer}) {
+import { useState } from 'react';
+function Input({label,type,value,setValue,onChange,name}) {
    
- 
+  
     return (
       <div className="global-input-container">
-        <input type={type}  onChange={onChange} name={name} onKeyPress={onKeyPress} ref={refer} />
+        <input type={type}  onChange={onChange} name={name} />
         <label className={value && 'filled'} >
           {label}
         </label>
