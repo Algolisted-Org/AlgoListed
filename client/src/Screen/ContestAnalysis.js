@@ -37,13 +37,27 @@ const ContestAnalysis = () => {
 
   console.log(Allcountries)
   const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
+  console.log(Allcountries)
   useEffect(() => {
     const storedArray = localStorage.getItem('myArray');
 
     if (storedArray) {
       setretrivestorage(JSON.parse(storedArray));
+      const  updated=retrivelocalstorage.map((eachfriend)=>{
+        const finduser = Allcountries?.find(
+          (eachuser) => eachuser.username === eachfriend.username
+        );
+        if(finduser){
+          return {
+            eachfriend,
+            global_rank: finduser.realrank,
+          }
+        }
+      return eachfriend
+      })
+      setretrivestorage(updated)
     }
-  }, [retrivelocalstorage])
+  }, [Allcountries])
   const removeuser = (username) => {
     const updatedArray = retrivelocalstorage.filter((eachuser) => eachuser.username !== username);
     localStorage.setItem("myArray", JSON.stringify(updatedArray));
