@@ -56,7 +56,7 @@ function AdduserModal({
         const updatedArray = [
           ...retrivelocalstorage,
           {
-            username: credential.username,
+            username: credential.name,
             image_url:credential.imgurl,
             
           },
