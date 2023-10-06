@@ -7,7 +7,7 @@ import {
 import styled from 'styled-components'
 
 import { BlogPage , AboutUs , Contact , FutureVision ,BlogIdeas, CodingCompetitions , Issues ,
-PageNotExist ,LandingPage ,OrganisationInfo ,AllBlogs ,AptitudeRound ,Opportunities ,Resources,
+PageNotExist, OrganisationInfo ,AllBlogs ,AptitudeRound ,Opportunities ,Resources,
 ContributeSite ,BlogAutoCode ,AuthPage , SelectedProfiles, CodingSheets ,AddContentCoreOnly ,LandingPage2, 
 Readme, CoreTeam ,Mission , RequestAPI, ChartTemp, PushDataToMongoDB }  from './Screen'
 import ScrollToTop from './Components/ScrollToTop';
