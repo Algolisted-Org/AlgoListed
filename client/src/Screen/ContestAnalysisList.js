@@ -101,14 +101,14 @@ const ContestAnalysisList = () => {
           <div className="note">
             <b>NOTE</b> : Make sure to pick the kind of contest and the contest number you want, like the Weekly Contest and 365, for example.
           </div>
-          <div className="message2">
+          {/* <div className="message2">
             <div className="icon">
               <WarningIcon/>
             </div>
             <div className="text">
               We uphold LeetCode's policies and, as a result, our API remains inaccessible during contest hours.
             </div>
-          </div>
+          </div> */}
         </div>
       </Container>
     </GrandContainer>
@@ -257,11 +257,11 @@ const Container = styled.div`
             width: 50%;
             margin-right: 10px;
             border-radius: 10px;
-            border: 1px solid #c5bcbd;
+            border: 1px solid ${(props) => (props.needDarkMode ? 'transparent' : '#c5bcbd')};
             display: flex;
             align-items: center;
             padding: 10px;
-            /* background-color: black; */
+            background-color: ${(props) => (props.needDarkMode ? '#282a2d' : 'transparent')};
           }
 
           input{
@@ -278,17 +278,13 @@ const Container = styled.div`
           height: 45px;
           width: 45px;
           border-radius: 10px;
-          background-color: black;
+          background-color: ${(props) => (props.needDarkMode ? '#454754' : '#333')};
           cursor: pointer;
           display: grid;
           place-items: center;
           
-
           svg{
             font-size: 1.35rem;
-            margin-bottom: -0.1rem;
-            margin-left: -0.35rem;
-            margin-left: 5px;
             fill: #fff;
           }
         }
@@ -317,13 +313,13 @@ const Filters = styled.div`
 	.filter {
 		padding: 7.5px 15px;
 		font-size: 0.8rem;
-		border: 1px solid #b9afaf;
+		border: 1px solid ${(props) => (props.needDarkMode ? '#514f4f' : '#b9afaf')};
 		border-radius: 500px;
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
 		text-decoration: none;
-		color: inherit;
-    background-color: ${(props) => (props.needDarkMode ? '#444754' : '#f1f1f1')};
+    background-color: ${(props) => (props.needDarkMode ? 'transparent' : 'transparent')};
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
 
     svg{
       font-size: 1rem;
@@ -333,9 +329,9 @@ const Filters = styled.div`
     }
 
 		&:hover {
-			border-color: #201f1f;
-			background-color: #201f1f;
-			color: #ebdddd;
+			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
 			transition-duration: 250ms;
 			cursor: pointer;
 		}
@@ -343,9 +339,9 @@ const Filters = styled.div`
 
   .locked-feature{
     &:hover{
-      background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f2eeee')};
-      color: black;
-      border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#7e7676')};
+      background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+      color: ${(props) => (props.needDarkMode ? '#fff' : 'inherit')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
       transition-duration: 250ms;
     }
   }
@@ -353,9 +349,17 @@ const Filters = styled.div`
 	.selected {
 		/* background-color: #ded7d7;
     color: #111; */
-    color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#ebdddd')};
-    border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#fff')};
-    background-color: ${(props) => (props.needDarkMode ? '#201f1f' : '#201f1f')};
+    color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+    border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+    background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
+
+    &:hover {
+      color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+      background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
+			transition-duration: 250ms;
+			cursor: pointer;
+		}
 	}
 
 	@media only screen and (max-width: 1100px) {

@@ -21,7 +21,12 @@ function AdduserModal({
     }
   }, []);
     
- 
+  const handleKeyPress = (e, nextInputRef) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); 
+      nextInputRef.current.focus(); 
+    }
+  };
   const onclose = () => {
     setadduser(false);
   };
@@ -35,13 +40,6 @@ function AdduserModal({
       ...prev,
       [e.target.name]: e.target.value,
     }));
-  };
-  const handleKeyPress = (e, nextInputRef) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      
-      nextInputRef.current.focus(); 
-    }
   };
   const handlesubmit = async () => {
 

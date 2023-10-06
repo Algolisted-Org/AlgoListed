@@ -565,7 +565,7 @@ const MobContainer = styled.div`
   @media only screen and (min-width: 1099px){
     display: none;
   }
-`
+`;
 
 const Container = styled.div`
     @media only screen and (max-width: 1099px){
@@ -1050,7 +1050,7 @@ const Container = styled.div`
         }
       }
     }
-`
+`;
 
 const Filters = styled.div`
 	display: flex;
@@ -1118,11 +1118,12 @@ const Filters = styled.div`
 
   
 `;
+
 const CleanLine = styled.div`
   height: 1px;
   width: 100%;
   background-color: grey;
-`
+`;
 
 const Filters2 = styled.div`
 	display: flex;
