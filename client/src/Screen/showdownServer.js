@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import CCHeader from '../Components/CCHeader'
+import CCHeaderDark from '../Components/CCHeaderDark'
 import LeftMenu from '../Components/LeftMenu'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import InfoIcon from '@material-ui/icons/Info';
+import LeftMenuDark from '../Components/LeftMenuDark';
 
 const ShowdownServer = () => {
     return (
@@ -14,10 +15,10 @@ const ShowdownServer = () => {
                 <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
             </MobContainer>
             <Container>
-                <CCHeader />
-                <LeftMenu marked={"showdown-server"} />
+                <CCHeaderDark />
+                <LeftMenuDark marked={"showdown-server"} />
                 <div className="cc-middle-content">
-                    <h1 className='main-heading'>Showdown Server <div className="head-tag">Powered by Algolisted Ai <img src="https://www.gstatic.com/lamda/images/sparkle_resting_v2_darkmode_2bdb7df2724e450073ede.gif" alt="" /></div></h1>
+                    <h1 className='main-heading'>Showdown Server <div className="head-tag">Powered by Algolisted Ai <img draggable="false" src="https://static.wixstatic.com/media/592002_0f04cb41e098424588d09e2fba76ec65~mv2.gif" alt="" /></div></h1>
                     <p className="heading-supporter">
                         <img className='circle' draggable="false" src="https://giffiles.alphacoders.com/214/214686.gif" alt="" />
                         Now, you can host coding competitions with your friends and select questions randomly from specific topics like binary search, recursion or graphs from platforms like Codeforces or LeetCode. Algolisted AI ensures each question is rephrased, preventing direct searches, and the competition concludes with a thrilling leaderboard showcasing your friends' coding skills!
@@ -93,9 +94,10 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     padding-left: 200px;
+    background-color: #313338;
 
     a{
-      color: #18489f;
+      color: #6d93d8;
     }
 
     .circle{
@@ -103,7 +105,7 @@ const Container = styled.div`
         padding: 5px;
         height: 120px;
         border: 1px solid #dababa;
-        background-color: #e5e5e5;
+        background-color: #2b2d31;
     }
 
     .cc-middle-content{
@@ -117,6 +119,7 @@ const Container = styled.div`
       min-width: 850px;
       margin: auto;
       
+      
       @media only screen and (max-width: 1200px){
         padding: 80px 50px 50px 50px;
       }   
@@ -125,7 +128,7 @@ const Container = styled.div`
       .main-heading{
           font-size: 1.65rem;
           font-weight: 600;
-          color: #292929;
+          color: #e5e6e8;
           display: flex; 
           align-items: center;
 
@@ -134,24 +137,25 @@ const Container = styled.div`
             font-size: 0.75rem;
             font-weight: 500;
             padding: 0.25rem 0.5rem;
+            padding-right: 35px;
             border-radius: 100px;
-            background-color: #e5e5e5;
+            background-color: #a5bb26;
             margin-left: 10px;
 
             img{
-                height: 1.15rem;
-                margin-bottom: -5px;
-                margin-left: 5px;
+                position: absolute;
+                height: 2rem;
+                margin-top: -7.5px;
+                margin-left: -5px;
             }
           }
       }
-
 
       .heading-supporter{
           font-size: 1.05rem;
           margin-bottom: 10px;
           font-weight: 400;
-          color: #696168;
+          color: #ffffffa6;
           display: flex;
           align-items: center;
 
@@ -171,18 +175,19 @@ const Container = styled.div`
         display: inline-block;
         /* display: flex; */
         /* align-items: center; */
-        background-color: #d5f7e1;
+        background-color: #444754;
         border-radius: 5px;
         padding: 10px;
         margin: 20px 0 50px 0;
 
         .text{
             font-size: 0.8rem;
-            color: #13803b;
+            color: #b7b8ba;
             font-weight: 300;
             
             b{
                 font-weight: 500;
+                color: #b7b8ba;
             }
         }   
       }
@@ -191,14 +196,14 @@ const Container = styled.div`
         .input-container-server{
             height: 40px;
             width: 500px;
-            background-color: #e5e5e5;
+            background-color: #2b2d31;
             margin-bottom: 10px;
             border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 10px;
-            border: 1px solid #c0c0c0;
+            border: 1px solid #211f1f;
 
 
             input{
@@ -209,8 +214,9 @@ const Container = styled.div`
                 font-weight: 300;
                 letter-spacing: 0.05rem;
                 border: none;
-                border-right: 1px solid #c0c0c0;
+                border-right: 1px solid #211f1f;
                 margin-right: 10px;
+                color: white;
             }
 
             svg{
@@ -230,20 +236,20 @@ const Container = styled.div`
             .btn-server{
                 height: 100%;
                 width: 150px;
-                background-color: #e5e5e5;
+                background-color: #211f1f;
                 margin-bottom: 10px;
                 border-radius: 5px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 padding: 10px;
-                border: 1px solid #c0c0c0;
+                border: 1px solid #211f1f;
                 font-size: 0.8rem;
                 text-transform: uppercase;
                 font-weight: 600;
                 cursor: pointer;
                 text-decoration: none;
-                color: black;
+                color: white;
             }
 
             .info{
@@ -257,13 +263,14 @@ const Container = styled.div`
 
                 svg{
                     margin-right: 2.5px;
-                    fill: #333;
+                    fill: #ffffffa6;
                     font-size: 1rem;
                 }
 
                 .text{
                     font-size: 0.7rem;
                     font-weight: 200;
+                    color: #ffffffa6;
                 }
                 
             }

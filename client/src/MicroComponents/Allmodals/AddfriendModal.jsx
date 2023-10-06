@@ -27,6 +27,7 @@ function AdduserModal({
       [e.target.name]: e.target.value,
     }));
   };
+  
   const handlesubmit = async () => {
     if (credential.name.trim() === "") {
       setvalidation(true);

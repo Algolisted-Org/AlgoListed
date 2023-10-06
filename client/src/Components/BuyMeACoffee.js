@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import groupPhoto from '../Images/aboutUsImg.jpeg'
 import scanMeImage from '../Images/gpayScan.jpeg'
 // import gpayImage from '../Images/gpay.png'
 import gpayImage from '../Images/upi.png'
