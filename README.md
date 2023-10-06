@@ -1,8 +1,10 @@
-![image](https://github.com/Nayaker/AlgoListed/assets/93304796/04728c3e-f51e-49c8-86cf-dfda1f9efa72)
+## 🔥 Get Beginner-Level Issues for HacktoberFest 2023 
+As we're gearing up for the project's v2 release, we've introduced a variety of issues that are suitable for beginners. Feel free to explore the issues section for more details.
+<hr/>
+<br/><br/>
 
 
-
-# 🚀 Welcome to Algolisted
+# 🚀 Welcome to Algolisted v1.0 (BETA)
 
 <img width="1440" alt="Screenshot 2023-01-02 at 2 25 53 AM" src="https://user-images.githubusercontent.com/93304796/210184355-8a328a4c-191e-44c4-b36f-a98a26ffe49e.png">
 

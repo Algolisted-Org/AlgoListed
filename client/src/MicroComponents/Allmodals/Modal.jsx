@@ -12,26 +12,26 @@ export const Modal = ({ isOpen, body, footer, label, onClose }) => {
       {showModal && (
         <div
           className="
-   container
+   global-container
     "
         >
-          <div className="custom-container">
+          <div className="global-custom-container">
             <div
-              className={`boxmodal ${showModal ? 'show-modal' : 'hide-modal'}`}
+              className={`global-boxmodal ${showModal ? 'show-modal' : 'hide-modal'}`}
            
             >
-              <button className="btn" onClick={onClose}>
+              <button className="global-btn" onClick={onClose}>
                 <IoMdClose size={18} />
               </button>
-              <div className="custom-text">{label}</div>
+              <div className="global-custom-text">{label}</div>
             </div>
             {/*body*/}
-            <div className="body">{body}</div>
+            <div className="global-body">{body}</div>
             {/*footer*/}
-            <div className="biggerfooter">
+            <div className="global-biggerfooter">
               <div
                 className="
-               footer
+                global-footer
               "
               >
                 {footer}

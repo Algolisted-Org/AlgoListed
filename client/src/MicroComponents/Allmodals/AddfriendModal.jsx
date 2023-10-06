@@ -88,7 +88,7 @@ function AdduserModal({
         name="imgurl"
         onChange={chnagecred}
       />
-      <button className="Add" onClick={handlesubmit}>
+      <button className="global-Add" onClick={handlesubmit}>
         Add
       </button>
     </>
