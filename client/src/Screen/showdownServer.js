@@ -151,7 +151,6 @@ const Container = styled.div`
           }
       }
 
-
       .heading-supporter{
           font-size: 1.05rem;
           margin-bottom: 10px;
