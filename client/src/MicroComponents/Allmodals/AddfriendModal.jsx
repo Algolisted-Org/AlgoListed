@@ -1,5 +1,5 @@
 import "../../Allcss/Modal.css";
-import { useState } from "react";
+import { useState,useRef,useEffect} from "react";
 import Input from "../input";
 import { Modal } from "./Modal";
 
@@ -11,8 +11,17 @@ function AdduserModal({
   setretrivestorage,
 }) {
   const [validation, setvalidation] = useState(false);
- 
+  const input1Ref = useRef(null);
+  const input2Ref = useRef(null);
+  const input3Ref = useRef(null);
 
+  useEffect(() => {
+    if (input1Ref.current) {
+      input1Ref.current.focus();
+    }
+  }, []);
+    
+ 
   const onclose = () => {
     setadduser(false);
   };
@@ -27,7 +36,15 @@ function AdduserModal({
       [e.target.name]: e.target.value,
     }));
   };
+  const handleKeyPress = (e, nextInputRef) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      
+      nextInputRef.current.focus(); 
+    }
+  };
   const handlesubmit = async () => {
+
     if (credential.name.trim() === "") {
       setvalidation(true);
     }
@@ -36,7 +53,7 @@ function AdduserModal({
       (eachuser) => eachuser.username === credential.name
     );
 
-    if (finduser) {
+  
       const ispresent = retrivelocalstorage.some(
         (user) => user.username === credential.name
       );
@@ -47,7 +64,7 @@ function AdduserModal({
           {
             username: finduser.username,
             image_url:credential.imgurl,
-            global_rank: finduser.realrank,
+            
             solved: 1,
           },
         ];
@@ -60,14 +77,10 @@ function AdduserModal({
        })
        setadduser(false)
 
-      } else {
+      }else {
         alert("alread present")
       }
-    } else {
     
-       alert("not present")
-     
-    }
 }
     
   };
@@ -77,18 +90,22 @@ function AdduserModal({
         type="text"
         label="Name"
         value={credential.name}
+        refer={input1Ref}
         name="name"
         onChange={chnagecred}
+        onKeyPress={(e) => handleKeyPress(e, input2Ref)}
       />
       {validation && <h6>Enter User name</h6>}
       <Input
         type="url"
         label="Image-url"
         value={credential.imgurl}
+        refer={input2Ref}
         name="imgurl"
         onChange={chnagecred}
+        onKeyPress={(e) => handleKeyPress(e,input3Ref)}
       />
-      <button className="global-Add" onClick={handlesubmit}>
+      <button className="global-Add" ref={input3Ref} onClick={handlesubmit}>
         Add
       </button>
     </>
