@@ -46,15 +46,27 @@ const ContestAnalysis = () => {
 
   // console.log(Allcountries);
   const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
-
   useEffect(() => {
     const storedArray = localStorage.getItem('myArray');
 
     if (storedArray) {
       setretrivestorage(JSON.parse(storedArray));
-    }
-  }, [])
+    const updatearray=retrivelocalstorage.map((eachfriend)=>{
+      const finduser = Allcountries?.find(
+        (eachuser) => eachuser.username === eachfriend.name
+      );
+      if(finduser){
+        return{
+          eachfriend,
+          global_rank: finduser.realrank,
 
+        }
+      }
+      return eachfriend
+    })
+    setretrivestorage(updatearray)
+    }
+  }, [Allcountries])
   const removeuser = (username) => {
     const updatedArray = retrivelocalstorage.filter((eachuser) => eachuser.username !== username);
     localStorage.setItem("myArray", JSON.stringify(updatedArray));
@@ -612,7 +624,7 @@ const MobContainer = styled.div`
   @media only screen and (min-width: 1099px){
     display: none;
   }
-`
+`;
 
 const Container = styled.div`
     @media only screen and (max-width: 1099px){
@@ -1097,7 +1109,7 @@ const Container = styled.div`
         }
       }
     }
-`
+`;
 
 const Filters = styled.div`
 	display: flex;
@@ -1165,11 +1177,12 @@ const Filters = styled.div`
 
   
 `;
+
 const CleanLine = styled.div`
   height: 1px;
   width: 100%;
   background-color: grey;
-`
+`;
 
 const Filters2 = styled.div`
 	display: flex;
