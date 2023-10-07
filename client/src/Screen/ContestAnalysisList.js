@@ -19,10 +19,17 @@ const ContestAnalysisList = () => {
   const [contestNumber, setContestNumber] = useState('361');
   const [needDarkMode, setNeedDarkMode] = useState(false);
 
+  useEffect(() => {
+    let selectedTheme = localStorage.getItem("selectedTheme");
+    if(selectedTheme === 'dark') setNeedDarkMode(true);
+  }, [])
+  
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
+
+  
 
   const filters = contestAnalysisFilters.map((item) => {
     return (

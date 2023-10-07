@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import CCHeader from '../Components/CCHeader'
+import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus'
+import CCHeaderPlus from '../Components/CCHeaderPlus'
 import LeftMenu from '../Components/LeftMenu'
+import LeftMenuDark from '../Components/LeftMenuDark'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import axios from "axios";
@@ -18,7 +20,15 @@ const Resources = () => {
   const [allResources, setAllResources] = useState([]);
   const [filter, setFilter] = useState("All Resources");
   const [showFilters, setShowFilters] = useState(false);
+  const [needDarkMode, setNeedDarkMode] = useState(false);
 
+  let selectedTheme = localStorage.getItem("selectedTheme");
+  console.log("needDarkMode : ", needDarkMode);
+  const toggleDarkMode = () => {
+    setNeedDarkMode(!needDarkMode);
+  };
+
+  
   useEffect(() => {
     document.title = "Coding Resources - Algolisted";
   }, []);
@@ -119,8 +129,14 @@ const Resources = () => {
       </MobContainer>
  
       <Container>
-        <CCHeader />
-        <LeftMenu marked={"resources"} />
+        {
+          selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+        }
+        {/* <CCHeaderDarkPlus needDarkMode={selectedTheme} /> */}
+        { 
+          selectedTheme == "dark" ? <LeftMenuDark marked={"resources"} /> : <LeftMenu marked={"resources"} />
+        }
+        
         <div className="cc-middle-content">
           <h1 className='main-heading'>Coding Resources</h1>
           <p className="heading-supporter">
