@@ -1,74 +1,87 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Cutive&family=Poppins:wght@700&display=swap');
-body{
+
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Define some variables for consistent use */
+:root {
+    --primary-color: rgb(29, 29, 219);
+    --secondary-color: rgb(106, 106, 218);
+}
+
+body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5; /* Add a background color for better readability */
 }
-.container{
-    width: 400px;
-    border-top: 4.5px solid rgb(29, 29, 219);
-    border-bottom: 4.5px solid rgb(29, 29, 219);
-    margin: auto;
+
+.container {
+    width: 90%; /* Make the container width more responsive */
+    max-width: 600px; /* Set a maximum width for larger screens */
+    border: 4.5px solid var(--primary-color);
+    margin: 2rem auto; /* Center the container vertically and horizontally */
+    padding: 1rem; /* Add some padding for spacing */
+    background-color: #fff; /* Add a white background to the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 1rem; /* Add spacing below the header */
 }
-.header{
-    display: flex;
-    flex-direction: row;
-    border-bottom: 3px solid rgb(106, 106, 218);
-    justify-content: space-around;
+
+.header-logo {
+    width: 20%;
+    max-width: 100px; /* Limit the logo width */
 }
-.header-logo{
-    width: 17%;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-.header-text{
+
+.header-text {
     width: 70%;
+    text-align: center; /* Center-align the header text */
 }
-.header-text h2,h3{
-    margin-top: 1%;
-    margin-bottom: 1%;
+
+.header-text h2,
+.header-text h3 {
+    margin: 1% 0; /* Adjust heading margins for better spacing */
 }
-.header div img{
-    width: 100%;
-    height: 100%;
-}
-.coding-list{
+
+.coding-list {
     width: 100%;
     display: flex;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-wrap: wrap; /* Allow items to wrap to the next row on smaller screens */
+    margin-top: 1rem; /* Increase top margin for spacing */
 }
-.serial-no{
-    width: 10%;
-    font-size: 1.2rem;
-    text-align: center;
-}
-.details{
-    width: 85%;
-}
-.comp-name{
-    font-size: 1.1rem;
-}
-.comp-details{
-    font-family: sans-serif;
-}
-.coding-list:hover{
+
+.coding-list-item {
+    flex: 1;
+    min-width: calc(33.33% - 1rem); /* Set a minimum width for each item */
+    margin: 0.5rem; /* Add spacing between items */
+    padding: 1rem; /* Add padding to each item */
+    border: 1px solid #ddd; /* Add a subtle border */
+    background-color: #fff; /* Add a white background */
+    transition: background-color 0.3s ease; /* Add a smooth hover effect */
     cursor: pointer;
 }
-.suggestAdditon{
+
+.coding-list-item:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+.suggestAddition {
     text-align: center;
-    font-size: 1.4rem;
+    margin-top: 2rem; /* Increase top margin for spacing */
 }
-.suggestAdditon h5{
-    margin: 3%;
-}
-.coding-list:hover{
-    background-color: rgb(195, 252, 252);
+
+.suggestAddition h5 {
+    margin: 1rem 0; /* Adjust margin for better spacing */
 }
