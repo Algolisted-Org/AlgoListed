@@ -9,8 +9,9 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
+localStorage.getItem("selectedTheme"); 
+
 root.render(
   <Provider store={store}>
   <BrowserRouter>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import CCHeader from "../Components/CCHeader";
-import LeftMenu from "../Components/LeftMenu";
+import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus'
+import CCHeaderPlus from '../Components/CCHeaderPlus'
+import LeftMenu from '../Components/LeftMenu'
+import LeftMenuDark from '../Components/LeftMenuDark'
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { codingSheetsFilters } from "../Components/codingSheetsFilters";
 import axios from "axios";
@@ -45,14 +47,25 @@ const CodingSheets = () => {
 	const [filteredData, setFilteredData] = useState(data);
 	const [showTags, setShowTags] = useState(true);
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
-	
 	const [selectedLabel, setSelectedLabel] = useState('All');
+	
+	// ----- FOR DARK MODE -----
+	const [needDarkMode, setNeedDarkMode] = useState(false);
+	let selectedTheme = localStorage.getItem("selectedTheme");
+	console.log("needDarkMode : ", needDarkMode);
+	const toggleDarkMode = () => {
+		setNeedDarkMode(!needDarkMode);
+	};
+	// ----- FOR DARK MODE -----
+	
 	// console.log(selectedLabel);
 	// console.log(data);
 
 	const handleLabelClick = (label) => {
 		setSelectedLabel(label);
 	}
+
+	
 
 	const params = useParams();
 	const { sheetname } = params;
@@ -546,8 +559,12 @@ const CodingSheets = () => {
 				<SimpleFooter />
 			</MobContainer>
 			<Container>
-				<CCHeader />
-				<LeftMenu marked={"coding-sheets"} />
+				{
+					selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+				}
+				{ 
+					selectedTheme == "dark" ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
+				}
 				<div className="cc-middle-content">
 					<h1 className="main-heading">Coding Sheets</h1>
 					<p className="heading-supporter">

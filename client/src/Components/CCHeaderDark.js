@@ -13,6 +13,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import BuyMeACoffee from './BuyMeACoffee';
 import Fade from 'react-reveal/Fade';
 import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
+import NetworkCheckIcon from '@material-ui/icons/NetworkCheck';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 
 const CCHeaderDark = () => {
@@ -71,14 +72,15 @@ const CCHeaderDark = () => {
             Buy me a coffee
           </div>
         </div>
+        <div className={showWebUpdate ? "icon-box clicked" : "icon-box"} onClick={() => alert("Light mode not available for this page!")}>
+            <Brightness4Icon />
+        </div>
         <div className="icon-box">
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
             <GitHubIcon/>
           </a>
         </div>
-        <div className={showWebUpdate ? "icon-box clicked" : "icon-box"} onClick={handleWebUpdate}>
-            <WhatshotIcon/>
-        </div>
+        
         {/* <div className="icon-box" >
             <Brightness4Icon/>
         </div> */}

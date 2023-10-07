@@ -8,6 +8,15 @@ import { Link as RouterLink }from 'react-router-dom';
 const LeftMenu = ({ marked }) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
 
+  // ----- FOR DARK MODE -----
+	const [needDarkMode, setNeedDarkMode] = useState(false);
+	let selectedTheme = localStorage.getItem("selectedTheme");
+	console.log("needDarkMode : ", needDarkMode);
+	const toggleDarkMode = () => {
+		setNeedDarkMode(!needDarkMode);
+	};
+	// ----- FOR DARK MODE -----
+
   const menuItems = [
     {
       value: "Show All Blogs",
@@ -75,7 +84,7 @@ const LeftMenu = ({ marked }) => {
     //   showAt: "aptitude-round",
     //   link: "/aptitude-round",
     // },
-  ]
+  ] 
 
   return (
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
@@ -132,10 +141,10 @@ export default LeftMenu
 
 const Container = styled.div`
   width: 200px;
-  border-right: 1px solid rgba(230, 230, 230, 1);
+  border-right: 1px solid var(--body_borderright);
   height: 100vh;
   min-height: 600px;
-  background-color: white;
+  background-color: var(--body_menubgcolor);
   z-index: 2;
   position: fixed;
   /* overflow-y: scroll; */
@@ -157,9 +166,9 @@ const Container = styled.div`
     /* text-transform: uppercase; */
     letter-spacing: 0.15rem;
     height: 45px;
-    background-color: #211f1f;
+    background-color: var(--body_logobg);
     display: flex;
-    color: white;
+    color: var(--body_logocolor);
     align-items: center;
     justify-content: center;
     /* border: 1px solid #f7d59d; */
@@ -191,12 +200,13 @@ const Container = styled.div`
       .line{
         width: 20%;
         height: 1px;
-        background-color: black;
+        background-color: var(--body_menup_text3);
       }
 
       .text{
         font-size: 0.8rem;
         font-weight: 400;
+        color: var(--body_menup_text1);
       }
     }
 
@@ -212,7 +222,7 @@ const Container = styled.div`
       cursor: pointer;
       text-align: center;
       margin-bottom: 7.5px;
-      color: inherit;
+      color: var(--body_menulink);
       text-decoration: none;
       
       svg{
@@ -220,13 +230,20 @@ const Container = styled.div`
       }
 
       &:hover{
-        background-color: #e5e5e5;
+        background-color: var(--body_menuhoverbg);
+        color: var(--body_menuhovercolor);
         transition-duration: 250ms;
       }
     }
     
     .current-link{
-      background-color: #e5e5e5;
+      background-color: var(--body_menuselectedbg);
+      color: var(--body_menulinkselected);
+
+      &:hover{
+        background-color: var(--body_menuselectedbg);
+        color: var(--body_menulinkselected);
+      }
 
       svg{
         display: block;
@@ -243,9 +260,10 @@ const Container = styled.div`
     left: 10px;
     bottom: 50px;
     border-radius: 15px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid var(--body_modelborders);
     box-shadow: rgb(28 28 28 / 26%) 0px 2px 20px;
-    background-color: white;
+    background-color: var(--body_menubgcolor);
+    overflow: hidden;
 
     .more-link{
       display:block;
@@ -254,14 +272,14 @@ const Container = styled.div`
       font-weight: 300;
       cursor: pointer;
       padding: 12.5px 20px;
-      color: inherit;
+      color: var(--body_menulink);
       text-decoration: none;
-      border-bottom: 1px solid #e5e5e5;
+      border-bottom: 1px solid var(--body_modelborders);
 
       &:hover{
-        background-color: #eeeeee6c;
+        background-color: var(--body_menuhoverbg);
         transition-duration: 250ms;
-        color: black;
+        color: var(--body_menulinkselected);
       }
     }
 
@@ -280,13 +298,21 @@ const Container = styled.div`
     cursor: pointer;
 
     .icon{
+      color: var(--body_menup_text2);
+      svg{
+        fill: var(--body_menup_text2);
+      }
+    }
 
+    svg{
+      fill: var(--body_menup_text2);
     }
 
     .text{
       font-weight: 300;
       font-size: 0.85rem;
       margin-left: 5px;
+      color: var(--body_menup_text2);
     }
   }
 `

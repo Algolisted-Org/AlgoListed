@@ -21,7 +21,7 @@ const Resources = () => {
   const [filter, setFilter] = useState("All Resources");
   const [showFilters, setShowFilters] = useState(false);
   const [needDarkMode, setNeedDarkMode] = useState(false);
-
+  
   let selectedTheme = localStorage.getItem("selectedTheme");
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
@@ -132,7 +132,6 @@ const Resources = () => {
         {
           selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
         }
-        {/* <CCHeaderDarkPlus needDarkMode={selectedTheme} /> */}
         { 
           selectedTheme == "dark" ? <LeftMenuDark marked={"resources"} /> : <LeftMenu marked={"resources"} />
         }
