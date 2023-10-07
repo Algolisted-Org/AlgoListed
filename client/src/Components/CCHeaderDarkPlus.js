@@ -15,7 +15,7 @@ import Fade from 'react-reveal/Fade';
 import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 
-const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
+const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => { 
   const [showAccountModel, setShowAccountModel] = useState(false);
   const [showWebUpdate, setShowWebUpdate] = useState(false);
   const [showNotificationModel, setShowNotificationModel] = useState(false);
@@ -24,6 +24,32 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
   const handleToggleDarkMode = () => {
     // Call the toggleDarkMode function to update the state in the parent component.
     toggleDarkMode();
+  };
+
+  const setDarkModeFunc = () => {
+    document.querySelector("body").setAttribute('data-theme', 'dark');
+    localStorage.setItem("selectedTheme", "dark");
+  };
+
+  const setLightMode = () => {
+      document.querySelector("body").setAttribute('data-theme', 'light');
+      localStorage.setItem("selectedTheme", "light");
+  };
+  
+  let selectedTheme = localStorage.getItem("selectedTheme");
+
+  console.log(selectedTheme);
+  
+  if (selectedTheme === "dark") {
+      setDarkModeFunc();
+  }
+  
+  const toggleTheme = (e) => {
+      if (selectedTheme === "dark") setLightMode();
+      else setDarkModeFunc();
+      handleToggleDarkMode();
+      selectedTheme = localStorage.getItem("selectedTheme");
+      console.log(selectedTheme);
   };
   
   const handleNotification = () => {
@@ -78,7 +104,7 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
           </div>
         </div>
         
-        <div className="icon-box" onClick={handleToggleDarkMode}>
+        <div className="icon-box"  onClick={toggleTheme}>
           <Brightness4Icon/>
         </div>
         <div className="icon-box">
