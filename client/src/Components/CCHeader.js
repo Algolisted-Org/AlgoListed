@@ -14,7 +14,6 @@ import BuyMeACoffee from './BuyMeACoffee';
 import Fade from 'react-reveal/Fade';
 import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
-import DarkMode from './DarkMode/DarkMode';
 
 const CCHeader = () => {
   const [showAccountModel, setShowAccountModel] = useState(false);
@@ -66,9 +65,6 @@ const CCHeader = () => {
         {/* <a href='https://www.buymeacoffee.com/nayak' target={"_blank"} className="icontext-btn">
           <div className="text">Buy me a coffee</div>
         </a> */}
-        <div>
-          <DarkMode/>
-        </div>
         <div className="icontext-btn" onClick={() => {setshowModelCoffee(!showModelCoffee)}}>
           <div className="text">
             <FreeBreakfastIcon/>
@@ -185,21 +181,20 @@ const Container = styled.div`
     height: 55px;
     /* width: calc(100vw - 200px); */
     width: 100vw;
-    /* border-bottom: 1px solid rgb(233, 229, 229); */
-    /* box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px; */
+    /* background-color: orange; */
+    border-bottom: 1px solid rgb(233, 229, 229);
+    box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
     position: fixed;
     top: 0;
     /* left: 200px; */
     left: 0;
     padding-left: 200px;
     z-index: 2;
+    background-color: white;
     align-items: center;
-    /* border-bottom: 1px solid rgb(233, 229, 229); */
-    border-bottom: 1px solid var(--body_borderbottom);
-    /*background-color: #ffffffd4;*/
-    background-color: var(--body_headerbg);
-    /* box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px; */
-    box-shadow: 1px 1px 10px 0 var(--body_boxshadow);
+    border-bottom: 1px solid rgb(233, 229, 229);
+    background-color: #ffffffd4;
+    box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 5%);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     
@@ -234,7 +229,6 @@ const Container = styled.div`
       height: 60%;
       background-color: #f1f1f1;
       position: relative;
-      right: 70px;
 
       display: flex;
       align-items: center;

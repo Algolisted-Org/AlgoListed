@@ -51,14 +51,16 @@ const ContestAnalysis = () => {
   const removeuser = (username) => {
     const updatedArray = retrivelocalstorage.filter((eachuser) => eachuser.username !== username);
     localStorage.setItem("myArray", JSON.stringify(updatedArray));
+    setSessionUserCountChange(SessionUserCountChange - 1);
   }
   // console.log(retrivelocalstorage);
-useEffect(()=>{
-  const storedArray = localStorage.getItem('myArray');
-  const parsedArray = JSON.parse(storedArray);
-   
-  setretrivestorage(parsedArray);
-},[SessionUserCountChange])
+
+  useEffect(()=>{
+    const storedArray = localStorage.getItem('myArray');
+    const parsedArray = JSON.parse(storedArray);
+    
+    setretrivestorage(parsedArray);
+  },[SessionUserCountChange])
 
   useEffect(() => {
     axios
@@ -149,13 +151,6 @@ useEffect(()=>{
         setShowVisuals(true);
       })
       .catch((err) => console.log(err));
-
-
-
-   
-
-
-
   }, []);
 
   const handleAnalysisName = () => {
@@ -456,7 +451,7 @@ useEffect(()=>{
                               Global Rank : <b>#{userExists.realrank}</b>
                             </div>
                           </div>
-                          <div className="clear-btn" onClick={() => {removeuser(eachuser.username); setSessionUserCountChange(SessionUserCountChange + 1);}}>
+                          <div className="clear-btn" onClick={() => {removeuser(eachuser.username)}}>
                             <ClearIcon />
                           </div>
                         </div>
