@@ -1,0 +1,47 @@
+{
+    "contest_problems" : [
+        {
+            "A" : {
+                "name" : "Maximum Value of an Ordered Triplet I",
+                "contest_problem_link" : "https://leetcode.com/contest/weekly-contest-365/problems/maximum-value-of-an-ordered-triplet-i/",
+                "problemset_problem_link" : "https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-i/",
+                "tags" : [
+                    "Array"
+                ],
+                "difficulty" : "Easy"
+            },
+            "B" : {
+                "name" : "Maximum Value of an Ordered Triplet II",
+                "contest_problem_link" : "https://leetcode.com/contest/weekly-contest-365/problems/maximum-value-of-an-ordered-triplet-ii/",
+                "problemset_problem_link" : "https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-ii/",
+                "tags" : [
+                    "Array"
+                ],
+                "difficulty" : "Medium"
+
+            },
+            "C" : {
+                "name" : "Minimum Size Subarray in Infinite Array",
+                "contest_problem_link" : "https://leetcode.com/contest/weekly-contest-365/problems/minimum-size-subarray-in-infinite-array/",
+                "problemset_problem_link" : "https://leetcode.com/problems/minimum-size-subarray-in-infinite-array/",
+                "tags" : [
+                    "Array", "Hash Table", "Sliding Window", "Prefix Sum"
+                ],
+                "difficulty" : "Medium"
+
+            },
+            "D" : {
+                "name" : "Count Visited Nodes in a Directed Graph",
+                "contest_problem_link" : "https://leetcode.com/contest/weekly-contest-365/problems/count-visited-nodes-in-a-directed-graph/",
+                "problemset_problem_link" : "https://leetcode.com/problems/count-visited-nodes-in-a-directed-graph/",
+                "tags" : [
+                    "Dynamic Programming", "Graph", "Memoization"
+                ],
+                "difficulty" : "Hard"
+
+            },
+            "contest_name" : "Weekly Contest 365",
+            "contest_link" : "https://leetcode.com/contest/weekly-contest-365/"
+        }
+    ]
+}
