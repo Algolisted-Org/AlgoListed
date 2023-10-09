@@ -23,10 +23,9 @@ import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
 import ShowdownServer from './Screen/ShowdownServer';
 import ShowdownServerOpened from './Screen/ShowdownServerOpened';
+import Development from './Screen/Development';
 
 const App = () => {
-  
-
   return (
     <div>
       <ScrollToTop/>
@@ -65,11 +64,11 @@ const App = () => {
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
         <Route path="/showdown-server" element={<ShowdownServer/>} />
         <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} />
+        <Route path="/development" element={<Development/>} />
         {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
       </Routes>
-      
       <GoToTop/>
     </div>
   )

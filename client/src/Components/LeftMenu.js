@@ -4,6 +4,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Tooltip from '@material-ui/core/Tooltip';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Link as RouterLink }from 'react-router-dom';
+import CallMadeIcon from '@material-ui/icons/CallMade';
 
 const LeftMenu = ({ marked }) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
@@ -34,14 +35,19 @@ const LeftMenu = ({ marked }) => {
       link: "/showdown-server",
     }, 
     {
+      value: "Coding Sheets",
+      showAt: "coding-sheets",
+      link: "/coding-sheets/striver-sde-sheet",
+    },
+    {
       value: "Interview Summaries",
       showAt: "interview-summaries",
       link: "/interview-summaries",
     },
     {
-      value: "Coding Sheets",
-      showAt: "coding-sheets",
-      link: "/coding-sheets/striver-sde-sheet",
+      value: "Contest Analysis",
+      showAt: "contest-analysis",
+      link: "/contest-analysis",
     },
     
     // {
@@ -49,11 +55,6 @@ const LeftMenu = ({ marked }) => {
     //   showAt: "all-coding-competitions",
     //   link: "/coding-competitions",
     // },
-    {
-      value: "Contest Analysis",
-      showAt: "contest-analysis",
-      link: "/contest-analysis",
-    },
     // {
     //   value: "Contest Archive",
     //   showAt: "contest-archive",
@@ -74,11 +75,11 @@ const LeftMenu = ({ marked }) => {
     //   showAt: "resume-shortlisting",
     //   link: "/resume-shortlisting",
     // },
-    // {
-    //   value: "Opportunities",
-    //   showAt: "opportunities",
-    //   link: "/opportunities",
-    // },
+    {
+      value: "Opportunities",
+      showAt: "opportunities",
+      link: "/opportunities",
+    },
     // {
     //   value: "Aptitude Round",
     //   showAt: "aptitude-round",
@@ -112,7 +113,7 @@ const LeftMenu = ({ marked }) => {
           <div className="text">algolisted.com</div>
           <div className="line"></div>
         </div>
-        <a href='mailto:nayak.primary@gmail.com' target={"_blank"} className="link">Request API Access</a>
+        <a href='mailto:nayak.primary@gmail.com' target={"_blank"} className="link">Algolisted Business <CallMadeIcon/></a>
         <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link">Report an Issue</a>
       </div>
 
@@ -151,6 +152,10 @@ const Container = styled.div`
   top: 0;
   left: 0;
   padding: 10px;
+
+  a{
+    cursor: pointer;
+  }
 
   display: flex;
   justify-content: space-between;
@@ -224,9 +229,12 @@ const Container = styled.div`
       margin-bottom: 7.5px;
       color: var(--body_menulink);
       text-decoration: none;
+      padding: 0 5px;
       
       svg{
-        display: none;
+        /* display: none; */
+        font-size: 1.05rem;
+        margin-left: 5px;
       }
 
       &:hover{
