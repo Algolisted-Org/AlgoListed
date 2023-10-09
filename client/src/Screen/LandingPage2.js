@@ -252,10 +252,9 @@ const LandingPage2 = () => {
             <Fade left>
               <div className="learn">
                 <Link to='content' spy={true} smooth={true} offset={700} duration={1000}>
-              <div className="btn">Learn More</div>
-              </Link>
+                  <div className="btn">Learn More</div>
+                </Link>
               </div>
-              
             </Fade>
             </div>
             {/* <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/CharmingMilkyHamster-size_restricted.gif" alt="" /></div> */}
@@ -416,6 +415,7 @@ const GrandContainer = styled.div`
   width: 100vw;
   overflow: hidden;
 
+  
   .btn{
     border: 1px solid #c2b1b1;
     color: white;
