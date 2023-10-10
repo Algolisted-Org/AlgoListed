@@ -28,6 +28,7 @@ import {
 } from "react-circular-progressbar";
 
 import "react-circular-progressbar/dist/styles.css";
+import Tagsfilter from "../MicroComponents/Tagsfilter";
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -48,7 +49,7 @@ const CodingSheets = () => {
 	const [showTags, setShowTags] = useState(true);
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
-	
+	console.log(filteredData)
 	// ----- FOR DARK MODE -----
 	const [needDarkMode, setNeedDarkMode] = useState(false);
 	let selectedTheme = localStorage.getItem("selectedTheme");
@@ -151,13 +152,18 @@ const CodingSheets = () => {
 		"circular-linked-list",
 		"Biconnected Component"
 	];
-
+useEffect(()=>{
+if(filteredData.length<1){
+	setFilteredData(data)
+}
+},[filteredData])
 	useEffect(() => {
 		// retrieve the data from the server
 		axios
 			// .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
 			.get(`https://algolisted.cyclic.app/coding-questions/question/${sheetname}`)
 			.then((res) => {
+				
 				// retrieve the "completed" status of each sheet from the local storage
 				let updatedData = res.data.map((sheet) => {
 					const completed = localStorage.getItem(`completedSheetQuestion-${sheet._id}`);
@@ -750,6 +756,7 @@ const CodingSheets = () => {
 							<label htmlFor="hard">Hard</label>
 						</div>
 						<div className="right">
+							<Tagsfilter tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData}/>
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
