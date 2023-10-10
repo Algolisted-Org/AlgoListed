@@ -127,19 +127,18 @@ const LandingPage2 = () => {
                         Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
                     </div>
                   </Fade>
-                  
               </div>
-            <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
-            <h1 className="sub-page-head">Our Contributors</h1>
-            <div className="hold-contributors">
-              {
-                contributorsList != null && contributorsList.map((item, index) => {
-                  return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
-                    <img src={item.avatar_url} alt="" />
-                  </a>
-                })
-              }
-            </div>
+              <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
+              <h1 className="sub-page-head">Our Contributors</h1>
+              <div className="hold-contributors">
+                {
+                  contributorsList != null && contributorsList.map((item, index) => {
+                    return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                      <img src={item.avatar_url} alt="" />
+                    </a>
+                  })
+                }
+              </div>
             </div>
             <PageThreeFooter>
               <div className="top">
