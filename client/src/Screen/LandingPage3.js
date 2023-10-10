@@ -15,7 +15,7 @@ import Fade from 'react-reveal/Fade';
 import {Link} from 'react-scroll';
 import { Link as RouterLink }from 'react-router-dom';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import featureAnalysis1 from "../Images/feature-analysis1.png";
+// import featureAnalysis1 from "../Images/fe";
 
 const LandingPage3 = () => {
   const [contributorsList, setContributorsList] = useState(null);
@@ -132,7 +132,7 @@ const LandingPage3 = () => {
             <div className="line"></div>
           </div>
           <div className="feature-show">
-            <img src={featureAnalysis1} alt="" />
+            {/* <img src={featureAnalysis1} alt="" /> */}
             <div className="message">
               <div className="feature-name">Leetcode Contest Analysis</div>
               <div className="feature-desc">
