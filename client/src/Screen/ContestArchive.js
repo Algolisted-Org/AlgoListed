@@ -13,7 +13,7 @@ import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
 
 
 
-const ContestAnalysisList = () => {
+const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
   const [contestType, setContestType] = useState('Weekly Contest');
   const [contestNumber, setContestNumber] = useState('361');
@@ -21,15 +21,15 @@ const ContestAnalysisList = () => {
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if(selectedTheme === 'dark') setNeedDarkMode(true);
+    if (selectedTheme === 'dark') setNeedDarkMode(true);
   }, [])
-  
+
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
 
-  
+
 
   const filters = contestAnalysisFilters.map((item) => {
     return (
@@ -61,14 +61,14 @@ const ContestAnalysisList = () => {
       </MobContainer>
       <Container needDarkMode={needDarkMode}>
         {
-          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
         }
-        
+
         {
           needDarkMode ? <LeftMenuDark marked={"contest-analysis"} /> : <LeftMenu marked={"contest-analysis"} />
         }
         <div className="cc-middle-content">
-          <h1 className='main-heading'>Contest Analysis</h1>
+          <h1 className='main-heading'>Contest Archive</h1>
           <p className="heading-supporter">
             Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!
           </p>
@@ -81,48 +81,158 @@ const ContestAnalysisList = () => {
           <Filters needDarkMode={needDarkMode}>{filters}</Filters>
           <CleanLine />
           <Filters2 needDarkMode={needDarkMode}>
-            <a href='' className="filter selected">Contests Analysis</a>
-            <a href='/contests-archive' className="filter">Contests Archive</a>
+            <a href='/contest-analysis' className="filter">Contests Analysis</a>
+            <a href='' className="filter selected">Contests Archive</a>
           </Filters2>
-          <div className="search-contest">
-            <div className="search-options">
-              <div className="contest-type">
-                <input
-                  type="text"
-                  value={contestType}
-                  onChange={(e) => setContestType(e.target.value)}
-                />
-              </div>
-              <div className="contest-number">
-                <input
-                  type="text"
-                  value={contestNumber}
-                  onChange={(e) => setContestNumber(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="search-btn" onClick={redirectToContest}>
-              <SearchIcon/>
-            </div>
-          </div>
-          <div className="note">
+
+          {/* <div className="note">
             <b>NOTE</b> : Make sure to pick the kind of contest and the contest number you want, like the Weekly Contest and 365, for example.
-          </div>
-          {/* <div className="message2">
-            <div className="icon">
-              <WarningIcon/>
-            </div>
-            <div className="text">
-              We uphold LeetCode's policies and, as a result, our API remains inaccessible during contest hours.
-            </div>
           </div> */}
+
+          <div className="table">
+            <div className="row first-row">
+              <div className="contest-name">Contest Name</div>
+              <div className="contest-problem problem-section">Problem A</div>
+              <div className="contest-problem problem-section">Problem B</div>
+              <div className="contest-problem problem-section">Problem C</div>
+              <div className="contest-problem problem-section">Problem D</div>
+            </div>
+            <div className="row visual-row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+            <div className="row">
+              <div className="contest-name">Weekly Contest 366</div>
+              <div className="contest-problem">
+                <div className="problem-name">Divisible and Non-divisible Sums Difference</div>
+                <div className="problem-info">
+                  <div className="problem-difficulty">
+                    <div className="text">Easy |</div>
+                    <div className="problem-stat">Solved by - in contest</div>
+                  </div>
+                  <div className="all-tags">
+                    <div className="problem-tags">
+                      <div className="tag">Array</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="contest-problem">
+                <div className="problem-name">Minimum Processing Time</div>
+                <div className="problem-info">
+                  <div className="problem-difficulty">
+                    <div className="text">Medium |</div>
+                    <div className="problem-stat">Solved by - in contest</div></div>
+                  <div className="all-tags">
+                    <div className="problem-tags">
+                      <div className="tag">Array</div>
+                      <div className="tag">Sliding Window</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="contest-problem">
+                <div className="problem-name">Apply Operations to Make Two Strings Equal</div>
+                <div className="problem-info">
+                  <div className="problem-difficulty">
+                    <div className="text">Medium |</div>
+                    <div className="problem-stat">Solved by - in contest</div></div>
+                  <div className="all-tags">
+                    <div className="problem-tags">
+                      <div className="tag">Dynamic Programming</div>
+                      <div className="tag">Maths</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="contest-problem">
+                <div className="problem-name">Apply Operations on Array to Maximize Sum of Squares</div>
+                <div className="problem-info">
+                  <div className="problem-difficulty">
+                    <div className="text">Hard |</div>
+                    <div className="problem-stat">Solved by - in contest</div></div>
+                  <div className="all-tags">
+                    <div className="problem-tags">
+                      <div className="tag">Tries</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+            <div className="row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+            <div className="row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+            <div className="row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+            <div className="row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+            <div className="row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+            <div className="row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+            <div className="row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+            <div className="row">
+              <div className="contest-name"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+              <div className="contest-problem"></div>
+            </div>
+          </div>
         </div>
       </Container>
     </GrandContainer>
   );
 };
 
-export default ContestAnalysisList;
+export default ContestArchive;
 
 const GrandContainer = styled.div`
 
@@ -250,50 +360,118 @@ const Container = styled.div`
         }
       }
 
-      .search-contest{
-        display: flex;
-        margin-bottom: 20px;
+      .table{
+        width: 100%;
+        min-height: 200px;
 
-        .search-options{
-          flex: 1;
+        .row{
           display: flex;
-          position: relative;
+          height: 120px;
+          width: 100%;
+          justify-content: space-between;
+          border-bottom: 1px solid black;
 
-          div{
-            height: 45px;
-            width: 50%;
-            margin-right: 10px;
-            border-radius: 10px;
-            border: 1px solid ${(props) => (props.needDarkMode ? 'transparent' : '#c5bcbd')};
+          .contest-name{
+            height: 100%;
+            width: 120px;
+            background-color: #99d9a0;
             display: flex;
             align-items: center;
-            padding: 10px;
-            background-color: ${(props) => (props.needDarkMode ? '#282a2d' : 'transparent')};
+            justify-content: center;
+            font-size: 0.75rem;
+            padding: 5px 10px;
           }
 
-          input{
-            width: 100%;
+          .contest-problem{
             height: 100%;
-            border: none;
-            font-weight: 400;
-            font-size: 0.85rem;
-		        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            width: calc(25% - 30px);
+            background-color: #f7efef;
+            border-left: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            /* align-items: center; */
+            justify-content: space-between;
+            font-size: 0.75rem;
+            padding: 10px;
+
+            .problem-name{
+              font-weight: 500;
+              color: cornflowerblue;
+            }
+
+            .problem-info{
+
+              .problem-difficulty{
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                font-weight: 500;
+
+                .text{
+                  margin-right: 2.5px;
+                }
+
+                /* background-color: green; */
+                .problem-stat{
+                  font-size: 0.65rem;
+                  font-weight: 300;
+                  
+                }
+              }
+              
+              
+              .all-tags{
+                width: calc(100% + 10px);
+                margin-top: 5px;
+                overflow-x: scroll;
+                margin-left: -5px;
+                
+                ::-webkit-scrollbar {
+                  display: none;
+                }
+                
+                .problem-tags{
+                  width: 100vw;
+  
+                  .tag{
+                    font-size: 0.65rem;
+                    display: inline-block;
+                    width: auto;
+                    padding: 2.5px 10px;
+                    margin: 0 5px 5px 0;
+                    background-color: white;
+                    border-radius: 100px;
+                    border: 1px solid black;
+                  }
+                }
+
+              }
+            }
+
+          }
+
+        }
+
+        .first-row{
+          height: 60px;
+          margin-top: 20px;
+          
+          .contest-problem{
+            height: 100%;
+            /* background-color: black; */
+            
+          }
+
+          .problem-section{
+            display: grid; 
+            place-items: center;
+            text-align: center;
+            font-weight: 500;
           }
         }
-        
-        .search-btn{
-          height: 45px;
-          width: 45px;
-          border-radius: 10px;
-          background-color: ${(props) => (props.needDarkMode ? '#454754' : '#333')};
-          cursor: pointer;
-          display: grid;
-          place-items: center;
-          
-          svg{
-            font-size: 1.35rem;
-            fill: #fff;
-          }
+
+        .visual-row{
+          height: 200px;
         }
       }
 
