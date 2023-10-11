@@ -7,6 +7,10 @@ import InfoIcon from '@material-ui/icons/Info';
 import LeftMenuDark from '../Components/LeftMenuDark';
 
 const ShowdownServer = () => {
+    useEffect(() => {
+        document.title = "Showdown Server - Algolisted";
+    }, []);
+
     return (
         <GrandContainer>
             <MobContainer>

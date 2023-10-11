@@ -221,6 +221,7 @@ const Container = styled.div`
         /* display: none; */
         font-size: 1.05rem;
         margin-left: 5px;
+        fill: #949ba4;
       }
 
       &:hover{
