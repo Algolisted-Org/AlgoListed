@@ -107,7 +107,15 @@ const ContestArchive = () => {
             <div className="row">
               <div className="contest-name">Weekly Contest 366</div>
               <div className="contest-problem">
+              <div>
+                <label>
+                  <input
+                    type="checkbox"
+                  />
+                  Problem Unsolved
+                </label>
                 <div className="problem-name">Divisible and Non-divisible Sums Difference</div>
+              </div>
                 <div className="problem-info">
                   <div className="problem-difficulty">
                     <div className="text">Easy |</div>
@@ -121,7 +129,15 @@ const ContestArchive = () => {
                 </div>
               </div>
               <div className="contest-problem">
-                <div className="problem-name">Minimum Processing Time</div>
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                    />
+                    Problem Unsolved
+                  </label>
+                  <div className="problem-name">Minimum Processing Time</div>
+                </div>
                 <div className="problem-info">
                   <div className="problem-difficulty">
                     <div className="text">Medium |</div>
@@ -135,7 +151,15 @@ const ContestArchive = () => {
                 </div>
               </div>
               <div className="contest-problem">
-                <div className="problem-name">Apply Operations to Make Two Strings Equal</div>
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                    />
+                    Problem Unsolved
+                  </label>
+                  <div className="problem-name">Apply Operations to Make Two Strings Equal</div>
+                </div>
                 <div className="problem-info">
                   <div className="problem-difficulty">
                     <div className="text">Medium |</div>
@@ -149,7 +173,15 @@ const ContestArchive = () => {
                 </div>
               </div>
               <div className="contest-problem">
-                <div className="problem-name">Apply Operations on Array to Maximize Sum of Squares</div>
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                    />
+                    Problem Unsolved
+                  </label>
+                  <div className="problem-name">Apply Operations on Array to Maximize Sum of Squares</div>
+                </div>
                 <div className="problem-info">
                   <div className="problem-difficulty">
                     <div className="text">Hard |</div>
@@ -366,7 +398,7 @@ const Container = styled.div`
 
         .row{
           display: flex;
-          height: 120px;
+          height: 140px;
           width: 100%;
           justify-content: space-between;
           border-bottom: 1px solid black;
@@ -393,6 +425,18 @@ const Container = styled.div`
             justify-content: space-between;
             font-size: 0.75rem;
             padding: 10px;
+
+            label{
+              display: flex;
+              align-items: center;
+              margin-bottom: 5px;
+              
+              input{
+                margin-right: 5px;
+              }
+
+              font-size: 0.65rem;
+            }
 
             .problem-name{
               font-weight: 500;
