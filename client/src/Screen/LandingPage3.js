@@ -158,9 +158,9 @@ const LandingPage3 = () => {
               <StarBorderIcon />
               <div className="text">Star us on Github</div>
             </a>
-            <div className="version">
-              <div className="text">v2.10</div>
-            </div>
+            {/* <div className="version">
+              <div className="text">12.8 K | Visits</div>
+            </div> */}
           </div>
         </Navbar>
         <div className="hero-page">
@@ -178,7 +178,7 @@ const LandingPage3 = () => {
             </Fade>
             <Fade left>
               <div className="learn">
-                <div className="btn">Explore</div>
+                <div className="btn">Get Started</div>
               </div>
             </Fade>
           </div>
@@ -214,7 +214,7 @@ const LandingPage3 = () => {
             <ArrowBackIosIcon className='left-btn icon-btn' onClick={decrementFeatureIdx} />
             <ArrowForwardIosIcon className='right-btn icon-btn' onClick={incrementFeatureIdx} />
             <div className="message">
-              <div className="feature-name">{currentFeature["feature-title"]}</div>
+              <div className="feature-name">{currentFeature["feature-title"]} </div>
               <div className="feature-desc">
                 {currentFeature["feature-desc"]}
               </div>
@@ -225,39 +225,39 @@ const LandingPage3 = () => {
             <div className="one-row">
               <div className="box down-border right-border">
                 <img src='https://leetcode.com/static/images/LeetCode_logo_rvs.png' className="feature-logo"></img>
-                <div className="feature-name">Leetcode Contest Analysis</div>
+                <a href='/' className="feature-name">Leetcode Contest Analysis <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box down-border right-border">
                 <img src='https://play-lh.googleusercontent.com/WsR_f03nbqW3qZjCZeXUYmnmhSWXo3hQhLX9hgl9QHydCgbXQi_VJeAwnmtuIgTHKdQ' className="feature-logo"></img>
-                <div className="feature-name">Contest Problems Collection</div>
+                <a href='/' className="feature-name">Contest Problems Collection <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box down-border right-border">
                 <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJwFbP8A6iFB7mX56y_hTVlTpssz3RpAvSgQ&usqp=CAU' className="feature-logo"></img>
-                <div className="feature-name">Coding Sheets with Visualisation</div>
+                <a href='/' className="feature-name">Coding Sheets with Visualisation <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box down-border">
                 <img src='https://res.cloudinary.com/practicaldev/image/fetch/s--CsuD8TQh--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yy6g8h2z1y7req5ibczx.jpg' className="feature-logo"></img>
-                <div className="feature-name">Coding Interview Summarization</div>
+                <a href='/' className="feature-name">Coding Interview Summarization <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
             </div>
             <div className="one-row">
               <div className="box right-border">
                 <img src='https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec' className="feature-logo"></img>
-                <div className="feature-name">Host Friendly Coding Competitions</div>
+                <a href='/' className="feature-name">Host Friendly Coding Competitions <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box right-border">
                 <img src='https://www.grackledocs.com/wp-content/uploads/2023/09/pdf.png' className="feature-logo"></img>
-                <div className="feature-name">Collection of Coding Learning Resources</div>
+                <a href='/' className="feature-name">Collection of Coding Learning Resources <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box right-border">
                 <img src='https://static.vecteezy.com/system/resources/previews/005/086/755/original/apply-now-banner-label-free-vector.jpg' className="feature-logo"></img>
-                <div className="feature-name">Job & Internship Openings</div>
+                <a href='/' className="feature-name">Job & Internship Openings <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="last-box">
@@ -661,6 +661,17 @@ const Container = styled.div`
           color: white;
           margin: 5px 0 5px 0;
           font-size: 0.9rem;
+          text-decoration: none;
+          
+          svg{
+            fill: white;
+            font-size: 0.8rem;
+          }
+
+          &:hover{
+            color: cornflowerblue;
+            transition-duration: 250ms;
+          }
         }
 
         .feature-desc{
@@ -782,6 +793,7 @@ const Container = styled.div`
       top: calc(50% - 0.75rem);
       font-size: 1.5rem;
       fill: white;
+      cursor: pointer;
     }
 
     .left-btn{
@@ -956,7 +968,7 @@ const Container = styled.div`
 
     .background{
       position: absolute;
-      height: 850px;
+      height: 815px;
       opacity: 0.4; 
       z-index: 1;
       top: 0;
@@ -1170,12 +1182,14 @@ const Navbar = styled.div`
         display: flex;
         align-items: center;
         text-decoration: none;
-        background-color: #fd366e;
+        background: linear-gradient(150deg, #016df8,#2ba4b4,#d6cd16);
+        background-size: 200% 200%;
+        animation: AnimationName 10s linear infinite;
         padding: 5px 10px;
-        border-radius: 2px;
+        border-radius: 5px;
 
         .text{
-          font-size: 0.85rem;
+          font-size: 0.75rem;
           font-weight: 200;
           color: #ededf0;
           margin: 0 0 0 10px;
@@ -1188,21 +1202,36 @@ const Navbar = styled.div`
           font-size: 1.05rem;
         }
       }
+      
       .version{
         display: flex;
         align-items: center;
         text-decoration: none;
-        background-color: #fd366e;
+        background: linear-gradient(150deg,#d6cd16,#2ba4b4,#016df8,#016df8,#016df8);
+        background-size: 200% 200%;
+        /* animation: AnimationName 10s linear infinite; */
         padding: 5px 10px;
-        border-radius: 2px;
+        border-radius: 5px;
         margin-left: 15px;
 
         .text{
           font-size: 0.85rem;
           color: #ededf0;
-          font-weight: 700;
+          /* font-weight: 700; */
         }
       }
+
+      @keyframes AnimationName {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
     }
 
 `
@@ -1216,7 +1245,7 @@ const PageThreeFooter = styled.div`
     /* margin-bottom: 60px; */
     display: flex;
     flex-direction: column;
-    z-index: -10;
+    z-index: 0;
 
 
     .top{
