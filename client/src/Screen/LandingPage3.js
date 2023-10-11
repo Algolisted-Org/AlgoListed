@@ -17,6 +17,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import featureAnalysis1 from "../Images/feature-analysis1.png";
 import CallMadeIcon from '@material-ui/icons/CallMade';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const LandingPage3 = () => {
   const [contributorsList, setContributorsList] = useState(null);
@@ -62,6 +64,73 @@ const LandingPage3 = () => {
       "link": "/blogs/all"
     },
   ]
+
+  const featuresDisplayData = [
+    {
+      // "img-url": featureAnalysis1, // create GIFs here
+      "img-url": "dummy-link1", 
+      "feature-title": "About this Feature",
+      "feature-desc": "This feature will be completed after we are done with all the main-site-features are completed. We will bring out some gifs and attach above - try to do it in dark mode :) ",
+      "id": "1",
+    },
+    {
+      "img-url": "dummy-link2", // create GIFs here
+      "feature-title": "dummy-title2",
+      "feature-desc": "dummy-desc2",
+      "id": "2",
+    },
+    {
+      "img-url": "dummy-link2", // create GIFs here
+      "feature-title": "dummy-title2",
+      "feature-desc": "dummy-desc2",
+      "id": "2",
+    },
+    {
+      "img-url": "dummy-link2", // create GIFs here
+      "feature-title": "dummy-title2",
+      "feature-desc": "dummy-desc2",
+      "id": "2",
+    },
+    {
+      "img-url": "dummy-link2", // create GIFs here
+      "feature-title": "dummy-title2",
+      "feature-desc": "dummy-desc2",
+      "id": "2",
+    },
+    {
+      "img-url": "dummy-link2", // create GIFs here
+      "feature-title": "dummy-title2",
+      "feature-desc": "dummy-desc2",
+      "id": "2",
+    },
+    {
+      "img-url": "dummy-link2", // create GIFs here
+      "feature-title": "dummy-title2",
+      "feature-desc": "dummy-desc2",
+      "id": "2",
+    },
+    {
+      "img-url": "dummy-link2", // create GIFs here
+      "feature-title": "dummy-title2",
+      "feature-desc": "dummy-desc2",
+      "id": "2",
+    },
+
+  ]
+
+  const [featureIdx, setFeatureIdx] = useState(0);
+
+  const incrementFeatureIdx = () => {
+    setFeatureIdx((prevIdx) => (prevIdx + 1) % featuresDisplayData.length);
+  };
+
+  const decrementFeatureIdx = () => {
+    setFeatureIdx((prevIdx) =>
+      prevIdx === 0 ? featuresDisplayData.length - 1 : prevIdx - 1
+    );
+  };
+
+  const currentFeature = featuresDisplayData[featureIdx];
 
   return (
     <GrandContainer>
@@ -133,14 +202,25 @@ const LandingPage3 = () => {
             <div className="line"></div>
           </div>
           <div className="feature-show">
-            <img src={featureAnalysis1} alt="" />
+            <div className="vertical-line-menu">
+              {featuresDisplayData.map((_, index) => (
+                <div
+                  key={index}
+                  className={`menu-item ${index === featureIdx ? 'dark-item' : ''}`}
+                ></div>
+              ))}
+            </div>
+            <img src={currentFeature["img-url"]} alt="" />
+            <ArrowBackIosIcon className='left-btn icon-btn' onClick={decrementFeatureIdx} />
+            <ArrowForwardIosIcon className='right-btn icon-btn' onClick={incrementFeatureIdx} />
             <div className="message">
-              <div className="feature-name">Leetcode Contest Analysis</div>
+              <div className="feature-name">{currentFeature["feature-title"]}</div>
               <div className="feature-desc">
-                Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!
+                {currentFeature["feature-desc"]}
               </div>
             </div>
           </div>
+
           <div className="feature-table">
             <div className="one-row">
               <div className="box down-border right-border">
@@ -244,7 +324,7 @@ const LandingPage3 = () => {
           <div className="desc-2">
             Elevate your digital presence with Algolisted's expertise in scalable web and ML solutions, next-gen applications, UI excellence, SEO prowess, and AI-driven feature enhancements.
           </div>
-          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Get Started</a>
           <h1 className="sub-page-head">You are in Good Company</h1>
           <div className="hold-collection">
             <div className="contributor">
@@ -534,11 +614,12 @@ const Container = styled.div`
 
     .feature-show{
       position: relative;
-      margin-top: 50px;
+      margin-top: 100px;
       width: 50vw;
       border-radius: 20px;
       background-color: #c2c3d2;
       padding: 10px;
+      min-height: 401.81px;
       
       img{
         width: 100%;
@@ -643,15 +724,28 @@ const Container = styled.div`
       }
     }
     
-    @keyframes AnimationName {
-      0% {
-        background-position: 0% 50%;
+    .vertical-line-menu{
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      left: -50px;
+      background-color: #282828;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .menu-item{
+        color: white;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #282828;
+        margin-left: -7.5px;
       }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
+
+      .dark-item{
+        background: linear-gradient(281deg,rgb(41 202 52) 7%,rgb(255 255 255) 76%);
+        /* border: 2.5px solid white; */
       }
     }
 
@@ -667,6 +761,8 @@ const Container = styled.div`
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
       padding: 10px 20px;
+      background: rgb(148,79,224);
+      background: linear-gradient(309deg, rgba(148,79,224,0.5) 7%, rgba(0,0,0,0.7) 76%);
 
       .feature-name{
         color: white;
@@ -680,6 +776,34 @@ const Container = styled.div`
       }
 
     }
+
+    .icon-btn{
+      position: absolute;
+      top: calc(50% - 0.75rem);
+      font-size: 1.5rem;
+      fill: white;
+    }
+
+    .left-btn{
+      left: -120px;
+    }
+
+    .right-btn{
+      right: -120px;
+    }
+
+    @keyframes AnimationName {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
 
   }
 
@@ -832,7 +956,7 @@ const Container = styled.div`
 
     .background{
       position: absolute;
-      height: 800px;
+      height: 850px;
       opacity: 0.4; 
       z-index: 1;
       top: 0;
@@ -1092,6 +1216,7 @@ const PageThreeFooter = styled.div`
     /* margin-bottom: 60px; */
     display: flex;
     flex-direction: column;
+    z-index: -10;
 
 
     .top{
