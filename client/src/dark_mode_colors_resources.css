@@ -40,6 +40,7 @@
 }
 
 [data-theme="dark"] {
+    --body_night:white;
     --body_background: #313338;
     --body_background2: #2b2d31;
     --body_background3: #404249;
