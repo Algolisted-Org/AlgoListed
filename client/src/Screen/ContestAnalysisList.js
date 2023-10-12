@@ -81,8 +81,8 @@ const ContestAnalysisList = () => {
           <Filters needDarkMode={needDarkMode}>{filters}</Filters>
           <CleanLine />
           <Filters2 needDarkMode={needDarkMode}>
-            <div className="filter selected">Contests Analysis</div>
-            <div className="filter">Contests Archive</div>
+            <a href='' className="filter selected">Contests Analysis</a>
+            <a href='/contests-archive' className="filter">Contests Archive</a>
           </Filters2>
           <div className="search-contest">
             <div className="search-options">

@@ -9,6 +9,9 @@ import LeftMenuDark from '../Components/LeftMenuDark';
 import CCHeaderDark from '../Components/CCHeaderDark';
 
 const ShowdownServerOpened = () => {
+    useEffect(() => {
+      document.title = "Local Showdown Server - Algolisted";
+    }, []);
     return (
         <GrandContainer>
             <MobContainer>

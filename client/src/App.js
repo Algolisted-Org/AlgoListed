@@ -25,6 +25,7 @@ import ShowdownServer from './Screen/ShowdownServer';
 import ShowdownServerOpened from './Screen/ShowdownServerOpened';
 import Development from './Screen/Development';
 import LandingPage3 from './Screen/LandingPage3';
+import ContestArchive from './Screen/ContestArchive';
 
 const App = () => {
   return (
@@ -32,8 +33,8 @@ const App = () => {
       <ScrollToTop/>
       <Routes>
         {/* <Route path="/development" element={<CompetitionApi/>} /> */}
-        <Route path="/" element={<LandingPage2/>} />
-        {/* <Route path="/" element={<LandingPage3/>} /> */}
+        {/* <Route path="/" element={<LandingPage2/>} /> */}
+        <Route path="/" element={<LandingPage3/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/sign-in" element={<AuthPage/>} />
         <Route path="/create-account" element={<AuthPage/>} />
@@ -60,6 +61,7 @@ const App = () => {
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />
         <Route path="/contest-analysis" element={<ContestAnalysisList/>} />
+        <Route path="/contests-archive" element={<ContestArchive/>} />
         <Route path="/contest-analysis/:contestName" element={<ContestAnalysis/>} />
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
