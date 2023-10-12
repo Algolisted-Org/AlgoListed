@@ -11,135 +11,128 @@ import WarningIcon from '@material-ui/icons/Warning';
 import SearchIcon from '@material-ui/icons/Search';
 import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
 import contestsData from '../DummyDB/InterviewSummaries/LcContests.json';
-
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import CallMadeIcon from '@material-ui/icons/CallMade';
+import NotesIcon from '@material-ui/icons/Notes';
+import CreateIcon from '@material-ui/icons/Create';
 
 const ContestArchive = () => {
-    const [platformName, setPlatformName] = useState('leetcode');
-    const [contestType, setContestType] = useState('Weekly Contest');
-    const [contestNumber, setContestNumber] = useState('361');
-    const [needDarkMode, setNeedDarkMode] = useState(false);
+  const [platformName, setPlatformName] = useState('leetcode');
+  const [contestType, setContestType] = useState('Weekly Contest');
+  const [contestNumber, setContestNumber] = useState('361');
+  const [needDarkMode, setNeedDarkMode] = useState(false);
 
-    useEffect(() => {
-        let selectedTheme = localStorage.getItem("selectedTheme");
-        if (selectedTheme === 'dark') setNeedDarkMode(true);
-    }, [])
+  useEffect(() => {
+    let selectedTheme = localStorage.getItem("selectedTheme");
+    if (selectedTheme === 'dark') setNeedDarkMode(true);
+  }, [])
 
-    console.log("needDarkMode : ", needDarkMode);
-    const toggleDarkMode = () => {
-        setNeedDarkMode(!needDarkMode);
-    };
+  console.log("needDarkMode : ", needDarkMode);
+  const toggleDarkMode = () => {
+    setNeedDarkMode(!needDarkMode);
+  };
 
 
 
-    const filters = contestAnalysisFilters.map((item) => {
-        return (
-            <div
-                key={item.id}
-                className={
-                    item.domainFilter === platformName ? 'filter selected' : (
-                        item.lock === true ? 'locked-feature filter' : 'filter'
-                    )
-                }
-            >
-                {item.text}
-                {item.lock === true ? <LockIcon /> : <></>}
-            </div>
-        );
-    });
-
-    const redirectToContest = () => {
-        const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
-        window.location.href = url;
-    };
-
+  const filters = contestAnalysisFilters.map((item) => {
     return (
-        <GrandContainer>
-            <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with
-                width more than 1100px, a standard laptop or tablet landscape.
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
-            </MobContainer>
-            <Container needDarkMode={needDarkMode}>
-                {
-                    needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
-                }
+      <div
+        key={item.id}
+        className={
+          item.domainFilter === platformName ? 'filter selected' : (
+            item.lock === true ? 'locked-feature filter' : 'filter'
+          )
+        }
+      >
+        {item.text}
+        {item.lock === true ? <LockIcon /> : <></>}
+      </div>
+    );
+  });
 
-                {
-                    needDarkMode ? <LeftMenuDark marked={"contest-analysis"} /> : <LeftMenu marked={"contest-analysis"} />
-                }
-                <div className="cc-middle-content">
-                    <h1 className='main-heading'>Contest Archive</h1>
-                    <p className="heading-supporter">
-                        Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!
-                    </p>
-                    <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            A particular feature you have in mind that you'd like to see implemented on this page? <a href="https://github.com/Nayaker/AlgoListed/issues/new">create an enhancement issue</a>
-                        </div>
-                    </div>
-                    <Filters needDarkMode={needDarkMode}>{filters}</Filters>
-                    <CleanLine />
-                    <Filters2 needDarkMode={needDarkMode}>
-                        <a href='/contest-analysis' className="filter">Contests Analysis</a>
-                        <a href='' className="filter selected">Contests Archive</a>
-                    </Filters2>
+  const redirectToContest = () => {
+    const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
+    window.location.href = url;
+  };
 
-                    {/* <div className="note">
+  return (
+    <GrandContainer>
+      <MobContainer>
+        We are still working on Responsive Version of the website, please view the site with
+        width more than 1100px, a standard laptop or tablet landscape.
+        <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+      </MobContainer>
+      <Container needDarkMode={needDarkMode}>
+        {
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+        }
+
+        {
+          needDarkMode ? <LeftMenuDark marked={"contest-analysis"} /> : <LeftMenu marked={"contest-analysis"} />
+        }
+        <div className="cc-middle-content">
+          <h1 className='main-heading'>Contest Archive</h1>
+          <p className="heading-supporter">
+            Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!
+          </p>
+          <div className="message">
+            <div className="icon"></div>
+            <div className="text">
+              A particular feature you have in mind that you'd like to see implemented on this page? <a href="https://github.com/Nayaker/AlgoListed/issues/new">create an enhancement issue</a>
+            </div>
+          </div>
+          <Filters needDarkMode={needDarkMode}>{filters}</Filters>
+          <CleanLine />
+          <Filters2 needDarkMode={needDarkMode}>
+            <a href='/contest-analysis' className="filter">Contests Analysis</a>
+            <a href='' className="filter selected">Contests Archive</a>
+          </Filters2>
+
+          {/* <div className="note">
             <b>NOTE</b> : Make sure to pick the kind of contest and the contest number you want, like the Weekly Contest and 365, for example.
           </div> */}
 
-                    <div className="table">
-                        <div className="row first-row">
-                            <div className="contest-name">Contest Name</div>
-                            <div className="contest-problem problem-section">Problem A</div>
-                            <div className="contest-problem problem-section">Problem B</div>
-                            <div className="contest-problem problem-section">Problem C</div>
-                            <div className="contest-problem problem-section">Problem D</div>
-                        </div>
-                        {contestsData.map((contestData, index) => {
-                            return (
-                                <div className="row">
-                                    <div className="contest-name">{contestData.contest_name}</div>
-                                    {Object.values(contestData.problems).map((problem) => {
-                                        console.log(problem);
-                                        return (
-                                            <div className="contest-problem">
-                                                <div>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                        />
-                                                        Problem Unsolved
-                                                    </label>
-                                                    <div className="problem-name">{problem.name}</div>
-                                                </div>
-                                                <div className="problem-info">
-                                                    <div className="problem-difficulty">
-                                                        <div className="text">{problem.difficulty} |</div>
-                                                        <div className="problem-stat">Solved by - in contest</div>
-                                                    </div>
-                                                    <div className="all-tags">
-                                                        <div className="problem-tags">
-                                                            {problem.tags.map((tag) => {
-                                                                return (
-                                                                    <div className="tag">{tag}</div>
-                                                                )
-                                                            })}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            );
-                        })}
-                    </div>
+          <div className="problems-table">
+            {contestsData.map((contestData, index) => (
+              <div className="one-contest-problems" key={index}>
+                <div className="contest-name">{contestData.contest_name}</div>
+                <div className="contest-outlinks">
+                  <div className="link">
+                    <CallMadeIcon/>
+                  </div>
+                  <div className="link">
+                    <EqualizerIcon/>
+                  </div>
+                  <div className="link">
+                    <CreateIcon/>
+                  </div>
                 </div>
-            </Container>
-        </GrandContainer>
-    );
+                {Object.values(contestData.problems).map((problem, problemIndex) => (
+                  <div className="contest-problem" key={problemIndex}>
+                    <div className="problem-main-name">
+                      <label>
+                        <input type="checkbox" />
+                        Problem Unsolved
+                      </label>
+                      <div className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</div>
+                    </div>
+                    <div className="problem-info">
+                      <div className="tag difficulty-tag">{problem.difficulty}</div>
+                      {problem.tags.map((tag, tagIndex) => (
+                        <div className="tag" key={tagIndex}>
+                          {tag}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </GrandContainer>
+  );
 };
 
 export default ContestArchive;
@@ -270,132 +263,146 @@ const Container = styled.div`
         }
       }
 
-      .table{
+      .problems-table{
+        min-height: 2500px;
         width: 100%;
-        min-height: 200px;
+        /* background-color: cornflowerblue; */
+        border-radius: 20px;
+        margin-top: 20px;
 
-        .row{
-          display: flex;
-          height: 140px;
+        .one-contest-problems{
+          position: relative;
+          height: 200px;
           width: 100%;
-          justify-content: space-between;
-          border-bottom: 1px solid black;
+          background-color: #ffffff;
+          border-radius: 20px;
+          margin-bottom: 30px;
+          display: flex;
+          border: 1px solid rgb(209, 213, 219);
+          
+          /* border: 1px solid #e5e5e5; */
 
-          .contest-name{
-            height: 100%;
-            width: 120px;
-            background-color: #99d9a0;
+          .contest-name {
+            position: absolute;
+            height: 30px;
+            border-radius: 100px;
+            background-color: #f3f4f7;
+            border: 1px solid rgb(209, 213, 219);
+            left: -15px;
+            top: -15px;
+            padding: 0 10px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: 300;
           }
 
-          .contest-problem{
-            height: 100%;
-            width: calc(25% - 30px);
-            background-color: #f7efef;
-            border-left: 1px solid black;
+          .contest-outlinks{
+            width: 45px;
+            /* background-color: black; */
+            border-radius: 1000px;
+            position: absolute;
+            right: -22.5px;
+            top: -15px;
+
             display: flex;
             flex-direction: column;
-            /* align-items: center; */
-            justify-content: space-between;
-            font-size: 0.75rem;
-            padding: 10px;
 
-            label{
-              display: flex;
-              align-items: center;
-              margin-bottom: 5px;
+            .link{
+              width: 100%;
+              aspect-ratio: 1/1;
+              background-color: #f3f4f7;
+              border: 1px solid rgb(209, 213, 219);
+              border-radius: 50%;
+              margin-bottom: 7.5px;
 
-              input{
-                margin-right: 5px;
+              display: grid; 
+              place-items: center;
+              
+              svg{
+                fill: #cacacd;
+                font-size: 1.25rem;
               }
 
-              font-size: 0.65rem;
+              &:hover{
+                cursor: pointer;
+                border-color: black;
+                transition-duration: 250ms;
+
+                svg{
+                  fill: #333;
+                }
+              }
+            }
+          }
+
+          .contest-problem {
+            height: 100%;
+            width: 25%;
+            border-right: 1px solid rgb(209, 213, 219);
+            overflow-y: scroll;
+
+            ::-webkit-scrollbar {
+              display: none;
+            }
+            
+            &:last-child {
+              border-right: none;
             }
 
-            .problem-name{
-              font-weight: 500;
-              color: cornflowerblue;
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .problem-main-name{
+              margin-bottom: 20px;
+              label{
+                display: flex;
+                align-items: center;
+                margin-bottom: 5px;
+
+                input{
+                  margin-right: 5px;
+                }
+
+                font-size: 0.65rem;
+              }
+
+              .problem-name{
+                font-size: 0.85rem;
+                font-weight: 500;
+                color: cornflowerblue;
+              }
             }
 
             .problem-info{
+              display: flex;
+              flex-wrap: wrap;
 
-              .problem-difficulty{
-                display: flex;
-                align-items: center;
-                flex-wrap: wrap;
-                font-weight: 500;
-
-                .text{
-                  margin-right: 2.5px;
-                }
-
-                /* background-color: green; */
-                .problem-stat{
-                  font-size: 0.65rem;
-                  font-weight: 300;
-
-                }
+              .tag{
+                font-size: 0.65rem;
+                padding: 2.5px 7.5px;
+                border: 1px solid rgb(202, 195, 195);
+                border-radius: 100px;
+                margin: 0 2.5px 2.5px 0;
+                font-weight: 300;
+                background-color: #f3f4f7;
               }
 
-
-              .all-tags{
-                width: calc(100% + 10px);
-                margin-top: 5px;
-                overflow-x: scroll;
-                margin-left: -5px;
-
-                ::-webkit-scrollbar {
-                  display: none;
-                }
-
-                .problem-tags{
-                  width: 100vw;
-
-                  .tag{
-                    font-size: 0.65rem;
-                    display: inline-block;
-                    width: auto;
-                    padding: 2.5px 10px;
-                    margin: 0 5px 5px 0;
-                    background-color: white;
-                    border-radius: 100px;
-                    border: 1px solid black;
-                  }
-                }
-
+              .difficulty-tag{
+                border-color: rgb(17, 17, 17);
+                /* background-color: #fff; */
               }
             }
 
-          }
-
-        }
-
-        .first-row{
-          height: 60px;
-          margin-top: 20px;
-
-          .contest-problem{
-            height: 100%;
-            /* background-color: black; */
 
           }
-
-          .problem-section{
-            display: grid;
-            place-items: center;
-            text-align: center;
-            font-weight: 500;
-          }
-        }
-
-        .visual-row{
-          height: 200px;
         }
       }
+
+
 
       .note{
         font-weight: 200;
