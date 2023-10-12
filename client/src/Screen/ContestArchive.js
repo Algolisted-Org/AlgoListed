@@ -10,258 +10,136 @@ import LockIcon from '@material-ui/icons/Lock';
 import WarningIcon from '@material-ui/icons/Warning';
 import SearchIcon from '@material-ui/icons/Search';
 import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
-
+import contestsData from '../DummyDB/InterviewSummaries/LcContests.json';
 
 
 const ContestArchive = () => {
-  const [platformName, setPlatformName] = useState('leetcode');
-  const [contestType, setContestType] = useState('Weekly Contest');
-  const [contestNumber, setContestNumber] = useState('361');
-  const [needDarkMode, setNeedDarkMode] = useState(false);
+    const [platformName, setPlatformName] = useState('leetcode');
+    const [contestType, setContestType] = useState('Weekly Contest');
+    const [contestNumber, setContestNumber] = useState('361');
+    const [needDarkMode, setNeedDarkMode] = useState(false);
 
-  useEffect(() => {
-    let selectedTheme = localStorage.getItem("selectedTheme");
-    if (selectedTheme === 'dark') setNeedDarkMode(true);
-  }, [])
+    useEffect(() => {
+        let selectedTheme = localStorage.getItem("selectedTheme");
+        if (selectedTheme === 'dark') setNeedDarkMode(true);
+    }, [])
 
-  console.log("needDarkMode : ", needDarkMode);
-  const toggleDarkMode = () => {
-    setNeedDarkMode(!needDarkMode);
-  };
+    console.log("needDarkMode : ", needDarkMode);
+    const toggleDarkMode = () => {
+        setNeedDarkMode(!needDarkMode);
+    };
 
 
 
-  const filters = contestAnalysisFilters.map((item) => {
-    return (
-      <div
-        key={item.id}
-        className={
-          item.domainFilter === platformName ? 'filter selected' : (
-            item.lock === true ? 'locked-feature filter' : 'filter'
-          )
-        }
-      >
-        {item.text}
-        {item.lock === true ? <LockIcon /> : <></>}
-      </div>
-    );
-  });
-
-  const redirectToContest = () => {
-    const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
-    window.location.href = url;
-  };
-
-  return (
-    <GrandContainer>
-      <MobContainer>
-        We are still working on Responsive Version of the website, please view the site with
-        width more than 1100px, a standard laptop or tablet landscape.
-        <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
-      </MobContainer>
-      <Container needDarkMode={needDarkMode}>
-        {
-          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
-        }
-
-        {
-          needDarkMode ? <LeftMenuDark marked={"contest-analysis"} /> : <LeftMenu marked={"contest-analysis"} />
-        }
-        <div className="cc-middle-content">
-          <h1 className='main-heading'>Contest Archive</h1>
-          <p className="heading-supporter">
-            Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!
-          </p>
-          <div className="message">
-            <div className="icon"></div>
-            <div className="text">
-              A particular feature you have in mind that you'd like to see implemented on this page? <a href="https://github.com/Nayaker/AlgoListed/issues/new">create an enhancement issue</a>
+    const filters = contestAnalysisFilters.map((item) => {
+        return (
+            <div
+                key={item.id}
+                className={
+                    item.domainFilter === platformName ? 'filter selected' : (
+                        item.lock === true ? 'locked-feature filter' : 'filter'
+                    )
+                }
+            >
+                {item.text}
+                {item.lock === true ? <LockIcon /> : <></>}
             </div>
-          </div>
-          <Filters needDarkMode={needDarkMode}>{filters}</Filters>
-          <CleanLine />
-          <Filters2 needDarkMode={needDarkMode}>
-            <a href='/contest-analysis' className="filter">Contests Analysis</a>
-            <a href='' className="filter selected">Contests Archive</a>
-          </Filters2>
+        );
+    });
 
-          {/* <div className="note">
+    const redirectToContest = () => {
+        const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
+        window.location.href = url;
+    };
+
+    return (
+        <GrandContainer>
+            <MobContainer>
+                We are still working on Responsive Version of the website, please view the site with
+                width more than 1100px, a standard laptop or tablet landscape.
+                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+            </MobContainer>
+            <Container needDarkMode={needDarkMode}>
+                {
+                    needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+                }
+
+                {
+                    needDarkMode ? <LeftMenuDark marked={"contest-analysis"} /> : <LeftMenu marked={"contest-analysis"} />
+                }
+                <div className="cc-middle-content">
+                    <h1 className='main-heading'>Contest Archive</h1>
+                    <p className="heading-supporter">
+                        Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!
+                    </p>
+                    <div className="message">
+                        <div className="icon"></div>
+                        <div className="text">
+                            A particular feature you have in mind that you'd like to see implemented on this page? <a href="https://github.com/Nayaker/AlgoListed/issues/new">create an enhancement issue</a>
+                        </div>
+                    </div>
+                    <Filters needDarkMode={needDarkMode}>{filters}</Filters>
+                    <CleanLine />
+                    <Filters2 needDarkMode={needDarkMode}>
+                        <a href='/contest-analysis' className="filter">Contests Analysis</a>
+                        <a href='' className="filter selected">Contests Archive</a>
+                    </Filters2>
+
+                    {/* <div className="note">
             <b>NOTE</b> : Make sure to pick the kind of contest and the contest number you want, like the Weekly Contest and 365, for example.
           </div> */}
 
-          <div className="table">
-            <div className="row first-row">
-              <div className="contest-name">Contest Name</div>
-              <div className="contest-problem problem-section">Problem A</div>
-              <div className="contest-problem problem-section">Problem B</div>
-              <div className="contest-problem problem-section">Problem C</div>
-              <div className="contest-problem problem-section">Problem D</div>
-            </div>
-            <div className="row visual-row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-            <div className="row">
-              <div className="contest-name">Weekly Contest 366</div>
-              <div className="contest-problem">
-              <div>
-                <label>
-                  <input
-                    type="checkbox"
-                  />
-                  Problem Unsolved
-                </label>
-                <div className="problem-name">Divisible and Non-divisible Sums Difference</div>
-              </div>
-                <div className="problem-info">
-                  <div className="problem-difficulty">
-                    <div className="text">Easy |</div>
-                    <div className="problem-stat">Solved by - in contest</div>
-                  </div>
-                  <div className="all-tags">
-                    <div className="problem-tags">
-                      <div className="tag">Array</div>
+                    <div className="table">
+                        <div className="row first-row">
+                            <div className="contest-name">Contest Name</div>
+                            <div className="contest-problem problem-section">Problem A</div>
+                            <div className="contest-problem problem-section">Problem B</div>
+                            <div className="contest-problem problem-section">Problem C</div>
+                            <div className="contest-problem problem-section">Problem D</div>
+                        </div>
+                        {contestsData.map((contestData, index) => {
+                            return (
+                                <div className="row">
+                                    <div className="contest-name">{contestData.contest_name}</div>
+                                    {Object.values(contestData.problems).map((problem) => {
+                                        console.log(problem);
+                                        return (
+                                            <div className="contest-problem">
+                                                <div>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                        />
+                                                        Problem Unsolved
+                                                    </label>
+                                                    <div className="problem-name">{problem.name}</div>
+                                                </div>
+                                                <div className="problem-info">
+                                                    <div className="problem-difficulty">
+                                                        <div className="text">{problem.difficulty} |</div>
+                                                        <div className="problem-stat">Solved by - in contest</div>
+                                                    </div>
+                                                    <div className="all-tags">
+                                                        <div className="problem-tags">
+                                                            {problem.tags.map((tag) => {
+                                                                return (
+                                                                    <div className="tag">{tag}</div>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            );
+                        })}
                     </div>
-                  </div>
                 </div>
-              </div>
-              <div className="contest-problem">
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                    />
-                    Problem Unsolved
-                  </label>
-                  <div className="problem-name">Minimum Processing Time</div>
-                </div>
-                <div className="problem-info">
-                  <div className="problem-difficulty">
-                    <div className="text">Medium |</div>
-                    <div className="problem-stat">Solved by - in contest</div></div>
-                  <div className="all-tags">
-                    <div className="problem-tags">
-                      <div className="tag">Array</div>
-                      <div className="tag">Sliding Window</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="contest-problem">
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                    />
-                    Problem Unsolved
-                  </label>
-                  <div className="problem-name">Apply Operations to Make Two Strings Equal</div>
-                </div>
-                <div className="problem-info">
-                  <div className="problem-difficulty">
-                    <div className="text">Medium |</div>
-                    <div className="problem-stat">Solved by - in contest</div></div>
-                  <div className="all-tags">
-                    <div className="problem-tags">
-                      <div className="tag">Dynamic Programming</div>
-                      <div className="tag">Maths</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="contest-problem">
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                    />
-                    Problem Unsolved
-                  </label>
-                  <div className="problem-name">Apply Operations on Array to Maximize Sum of Squares</div>
-                </div>
-                <div className="problem-info">
-                  <div className="problem-difficulty">
-                    <div className="text">Hard |</div>
-                    <div className="problem-stat">Solved by - in contest</div></div>
-                  <div className="all-tags">
-                    <div className="problem-tags">
-                      <div className="tag">Tries</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-            <div className="row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-            <div className="row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-            <div className="row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-            <div className="row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-            <div className="row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-            <div className="row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-            <div className="row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-            <div className="row">
-              <div className="contest-name"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-              <div className="contest-problem"></div>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </GrandContainer>
-  );
+            </Container>
+        </GrandContainer>
+    );
 };
 
 export default ContestArchive;
@@ -318,10 +196,10 @@ const Container = styled.div`
       max-width: 1360px;
       min-width: 850px;
       margin: auto;
-      
+
       @media only screen and (max-width: 1200px){
         padding: 80px 50px 50px 50px;
-      }   
+      }
 
 
       .main-heading{
@@ -335,7 +213,7 @@ const Container = styled.div`
           margin-bottom: 10px;
           font-weight: 400;
           color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
-          
+
           a{
             color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
             font-size: 0.95rem;
@@ -357,7 +235,7 @@ const Container = styled.div`
             font-size: 0.8rem;
             color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
             font-weight: 300;
-            
+
             b{
                 font-weight: 500;
                 color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
@@ -365,8 +243,8 @@ const Container = styled.div`
         }
       }
 
-      
-      
+
+
       .message2{
         display: flex;
         align-items: center;
@@ -374,7 +252,7 @@ const Container = styled.div`
         border-radius: 5px;
         padding: 10px;
         margin: 20px 0 10px 0;
-        
+
         .icon{
           svg{
             fill: white;
@@ -388,7 +266,7 @@ const Container = styled.div`
             font-size: 0.8rem;
             color: white;
             font-weight: 300;
-            
+
         }
       }
 
@@ -430,7 +308,7 @@ const Container = styled.div`
               display: flex;
               align-items: center;
               margin-bottom: 5px;
-              
+
               input{
                 margin-right: 5px;
               }
@@ -459,24 +337,24 @@ const Container = styled.div`
                 .problem-stat{
                   font-size: 0.65rem;
                   font-weight: 300;
-                  
+
                 }
               }
-              
-              
+
+
               .all-tags{
                 width: calc(100% + 10px);
                 margin-top: 5px;
                 overflow-x: scroll;
                 margin-left: -5px;
-                
+
                 ::-webkit-scrollbar {
                   display: none;
                 }
-                
+
                 .problem-tags{
                   width: 100vw;
-  
+
                   .tag{
                     font-size: 0.65rem;
                     display: inline-block;
@@ -499,15 +377,15 @@ const Container = styled.div`
         .first-row{
           height: 60px;
           margin-top: 20px;
-          
+
           .contest-problem{
             height: 100%;
             /* background-color: black; */
-            
+
           }
 
           .problem-section{
-            display: grid; 
+            display: grid;
             place-items: center;
             text-align: center;
             font-weight: 500;
@@ -609,7 +487,7 @@ const Filters = styled.div`
 		}
 	}
 
-  
+
 `;
 
 const Filters2 = styled.div`
@@ -673,7 +551,7 @@ const Filters2 = styled.div`
 		}
 	}
 
-  
+
 `;
 
 const CleanLine = styled.div`
