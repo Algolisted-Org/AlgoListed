@@ -430,6 +430,7 @@ const Container = styled.div`
 
     .cc-middle-content{
       min-height: 100vh;
+      background-color:var(--body_background);
       width: 100%;
       /* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
       padding: 80px 120px 30px 120px;
@@ -446,7 +447,7 @@ const Container = styled.div`
       .main-heading{
           font-size: 1.65rem;
           font-weight: 600;
-          color: #292929;
+          color: var(--body_background5);
           display: flex; 
           align-items: center;
 
@@ -465,7 +466,7 @@ const Container = styled.div`
           font-size: 1.05rem;
           margin-bottom: 10px;
           font-weight: 400;
-          color: #696168;
+          color: var(--body_background5);
 
           a{
             color: #18489f;
@@ -552,7 +553,7 @@ const Container = styled.div`
           .title{
               font-size: 0.85rem;
               font-weight: 500;
-              color: #374151;
+              color: var(--body_background5);
               cursor: pointer;
               text-decoration: none;
               width: 100%;
@@ -567,6 +568,7 @@ const Container = styled.div`
 
 
           .short-desc{
+            color: var(--body_background5);
             font-size: 0.75rem;
             font-weight: 200;
             letter-spacing: 0.06rem;
@@ -604,7 +606,7 @@ const Container = styled.div`
             a{
               font-size: 0.75rem;
               /* text-decoration: none; */
-              /* color: inherit; */
+              color:var(--body_background5);
 
               &:hover{
                 text-decoration: underline;
@@ -613,6 +615,9 @@ const Container = styled.div`
           }
         }
       }
+    }
+    .top-part a{
+      color:var(--body_background5);
     }
 `
 
@@ -624,6 +629,7 @@ const Filters = styled.div`
   .filter {
     padding: 7.5px 15px;
     font-size: 0.8rem;
+    background-color:var(--body_night);
     border: 1px solid #b9afaf;
     border-radius: 500px;
     margin: 0px 5px 5px 0px;

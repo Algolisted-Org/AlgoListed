@@ -25,12 +25,12 @@ const Opportunities = () => {
                   <div className="cc-middle-content">
                       <h1 className='main-heading'>All Internship & Job Opportunities <div className="head-tag">coming soon</div> </h1>
                       <p className="heading-supporter">
-                        This page is very similar to the coding competitions list page, here in this page we will provide information about all available hiring and internship opportunities, including the timing of these opportunities. We are currently in the planning stages and will be launching this page soon.
+                        On this page, you'll find details about various job openings and internship opportunities, along with the corresponding schedules. We are presently in the process of planning and will be unveiling this page shortly. To have your LinkedIn post showcased on this page, simply include the hashtag <div className="special-blue">#list_as_hiring_on_algolisted</div>
                       </p>
                       <div className="message">
                           <div className="icon"></div>
                           <div className="text">
-                              You know about a internship or job opportunity which is not mentioned here. <a href="/">click here</a>
+                          Simply add the hashtag <b>#list_as_hiring_on_algolisted</b> to your LinkedIn post for it to be featured on this page.
                           </div> 
                       </div> 
                   </div>
@@ -123,6 +123,12 @@ const Container = styled.div`
           font-weight: 400;
           color: #696168;
 
+          .special-blue{
+            display: inline;
+            color: cornflowerblue;
+            font-weight: 500;
+            margin-left: 0.25rem;
+          }
           
 
           a{
@@ -147,6 +153,9 @@ const Container = styled.div`
             color: #13803b;
             font-weight: 300;
             
+            b{
+              font-weight: 400;
+            }
         }
       }
     }
