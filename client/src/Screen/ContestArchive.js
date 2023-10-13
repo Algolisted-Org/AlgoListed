@@ -71,7 +71,7 @@ const ContestArchive = () => {
         }
 
         {
-          needDarkMode ? <LeftMenuDark marked={"contest-analysis"} /> : <LeftMenu marked={"contest-analysis"} />
+          needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
         }
         <div className="cc-middle-content">
           <h1 className='main-heading'>Contest Archive</h1>

@@ -10,21 +10,32 @@ const LeftMenuDark = ({ marked }) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
 
   const menuItems = [
+    // {
+    //   value: "Show All Blogs",
+    //   showAt: "all-blogs",
+    //   link: "/blogs/all",
+    // },
     {
-      value: "Show All Blogs",
-      showAt: "all-blogs",
-      link: "/blogs/all",
+      value: "Showdown Server",
+      showAt: "showdown-server",
+      link: "/showdown-server",
+    }, 
+    {
+      value: "Contests Archive",
+      showAt: "contests-archive",
+      link: "/contests-archive",
+    },
+    {
+      value: "Contest Analysis",
+      showAt: "contest-analysis",
+      link: "/contest-analysis",
     },
     {
       value: "Coding Resources",
       showAt: "resources",
       link: "/resources",
     },
-    {
-      value: "Showdown Server",
-      showAt: "showdown-server",
-      link: "/showdown-server",
-    }, 
+    
     {
       value: "Coding Sheets",
       showAt: "coding-sheets",
@@ -35,22 +46,14 @@ const LeftMenuDark = ({ marked }) => {
       showAt: "interview-summaries",
       link: "/interview-summaries",
     },
-    {
-      value: "Contest Analysis",
-      showAt: "contest-analysis",
-      link: "/contest-analysis",
-    },
+    
     
     // {
     //   value: "Coding Competitions",
     //   showAt: "all-coding-competitions",
     //   link: "/coding-competitions",
     // },
-    // {
-    //   value: "Contest Archive",
-    //   showAt: "contest-archive",
-    //   link: "/contest-archive",
-    // },
+    
     // {
     //   value: "Selected Profiles",
     //   showAt: "selected-profiles",
@@ -85,7 +88,7 @@ const LeftMenuDark = ({ marked }) => {
       <Tooltip title="Version - v2.10">
         <div className="logo">
           {/* Alpha Version */}
-            Dev Mode
+            Algolisted
           {/* <div className="small-top">V2.17</div> */}
         </div>
       </Tooltip>
