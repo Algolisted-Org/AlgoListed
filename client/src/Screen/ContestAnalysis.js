@@ -37,6 +37,7 @@ const ContestAnalysis = () => {
   const [addUser, setadduser] = useState(false)
   const [Allcountries, setcounteries] = useState([])
   const [retrivelocalstorage, setretrivestorage] = useState([]);
+
   const [SessionUserCountChange, setSessionUserCountChange] = useState(0)
   const { contestName } = useParams();
   
@@ -435,7 +436,7 @@ const ContestAnalysis = () => {
                     <div className="add-btn" onClick={() => {  setadduser(true); setSessionUserCountChange(SessionUserCountChange + 1);}}>
                       <AddIcon />
                     </div>
-                    {retrivelocalstorage.length > 0 ?
+                    {retrivelocalstorage != null ?
                       retrivelocalstorage.map((eachuser, index) => {
                         const userExists = Allcountries.find(user => user.username === eachuser.username);
                          if(userExists){
@@ -472,17 +473,15 @@ const ContestAnalysis = () => {
                           </div>
                         </div>
                         )
-                      
                     }
-                          
                          })
-                        
-                      
                       : <h1 className="warning">You have Not added any friend yet</h1>
                     }
-                    
-                   
-                    
+                    {/* {console.log(retrivelocalstorage)} */}
+                    {/* {showVisuals ?
+                      <h1>Hello World</h1>
+                      : <h1 className="warning">You have Not added any friend yet</h1>
+                    } */}
                   </div>
                 </div>
               </div>
@@ -699,6 +698,8 @@ const Container = styled.div`
           .collection{
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
+            
             h1{
               margin-top:10px;
               margin-left:15px;
