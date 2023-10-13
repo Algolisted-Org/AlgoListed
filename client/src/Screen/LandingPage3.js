@@ -225,39 +225,39 @@ const LandingPage3 = () => {
             <div className="one-row">
               <div className="box down-border right-border">
                 <img src='https://leetcode.com/static/images/LeetCode_logo_rvs.png' className="feature-logo"></img>
-                <a href='/' className="feature-name">Leetcode Contest Analysis <CallMadeIcon/> </a> 
+                <a href='/contest-analysis' className="feature-name">Leetcode Contest Analysis <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box down-border right-border">
                 <img src='https://play-lh.googleusercontent.com/WsR_f03nbqW3qZjCZeXUYmnmhSWXo3hQhLX9hgl9QHydCgbXQi_VJeAwnmtuIgTHKdQ' className="feature-logo"></img>
-                <a href='/' className="feature-name">Contest Problems Collection <CallMadeIcon/> </a> 
+                <a href='/contests-archive' className="feature-name">Contest Problems Collection <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box down-border right-border">
                 <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJwFbP8A6iFB7mX56y_hTVlTpssz3RpAvSgQ&usqp=CAU' className="feature-logo"></img>
-                <a href='/' className="feature-name">Coding Sheets with Visualisation <CallMadeIcon/> </a> 
+                <a href='/coding-sheets/striver-sde-sheet' className="feature-name">Coding Sheets with Visualisation <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box down-border">
                 <img src='https://res.cloudinary.com/practicaldev/image/fetch/s--CsuD8TQh--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yy6g8h2z1y7req5ibczx.jpg' className="feature-logo"></img>
-                <a href='/' className="feature-name">Coding Interview Summarization <CallMadeIcon/> </a> 
+                <a href='/interview-summaries' className="feature-name">Coding Interview Summarization <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
             </div>
             <div className="one-row">
               <div className="box right-border">
                 <img src='https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec' className="feature-logo"></img>
-                <a href='/' className="feature-name">Host Friendly Coding Competitions <CallMadeIcon/> </a> 
+                <a href='/showdown-server' className="feature-name">Host Friendly Coding Competitions <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box right-border">
                 <img src='https://www.grackledocs.com/wp-content/uploads/2023/09/pdf.png' className="feature-logo"></img>
-                <a href='/' className="feature-name">Collection of Coding Learning Resources <CallMadeIcon/> </a> 
+                <a href='/resources' className="feature-name">Collection of Coding Learning Resources <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="box right-border">
                 <img src='https://static.vecteezy.com/system/resources/previews/005/086/755/original/apply-now-banner-label-free-vector.jpg' className="feature-logo"></img>
-                <a href='/' className="feature-name">Job & Internship Openings <CallMadeIcon/> </a> 
+                <a href='/opportunities' className="feature-name">Job & Internship Openings <CallMadeIcon/> </a> 
                 <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
               </div>
               <div className="last-box">
