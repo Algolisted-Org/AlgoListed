@@ -26,5 +26,19 @@
       }
 
     ]
+  },
+  {
+    "user_name": "saurabh-sen",
+    "name": "Saurabh Sen",
+    "description": "I were assigned to contribute an installation guide for the frontend of AlgoListed.com. I was excited to work on this project as it was my first time contributing to an open-source project. I was able to complete the task in a few days and it was a great learning experience for me. I was able to learn a lot about the open-source community and how to contribute to open-source projects. I am looking forward to contributing more to this project in the future.",
+    "avatar_url": "https://avatars.githubusercontent.com/u/68960038?v=4",
+    "pull_requests": [
+      {
+        "id": 93,
+        "title": "add readme for installation",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/93",
+        "created_on": "Apr 23, 2023"
+      }
+    ]
   }
 ]
