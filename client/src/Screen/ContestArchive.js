@@ -15,12 +15,15 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import NotesIcon from '@material-ui/icons/Notes';
 import CreateIcon from '@material-ui/icons/Create';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
   const [contestType, setContestType] = useState('Weekly Contest');
   const [contestNumber, setContestNumber] = useState('361');
   const [needDarkMode, setNeedDarkMode] = useState(false);
+  const [showTags, setShowTags] = useState(true);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
@@ -91,7 +94,44 @@ const ContestArchive = () => {
           {/* <div className="note">
             <b>NOTE</b> : Make sure to pick the kind of contest and the contest number you want, like the Weekly Contest and 365, for example.
           </div> */}
+          <div className="visulization">
+            <div className="visulization-cap">Visulization
+              <ExpandLessIcon/>
+            </div>
+            <div className="one-type-visualization">
+              <p className="small-text">
+                Here we are planning to show bar graph of top 5 tags of the <b>filtered contest-problem-set</b>, 
+                the bar graph will be kind of a complex one - Each column of the graph would have three layers of 
+                different colors represent the problem difficulty (easy/medium/hard).
+              </p>
+            </div>
+            <div className="one-type-visualization">
+              <img src="https://venngage-wordpress.s3.amazonaws.com/uploads/2022/01/Colorful-Stacked-Bar-Chart-Template.png" alt="" />
+            </div>
+            <div className="one-type-visualization">
+              <img src="https://i.ytimg.com/vi/FYxpNm33YBA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBzkSliT5dho_jEjc7QF0KVbSFxgw" alt="" />
+            </div>
+            <div className="one-type-visualization"></div>
+          </div>
 
+          <EffectiveFilter>
+						<div className="left">
+              <div className="filter-item">Both Contest Types
+                <ExpandMoreIcon/>
+              </div>
+              <div className="filter-item">Last 15 Contests
+                <ExpandMoreIcon/>
+              </div>
+						</div>
+						<div className="right">
+              <div className="filter-item">A</div>
+              <div className="filter-item">B</div>
+              <div className="filter-item">C</div>
+              <div className="filter-item">D</div>
+							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+							{/* <div className="filter-item">Show Unsolved</div>  */}
+						</div>
+					</EffectiveFilter>
           <div className="problems-table">
             {contestsData.map((contestData, index) => (
               <div className="one-contest-problems" key={index}>
@@ -263,12 +303,68 @@ const Container = styled.div`
         }
       }
 
+      .visulization{
+        position: relative;
+        height: 200px;
+        width: 100%;
+        background-color: #ffffff;
+        border-radius: 20px;
+        margin: 30px 0 10px 0;
+        border: 1px solid rgb(209, 213, 219);
+        display: flex;
+
+        .visulization-cap {
+            position: absolute;
+            height: 30px;
+            border-radius: 100px;
+            background-color: #f3f4f7;
+            border: 1px solid rgb(209, 213, 219);
+            left: -15px;
+            top: -15px;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 300;
+
+            svg{
+              font-size: 1.25rem;
+              margin-left: 5px;
+            }
+          }
+
+        .one-type-visualization{
+          height: 100%;
+          width: 25%;
+          border-right: 1px solid rgb(209, 213, 219);
+          overflow-y: scroll;
+
+          ::-webkit-scrollbar {
+            display: none;
+          }
+          
+          &:last-child {
+            border-right: none;
+          }
+
+          .small-text{
+            font-size: 0.75rem;
+          }
+
+          img{
+            height: 100%;
+          }
+
+          padding: 20px;
+        }
+      }
+
       .problems-table{
         min-height: 2500px;
         width: 100%;
         /* background-color: cornflowerblue; */
         border-radius: 20px;
-        margin-top: 20px;
+        margin-top: 30px;
 
         .one-contest-problems{
           position: relative;
@@ -565,4 +661,48 @@ const CleanLine = styled.div`
   height: 1px;
   width: 100%;
   background-color: grey;
+`
+
+const EffectiveFilter = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 20px 0;
+
+	.left{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+    .filter-item{
+			padding: 5px 10px;
+			font-size: 0.7rem;
+			border: 1px solid #d0d5db;
+			border-radius: 3px;
+			margin-right: 5px;
+			cursor: pointer;
+
+      display: flex;
+      align-items: center;
+
+      svg{
+        font-size: 1rem;
+        margin-left: 5px;
+      }
+		}
+	}
+
+	.right{
+		display: flex;
+		align-items: center;
+
+		.filter-item{
+			padding: 5px 10px;
+			font-size: 0.7rem;
+			border: 1px solid #d0d5db;
+			border-radius: 3px;
+      margin-left: 5px;
+			cursor: pointer;
+		}
+	}
 `
