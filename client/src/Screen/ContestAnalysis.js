@@ -346,10 +346,10 @@ const ContestAnalysis = () => {
           </div>
           <Filters>{filters}</Filters>
           <CleanLine />
-          <Filters2>
+          {/* <Filters2>
             <a href='' className="filter selected">Contests Analysis</a>
             <a href='/contests-archive'  className="filter">Contests Archive</a>
-          </Filters2>
+          </Filters2> */}
 
           <div className="contest-btns">
             <a href='/contest-analysis' className="back-btn">
