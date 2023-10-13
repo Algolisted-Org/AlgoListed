@@ -734,7 +734,7 @@ if(filteredData.length<1){
 					</SheetMessage>
 
 					<Progress>
-						<div className="text">Progress : </div>
+					<div className="text" style={{ color: 'var(--body_background5)' }}>Progress : </div>
 						<div className="value">{`${progressBarPercent}%`}</div>
 						<div className="bar">
 							<div
@@ -747,17 +747,17 @@ if(filteredData.length<1){
 					<EffectiveFilter>
 						<div className="left">
 							<input type="checkbox" id="all" checked={selectedLabel === 'All'} onChange={() => handleLabelClick('All')} />
-							<label htmlFor="all">All</label>
+							<label htmlFor="all" style={{ color: 'var(--body_background5)' }}>All</label>
 							<input type="checkbox" id="easy" checked={selectedLabel === 'Easy'} onChange={() => handleLabelClick('Easy')} />
-							<label htmlFor="easy">Easy</label>
+							<label htmlFor="easy" style={{ color: 'var(--body_background5)' }}>Easy</label>
 							<input type="checkbox" id="medium" checked={selectedLabel === 'Medium'} onChange={() => handleLabelClick('Medium')} />
-							<label htmlFor="medium">Medium</label>
+							<label htmlFor="medium" style={{ color: 'var(--body_background5)' }}>Medium</label>
 							<input type="checkbox" id="hard" checked={selectedLabel === 'Hard'} onChange={() => handleLabelClick('Hard')} />
-							<label htmlFor="hard">Hard</label>
+							<label htmlFor="hard" style={{ color: 'var(--body_background5)' }}>Hard</label>
 						</div>
 						<div className="right">
 							<Tagsfilter tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData}/>
-							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+							<div className="filter-item" style={{ color: 'var(--body_background5)' }} onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
 					</EffectiveFilter>
@@ -1076,6 +1076,7 @@ const Container = styled.div`
 
 	.cc-middle-content {
 		min-height: 100vh;
+		background-color:var(--body_background);
 		width: 100%;
 		/* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
 		padding: 80px 120px 30px 120px;
@@ -1092,14 +1093,14 @@ const Container = styled.div`
 		.main-heading {
 			font-size: 1.65rem;
 			font-weight: 600;
-			color: #292929;
+			color: var(--body_background5);
 		}
 
 		.heading-supporter {
 			font-size: 1.05rem;
 			margin-bottom: 10px;
 			font-weight: 400;
-			color: #696168;
+			color: var(--body_background5);
 
 			a {
 				color: #18489f;
@@ -1138,6 +1139,7 @@ const Container = styled.div`
 			border-bottom-color: transparent;
 
 			.link-row {
+				background-color:var(--body_background);
 				padding: 20px 20px;
 				display: flex;
 				align-items: center;
@@ -1160,6 +1162,7 @@ const Container = styled.div`
 						font-weight: 500;
 						width: 32.5px;
 						text-align: center;
+						color:var(--body_color);
 					}
 
 					.main-row-content {
@@ -1168,6 +1171,7 @@ const Container = styled.div`
 							font-weight: 500;
 							text-decoration: none;
 							/* color: inherit; */
+							color:var(--body_color5);
 
 							&:hover {
 								text-decoration: underline;
@@ -1279,6 +1283,7 @@ const Filters = styled.div`
 
 	.filter {
 		padding: 7.5px 15px;
+		background-color:var(--body_night);
 		font-size: 0.8rem;
 		border: 1px solid #b9afaf;
 		border-radius: 500px;
@@ -1618,6 +1623,7 @@ const EffectiveFilter = styled.div`
 		align-items: center;
 
 		label{
+			color:blue;
 			font-size: 0.75rem;
 			display: flex;
 			justify-content: space-between;

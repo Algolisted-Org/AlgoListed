@@ -21,8 +21,8 @@ import OnlineAssessment from './Screen/OnlineAssessment';
 import ContestAnalysis from './Screen/ContestAnalysis';
 import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
-// import ShowdownServer from './Screen/ShowdownServer';
-// import ShowdownServerOpened from './Screen/ShowdownServerOpened';
+import ShowdownServer from './Screen/ShowdownServer';
+import ShowdownServerOpened from './Screen/ShowdownServerOpened';
 import Development from './Screen/Development';
 import LandingPage3 from './Screen/LandingPage3';
 import ContestArchive from './Screen/ContestArchive';
@@ -66,8 +66,8 @@ const App = () => {
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
-        {/* <Route path="/showdown-server" element={<ShowdownServer/>} />
-        <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
+        <Route path="/showdown-server" element={<ShowdownServer/>} />
+        <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} />
         <Route path="/development" element={<Development/>} />
         {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="/:random" element={<PageNotExist/>} />

@@ -33,7 +33,7 @@ function Tagsfilter({ tags,filterdata,setfilter }) {
   return (
     <Tagscompo>
       <Tags  onClick={onclicked}>
-        Filter based on Problem Tags 
+        <p style={{ color: 'var(--body_background5)' }}> Filter based on Problem Tags </p>
         {ischoose.length>0 && <Counts>{ischoose.length}</Counts>}
         {expand ? (
           <MdOutlineExpandLess size={30} />
