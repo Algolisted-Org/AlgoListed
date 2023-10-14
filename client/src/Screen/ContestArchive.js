@@ -85,7 +85,7 @@ const ContestArchive = () => {
     const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
     window.location.href = url;
   };
-  
+
   const marks = [
     {
       value: 0,
@@ -175,12 +175,12 @@ const ContestArchive = () => {
 
   function generateContestAnalysisURL(contestName) {
     const contestNameSlug = contestName.replace(/\s+/g, '-').toLowerCase();
-  
+
     const contestAnalysisURL = `/contest-analysis/${contestNameSlug}`;
-  
+
     return contestAnalysisURL;
   }
-  
+
 
   return (
     <GrandContainer>
@@ -219,12 +219,12 @@ const ContestArchive = () => {
           </div> */}
           <div className="visulization">
             <div className="visulization-cap">Visulization
-              <ExpandLessIcon/>
+              <ExpandLessIcon />
             </div>
             <div className="one-type-visualization">
               <p className="small-text">
-                Here we are planning to show bar graph of top 5 tags of the <b>filtered contest-problem-set</b>, 
-                the bar graph will be kind of a complex one - Each column of the graph would have three layers of 
+                Here we are planning to show bar graph of top 5 tags of the <b>filtered contest-problem-set</b>,
+                the bar graph will be kind of a complex one - Each column of the graph would have three layers of
                 different colors represent the problem difficulty (easy/medium/hard).
               </p>
             </div>
@@ -238,32 +238,32 @@ const ContestArchive = () => {
           </div>
 
           <EffectiveFilter className='noselect'>
-						<div className="left"> 
+            <div className="left">
               <div className="filter-item noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
-                {openModel1 == false ? <ExpandMoreIcon/> : <ExpandLessIcon/>} 
+                {openModel1 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                 {
                   openModel1 ? (
                     <ShowAbsoluteModelDropDown>
-                      <div className="option" onClick={() => {setFilterContestType("All"); setFilterContestTypeName("Both Contest Types")}}>Both Contest Types</div>
-                      <div className="option" onClick={() => {setFilterContestType("Weekly"); setFilterContestTypeName("Weekly Contests Only")}}>Weekly Contests Only</div>
-                      <div className="option" onClick={() => {setFilterContestType("Biweekly"); setFilterContestTypeName("Biweekly Contests Only")}}>Biweekly Contests Only</div>
+                      <div className="option" onClick={() => { setFilterContestType("All"); setFilterContestTypeName("Both Contest Types") }}>Both Contest Types</div>
+                      <div className="option" onClick={() => { setFilterContestType("Weekly"); setFilterContestTypeName("Weekly Contests Only") }}>Weekly Contests Only</div>
+                      <div className="option" onClick={() => { setFilterContestType("Biweekly"); setFilterContestTypeName("Biweekly Contests Only") }}>Biweekly Contests Only</div>
                     </ShowAbsoluteModelDropDown>
                   ) : <></>
                 }
               </div>
               <div className="filter-item" onClick={() => setOpenModel2(!openModel2)}>Last {sliderInputValue} Contests
-              {openModel2 == false ? <ExpandMoreIcon/> : <ExpandLessIcon/>} 
+                {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
               </div>
-						</div>
-						<div className="right">
+            </div>
+            <div className="right">
               {/* <div className="filter-item">A</div>
               <div className="filter-item">B</div>
               <div className="filter-item">C</div>
               <div className="filter-item">D</div> */}
-							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
-							{/* <div className="filter-item">Show Unsolved</div>  */}
-						</div>
-					</EffectiveFilter>
+              <div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+              {/* <div className="filter-item">Show Unsolved</div>  */}
+            </div>
+          </EffectiveFilter>
           {
             openModel2 ? (
               <SliderSelector>
@@ -275,23 +275,23 @@ const ContestArchive = () => {
                   marks={marks}
                 />
               </SliderSelector>
-              ): 
+            ) :
               <div></div>
           }
-          
+
 
           <div className="problems-table">
             <div className="one-contest-problems">
               <div className="contest-name">Dummy Contest 1</div>
               <div className="contest-outlinks">
                 <a target='_blank' className="link">
-                  <CallMadeIcon/>
-                </a> 
+                  <CallMadeIcon />
+                </a>
                 <a target='_blank' className="link">
-                  <EqualizerIcon/>
+                  <EqualizerIcon />
                 </a>
                 <div className="link">
-                  <CreateIcon/>
+                  <CreateIcon />
                 </div>
               </div>
               <div className="contest-problem">
@@ -344,21 +344,21 @@ const ContestArchive = () => {
               </div>
             </div>
             {filteredContestData.map((contestData, index) => (
-                <div className="one-contest-problems" key={index}>
-                  <div className="contest-name">{contestData.contest_name}</div>
-                  <div className="contest-outlinks">
-                    <a href={contestData.contest_link} target='_blank' className="link">
-                      <CallMadeIcon/>
-                    </a> 
-                    <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
-                      <EqualizerIcon/>
-                    </a>
-                    <div className="link">
-                      <CreateIcon/>
-                    </div>
+              <div className="one-contest-problems" key={index}>
+                <div className="contest-name">{contestData.contest_name}</div>
+                <div className="contest-outlinks">
+                  <a href={contestData.contest_link} target='_blank' className="link">
+                    <CallMadeIcon />
+                  </a>
+                  <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
+                    <EqualizerIcon />
+                  </a>
+                  <div className="link">
+                    <CreateIcon />
                   </div>
-                  {Object.values(contestData.problems).map((problem, problemIndex) => (
-                    <div className="contest-problem" key={problemIndex}>
+                </div>
+                {Object.values(contestData.problems).map((problem, problemIndex) => (
+                  <div className="contest-problem" key={problemIndex}>
                     <div className="problem-main-name">
                       <label>
                         <input type="checkbox" />
@@ -383,10 +383,10 @@ const ContestArchive = () => {
                       )
 
                     }
-                    
+
                   </div>
-                  ))}
-                </div>
+                ))}
+              </div>
             ))}
           </div>
         </div>
