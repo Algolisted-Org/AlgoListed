@@ -19,6 +19,8 @@ import data from "../DummyDB/InterviewSummaries/Interview.json";
 const InterviewSummaries = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedMainTopic, setSelectedMainTopic] = useState(null);
+  const [clickedButton, setClickedButton] = useState(null);
+  const [graphButton,setGraphButton]=useState(false);
 
   // ----- FOR DARK MODE -----
   const [needDarkMode, setNeedDarkMode] = useState(false);
@@ -34,8 +36,16 @@ const InterviewSummaries = () => {
   }, []);
   const handleTopicClick = (mainTopic) => {
     setSelectedMainTopic(mainTopic);
+    setClickedButton(mainTopic);
+    setGraphButton(false);
     // alert(`${mainTopic} is clicked}`);
   };
+  const handleGraphClick=(subtopic)=>{
+    setGraphButton((prev)=>({
+      ...prev,
+      [subtopic]:!prev[subtopic]
+    }))
+  }
 
   return (
     <GrandContainer>
@@ -109,7 +119,8 @@ const InterviewSummaries = () => {
             <div className="categories">
               <div className="main-topics">
                 {Object.keys(data).map((mainTopic) => (
-                  <button className="togg"
+                  <button
+                    className={clickedButton === mainTopic ? "selected" : ""}
                     key={mainTopic}
                     onClick={() => handleTopicClick(mainTopic)}
                   >
@@ -121,7 +132,22 @@ const InterviewSummaries = () => {
                 <div className="sub-topics">
                   <ul className="subele">
                     {Object.keys(data[selectedMainTopic]).map((subtopic) => (
-                      <li key={subtopic}>{subtopic}</li>
+                      <>
+                        <li key={subtopic}>
+                          {subtopic} <button key={subtopic} onClick={()=>handleGraphClick(subtopic)}>
+                          {
+                            graphButton[subtopic] ?(
+                              <ExpandLessIcon/>
+                            ):(
+                              <ExpandMoreIcon/>
+                            )
+                          }
+
+                          </button>
+                        </li>
+                          {graphButton[subtopic] && <Interviewgraph/>}
+                        
+                      </>
                     ))}
                   </ul>
                 </div>
@@ -240,14 +266,20 @@ const Container = styled.div`
           display: flex;
           justify-content: space-between;
           list-style-type: none;
-          button{
-            padding:20px;
-            
-            background-color:#fff;
-            border-radius:20px;
-            border:1px solid #ccc;
+          button {
+            padding: 20px;
+
+            background-color: #fff;
+            border-radius: 20px;
+            border: 1px solid #ccc;
           }
-          
+          .selected {
+            background-color: #000;
+            color: #fff;
+            transition-duration: 150ms;
+            transition: all 0.5s ease-out;
+            box-shadow: 0px 0px 10px 0px #ccc;
+          }
         }
         .sub-topics {
           display: flex;
@@ -268,6 +300,10 @@ const Container = styled.div`
               margin: 15px;
               padding: 15px;
               width: 100%;
+            }
+            button{
+              background-color: #fff;
+              border:none;
             }
           }
         }
