@@ -35,8 +35,6 @@ const ContestArchive = () => {
     setNeedDarkMode(!needDarkMode);
   };
 
-
-
   const filters = contestAnalysisFilters.map((item) => {
     return (
       <div
@@ -71,12 +69,12 @@ const ContestArchive = () => {
         }
 
         {
-          needDarkMode ? <LeftMenuDark marked={"contest-analysis"} /> : <LeftMenu marked={"contest-analysis"} />
+          needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
         }
         <div className="cc-middle-content">
           <h1 className='main-heading'>Contest Archive</h1>
           <p className="heading-supporter">
-            Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!
+            Cruise through a seamless and organized collection of all contest problems, empowering you to tackle them with maximum efficiency. On top of that, we enrich your contest experience with interactive visualizations and engaging infographics that bring the game to life and help you grasp it more effectively.
           </p>
           <div className="message">
             <div className="icon"></div>
@@ -86,10 +84,10 @@ const ContestArchive = () => {
           </div>
           <Filters needDarkMode={needDarkMode}>{filters}</Filters>
           <CleanLine />
-          <Filters2 needDarkMode={needDarkMode}>
+          {/* <Filters2 needDarkMode={needDarkMode}>
             <a href='/contest-analysis' className="filter">Contests Analysis</a>
             <a href='' className="filter selected">Contests Archive</a>
-          </Filters2>
+          </Filters2> */}
 
           {/* <div className="note">
             <b>NOTE</b> : Make sure to pick the kind of contest and the contest number you want, like the Weekly Contest and 365, for example.
@@ -309,7 +307,7 @@ const Container = styled.div`
         width: 100%;
         background-color: #ffffff;
         border-radius: 20px;
-        margin: 30px 0 10px 0;
+        margin: 50px 0 10px 0;
         border: 1px solid rgb(209, 213, 219);
         display: flex;
 

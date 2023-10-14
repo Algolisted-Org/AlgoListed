@@ -41,42 +41,35 @@ function AdduserModal({
       [e.target.name]: e.target.value,
     }));
   };
+  
   const handlesubmit = async () => {
-
     if (credential.name.trim() === "") {
       setvalidation(true);
-    }
-    else{
-    
-      const ispresent = retrivelocalstorage.some(
-        (user) => user.username === credential.name
-      );
-
-      if (!ispresent) {
-        const updatedArray = [
-          ...retrivelocalstorage,
-          {
-            username: credential.name,
-            image_url:credential.imgurl,
-            
-          },
-        ];
-        setretrivestorage(updatedArray);
-        localStorage.setItem("myArray", JSON.stringify(updatedArray));
-       alert("added user")
-       setcredential({
-        name:"",
-        imgurl:""
-       })
-       setadduser(false)
-
-      }else {
-        alert("alread present")
+    } else {
+      const retrievedData = localStorage.getItem("myArray");
+      let updatedArray = [];
+      
+      if (retrievedData) {
+        updatedArray = JSON.parse(retrievedData);
       }
-    
-}
-    
+      
+      updatedArray.push({
+        username: credential.name,
+        image_url: credential.imgurl,
+      });
+      
+      console.log(updatedArray);
+      setretrivestorage(updatedArray);
+      localStorage.setItem("myArray", JSON.stringify(updatedArray));
+      alert("added user");
+      setcredential({
+        name: "",
+        imgurl: ""
+      });
+      setadduser(false);
+    }
   };
+  
   const body = (
     <>
       <Input
