@@ -173,6 +173,13 @@ const ContestArchive = () => {
     },
   ];
 
+  function generateContestAnalysisURL(contestName) {
+    const contestNameSlug = contestName.replace(/\s+/g, '-').toLowerCase();
+  
+    const contestAnalysisURL = `/contest-analysis/${contestNameSlug}`;
+  
+    return contestAnalysisURL;
+  }
   
 
   return (
@@ -186,7 +193,6 @@ const ContestArchive = () => {
         {
           needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
         }
-
         {
           needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
         }
@@ -231,7 +237,7 @@ const ContestArchive = () => {
             <div className="one-type-visualization"></div>
           </div>
 
-          <EffectiveFilter>
+          <EffectiveFilter className='noselect'>
 						<div className="left"> 
               <div className="filter-item noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
                 {openModel1 == false ? <ExpandMoreIcon/> : <ExpandLessIcon/>} 
@@ -250,10 +256,10 @@ const ContestArchive = () => {
               </div>
 						</div>
 						<div className="right">
-              <div className="filter-item">A</div>
+              {/* <div className="filter-item">A</div>
               <div className="filter-item">B</div>
               <div className="filter-item">C</div>
-              <div className="filter-item">D</div>
+              <div className="filter-item">D</div> */}
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
@@ -275,16 +281,78 @@ const ContestArchive = () => {
           
 
           <div className="problems-table">
+            <div className="one-contest-problems">
+              <div className="contest-name">Dummy Contest 1</div>
+              <div className="contest-outlinks">
+                <a target='_blank' className="link">
+                  <CallMadeIcon/>
+                </a> 
+                <a target='_blank' className="link">
+                  <EqualizerIcon/>
+                </a>
+                <div className="link">
+                  <CreateIcon/>
+                </div>
+              </div>
+              <div className="contest-problem">
+                <div className="problem-main-name">
+                  <label>
+                    <input type="checkbox" />
+                    Problem Unsolved
+                  </label>
+                  <div className="problem-name">A. I am Dummy</div>
+                </div>
+                <div className="problem-info">
+                  <div className="tag">Problem Tags are Hidden</div>
+                </div>
+              </div>
+              <div className="contest-problem solved-problem">
+                <div className="problem-main-name">
+                  <label>
+                    <input type="checkbox" />
+                    Problem Unsolved
+                  </label>
+                  <div className="problem-name">B. I am Dummy</div>
+                </div>
+                <div className="problem-info">
+                  <div className="tag">Problem Tags are Hidden</div>
+                </div>
+              </div>
+              <div className="contest-problem">
+                <div className="problem-main-name">
+                  <label>
+                    <input type="checkbox" />
+                    Problem Unsolved
+                  </label>
+                  <div className="problem-name">C. I am Dummy</div>
+                </div>
+                <div className="problem-info">
+                  <div className="tag">Problem Tags are Hidden</div>
+                </div>
+              </div>
+              <div className="contest-problem">
+                <div className="problem-main-name">
+                  <label>
+                    <input type="checkbox" />
+                    Problem Unsolved
+                  </label>
+                  <div className="problem-name">D. I am Dummy</div>
+                </div>
+                <div className="problem-info">
+                  <div className="tag">Problem Tags are Hidden</div>
+                </div>
+              </div>
+            </div>
             {filteredContestData.map((contestData, index) => (
                 <div className="one-contest-problems" key={index}>
                   <div className="contest-name">{contestData.contest_name}</div>
                   <div className="contest-outlinks">
-                    <div className="link">
+                    <a href={contestData.contest_link} target='_blank' className="link">
                       <CallMadeIcon/>
-                    </div>
-                    <div className="link">
+                    </a> 
+                    <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
                       <EqualizerIcon/>
-                    </div>
+                    </a>
                     <div className="link">
                       <CreateIcon/>
                     </div>
@@ -310,7 +378,7 @@ const ContestArchive = () => {
                         </div>
                       ) : (
                         <div className="problem-info">
-                          <div className="tag">Tags are hidden</div>
+                          <div className="tag">Problem Tags are Hidden</div>
                         </div>
                       )
 
@@ -652,6 +720,10 @@ const Container = styled.div`
             }
 
 
+          }
+
+          .solved-problem{
+            background-color: #dcf8eb;
           }
         }
       }
