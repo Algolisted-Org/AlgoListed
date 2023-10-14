@@ -33,6 +33,7 @@ const Opportunities = () => {
                           Simply add the hashtag <b>#list_as_hiring_on_algolisted</b> to your LinkedIn post for it to be featured on this page.
                           </div> 
                       </div> 
+                      
                   </div>
                   <SimpleFooter></SimpleFooter>
                 </div>
