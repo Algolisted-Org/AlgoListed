@@ -2,26 +2,28 @@ import React, { useState,useEffect } from "react";
 import styled from "styled-components";
 import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
 
-function Tagsfilter({ tags,filterdata,setfilter }) {
+function Tagsfilter({ tags,filterdata,setfilter,data }) {
   const [expand, setexpand] = useState(false);
-   const [showAll, setShowAll] = useState(false);
+
    const [ischoose,setischoose]=useState([])
    console.log(ischoose)
+   
+  
    useEffect(()=>{
     const filteredData = filterdata.filter((item) => {
-        return item.tags.some((tag) => ischoose.includes(tag));
+        return ischoose.every((tag) => item.tags.includes(tag));
       });
       setfilter(filteredData)
-   
+      if(ischoose.length===0){
+        setfilter(data)
+       }
    },[ischoose])
    
   const onclicked = () => {
     setexpand((prev) => !prev);
-    setShowAll((prev) => !prev);
+ 
   };
-   const handleToggleShowAll = () => {
-    setShowAll((prev) => !prev);
-  };
+  
   const handletags=(each)=>{
     if (ischoose.includes(each)) {
         setischoose((prev) => prev.filter((tag) => tag !== each));
@@ -43,18 +45,14 @@ function Tagsfilter({ tags,filterdata,setfilter }) {
       </Tags>
       {expand && (
         <Menuexpand expanded={expand}>
-          {tags.slice(0, showAll ? tags.length : 5).map((each, index) => (
+          {tags.map((each, index) => (
             <MenuItem 
             key={index}
             isselected={ischoose.includes(each)}
             onClick={()=>handletags(each)}
             >{each}</MenuItem>
           ))}
-          {tags.length > 5 && (
-            <ShowMoreButton onClick={handleToggleShowAll}>
-              {showAll ? "Show Less" : "Show More"}
-            </ShowMoreButton>
-          )}
+          
         </Menuexpand>
       )}
     </Tagscompo>
@@ -91,7 +89,8 @@ const Menuexpand = styled.div`
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   width: 300px;
-  height: auto;
+  height: 250px;
+  overflow-y:auto;
   position: absolute;
   top: 60px;
   left: -3px;

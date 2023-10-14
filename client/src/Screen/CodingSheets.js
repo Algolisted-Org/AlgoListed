@@ -152,11 +152,7 @@ const CodingSheets = () => {
 		"circular-linked-list",
 		"Biconnected Component"
 	];
-useEffect(()=>{
-if(filteredData.length<1){
-	setFilteredData(data)
-}
-},[filteredData])
+
 	useEffect(() => {
 		// retrieve the data from the server
 		axios
@@ -756,7 +752,7 @@ if(filteredData.length<1){
 							<label htmlFor="hard">Hard</label>
 						</div>
 						<div className="right">
-							<Tagsfilter tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData}/>
+							<Tagsfilter data={data} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData}/>
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
@@ -768,7 +764,7 @@ if(filteredData.length<1){
 								<LinearProgress />
 							</>
 						) : (
-							filteredData.map((item, index) => {
+							filteredData.length===0?<h1>Not found</h1>:filteredData.map((item, index) => {
 								return (
 									<div
 										key={index}
