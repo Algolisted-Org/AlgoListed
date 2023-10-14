@@ -17,6 +17,9 @@ import NotesIcon from '@material-ui/icons/Notes';
 import CreateIcon from '@material-ui/icons/Create';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -24,6 +27,12 @@ const ContestArchive = () => {
   const [contestNumber, setContestNumber] = useState('361');
   const [needDarkMode, setNeedDarkMode] = useState(false);
   const [showTags, setShowTags] = useState(true);
+  const [filterContestType, setFilterContestType] = useState("All");
+  const [filterContestTypeName, setFilterContestTypeName] = useState("Both Contest Types");
+  const [openModel1, setOpenModel1] = useState(false);
+  const [openModel2, setOpenModel2] = useState(false);
+  const [sliderInputValue, setSliderInputValue] = useState(20);
+  const [filteredContestData, setFilteredContestData] = useState(contestsData);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
@@ -38,6 +47,23 @@ const ContestArchive = () => {
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
+
+  useEffect(() => {
+    console.log(filterContestType);
+  }, [filterContestType])
+
+  useEffect(() => {
+    const filteredData = contestsData.filter((contest) => {
+      if (filterContestType === 'All') {
+        return true; // Show all contests
+      } else {
+        return contest.contest_type === filterContestType;
+      }
+    }).slice(0, sliderInputValue);
+
+    setFilteredContestData(filteredData);
+  }, [filterContestType, sliderInputValue]);
+
 
   const filters = contestAnalysisFilters.map((item) => {
     return (
@@ -59,6 +85,95 @@ const ContestArchive = () => {
     const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
     window.location.href = url;
   };
+  
+  const marks = [
+    {
+      value: 0,
+      label: 'None',
+    },
+    {
+      value: 5,
+      label: '5',
+    },
+    {
+      value: 10,
+      label: '10',
+    },
+    {
+      value: 15,
+      label: '15',
+    },
+    {
+      value: 20,
+      label: '20',
+    },
+    {
+      value: 25,
+      label: '25',
+    },
+    {
+      value: 30,
+      label: '30',
+    },
+    {
+      value: 35,
+      label: '35',
+    },
+    {
+      value: 40,
+      label: '40',
+    },
+    {
+      value: 45,
+      label: '45',
+    },
+    {
+      value: 50,
+      label: '50',
+    },
+    {
+      value: 55,
+      label: '55',
+    },
+    {
+      value: 60,
+      label: '60',
+    },
+    {
+      value: 65,
+      label: '65',
+    },
+    {
+      value: 70,
+      label: '70',
+    },
+    {
+      value: 75,
+      label: '75',
+    },
+    {
+      value: 80,
+      label: '80',
+    },
+    {
+      value: 85,
+      label: '85',
+    },
+    {
+      value: 90,
+      label: '90',
+    },
+    {
+      value: 95,
+      label: '95',
+    },
+    {
+      value: 100,
+      label: '100',
+    },
+  ];
+
+  
 
   return (
     <GrandContainer>
@@ -117,12 +232,21 @@ const ContestArchive = () => {
           </div>
 
           <EffectiveFilter>
-						<div className="left">
-              <div className="filter-item">Both Contest Types
-                <ExpandMoreIcon/>
+						<div className="left"> 
+              <div className="filter-item noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
+                {openModel1 == false ? <ExpandMoreIcon/> : <ExpandLessIcon/>} 
+                {
+                  openModel1 ? (
+                    <ShowAbsoluteModelDropDown>
+                      <div className="option" onClick={() => {setFilterContestType("All"); setFilterContestTypeName("Both Contest Types")}}>Both Contest Types</div>
+                      <div className="option" onClick={() => {setFilterContestType("Weekly"); setFilterContestTypeName("Weekly Contests Only")}}>Weekly Contests Only</div>
+                      <div className="option" onClick={() => {setFilterContestType("Biweekly"); setFilterContestTypeName("Biweekly Contests Only")}}>Biweekly Contests Only</div>
+                    </ShowAbsoluteModelDropDown>
+                  ) : <></>
+                }
               </div>
-              <div className="filter-item">Last 15 Contests
-                <ExpandMoreIcon/>
+              <div className="filter-item" onClick={() => setOpenModel2(!openModel2)}>Last {sliderInputValue} Contests
+              {openModel2 == false ? <ExpandMoreIcon/> : <ExpandLessIcon/>} 
               </div>
 						</div>
 						<div className="right">
@@ -134,23 +258,39 @@ const ContestArchive = () => {
 							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
 					</EffectiveFilter>
+          {
+            openModel2 ? (
+              <SliderSelector>
+                <Slider onChange={(_, value) => setSliderInputValue(value)}
+                  defaultValue={20}
+                  aria-label="discrete-slider-custom"
+                  step={5}
+                  valueLabelDisplay="auto"
+                  marks={marks}
+                />
+              </SliderSelector>
+              ): 
+              <div></div>
+          }
+          
+
           <div className="problems-table">
-            {contestsData.map((contestData, index) => (
-              <div className="one-contest-problems" key={index}>
-                <div className="contest-name">{contestData.contest_name}</div>
-                <div className="contest-outlinks">
-                  <div className="link">
-                    <CallMadeIcon/>
+            {filteredContestData.map((contestData, index) => (
+                <div className="one-contest-problems" key={index}>
+                  <div className="contest-name">{contestData.contest_name}</div>
+                  <div className="contest-outlinks">
+                    <div className="link">
+                      <CallMadeIcon/>
+                    </div>
+                    <div className="link">
+                      <EqualizerIcon/>
+                    </div>
+                    <div className="link">
+                      <CreateIcon/>
+                    </div>
                   </div>
-                  <div className="link">
-                    <EqualizerIcon/>
-                  </div>
-                  <div className="link">
-                    <CreateIcon/>
-                  </div>
-                </div>
-                {Object.values(contestData.problems).map((problem, problemIndex) => (
-                  <div className="contest-problem" key={problemIndex}>
+                  {Object.values(contestData.problems).map((problem, problemIndex) => (
+                    <div className="contest-problem" key={problemIndex}>
                     <div className="problem-main-name">
                       <label>
                         <input type="checkbox" />
@@ -158,17 +298,27 @@ const ContestArchive = () => {
                       </label>
                       <div className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</div>
                     </div>
-                    <div className="problem-info">
-                      <div className="tag difficulty-tag">{problem.difficulty}</div>
-                      {problem.tags.map((tag, tagIndex) => (
-                        <div className="tag" key={tagIndex}>
-                          {tag}
+                    {
+                      showTags ? (
+                        <div className="problem-info">
+                          <div className="tag difficulty-tag">{problem.difficulty}</div>
+                          {problem.tags.map((tag, tagIndex) => (
+                            <div className="tag" key={tagIndex}>
+                              {tag}
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      ) : (
+                        <div className="problem-info">
+                          <div className="tag">Tags are hidden</div>
+                        </div>
+                      )
+
+                    }
+                    
                   </div>
-                ))}
-              </div>
+                  ))}
+                </div>
             ))}
           </div>
         </div>
@@ -180,7 +330,15 @@ const ContestArchive = () => {
 export default ContestArchive;
 
 const GrandContainer = styled.div`
-
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+  }
 `
 
 const MobContainer = styled.div`
@@ -311,7 +469,7 @@ const Container = styled.div`
         width: 100%;
         background-color: #ffffff;
         border-radius: 20px;
-        margin: 50px 0 10px 0;
+        margin: 50px 0 20px 0;
         border: 1px solid rgb(209, 213, 219);
         display: flex;
 
@@ -362,11 +520,9 @@ const Container = styled.div`
       }
 
       .problems-table{
-        min-height: 2500px;
         width: 100%;
-        /* background-color: cornflowerblue; */
         border-radius: 20px;
-        margin-top: 30px;
+        margin-top: 60px;
 
         .one-contest-problems{
           position: relative;
@@ -684,6 +840,8 @@ const EffectiveFilter = styled.div`
 			margin-right: 5px;
 			cursor: pointer;
 
+      position: relative;
+
       display: flex;
       align-items: center;
 
@@ -707,4 +865,64 @@ const EffectiveFilter = styled.div`
 			cursor: pointer;
 		}
 	}
+`
+
+const ShowAbsoluteModelDropDown = styled.div`
+  position: absolute;
+  max-height: 200px;
+  min-height: 30px;
+  width: 200px;
+  background-color: #ffffff;
+  border: 1px solid #d0d5db;
+  border-radius: 5px;
+  top: 35px;
+  left: -5px;
+  z-index: 10;
+  overflow-y: scroll;
+  cursor: default;
+
+  /* -webkit-box-shadow: 0px 0px 60px 0px rgba(219,212,219,1);
+  -moz-box-shadow: 0px 0px 60px 0px rgba(219,212,219,1);
+  box-shadow: 0px 0px 60px 0px rgba(219,212,219,1); */
+    
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  display: flex;
+  flex-direction: column;
+
+  .option{
+    height: 40px;
+    border-bottom: 1px solid #d0d5db;
+    display: grid;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+
+    &:hover{
+      background-color: #e5e5e5;
+      cursor: pointer;
+      transition-duration: 250ms;
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+`
+
+const SliderSelector = styled.div`
+  height: 80px;
+  width: 100%;
+  /* background-color: pink; */
+  border-radius: 10px;
+
+  span{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 0.65rem;
+  }
+
+  /* padding: 10px 50px; */
 `
