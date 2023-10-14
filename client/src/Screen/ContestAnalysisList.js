@@ -20,6 +20,10 @@ const ContestAnalysisList = () => {
   const [needDarkMode, setNeedDarkMode] = useState(false);
 
   useEffect(() => {
+    document.title = "Contest Analysis - Algolisted";
+  }, []);
+
+  useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if(selectedTheme === 'dark') setNeedDarkMode(true);
   }, [])

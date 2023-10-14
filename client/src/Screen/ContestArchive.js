@@ -30,6 +30,10 @@ const ContestArchive = () => {
     if (selectedTheme === 'dark') setNeedDarkMode(true);
   }, [])
 
+  useEffect(() => {
+    document.title = "Contest Archive - Algolisted";
+  }, []);
+
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
