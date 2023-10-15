@@ -20,6 +20,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -291,7 +292,7 @@ const ContestArchive = () => {
                   <EqualizerIcon/>
                 </a>
                 <div className="link">
-                  <CreateIcon/>
+                  <PostAddIcon/>
                 </div>
               </div>
               <div className="contest-problem">
@@ -354,7 +355,7 @@ const ContestArchive = () => {
                       <EqualizerIcon/>
                     </a>
                     <div className="link">
-                      <CreateIcon/>
+                      <PostAddIcon/>
                     </div>
                   </div>
                   {Object.values(contestData.problems).map((problem, problemIndex) => (

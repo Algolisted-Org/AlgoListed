@@ -6,6 +6,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import SimpleFooter from "../Components/SimpleFooter";
 import CallMadeIcon from '@material-ui/icons/CallMade';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 
 const Opportunities = () => {
     useEffect(() => {
