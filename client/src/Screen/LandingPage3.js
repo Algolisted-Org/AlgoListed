@@ -314,7 +314,7 @@ const LandingPage3 = () => {
         </div>
         <div className="page-4">
           {/* <img className='background' src="https://cutewallpaper.org/24/water-transparent-gif/source-files-gifs-get-the-best-gif-on-giphy.gif" draggable="false" alt="" /> */}
-          <img className='background' src="https://cutewallpaper.org/24/3d-gif-transparent/top-gif-xxx-3-d-stickers-for-android-amp-ios-gfycat.gif" draggable="false" alt="" />
+          {/* <img className='background' src="https://cutewallpaper.org/24/3d-gif-transparent/top-gif-xxx-3-d-stickers-for-android-amp-ios-gfycat.gif" draggable="false" alt="" /> */}
 
           <div className="feature-header">
             <div className="line"></div>

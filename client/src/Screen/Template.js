@@ -6,6 +6,22 @@ import LeftMenu from '../Components/LeftMenu'
 import LeftMenuDark from '../Components/LeftMenuDark'
 
 const Template = () => {
+    const [needDarkMode, setNeedDarkMode] = useState(false);
+    
+    useEffect(() => {
+      let selectedTheme = localStorage.getItem("selectedTheme");
+      if (selectedTheme === 'dark') setNeedDarkMode(true);
+    }, []);
+  
+    useEffect(() => {
+      document.title = "Template Page - Algolisted";
+    }, []);
+  
+    console.log("needDarkMode : ", needDarkMode);
+    const toggleDarkMode = () => {
+      setNeedDarkMode(!needDarkMode);
+    };
+
     return ( 
         <GrandContainer>
             <MobContainer>
@@ -15,10 +31,10 @@ const Template = () => {
             </MobContainer>
             <Container>
                 {
-                  selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+                    needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
                 }
-                { 
-                  selectedTheme == "dark" ? <LeftMenuDark marked={"all-blogs"} /> : <LeftMenu marked={"all-blogs"} />
+                {
+                    needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
                 }
                 {/* ---> change this all-blogs to your desired page-id */}
 
