@@ -20,6 +20,8 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import { useLocalStorage } from "@uidotdev/usehooks";
+
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -33,6 +35,10 @@ const ContestArchive = () => {
   const [openModel2, setOpenModel2] = useState(false);
   const [sliderInputValue, setSliderInputValue] = useState(20);
   const [filteredContestData, setFilteredContestData] = useState(contestsData);
+  const [checkbox1, setCheckbox1] = useLocalStorage("checkbox1",false);
+  const [checkbox2, setCheckbox2] = useLocalStorage("checkbox2",false);
+  const [checkbox3, setCheckbox3] = useLocalStorage("checkbox3",false);
+  const [checkbox4, setCheckbox4] = useLocalStorage("checkbox4",false);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
@@ -81,6 +87,27 @@ const ContestArchive = () => {
     );
   });
 
+  const onClick1 = (e) => {
+    setCheckbox1(e.target.checked)
+  }
+  const onClick2 = (e) => {
+
+    setCheckbox2(e.target.checked)
+  }
+  const onClick3 = (e) => {
+    setCheckbox3(e.target.checked)
+  }
+  const onClick4 = (e) => {
+    setCheckbox4(e.target.checked)
+  }
+  
+  useEffect(()=>{
+    window.localStorage.setItem("CheckBox1",JSON.stringify(checkbox1));
+    window.localStorage.setItem("CheckBox2",JSON.stringify(checkbox2));
+    window.localStorage.setItem("CheckBox3",JSON.stringify(checkbox3));
+    window.localStorage.setItem("CheckBox4",JSON.stringify(checkbox4));
+  },[checkbox1,checkbox2,checkbox3,checkbox4])
+  
   const redirectToContest = () => {
     const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
     window.location.href = url;
@@ -294,10 +321,10 @@ const ContestArchive = () => {
                   <CreateIcon />
                 </div>
               </div>
-              <div className="contest-problem">
+              <div className={`contest-problem  ${checkbox1 && "solved-problem"}`}>
                 <div className="problem-main-name">
                   <label>
-                    <input type="checkbox" />
+                    <input type="checkbox" value= {checkbox1} onChange={onClick1} checked={checkbox1}/>
                     Problem Unsolved
                   </label>
                   <div className="problem-name">A. I am Dummy</div>
@@ -306,10 +333,10 @@ const ContestArchive = () => {
                   <div className="tag">Problem Tags are Hidden</div>
                 </div>
               </div>
-              <div className="contest-problem solved-problem">
+              <div className={`contest-problem  ${checkbox2 && "solved-problem"}`}>
                 <div className="problem-main-name">
                   <label>
-                    <input type="checkbox" />
+                    <input type="checkbox" value= {checkbox2} onChange={onClick2} checked={checkbox2}/>
                     Problem Unsolved
                   </label>
                   <div className="problem-name">B. I am Dummy</div>
@@ -318,10 +345,10 @@ const ContestArchive = () => {
                   <div className="tag">Problem Tags are Hidden</div>
                 </div>
               </div>
-              <div className="contest-problem">
+              <div className={`contest-problem  ${checkbox3 && "solved-problem"}`}>
                 <div className="problem-main-name">
                   <label>
-                    <input type="checkbox" />
+                    <input type="checkbox"value= {checkbox3} onChange={onClick3} checked={checkbox3}/>
                     Problem Unsolved
                   </label>
                   <div className="problem-name">C. I am Dummy</div>
@@ -330,10 +357,10 @@ const ContestArchive = () => {
                   <div className="tag">Problem Tags are Hidden</div>
                 </div>
               </div>
-              <div className="contest-problem">
+              <div className={`contest-problem  ${checkbox4 && "solved-problem"}`}>
                 <div className="problem-main-name">
                   <label>
-                    <input type="checkbox" />
+                    <input type="checkbox" value= {checkbox4} onChange={onClick4} checked={checkbox4}/>
                     Problem Unsolved
                   </label>
                   <div className="problem-name">D. I am Dummy</div>
