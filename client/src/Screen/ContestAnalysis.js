@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { json, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CCHeader from '../Components/CCHeader';
@@ -14,6 +14,10 @@ import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 import AdduserModal from '../MicroComponents/Allmodals/AddfriendModal';
+import * as calcA from '../Components/DummyPredictRatingforLC/calcA'
+import * as calcB from '../Components/DummyPredictRatingforLC/calcA'
+import * as calcC from '../Components/DummyPredictRatingforLC/calcA'
+import * as calcD from '../Components/DummyPredictRatingforLC/calcA'
 
 const ContestAnalysis = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -32,30 +36,44 @@ const ContestAnalysis = () => {
   const [problemLabels, setProblemLabels] = useState([]);
   const [addUser, setadduser] = useState(false)
   const [Allcountries, setcounteries] = useState([])
-  const [retrivelocalstorage, setretrivestorage] = useState([])
+  const [retrivelocalstorage, setretrivestorage] = useState([]);
+
+  const [SessionUserCountChange, setSessionUserCountChange] = useState(0)
   const { contestName } = useParams();
 
-  console.log(Allcountries)
-  const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
   useEffect(() => {
-    const storedArray = localStorage.getItem('myArray');
+      document.title = "Contest Analysis - Algolisted";
+  }, []);
+  
+  // console.log(calcA.calculateValue(5000));
+  // console.log(calcB.calculateValue(5000));
+  // console.log(calcC.calculateValue(5000));
+  // console.log(calcD.calculateValue(5000));
 
-    if (storedArray) {
-      setretrivestorage(JSON.parse(storedArray));
-    }
-  }, [retrivelocalstorage])
+  // console.log(Allcountries);
+  const lineGraphColours = ['rgb(149, 164, 252)', 'rgb(90, 176, 150)', 'rgb(223, 207, 121)', 'rgb(236, 159, 154)']
+  
   const removeuser = (username) => {
     const updatedArray = retrivelocalstorage.filter((eachuser) => eachuser.username !== username);
     localStorage.setItem("myArray", JSON.stringify(updatedArray));
+    setSessionUserCountChange(SessionUserCountChange - 1);
   }
-  console.log(retrivelocalstorage)
+  // console.log(retrivelocalstorage);
+
+  useEffect(()=>{
+    const storedArray = localStorage.getItem('myArray');
+    const parsedArray = JSON.parse(storedArray);
+    
+    setretrivestorage(parsedArray);
+  },[SessionUserCountChange])
+
   useEffect(() => {
     axios
       .get(`https://nayak-leetcode-api.vercel.app/?weekly_contest=${contestName}`)
       // .get(`https://nayak-leetcode-api.vercel.app/?weekly_contest=weekly-contest-352`)
       .then((res) => {
         setWholeLeetcodeData(res.data);
-        console.log(res.data);
+        // console.log(res.data);
         const questionData = res.data.questions || [];
         setcounteries(res.data.rank_by_country["All Countries"])
         setQuestions(questionData);
@@ -162,7 +180,9 @@ const ContestAnalysis = () => {
       <div
         key={item.id}
         className={
-          item.domainFilter === platformName ? 'filter selected' : 'filter'
+          item.domainFilter === platformName ? 'filter selected' : (
+            item.lock === true ? 'locked-feature filter' : 'filter'
+          )
         }
       >
         {item.text}
@@ -204,7 +224,7 @@ const ContestAnalysis = () => {
     },
   };
 
-  // Render the bar graphs for each problem's fail count
+  
   const barGraphs = barData.map((data, index) => (
     <div key={index} className='problem'>
       <div className="problem-title">Problem {IdToProblem[questions[index].question_id]} : <br /> <i>{questions[index].title}</i></div>
@@ -264,7 +284,7 @@ const ContestAnalysis = () => {
   useEffect(() => {
     if (wholeLeetcodeData != null) {
       const rankByCountry = wholeLeetcodeData.rank_by_country;
-      setCountryOptions(['all countries', ...Object.keys(rankByCountry)]);
+      setCountryOptions([...Object.keys(rankByCountry)]);
 
       let filteredRankings = [];
 
@@ -285,16 +305,14 @@ const ContestAnalysis = () => {
     }
   }, [wholeLeetcodeData, selectedCountry, searchUsername]);
 
-
-
   const predictRating = () => {
     const url = `https://nayak-leetcode-api.vercel.app/?username=${username}`;
 
     axios.get(url)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setPrediction(res.data[0]);
-        console.log(prediction);
+        // console.log(prediction);
       })
       .catch((error) => {
         // Handle errors here
@@ -333,10 +351,10 @@ const ContestAnalysis = () => {
           </div>
           <Filters>{filters}</Filters>
           <CleanLine />
-          <Filters2>
-            <div className="filter selected">Contests Analysis</div>
-            <div className="filter">Contests Archive</div>
-          </Filters2>
+          {/* <Filters2>
+            <a href='' className="filter selected">Contests Analysis</a>
+            <a href='/contests-archive'  className="filter">Contests Archive</a>
+          </Filters2> */}
 
           <div className="contest-btns">
             <a href='/contest-analysis' className="back-btn">
@@ -345,12 +363,15 @@ const ContestAnalysis = () => {
             <div className="main-display">{handleAnalysisName()}</div>
           </div>
           <div className="feature-title">1. Question Finished Count</div>
-          <div className="line-chart">
-            {
-              showVisuals ? (<LineChart chartData={chartData} options={chartOptions} />) : (<LinearProgress />)
-            }
-          </div>
+          {
+            showVisuals ? (
+              <div className="line-chart">
+                <LineChart chartData={chartData} options={chartOptions} />
+              </div>
+            ) : (<LinearProgress />)
+          }
           <div className="feature-title">2. Problem Stats</div>
+
           {
             showVisuals ? (
               <div className="problems">
@@ -360,9 +381,9 @@ const ContestAnalysis = () => {
           }
 
           <div className="feature-title">3. Country-wise Rank</div>
-          <div className="country-wise-rank">
-            {
-              countryOptions.length > 1 ?
+          {
+            countryOptions.length > 1 ?
+              <div className="country-wise-rank">
                 <div>
                   <div className='rank-inputs'>
                     <div>
@@ -397,7 +418,7 @@ const ContestAnalysis = () => {
                     <ul className='list-of-rankings'>
                       {rankings.map((ranking, index) => (
                         <li className='ranking' key={index}>
-                          <a href={`https://leetcode.com/${ranking.username}`}>{ranking.username}</a>
+                          <div><a href={`https://leetcode.com/${ranking.username}`}>{ranking.username}</a></div>
                           <div>{ranking.country_name}</div>
                           <div>{ranking.country_rank}</div>
                           <div>{ranking.realrank}</div>
@@ -405,156 +426,108 @@ const ContestAnalysis = () => {
                       ))}
                     </ul>
                   </div>
-                </div> : <LinearProgress />
-            }
-            <div className="info">
-              <InfoIcon />
-              <div className="text">
-                If your username doesn't align with your country, it could be because you haven't specified your country in your LeetCode account settings.
-                Visit the following URL: <a href="https://leetcode.com/profile/" target='_blank'>https://leetcode.com/profile/</a> and update your location information.
-              </div>
-            </div>
-            <div className="pinned-users">
-              <h4>Pinned Friend's Rankings</h4>
-              <div className="collection">
-                <div className="add-btn" onClick={() => setadduser(true)}>
-                  <AddIcon />
                 </div>
-                {retrivelocalstorage.length > 0 ?
-                  retrivelocalstorage.map((eachuser, index) => (
-                    <div className="friend">
-                      <img className="profile-pic" src={eachuser.image_url ? eachuser.image_url : "https://i.scdn.co/image/ab6761610000e5eb056f821a5186892979410deb"} alt="" />
-                      <div className="user-data">
-                        <a href={`https://leetcode.com/${eachuser.username}/`} className="username">
-                          {eachuser.username}
-                        </a>
-                        <div className="global-rank">
-                          Global Rank : <b>#{eachuser.global_rank}</b> and Solved : <b>{eachuser.solved}</b>
+                <div className="info">
+                  <InfoIcon />
+                  <div className="text">
+                    If your username doesn't align with your country, it could be because you haven't specified your country in your LeetCode account settings.
+                    Visit the following URL: <a href="https://leetcode.com/profile/" target='_blank'>https://leetcode.com/profile/</a> and update your location information.
+                  </div>
+                </div>
+                <div className="pinned-users">
+                  <h4>Pinned Friend's Rankings</h4>
+                  <div className="collection">
+                    <div className="add-btn" onClick={() => {  setadduser(true); setSessionUserCountChange(SessionUserCountChange + 1);}}>
+                      <AddIcon />
+                    </div>
+                    {retrivelocalstorage != null ?
+                      retrivelocalstorage.map((eachuser, index) => {
+                        const userExists = Allcountries.find(user => user.username === eachuser.username);
+                         if(userExists){
+                          return(
+                            <div className="friend">
+                          <img className="profile-pic" src={eachuser.image_url ? eachuser.image_url : "https://i.scdn.co/image/ab6761610000e5eb056f821a5186892979410deb"} alt="" />
+                          <div className="user-data">
+                            <a href={`https://leetcode.com/${eachuser.username}/`} className="username">
+                              {eachuser.username}
+                            </a>
+                            <div className="global-rank">
+                             
+                              Global Rank : <b>#{userExists.realrank}</b>
+                            </div>
+                          </div>
+                          <div className="clear-btn" onClick={() => {removeuser(eachuser.username)}}>
+                            <ClearIcon />
+                          </div>
                         </div>
-                      </div>
-                      <div className="clear-btn" onClick={() => removeuser(eachuser.username)}>
-                        <ClearIcon />
-                      </div>
-                    </div>
-
-                  ))
-                  : <h1 className="warning">You have Not added any friend yet</h1>
-                }
-                <a href='https://leetcode.com/penguinhacker/' className="friend">
-                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                  <div className="user-data">
-                    <div className="username">
-                      @penguinhacker
-                    </div>
-                    <div className="global-rank">
-                      <i>Did not Attempt</i>
-                    </div>
+                      )}else{
+                        return(
+                          <div  className="friend">
+                          <img className="profile-pic" src={eachuser.image_url ? eachuser.image_url : "https://i.scdn.co/image/ab6761610000e5eb056f821a5186892979410deb"} alt="" />
+                          <div className="user-data">
+                            <a href={`https://leetcode.com/${eachuser.username}/`}className="username">
+                            {eachuser.username}
+                            </a>
+                            <div className="global-rank">
+                              <i>Did not Attempt</i>
+                            </div>
+                          </div>
+                          <div className="clear-btn" onClick={() => removeuser(eachuser.username)}>
+                            <ClearIcon />
+                          </div>
+                        </div>
+                        )
+                    }
+                         })
+                      : <h1 className="warning">You have Not added any friend yet</h1>
+                    }
+                    {/* {console.log(retrivelocalstorage)} */}
+                    {/* {showVisuals ?
+                      <h1>Hello World</h1>
+                      : <h1 className="warning">You have Not added any friend yet</h1>
+                    } */}
                   </div>
-                  <div className="clear-btn">
-                    <ClearIcon />
-                  </div>
-                </a>
-                <a href='https://leetcode.com/penguinhacker/' className="friend">
-                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                  <div className="user-data">
-                    <div className="username">
-                      @penguinhacker
-                    </div>
-                    <div className="global-rank">
-                      <i>Did not Attempt</i>
-                    </div>
-                  </div>
-                  <div className="clear-btn">
-                    <ClearIcon />
-                  </div>
-                </a>
-                <a href='https://leetcode.com/penguinhacker/' className="friend">
-                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                  <div className="user-data">
-                    <div className="username">
-                      @penguinhacker
-                    </div>
-                    <div className="global-rank">
-                      <i>Did not Attempt</i>
-                    </div>
-                  </div>
-                  <div className="clear-btn">
-                    <ClearIcon />
-                  </div>
-                </a>
-                <a href='https://leetcode.com/penguinhacker/' className="friend">
-                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                  <div className="user-data">
-                    <div className="username">
-                      @penguinhacker
-                    </div>
-                    <div className="global-rank">
-                      <i>Did not Attempt</i>
-                    </div>
-                  </div>
-                  <div className="clear-btn">
-                    <ClearIcon />
-                  </div>
-                </a>
-                <a href='https://leetcode.com/penguinhacker/' className="friend">
-                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                  <div className="user-data">
-                    <div className="username">
-                      @penguinhacker
-                    </div>
-                    <div className="global-rank">
-                      <i>Did not Attempt</i>
-                    </div>
-                  </div>
-                  <div className="clear-btn">
-                    <ClearIcon />
-                  </div>
-                </a>
-                <a href='https://leetcode.com/penguinhacker/' className="friend">
-                  <img className="profile-pic" src="https://i.pinimg.com/736x/b5/fb/79/b5fb794842929d0f1e709a1829116d81.jpg" alt="" />
-                  <div className="user-data">
-                    <div className="username">
-                      @penguinhacker
-                    </div>
-                    <div className="global-rank">
-                      <i>Did not Attempt</i>
-                    </div>
-                  </div>
-                  <div className="clear-btn">
-                    <ClearIcon />
-                  </div>
-                </a>
+                </div>
               </div>
-            </div>
-          </div>
+              :
+              (<LinearProgress />)
+          }
 
           <div className="feature-title">4. Predict Rating Change</div>
           <div className='predict-rating'>
-            <input
-              className='input'
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder='Enter your username'
-            />
-            <button
-              className='search-btn'
-              onClick={() => predictRating()}>
-              Predict
-            </button>
-            <div
-              className='virtual-btn'>
-              Virtual contest ?
-            </div>
-            {
-              prediction != null ? <div>
-                <p>delta_rating : {prediction.delta_rating}</p>
-                <p>old_rating : {prediction.old_rating}</p>
-                <p>new_rating : {prediction.new_rating}</p>
-              </div> : <></>
-            }
+            <div className='predict-rating-form'>
+              <input
+                className='input'
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder='Enter your username'
+              />
+              <button
+                className='search-btn'
+                onClick={() => predictRating()}>
+                Predict
+              </button>
+              <div className='virtual-btn'>
+                {/* Virtual contest ? */}
+              </div>
+              {
+                prediction != null ? <div>
+                  <p>delta_rating : {prediction.delta_rating}</p>
+                  <p>old_rating : {prediction.old_rating}</p>
+                  <p>new_rating : {prediction.new_rating}</p>
+                </div> : <></>
+              }
           </div>
-        </div>
+          <div className="info">
+            <InfoIcon />
+            <div className="text">
+              Because the machine learning model is resource-intensive, it takes some time to initialize its weights. {" "}
+              <b>Consequently, this feature may not function properly within the first 30 minutes of the contest.</b>
+            </div>
+          </div>
+          </div>
+      </div>
 
 
 
@@ -586,7 +559,7 @@ const MobContainer = styled.div`
   @media only screen and (min-width: 1099px){
     display: none;
   }
-`
+`;
 
 const Container = styled.div`
     @media only screen and (max-width: 1099px){
@@ -600,6 +573,8 @@ const Container = styled.div`
     a{
       color: #18489f;
     }
+
+    
 
     .cc-middle-content{
       min-height: 100vh;
@@ -727,6 +702,8 @@ const Container = styled.div`
           .collection{
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
+            
             h1{
               margin-top:10px;
               margin-left:15px;
@@ -814,18 +791,46 @@ const Container = styled.div`
       }
 
       .predict-rating{
-        width: 100%;
-        /* border: 1px solid black; */
         margin-left: 20px;
-        display: flex;
-        justify-content: space-between;
+        width: 100%;
+        
+        .predict-rating-form{
+          width: 100%;
+          /* border: 1px solid black; */
+          display: flex;
+          justify-content: space-between;
 
-        input{
-          margin: 0;
-          width: auto;
-          flex: 1;
+          input{
+            margin: 0;
+            width: auto;
+            flex: 1;
+          }
         }
+
+
+        .info{
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+  
+            svg{
+              margin-right: 10px;
+              fill: #333;
+            }
+  
+            .text{
+              font-size: 0.8rem;
+              font-weight: 200;
+              line-height: 1.15rem;
+            }
+
+            b{
+              font-weight: 500;
+            }
+            
+          }
       }
+
 
       .rank-inputs {
         width: 100%;
@@ -959,6 +964,7 @@ const Container = styled.div`
                 padding: 5px 10px;
                 border: 1px solid #b9afaf;
                 border-radius: 8px;
+                height: 36px;
               }
             }
           }
@@ -1027,6 +1033,8 @@ const Container = styled.div`
 
             a{
               font-size: 0.85rem;
+              width: auto;
+              display: inline-block;
             }
 
             &:hover {
@@ -1038,7 +1046,7 @@ const Container = styled.div`
         }
       }
     }
-`
+`;
 
 const Filters = styled.div`
 	display: flex;
@@ -1071,6 +1079,13 @@ const Filters = styled.div`
 		}
 	}
 
+  .locked-feature{
+    &:hover{
+      background-color: #f1f1f1;
+      color: #333;
+    }
+  }
+
 	.selected {
 		/* background-color: #ded7d7;
     color: #111; */
@@ -1078,8 +1093,6 @@ const Filters = styled.div`
 		background-color: #201f1f;
 		color: #ebdddd;
 	}
-
-  
 
 	@media only screen and (max-width: 1100px) {
 		margin: 10px 0 10px 0;
@@ -1106,7 +1119,7 @@ const CleanLine = styled.div`
   height: 1px;
   width: 100%;
   background-color: grey;
-`
+`;
 
 const Filters2 = styled.div`
 	display: flex;

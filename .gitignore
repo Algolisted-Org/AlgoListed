@@ -9,7 +9,7 @@ client/.firebaserc
 .firebase
 .firebaserc
 build
-Images
 flask_backend
 flask_backend/.
 .DS_Store
+.env

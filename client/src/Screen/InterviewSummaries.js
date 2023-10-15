@@ -1,8 +1,10 @@
 // InterviewSummaries
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import CCHeader from '../Components/CCHeader'
+import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus'
+import CCHeaderPlus from '../Components/CCHeaderPlus'
 import LeftMenu from '../Components/LeftMenu'
+import LeftMenuDark from '../Components/LeftMenuDark'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import allBlogsDatabase from "../Components/allBlogsDatabase.json"
@@ -15,6 +17,14 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const InterviewSummaries = () => {
   const [showFilters, setShowFilters] = useState(false);
+  // ----- FOR DARK MODE -----
+	const [needDarkMode, setNeedDarkMode] = useState(false);
+	let selectedTheme = localStorage.getItem("selectedTheme");
+	console.log("needDarkMode : ", needDarkMode);
+	const toggleDarkMode = () => {
+		setNeedDarkMode(!needDarkMode);
+	};
+	// ----- FOR DARK MODE -----
 
   useEffect(() => {
     document.title = "Interview Summaries - Algolisted";
@@ -28,8 +38,12 @@ const InterviewSummaries = () => {
         <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
       </MobContainer>
       <Container>
-        <CCHeader />
-        <LeftMenu marked={"interview-summaries"} />
+        {
+					selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+				}
+				{ 
+					selectedTheme == "dark" ? <LeftMenuDark marked={"interview-summaries"} /> : <LeftMenu marked={"interview-summaries"} />
+				}
         <div className="cc-middle-content">
           <h1 className='main-heading'>AI Summarization of Interviews <div className="head-tag">Under Development Phase 0.65-C</div> </h1>
           <p className="heading-supporter">

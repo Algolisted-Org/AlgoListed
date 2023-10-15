@@ -127,19 +127,18 @@ const LandingPage2 = () => {
                         Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
                     </div>
                   </Fade>
-                  
               </div>
-            <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
-            <h1 className="sub-page-head">Our Contributors</h1>
-            <div className="hold-contributors">
-              {
-                contributorsList != null && contributorsList.map((item, index) => {
-                  return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
-                    <img src={item.avatar_url} alt="" />
-                  </a>
-                })
-              }
-            </div>
+              <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
+              <h1 className="sub-page-head">Our Contributors</h1>
+              <div className="hold-contributors">
+                {
+                  contributorsList != null && contributorsList.map((item, index) => {
+                    return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                      <img src={item.avatar_url} alt="" />
+                    </a>
+                  })
+                }
+              </div>
             </div>
             <PageThreeFooter>
               <div className="top">
@@ -252,10 +251,9 @@ const LandingPage2 = () => {
             <Fade left>
               <div className="learn">
                 <Link to='content' spy={true} smooth={true} offset={700} duration={1000}>
-              <div className="btn">Learn More</div>
-              </Link>
+                  <div className="btn">Learn More</div>
+                </Link>
               </div>
-              
             </Fade>
             </div>
             {/* <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/CharmingMilkyHamster-size_restricted.gif" alt="" /></div> */}
@@ -416,6 +414,7 @@ const GrandContainer = styled.div`
   width: 100vw;
   overflow: hidden;
 
+  
   .btn{
     border: 1px solid #c2b1b1;
     color: white;
