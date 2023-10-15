@@ -20,7 +20,7 @@ const InterviewSummaries = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedMainTopic, setSelectedMainTopic] = useState(null);
   const [clickedButton, setClickedButton] = useState(null);
-  const [graphButton,setGraphButton]=useState(false);
+  const [graphButton, setGraphButton] = useState(false);
 
   // ----- FOR DARK MODE -----
   const [needDarkMode, setNeedDarkMode] = useState(false);
@@ -40,12 +40,12 @@ const InterviewSummaries = () => {
     setGraphButton(false);
     // alert(`${mainTopic} is clicked}`);
   };
-  const handleGraphClick=(subtopic)=>{
-    setGraphButton((prev)=>({
+  const handleGraphClick = (subtopic) => {
+    setGraphButton((prev) => ({
       ...prev,
-      [subtopic]:!prev[subtopic]
-    }))
-  }
+      [subtopic]: !prev[subtopic],
+    }));
+  };
 
   return (
     <GrandContainer>
@@ -134,19 +134,26 @@ const InterviewSummaries = () => {
                     {Object.keys(data[selectedMainTopic]).map((subtopic) => (
                       <>
                         <li key={subtopic}>
-                          {subtopic} <button key={subtopic} onClick={()=>handleGraphClick(subtopic)}>
-                          {
-                            graphButton[subtopic] ?(
-                              <ExpandLessIcon/>
-                            ):(
-                              <ExpandMoreIcon/>
-                            )
-                          }
-
+                          {subtopic}{" "}
+                          <button
+                            key={subtopic}
+                            onClick={() => handleGraphClick(subtopic)}
+                          >
+                            {graphButton[subtopic] ? (
+                              <ExpandLessIcon />
+                            ) : (
+                              <ExpandMoreIcon />
+                            )}
                           </button>
                         </li>
-                          {graphButton[subtopic] && <Interviewgraph/>}
-                        
+                        {graphButton[subtopic] && (
+                          <Interviewgraph
+                            companies={
+                              data[selectedMainTopic][subtopic]
+                            }
+                            subtopic={subtopic}
+                          />
+                        )}
                       </>
                     ))}
                   </ul>
@@ -301,9 +308,9 @@ const Container = styled.div`
               padding: 15px;
               width: 100%;
             }
-            button{
+            button {
               background-color: #fff;
-              border:none;
+              border: none;
             }
           }
         }
