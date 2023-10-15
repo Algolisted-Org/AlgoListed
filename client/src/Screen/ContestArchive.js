@@ -28,7 +28,7 @@ const ContestArchive = () => {
   const [contestType, setContestType] = useState('Weekly Contest');
   const [contestNumber, setContestNumber] = useState('361');
   const [needDarkMode, setNeedDarkMode] = useState(false);
-  const [showTags, setShowTags] = useState(true);
+  const [showTags, setShowTags] = useLocalStorage("showTags",true);
   const [filterContestType, setFilterContestType] = useState("All");
   const [filterContestTypeName, setFilterContestTypeName] = useState("Both Contest Types");
   const [openModel1, setOpenModel1] = useState(false);
@@ -287,7 +287,7 @@ const ContestArchive = () => {
               <div className="filter-item">B</div>
               <div className="filter-item">C</div>
               <div className="filter-item">D</div> */}
-              <div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+              <div className="filter-item" onClick={()=>{setShowTags(!showTags); }}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
               {/* <div className="filter-item">Show Unsolved</div>  */}
             </div>
           </EffectiveFilter>

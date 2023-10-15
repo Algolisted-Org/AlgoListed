@@ -21,17 +21,14 @@ import OnlineAssessment from './Screen/OnlineAssessment';
 import ContestAnalysis from './Screen/ContestAnalysis';
 import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
-<<<<<<< HEAD
-import ShowdownServer from './firebase-db/ShowdownServer';
-import ShowdownServerOpened from './firebase-db/ShowdownServerOpened';
-=======
+// import ShowdownServer from './firebase-db/ShowdownServer';
+// import ShowdownServerOpened from './firebase-db/ShowdownServerOpened';
 import ShowdownServer from './Screen/ShowdownServer';
 import ShowdownServerOpened from './Screen/ShowdownServerOpened';
 import Development from './Screen/Development';
 import LandingPage3 from './Screen/LandingPage3';
 import ContestArchive from './Screen/ContestArchive';
 import CreateCustomCodingSheets from './Screen/CreateCustomCodingSheets';
->>>>>>> f786ecf0cc8d698758a1cc5b600efcff3be110be
 
 const App = () => {
   return (
