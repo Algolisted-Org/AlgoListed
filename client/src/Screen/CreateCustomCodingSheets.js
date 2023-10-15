@@ -7,6 +7,7 @@ import LeftMenuDark from '../Components/LeftMenuDark'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import GradeIcon from '@material-ui/icons/Grade';
 import CallMadeIcon from '@material-ui/icons/CallMade';
+import AddIcon from '@material-ui/icons/Add';
 
 const CreateCustomCodingSheets = () => {
     const [needDarkMode, setNeedDarkMode] = useState(false);
@@ -52,10 +53,50 @@ const CreateCustomCodingSheets = () => {
                             Curious about how to use it? Watch our <a href="/">youtube video</a> to see how it's done!
                         </div>
                     </div> 
-
+                    <UserSheetsLikedList>
+                        <h3>You need to have an account to use this feature</h3>
+                        
+                        <SignUpButton>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png" alt="" />
+                            <div className="text">Continue with Google</div>
+                        </SignUpButton>
+                    </UserSheetsLikedList>
                     <UserSheetsList>
                         <h3>Your Sheets</h3>
                         <div className="list">
+                            <div className="new-sheet-container">
+                                <AddIcon/>
+                            </div>
+                            {/* <div className="new-sheet-container search-bar"></div> */}
+                        </div>
+                        <div className="list">
+                            <div className="sheet-container">
+                                <div className="title">Binary Search for Beginners <CallMadeIcon/> </div>
+                                <div className="desc">Explore 'Binary Search for Beginners,' a comprehensive guide by a seasoned LeetCode enthusiast. Discover over 50 LeetCode questions and hone your binary search skills, making complex problem-solving seem like a breeze. Perfect for newcomers seeking a solid foundation in this essential algorithm.</div>
+                                <div className="info">
+                                    <div className="one-info">
+                                        <b>Questions count : </b>
+                                        0
+                                    </div>
+                                    <div className="one-info">
+                                        <b>Latest Edit : </b>
+                                        20 Oct 2023
+                                    </div>
+                                </div>
+                                <div className="btns">
+                                    <div className="btn">Edit Sheet Content</div>
+                                    <div className="right">
+                                        <div className="analytics">
+                                            <VisibilityIcon/>
+                                            <div className="stats">1,342</div>
+                                        </div>
+                                        <div className="analytics">
+                                            <GradeIcon/>
+                                            <div className="stats">127</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="sheet-container">
                                 <div className="title">Binary Search for Beginners <CallMadeIcon/> </div>
                                 <div className="desc">Explore 'Binary Search for Beginners,' a comprehensive guide by a seasoned LeetCode enthusiast. Discover over 50 LeetCode questions and hone your binary search skills, making complex problem-solving seem like a breeze. Perfect for newcomers seeking a solid foundation in this essential algorithm.</div>
@@ -286,12 +327,11 @@ const Container = styled.div`
 
 const UserSheetsList = styled.div`
     margin-top: 30px;
-    margin-bottom: 100px;
+    margin-bottom: 60px;
 
     h3{
         font-size: 1.25rem;
         font-weight: 500;
-        margin-bottom: 10px;
     }
 
     .list{
@@ -383,6 +423,23 @@ const UserSheetsList = styled.div`
                     
                 }
             }
+        }
+
+        .new-sheet-container{
+            width: 50px;
+            height: 50px;
+            /* background-color: black; */
+            margin: 10px 10px 0 0;
+            border-radius: 10px;
+            border: 1px solid #e7dcdc;
+            padding: 10px;
+
+            display: grid;
+            place-items: center;
+        }
+
+        .search-bar{
+            width: 425px;
         }
 
     }
@@ -603,3 +660,25 @@ const Progress = styled.div`
 
 
 `;
+
+const SignUpButton = styled.div`
+    height: 40px;
+    width: 220px;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    cursor: pointer;   
+
+    img{
+        height: 20px;
+    }
+
+    .text{
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-left: 10px;
+    }
+`
