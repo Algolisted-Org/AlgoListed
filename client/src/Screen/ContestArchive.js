@@ -20,8 +20,6 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import { useLocalStorage } from "@uidotdev/usehooks";
-import PostAddIcon from '@material-ui/icons/PostAdd';
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -35,15 +33,11 @@ const ContestArchive = () => {
   const [openModel2, setOpenModel2] = useState(false);
   const [sliderInputValue, setSliderInputValue] = useState(20);
   const [filteredContestData, setFilteredContestData] = useState(contestsData);
-  const [checkbox1, setCheckbox1] = useLocalStorage("checkbox1",false);
-  const [checkbox2, setCheckbox2] = useLocalStorage("checkbox2",false);
-  const [checkbox3, setCheckbox3] = useLocalStorage("checkbox3",false);
-  const [checkbox4, setCheckbox4] = useLocalStorage("checkbox4",false);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === 'dark') setNeedDarkMode(true);
-  }, []);
+  }, [])
 
   useEffect(() => {
     document.title = "Contest Archive - Algolisted";
@@ -87,32 +81,11 @@ const ContestArchive = () => {
     );
   });
 
-  const onClick1 = (e) => {
-    setCheckbox1(e.target.checked)
-  }
-  const onClick2 = (e) => {
-
-    setCheckbox2(e.target.checked)
-  }
-  const onClick3 = (e) => {
-    setCheckbox3(e.target.checked)
-  }
-  const onClick4 = (e) => {
-    setCheckbox4(e.target.checked)
-  }
-  
-  useEffect(()=>{
-    window.localStorage.setItem("CheckBox1",JSON.stringify(checkbox1));
-    window.localStorage.setItem("CheckBox2",JSON.stringify(checkbox2));
-    window.localStorage.setItem("CheckBox3",JSON.stringify(checkbox3));
-    window.localStorage.setItem("CheckBox4",JSON.stringify(checkbox4));
-  },[checkbox1,checkbox2,checkbox3,checkbox4])
-  
   const redirectToContest = () => {
     const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
     window.location.href = url;
   };
-
+  
   const marks = [
     {
       value: 0,
@@ -202,12 +175,12 @@ const ContestArchive = () => {
 
   function generateContestAnalysisURL(contestName) {
     const contestNameSlug = contestName.replace(/\s+/g, '-').toLowerCase();
-
+  
     const contestAnalysisURL = `/contest-analysis/${contestNameSlug}`;
-
+  
     return contestAnalysisURL;
   }
-
+  
 
   return (
     <GrandContainer>
@@ -246,12 +219,12 @@ const ContestArchive = () => {
           </div> */}
           <div className="visulization">
             <div className="visulization-cap">Visulization
-              <ExpandLessIcon />
+              <ExpandLessIcon/>
             </div>
             <div className="one-type-visualization">
               <p className="small-text">
-                Here we are planning to show bar graph of top 5 tags of the <b>filtered contest-problem-set</b>,
-                the bar graph will be kind of a complex one - Each column of the graph would have three layers of
+                Here we are planning to show bar graph of top 5 tags of the <b>filtered contest-problem-set</b>, 
+                the bar graph will be kind of a complex one - Each column of the graph would have three layers of 
                 different colors represent the problem difficulty (easy/medium/hard).
               </p>
             </div>
@@ -265,32 +238,32 @@ const ContestArchive = () => {
           </div>
 
           <EffectiveFilter className='noselect'>
-            <div className="left">
+						<div className="left"> 
               <div className="filter-item noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
-                {openModel1 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                {openModel1 == false ? <ExpandMoreIcon/> : <ExpandLessIcon/>} 
                 {
                   openModel1 ? (
                     <ShowAbsoluteModelDropDown>
-                      <div className="option" onClick={() => { setFilterContestType("All"); setFilterContestTypeName("Both Contest Types") }}>Both Contest Types</div>
-                      <div className="option" onClick={() => { setFilterContestType("Weekly"); setFilterContestTypeName("Weekly Contests Only") }}>Weekly Contests Only</div>
-                      <div className="option" onClick={() => { setFilterContestType("Biweekly"); setFilterContestTypeName("Biweekly Contests Only") }}>Biweekly Contests Only</div>
+                      <div className="option" onClick={() => {setFilterContestType("All"); setFilterContestTypeName("Both Contest Types")}}>Both Contest Types</div>
+                      <div className="option" onClick={() => {setFilterContestType("Weekly"); setFilterContestTypeName("Weekly Contests Only")}}>Weekly Contests Only</div>
+                      <div className="option" onClick={() => {setFilterContestType("Biweekly"); setFilterContestTypeName("Biweekly Contests Only")}}>Biweekly Contests Only</div>
                     </ShowAbsoluteModelDropDown>
                   ) : <></>
                 }
               </div>
               <div className="filter-item" onClick={() => setOpenModel2(!openModel2)}>Last {sliderInputValue} Contests
-                {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+              {openModel2 == false ? <ExpandMoreIcon/> : <ExpandLessIcon/>} 
               </div>
-            </div>
-            <div className="right">
+						</div>
+						<div className="right">
               {/* <div className="filter-item">A</div>
               <div className="filter-item">B</div>
               <div className="filter-item">C</div>
               <div className="filter-item">D</div> */}
-              <div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
-              {/* <div className="filter-item">Show Unsolved</div>  */}
-            </div>
-          </EffectiveFilter>
+							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+							{/* <div className="filter-item">Show Unsolved</div>  */}
+						</div>
+					</EffectiveFilter>
           {
             openModel2 ? (
               <SliderSelector>
@@ -302,36 +275,29 @@ const ContestArchive = () => {
                   marks={marks}
                 />
               </SliderSelector>
-            ) :
+              ): 
               <div></div>
           }
-
+          
 
           <div className="problems-table">
             <div className="one-contest-problems">
               <div className="contest-name">Dummy Contest 1</div>
               <div className="contest-outlinks">
                 <a target='_blank' className="link">
-                  <CallMadeIcon />
-                </a>
-                <a target='_blank' className="link">
-
-                  <EqualizerIcon />
-                </a>
-                <div className="link">
-                  <CreateIcon />
-
-                  <EqualizerIcon/>
+                  <CallMadeIcon/>
                 </a> 
+                <a target='_blank' className="link">
+                  <EqualizerIcon/>
+                </a>
                 <div className="link">
-                  <PostAddIcon/>
-
+                  <CreateIcon/>
                 </div>
               </div>
-              <div className={`contest-problem  ${checkbox1 && "solved-problem"}`}>
+              <div className="contest-problem">
                 <div className="problem-main-name">
                   <label>
-                    <input type="checkbox" value= {checkbox1} onChange={onClick1} checked={checkbox1}/>
+                    <input type="checkbox" />
                     Problem Unsolved
                   </label>
                   <div className="problem-name">A. I am Dummy</div>
@@ -340,10 +306,10 @@ const ContestArchive = () => {
                   <div className="tag">Problem Tags are Hidden</div>
                 </div>
               </div>
-              <div className={`contest-problem  ${checkbox2 && "solved-problem"}`}>
+              <div className="contest-problem solved-problem">
                 <div className="problem-main-name">
                   <label>
-                    <input type="checkbox" value= {checkbox2} onChange={onClick2} checked={checkbox2}/>
+                    <input type="checkbox" />
                     Problem Unsolved
                   </label>
                   <div className="problem-name">B. I am Dummy</div>
@@ -352,10 +318,10 @@ const ContestArchive = () => {
                   <div className="tag">Problem Tags are Hidden</div>
                 </div>
               </div>
-              <div className={`contest-problem  ${checkbox3 && "solved-problem"}`}>
+              <div className="contest-problem">
                 <div className="problem-main-name">
                   <label>
-                    <input type="checkbox"value= {checkbox3} onChange={onClick3} checked={checkbox3}/>
+                    <input type="checkbox" />
                     Problem Unsolved
                   </label>
                   <div className="problem-name">C. I am Dummy</div>
@@ -364,10 +330,10 @@ const ContestArchive = () => {
                   <div className="tag">Problem Tags are Hidden</div>
                 </div>
               </div>
-              <div className={`contest-problem  ${checkbox4 && "solved-problem"}`}>
+              <div className="contest-problem">
                 <div className="problem-main-name">
                   <label>
-                    <input type="checkbox" value= {checkbox4} onChange={onClick4} checked={checkbox4}/>
+                    <input type="checkbox" />
                     Problem Unsolved
                   </label>
                   <div className="problem-name">D. I am Dummy</div>
@@ -378,19 +344,6 @@ const ContestArchive = () => {
               </div>
             </div>
             {filteredContestData.map((contestData, index) => (
-
-              <div className="one-contest-problems" key={index}>
-                <div className="contest-name">{contestData.contest_name}</div>
-                <div className="contest-outlinks">
-                  <a href={contestData.contest_link} target='_blank' className="link">
-                    <CallMadeIcon />
-                  </a>
-                  <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
-                    <EqualizerIcon />
-                  </a>
-                  <div className="link">
-                    <CreateIcon />
-
                 <div className="one-contest-problems" key={index}>
                   <div className="contest-name">{contestData.contest_name}</div>
                   <div className="contest-outlinks">
@@ -401,13 +354,11 @@ const ContestArchive = () => {
                       <EqualizerIcon/>
                     </a>
                     <div className="link">
-                      <PostAddIcon/>
+                      <CreateIcon/>
                     </div>
-
                   </div>
-                </div>
-                {Object.values(contestData.problems).map((problem, problemIndex) => (
-                  <div className="contest-problem" key={problemIndex}>
+                  {Object.values(contestData.problems).map((problem, problemIndex) => (
+                    <div className="contest-problem" key={problemIndex}>
                     <div className="problem-main-name">
                       <label>
                         <input type="checkbox" />
@@ -432,10 +383,10 @@ const ContestArchive = () => {
                       )
 
                     }
-
+                    
                   </div>
-                ))}
-              </div>
+                  ))}
+                </div>
             ))}
           </div>
         </div>

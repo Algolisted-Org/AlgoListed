@@ -592,7 +592,7 @@ const CodingSheets = () => {
 						{filters}
 					</Filters>
 
-					<SheetMessage>
+					<SheetMessage data-theme={selectedTheme}>
 						<div className="text">
 							Hey there! With this tool, you can easily see a visual representation of the coding sheet you are working on and track your progress as you go. It also gives you an idea of the types of questions you can expect to find on the sheet. Cool, huh?
 						</div>
@@ -603,14 +603,14 @@ const CodingSheets = () => {
 										<div className="desc">
 											Close Visualiser
 										</div>
-										<ExpandLessIcon />
+										<ExpandLessIcon color="inherit"/>
 									</>
 								) : (
 									<>
 										<div className="desc">
 											Open Visualiser
 										</div>
-										<ExpandMoreIcon />
+										<ExpandMoreIcon color="inherit"/>
 									</>
 								)
 							}
@@ -976,6 +976,7 @@ const MobContainer = styled.div`
 				border-top-left-radius: 5px;
 				border-top-right-radius: 5px;
 				border-bottom: 1px solid #d1d5db;
+				background-color:var(--body_background);
 
 				.link-row-left {
 					display: flex;
@@ -996,7 +997,7 @@ const MobContainer = styled.div`
 							font-size: 0.85rem;
 							font-weight: 500;
 							text-decoration: none;
-							/* color: inherit; */
+							color: var(--body_link);
 
 							&:hover {
 								text-decoration: underline;
@@ -1152,6 +1153,7 @@ const Container = styled.div`
 				border-top-left-radius: 5px;
 				border-top-right-radius: 5px;
 				border-bottom: 1px solid #d1d5db;
+				background-color:var(--body_background);
 
 				.link-row-left {
 					display: flex;
@@ -1167,6 +1169,7 @@ const Container = styled.div`
 						font-weight: 500;
 						width: 32.5px;
 						text-align: center;
+						color:var(--body_color);
 					}
 
 					.main-row-content {
@@ -1174,7 +1177,7 @@ const Container = styled.div`
 							font-size: 0.9rem;
 							font-weight: 500;
 							text-decoration: none;
-							/* color: inherit; */
+							color: var(--body_link);
 
 							&:hover {
 								text-decoration: underline;
@@ -1187,7 +1190,7 @@ const Container = styled.div`
 							flex-wrap: wrap;
 
 							.tag {
-								background-color: #f3f4f7;
+								background-color: var(--body_tagbackground2);
 								color: inherit;
 								padding: 2.5px 7.5px;
 								border-radius: 100px;
@@ -1283,7 +1286,7 @@ const Filters = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	margin: 10px 0 10px 0;
-
+	color:var(--body_color);
 	.filter {
 		padding: 7.5px 15px;
 		font-size: 0.8rem;
@@ -1297,7 +1300,7 @@ const Filters = styled.div`
 		&:hover {
 			border-color: #201f1f;
 			background-color: #201f1f;
-			color: #ebdddd;
+			color: var(--body_color);
 			transition-duration: 250ms;
 			cursor: pointer;
 		}
@@ -1357,7 +1360,6 @@ const Filters = styled.div`
 		background-color: #201f1f;
 		color: #ebdddd;
 	}
-
 	@media only screen and (max-width: 1100px) {
 		margin: 10px 0 10px 0;
 
@@ -1455,23 +1457,27 @@ const Progress = styled.div`
 const SheetMessage = styled.div`
 	padding: 10px;
 	margin: 20px 0 0px 0;
-	/* border: 1px solid black; */
+	border: 1px solid var(--body_modelborders);
 	border-radius: 5px;
 	/* background-color: #c9e8ff; */
-	background-color: #f0f0f0;
-
+	background-color:var(--body_background2);
+	color:var(--body_color);
 	.text {
 		font-size: 0.8rem;
+		color:var(--body_color);
+	}
+	.desc{
+		color:var(--body_color);
 	}
 
 	.open-btn{
 		display: flex;
 		align-items: center;
 		cursor: pointer;
-		
 		font-size: 0.8rem;
 		font-weight: 500;
 		margin-top: 15px;
+		color:var(--body_color);
 	}
 `;
 
@@ -1481,6 +1487,7 @@ const GiveSpace = styled.div`
 
 const VisualiserConatiner = styled.div`
 	margin: 10px 0 0 0;
+	background:var(--body_background);
     .visualiser-conatiner{
         display: flex;
 		align-items: stretch;
@@ -1488,7 +1495,7 @@ const VisualiserConatiner = styled.div`
         
         .canvas-container{
             border: 1px solid #d1d5db;
-            background-color: rgba(255, 255, 255, 0.83);
+            background:var(--body_background);
             box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
             border-radius: 5px;
             padding: 50px 10px 10px 50px;
@@ -1511,6 +1518,7 @@ const VisualiserConatiner = styled.div`
 				height: 220px;
 				overflow-y: scroll;
 				padding: 0 20px;
+				color:var(--body_color);
 
 				::-webkit-scrollbar {
 					width: 2px;
@@ -1547,6 +1555,7 @@ const VisualiserConatiner = styled.div`
                         font-size: 0.7rem;
                         font-weight: 500;
                         margin-right: 5px;
+						color:var(--body_color);
                     }
     
                     .label-value{
@@ -1554,6 +1563,7 @@ const VisualiserConatiner = styled.div`
                         letter-spacing: 0.07rem;
                         font-weight: 300;
                         font-family: verdana,arial,sans-serif;
+						color:var(--body_color);
                     }
                 }
             }
@@ -1564,7 +1574,7 @@ const VisualiserConatiner = styled.div`
             padding: 10px 30px;
             margin-left: 7.5px;
             border: 1px solid #d1d5db;
-            background-color: rgba(255, 255, 255, 0.83);
+            background-color: var(--body_background);
             box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
             border-radius: 5px;
 			position: relative;
@@ -1580,6 +1590,7 @@ const VisualiserConatiner = styled.div`
                 flex-direction: column;
 				justify-content: center;
                 width: 100%;
+				
 
                 .cat-data{
                     display: flex;
@@ -1590,6 +1601,7 @@ const VisualiserConatiner = styled.div`
                     .name{
                         font-size: 0.9rem;
                         font-weight: 500;
+						color:var(--body_color);
                     }
     
                     .completed{
