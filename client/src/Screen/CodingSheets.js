@@ -581,7 +581,7 @@ const CodingSheets = () => {
 					</div>
 					<Filters>
 						<a href="/custom-coding-sheets/create" className="filter2">
-							Create your custom coding sheet
+							Explore custom coding sheets
 							<CallMadeIcon />
 							<div className="tag">New Feature 🔥</div>
 						</a>
