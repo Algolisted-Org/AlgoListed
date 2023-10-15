@@ -21,8 +21,8 @@ import OnlineAssessment from './Screen/OnlineAssessment';
 import ContestAnalysis from './Screen/ContestAnalysis';
 import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
-// import ShowdownServer from './firebase-db/ShowdownServer';
-// import ShowdownServerOpened from './firebase-db/ShowdownServerOpened';
+import ShowdownServerFBDB from './firebase-db/ShowdownServer';
+import ShowdownServerOpenedFBDB from './firebase-db/ShowdownServerOpened';
 import ShowdownServer from './Screen/ShowdownServer';
 import ShowdownServerOpened from './Screen/ShowdownServerOpened';
 import Development from './Screen/Development';
@@ -71,7 +71,9 @@ const App = () => {
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
         <Route path="/showdown-server" element={<ShowdownServer/>} />
+        {/* <Route path="/showdown-server-anurag" element={<ShowdownServerFBDB/>} /> */}
         <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} />
+        {/* <Route path="/showdown-server-anurag/:serverId" element={<ShowdownServerOpenedFBDB/>} /> */}
         <Route path="/development" element={<Development/>} />
         {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="/:random" element={<PageNotExist/>} />

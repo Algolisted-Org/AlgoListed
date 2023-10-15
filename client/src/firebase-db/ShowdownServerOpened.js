@@ -6,7 +6,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import InfoIcon from '@material-ui/icons/Info';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
-const ShowdownServerOpened = () => {
+const ShowdownServerOpenedFBDB = () => {
     return (
         <GrandContainer>
             <MobContainer>
@@ -237,7 +237,7 @@ const ShowdownServerOpened = () => {
     )
 }
 
-export default ShowdownServerOpened
+export default ShowdownServerOpenedFBDB
 
 const GrandContainer = styled.div`
 
