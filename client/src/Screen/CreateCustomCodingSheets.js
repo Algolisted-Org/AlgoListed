@@ -286,6 +286,7 @@ const Container = styled.div`
 
 const UserSheetsList = styled.div`
     margin-top: 30px;
+    margin-bottom: 100px;
 
     h3{
         font-size: 1.25rem;
