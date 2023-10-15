@@ -42,7 +42,7 @@ const CreateCustomCodingSheets = () => {
                 {/* ---> change this all-blogs to your desired page-id */}
 
                 <div className="cc-middle-content">
-                    <h1 className='main-heading'>Create Custom Coding Sheets</h1>
+                    <h1 className='main-heading'>Custom Coding Sheets</h1>
                     <p className="heading-supporter">
                         In this feature, you can make lists of coding problems you like and easily share them with your friends. This helps you remember your favorite problems and lets you share the list link with others. Plus, if you share a link to a problem, we'll automatically scrape information about that problem and show it in your list with visualizations.
                     </p>
@@ -290,6 +290,7 @@ const UserSheetsList = styled.div`
     h3{
         font-size: 1.25rem;
         font-weight: 500;
+        margin-bottom: 10px;
     }
 
     .list{
@@ -392,6 +393,7 @@ const UserSheetsLikedList = styled.div`
     h3{
         font-size: 1.25rem;
         font-weight: 500;
+        margin-bottom: 10px;
     }
 
     .list{
