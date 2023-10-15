@@ -26,6 +26,7 @@ import ShowdownServerOpened from './Screen/showdownServerOpened';
 import Development from './Screen/Development';
 import LandingPage3 from './Screen/LandingPage3';
 import ContestArchive from './Screen/ContestArchive';
+import CreateCustomCodingSheets from './Screen/CreateCustomCodingSheets';
 
 const App = () => {
   return (
@@ -58,6 +59,7 @@ const App = () => {
         <Route path="/selected-profiles" element={<SelectedProfiles/>} />
         {/* <Route path="/coding-sheets" element={<CodingSheets/>} /> */}
         <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
+        <Route path="/custom-coding-sheets/create" element={<CreateCustomCodingSheets/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />
         <Route path="/contest-analysis" element={<ContestAnalysisList/>} />

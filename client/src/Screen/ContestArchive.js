@@ -21,7 +21,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useLocalStorage } from "@uidotdev/usehooks";
-
+import PostAddIcon from '@material-ui/icons/PostAdd';
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -43,7 +43,7 @@ const ContestArchive = () => {
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === 'dark') setNeedDarkMode(true);
-  }, [])
+  }, []);
 
   useEffect(() => {
     document.title = "Contest Archive - Algolisted";
@@ -315,10 +315,17 @@ const ContestArchive = () => {
                   <CallMadeIcon />
                 </a>
                 <a target='_blank' className="link">
+
                   <EqualizerIcon />
                 </a>
                 <div className="link">
                   <CreateIcon />
+
+                  <EqualizerIcon/>
+                </a> 
+                <div className="link">
+                  <PostAddIcon/>
+
                 </div>
               </div>
               <div className={`contest-problem  ${checkbox1 && "solved-problem"}`}>
@@ -371,6 +378,7 @@ const ContestArchive = () => {
               </div>
             </div>
             {filteredContestData.map((contestData, index) => (
+
               <div className="one-contest-problems" key={index}>
                 <div className="contest-name">{contestData.contest_name}</div>
                 <div className="contest-outlinks">
@@ -382,6 +390,20 @@ const ContestArchive = () => {
                   </a>
                   <div className="link">
                     <CreateIcon />
+
+                <div className="one-contest-problems" key={index}>
+                  <div className="contest-name">{contestData.contest_name}</div>
+                  <div className="contest-outlinks">
+                    <a href={contestData.contest_link} target='_blank' className="link">
+                      <CallMadeIcon/>
+                    </a> 
+                    <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
+                      <EqualizerIcon/>
+                    </a>
+                    <div className="link">
+                      <PostAddIcon/>
+                    </div>
+
                   </div>
                 </div>
                 {Object.values(contestData.problems).map((problem, problemIndex) => (
