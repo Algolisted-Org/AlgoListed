@@ -5,22 +5,22 @@ import CCHeaderPlus from '../Components/CCHeaderPlus'
 import LeftMenu from '../Components/LeftMenu'
 import LeftMenuDark from '../Components/LeftMenuDark'
 
-const Template = () => {
+const CreateCustomCodingSheets = () => {
     const [needDarkMode, setNeedDarkMode] = useState(false);
     
     useEffect(() => {
-      let selectedTheme = localStorage.getItem("selectedTheme");
-      if (selectedTheme === 'dark') setNeedDarkMode(true);
-    }, []);
-  
-    useEffect(() => {
-      document.title = "Template Page - Algolisted";
-    }, []);
-  
-    console.log("needDarkMode : ", needDarkMode);
-    const toggleDarkMode = () => {
-      setNeedDarkMode(!needDarkMode);
-    };
+        let selectedTheme = localStorage.getItem("selectedTheme");
+        if (selectedTheme === 'dark') setNeedDarkMode(true);
+      }, []);
+    
+      useEffect(() => {
+        document.title = "Contest Archive - Algolisted";
+      }, []);
+    
+      console.log("needDarkMode : ", needDarkMode);
+      const toggleDarkMode = () => {
+        setNeedDarkMode(!needDarkMode);
+      };
 
     return ( 
         <GrandContainer>
@@ -34,28 +34,38 @@ const Template = () => {
                     needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
                 }
                 {
-                    needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
+                    needDarkMode ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
                 }
                 {/* ---> change this all-blogs to your desired page-id */}
 
                 <div className="cc-middle-content">
-                    <h1 className='main-heading'>Template Name Here</h1>
+                    <h1 className='main-heading'>Create Custom Coding Sheets</h1>
                     <p className="heading-supporter">
-                        Random Text : We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
+                        In this feature, you can make lists of coding problems you like and easily share them with your friends. This helps you remember your favorite problems and lets you share the list link with others. Plus, if you share a link to a problem, we'll automatically scrape information about that problem and show it in your list with visualizations.
                     </p>
                     <div className="message">
                         <div className="icon"></div>
                         <div className="text">
-                            Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
+                            Curious about how to use it? Watch our <a href="/">youtube video</a> to see how it's done!
                         </div>
-                    </div>
+                    </div> 
+
+                    <UserSheetsList>
+                        <h3>Your Sheets</h3>
+                        <div className="list">
+                            <div className="sheet-container"></div>
+                            <div className="sheet-container"></div>
+                            <div className="sheet-container"></div>
+                            <div className="sheet-container"></div>
+                        </div>
+                    </UserSheetsList>
                 </div>
             </Container>
         </GrandContainer>
     )
 }
 
-export default Template
+export default CreateCustomCodingSheets
 
 const GrandContainer = styled.div`
 
@@ -145,5 +155,29 @@ const Container = styled.div`
             
         }
       }
+    }
+`
+
+const UserSheetsList = styled.div`
+    margin-top: 30px;
+
+    h3{
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+
+    .list{
+        display: flex;
+        flex-wrap: wrap;
+
+        .sheet-container{
+            height: 200px;
+            width: calc(50% - 10px);
+            /* background-color: black; */
+            margin: 10px 10px 0 0;
+            border-radius: 10px;
+            border: 1px solid #e7dcdc;
+        }
+
     }
 `

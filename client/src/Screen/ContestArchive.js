@@ -38,7 +38,7 @@ const ContestArchive = () => {
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === 'dark') setNeedDarkMode(true);
-  }, [])
+  }, []);
 
   useEffect(() => {
     document.title = "Contest Archive - Algolisted";
