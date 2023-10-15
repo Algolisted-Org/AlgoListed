@@ -290,7 +290,7 @@ const ContestArchive = () => {
                 </a> 
                 <a target='_blank' className="link">
                   <EqualizerIcon/>
-                </a>
+                </a> 
                 <div className="link">
                   <PostAddIcon/>
                 </div>
