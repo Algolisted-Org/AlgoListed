@@ -18,8 +18,8 @@ import Interviewgraph from "./Interviewgraph";
 import data from "../DummyDB/InterviewSummaries/Interview.json";
 const InterviewSummaries = () => {
   const [showFilters, setShowFilters] = useState(false);
-  const [selectedMainTopic, setSelectedMainTopic] = useState(null);
-  const [clickedButton, setClickedButton] = useState(null);
+  const [selectedMainTopic, setSelectedMainTopic] = useState('DSA');
+  const [clickedButton, setClickedButton] = useState('DSA');
   const [graphButton, setGraphButton] = useState(false);
 
   // ----- FOR DARK MODE -----
@@ -33,6 +33,7 @@ const InterviewSummaries = () => {
 
   useEffect(() => {
     document.title = "Interview Summaries - Algolisted";
+    
   }, []);
   const handleTopicClick = (mainTopic) => {
     setSelectedMainTopic(mainTopic);
