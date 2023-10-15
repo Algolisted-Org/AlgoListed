@@ -5,8 +5,13 @@ import LeftMenu from '../Components/LeftMenu'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import InfoIcon from '@material-ui/icons/Info';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import LeftMenuDark from '../Components/LeftMenuDark';
+import CCHeaderDark from '../Components/CCHeaderDark';
 
 const ShowdownServerOpened = () => {
+    useEffect(() => {
+      document.title = "Local Showdown Server - Algolisted";
+    }, []);
     return (
         <GrandContainer>
             <MobContainer>
@@ -15,15 +20,15 @@ const ShowdownServerOpened = () => {
                 <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
             </MobContainer>
             <Container>
-                <CCHeader />
-                <LeftMenu marked={"showdown-server"} />
+                <CCHeaderDark />
+                <LeftMenuDark marked={"showdown-server"} />
                 <div className="cc-middle-content">
                     <a href='/showdown-server' className="back-btn">
                         <ArrowBackIosIcon/>    
                     </a> 
                     <h1 className='main-heading'>Hello World! <div className="head-tag">@iamatanunayak's server</div></h1>
                     <p className="heading-supporter">
-                        <img className='circle' draggable="false" src="https://media.tenor.com/SbpquMdX92cAAAAC/among-us.gif" alt="" />
+                        {/* <img className='circle' draggable="false" src="https://media.tenor.com/SbpquMdX92cAAAAC/among-us.gif" alt="" /> */}
                         Now, you can host coding competitions with your friends and select questions randomly from specific topics like binary search, recursion or graphs from platforms like Codeforces or LeetCode. Algolisted AI ensures each question is rephrased, preventing direct searches, and the competition concludes with a thrilling leaderboard showcasing your friends' coding skills!
                     </p>
                     {/* <div className="message">
@@ -270,9 +275,14 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     padding-left: 200px;
+    background-color: #313338;
 
     a{
       color: #18489f;
+    }
+
+    svg{
+      fill: #b7b8ba;
     }
 
     .circle{
@@ -302,7 +312,7 @@ const Container = styled.div`
       .main-heading{
           font-size: 1.65rem;
           font-weight: 600;
-          color: #292929;
+          color: #e5e6e8;
           display: flex; 
           align-items: center;
 
@@ -312,13 +322,14 @@ const Container = styled.div`
             font-weight: 500;
             padding: 0.25rem 0.5rem;
             border-radius: 100px;
-            background-color: #e5e5e5;
+            background-color: #a5bb26;
             margin-left: 10px;
 
             img{
-                height: 1.15rem;
-                margin-bottom: -5px;
-                margin-left: 5px;
+                position: absolute;
+                height: 2rem;
+                margin-top: -7.5px;
+                margin-left: -5px;
             }
           }
       }
@@ -328,7 +339,7 @@ const Container = styled.div`
           font-size: 1.05rem;
           margin-bottom: 10px;
           font-weight: 400;
-          color: #696168;
+          color: #ffffffa6;
           display: flex;
           align-items: center;
 
@@ -348,26 +359,29 @@ const Container = styled.div`
         display: inline-block;
         /* display: flex; */
         /* align-items: center; */
-        background-color: #d5f7e1;
+        background-color: #444754;
         border-radius: 5px;
         padding: 10px;
         margin: 20px 0 50px 0;
 
         .text{
             font-size: 0.8rem;
-            color: #13803b;
+            color: #b7b8ba;
             font-weight: 300;
             
             b{
                 font-weight: 500;
+                color: #b7b8ba;
             }
         }   
       }
+
 
       h3{
         font-size: 1.15rem;
         font-weight: 500;
         margin-bottom: 5px;
+        color: #e5e6e8;
       }
 
       .room-info-section{
@@ -379,13 +393,13 @@ const Container = styled.div`
             .contain-info{
                 height: 40px;
                 min-width: 40px;
-                background-color: white;
-                border: 1px solid #cbc7c7;
+                background-color: #444754;
+                /* border: 1px solid black; */
                 margin-right: 10px;
                 margin-top: 10px;
                 border-radius: 5px;
-                
                 padding: 10px;
+                color: #e5e6e8;
 
                 display: flex;
                 align-items: center;
@@ -394,8 +408,9 @@ const Container = styled.div`
                 font-size: 0.8rem;
 
                 b{
-                    font-weight: 500;
-                    margin-left: 5px;
+                  font-weight: 500;
+                  margin-left: 5px;
+                  color: white;
                 }
             }
             
@@ -403,23 +418,23 @@ const Container = styled.div`
               height: 42px;
               min-width: 50px;
               border-radius: 20px;
-              border: 1px solid black;
+              border: 1px solid #808080;
               margin-top: 10px;
               margin-right: 10px;
               padding: 2.5px;
               padding-right: 5px;
               display: flex;
               align-items: center;
-              background-color: #f8f8f8;
               text-decoration: none;
               position: relative;
               cursor:pointer;
+              background-color: #555059;
               
               .profile-pic{
                 height: 35px;
                 width: 35px;
                 border-radius: 100%;
-                border: 1px solid black;
+                border: 1px solid white;
                 background-color: white;
               }
               
@@ -429,6 +444,7 @@ const Container = styled.div`
                 .username{
                   font-size: 0.7rem;
                   font-weight: 600;
+                  color: #e0e9d9;
                 }
   
                 .global-rank{
@@ -436,11 +452,7 @@ const Container = styled.div`
                 }
               }
 
-              &:hover{
-                cursor: pointer;
-                box-shadow: #00000021 0px 7px 29px 0px;
-                transition-duration: 250ms;
-              }
+              box-shadow: #00000014 0px 10px 30px 5px;
 
               .clear-btn{
                 position: absolute;
@@ -502,18 +514,21 @@ const Container = styled.div`
               .username{
                 color: white;
               }
+
+              box-shadow: #ffffff21 0px 10px 30px 5px;
             }
         }
         
         .start-in{
             margin-top: 10px;
-
+            
             display: flex;
             align-items: center;
 
             .start-text{
                 font-size: 0.85rem;
                 font-weight: 400;
+                color: #e5e6e8;
             }
 
             .time-digit{
@@ -541,13 +556,13 @@ const Container = styled.div`
 
             svg{
                 margin-right: 2.5px;
-                fill: #333;
                 font-size: 1rem;
             }
 
             .text{
                 font-size: 0.75rem;
                 font-weight: 200;
+                color: #e5e6e8;
             }
             
         }
@@ -558,12 +573,14 @@ const Container = styled.div`
             font-size: 1rem;
             margin-bottom: 10px;
             margin-top: 30px;
+            color: #e5e6e8;
         }
 
         p{
             font-size: 0.9rem;
             font-weight: 300;
             margin-bottom: 10px;
+            color: #e5e6e8;
         }
 
         h4{
@@ -571,11 +588,13 @@ const Container = styled.div`
           margin-bottom: 10px;
           font-weight: 500;
           margin-top: 30px;
+          color: #e5e6e8;
         }
 
         li{
           margin-left: 35px;
           margin-bottom: 5px;
+          color: #e5e6e8;
         }
 
         .sample-result{
@@ -594,14 +613,17 @@ const Container = styled.div`
             .result{
               padding: 10px;
               width: 100%;
-              border: 1px solid #dbdde1;
+              border: 1px solid #4b4d51;
               min-height: 50px;
-              background-color: #f5f6f7;
+              background-color: #2b2d31;
               border-radius: 5px;
-              font-size: 0.75rem;
+              font-size: 0.85rem;
               font-weight: 400;
               font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
               -webkit-font-smoothing: subpixel-antialiased;
+              color: white;
+              line-height: 2rem;
+              letter-spacing: 0.07rem;
             }
           }
 
@@ -631,7 +653,7 @@ const Filters2 = styled.div`
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
 		text-decoration: none;
-		color: inherit;
+		color: white;
 
     svg{
       font-size: 1rem;
@@ -653,7 +675,7 @@ const Filters2 = styled.div`
 		/* background-color: #ded7d7;
     color: #111; */
 		border-color: rgb(185, 175, 175);
-		background-color: #e5e5e5;
+		background-color: white;
 		color: #201f1f;
 	}
 

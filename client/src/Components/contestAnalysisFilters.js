@@ -12,10 +12,16 @@ export const contestAnalysisFilters = [
       lock: true,
     },
     {
-      text: "Hackerrank",
-      domainFilter: "hackerrank",
+      text: "Codechef",
+      domainFilter: "codechef",
       id: 3,
       lock: true,
-    }
+    },
+    {
+      text: "Hackerrank",
+      domainFilter: "hackerrank",
+      id: 4,
+      lock: true,
+    },
   ];
   

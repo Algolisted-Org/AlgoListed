@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import CCHeader from '../Components/CCHeader'
+import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus'
+import CCHeaderPlus from '../Components/CCHeaderPlus'
 import LeftMenu from '../Components/LeftMenu'
+import LeftMenuDark from '../Components/LeftMenuDark'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
 import allBlogsDatabase from "../Components/allBlogsDatabase.json"
@@ -14,10 +16,21 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const AllBlogs = () => {
   const [showFilters, setShowFilters] = useState(false);
+  
+  // ----- FOR DARK MODE -----
+	const [needDarkMode, setNeedDarkMode] = useState(false);
+	let selectedTheme = localStorage.getItem("selectedTheme");
+	console.log("needDarkMode : ", needDarkMode);
+	const toggleDarkMode = () => {
+		setNeedDarkMode(!needDarkMode);
+	};
+	// ----- FOR DARK MODE -----
 
   useEffect(() => {
     document.title = "Simplified Coding Blogs - Algolisted";
   }, []);  
+
+  
 
 return (
     <GrandContainer>
@@ -85,8 +98,13 @@ return (
         <SimpleFooter />
       </MobContainer>
       <Container>
-        <CCHeader />
-        <LeftMenu marked={"all-blogs"} />
+        {
+					selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+				}
+				{ 
+					selectedTheme == "dark" ? <LeftMenuDark marked={"all-blogs"} /> : <LeftMenu marked={"all-blogs"} />
+				}
+
         <div className="cc-middle-content">
           <h1 className='main-heading'>AI Summarization of Blogs <div className="head-tag">Under Development Phase 0.90-C</div> </h1>
           <p className="heading-supporter">

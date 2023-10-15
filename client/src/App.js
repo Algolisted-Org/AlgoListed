@@ -7,7 +7,7 @@ import {
 import styled from 'styled-components'
 
 import { BlogPage , AboutUs , Contact , FutureVision ,BlogIdeas, CodingCompetitions , Issues ,
-PageNotExist ,LandingPage ,OrganisationInfo ,AllBlogs ,AptitudeRound ,Opportunities ,Resources,
+PageNotExist, OrganisationInfo ,AllBlogs ,AptitudeRound ,Opportunities ,Resources,
 ContributeSite ,BlogAutoCode ,AuthPage , SelectedProfiles, CodingSheets ,AddContentCoreOnly ,LandingPage2, 
 Readme, CoreTeam ,Mission , RequestAPI, ChartTemp, PushDataToMongoDB }  from './Screen'
 import ScrollToTop from './Components/ScrollToTop';
@@ -23,16 +23,19 @@ import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
 import ShowdownServer from './Screen/ShowdownServer';
 import ShowdownServerOpened from './Screen/ShowdownServerOpened';
+import Development from './Screen/Development';
+import LandingPage3 from './Screen/LandingPage3';
+import ContestArchive from './Screen/ContestArchive';
+import CreateCustomCodingSheets from './Screen/CreateCustomCodingSheets';
 
 const App = () => {
-  
-
   return (
     <div>
       <ScrollToTop/>
       <Routes>
         {/* <Route path="/development" element={<CompetitionApi/>} /> */}
-        <Route path="/" element={<LandingPage2/>} />
+        {/* <Route path="/" element={<LandingPage2/>} /> */}
+        <Route path="/" element={<LandingPage3/>} />
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/sign-in" element={<AuthPage/>} />
         <Route path="/create-account" element={<AuthPage/>} />
@@ -56,20 +59,22 @@ const App = () => {
         <Route path="/selected-profiles" element={<SelectedProfiles/>} />
         {/* <Route path="/coding-sheets" element={<CodingSheets/>} /> */}
         <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
+        <Route path="/custom-coding-sheets/create" element={<CreateCustomCodingSheets/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />
         <Route path="/contest-analysis" element={<ContestAnalysisList/>} />
+        <Route path="/contests-archive" element={<ContestArchive/>} />
         <Route path="/contest-analysis/:contestName" element={<ContestAnalysis/>} />
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
         <Route path="/showdown-server" element={<ShowdownServer/>} />
         <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} />
+        <Route path="/development" element={<Development/>} />
         {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="/:random" element={<PageNotExist/>} />
         <Route path="/:random/:random" element={<PageNotExist/>} />
       </Routes>
-      
       <GoToTop/>
     </div>
   )

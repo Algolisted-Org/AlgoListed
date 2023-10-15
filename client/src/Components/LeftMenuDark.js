@@ -6,17 +6,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Link as RouterLink }from 'react-router-dom';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 
-const LeftMenu = ({ marked }) => {
+const LeftMenuDark = ({ marked }) => { 
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
-
-  // ----- FOR DARK MODE -----
-	const [needDarkMode, setNeedDarkMode] = useState(false);
-	let selectedTheme = localStorage.getItem("selectedTheme");
-	console.log("needDarkMode : ", needDarkMode);
-	const toggleDarkMode = () => {
-		setNeedDarkMode(!needDarkMode);
-	};
-	// ----- FOR DARK MODE -----
 
   const menuItems = [
     // {
@@ -96,6 +87,7 @@ const LeftMenu = ({ marked }) => {
       
       <Tooltip title="Version - v2.10">
         <div className="logo">
+          {/* Alpha Version */}
             Algolisted
           {/* <div className="small-top">V2.17</div> */}
         </div>
@@ -140,24 +132,20 @@ const LeftMenu = ({ marked }) => {
   )
 }
 
-export default LeftMenu
+export default LeftMenuDark
 
 const Container = styled.div`
   width: 200px;
-  border-right: 1px solid var(--body_borderright);
+  border-right: 1px solid #242526;
   height: 100vh;
   min-height: 600px;
-  background-color: var(--body_menubgcolor);
+  background-color: #2b2d31;
   z-index: 2;
   position: fixed;
   /* overflow-y: scroll; */
   top: 0;
   left: 0;
   padding: 10px;
-
-  a{
-    cursor: pointer;
-  }
 
   display: flex;
   justify-content: space-between;
@@ -173,15 +161,15 @@ const Container = styled.div`
     /* text-transform: uppercase; */
     letter-spacing: 0.15rem;
     height: 45px;
-    background-color: var(--body_logobg);
+    background-color: #211f1f;
     display: flex;
-    color: var(--body_logocolor);
+    color: white;
     align-items: center;
     justify-content: center;
     /* border: 1px solid #f7d59d; */
     border-radius: 100px;
     cursor: pointer;
-    position: relative;
+    position: relative;;
 
     .small-top{
       position: absolute;
@@ -207,13 +195,13 @@ const Container = styled.div`
       .line{
         width: 20%;
         height: 1px;
-        background-color: var(--body_menup_text3);
+        background-color: #949ba4;
       }
 
       .text{
         font-size: 0.8rem;
         font-weight: 400;
-        color: var(--body_menup_text1);
+        color: #f2f3f5;
       }
     }
 
@@ -229,31 +217,25 @@ const Container = styled.div`
       cursor: pointer;
       text-align: center;
       margin-bottom: 7.5px;
-      color: var(--body_menulink);
+      color: #949ba4;
       text-decoration: none;
-      padding: 0 5px;
       
       svg{
         /* display: none; */
         font-size: 1.05rem;
         margin-left: 5px;
+        fill: #949ba4;
       }
 
       &:hover{
-        background-color: var(--body_menuhoverbg);
-        color: var(--body_menuhovercolor);
+        background-color: #404249;
         transition-duration: 250ms;
       }
     }
     
     .current-link{
-      background-color: var(--body_menuselectedbg);
-      color: var(--body_menulinkselected);
-
-      &:hover{
-        background-color: var(--body_menuselectedbg);
-        color: var(--body_menulinkselected);
-      }
+      background-color: #404249;
+      color: #f2f3f5;
 
       svg{
         display: block;
@@ -270,9 +252,9 @@ const Container = styled.div`
     left: 10px;
     bottom: 50px;
     border-radius: 15px;
-    border: 1px solid var(--body_modelborders);
+    border: 1px solid #3d3b3b;
     box-shadow: rgb(28 28 28 / 26%) 0px 2px 20px;
-    background-color: var(--body_menubgcolor);
+    background-color: #2b2d31;
     overflow: hidden;
 
     .more-link{
@@ -282,14 +264,14 @@ const Container = styled.div`
       font-weight: 300;
       cursor: pointer;
       padding: 12.5px 20px;
-      color: var(--body_menulink);
+      color: #949ba4;
       text-decoration: none;
-      border-bottom: 1px solid var(--body_modelborders);
+      border-bottom: 1px solid #3d3b3b;
 
       &:hover{
-        background-color: var(--body_menuhoverbg);
+        background-color: #404249;
         transition-duration: 250ms;
-        color: var(--body_menulinkselected);
+        color: #f2f3f5;
       }
     }
 
@@ -308,21 +290,14 @@ const Container = styled.div`
     cursor: pointer;
 
     .icon{
-      color: var(--body_menup_text2);
-      svg{
-        fill: var(--body_menup_text2);
-      }
-    }
-
-    svg{
-      fill: var(--body_menup_text2);
+        fill: #f2f3f5;
     }
 
     .text{
       font-weight: 300;
       font-size: 0.85rem;
       margin-left: 5px;
-      color: var(--body_menup_text2);
+      color: #f2f3f5;
     }
   }
 `

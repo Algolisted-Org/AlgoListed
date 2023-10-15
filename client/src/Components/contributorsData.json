@@ -1,28 +1,36 @@
 [
+  
   {
-    "user_name": "ThorezNS",
-    "name": "Maciej Niemiec",
-    "avatar_url": "https://avatars.githubusercontent.com/u/84680745?v=4",
+    "user_name": "Mohit030802",
+    "name": "Mohit Kumar Dubey",
+    "description": "I have had the pleasure of making several contributions to this project over the past few days, and it has been an absolutely fantastic experience. Working on this project has been a unique and incredibly interesting endeavor, one that has not only allowed me to contribute to an open-source project but also helped me expand my knowledge and skills.The diversity of tasks and challenges within this project has made it an exciting journey. From bug fixes to feature enhancements, each contribution has presented a new opportunity to learn and grow. I am genuinely enthusiastic about the prospect of continuing to contribute to this project, as I believe it will provide me with countless opportunities for personal and professional development.",
+    "avatar_url": "https://avatars.githubusercontent.com/u/80634689?v=4",
     "pull_requests": [
       {
-        "id": 91,
-        "title":
-          "fix the name conflict bug regarding the start time of the competition",
-        "url": "https://github.com/Nayaker/AlgoListed/pull/91",
-        "created_on": "Apr 23, 2023"
+        "id": 70,
+        "title": "Custom Scroll Bar",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/70",
+        "created_on": "Jan 3, 2023"
       },
       {
-        "id": 60,
-        "title":
-          "correct the way of sorting by the time remaining to the end of regist…",
-        "url": "https://github.com/Nayaker/AlgoListed/pull/60",
-        "created_on": "Dec 29, 2022"
+        "id": 76,
+        "title": "Blog Page Referencing",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/76",
+        "created_on": "Jan 9, 2023"
+      },
+      {
+        "id": 111,
+        "title": "Local DB",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/111",
+        "created_on": "Oct 4, 2023"
       }
+
     ]
   },
   {
     "user_name": "saurabh-sen",
     "name": "Saurabh Sen",
+    "description": "I were assigned to contribute an installation guide for the frontend of AlgoListed.com. I was excited to work on this project as it was my first time contributing to an open-source project. I was able to complete the task in a few days and it was a great learning experience for me. I was able to learn a lot about the open-source community and how to contribute to open-source projects. I am looking forward to contributing more to this project in the future.",
     "avatar_url": "https://avatars.githubusercontent.com/u/68960038?v=4",
     "pull_requests": [
       {
@@ -30,45 +38,6 @@
         "title": "add readme for installation",
         "url": "https://github.com/Nayaker/AlgoListed/pull/93",
         "created_on": "Apr 23, 2023"
-      }
-    ]
-  },
-  {
-    "user_name": "skshahnawaz",
-    "name": "Sk Shahnawaz",
-    "avatar_url": "https://avatars.githubusercontent.com/u/52563824?v=4",
-    "pull_requests": [
-      {
-        "id": 82,
-        "title": "Update index.html",
-        "url": "https://github.com/Nayaker/AlgoListed/pull/82",
-        "created_on": "Jan 12, 2023"
-      }
-    ]
-  },
-  {
-    "user_name": "sailikpandey22",
-    "name": "SAILIK PANDEY",
-    "avatar_url": "https://avatars.githubusercontent.com/u/102276321?v=4",
-    "pull_requests": [
-      {
-        "id": 89,
-        "title": "Added Kickstart Script",
-        "url": "https://github.com/Nayaker/AlgoListed/pull/89",
-        "created_on": "Jan 18, 2023"
-      }
-    ]
-  },
-  {
-    "user_name": "dineshigdd",
-    "name": "Daminda Dinesh W Imaduwa Gamage",
-    "avatar_url": "https://avatars.githubusercontent.com/u/10340892?v=4",
-    "pull_requests": [
-      {
-        "id": 88,
-        "title": "Enter proper links in Landing Page Footer",
-        "url": "https://github.com/Nayaker/AlgoListed/pull/88",
-        "created_on": "Jan 18, 2023"
       }
     ]
   }

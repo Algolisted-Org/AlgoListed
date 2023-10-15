@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import CCHeader from '../Components/CCHeader'
+import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus'
+import CCHeaderPlus from '../Components/CCHeaderPlus'
 import LeftMenu from '../Components/LeftMenu'
+import LeftMenuDark from '../Components/LeftMenuDark'
 
 const Template = () => {
+    const [needDarkMode, setNeedDarkMode] = useState(false);
+    
+    useEffect(() => {
+      let selectedTheme = localStorage.getItem("selectedTheme");
+      if (selectedTheme === 'dark') setNeedDarkMode(true);
+    }, []);
+  
+    useEffect(() => {
+      document.title = "Template Page - Algolisted";
+    }, []);
+  
+    console.log("needDarkMode : ", needDarkMode);
+    const toggleDarkMode = () => {
+      setNeedDarkMode(!needDarkMode);
+    };
+
     return ( 
         <GrandContainer>
             <MobContainer>
@@ -12,8 +30,14 @@ const Template = () => {
                 <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
             </MobContainer>
             <Container>
-                <CCHeader />
-                <LeftMenu marked={"all-blogs"} /> {/* ---> change this as well */}
+                {
+                    needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+                }
+                {
+                    needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
+                }
+                {/* ---> change this all-blogs to your desired page-id */}
+
                 <div className="cc-middle-content">
                     <h1 className='main-heading'>Template Name Here</h1>
                     <p className="heading-supporter">

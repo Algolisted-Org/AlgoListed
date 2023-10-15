@@ -7,7 +7,6 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
 import FacebookIcon from '@material-ui/icons/Facebook';
-import react3dLoader from '../Images/react3dLoader.gif'
 import axios from "axios";
 
 

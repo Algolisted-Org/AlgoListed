@@ -44,8 +44,14 @@ Main Website : <a href="http://algolisted.com/">algolisted.com</a>
 If you encounter a bug, or have a request for a new feature, please open a [New Issue](https://github.com/Nayaker/Algorithmist/issues).
 <br/><br/>
 ## Want to Contribute?
-This project is looking for new contributors.  If you are interested in contributing, please refer to the [Contributing Guide](https://github.com/Nayaker/Algorithmist/blob/main/WantToContribute.md)
+This project is looking for new contributors.  If you are interested in contributing,then follow this
+=>FRONTEND
+To run the front end of the project follow these steps.
 
+Go to the client folder in the terminal  cd client
+Now to install the required dependencies use npm i --force.
+And once the required dependencies are installed just use npm start to run the repo on your local machine.
+-------
 Currently Working on the redux part on the frontend.
 <br/><br/>
 ## Some Images from the Website
