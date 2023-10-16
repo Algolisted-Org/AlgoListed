@@ -11,18 +11,46 @@ import AddIcon from '@material-ui/icons/Add';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { customCodingSheetsFilters } from "../Components/customCodingSheetsFilters";
 import LinkIcon from '@material-ui/icons/Link';
+import DeleteIcon from '@material-ui/icons/Delete';
+import DoneIcon from '@material-ui/icons/Done';
+import StorageIcon from '@material-ui/icons/Storage';
+import problemsData from '../DummyDB/InterviewSummaries/LcProblems.json';
+import problemsDataServer from '../DummyDB/InterviewSummaries/LcUserServerProblems.json';
 
 const CreateCustomCodingSheetsEdit = () => {
     const [needDarkMode, setNeedDarkMode] = useState(false);
+    const [problemLink, setProblemLink] = useState('');
+    const [recentlyAddedProblems, setRecentlyAddedProblems] = useState([]);
+    const [problemStatus, setProblemStatus] = useState({});
+    const [problemsStoredInServer, setProblemsStoredInServer] = useState(problemsDataServer);
+
+    useEffect(() => {
+        console.log('problemsDataServer:', problemsDataServer);
+        console.log('problemsStoredInServer:', problemsStoredInServer);
+
+        // Check the values of problemsDataServer and problemsStoredInServer
+
+        if (problemsDataServer && Array.isArray(problemsDataServer) && problemsDataServer.length > 0) {
+            console.log('problemsDataServer is populated');
+        }
+
+        if (problemsStoredInServer && Array.isArray(problemsStoredInServer) && problemsStoredInServer.length > 0) {
+            console.log('problemsStoredInServer is populated');
+        }
+    }, []); // Ensure this runs only once when the component mounts
+
+    useEffect(() => {
+        document.title = "Contest Archive - Algolisted";
+    }, []);
 
     useEffect(() => {
         let selectedTheme = localStorage.getItem("selectedTheme");
         if (selectedTheme === 'dark') setNeedDarkMode(true);
     }, []);
 
-    useEffect(() => {
-        document.title = "Contest Archive - Algolisted";
-    }, []);
+    console.log(problemsDataServer);
+
+
 
     console.log("needDarkMode : ", needDarkMode);
     const toggleDarkMode = () => {
@@ -40,6 +68,52 @@ const CreateCustomCodingSheetsEdit = () => {
             </a>
         );
     });
+
+    console.log(problemsData);
+
+    const handleAddProblem = () => {
+        let scrapedProblemData = problemsData[problemLink];
+        if (scrapedProblemData === undefined) {
+            alert("Problem Not Found!");
+        } else {
+            const timestamp = Date.now();
+            setRecentlyAddedProblems(recentlyAddedProblems.concat(scrapedProblemData));
+
+            // Set the initial status as "scrapping" with the timestamp
+            setProblemStatus((prevStatus) => ({
+                ...prevStatus,
+                [scrapedProblemData.quesName]: { status: 'scrapping', timestamp },
+            }));
+        }
+        console.log(scrapedProblemData);
+        setProblemLink("");
+    }
+
+    useEffect(() => {
+        const updateProblemStatus = () => {
+            const currentTime = Date.now();
+            const updatedStatus = { ...problemStatus };
+
+            for (const problemName in problemStatus) {
+                const problem = problemStatus[problemName];
+                if (problem.status === 'scrapping' && currentTime - problem.timestamp >= 6000) {
+                    updatedStatus[problemName] = { status: 'scrapping-done' };
+                }
+            }
+
+            setProblemStatus(updatedStatus);
+        };
+
+        const interval = setInterval(updateProblemStatus, 5000);
+
+        return () => clearInterval(interval);
+    }, [problemStatus]);
+
+    const handleDeleteProblem = (problemName) => {
+        const updatedProblems = recentlyAddedProblems.filter(problemData => problemData.quesName !== problemName);
+        setRecentlyAddedProblems(updatedProblems);
+    };
+
 
     return (
         <GrandContainer>
@@ -74,16 +148,215 @@ const CreateCustomCodingSheetsEdit = () => {
 
                     <div className="controls">
                         <div className='export-btn'>
-                            <LinkIcon/>
-                            Export Sheet Link and Update Sheet Details
+                            <LinkIcon />
+                            New data currently stored stored as temporary - Export Sheet Link to save to server!
                         </div>
                         <div className="add-link">
                             <div className='options'>
                                 <div className="platform">Leetcode</div>
-                                <ExpandMoreIcon/>
+                                <ExpandMoreIcon />
                             </div>
-                            <input type="text" placeholder='Enter Problem Link'/>
-                            <div className='square'><AddIcon/></div>
+
+                            <input type="text" placeholder="Enter Problem Link" value={problemLink} onChange={(e) => setProblemLink(e.target.value)} />
+                            <div className='square' onClick={() => handleAddProblem()}><AddIcon /></div>
+                        </div>
+                    </div>
+                    <div className="problem-sheet">
+                        <h3>Newly added Problems</h3>
+                        {
+                            recentlyAddedProblems.length > 0 ? (
+                                <div>
+                                    {recentlyAddedProblems.map((problemData, index) => {
+                                        const status = problemStatus[problemData.quesName] ? problemStatus[problemData.quesName].status : 'scrapping';
+                                        return (
+                                            <div className="problem" key={index}>
+                                                <div className="square-box">{index + 1}</div>
+                                                <a href={problemData.quesLink} target='_blank' className="problem-name">
+                                                    {problemData.quesName}
+                                                    {status === 'scrapping' ? (
+                                                        <div className="scrapping">
+                                                            <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
+                                                            <div className="status-message">
+                                                                Scraping Problem Data
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="scrapping-done">
+                                                            <DoneIcon />
+                                                            <div className="status-message">
+                                                                Problem Data Scraped
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </a>
+                                                <div className="square-box cursor-pointer">
+                                                    <DeleteIcon onClick={() => handleDeleteProblem(problemData.quesName)} />
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                <div className='empty-array-message'>
+                                    <div className="text">
+                                        You currently don't have any problem added in the local server. Please paste a link in the above
+                                        input bar and hit the add symbol to see you problem.
+                                    </div>
+                                </div>
+                            )
+                        }
+
+                        {/* <div className="problem">
+                            <div className="square-box">1</div>
+                            <div className="problem-name">
+                                Search Insert Position
+                                <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
+                                <div className="status-message">
+                                    Scraping Problem Data 
+                                </div>
+                                <DoneIcon />
+                                <div className="status-message">
+                                    Problem Data Scraped
+                                </div>
+                            </div>
+                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
+                        </div>
+                        <div className="problem">
+                            <div className="square-box">2</div>
+                            <div className="problem-name">
+                                Median of Two Sorted Arrays
+                                <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
+                                <div className="status-message">
+                                    Scraping Problem Data
+                                </div>
+                                <DoneIcon/>
+                                <div className="status-message">
+                                    Problem Data Scraped
+                                </div>
+                            </div>
+                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
+                        </div> */}
+                    </div>
+                    <div className="problem-sheet">
+                        <h4>{problemsStoredInServer.length}</h4>
+                        <h3>Previously Added Problems Stored in Server</h3>
+                        {problemsStoredInServer.length > 0 ? (
+                            <div>
+                                {problemsStoredInServer.map((problemData, index) => {
+                                    return (
+                                        <div className="problem" key={index}>
+                                            <div className="square-box">{index + 1}</div>
+                                            <a href={problemData.quesLink} target="_blank" className="problem-name">
+                                                {problemData.quesName}
+                                                <StorageIcon />
+                                                <div className="status-message">
+                                                    Problem Stored in Server
+                                                </div>
+                                            </a>
+                                            <div className="square-box cursor-pointer">
+                                                <DeleteIcon />
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        ) : (
+                            <div className='empty-array-message'>
+                                <div className="text">Empty Array</div>
+                            </div>
+                        )}
+                    </div>
+                    <div className="problem-sheet">
+                        <h3>Previously Added Problems Stored in Server</h3>
+                        <div className="problem">
+                            <div className="square-box">1</div>
+                            <div className="problem-name">
+                                Search in Rotated Sorted Array
+                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
+                                <div className="status-message">
+                                    Scraping Problem Data 
+                                </div> */}
+                                <StorageIcon />
+                                <div className="status-message">
+                                    Problem Stored in Server
+                                </div>
+                            </div>
+                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
+                        </div>
+                        <div className="problem">
+                            <div className="square-box">2</div>
+                            <div className="problem-name">
+                                Find First and Last Position of Element in Sorted Array
+                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
+                                <div className="status-message">
+                                    Scraping Problem Data 
+                                </div> */}
+                                <StorageIcon />
+                                <div className="status-message">
+                                    Problem Stored in Server
+                                </div>
+                            </div>
+                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
+                        </div>
+                        <div className="problem">
+                            <div className="square-box">3</div>
+                            <div className="problem-name">
+                                Smallest Rectangle Enclosing Black Pixels
+                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
+                                <div className="status-message">
+                                    Scraping Problem Data 
+                                </div> */}
+                                <StorageIcon />
+                                <div className="status-message">
+                                    Problem Stored in Server
+                                </div>
+                            </div>
+                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
+                        </div>
+                        <div className="problem">
+                            <div className="square-box">4</div>
+                            <div className="problem-name">
+                                Search a 2D Matrix
+                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
+                                <div className="status-message">
+                                    Scraping Problem Data 
+                                </div> */}
+                                <StorageIcon />
+                                <div className="status-message">
+                                    Problem Stored in Server
+                                </div>
+                            </div>
+                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
+                        </div>
+                        <div className="problem">
+                            <div className="square-box">5</div>
+                            <div className="problem-name">
+                                Find Minimum in Rotated Sorted Array
+                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
+                                <div className="status-message">
+                                    Scraping Problem Data 
+                                </div> */}
+                                <StorageIcon />
+                                <div className="status-message">
+                                    Problem Stored in Server
+                                </div>
+                            </div>
+                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
+                        </div>
+                        <div className="problem">
+                            <div className="square-box">6</div>
+                            <div className="problem-name">
+                                Search in Rotated Sorted Array II
+                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
+                                <div className="status-message">
+                                    Scraping Problem Data 
+                                </div> */}
+                                <StorageIcon />
+                                <div className="status-message">
+                                    Problem Stored in Server
+                                </div>
+                            </div>
+                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
                         </div>
                     </div>
                 </div>
@@ -95,7 +368,9 @@ const CreateCustomCodingSheetsEdit = () => {
 export default CreateCustomCodingSheetsEdit
 
 const GrandContainer = styled.div`
-
+    .cursor-pointer{
+        cursor: pointer;
+    }
 `
 
 const MobContainer = styled.div`
@@ -210,6 +485,7 @@ const Container = styled.div`
             background-color: white;
             border: 1px solid #e5e5e5;
             border-radius: 10px;
+            cursor: pointer;
         }
 
         .add-link{
@@ -242,6 +518,74 @@ const Container = styled.div`
                 flex: 1;
                 height: 50px;
                 margin: 0 10px;
+            }
+        }
+      }
+
+      .problem-sheet{
+        margin-top: 30px;
+          
+        h3{
+            margin-top: 50px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .empty-array-message{
+            .text{
+                font-size: 0.8rem;
+            }
+        }
+
+        .problem{
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+
+            .square-box{
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: white;
+                border: 1px solid #e5e5e5;
+                border-radius: 10px;
+            }
+
+            .problem-name{
+                position: relative;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: #fff;
+                border: 1px solid #e5e5e5;
+                border-radius: 10px;
+                font-size: 0.8rem;
+                padding: 5px 15px;
+                height: 50px;
+                text-align: center;
+                margin: 0 10px;
+                text-decoration: none;
+                color: cornflowerblue;
+
+                svg{
+                    
+                }
+
+                .status-message{
+                    position: absolute;
+                    height: 20px;
+                    right: 55px;
+                    top: 18px;
+                    font-size: 0.6rem;
+                }
+
+                img{
+                    height: 25px;
+                }
             }
         }
       }
