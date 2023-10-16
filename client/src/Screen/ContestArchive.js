@@ -17,6 +17,7 @@ import NotesIcon from '@material-ui/icons/Notes';
 import CreateIcon from '@material-ui/icons/Create';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import NoteMaking from './../MicroComponents/NoteMakingCompo';
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -24,8 +25,18 @@ const ContestArchive = () => {
   const [contestNumber, setContestNumber] = useState('361');
   const [needDarkMode, setNeedDarkMode] = useState(false);
   const [showTags, setShowTags] = useState(true);
-
-  useEffect(() => {
+   const [notes,setnotes]=useState([])
+   const notesadded=(name)=>{ 
+      if(notes.includes(name)){
+        const idpresent=notes.filter((each)=>each!==name);
+        setnotes([...idpresent])
+      }
+      else{
+        setnotes((prev)=>[...prev,name])
+      }
+      
+ }
+ useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === 'dark') setNeedDarkMode(true);
   }, [])
@@ -131,6 +142,7 @@ const ContestArchive = () => {
 						</div>
 					</EffectiveFilter>
           <div className="problems-table">
+
             {contestsData.map((contestData, index) => (
               <div className="one-contest-problems" key={index}>
                 <div className="contest-name">{contestData.contest_name}</div>
@@ -141,11 +153,11 @@ const ContestArchive = () => {
                   <div className="link">
                     <EqualizerIcon/>
                   </div>
-                  <div className="link">
+                  <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
                     <CreateIcon/>
                   </div>
                 </div>
-                {Object.values(contestData.problems).map((problem, problemIndex) => (
+                {notes.includes(contestData.contest_name)?<NoteMaking name={contestData.contest_name}/>:Object.values(contestData.problems).map((problem, problemIndex) => (
                   <div className="contest-problem" key={problemIndex}>
                     <div className="problem-main-name">
                       <label>

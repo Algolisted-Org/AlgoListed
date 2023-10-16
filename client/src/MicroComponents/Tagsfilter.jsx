@@ -77,7 +77,7 @@ const MenuItem = styled.div`
   border-radius: 4px;
   margin: 5px;
   height:30px;
-  text-align:center
+  text-align:center;
   cursor:pointer;
   color: ${(props) => (props.isselected ? "white":"black")};
   border: 1px solid black;
