@@ -441,11 +441,13 @@ const GrandContainer = styled.div`
     /* text-transform: uppercase; */
     letter-spacing: 0.15rem;
     border-radius: 100px;
+    transition : 0.8s ease;
 
     &:hover{
       background-color: whitesmoke;
       color: #333;
       cursor: pointer;
+      transform : scale(1.2);
       transition-duration: 250ms;
     }
   }
