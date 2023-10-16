@@ -22,17 +22,32 @@ const Interviewgraph = ({ companies }) => {
               label: "Interview Summary",
               data: Object.values(companies),
               backgroundColor: [
-                "#D9EAD3",
-                "#B6D7A8",
-                "#93C47D",
-                "#8AD767",
-                "#70DF3F",
-                "#5CE61D",
-                "#6AA84F",
-                "#57BD2A",
-                "#38761D",
-                "#2F810B",
+                "#02992B",
+                "#05AD32",
+                "#0BBC3A",
+                "#29BD50",
+                "#2CCE57",
+                "#15D849",
+                "#09E042",
+                "#03ED41",
+                "#06DC1E",
+                "#07F322",
+                "#00FE1D",
+                "#23F623",
+                "#33F933",
+                "#68F368",
+                "#51F051",
+                "#65EF65",
+                "#71F071",
+                "#80F080",
+                "#8EF28E",
+                "#A0F1A0",
               ],
+              borderColor:[
+                "#BDFABD"
+              ],
+              borderRadius:2,
+              borderWidth:1,
               hoverOffset: 4,
             },
           ],
@@ -46,7 +61,10 @@ const Interviewgraph = ({ companies }) => {
       <StyledContainer>
         <div className="graph">
           <div className="graphMain">
-            <canvas ref={chartRef} style={{ width: "500px", height: "500px" }} />
+            <canvas
+              ref={chartRef}
+              style={{ width: "500px", height: "500px" }}
+            />
           </div>
           <div className="graphDetail">
             <ul>
