@@ -25,21 +25,6 @@ const CreateCustomCodingSheetsEdit = () => {
     const [problemsStoredInServer, setProblemsStoredInServer] = useState(problemsDataServer);
 
     useEffect(() => {
-        console.log('problemsDataServer:', problemsDataServer);
-        console.log('problemsStoredInServer:', problemsStoredInServer);
-
-        // Check the values of problemsDataServer and problemsStoredInServer
-
-        if (problemsDataServer && Array.isArray(problemsDataServer) && problemsDataServer.length > 0) {
-            console.log('problemsDataServer is populated');
-        }
-
-        if (problemsStoredInServer && Array.isArray(problemsStoredInServer) && problemsStoredInServer.length > 0) {
-            console.log('problemsStoredInServer is populated');
-        }
-    }, []); // Ensure this runs only once when the component mounts
-
-    useEffect(() => {
         document.title = "Contest Archive - Algolisted";
     }, []);
 
@@ -112,6 +97,12 @@ const CreateCustomCodingSheetsEdit = () => {
     const handleDeleteProblem = (problemName) => {
         const updatedProblems = recentlyAddedProblems.filter(problemData => problemData.quesName !== problemName);
         setRecentlyAddedProblems(updatedProblems);
+    };
+
+    const handleDeleteProblemFromServerProblems = (problemName) => {
+        const updatedProblems = problemsStoredInServer.filter(problemData => problemData.quesName !== problemName);
+        setProblemsStoredInServer(updatedProblems);
+        console.log(updatedProblems);
     };
 
 
@@ -238,7 +229,6 @@ const CreateCustomCodingSheetsEdit = () => {
                         </div> */}
                     </div>
                     <div className="problem-sheet">
-                        <h4>{problemsStoredInServer.length}</h4>
                         <h3>Previously Added Problems Stored in Server</h3>
                         {problemsStoredInServer.length > 0 ? (
                             <div>
@@ -254,7 +244,7 @@ const CreateCustomCodingSheetsEdit = () => {
                                                 </div>
                                             </a>
                                             <div className="square-box cursor-pointer">
-                                                <DeleteIcon />
+                                                <DeleteIcon onClick={() => handleDeleteProblemFromServerProblems(problemData.quesName)} />
                                             </div>
                                         </div>
                                     );
@@ -265,99 +255,6 @@ const CreateCustomCodingSheetsEdit = () => {
                                 <div className="text">Empty Array</div>
                             </div>
                         )}
-                    </div>
-                    <div className="problem-sheet">
-                        <h3>Previously Added Problems Stored in Server</h3>
-                        <div className="problem">
-                            <div className="square-box">1</div>
-                            <div className="problem-name">
-                                Search in Rotated Sorted Array
-                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
-                                <div className="status-message">
-                                    Scraping Problem Data 
-                                </div> */}
-                                <StorageIcon />
-                                <div className="status-message">
-                                    Problem Stored in Server
-                                </div>
-                            </div>
-                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
-                        </div>
-                        <div className="problem">
-                            <div className="square-box">2</div>
-                            <div className="problem-name">
-                                Find First and Last Position of Element in Sorted Array
-                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
-                                <div className="status-message">
-                                    Scraping Problem Data 
-                                </div> */}
-                                <StorageIcon />
-                                <div className="status-message">
-                                    Problem Stored in Server
-                                </div>
-                            </div>
-                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
-                        </div>
-                        <div className="problem">
-                            <div className="square-box">3</div>
-                            <div className="problem-name">
-                                Smallest Rectangle Enclosing Black Pixels
-                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
-                                <div className="status-message">
-                                    Scraping Problem Data 
-                                </div> */}
-                                <StorageIcon />
-                                <div className="status-message">
-                                    Problem Stored in Server
-                                </div>
-                            </div>
-                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
-                        </div>
-                        <div className="problem">
-                            <div className="square-box">4</div>
-                            <div className="problem-name">
-                                Search a 2D Matrix
-                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
-                                <div className="status-message">
-                                    Scraping Problem Data 
-                                </div> */}
-                                <StorageIcon />
-                                <div className="status-message">
-                                    Problem Stored in Server
-                                </div>
-                            </div>
-                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
-                        </div>
-                        <div className="problem">
-                            <div className="square-box">5</div>
-                            <div className="problem-name">
-                                Find Minimum in Rotated Sorted Array
-                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
-                                <div className="status-message">
-                                    Scraping Problem Data 
-                                </div> */}
-                                <StorageIcon />
-                                <div className="status-message">
-                                    Problem Stored in Server
-                                </div>
-                            </div>
-                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
-                        </div>
-                        <div className="problem">
-                            <div className="square-box">6</div>
-                            <div className="problem-name">
-                                Search in Rotated Sorted Array II
-                                {/* <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" />
-                                <div className="status-message">
-                                    Scraping Problem Data 
-                                </div> */}
-                                <StorageIcon />
-                                <div className="status-message">
-                                    Problem Stored in Server
-                                </div>
-                            </div>
-                            <div className="square-box cursor-pointer"><DeleteIcon /></div>
-                        </div>
                     </div>
                 </div>
             </Container>
