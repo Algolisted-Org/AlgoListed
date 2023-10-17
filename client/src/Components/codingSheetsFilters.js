@@ -33,4 +33,19 @@ export const codingSheetsFilters = [
     domainFilter: "leetcode-top-interview-questions",
     id: 6,
   },
+  {
+    text: "Neetcode 150",
+    domainFilter: "leetcode-top-interview-questions",
+    id: 7,
+  },
+  {
+    text: "Neetcode 400",
+    domainFilter: "leetcode-top-interview-questions",
+    id: 8,
+  },
+  {
+    text: "Striver A2Z",
+    domainFilter: "leetcode-top-interview-questions",
+    id: 9,
+  },
 ];

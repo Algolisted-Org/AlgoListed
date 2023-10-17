@@ -17,34 +17,63 @@ import NotesIcon from '@material-ui/icons/Notes';
 import CreateIcon from '@material-ui/icons/Create';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import NoteMaking from './../MicroComponents/NoteMakingCompo';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+import { useLocalStorage } from "@uidotdev/usehooks";
+import { FaWineBottle } from 'react-icons/fa';
+
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
   const [contestType, setContestType] = useState('Weekly Contest');
   const [contestNumber, setContestNumber] = useState('361');
   const [needDarkMode, setNeedDarkMode] = useState(false);
-  const [showTags, setShowTags] = useState(true);
-   const [notes,setnotes]=useState([])
-   const notesadded=(name)=>{ 
-      if(notes.includes(name)){
-        const idpresent=notes.filter((each)=>each!==name);
-        setnotes([...idpresent])
-      }
-      else{
-        setnotes((prev)=>[...prev,name])
-      }
-      
- }
- useEffect(() => {
+  const [showTags, setShowTags] = useLocalStorage("showTags", true);
+  const [filterContestType, setFilterContestType] = useState("All");
+  const [filterContestTypeName, setFilterContestTypeName] = useState("Both Contest Types");
+  const [openModel1, setOpenModel1] = useState(false);
+  const [openModel2, setOpenModel2] = useState(false);
+  const [sliderInputValue, setSliderInputValue] = useState(20);
+  const [filteredContestData, setFilteredContestData] = useState(contestsData);
+  const [checkbox1, setCheckbox1] = useLocalStorage("checkbox1", false);
+  const [checkbox2, setCheckbox2] = useLocalStorage("checkbox2", false);
+  const [checkbox3, setCheckbox3] = useLocalStorage("checkbox3", false);
+  const [checkbox4, setCheckbox4] = useLocalStorage("checkbox4", false);
+  // const [checkboxShared,setCheckboxShared] = useState(localStorage.getItem("checkboxShared") || {0:false, 1:false, 2:false, 3:false});
+  // const [checkboxShared, setCheckboxShared] = useLocalStorageCustom("checkboxShared", []);
+  const [checkboxstate,setCheckboxstate]= useState(JSON.parse(localStorage.getItem("checkboxShared")) || null)
+  let arr;
+  useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === 'dark') setNeedDarkMode(true);
   }, [])
+
+  useEffect(() => {
+    document.title = "Contest Archive - Algolisted";
+  }, []);
 
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
+
+  useEffect(() => {
+    console.log(filterContestType);
+  }, [filterContestType])
+
+  useEffect(() => {
+    const filteredData = contestsData.filter((contest) => {
+      if (filterContestType === 'All') {
+        return true; // Show all contests
+      } else {
+        return contest.contest_type === filterContestType;
+      }
+    }).slice(0, sliderInputValue);
+
+    setFilteredContestData(filteredData);
+  }, [filterContestType, sliderInputValue]);
+
 
   const filters = contestAnalysisFilters.map((item) => {
     return (
@@ -62,10 +91,188 @@ const ContestArchive = () => {
     );
   });
 
+  const onClick1 = (e) => {
+    setCheckbox1(e.target.checked)
+  }
+  const onClick2 = (e) => {
+
+    setCheckbox2(e.target.checked)
+  }
+  const onClick3 = (e) => {
+    setCheckbox3(e.target.checked)
+  }
+  const onClick4 = (e) => {
+    setCheckbox4(e.target.checked)
+  }
+
+
+    const onClickShared = (pname, cname) => {
+      pname = pname.toLowerCase().replaceAll(" ", "_");
+      cname = cname.toLowerCase().replaceAll(" ", "_");
+      let x = JSON.parse(window.localStorage.getItem("checkboxShared"));
+      if (!x) {
+        const objToSave = {
+          [cname]: {
+            [pname]: true,
+          }
+        }
+        window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+        setCheckboxstate(objToSave);
+        return;
+      }
+
+      if (!Object.keys(x).includes(cname)) {
+        const objToSave = {
+          ...x,
+          [cname]: {
+            [pname]: true,
+          }
+        }
+        window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+        // console.log(objToSave);
+        setCheckboxstate(objToSave);
+
+        return;
+      }
+
+      if (!Object.keys(x[cname]).includes(pname)) {
+        const objToSave = {
+          ...x,
+          [cname]:
+          {
+            ...x[cname],
+            [pname]: true
+          }
+        }
+        window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+        // console.log(objToSave);
+        setCheckboxstate(objToSave);
+
+
+        return;
+      }
+
+      const newObject = { ...x[cname] }
+      delete newObject[pname];
+
+      const objToSave = {
+        ...x,
+        [cname]: newObject
+      }
+
+      localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+      // console.log(objToSave);
+      setCheckboxstate(objToSave)
+      
+    }
+
+    const isQuestionSolved = (cname,pname)=>{
+      cname = cname.toLowerCase().replaceAll(" ","_");
+      pname = pname.toLowerCase().replaceAll(" ","_");
+      return checkboxstate && checkboxstate?.[cname]&& checkboxstate[cname]?.[pname]
+    }
+  
+
   const redirectToContest = () => {
     const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
     window.location.href = url;
   };
+
+  const marks = [
+    {
+      value: 0,
+      label: 'None',
+    },
+    {
+      value: 5,
+      label: '5',
+    },
+    {
+      value: 10,
+      label: '10',
+    },
+    {
+      value: 15,
+      label: '15',
+    },
+    {
+      value: 20,
+      label: '20',
+    },
+    {
+      value: 25,
+      label: '25',
+    },
+    {
+      value: 30,
+      label: '30',
+    },
+    {
+      value: 35,
+      label: '35',
+    },
+    {
+      value: 40,
+      label: '40',
+    },
+    {
+      value: 45,
+      label: '45',
+    },
+    {
+      value: 50,
+      label: '50',
+    },
+    {
+      value: 55,
+      label: '55',
+    },
+    {
+      value: 60,
+      label: '60',
+    },
+    {
+      value: 65,
+      label: '65',
+    },
+    {
+      value: 70,
+      label: '70',
+    },
+    {
+      value: 75,
+      label: '75',
+    },
+    {
+      value: 80,
+      label: '80',
+    },
+    {
+      value: 85,
+      label: '85',
+    },
+    {
+      value: 90,
+      label: '90',
+    },
+    {
+      value: 95,
+      label: '95',
+    },
+    {
+      value: 100,
+      label: '100',
+    },
+  ];
+
+  function generateContestAnalysisURL(contestName) {
+    const contestNameSlug = contestName.replace(/\s+/g, '-').toLowerCase();
+
+    const contestAnalysisURL = `/contest-analysis/${contestNameSlug}`;
+
+    return contestAnalysisURL;
+  }
+
 
   return (
     <GrandContainer>
@@ -78,7 +285,6 @@ const ContestArchive = () => {
         {
           needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
         }
-
         {
           needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
         }
@@ -105,12 +311,12 @@ const ContestArchive = () => {
           </div> */}
           <div className="visulization">
             <div className="visulization-cap">Visulization
-              <ExpandLessIcon/>
+              <ExpandLessIcon />
             </div>
             <div className="one-type-visualization">
               <p className="small-text">
-                Here we are planning to show bar graph of top 5 tags of the <b>filtered contest-problem-set</b>, 
-                the bar graph will be kind of a complex one - Each column of the graph would have three layers of 
+                Here we are planning to show bar graph of top 5 tags of the <b>filtered contest-problem-set</b>,
+                the bar graph will be kind of a complex one - Each column of the graph would have three layers of
                 different colors represent the problem difficulty (easy/medium/hard).
               </p>
             </div>
@@ -123,57 +329,90 @@ const ContestArchive = () => {
             <div className="one-type-visualization"></div>
           </div>
 
-          <EffectiveFilter>
-						<div className="left">
-              <div className="filter-item">Both Contest Types
-                <ExpandMoreIcon/>
+          <EffectiveFilter className='noselect'>
+            <div className="left">
+              <div className="filter-item noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
+                {openModel1 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                {
+                  openModel1 ? (
+                    <ShowAbsoluteModelDropDown>
+                      <div className="option" onClick={() => { setFilterContestType("All"); setFilterContestTypeName("Both Contest Types") }}>Both Contest Types</div>
+                      <div className="option" onClick={() => { setFilterContestType("Weekly"); setFilterContestTypeName("Weekly Contests Only") }}>Weekly Contests Only</div>
+                      <div className="option" onClick={() => { setFilterContestType("Biweekly"); setFilterContestTypeName("Biweekly Contests Only") }}>Biweekly Contests Only</div>
+                    </ShowAbsoluteModelDropDown>
+                  ) : <></>
+                }
               </div>
-              <div className="filter-item">Last 15 Contests
-                <ExpandMoreIcon/>
+              <div className="filter-item" onClick={() => setOpenModel2(!openModel2)}>Last {sliderInputValue} Contests
+                {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
               </div>
-						</div>
-						<div className="right">
-              <div className="filter-item">A</div>
+            </div>
+            <div className="right">
+              {/* <div className="filter-item">A</div>
               <div className="filter-item">B</div>
               <div className="filter-item">C</div>
-              <div className="filter-item">D</div>
-							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
-							{/* <div className="filter-item">Show Unsolved</div>  */}
-						</div>
-					</EffectiveFilter>
-          <div className="problems-table">
+              <div className="filter-item">D</div> */}
+              <div className="filter-item" onClick={() => { setShowTags(!showTags); }}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+              {/* <div className="filter-item">Show Unsolved</div>  */}
+            </div>
+          </EffectiveFilter>
+          {
+            openModel2 ? (
+              <SliderSelector>
+                <Slider onChange={(_, value) => setSliderInputValue(value)}
+                  defaultValue={20}
+                  aria-label="discrete-slider-custom"
+                  step={5}
+                  valueLabelDisplay="auto"
+                  marks={marks}
+                />
+              </SliderSelector>
+            ) :
+              <div></div>
+          }
 
-            {contestsData.map((contestData, index) => (
+
+          <div className="problems-table">
+            {filteredContestData.map((contestData, index) => (
               <div className="one-contest-problems" key={index}>
                 <div className="contest-name">{contestData.contest_name}</div>
                 <div className="contest-outlinks">
+                  <a href={contestData.contest_link} target='_blank' className="link">
+                    <CallMadeIcon />
+                  </a>
+                  <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
+                    <EqualizerIcon />
+                  </a>
                   <div className="link">
-                    <CallMadeIcon/>
-                  </div>
-                  <div className="link">
-                    <EqualizerIcon/>
-                  </div>
-                  <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
-                    <CreateIcon/>
+                    <CreateIcon />
                   </div>
                 </div>
-                {notes.includes(contestData.contest_name)?<NoteMaking name={contestData.contest_name}/>:Object.values(contestData.problems).map((problem, problemIndex) => (
-                  <div className="contest-problem" key={problemIndex}>
+                {Object.values(contestData.problems).map((problem, problemIndex) => (
+                  <div className={`contest-problem ${isQuestionSolved(contestData.contest_name,problem.name)?"solved-problem":""}`} key={problemIndex}>
                     <div className="problem-main-name">
                       <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name,problem.name)}/>
                         Problem Unsolved
                       </label>
                       <div className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</div>
                     </div>
-                    <div className="problem-info">
-                      <div className="tag difficulty-tag">{problem.difficulty}</div>
-                      {problem.tags.map((tag, tagIndex) => (
-                        <div className="tag" key={tagIndex}>
-                          {tag}
+                    {
+                      showTags ? (
+                        <div className="problem-info">
+                          <div className="tag difficulty-tag">{problem.difficulty}</div>
+                          {problem.tags.map((tag, tagIndex) => (
+                            <div className="tag" key={tagIndex}>
+                              {tag}
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      ) : (
+                        <div className="problem-info">
+                          <div className="tag">Problem Tags are Hidden</div>
+                        </div>
+                      )
+                    }
+
                   </div>
                 ))}
               </div>
@@ -188,7 +427,15 @@ const ContestArchive = () => {
 export default ContestArchive;
 
 const GrandContainer = styled.div`
-
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+  }
 `
 
 const MobContainer = styled.div`
@@ -319,7 +566,7 @@ const Container = styled.div`
         width: 100%;
         background-color: #ffffff;
         border-radius: 20px;
-        margin: 50px 0 10px 0;
+        margin: 50px 0 20px 0;
         border: 1px solid rgb(209, 213, 219);
         display: flex;
 
@@ -370,11 +617,9 @@ const Container = styled.div`
       }
 
       .problems-table{
-        min-height: 2500px;
         width: 100%;
-        /* background-color: cornflowerblue; */
         border-radius: 20px;
-        margin-top: 30px;
+        margin-top: 60px;
 
         .one-contest-problems{
           position: relative;
@@ -504,6 +749,10 @@ const Container = styled.div`
             }
 
 
+          }
+
+          .solved-problem{
+            background-color: #dcf8eb;
           }
         }
       }
@@ -692,6 +941,8 @@ const EffectiveFilter = styled.div`
 			margin-right: 5px;
 			cursor: pointer;
 
+      position: relative;
+
       display: flex;
       align-items: center;
 
@@ -715,4 +966,64 @@ const EffectiveFilter = styled.div`
 			cursor: pointer;
 		}
 	}
+`
+
+const ShowAbsoluteModelDropDown = styled.div`
+  position: absolute;
+  max-height: 200px;
+  min-height: 30px;
+  width: 200px;
+  background-color: #ffffff;
+  border: 1px solid #d0d5db;
+  border-radius: 5px;
+  top: 35px;
+  left: -5px;
+  z-index: 10;
+  overflow-y: scroll;
+  cursor: default;
+
+  /* -webkit-box-shadow: 0px 0px 60px 0px rgba(219,212,219,1);
+  -moz-box-shadow: 0px 0px 60px 0px rgba(219,212,219,1);
+  box-shadow: 0px 0px 60px 0px rgba(219,212,219,1); */
+    
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  display: flex;
+  flex-direction: column;
+
+  .option{
+    height: 40px;
+    border-bottom: 1px solid #d0d5db;
+    display: grid;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+
+    &:hover{
+      background-color: #e5e5e5;
+      cursor: pointer;
+      transition-duration: 250ms;
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+`
+
+const SliderSelector = styled.div`
+  height: 80px;
+  width: 100%;
+  /* background-color: pink; */
+  border-radius: 10px;
+
+  span{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 0.65rem;
+  }
+
+  /* padding: 10px 50px; */
 `

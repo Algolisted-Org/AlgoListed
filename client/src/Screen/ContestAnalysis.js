@@ -40,6 +40,10 @@ const ContestAnalysis = () => {
 
   const [SessionUserCountChange, setSessionUserCountChange] = useState(0)
   const { contestName } = useParams();
+
+  useEffect(() => {
+      document.title = "Contest Analysis - Algolisted";
+  }, []);
   
   // console.log(calcA.calculateValue(5000));
   // console.log(calcB.calculateValue(5000));

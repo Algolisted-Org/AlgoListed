@@ -1,0 +1,112 @@
+{
+    "https://leetcode.com/problems/1": {
+        "quesName": "Problem 1",
+        "quesLink": "https://leetcode.com/problems/1",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    }, 
+    "https://leetcode.com/problems/2": {
+        "quesName": "Problem 2",
+        "quesLink": "https://leetcode.com/problems/2",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    }, 
+    "https://leetcode.com/problems/3": {
+        "quesName": "Problem 3",
+        "quesLink": "https://leetcode.com/problems/3",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    }, 
+    "https://leetcode.com/problems/4": {
+        "quesName": "Problem 4",
+        "quesLink": "https://leetcode.com/problems/4",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    },
+    "https://leetcode.com/problems/5": {
+        "quesName": "Problem 5",
+        "quesLink": "https://leetcode.com/problems/1",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    }, 
+    "https://leetcode.com/problems/6": {
+        "quesName": "Problem 6",
+        "quesLink": "https://leetcode.com/problems/6",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    },
+    "https://leetcode.com/problems/7": {
+        "quesName": "Problem 7",
+        "quesLink": "https://leetcode.com/problems/7",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    },
+    "https://leetcode.com/problems/8": {
+        "quesName": "Problem 8",
+        "quesLink": "https://leetcode.com/problems/8",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    },
+    "https://leetcode.com/problems/9": {
+        "quesName": "Problem 9",
+        "quesLink": "https://leetcode.com/problems/9",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    },
+    "https://leetcode.com/problems/10": {
+        "quesName": "Problem 10",
+        "quesLink": "https://leetcode.com/problems/1",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    },
+    "https://leetcode.com/problems/11": {
+        "quesName": "Problem 11",
+        "quesLink": "https://leetcode.com/problems/1",
+        "specialTag": "Easy",
+        "tags": [
+            "Array",
+            "Hash Table",
+            "Sorting"
+        ]
+    }
+}
