@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { MdDelete } from 'react-icons/md';
-
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { MdDelete } from "react-icons/md";
+import uniqid from "uniqid";
 const NoteMaking = ({ name }) => {
   const [allNotes, setAllNotes] = useState([]);
-  const [notevalue, setNoteValue] = useState('');
+  const [notevalue, setNoteValue] = useState("");
   const [specificNotes, setSpecificNotes] = useState([]);
   const [click, setNotClick] = useState(true);
-  const [clickedItemIndex, setClickedItemIndex] = useState(null);
+  const [specificid,setid]=useState(setAllNotes[0]?.id)
 
+ const [clickedItemIndex,setindex]=useState(null)
   useEffect(() => {
-    const savedNotes = JSON.parse(localStorage.getItem('All-notes')) || [];
+    const savedNotes = JSON.parse(localStorage.getItem("All-notes")) || [];
     setAllNotes([...savedNotes]);
     if (savedNotes.length) {
       const specific = savedNotes.filter((each) => each.contestName === name);
@@ -19,56 +20,96 @@ const NoteMaking = ({ name }) => {
   }, [name]);
 
   useEffect(() => {
+    if (specificNotes.length == 0) {
+      setNotClick(false);
+      setNoteValue("");
+    }
     if (specificNotes.length > 0) {
-      setClickedItemIndex(0);
+      setindex(0)
+      setNoteValue(specificNotes[0].content);
+      setNotClick(true);
     }
   }, [specificNotes]);
 
-  const deleteNotes = (index) => {
-    const filteredNotes = specificNotes.filter((_, i) => i !== index);
+  const deleteNotes = (id,name) => {
+    console.log(id)
+    const filteredNotes = specificNotes.filter((each) =>each.contestName===name && each.id !== id);
+    console.log(filteredNotes)
     setSpecificNotes([...filteredNotes]);
-      setClickedItemIndex(null);
+    const updatedNotes = allNotes.filter((each) => each.id !== id);
+    setAllNotes(updatedNotes);
+    console.log(specificNotes)
+    localStorage.setItem("All-notes", JSON.stringify(updatedNotes));
+   
   };
 
-  const add = () => {
-    if (notevalue.trim() !== '') {
+  const add = (id) => {
+    if(!click){
+    if (notevalue.trim() !== "") {
       const newNote = {
+        id: uniqid(),
         contestName: name,
         content: notevalue,
       };
-      setSpecificNotes((prevSpecificNotes) => [...prevSpecificNotes, newNote]);
+      setSpecificNotes((prevSpecificNotes) => [ newNote,...prevSpecificNotes]);
       const updatedNotes = [...allNotes, newNote];
       setAllNotes(updatedNotes);
-      localStorage.setItem('All-notes', JSON.stringify(updatedNotes));
-      setNoteValue('');
+      localStorage.setItem("All-notes", JSON.stringify(updatedNotes));
+      setNoteValue("");
     }
+  }
+  else{
+    const editedNotes = specificNotes.map((note) =>
+    note.id == id ? { ...note, content: notevalue } : note
+  );
+  setSpecificNotes(editedNotes);
+  const updatedAllNotes = allNotes.map((note) =>
+    note.id == id ? { ...note, content: notevalue } : note
+  );
+  setAllNotes(updatedAllNotes);
+  localStorage.setItem("All-notes", JSON.stringify(updatedAllNotes));
+  }
   };
 
   return (
     <Wrapper>
       <LeftSection>
         <ToDoContainer>
-          <div style={{ position: 'sticky', top: 0, zIndex: 10 }}>
-            <Btn onClick={() => setNotClick(false)}>Add new Notes</Btn>
+          <div style={{ position: "sticky", top: 0, zIndex: 10 }}>
+            <Btn
+              onClick={() => {
+                setNotClick(false);
+                setNoteValue("")
+              }}
+            >
+              Add new Notes +
+            </Btn>
           </div>
           <ToDoList>
-            {specificNotes?.map((notes, index) => (
-              <ToDoItem key={index} 
-
-                onClick={()=>{
-                setNoteValue(notes.content)
-              setClickedItemIndex(index)}
-              
-                }
-                 style={{
-                  backgroundColor: clickedItemIndex === index ? '#f0f0f0' : 'inherit',
+            {specificNotes.map((notes, index) => (
+              <ToDoItem
+                key={index}
+                onClick={() => {
+                  setNoteValue(notes.content);
+                  setNotClick(true);
+                  setid(notes.id)
                 }}
-                >
+                style={{
+                  backgroundColor:
+                    clickedItemIndex === index ? "#f0f0f0" : "inherit",
+                }}
+              >
                 {notes.content}
                 <MdDelete
-                  onClick={() => deleteNotes(index)}
-                  style={{ position: 'absolute', top: 14, right: 16, cursor: 'pointer' }}
+                  onClick={() => deleteNotes(notes.id,notes.contestName)}
+                  style={{
+                    position: "absolute",
+                    top: 14,
+                    right: 16,
+                    cursor: "pointer",
+                  }}
                 />
+                  
               </ToDoItem>
             ))}
           </ToDoList>
@@ -76,8 +117,12 @@ const NoteMaking = ({ name }) => {
       </LeftSection>
       <RightSection>
         <NotesInputContainer>
-          <TextInput value={click ? notevalue : ''} onChange={(e) => setNoteValue(e.target.value)} placeholder="Add New Notes" />
-          <AddButton onClick={add}>{click ? 'Edit' : 'Add'}</AddButton>
+          <TextInput
+            value={notevalue}
+            onChange={(e) => setNoteValue(e.target.value)}
+            placeholder="Add New Notes"
+          />
+          <AddButton onClick={()=>add(specificid)}>{click ? "Edit" : "Add"}</AddButton>
         </NotesInputContainer>
       </RightSection>
     </Wrapper>

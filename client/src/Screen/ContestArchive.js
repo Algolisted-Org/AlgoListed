@@ -22,6 +22,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { FaWineBottle } from 'react-icons/fa';
+import NoteMaking from './../MicroComponents/NoteMakingCompo';
 
 
 const ContestArchive = () => {
@@ -40,6 +41,16 @@ const ContestArchive = () => {
   const [checkbox2, setCheckbox2] = useLocalStorage("checkbox2", false);
   const [checkbox3, setCheckbox3] = useLocalStorage("checkbox3", false);
   const [checkbox4, setCheckbox4] = useLocalStorage("checkbox4", false);
+  const [notes,setnotes]=useState([]);
+  const notesadded=(name)=>{
+       if(notes.includes(name)){
+          const filterdata=notes.filter(each=>each!==name);
+          setnotes([...filterdata])
+       }
+       else{
+        setnotes(prev=>[...prev,name])
+       }
+  }
   // const [checkboxShared,setCheckboxShared] = useState(localStorage.getItem("checkboxShared") || {0:false, 1:false, 2:false, 3:false});
   // const [checkboxShared, setCheckboxShared] = useLocalStorageCustom("checkboxShared", []);
   const [checkboxstate,setCheckboxstate]= useState(JSON.parse(localStorage.getItem("checkboxShared")) || null)
@@ -383,11 +394,11 @@ const ContestArchive = () => {
                   <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
                     <EqualizerIcon />
                   </a>
-                  <div className="link">
+                  <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
                     <CreateIcon />
                   </div>
                 </div>
-                {Object.values(contestData.problems).map((problem, problemIndex) => (
+                {notes.includes(contestData.contest_name)?<NoteMaking name={contestData.contest_name}/>:Object.values(contestData.problems).map((problem, problemIndex) => (
                   <div className={`contest-problem ${isQuestionSolved(contestData.contest_name,problem.name)?"solved-problem":""}`} key={problemIndex}>
                     <div className="problem-main-name">
                       <label>
