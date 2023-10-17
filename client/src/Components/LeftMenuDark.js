@@ -86,11 +86,11 @@ const LeftMenuDark = ({ marked }) => {
       {/* <a href='/' className="logo">AlgoListed</a> */}
       
       <Tooltip title="Version - v2.10">
-        <div className="logo">
+        <a href="../" className="logo">
           {/* Alpha Version */}
             Algolisted
           {/* <div className="small-top">V2.17</div> */}
-        </div>
+        </a>
       </Tooltip>
       <div className="mid-links">
         {
