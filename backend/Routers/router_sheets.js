@@ -41,4 +41,16 @@ router.post('/increase-stars', async (req, res) => {
     }
 });
 
+router.get('/get-by-owner/:ownerId', async (req, res) => {
+    const ownerId = req.params.ownerId;
+
+    const result = await sheetsController.getAllSheetsByOwnerId(ownerId);
+
+    if (result.success) {
+        res.status(200).json({ sheets: result.sheets });
+    } else {
+        res.status(500).json({ message: result.message });
+    }
+});
+
 module.exports = router;

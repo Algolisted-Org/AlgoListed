@@ -120,6 +120,16 @@ const updateStarCount = async (sheetId) => {
     }
 };
 
+const getAllSheetsByOwnerId = async (ownerId) => {
+    try {
+        // Find all sheets with the specified ownerId
+        const sheets = await ProblemSheetsModel.find({ ownerId });
+        return { success: true, sheets };
+    } catch (error) {
+        console.error(error);
+        return { success: false, message: 'Failed to retrieve sheets' };
+    }
+};
 
 
-module.exports = { createProblemSheet, updateProblemSheet, getProblemSheetDetails, updateViewCount, updateStarCount };
+module.exports = { createProblemSheet, updateProblemSheet, getProblemSheetDetails, updateViewCount, updateStarCount, getAllSheetsByOwnerId };

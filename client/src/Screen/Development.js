@@ -37,6 +37,73 @@ const Development = () => {
 
       // var isWeekly = true;
 
+      const [sheetId, setSheetId] = useState('');
+      const [ownerId, setOwnerId] = useState('7');
+      const [sheetName, setSheetName] = useState('');
+      const [sheetDesc, setSheetDesc] = useState('');
+      const [lastUpdated, setLastUpdated] = useState('');
+      
+      const [sheets, setSheets] = useState([]);
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        const curr_time = new Date();
+        setLastUpdated(curr_time);
+
+        const uniqueId = Date.now().toString();
+        setSheetId(uniqueId);
+    
+        // Prepare the data to send in the POST request
+        const data = {
+          sheetId,
+          ownerId,
+          sheetName,
+          sheetDesc,
+          lastUpdated,
+        };
+    
+        try {
+          const response = await fetch('http://localhost:8000/problem-sheets/create', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+    
+          if (response.ok) {
+            const result = await response.json();
+            console.log(result);
+            alert("Success");
+            // Handle success (e.g., show a success message)
+          } else {
+            console.error('Failed to create problem sheet');
+            // Handle the error (e.g., show an error message)
+          }
+        } catch (error) {
+          console.error(error);
+          // Handle network or other errors
+        }
+      };
+
+      const handleGetSheets = () => {
+        // Make an HTTP request to your server to fetch questions
+        fetch(`http://localhost:8000/problem-sheets/get-by-owner/${ownerId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Assuming the response data is an array of questions
+            setSheets(data);
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error('Error fetching sheets:', error);
+          });
+      };
 
     return (
         <Container>
@@ -59,6 +126,36 @@ const Development = () => {
               <ul>
                 <li>The code in the /development file is solid - have tested that it passes leap year and all such sort of stuff!</li>
               </ul>
+            </div>
+            <div className="collection">
+              <h1>4. Testing Backend - Temp </h1>
+              <ul>
+                <li>Here I am testing the create coding sheets code</li>
+              </ul>
+              <div>
+                <h2>Create Problem Sheet</h2>
+                <h4>User is logged in id = {ownerId}</h4>
+                <form onSubmit={handleSubmit}>
+                <div>
+                  <label>Sheet Name:</label>
+                  <input
+                    type="text"
+                    value={sheetName}
+                    onChange={(e) => setSheetName(e.target.value)}
+                  />
+                </div>
+                  <div>
+                    <label>Sheet Description:</label>
+                    <input
+                      type="text"
+                      value={sheetDesc}
+                      onChange={(e) => setSheetDesc(e.target.value)}
+                    />
+                  </div>
+                  <button type="submit">Create Problem Sheet</button>
+                </form>
+              </div>
+              <button onClick={handleGetSheets}>Get Sheets</button>
             </div>
         </Container>
     )
