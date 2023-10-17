@@ -82,8 +82,7 @@ const App = () => {
         {/* <Route path="/showdown-server-anurag/:serverId" element={<ShowdownServerOpenedFBDB/>} /> */}
         <Route path="/development" element={<Development/>} />
         {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
-        <Route path="/:random" element={<PageNotExist/>} />
-        <Route path="/:random/:random" element={<PageNotExist/>} />
+        <Route path="*" element={<PageNotExist/>} />
       </Routes>
       <GoToTop/>
     </div>
