@@ -32,6 +32,7 @@ app.use('/resumes', require('./Routers/router_resumes'));
 app.use('/coding-sheets', require('./Routers/coding_sheets'));
 app.use('/coding-questions', require('./Routers/coding_questions'));
 app.use('/blog-resources', require('./Routers/router_blog_resources'));
+app.use('/user-details', require('./Routers/router_user'));
 
 const port = process.env.PORT || 8000;
 
