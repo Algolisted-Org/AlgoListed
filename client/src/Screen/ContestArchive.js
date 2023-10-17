@@ -22,7 +22,8 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { FaWineBottle } from 'react-icons/fa';
-import NoteMaking from '../MicroComponents/NoteMakingCompo';
+import NoteMaking from './../MicroComponents/NoteMakingCompo';
+
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -40,15 +41,15 @@ const ContestArchive = () => {
   const [checkbox2, setCheckbox2] = useLocalStorage("checkbox2", false);
   const [checkbox3, setCheckbox3] = useLocalStorage("checkbox3", false);
   const [checkbox4, setCheckbox4] = useLocalStorage("checkbox4", false);
-  const [notes, setnotes]=useState ( []) ;
-  const notesadded = (name) => {
-    if(notes.includes(name)){
-      const filterdata = notes.filter(each=>each!==name);
-      setnotes([...filterdata]);
-    }
-    else{
-      setnotes(prev=>[...prev, name]);
-    }
+  const [notes,setnotes]=useState([]);
+  const notesadded=(name)=>{
+       if(notes.includes(name)){
+          const filterdata=notes.filter(each=>each!==name);
+          setnotes([...filterdata])
+       }
+       else{
+        setnotes(prev=>[...prev,name])
+       }
   }
   // const [checkboxShared,setCheckboxShared] = useState(localStorage.getItem("checkboxShared") || {0:false, 1:false, 2:false, 3:false});
   // const [checkboxShared, setCheckboxShared] = useLocalStorageCustom("checkboxShared", []);
@@ -393,42 +394,38 @@ const ContestArchive = () => {
                   <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
                     <EqualizerIcon />
                   </a>
-                  <div className="link" onClick={() => notesadded(contestData.contest_name)} >
+                  <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
                     <CreateIcon />
                   </div>
                 </div>
-                {
-                  notes.includes(contestData.contest_name) ? 
-                  <NoteMaking name={contestData.contest_name}/>
-                  : Object.values(contestData.problems).map((problem, problemIndex) => (
-                    <div className={`contest-problem ${isQuestionSolved(contestData.contest_name,problem.name)?"solved-problem":""}`} key={problemIndex}>
-                      <div className="problem-main-name">
-                        <label>
-                          <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name,problem.name)}/>
-                          Problem Unsolved
-                        </label>
-                        <div className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</div>
-                      </div>
-                      {
-                        showTags ? (
-                          <div className="problem-info">
-                            <div className="tag difficulty-tag">{problem.difficulty}</div>
-                            {problem.tags.map((tag, tagIndex) => (
-                              <div className="tag" key={tagIndex}>
-                                {tag}
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className="problem-info">
-                            <div className="tag">Problem Tags are Hidden</div>
-                          </div>
-                        )
-                      }
-  
+                {notes.includes(contestData.contest_name)?<NoteMaking name={contestData.contest_name}/>:Object.values(contestData.problems).map((problem, problemIndex) => (
+                  <div className={`contest-problem ${isQuestionSolved(contestData.contest_name,problem.name)?"solved-problem":""}`} key={problemIndex}>
+                    <div className="problem-main-name">
+                      <label>
+                        <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name,problem.name)}/>
+                        Problem Unsolved
+                      </label>
+                      <div className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</div>
                     </div>
-                  ))
-                }
+                    {
+                      showTags ? (
+                        <div className="problem-info">
+                          <div className="tag difficulty-tag">{problem.difficulty}</div>
+                          {problem.tags.map((tag, tagIndex) => (
+                            <div className="tag" key={tagIndex}>
+                              {tag}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="problem-info">
+                          <div className="tag">Problem Tags are Hidden</div>
+                        </div>
+                      )
+                    }
+
+                  </div>
+                ))}
               </div>
             ))}
           </div>
