@@ -21,5 +21,16 @@ const getProblemsByProblemId = async (problemId) => {
     }
 };
 
+const getAllProblemsBySheetId = async (sheetId) => {
+    try {
+        // Find all problems with the specified sheetId
+        const problems = await Problem.find({ sheetId });
+        return { success: true, problems };
+    } catch (error) {
+        console.error(error);
+        return { success: false, message: 'Failed to retrieve problems' };
+    }
+};
 
-module.exports = { createProblem, getProblemsByProblemId };
+
+module.exports = { createProblem, getProblemsByProblemId, getAllProblemsBySheetId };

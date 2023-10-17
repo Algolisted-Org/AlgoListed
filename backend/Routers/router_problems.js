@@ -15,6 +15,18 @@ router.get('/get-by-problem/:problemId', async (req, res) => {
     }
 });
 
+router.get('/get-by-sheet/:sheetId', async (req, res) => {
+    const sheetId = req.params.sheetId;
+
+    const result = await SheetProblem.getAllProblemsBySheetId(sheetId);
+
+    if (result.success) {
+        res.status(200).json({ problems: result.problems });
+    } else {
+        res.status(500).json({ message: result.message });
+    }
+});
+
 router.post('/create', async (req, res) => {
     const { problemId, quesLink, sheetId } = req.body;
 
