@@ -15,11 +15,11 @@ const LeftMenuDark = ({ marked }) => {
     //   showAt: "all-blogs",
     //   link: "/blogs/all",
     // },
-    {
-      value: "Showdown Server",
-      showAt: "showdown-server",
-      link: "/showdown-server",
-    }, 
+    // {
+    //   value: "Showdown Server",
+    //   showAt: "showdown-server",
+    //   link: "/showdown-server",
+    // }, 
     {
       value: "Contests Archive",
       showAt: "contests-archive",
@@ -35,11 +35,15 @@ const LeftMenuDark = ({ marked }) => {
       showAt: "resources",
       link: "/resources",
     },
-    
     {
       value: "Coding Sheets",
       showAt: "coding-sheets",
       link: "/coding-sheets/striver-sde-sheet",
+    },
+    {
+      value: "Create Problem List",
+      showAt: "create-problem-list",
+      link: "/create-problem-list",
     },
     {
       value: "Interview Summaries",
@@ -79,7 +83,7 @@ const LeftMenuDark = ({ marked }) => {
     //   showAt: "aptitude-round",
     //   link: "/aptitude-round",
     // },
-  ] 
+  ]  
 
   return (
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>

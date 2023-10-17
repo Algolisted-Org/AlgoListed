@@ -23,10 +23,10 @@ import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
 // import ShowdownServer from './Screen/ShowdownServer';
 // import ShowdownServerOpened from './Screen/ShowdownServerOpened';
-import ShowdownServerFBDB from './firebase-db/ShowdownServer';
-import ShowdownServerOpenedFBDB from './firebase-db/ShowdownServerOpened';
-import ShowdownServer from './Screen/ShowdownServer';
-import ShowdownServerOpened from './Screen/ShowdownServerOpened';
+// import ShowdownServerFBDB from './firebase-db/ShowdownServer';
+// import ShowdownServerOpenedFBDB from './firebase-db/ShowdownServerOpened';
+// import ShowdownServer from './Screen/ShowdownServer';
+// import ShowdownServerOpened from './Screen/ShowdownServerOpened';
 import Development from './Screen/Development';
 import LandingPage3 from './Screen/LandingPage3';
 import ContestArchive from './Screen/ContestArchive';
@@ -64,8 +64,8 @@ const App = () => {
         <Route path="/selected-profiles" element={<SelectedProfiles/>} />
         {/* <Route path="/coding-sheets" element={<CodingSheets/>} /> */}
         <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
-        <Route path="/custom-coding-sheets/create" element={<CreateCustomCodingSheets/>} />
-        <Route path="/custom-coding-sheets/sheet/:sheetId" element={<CreateCustomCodingSheetsEdit/>} />
+        <Route path="/create-problem-list" element={<CreateCustomCodingSheets/>} />
+        <Route path="/create-problem-list/sheet-dashboard/:sheetId" element={<CreateCustomCodingSheetsEdit/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />
         <Route path="/contest-analysis" element={<ContestAnalysisList/>} />
@@ -76,9 +76,9 @@ const App = () => {
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
         {/* <Route path="/showdown-server" element={<ShowdownServer/>} />
         <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
-        <Route path="/showdown-server" element={<ShowdownServer/>} />
+        {/* <Route path="/showdown-server" element={<ShowdownServer/>} /> */}
         {/* <Route path="/showdown-server-anurag" element={<ShowdownServerFBDB/>} /> */}
-        <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} />
+        {/* <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
         {/* <Route path="/showdown-server-anurag/:serverId" element={<ShowdownServerOpenedFBDB/>} /> */}
         <Route path="/development" element={<Development/>} />
         {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
