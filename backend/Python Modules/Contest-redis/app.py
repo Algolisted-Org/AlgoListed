@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/get-prediction', methods=['GET'])
 def get_prediction():
-    weekly_contest = request.args.get('weekly_contest', 'weekly-contest-341')
+    weekly_contest = request.args.get('weekly_contest', 'weekly-contest-367')
     username = request.args.get('username', 'sahapriyam')
     
     
