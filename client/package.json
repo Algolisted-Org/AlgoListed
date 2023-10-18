@@ -11,7 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@uidotdev/usehooks": "^2.4.0",
     "axios": "^1.2.0",
-    "chart.js": "^4.1.2",
+    "chart.js": "^4.4.0",
     "d3": "^7.8.0",
     "d3-scale-chromatic": "^3.0.0",
     "easy-resume-parser": "^1.0.1",
@@ -33,11 +33,12 @@
     "react-spinners": "^0.13.6",
     "redux": "^4.2.0",
     "styled-components": "^5.3.6",
+    "uniqid": "^5.4.0",
     "web-vitals": "^2.1.4",
     "website-scraper": "^5.3.1"
   },
   "scripts": {
-    "start": "set PORT=4000 && react-scripts start",
+    "start": "set PORT=3000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,23 +1,18 @@
-## 🔥 Get Beginner-Level Issues for HacktoberFest 2023 
-As we're gearing up for the project's v2 release, we've introduced a variety of issues that are suitable for beginners. Feel free to explore the issues section for more details.
-<hr/>
-<br/><br/>
+# Algolisted 🚀
+
+[![React Badge](http://img.shields.io/badge/Powered%20By-React-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Website Badge](https://img.shields.io/badge/Visit-Now-green?style=for-the-badge&logo=vercel)](https://algolisted.com/)
+
+![Algolisted (1)](https://github.com/Nayaker/AlgoListed/assets/93304796/1f6f6b12-66c4-49af-82b3-d44ef6c1ef7a)
+
+![GitHub top language](https://img.shields.io/github/languages/top/Nayaker/Algolisted.svg?style=flat)
+![GitHub last commit](https://img.shields.io/github/last-commit/Nayaker/Algolisted.svg?style=flat)
+![ViewCount](https://views.whatilearened.today/views/github/Nayaker/Algolisted.svg?cache=remove)
 
 
-# 🚀 Welcome to Algolisted v1.0 (BETA)
-
-<img width="1440" alt="Screenshot 2023-01-02 at 2 25 53 AM" src="https://user-images.githubusercontent.com/93304796/210184355-8a328a4c-191e-44c4-b36f-a98a26ffe49e.png">
 
 ## About
 
-Welcome to the Algorithmist, a website dedicated to exploring the world of algorithms and data structures. Algorithmist is an open source, educational website for coders.  We are building a community where you can learn and sharpen your data structure skills.  Data structures and algorithms can be difficult, so learning in a community can be one of the best ways to master these techniques.
-
-On our site, you will find a variety of resources and tutorials on topics ranging from basic algorithms to advanced data structures and algorithms. Whether you are a beginner looking to learn the basics or an experienced developer looking to improve your skills, we have something for everyone.
-
-We are constantly working to improve and expand our website, so be sure to check back
-often for new content and updates. We hope you enjoy your time on our site and that you
-find it helpful and informative.
-<br/><br/>
 ## Tech Stack
 This project is created with MERN stack.  A few third party APIs and services are used, such as the Google Spread Sheet APIs, Firebase for deployment, and Cyclic for the backend.
 
@@ -26,7 +21,7 @@ Frontend hosted on Firebase : https://algorithmist-dev.web.app/
 API hosted on cyclic.sh : https://algolisted.cyclic.app/
 
 Main Website : <a href="http://algolisted.com/">algolisted.com</a>
-<br/><br/>
+
 ## Modules of Algorithmist
 <br/>
 <img width="1222" alt="Screenshot 2022-12-16 at 9 14 38 AM" src="https://user-images.githubusercontent.com/93304796/208017207-37510308-f295-42a0-86dc-1de7fe0e6edf.png">
@@ -42,7 +37,7 @@ Main Website : <a href="http://algolisted.com/">algolisted.com</a>
 
 ## Bug Report or Feature Request
 If you encounter a bug, or have a request for a new feature, please open a [New Issue](https://github.com/Nayaker/Algorithmist/issues).
-<br/><br/>
+
 ## Want to Contribute?
 This project is looking for new contributors.  If you are interested in contributing,then follow this
 =>FRONTEND

@@ -20,20 +20,41 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import { useLocalStorage } from "@uidotdev/usehooks";
+import { FaWineBottle } from 'react-icons/fa';
+import NoteMaking from './../MicroComponents/NoteMakingCompo';
+
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
   const [contestType, setContestType] = useState('Weekly Contest');
   const [contestNumber, setContestNumber] = useState('361');
   const [needDarkMode, setNeedDarkMode] = useState(false);
-  const [showTags, setShowTags] = useState(true);
+  const [showTags, setShowTags] = useLocalStorage("showTags", true);
   const [filterContestType, setFilterContestType] = useState("All");
   const [filterContestTypeName, setFilterContestTypeName] = useState("Both Contest Types");
   const [openModel1, setOpenModel1] = useState(false);
   const [openModel2, setOpenModel2] = useState(false);
   const [sliderInputValue, setSliderInputValue] = useState(20);
   const [filteredContestData, setFilteredContestData] = useState(contestsData);
-
+  const [checkbox1, setCheckbox1] = useLocalStorage("checkbox1", false);
+  const [checkbox2, setCheckbox2] = useLocalStorage("checkbox2", false);
+  const [checkbox3, setCheckbox3] = useLocalStorage("checkbox3", false);
+  const [checkbox4, setCheckbox4] = useLocalStorage("checkbox4", false);
+  const [notes,setnotes]=useState([]);
+  const notesadded=(name)=>{
+       if(notes.includes(name)){
+          const filterdata=notes.filter(each=>each!==name);
+          setnotes([...filterdata])
+       }
+       else{
+        setnotes(prev=>[...prev,name])
+       }
+  }
+  // const [checkboxShared,setCheckboxShared] = useState(localStorage.getItem("checkboxShared") || {0:false, 1:false, 2:false, 3:false});
+  // const [checkboxShared, setCheckboxShared] = useLocalStorageCustom("checkboxShared", []);
+  const [checkboxstate,setCheckboxstate]= useState(JSON.parse(localStorage.getItem("checkboxShared")) || null)
+  let arr;
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === 'dark') setNeedDarkMode(true);
@@ -80,6 +101,88 @@ const ContestArchive = () => {
       </div>
     );
   });
+
+  const onClick1 = (e) => {
+    setCheckbox1(e.target.checked)
+  }
+  const onClick2 = (e) => {
+
+    setCheckbox2(e.target.checked)
+  }
+  const onClick3 = (e) => {
+    setCheckbox3(e.target.checked)
+  }
+  const onClick4 = (e) => {
+    setCheckbox4(e.target.checked)
+  }
+
+
+    const onClickShared = (pname, cname) => {
+      pname = pname.toLowerCase().replaceAll(" ", "_");
+      cname = cname.toLowerCase().replaceAll(" ", "_");
+      let x = JSON.parse(window.localStorage.getItem("checkboxShared"));
+      if (!x) {
+        const objToSave = {
+          [cname]: {
+            [pname]: true,
+          }
+        }
+        window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+        setCheckboxstate(objToSave);
+        return;
+      }
+
+      if (!Object.keys(x).includes(cname)) {
+        const objToSave = {
+          ...x,
+          [cname]: {
+            [pname]: true,
+          }
+        }
+        window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+        // console.log(objToSave);
+        setCheckboxstate(objToSave);
+
+        return;
+      }
+
+      if (!Object.keys(x[cname]).includes(pname)) {
+        const objToSave = {
+          ...x,
+          [cname]:
+          {
+            ...x[cname],
+            [pname]: true
+          }
+        }
+        window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+        // console.log(objToSave);
+        setCheckboxstate(objToSave);
+
+
+        return;
+      }
+
+      const newObject = { ...x[cname] }
+      delete newObject[pname];
+
+      const objToSave = {
+        ...x,
+        [cname]: newObject
+      }
+
+      localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+      // console.log(objToSave);
+      setCheckboxstate(objToSave)
+      
+    }
+
+    const isQuestionSolved = (cname,pname)=>{
+      cname = cname.toLowerCase().replaceAll(" ","_");
+      pname = pname.toLowerCase().replaceAll(" ","_");
+      return checkboxstate && checkboxstate?.[cname]&& checkboxstate[cname]?.[pname]
+    }
+  
 
   const redirectToContest = () => {
     const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
@@ -218,23 +321,9 @@ const ContestArchive = () => {
             <b>NOTE</b> : Make sure to pick the kind of contest and the contest number you want, like the Weekly Contest and 365, for example.
           </div> */}
           <div className="visulization">
-            <div className="visulization-cap">Visulization
-              <ExpandLessIcon/>
+            <div className="visulization-cap">Close Visulization
+              <ExpandLessIcon />
             </div>
-            <div className="one-type-visualization">
-              <p className="small-text">
-                Here we are planning to show bar graph of top 5 tags of the <b>filtered contest-problem-set</b>, 
-                the bar graph will be kind of a complex one - Each column of the graph would have three layers of 
-                different colors represent the problem difficulty (easy/medium/hard).
-              </p>
-            </div>
-            <div className="one-type-visualization">
-              <img src="https://venngage-wordpress.s3.amazonaws.com/uploads/2022/01/Colorful-Stacked-Bar-Chart-Template.png" alt="" />
-            </div>
-            <div className="one-type-visualization">
-              <img src="https://i.ytimg.com/vi/FYxpNm33YBA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBzkSliT5dho_jEjc7QF0KVbSFxgw" alt="" />
-            </div>
-            <div className="one-type-visualization"></div>
           </div>
 
           <EffectiveFilter className='noselect'>
@@ -260,10 +349,10 @@ const ContestArchive = () => {
               <div className="filter-item">B</div>
               <div className="filter-item">C</div>
               <div className="filter-item">D</div> */}
-							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
-							{/* <div className="filter-item">Show Unsolved</div>  */}
-						</div>
-					</EffectiveFilter>
+              <div className="filter-item" onClick={() => { setShowTags(!showTags); }}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+              {/* <div className="filter-item">Show Unsolved</div>  */}
+            </div>
+          </EffectiveFilter>
           {
             openModel2 ? (
               <SliderSelector>
@@ -281,87 +370,25 @@ const ContestArchive = () => {
           
 
           <div className="problems-table">
-            <div className="one-contest-problems">
-              <div className="contest-name">Dummy Contest 1</div>
-              <div className="contest-outlinks">
-                <a target='_blank' className="link">
-                  <CallMadeIcon/>
-                </a> 
-                <a target='_blank' className="link">
-                  <EqualizerIcon/>
-                </a>
-                <div className="link">
-                  <CreateIcon/>
-                </div>
-              </div>
-              <div className="contest-problem">
-                <div className="problem-main-name">
-                  <label>
-                    <input type="checkbox" />
-                    Problem Unsolved
-                  </label>
-                  <div className="problem-name">A. I am Dummy</div>
-                </div>
-                <div className="problem-info">
-                  <div className="tag">Problem Tags are Hidden</div>
-                </div>
-              </div>
-              <div className="contest-problem solved-problem">
-                <div className="problem-main-name">
-                  <label>
-                    <input type="checkbox" />
-                    Problem Unsolved
-                  </label>
-                  <div className="problem-name">B. I am Dummy</div>
-                </div>
-                <div className="problem-info">
-                  <div className="tag">Problem Tags are Hidden</div>
-                </div>
-              </div>
-              <div className="contest-problem">
-                <div className="problem-main-name">
-                  <label>
-                    <input type="checkbox" />
-                    Problem Unsolved
-                  </label>
-                  <div className="problem-name">C. I am Dummy</div>
-                </div>
-                <div className="problem-info">
-                  <div className="tag">Problem Tags are Hidden</div>
-                </div>
-              </div>
-              <div className="contest-problem">
-                <div className="problem-main-name">
-                  <label>
-                    <input type="checkbox" />
-                    Problem Unsolved
-                  </label>
-                  <div className="problem-name">D. I am Dummy</div>
-                </div>
-                <div className="problem-info">
-                  <div className="tag">Problem Tags are Hidden</div>
-                </div>
-              </div>
-            </div>
             {filteredContestData.map((contestData, index) => (
-                <div className="one-contest-problems" key={index}>
-                  <div className="contest-name">{contestData.contest_name}</div>
-                  <div className="contest-outlinks">
-                    <a href={contestData.contest_link} target='_blank' className="link">
-                      <CallMadeIcon/>
-                    </a> 
-                    <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
-                      <EqualizerIcon/>
-                    </a>
-                    <div className="link">
-                      <CreateIcon/>
-                    </div>
+              <div className="one-contest-problems" key={index}>
+                <div className="contest-name">{contestData.contest_name}</div>
+                <div className="contest-outlinks">
+                  <a href={contestData.contest_link} target='_blank' className="link">
+                    <CallMadeIcon />
+                  </a>
+                  <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
+                    <EqualizerIcon />
+                  </a>
+                  <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
+                    <CreateIcon />
                   </div>
-                  {Object.values(contestData.problems).map((problem, problemIndex) => (
-                    <div className="contest-problem" key={problemIndex}>
+                </div>
+                {notes.includes(contestData.contest_name)?<NoteMaking name={contestData.contest_name}/>:Object.values(contestData.problems).map((problem, problemIndex) => (
+                  <div className={`contest-problem ${isQuestionSolved(contestData.contest_name,problem.name)?"solved-problem":""}`} key={problemIndex}>
                     <div className="problem-main-name">
                       <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name,problem.name)}/>
                         Problem Unsolved
                       </label>
                       <div className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</div>
@@ -381,7 +408,6 @@ const ContestArchive = () => {
                           <div className="tag">Problem Tags are Hidden</div>
                         </div>
                       )
-
                     }
                     
                   </div>
@@ -533,7 +559,7 @@ const Container = styled.div`
 
       .visulization{
         position: relative;
-        height: 200px;
+        height: 400px;
         width: 100%;
         background-color: #ffffff;
         border-radius: 20px;

@@ -588,7 +588,6 @@ const CodingSheets = () => {
 					</Filters>
 
 					<Filters>
-
 						{filters}
 					</Filters>
 
