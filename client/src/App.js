@@ -32,6 +32,7 @@ import LandingPage3 from './Screen/LandingPage3';
 import ContestArchive from './Screen/ContestArchive';
 import CreateCustomCodingSheets from './Screen/CreateCustomCodingSheets';
 import CreateCustomCodingSheetsEdit from './Screen/CreateCustomCodingSheetsEdit';
+import ResumeQuestions from './Screen/ResumeQuestions';
 
 const App = () => {
   return (
@@ -81,6 +82,7 @@ const App = () => {
         {/* <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
         {/* <Route path="/showdown-server-anurag/:serverId" element={<ShowdownServerOpenedFBDB/>} /> */}
         <Route path="/development" element={<Development/>} />
+        <Route path="/resume-questions" element={<ResumeQuestions/>} />
         {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="*" element={<PageNotExist/>} />
       </Routes>

@@ -321,23 +321,9 @@ const ContestArchive = () => {
             <b>NOTE</b> : Make sure to pick the kind of contest and the contest number you want, like the Weekly Contest and 365, for example.
           </div> */}
           <div className="visulization">
-            <div className="visulization-cap">Visulization
+            <div className="visulization-cap">Close Visulization
               <ExpandLessIcon />
             </div>
-            <div className="one-type-visualization">
-              <p className="small-text">
-                Here we are planning to show bar graph of top 5 tags of the <b>filtered contest-problem-set</b>,
-                the bar graph will be kind of a complex one - Each column of the graph would have three layers of
-                different colors represent the problem difficulty (easy/medium/hard).
-              </p>
-            </div>
-            <div className="one-type-visualization">
-              <img src="https://venngage-wordpress.s3.amazonaws.com/uploads/2022/01/Colorful-Stacked-Bar-Chart-Template.png" alt="" />
-            </div>
-            <div className="one-type-visualization">
-              <img src="https://i.ytimg.com/vi/FYxpNm33YBA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBzkSliT5dho_jEjc7QF0KVbSFxgw" alt="" />
-            </div>
-            <div className="one-type-visualization"></div>
           </div>
 
           <EffectiveFilter className='noselect'>
@@ -573,7 +559,7 @@ const Container = styled.div`
 
       .visulization{
         position: relative;
-        height: 200px;
+        height: 400px;
         width: 100%;
         background-color: #ffffff;
         border-radius: 20px;

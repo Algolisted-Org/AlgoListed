@@ -45,10 +45,15 @@ const LeftMenuDark = ({ marked }) => {
       showAt: "create-problem-list",
       link: "/create-problem-list",
     },
+    // {
+    //   value: "Interview Summaries",
+    //   showAt: "interview-summaries",
+    //   link: "/interview-summaries",
+    // },
     {
-      value: "Interview Summaries",
-      showAt: "interview-summaries",
-      link: "/interview-summaries",
+      value: "Resume Questions",
+      showAt: "resume-questions",
+      link: "/resume-questions",
     },
     
     
