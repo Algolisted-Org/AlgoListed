@@ -18,6 +18,7 @@ import * as calcA from "../Components/DummyPredictRatingforLC/calcA";
 import * as calcB from "../Components/DummyPredictRatingforLC/calcA";
 import * as calcC from "../Components/DummyPredictRatingforLC/calcA";
 import * as calcD from "../Components/DummyPredictRatingforLC/calcA";
+
 const ContestAnalysis = () => {
   const [platformName, setPlatformName] = useState("leetcode");
   const [chartData, setChartData] = useState(null);
@@ -39,6 +40,10 @@ const ContestAnalysis = () => {
 
   const [SessionUserCountChange, setSessionUserCountChange] = useState(0);
   const { contestName } = useParams();
+
+  useEffect(() => {
+    document.title = "Contest Analysis - Algolisted";
+  }, []);
 
   // console.log(calcA.calculateValue(5000));
   // console.log(calcB.calculateValue(5000));
