@@ -5,6 +5,12 @@
 
 ![Algolisted (1)](https://github.com/Nayaker/AlgoListed/assets/93304796/1f6f6b12-66c4-49af-82b3-d44ef6c1ef7a)
 
+![GitHub top language](https://img.shields.io/github/languages/top/Nayaker/Algolisted.svg?style=flat)
+![GitHub last commit](https://img.shields.io/github/last-commit/Nayaker/Algolisted.svg?style=flat)
+![ViewCount](https://views.whatilearened.today/views/github/Nayaker/Algolisted.svg?cache=remove)
+
+
+
 ## About
 
 ## Tech Stack
