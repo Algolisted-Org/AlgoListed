@@ -3,6 +3,8 @@
 [![React Badge](http://img.shields.io/badge/Powered%20By-React-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
 [![Website Badge](https://img.shields.io/badge/Visit-Now-green?style=for-the-badge&logo=vercel)](https://algolisted.com/)
 
+![Algolisted](https://github.com/Nayaker/AlgoListed/assets/93304796/a7adcd78-2f3a-4e6a-9222-19c1838df036)
+
 ## 🔥 Get Beginner-Level Issues for HacktoberFest 2023 
 As we're gearing up for the project's v2 release, we've introduced a variety of issues that are suitable for beginners. Feel free to explore the issues section for more details.
 <hr/>
