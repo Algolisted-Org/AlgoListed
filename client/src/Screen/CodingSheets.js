@@ -20,7 +20,8 @@ import UpdateIcon from '@material-ui/icons/Update';
 import CreateIcon from '@material-ui/icons/Create';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
-import { Link as RouterLink }from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import CallMadeIcon from '@material-ui/icons/CallMade';
 
 import {
 	CircularProgressbar,
@@ -58,7 +59,7 @@ const CodingSheets = () => {
 		setNeedDarkMode(!needDarkMode);
 	};
 	// ----- FOR DARK MODE -----
-	
+
 	// console.log(selectedLabel);
 	// console.log(data);
 
@@ -66,7 +67,7 @@ const CodingSheets = () => {
 		setSelectedLabel(label);
 	}
 
-	
+
 
 	const params = useParams();
 	const { sheetname } = params;
@@ -152,18 +153,14 @@ const CodingSheets = () => {
 		"circular-linked-list",
 		"Biconnected Component"
 	];
-useEffect(()=>{
-if(filteredData.length<1){
-	setFilteredData(data)
-}
-},[filteredData])
+
 	useEffect(() => {
 		// retrieve the data from the server
 		axios
 			// .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
 			.get(`https://algolisted.cyclic.app/coding-questions/question/${sheetname}`)
 			.then((res) => {
-				
+
 				// retrieve the "completed" status of each sheet from the local storage
 				let updatedData = res.data.map((sheet) => {
 					const completed = localStorage.getItem(`completedSheetQuestion-${sheet._id}`);
@@ -199,9 +196,9 @@ if(filteredData.length<1){
 		// update the "completed" field for the coding sheet at the specified index
 		const updatedData = [...data];
 		let index = 0, len = data.length;
-		
-		for(; index < len; index++) {
-			if(updatedData[index]._id == id) break;
+
+		for (; index < len; index++) {
+			if (updatedData[index]._id == id) break;
 		}
 
 		updatedData[index].completed = !updatedData[index].completed;
@@ -209,7 +206,7 @@ if(filteredData.length<1){
 		setCompletedCount(
 			(prevCount) => prevCount + (updatedData[index].completed ? 1 : -1)
 		);
-		
+
 		var solvedQuestions = [];
 		for (let i = 0; i < len; i++) {
 			if (updatedData[i].completed == true) solvedQuestions.push(updatedData[i]);
@@ -241,7 +238,7 @@ if(filteredData.length<1){
 
 	const filters = codingSheetsFilters.map((item) => {
 		return (
-			<a 
+			<a
 				href={item.domainFilter}
 				key={item.id}
 				className={
@@ -261,7 +258,7 @@ if(filteredData.length<1){
 	];
 
 	// const colors = ["#de79ef", "#df6cf7", "#e061ff", "#e15754", "#e24d08", "#e3430c", "#e4390f", "#e53011", "#e6281a", "#e72122", "#e81b29", "#e91730", "#ea123c", "#eb0f4c", "#ec0c5e", "#ed0974", "#ee0695", "#ef03bb", "#f000e4", "#cfff95"];
-	
+
 	// const colors = ["#F5F5DC", "#F8F8FF", "#FAEBD7", "#FFF0F5", "#FFF5EE", "#FFF8DC", "#FFFACD", "#FFFAF0", "#FFFAFA", "#FFFFF0", "#FFFFFF", "#F0F8FF", "#F0FFFF", "#F4F4F4", "#F5F5F5", "#F5FFFA", "#F7F7F7", "#F8F8F8", "#FAF0E6", "#FAFAD2", "#FBFBFB", "#FCFCFC", "#FDF5E6", "#FFEFD5"];
 
 
@@ -566,9 +563,9 @@ if(filteredData.length<1){
 			</MobContainer>
 			<Container>
 				{
-					selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+					selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
 				}
-				{ 
+				{
 					selectedTheme == "dark" ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
 				}
 				<div className="cc-middle-content">
@@ -582,8 +579,17 @@ if(filteredData.length<1){
 							As we continue to develop our platform, we do not currently require users to create accounts. As a result, any progress made is saved locally in your device's storage. Therefore, it's recommended to not clear your browser's cache.
 						</div>
 					</div>
+					<Filters>
+						<a href="/custom-coding-sheets/create" className="filter2">
+							Explore custom coding sheets
+							<CallMadeIcon />
+							<div className="tag">New Feature 🔥</div>
+						</a>
+					</Filters>
 
-					<Filters>{filters}</Filters>
+					<Filters>
+						{filters}
+					</Filters>
 
 					<SheetMessage>
 						<div className="text">
@@ -615,7 +621,7 @@ if(filteredData.length<1){
 										<div className="canvas-container">
 											<div className="top-label">
 												<div className={showSolvedChart ? "label-item" : "label-item selected"} onClick={() => setShowSolvedChart(false)}>Problem Tags in Sheet</div>
-												<div className={!showSolvedChart ? "label-item" : "label-item selected"} 
+												<div className={!showSolvedChart ? "label-item" : "label-item selected"}
 													onClick={solvedData.length > 0 ? () => setShowSolvedChart(true) : () => alert("You need to solve atleast one problem to use this feature.")}
 												>Solved Tags</div>
 											</div>
@@ -623,7 +629,7 @@ if(filteredData.length<1){
 												showSolvedChart ? (
 													<>
 														<div className="canvas-graph">
-															
+
 															<DoughnutChart chartData={chartDataSolved} options={options}></DoughnutChart>
 														</div>
 														<div className="graph-labels">
@@ -640,7 +646,7 @@ if(filteredData.length<1){
 															}
 														</div>
 													</>
-												):(
+												) : (
 													<>
 														<div className="canvas-graph">
 															<DoughnutChart chartData={chartData} options={options}></DoughnutChart>
@@ -661,7 +667,7 @@ if(filteredData.length<1){
 													</>
 												)
 											}
-											
+
 										</div>
 										<div className="learn-self-graph">
 											<div className="top-label">
@@ -756,7 +762,7 @@ if(filteredData.length<1){
 							<label htmlFor="hard">Hard</label>
 						</div>
 						<div className="right">
-							<Tagsfilter tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData}/>
+							<Tagsfilter data={data} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
@@ -768,7 +774,7 @@ if(filteredData.length<1){
 								<LinearProgress />
 							</>
 						) : (
-							filteredData.map((item, index) => {
+							filteredData.length === 0 ? <h1>Not found</h1> : filteredData.map((item, index) => {
 								return (
 									<div
 										key={index}
@@ -800,7 +806,7 @@ if(filteredData.length<1){
 														<></>
 													)}
 													{item.tags.map((tagItem, tagIndex) => {
-														if(showTags){
+														if (showTags) {
 															return (
 																<div className="tag" key={tagIndex}>
 																	{tagItem}
@@ -1116,7 +1122,7 @@ const Container = styled.div`
 			background-color: #d5f7e1;
 			border-radius: 5px;
 			padding: 10px;
-			margin: 20px 0 10px 0;
+			margin: 20px 0 40px 0;
 
 			.text {
 				font-size: 0.8rem;
@@ -1275,7 +1281,7 @@ const Container = styled.div`
 const Filters = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	margin: 80px 0 10px 0;
+	margin: 10px 0 10px 0;
 
 	.filter {
 		padding: 7.5px 15px;
@@ -1295,6 +1301,53 @@ const Filters = styled.div`
 			cursor: pointer;
 		}
 	}
+
+	.filter2{
+		position: relative;
+		padding: 7.5px 15px;
+		font-size: 0.8rem;
+		border: 1px solid #b9afaf;
+		border-radius: 500px;
+		margin: 0px 5px 5px 0px;
+		font-weight: 300;
+		text-decoration: none;
+		color: inherit;
+		display: flex;
+		align-items: center;
+
+		svg{
+			font-size: 1rem;
+			margin-left: 5px;
+		}
+
+		&:hover {
+			border-color: #201f1f;
+			background-color: #201f1f;
+			color: #ebdddd;
+			transition-duration: 250ms;
+			cursor: pointer;
+
+			svg{
+				fill: #ebdddd;
+			}
+		}
+
+		svg{
+			font-size: 1rem;
+			margin-left: 5px;
+		}
+
+		.tag{
+			position: absolute;
+			padding: 2.5px 7.5px;
+			font-size: 0.65rem;
+			background-color: orange;
+			border-radius: 100px;
+			left: -10px;
+			top: -12.5px;
+		}
+	}
+
 
 	.selected {
 		/* background-color: #ded7d7;

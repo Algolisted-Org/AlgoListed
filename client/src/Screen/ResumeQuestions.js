@@ -4,8 +4,11 @@ import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus'
 import CCHeaderPlus from '../Components/CCHeaderPlus'
 import LeftMenu from '../Components/LeftMenu'
 import LeftMenuDark from '../Components/LeftMenuDark'
+// import { PdfReader } from "pdfreader";
+// const { PdfReader } = require('pdfreader');
+import AttachmentIcon from '@material-ui/icons/Attachment';
 
-const Template = () => {
+const ResumeQuestions = () => {
     const [needDarkMode, setNeedDarkMode] = useState(false);
     
     useEffect(() => {
@@ -14,7 +17,7 @@ const Template = () => {
     }, []);
   
     useEffect(() => {
-      document.title = "Template Page - Algolisted";
+      document.title = "Resume Questions Page";
     }, []);
   
     console.log("needDarkMode : ", needDarkMode);
@@ -34,31 +37,32 @@ const Template = () => {
                     needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
                 }
                 {
-                    needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
+                    needDarkMode ? <LeftMenuDark marked={"resume-questions"} /> : <LeftMenu marked={"resume-questions"} />
                 }
                 {/* ---> change this all-blogs to your desired page-id */}
 
                 <div className="cc-middle-content">
-                    <h1 className='main-heading'>Template Name Here</h1>
+                    <h1 className='main-heading'>Resume Based Questions <div className="head-tag">Powered by Algolisted Ai <img draggable="false" src="https://static.wixstatic.com/media/592002_0f04cb41e098424588d09e2fba76ec65~mv2.gif" alt="" /></div></h1>
                     <p className="heading-supporter">
-                        Random Text : We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
+                      Using this feature, once you've uploaded your resume, our AI identifies the specific qualities your target company is looking for and then poses questions that match those company preferences. This encompasses your preparation for non-technical interview rounds, such as HR and project-related discussions.
                     </p>
-                    <div className="message">
+                    {/* <div className="message">
                         <div className="icon"></div>
                         <div className="text">
                             Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
                         </div>
-                    </div>
+                    </div> */}
+                    <button className='btn-1'><AttachmentIcon/> Attach your Resume</button>
                 </div>
             </Container>
         </GrandContainer>
     )
 }
 
-export default Template
+export default ResumeQuestions
 
 const GrandContainer = styled.div`
-
+  
 `
 
 const MobContainer = styled.div`
@@ -112,7 +116,26 @@ const Container = styled.div`
       .main-heading{
           font-size: 1.65rem;
           font-weight: 600;
-          color: #292929;
+          display: flex; 
+          align-items: center;
+
+          .head-tag{
+            display: inline;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.25rem 0.5rem;
+            padding-right: 35px;
+            border-radius: 100px;
+            background-color: #a5bb26;
+            margin-left: 10px;
+
+            img{
+                position: absolute;
+                height: 2rem;
+                margin-top: -7.5px;
+                margin-left: -5px;
+            }
+          }
       }
 
       .heading-supporter{
@@ -143,6 +166,16 @@ const Container = styled.div`
             color: #13803b;
             font-weight: 300;
             
+        }
+      }
+
+      .btn-1{
+        padding: 5px 10px;
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+        svg{
+          margin-right: 5px;
         }
       }
     }

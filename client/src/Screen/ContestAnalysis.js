@@ -42,8 +42,10 @@ const ContestAnalysis = () => {
   const { contestName } = useParams();
 
   useEffect(() => {
-    document.title = "Contest Analysis - Algolisted";
+
+      document.title = "Contest Analysis - Algolisted";
   }, []);
+  
 
   // console.log(calcA.calculateValue(5000));
   // console.log(calcB.calculateValue(5000));
