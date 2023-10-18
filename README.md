@@ -1,3 +1,8 @@
+# Algolisted BETA v2.10 🚀
+
+[![React Badge](http://img.shields.io/badge/Powered%20By-React-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Website Badge](https://img.shields.io/badge/Visit-Now-green?style=for-the-badge&logo=vercel)](https://algolisted.com/)
+
 ## 🔥 Get Beginner-Level Issues for HacktoberFest 2023 
 As we're gearing up for the project's v2 release, we've introduced a variety of issues that are suitable for beginners. Feel free to explore the issues section for more details.
 <hr/>
