@@ -2,6 +2,7 @@ import redis
 from flask import Flask, request, jsonify
 import requests
 import json
+import calendar
 # Make Redis
 from datetime import datetime
 redis_cache = redis.Redis(host='localhost', port=6379, db=0)
@@ -9,13 +10,15 @@ redis_cache = redis.Redis(host='localhost', port=6379, db=0)
 # Make Flask app
 app = Flask(__name__)
 def is_contest_time():
+    current_date = datetime.now().date()
+    week_number = current_date.isocalendar()[1]
     current_time_in_utc = datetime.utcnow()
     if current_time_in_utc.weekday() == 6:  
         if (current_time_in_utc.hour == 2 and current_time_in_utc.minute >= 30) or \
            (current_time_in_utc.hour == 3) or \
            (current_time_in_utc.hour == 4 and current_time_in_utc.minute == 0):
             return True
-    elif current_time_in_utc.weekday() == 5:
+    elif (week_number==2 or week_number==4) and current_time_in_utc.weekday() == 5:
         if (current_time_in_utc.hour == 13 and current_time_in_utc.minute >= 30) or \
            (current_time_in_utc.hour == 14) or \
            (current_time_in_utc.hour == 15 and current_time_in_utc.minute == 0):
