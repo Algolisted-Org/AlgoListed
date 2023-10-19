@@ -14,6 +14,7 @@ import BuyMeACoffee from './BuyMeACoffee';
 import Fade from 'react-reveal/Fade';
 import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import CallMadeIcon from '@material-ui/icons/CallMade';
 
 const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => { 
   const [showAccountModel, setShowAccountModel] = useState(false);
@@ -84,9 +85,9 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
           <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
         </div> */}
 
-        <a className="nav-adv" href='https://bit.ly/3t1AktU' target={"_blank"}>
-          <div className="text">Master complete DSA as a beginner <b>absolutely free</b> with <b>Love Babbar</b></div>
-          <div className="promotion-tag linear-gradient">Promotion</div>
+        <a className="nav-adv" href='/' target={"_blank"}>
+          <div className="text">Thanks for being a <b>BETA Tester</b> - Report bugs and suggest improvements. <CallMadeIcon/> </div>
+          <div className="promotion-tag linear-gradient">BETA v2.10</div>
         </a>
 
       {/* <div className="top-header">
@@ -280,7 +281,6 @@ const Container = styled.div`
 
         b{
           font-weight: 600;
-          margin: 0 3.5px;
           color: #9db2d9;
           /* background-color: #f3ec78; */
           /* background-image: linear-gradient(92deg,#6e93db,#819b81); */
@@ -289,6 +289,11 @@ const Container = styled.div`
             /* -moz-background-clip: text; */
             /* -webkit-text-fill-color: transparent;  */
             /* -moz-text-fill-color: transparent; */
+        }
+
+        svg{
+          font-size: 1rem;
+          fill: #9db2d9;
         }
       }
 

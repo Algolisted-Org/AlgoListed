@@ -140,7 +140,7 @@ const CreateCustomCodingSheetsEdit = () => {
                     <div className="controls">
                         <div className='export-btn'>
                             <LinkIcon />
-                            New data currently stored stored as temporary - Export Sheet Link to save to server!
+                            Click to Save and Export Problem Sheet Link
                         </div>
                         <div className="add-link">
                             <div className='options'>

@@ -79,7 +79,7 @@ const ContestAnalysis = () => {
   useEffect(() => {
     axios
       .get(
-        `https://nayak-leetcode-api.vercel.app/?weekly_contest=${contestName}`
+        `https://mark2.vercel.app/?contest=${contestName}`
       )
       // .get(`https://nayak-leetcode-api.vercel.app/?weekly_contest=weekly-contest-352`)
       .then((res) => {
