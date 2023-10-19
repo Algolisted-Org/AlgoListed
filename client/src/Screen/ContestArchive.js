@@ -23,12 +23,14 @@ import Slider from '@material-ui/core/Slider';
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { FaWineBottle } from 'react-icons/fa';
 import NoteMaking from './../MicroComponents/NoteMakingCompo';
+import { Bar } from 'react-chartjs-2';
 
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
   const [contestType, setContestType] = useState('Weekly Contest');
   const [contestNumber, setContestNumber] = useState('361');
+  const [openVisualiser, setOpenVisualiser] = useState(true);
   const [needDarkMode, setNeedDarkMode] = useState(false);
   const [showTags, setShowTags] = useLocalStorage("showTags", true);
   const [filterContestType, setFilterContestType] = useState("All");
@@ -37,6 +39,10 @@ const ContestArchive = () => {
   const [openModel2, setOpenModel2] = useState(false);
   const [sliderInputValue, setSliderInputValue] = useState(20);
   const [filteredContestData, setFilteredContestData] = useState(contestsData);
+  const [problemAIsChecked, setProblemAIsChecked] = useState(true);
+  const [problemBIsChecked, setProblemBIsChecked] = useState(true);
+  const [problemCIsChecked, setProblemCIsChecked] = useState(true);
+  const [problemDIsChecked, setProblemDIsChecked] = useState(true);
   const [checkbox1, setCheckbox1] = useLocalStorage("checkbox1", false);
   const [checkbox2, setCheckbox2] = useLocalStorage("checkbox2", false);
   const [checkbox3, setCheckbox3] = useLocalStorage("checkbox3", false);
@@ -284,6 +290,104 @@ const ContestArchive = () => {
     return contestAnalysisURL;
   }
 
+  const tagsMappedToProblems = {
+    A: {},
+    B: {},
+    C: {},
+    D: {}
+  };
+
+  filteredContestData.forEach(contest => {
+    Object.keys(contest.problems).forEach(problemKey => {
+      const problem = contest.problems[problemKey];
+
+      problem.tags.forEach(tag => {
+        if (!(tag in tagsMappedToProblems[problemKey])) {
+          tagsMappedToProblems[problemKey][tag] = [];
+        }
+
+        tagsMappedToProblems[problemKey][tag].push(problem);
+      });
+    });
+  });
+
+  const allTags = new Set();
+
+  for (const problemKey in tagsMappedToProblems) {
+    const problem = tagsMappedToProblems[problemKey];
+    Object.keys(problem).forEach(tag => {
+      allTags.add(tag);
+    });
+  }
+
+  Object.keys(tagsMappedToProblems).forEach((problem) => {
+    const tagsInProblem = tagsMappedToProblems[problem]
+    allTags.forEach((tag) => {
+      if (!(tag in tagsInProblem)) {
+        tagsMappedToProblems[problem][tag] = [];
+      }
+    })
+  })
+  console.log(tagsMappedToProblems)
+  
+  
+  const sortedTags = Object.keys(tagsMappedToProblems['A'])
+  sortedTags.sort();
+  
+  const dataForTagsInA = [];
+  const dataForTagsInB = [];
+  const dataForTagsInC = [];
+  const dataForTagsInD = [];
+  for(const tag of sortedTags) {
+    dataForTagsInA.push(tagsMappedToProblems['A'][tag].length);
+    dataForTagsInB.push(tagsMappedToProblems['B'][tag].length);
+    dataForTagsInC.push(tagsMappedToProblems['C'][tag].length);
+    dataForTagsInD.push(tagsMappedToProblems['D'][tag].length);
+  }
+  
+const problems = [
+  { isChecked: problemAIsChecked, label: 'Problem A', data: dataForTagsInA, backgroundColor: '#43d640' },
+  { isChecked: problemBIsChecked, label: 'Problem B', data: dataForTagsInB, backgroundColor: '#23ae20' },
+  { isChecked: problemCIsChecked, label: 'Problem C', data: dataForTagsInC, backgroundColor: '#c77248' },
+  { isChecked: problemDIsChecked, label: 'Problem D', data: dataForTagsInD, backgroundColor: '#cf3838' },
+];
+
+const datasets = problems
+  .filter(problem => problem.isChecked)
+  .map(problem => ({
+    label: problem.label,
+    data: problem.data,
+    backgroundColor: problem.backgroundColor,
+  }));
+
+  const data = {
+    labels: sortedTags,
+    datasets: datasets,
+  };
+
+  const barChartOptions = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+      // title: {
+      //   display: true,
+      //   text: 'Chart.js Bar Chart - Stacked'
+      // },
+    },
+    responsive: true,
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+      },
+    },
+  };
 
   return (
     <GrandContainer>
@@ -320,16 +424,56 @@ const ContestArchive = () => {
           {/* <div className="note">
             <b>NOTE</b> : Make sure to pick the kind of contest and the contest number you want, like the Weekly Contest and 365, for example.
           </div> */}
-          <div className="visulization">
-            <div className="visulization-cap">Close Visulization
-              <ExpandLessIcon />
+          <div className={openVisualiser ? "visualization" : "closed-visualization"}>
+            {openVisualiser ?
+              <div className='stacked-bar-chart'>
+                <Bar options={barChartOptions} data={data}/>
+                <div className='legends'>
+                    <div className='legend'>
+                      <input type="checkbox" className="checkbox" checked={problemAIsChecked} onChange={()=>{
+                        setProblemAIsChecked((prevState) => {
+                        return !prevState
+                      })}}/>
+                      <div className='problem-A'/>
+                      <label className='legend-label' for="problem A">Problem A</label>
+                    </div>
+                    <div className='legend'>
+                      <input type="checkbox" checked={problemBIsChecked} className="checkbox" onChange={()=> {
+                        setProblemBIsChecked((prevState) => {
+                        return !prevState
+                      })}}/>
+                      <div className='problem-B'/>
+                      <label className='legend-label' for="problem B">Problem B</label>
+                    </div>
+                    <div className='legend'>
+                      <input type="checkbox" checked={problemCIsChecked} className="checkbox" onChange={()=> {
+                        setProblemCIsChecked((prevState) => {
+                        return !prevState
+                      })}}/>
+                      <div className='problem-C'/>
+                      <label className='legend-label' for="problem C">Problem C</label>
+                    </div>
+                    <div className='legend'>
+                      <input type="checkbox" checked={problemDIsChecked} className="checkbox" onChange={()=> {
+                        setProblemDIsChecked((prevState) => {
+                        return !prevState
+                      })}}/>
+                      <div className='problem-D'/>
+                      <label className='legend-label' for="problem D">Problem D</label>
+                    </div>
+                </div>
+              </div>
+            : <div></div>}
+            <div className="visualization-cap"  onClick={() => setOpenVisualiser((prevState) => !prevState)}>
+              {openVisualiser ? 'Close Visualization' : 'Open Visualization'}
+              {openVisualiser ? <ExpandLessIcon /> : <ExpandMoreIcon/>}
             </div>
           </div>
 
           <EffectiveFilter className='noselect'>
             <div className="left">
               <div className="filter-item noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
-                {openModel1 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                 {
                   openModel1 ? (
                     <ShowAbsoluteModelDropDown>
@@ -557,17 +701,25 @@ const Container = styled.div`
         }
       }
 
-      .visulization{
-        position: relative;
-        height: 400px;
-        width: 100%;
-        background-color: #ffffff;
-        border-radius: 20px;
-        margin: 50px 0 20px 0;
-        border: 1px solid rgb(209, 213, 219);
-        display: flex;
+        .closed-visualization {
+          border-top: 1px solid rgb(209, 213, 219);
+          position: relative;
+          width: 100%;
+          margin: 50px 0 30px 0;
+          animation: slide-up 0.2s linear both;
+          
+          @keyframes slide-up {
+            from {
+              visibility: visible;
+              height: 590px;
+            }
 
-        .visulization-cap {
+            to {
+              height: 30px;
+            }
+          }
+
+          .visualization-cap {
             position: absolute;
             height: 30px;
             border-radius: 100px;
@@ -580,6 +732,111 @@ const Container = styled.div`
             align-items: center;
             font-size: 0.8rem;
             font-weight: 300;
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            svg{
+              font-size: 1.25rem;
+              margin-left: 5px;
+            }
+          }
+        }
+
+      .visualization{
+        position: relative;
+        height: 590px;
+        width: 100%;
+        background-color: #ffffff;
+        border-radius: 20px;
+        margin: 50px 0 20px 0;
+        border: 1px solid rgb(209, 213, 219);
+        animation: slide-down 0.3s linear both;
+
+        @keyframes slide-down {
+          0% {
+            height: 30px;
+          }
+
+          100% {
+            visibility: visible;
+            height: 590px;
+          }
+        }
+
+        .stacked-bar-chart {
+          padding: 40px 50px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: 13px;
+
+          .legends {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            margin-top: 10px;
+            
+            .legend {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+
+              .checkbox {
+                height: 12px;
+                width: 12px;
+              }
+              
+              .problem-A {
+                background-color: #43d640;
+                height: 12px;
+                width: 12px;
+                margin: 0px 5px;
+              }
+              
+              .problem-B {
+                background-color: #23ae20;
+                height: 12px;
+                width: 12px;
+                margin: 0px 5px;
+              }
+              .problem-C {
+                background-color: #c77248;
+                height: 12px;
+                width: 12px;
+                margin: 0px 5px;
+              }
+              .problem-D {
+                background-color: #cf3838;
+                height: 12px;
+                width: 12px;
+                margin: 0px 5px;
+              }
+            }
+          }
+        }
+
+        .visualization-cap {
+            position: absolute;
+            height: 30px;
+            border-radius: 100px;
+            background-color: #f3f4f7;
+            border: 1px solid rgb(209, 213, 219);
+            left: -15px;
+            top: -15px;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 300;
+
+            &:hover {
+              cursor: pointer;
+            }
 
             svg{
               font-size: 1.25rem;
@@ -769,6 +1026,7 @@ const Container = styled.div`
         }
       }
     }
+
 `
 
 const Filters = styled.div`
