@@ -22,14 +22,10 @@ import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
 import { Link as RouterLink } from 'react-router-dom';
 import CallMadeIcon from '@material-ui/icons/CallMade';
-
-import {
-	CircularProgressbar,
-	buildStyles
-} from "react-circular-progressbar";
-
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Tagsfilter from "../MicroComponents/Tagsfilter";
+import LockIcon from '@material-ui/icons/Lock';
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -50,11 +46,11 @@ const CodingSheets = () => {
 	const [showTags, setShowTags] = useState(true);
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
-	console.log(filteredData)
+	// console.log(filteredData)
 	// ----- FOR DARK MODE -----
 	const [needDarkMode, setNeedDarkMode] = useState(false);
 	let selectedTheme = localStorage.getItem("selectedTheme");
-	console.log("needDarkMode : ", needDarkMode);
+	// console.log("needDarkMode : ", needDarkMode);
 	const toggleDarkMode = () => {
 		setNeedDarkMode(!needDarkMode);
 	};
@@ -66,8 +62,6 @@ const CodingSheets = () => {
 	const handleLabelClick = (label) => {
 		setSelectedLabel(label);
 	}
-
-
 
 	const params = useParams();
 	const { sheetname } = params;
@@ -236,20 +230,23 @@ const CodingSheets = () => {
 	const progressBarPercent =
 		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
-	const filters = codingSheetsFilters.map((item) => {
-		return (
-			<a
+	
+		const filters = codingSheetsFilters.map((item) => {
+			return item.lock === true ? (
+			  <div key={item.id} className='locked-feature filter'>
+				{item.text}
+				<LockIcon />
+			  </div>
+			) : (
+			  <a
 				href={item.domainFilter}
 				key={item.id}
-				className={
-					item.domainFilter === sheetname ? "filter selected" : "filter"
-				}
-			>
+				className={item.domainFilter === sheetname ? 'filter selected' : 'filter'}
+			  >
 				{item.text}
-			</a>
-		);
-	});
-
+			  </a>
+			);
+		  });
 
 	// console.log(data);
 
@@ -1025,13 +1022,19 @@ const CodingSheets = () => {
 						</div>
 					</EffectiveFilter>
 
+					{
+						filteredData.length != data.length ? 
+						<div className="notice">Note : Unclicking a tag may not work. Try deselecting all, then select the filter collection.</div> : 
+						<div></div> 
+					}
+
 					<div className="table">
 						{dataLoading ? (
 							<>
 								<LinearProgress />
 							</>
 						) : (
-							filteredData.length === 0 ? <h1>Not found</h1> : filteredData.map((item, index) => {
+							filteredData.length === 0 ? <></> : filteredData.map((item, index) => {
 								return (
 									<div
 										key={index}
@@ -1388,6 +1391,10 @@ const Container = styled.div`
 			}
 		}
 
+		.notice{
+			font-size: 0.8rem;
+		}
+
 		.table {
 			margin: 15px 0;
 			width: 100%;
@@ -1534,7 +1541,6 @@ const Container = styled.div`
 		}
 	}
 `;
-
 const Filters = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -1543,17 +1549,25 @@ const Filters = styled.div`
 	.filter {
 		padding: 7.5px 15px;
 		font-size: 0.8rem;
-		border: 1px solid #b9afaf;
+		border: 1px solid ${(props) => (props.needDarkMode ? '#514f4f' : '#b9afaf')};
 		border-radius: 500px;
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
 		text-decoration: none;
-		color: inherit;
+    background-color: ${(props) => (props.needDarkMode ? 'transparent' : 'transparent')};
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
+
+    svg{
+      font-size: 1rem;
+      margin-bottom: -0.2rem;
+      margin-left: 5px;
+      fill: #71c929;
+    }
 
 		&:hover {
-			border-color: #201f1f;
-			background-color: #201f1f;
-			color: #ebdddd;
+			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
 			transition-duration: 250ms;
 			cursor: pointer;
 		}
@@ -1571,29 +1585,29 @@ const Filters = styled.div`
 		color: inherit;
 		display: flex;
 		align-items: center;
-
+	
 		svg{
 			font-size: 1rem;
 			margin-left: 5px;
 		}
-
+	
 		&:hover {
 			border-color: #201f1f;
 			background-color: #201f1f;
 			color: #ebdddd;
 			transition-duration: 250ms;
 			cursor: pointer;
-
+	
 			svg{
 				fill: #ebdddd;
 			}
 		}
-
+	
 		svg{
 			font-size: 1rem;
 			margin-left: 5px;
 		}
-
+	
 		.tag{
 			position: absolute;
 			padding: 2.5px 7.5px;
@@ -1605,13 +1619,29 @@ const Filters = styled.div`
 		}
 	}
 
+  .locked-feature{
+    &:hover{
+      background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+      color: ${(props) => (props.needDarkMode ? '#fff' : 'inherit')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+      transition-duration: 250ms;
+    }
+  }
 
 	.selected {
 		/* background-color: #ded7d7;
     color: #111; */
-		border-color: #201f1f;
-		background-color: #201f1f;
-		color: #ebdddd;
+    color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+    border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+    background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
+
+    &:hover {
+      color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+      background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
+			transition-duration: 250ms;
+			cursor: pointer;
+		}
 	}
 
 	@media only screen and (max-width: 1100px) {
@@ -1631,6 +1661,9 @@ const Filters = styled.div`
 			color: #ebdddd;
 		}
 	}
+
+	
+  
 `;
 
 const Progress = styled.div`

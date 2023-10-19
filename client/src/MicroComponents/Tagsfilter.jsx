@@ -8,6 +8,7 @@ function Tagsfilter({ tags,filterdata,setfilter,data }) {
   const [expand, setexpand] = useState(false);
 
    const [ischoose,setischoose]=useState([])
+   
    console.log(ischoose)
    if(ischoose.length===0){
     setfilter(data)
@@ -36,9 +37,9 @@ function Tagsfilter({ tags,filterdata,setfilter,data }) {
  
   return (
     <>
-    {
+    {/* {
       expand && <SearchBar  tagdat={tagdat} tags={tags} settagdata={settagdata}/>
-    }
+    } */}
   
     <Tagscompo>
       
@@ -71,27 +72,16 @@ function Tagsfilter({ tags,filterdata,setfilter,data }) {
 export default Tagsfilter;
 
 const MenuItem = styled.div`
-  font-size: 12px;
-  background-color:${(props) => (props.isselected ? "#3498db" : "white")};
-  padding: 5px 10px;
-  border-radius: 4px;
-  margin: 5px;
-  height:30px;
+  font-size: 0.75rem;
+  background-color:${(props) => (props.isselected ? "#e5e5e5" : "#f3f4f7")};
+  padding: 2.5px 7.5px;
+  border-radius: 100px;
+  margin-top: 5px;
+  margin-right: 5px;
   text-align:center;
   cursor:pointer;
-  color: ${(props) => (props.isselected ? "white":"black")};
-  border: 1px solid black;
-  
-`;
-
-const ShowMoreButton = styled.button`
-  background: none;
-  border: none;
-  color: #3498db;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 5px;
-  margin: 10px 0;
+  /* color: ${(props) => (props.isselected ? "white":"black")}; */
+  border: 1px solid ${(props) => (props.isselected ? "#8d8686":"#cac3c3")};
 `;
 
 const Menuexpand = styled.div`
@@ -103,13 +93,29 @@ const Menuexpand = styled.div`
   height: 200px;
   overflow-y:auto;
   position: absolute;
-  top: 60px;
-  left: -3px;
+  top: 40px;
+  right: 0px;
   display: flex;
+  border: 1px solid #cccccc;
+  overflow-x: hidden;
   flex-wrap: wrap;
   opacity: ${props => (props.expanded ? 1 : 0)};
   transform: translateY(${props => (props.expanded ? "0" : "-10px")});
   transition: opacity 0.3s ease, transform 0.3s ease;
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-left: 1px solid transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #335ddc;
+    border-radius: 100px;
+  }
 `;
 
 const Tags = styled.div`
@@ -126,8 +132,8 @@ const Counts = styled.span`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #3498db;
-  color: white;
+  background-color: #f3f4f7;
+  border: 1px solid #d0d5db;
   display: flex;
   align-items: center;
   justify-content: center;
