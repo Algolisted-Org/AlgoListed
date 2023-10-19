@@ -59,11 +59,11 @@ const updateProblemSheet = async (req, res) => {
     }
 };
 
-const getProblemSheetDetails = async (req, res) => {
-    const sheetId = req.params.sheetId;
-
+const getProblemSheetDetails = async (sheetId, res) => {
     try {
+        console.log(sheetId);
         const problemSheet = await ProblemSheetsModel.findOne({ sheetId });
+        console.log(problemSheet);
 
         if (!problemSheet) {
             return res.status(404).json({ message: "Problem sheet not found." });

@@ -25,14 +25,14 @@ const CreateCustomCodingSheetsEdit = () => {
     const [problemStatus, setProblemStatus] = useState({});
     // const [problemsStoredInServer, setProblemsStoredInServer] = useState(problemsDataServer);
     const [problemsStoredInServer, setProblemsStoredInServer] = useState([]);
-    
     const [ownerId, setOwnerId] = useState(942);
     const [sheetId, setOheetId] = useState(823);
     const [sheetName, setSheetName] = useState('This is Sheet Name'); // Add this
     const [sheetDesc, setSheetDesc] = useState('This is Sheet Desc'); // Add this
+    const [combinedProblems, setCombinedProblems] = useState([]);
 
 
-    useEffect(() => {
+    useEffect(() => { 
         document.title = "Contest Archive - Algolisted";
     }, []);
 
@@ -41,9 +41,39 @@ const CreateCustomCodingSheetsEdit = () => {
         if (selectedTheme === 'dark') setNeedDarkMode(true);
     }, []);
 
-    // console.log(problemsDataServer);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8000/problem-sheets/details?sheetId=${sheetId}`);
+                const problemIds = response.data.sheet.problemIds;
+        
+                // Initialize an array to store the scraped problem data
+                const scrapedProblems = [];
+        
+                for (let i = 0; i < problemIds.length; i++) {
+                    const problemId = problemIds[i];
+                    const scrapedProblemData = problemsData[problemId];
+        
+                    if (scrapedProblemData) {
+                        scrapedProblems.push(scrapedProblemData);
+                    }
+                }
+        
+                // Update the state with the scraped problem data
+                setProblemsStoredInServer(scrapedProblems);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
+        fetchData(); // Call the fetchData function when the component mounts or when sheetId changes
+    }, [sheetId]);
+
+    useEffect(() => {
+        console.log(problemsStoredInServer);
+    }, [problemsStoredInServer]);
+    
 
     // console.log("needDarkMode : ", needDarkMode);
     const toggleDarkMode = () => {
@@ -132,14 +162,18 @@ const CreateCustomCodingSheetsEdit = () => {
     };
 
     const handleExportProblemSheet = async () => {
-        const problemIds = recentlyAddedProblems.map(problemData => extractProblemName(problemData.quesLink));
-        console.log(problemIds);
+        const serverProblemIds = problemsStoredInServer.map(problemData => extractProblemName(problemData.quesLink));
+        const localProblemIds = recentlyAddedProblems.map(problemData => extractProblemName(problemData.quesLink));
+        const allProblemsIds = [...serverProblemIds, ...localProblemIds];
+
+        // const problemIds = recentlyAddedProblems.map(problemData => extractProblemName(problemData.quesLink));
+        console.log(allProblemsIds);
 
         const data = {
             sheetId,
             // sheetName,
-            // sheetDesc,
-            problemIds,
+            sheetDesc: "Ikki Bhen Ki Oye!",
+            problemIds: allProblemsIds,
         };
 
         try {
@@ -148,6 +182,8 @@ const CreateCustomCodingSheetsEdit = () => {
             if (response.status === 200) {
                 console.log(response.data);
                 alert("Problem sheet has been updated.");
+                setRecentlyAddedProblems([]);
+                setProblemsStoredInServer([...problemsStoredInServer, ...recentlyAddedProblems]);
                 
             } else {
                 alert("Something went wrong!");
@@ -171,7 +207,7 @@ const CreateCustomCodingSheetsEdit = () => {
                     needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
                 }
                 {
-                    needDarkMode ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
+                    needDarkMode ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
                 }
                 {/* ---> change this all-blogs to your desired page-id */}
 
@@ -289,7 +325,7 @@ const CreateCustomCodingSheetsEdit = () => {
                         <h3>Previously Added Problems Stored in Server</h3>
                         {problemsStoredInServer.length > 0 ? (
                             <div>
-                                {problemsStoredInServer.length > 0 && problemsStoredInServer.map((problemData, index) => {
+                                {problemsStoredInServer.map((problemData, index) => {
                                     return (
                                         <div className="problem" key={index}>
                                             <div className="square-box">{index + 1}</div>
