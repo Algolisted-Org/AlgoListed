@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
 import SearchBar from "./searchbar";
 
-function Tagsfilter({ tags,filterdata,setfilter,data }) {
+function Tagsfilter({ tags, filterdata,setfilter,data }) {
   const [tagdat,settagdata]=useState([...tags])
   const [expand, setexpand] = useState(false);
 

@@ -57,6 +57,7 @@ import LandingPage3 from './Screen/LandingPage3';
 import ContestArchive from './Screen/ContestArchive';
 import CreateCustomCodingSheets from './Screen/CreateCustomCodingSheets';
 import CreateCustomCodingSheetsEdit from './Screen/CreateCustomCodingSheetsEdit';
+import CustomSheet from './Screen/CustomSheet';
 import ResumeQuestions from './Screen/ResumeQuestions';
 
 
@@ -94,6 +95,7 @@ const App = () => {
         <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
         <Route path="/create-problem-list" element={<CreateCustomCodingSheets/>} />
         <Route path="/create-problem-list/sheet-dashboard/:sheetId" element={<CreateCustomCodingSheetsEdit/>} />
+        <Route path="/create-problem-list/sheet/:sheetId" element={<CustomSheet/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />
         <Route path="/contest-analysis" element={<ContestAnalysisList/>} />

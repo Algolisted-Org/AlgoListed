@@ -30,9 +30,10 @@ const CreateCustomCodingSheetsEdit = () => {
     const [sheetName, setSheetName] = useState('This is Sheet Name'); // Add this
     const [sheetDesc, setSheetDesc] = useState('This is Sheet Desc'); // Add this
     const [combinedProblems, setCombinedProblems] = useState([]);
+    const [exportingSheet, setExportingSheet] = useState(false);
 
 
-    useEffect(() => { 
+    useEffect(() => {
         document.title = "Contest Archive - Algolisted";
     }, []);
 
@@ -47,19 +48,19 @@ const CreateCustomCodingSheetsEdit = () => {
             try {
                 const response = await axios.get(`http://localhost:8000/problem-sheets/details?sheetId=${sheetId}`);
                 const problemIds = response.data.sheet.problemIds;
-        
+
                 // Initialize an array to store the scraped problem data
                 const scrapedProblems = [];
-        
+
                 for (let i = 0; i < problemIds.length; i++) {
                     const problemId = problemIds[i];
                     const scrapedProblemData = problemsData[problemId];
-        
+
                     if (scrapedProblemData) {
                         scrapedProblems.push(scrapedProblemData);
                     }
                 }
-        
+
                 // Update the state with the scraped problem data
                 setProblemsStoredInServer(scrapedProblems);
             } catch (error) {
@@ -73,7 +74,7 @@ const CreateCustomCodingSheetsEdit = () => {
     useEffect(() => {
         console.log(problemsStoredInServer);
     }, [problemsStoredInServer]);
-    
+
 
     // console.log("needDarkMode : ", needDarkMode);
     const toggleDarkMode = () => {
@@ -96,19 +97,19 @@ const CreateCustomCodingSheetsEdit = () => {
 
     function extractProblemName(url) {
         // Define a regular expression to match the "anything" part of the URL
-        const regex = /https:\/\/leetcode\.com\/problems\/([^/]+)/;
-      
+        const regex = /https:\/\/leetcode\.com\/problems\/([^/?]+)/;
+        
         // Use the regular expression to extract the "anything" part
         const match = url.match(regex);
-      
+        
         // Check if a match was found
         if (match && match[1]) {
-          return match[1];
+            return match[1];
         }
-      
+        
         // If no match is found, return an empty string or an error message
         return "Invalid URL";
-    } 
+    }
 
     const handleAddProblem = () => {
         const problemName = extractProblemName(problemLink);
@@ -162,38 +163,48 @@ const CreateCustomCodingSheetsEdit = () => {
     };
 
     const handleExportProblemSheet = async () => {
+        setExportingSheet(true);
+      
         const serverProblemIds = problemsStoredInServer.map(problemData => extractProblemName(problemData.quesLink));
         const localProblemIds = recentlyAddedProblems.map(problemData => extractProblemName(problemData.quesLink));
         const allProblemsIds = [...serverProblemIds, ...localProblemIds];
-
-        // const problemIds = recentlyAddedProblems.map(problemData => extractProblemName(problemData.quesLink));
-        console.log(allProblemsIds);
-
+      
         const data = {
-            sheetId,
-            // sheetName,
-            sheetDesc: "Ikki Bhen Ki Oye!",
-            problemIds: allProblemsIds,
+          sheetId,
+          sheetDesc: "Ikki Bhen Ki Oye!",
+          problemIds: allProblemsIds,
         };
-
+      
         try {
-            const response = await axios.post('http://localhost:8000/problem-sheets/update', data);
-
+          const startTime = Date.now();
+          const response = await axios.post('http://localhost:8000/problem-sheets/update', data);
+          const endTime = Date.now();
+          const timeElapsed = endTime - startTime;
+      
+          // Wait for a minimum of 5 seconds if the MongoDB operation finishes before that
+          const minimumWaitTime = 5000;
+          const waitTime = Math.max(minimumWaitTime - timeElapsed, 0);
+          
+          setTimeout(() => {
             if (response.status === 200) {
-                console.log(response.data);
-                alert("Problem sheet has been updated.");
-                setRecentlyAddedProblems([]);
-                setProblemsStoredInServer([...problemsStoredInServer, ...recentlyAddedProblems]);
-                
+              console.log(response.data);
+            //   alert("Problem sheet has been updated.");
+              setRecentlyAddedProblems([]);
+              setProblemsStoredInServer([...problemsStoredInServer, ...recentlyAddedProblems]);
+              
+              // Open a new tab with the specified URL
+              window.open(`http://localhost:3000/create-problem-list/sheet/${sheetId}`, '_blank');
             } else {
-                alert("Something went wrong!");
+              alert("Something went wrong!");
             }
+            setExportingSheet(false);
+          }, waitTime);
         } catch (error) {
-            console.error(error);
-            alert("Something went wrong!");
+          console.error(error);
+          alert("Something went wrong!");
+          setExportingSheet(false);
         }
-    };
-
+      };
 
     return (
         <GrandContainer>
@@ -228,9 +239,19 @@ const CreateCustomCodingSheetsEdit = () => {
 
                     <div className="controls">
                         <div className='export-btn' onClick={handleExportProblemSheet}>
+                            {exportingSheet ? (
+                                <span>Exporting...</span>
+                            ) : (
+                                <>
+                                    <LinkIcon />
+                                    Click to Save and Export Problem Sheet Link
+                                </>
+                            )}
+                        </div>
+                        {/* <div className='export-btn' onClick={handleExportProblemSheet}>
                             <LinkIcon />
                             Click to Save and Export Problem Sheet Link
-                        </div>
+                        </div> */}
                         <div className="add-link">
                             <div className='options'>
                                 <div className="platform">Leetcode</div>
@@ -241,7 +262,7 @@ const CreateCustomCodingSheetsEdit = () => {
                             <div className='square' onClick={() => handleAddProblem()}><AddIcon /></div>
                         </div>
                     </div>
-                    
+
                     {/* <Model>
                         <div className="model">You material UI modal https://mui.com/material-ui/react-modal/</div>
                     </Model> */}
