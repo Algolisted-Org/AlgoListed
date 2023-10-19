@@ -7,7 +7,6 @@
 /build
 .env
 
-
 .firebaserc
 firebaserc
 firebase.json

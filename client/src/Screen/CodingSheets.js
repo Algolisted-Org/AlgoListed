@@ -22,14 +22,10 @@ import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
 import { Link as RouterLink } from 'react-router-dom';
 import CallMadeIcon from '@material-ui/icons/CallMade';
-
-import {
-	CircularProgressbar,
-	buildStyles
-} from "react-circular-progressbar";
-
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Tagsfilter from "../MicroComponents/Tagsfilter";
+import LockIcon from '@material-ui/icons/Lock';
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -44,17 +40,17 @@ const CodingSheets = () => {
 	const [difficulty, setDifficulty] = useState({});
 	const [userDifficulty, setUserDifficulty] = useState({});
 	const [difficultyPercentage, setDifficultyPercentage] = useState([0, 0, 0]);
-	const [openVisualiser, setOpenVisualiser] = useState(true);
+	const [openVisualiser, setOpenVisualiser] = useState(false);
 	const [toggleEffect, setToggleEffect] = useState(true);
 	const [filteredData, setFilteredData] = useState(data);
 	const [showTags, setShowTags] = useState(true);
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
-	console.log(filteredData)
+	// console.log(filteredData)
 	// ----- FOR DARK MODE -----
 	const [needDarkMode, setNeedDarkMode] = useState(false);
 	let selectedTheme = localStorage.getItem("selectedTheme");
-	console.log("needDarkMode : ", needDarkMode);
+	// console.log("needDarkMode : ", needDarkMode);
 	const toggleDarkMode = () => {
 		setNeedDarkMode(!needDarkMode);
 	};
@@ -66,8 +62,6 @@ const CodingSheets = () => {
 	const handleLabelClick = (label) => {
 		setSelectedLabel(label);
 	}
-
-
 
 	const params = useParams();
 	const { sheetname } = params;
@@ -236,34 +230,294 @@ const CodingSheets = () => {
 	const progressBarPercent =
 		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
-	const filters = codingSheetsFilters.map((item) => {
-		return (
-			<a
+	
+		const filters = codingSheetsFilters.map((item) => {
+			return item.lock === true ? (
+			  <div key={item.id} className='locked-feature filter'>
+				{item.text}
+				<LockIcon />
+			  </div>
+			) : (
+			  <a
 				href={item.domainFilter}
 				key={item.id}
-				className={
-					item.domainFilter === sheetname ? "filter selected" : "filter"
-				}
-			>
+				className={item.domainFilter === sheetname ? 'filter selected' : 'filter'}
+			  >
 				{item.text}
-			</a>
-		);
-	});
-
+			  </a>
+			);
+		  });
 
 	// console.log(data);
 
+	// const colors = [
+    // "#884373",
+    // "#8a4574",
+    // "#8b4875",
+    // "#8c4b76",
+    // "#8d4d77",
+    // "#8f5078",
+    // "#905379",
+    // "#91567a",
+    // "#92597b",
+    // "#945c7c",
+    // "#955e7d",
+    // "#96617e",
+    // "#97647f",
+    // "#996680",
+    // "#9a6981",
+    // "#9b6b82",
+    // "#9d6e83",
+    // "#9e7184",
+    // "#9f7385",
+    // "#a17686",
+    // "#a27987",
+    // "#a37c88",
+    // "#a57e89",
+    // "#a6808a",
+    // "#a7838b",
+    // "#a8868c",
+    // "#a9898d",
+    // "#aa8b8e",
+    // "#ac8e8f",
+    // "#ad9190",
+    // "#ae9491",
+    // "#b09692",
+    // "#b19993",
+    // "#b29c94",
+    // "#b49e95",
+    // "#b5a196",
+    // "#b6a497",
+    // "#b7a698",
+    // "#b9a899",
+    // "#baaa9a",
+    // "#bca99b",
+    // "#bdaa9c",
+    // "#beab9d",
+    // "#c0ac9e",
+    // "#c1ad9f",
+    // "#c2ae9f",
+    // "#c4af9f",
+    // "#c5b0a0",
+    // "#c6b1a0",
+    // "#c8b2a0",
+    // "#c9b3a1",
+    // "#cab4a1",
+    // "#ccb5a1",
+    // "#cdb6a2",
+    // "#ceb7a2",
+    // "#d0b8a2",
+	// ];
+	// const colors = [
+	// 	"#e782c9",
+	// 	"#e887ca",
+	// 	"#e88cca",
+	// 	"#e891cb",
+	// 	"#e895cc",
+	// 	"#e89acd",
+	// 	"#e8a1cd",
+	// 	"#e8a5ce",
+	// 	"#e8aace",
+	// 	"#e8afcf",
+	// 	"#e8b4d0",
+	// 	"#e8b8d1",
+	// 	"#e8bdd2",
+	// 	"#e8c1d3",
+	// 	"#e8c6d4",
+	// 	"#e8cad5",
+	// 	"#e8cfd6",
+	// 	"#e8d3d7",
+	// 	"#e8d8d8",
+	// 	"#e8dcd9",
+	// 	"#e8e1da",
+	// 	"#e8e6db",
+	// 	"#e8eadc",
+	// 	"#e8efdd",
+	// 	"#e8f3de",
+	// 	"#e8f8df",
+	// 	"#e8fcdf",
+	// 	"#e7fbdb",
+	// 	"#e7fbd7",
+	// 	"#e7fad3",
+	// 	"#e7fad0",
+	// 	"#e7facd",
+	// 	"#e7fac9",
+	// 	"#e7f9c5",
+	// 	"#e7f9c2",
+	// 	"#e7f9bf",
+	// 	"#e7f9bb",
+	// 	"#e7f8b7",
+	// 	"#e7f8b4",
+	// 	"#e7f8b1",
+	// 	"#e7f8ad",
+	// 	"#e7f7a9",
+	// 	"#e7f7a6",
+	// 	"#e7f7a3",
+	// 	"#e7f7a0",
+	// 	"#e7f69c",
+	// 	"#e7f699",
+	// 	"#e7f695",
+	// 	"#e7f692",
+	// 	"#e7f68f",
+	// 	"#e7f68c",
+	// 	"#ff7d7c"
+	// ]
+
+	// const colors = [
+	// 	"rgb(223, 121, 239)",
+	// 	"rgb(224, 126, 236)",
+	// 	"rgb(224, 130, 233)",
+	// 	"rgb(224, 134, 230)",
+	// 	"rgb(225, 138, 227)",
+	// 	"rgb(225, 142, 224)",
+	// 	"rgb(226, 147, 221)",
+	// 	"rgb(226, 151, 218)",
+	// 	"rgb(226, 155, 215)",
+	// 	"rgb(227, 159, 212)",
+	// 	"rgb(227, 163, 209)",
+	// 	"rgb(227, 168, 206)",
+	// 	"rgb(228, 172, 203)",
+	// 	"rgb(228, 176, 200)",
+	// 	"rgb(228, 180, 197)",
+	// 	"rgb(229, 184, 194)",
+	// 	"rgb(229, 189, 191)",
+	// 	"rgb(230, 193, 188)",
+	// 	"rgb(230, 197, 185)",
+	// 	"rgb(230, 201, 182)",
+	// 	"rgb(231, 205, 179)",
+	// 	"rgb(231, 210, 176)",
+	// 	"rgb(231, 214, 173)",
+	// 	"rgb(232, 218, 170)",
+	// 	"rgb(232, 222, 167)",
+	// 	"rgb(232, 226, 164)",
+	// 	"rgb(233, 231, 161)",
+	// 	"rgb(233, 235, 158)",
+	// 	"rgb(233, 239, 155)",
+	// 	"rgb(234, 243, 152)",
+	// 	"rgb(234, 247, 149)",
+	// 	"rgb(234, 252, 146)",
+	// 	"rgb(235, 256, 143)",
+	// 	"rgb(235, 255, 140)",
+	// 	"rgb(235, 251, 137)",
+	// 	"rgb(236, 248, 134)",
+	// 	"rgb(236, 244, 131)",
+	// 	"rgb(236, 240, 128)",
+	// 	"rgb(237, 236, 125)",
+	// 	"rgb(237, 232, 122)",
+	// 	"rgb(237, 228, 119)",
+	// 	"rgb(238, 224, 116)",
+	// 	"rgb(238, 221, 113)",
+	// 	"rgb(238, 217, 110)",
+	// 	"rgb(239, 213, 107)",
+	// 	"rgb(239, 209, 104)",
+	// 	"rgb(239, 205, 101)",
+	// 	"rgb(240, 200, 98)",
+	// 	"rgb(240, 196, 95)",
+	// 	"rgb(240, 192, 92)",
+	// 	"#ff7d7c"
+	// ]
+
 	const colors = [
-		'#FF877C', '#FF77A9', '#DF79EF', '#DF79EF', '#B085F5', '#8E99F3', '#7FD6FF', '#74E7FF', '#6FF9FF', '#63D8CB', '#98EE99', '#CFFF95', '#FFFF89'
-	];
+		"#438194",
+		"#478295",
+		"#4b8496",
+		"#4f8597",
+		"#538798",
+		"#578999",
+		"#5b8b9a",
+		"#5f8c9b",
+		"#638d9c",
+		"#678f9d",
+		"#6b909e",
+		"#6f919f",
+		"#7393a0",
+		"#7794a1",
+		"#7b95a2",
+		"#7f96a3",
+		"#8398a4",
+		"#8799a5",
+		"#8b9aa6",
+		"#8f9ca7",
+		"#939da8",
+		"#979ea9",
+		"#9ba0aa",
+		"#9fa1ab",
+		"#a3a2ac",
+		"#a7a4ad",
+		"#aba5ae",
+		"#afa6af",
+		"#b3a8b0",
+		"#b7a9b1",
+		"#bbaab2",
+		"#bfacb3",
+		"#c3adb4",
+		"#c7aeb5",
+		"#cba0b6",
+		"#cfa1b7",
+		"#ff7d7c"
+	]
 
-	// const colors = ["#de79ef", "#df6cf7", "#e061ff", "#e15754", "#e24d08", "#e3430c", "#e4390f", "#e53011", "#e6281a", "#e72122", "#e81b29", "#e91730", "#ea123c", "#eb0f4c", "#ec0c5e", "#ed0974", "#ee0695", "#ef03bb", "#f000e4", "#cfff95"];
-
-	// const colors = ["#F5F5DC", "#F8F8FF", "#FAEBD7", "#FFF0F5", "#FFF5EE", "#FFF8DC", "#FFFACD", "#FFFAF0", "#FFFAFA", "#FFFFF0", "#FFFFFF", "#F0F8FF", "#F0FFFF", "#F4F4F4", "#F5F5F5", "#F5FFFA", "#F7F7F7", "#F8F8F8", "#FAF0E6", "#FAFAD2", "#FBFBFB", "#FCFCFC", "#FDF5E6", "#FFEFD5"];
-
+	
+	
+	
+	// const colors = [
+	// 	"#a9d18f",
+	// 	"#aac292",
+	// 	"#acc496",
+	// 	"#adc699",
+	// 	"#aec99c",
+	// 	"#b0cca0",
+	// 	"#b1cfa3",
+	// 	"#b2d2a6",
+	// 	"#b4d5aa",
+	// 	"#b5d8ad",
+	// 	"#b6dbb0",
+	// 	"#b8deb4",
+	// 	"#b9e1b7",
+	// 	"#bae4ba",
+	// 	"#bce7be",
+	// 	"#bdeac1",
+	// 	"#bfebce",
+	// 	"#c1eeda",
+	// 	"#c3f1e7",
+	// 	"#c4f4f4",
+	// 	"#c6f7f0",
+	// 	"#c7fafd",
+	// 	"#c9fdfa",
+	// 	"#cafeee",
+	// 	"#ccf9e2",
+	// 	"#cdf6d7",
+	// 	"#cff3cc",
+	// 	"#d0f0c1",
+	// 	"#d2edb6",
+	// 	"#d3eaab",
+	// 	"#d5e7a0",
+	// 	"#d6e495",
+	// 	"#d7e18a",
+	// 	"#d9de7f",
+	// 	"#dadb74",
+	// 	"#dcd869",
+	// 	"#dde55e",
+	// 	"#dfe253",
+	// 	"#e0df48",
+	// 	"#e2dc3d",
+	// 	"#e3d932",
+	// 	"#e5d627",
+	// 	"#e6d31c",
+	// 	"#e7d111",
+	// 	"#e9ce06",
+	// 	"#eadb00",
+	// 	"#ebd900",
+	// 	"#eddd00",
+	// 	"#eeda00",
+	// 	"#f0d700",
+	// 	"#f1d400",
+	// 	"#f3d100",
+	// 	"#dfebf7"
+	// ]
 
 	const borderColors = [
-		'#fff'
+		"#000"
 	];
 
 	var chartData = {
@@ -274,7 +528,7 @@ const CodingSheets = () => {
 			data: sortedTopicTagsValues.map((items) => { return (items) }),
 			backgroundColor: colors,
 			borderColor: borderColors,
-			borderWidth: 1,
+			borderWidth: 0.25,
 		}],
 	};
 
@@ -286,7 +540,7 @@ const CodingSheets = () => {
 			data: sortedSolvedTopicTagsValues.map((items) => { return (items) }),
 			backgroundColor: colors,
 			borderColor: borderColors,
-			borderWidth: 1,
+			borderWidth: 0.25,
 		}],
 	};
 
@@ -768,13 +1022,19 @@ const CodingSheets = () => {
 						</div>
 					</EffectiveFilter>
 
+					{
+						filteredData.length != data.length ? 
+						<div className="notice">Note : Unclicking a tag may not work. Try deselecting all, then select the filter collection.</div> : 
+						<div></div> 
+					}
+
 					<div className="table">
 						{dataLoading ? (
 							<>
 								<LinearProgress />
 							</>
 						) : (
-							filteredData.length === 0 ? <h1>Not found</h1> : filteredData.map((item, index) => {
+							filteredData.length === 0 ? <></> : filteredData.map((item, index) => {
 								return (
 									<div
 										key={index}
@@ -1131,6 +1391,10 @@ const Container = styled.div`
 			}
 		}
 
+		.notice{
+			font-size: 0.8rem;
+		}
+
 		.table {
 			margin: 15px 0;
 			width: 100%;
@@ -1277,7 +1541,6 @@ const Container = styled.div`
 		}
 	}
 `;
-
 const Filters = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -1286,17 +1549,25 @@ const Filters = styled.div`
 	.filter {
 		padding: 7.5px 15px;
 		font-size: 0.8rem;
-		border: 1px solid #b9afaf;
+		border: 1px solid ${(props) => (props.needDarkMode ? '#514f4f' : '#b9afaf')};
 		border-radius: 500px;
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
 		text-decoration: none;
-		color: inherit;
+    background-color: ${(props) => (props.needDarkMode ? 'transparent' : 'transparent')};
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
+
+    svg{
+      font-size: 1rem;
+      margin-bottom: -0.2rem;
+      margin-left: 5px;
+      fill: #71c929;
+    }
 
 		&:hover {
-			border-color: #201f1f;
-			background-color: #201f1f;
-			color: #ebdddd;
+			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
 			transition-duration: 250ms;
 			cursor: pointer;
 		}
@@ -1314,29 +1585,29 @@ const Filters = styled.div`
 		color: inherit;
 		display: flex;
 		align-items: center;
-
+	
 		svg{
 			font-size: 1rem;
 			margin-left: 5px;
 		}
-
+	
 		&:hover {
 			border-color: #201f1f;
 			background-color: #201f1f;
 			color: #ebdddd;
 			transition-duration: 250ms;
 			cursor: pointer;
-
+	
 			svg{
 				fill: #ebdddd;
 			}
 		}
-
+	
 		svg{
 			font-size: 1rem;
 			margin-left: 5px;
 		}
-
+	
 		.tag{
 			position: absolute;
 			padding: 2.5px 7.5px;
@@ -1348,13 +1619,29 @@ const Filters = styled.div`
 		}
 	}
 
+  .locked-feature{
+    &:hover{
+      background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+      color: ${(props) => (props.needDarkMode ? '#fff' : 'inherit')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+      transition-duration: 250ms;
+    }
+  }
 
 	.selected {
 		/* background-color: #ded7d7;
     color: #111; */
-		border-color: #201f1f;
-		background-color: #201f1f;
-		color: #ebdddd;
+    color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+    border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+    background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
+
+    &:hover {
+      color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+      background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
+			transition-duration: 250ms;
+			cursor: pointer;
+		}
 	}
 
 	@media only screen and (max-width: 1100px) {
@@ -1374,6 +1661,9 @@ const Filters = styled.div`
 			color: #ebdddd;
 		}
 	}
+
+	
+  
 `;
 
 const Progress = styled.div`
