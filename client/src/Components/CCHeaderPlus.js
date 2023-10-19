@@ -39,7 +39,7 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
   
   let selectedTheme = localStorage.getItem("selectedTheme");
 
-  console.log(selectedTheme);
+  // console.log(selectedTheme);
   
   if (selectedTheme === "dark") {
       setDarkModeFunc();
@@ -50,7 +50,7 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
       else setDarkModeFunc();
       handleToggleDarkMode();
       selectedTheme = localStorage.getItem("selectedTheme");
-      console.log(selectedTheme);
+      // console.log(selectedTheme);
   };
   
   const handleNotification = () => {

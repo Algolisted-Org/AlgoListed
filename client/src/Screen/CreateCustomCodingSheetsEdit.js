@@ -16,13 +16,21 @@ import DoneIcon from '@material-ui/icons/Done';
 import StorageIcon from '@material-ui/icons/Storage';
 import problemsData from '../DummyDB/InterviewSummaries/LcProblems.json';
 import problemsDataServer from '../DummyDB/InterviewSummaries/LcUserServerProblems.json';
+import axios from 'axios';
 
 const CreateCustomCodingSheetsEdit = () => {
     const [needDarkMode, setNeedDarkMode] = useState(false);
     const [problemLink, setProblemLink] = useState('');
     const [recentlyAddedProblems, setRecentlyAddedProblems] = useState([]);
     const [problemStatus, setProblemStatus] = useState({});
-    const [problemsStoredInServer, setProblemsStoredInServer] = useState(problemsDataServer);
+    // const [problemsStoredInServer, setProblemsStoredInServer] = useState(problemsDataServer);
+    const [problemsStoredInServer, setProblemsStoredInServer] = useState([]);
+    
+    const [ownerId, setOwnerId] = useState(942);
+    const [sheetId, setOheetId] = useState(823);
+    const [sheetName, setSheetName] = useState('This is Sheet Name'); // Add this
+    const [sheetDesc, setSheetDesc] = useState('This is Sheet Desc'); // Add this
+
 
     useEffect(() => {
         document.title = "Contest Archive - Algolisted";
@@ -33,11 +41,11 @@ const CreateCustomCodingSheetsEdit = () => {
         if (selectedTheme === 'dark') setNeedDarkMode(true);
     }, []);
 
-    console.log(problemsDataServer);
+    // console.log(problemsDataServer);
 
 
 
-    console.log("needDarkMode : ", needDarkMode);
+    // console.log("needDarkMode : ", needDarkMode);
     const toggleDarkMode = () => {
         setNeedDarkMode(!needDarkMode);
     };
@@ -54,10 +62,28 @@ const CreateCustomCodingSheetsEdit = () => {
         );
     });
 
-    console.log(problemsData);
+    // console.log(problemsData);
+
+    function extractProblemName(url) {
+        // Define a regular expression to match the "anything" part of the URL
+        const regex = /https:\/\/leetcode\.com\/problems\/([^/]+)/;
+      
+        // Use the regular expression to extract the "anything" part
+        const match = url.match(regex);
+      
+        // Check if a match was found
+        if (match && match[1]) {
+          return match[1];
+        }
+      
+        // If no match is found, return an empty string or an error message
+        return "Invalid URL";
+    } 
 
     const handleAddProblem = () => {
-        let scrapedProblemData = problemsData[problemLink];
+        const problemName = extractProblemName(problemLink);
+        // console.log(problemName);
+        let scrapedProblemData = problemsData[problemName];
         if (scrapedProblemData === undefined) {
             alert("Problem Not Found!");
         } else {
@@ -70,7 +96,7 @@ const CreateCustomCodingSheetsEdit = () => {
                 [scrapedProblemData.quesName]: { status: 'scrapping', timestamp },
             }));
         }
-        console.log(scrapedProblemData);
+        // console.log(scrapedProblemData);
         setProblemLink("");
     }
 
@@ -89,7 +115,7 @@ const CreateCustomCodingSheetsEdit = () => {
             setProblemStatus(updatedStatus);
         };
 
-        const interval = setInterval(updateProblemStatus, 5000);
+        const interval = setInterval(updateProblemStatus, 1000);
 
         return () => clearInterval(interval);
     }, [problemStatus]);
@@ -102,7 +128,34 @@ const CreateCustomCodingSheetsEdit = () => {
     const handleDeleteProblemFromServerProblems = (problemName) => {
         const updatedProblems = problemsStoredInServer.filter(problemData => problemData.quesName !== problemName);
         setProblemsStoredInServer(updatedProblems);
-        console.log(updatedProblems);
+        // console.log(updatedProblems);
+    };
+
+    const handleExportProblemSheet = async () => {
+        const problemIds = recentlyAddedProblems.map(problemData => extractProblemName(problemData.quesLink));
+        console.log(problemIds);
+
+        const data = {
+            sheetId,
+            // sheetName,
+            // sheetDesc,
+            problemIds,
+        };
+
+        try {
+            const response = await axios.post('http://localhost:8000/problem-sheets/update', data);
+
+            if (response.status === 200) {
+                console.log(response.data);
+                alert("Problem sheet has been updated.");
+                
+            } else {
+                alert("Something went wrong!");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Something went wrong!");
+        }
     };
 
 
@@ -138,7 +191,7 @@ const CreateCustomCodingSheetsEdit = () => {
                     </Filters> */}
 
                     <div className="controls">
-                        <div className='export-btn'>
+                        <div className='export-btn' onClick={handleExportProblemSheet}>
                             <LinkIcon />
                             Click to Save and Export Problem Sheet Link
                         </div>
@@ -152,6 +205,10 @@ const CreateCustomCodingSheetsEdit = () => {
                             <div className='square' onClick={() => handleAddProblem()}><AddIcon /></div>
                         </div>
                     </div>
+                    
+                    {/* <Model>
+                        <div className="model">You material UI modal https://mui.com/material-ui/react-modal/</div>
+                    </Model> */}
                     <div className="problem-sheet">
                         <h3>Newly added Problems</h3>
                         {
@@ -232,7 +289,7 @@ const CreateCustomCodingSheetsEdit = () => {
                         <h3>Previously Added Problems Stored in Server</h3>
                         {problemsStoredInServer.length > 0 ? (
                             <div>
-                                {problemsStoredInServer.map((problemData, index) => {
+                                {problemsStoredInServer.length > 0 && problemsStoredInServer.map((problemData, index) => {
                                     return (
                                         <div className="problem" key={index}>
                                             <div className="square-box">{index + 1}</div>
@@ -267,6 +324,26 @@ export default CreateCustomCodingSheetsEdit
 const GrandContainer = styled.div`
     .cursor-pointer{
         cursor: pointer;
+    }
+`
+
+const Model = styled.div`
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000000b8;
+    
+    display: grid;
+    place-items: center;
+
+    .model{
+        width: 500px;
+        height: 400px;
+        background-color: white;
+        border-radius: 10px;
     }
 `
 
@@ -357,6 +434,7 @@ const Container = styled.div`
 
       .controls{
         .export-btn{
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
