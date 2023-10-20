@@ -26,6 +26,9 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Tagsfilter from "../MicroComponents/Tagsfilter";
 import LockIcon from '@material-ui/icons/Lock';
+import problemsData from '../DummyDB/InterviewSummaries/LcProblems.json';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -54,6 +57,7 @@ const CodingSheets = () => {
 	const toggleDarkMode = () => {
 		setNeedDarkMode(!needDarkMode);
 	};
+
 	// ----- FOR DARK MODE -----
 
 	// console.log(selectedLabel);
@@ -64,8 +68,8 @@ const CodingSheets = () => {
 	}
 
 	const params = useParams();
-	const { sheetname } = params;
-	// console.log(sheetname);
+	const { sheetId } = params;
+	console.log('sheetId : ', sheetId);
 
 	document.title = `Coding Sheets - Algolisted`;
 
@@ -152,19 +156,38 @@ const CodingSheets = () => {
 		// retrieve the data from the server
 		axios
 			// .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
-			.get(`https://algolisted.cyclic.app/coding-questions/question/${sheetname}`)
+			.get(`http://localhost:8000/problem-sheets/details?sheetId=${sheetId}`)
 			.then((res) => {
+                const problemIds = res.data.sheet.problemIds;
+        
+                // Initialize an array to store the scraped problem data
+                const scrapedProblems = [];
+
+                for (let i = 0; i < problemIds.length; i++) {
+                    const problemId = problemIds[i];
+                    const scrapedProblemData = problemsData[problemId];
+        
+                    if (scrapedProblemData) {
+                        scrapedProblems.push(scrapedProblemData);
+                    }
+                }
+
+                console.log("scrapedProblems : ", scrapedProblems);
+
 
 				// retrieve the "completed" status of each sheet from the local storage
-				let updatedData = res.data.map((sheet) => {
-					const completed = localStorage.getItem(`completedSheetQuestion-${sheet._id}`);
-					const marked = localStorage.getItem(`markedSheetQuestion-${sheet._id}`);
-					return {
-						...sheet,
-						completed: completed === "true",
-						marked: marked === "true",
-					};
-				});
+				const updatedData = scrapedProblems.map((sheet) => {
+                    const sheetLink = sheet.quesLink;
+                    const completed = localStorage.getItem(`completedSheetQuestion-${sheetLink}`);
+                    const marked = localStorage.getItem(`markedSheetQuestion-${sheetLink}`);
+                    return {
+                        ...sheet,
+                        completed: completed === "true",
+                        marked: marked === "true",
+                    };
+                });
+
+                console.log("updatedData : ", updatedData);
 
 				var solvedQuestions = [];
 				let len = updatedData.length;
@@ -172,7 +195,7 @@ const CodingSheets = () => {
 					if (updatedData[i].completed) solvedQuestions.push(updatedData[i]);
 				}
 				setSolvedData(solvedQuestions);
-
+                
 				// calculate the initial value of completedCount based on the "completed" status of the sheets in updatedData
 				const initialCompletedCount = updatedData.reduce((acc, sheet) => {
 					return acc + (sheet.completed ? 1 : 0);
@@ -182,17 +205,17 @@ const CodingSheets = () => {
 				setDataLoading(false);
 			})
 			.catch((err) => console.log(err));
-	}, [sheetname]);
+	}, [sheetId]);
 
 	// console.log(data);
 
-	const toggleCompleted = (id) => {
+	const toggleCompleted = (quesLink) => {
 		// update the "completed" field for the coding sheet at the specified index
 		const updatedData = [...data];
 		let index = 0, len = data.length;
 
 		for (; index < len; index++) {
-			if (updatedData[index]._id == id) break;
+			if (updatedData[index].quesLink == quesLink) break;
 		}
 
 		updatedData[index].completed = !updatedData[index].completed;
@@ -210,7 +233,7 @@ const CodingSheets = () => {
 
 		// save the "completed" status of the sheet in the local storage
 		localStorage.setItem(
-			`completedSheetQuestion-${updatedData[index]._id}`,
+			`completedSheetQuestion-${updatedData[index].quesLink}`,
 			updatedData[index].completed
 		);
 	};
@@ -222,200 +245,12 @@ const CodingSheets = () => {
 		setFilteredData(updatedData);
 
 		localStorage.setItem(
-			`markedSheetQuestion-${updatedData[index]._id}`,
+			`markedSheetQuestion-${updatedData[index].quesLink}`,
 			updatedData[index].marked
 		);
 	};
 
-	const progressBarPercent =
-		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
-
-	
-		const filters = codingSheetsFilters.map((item) => {
-			return item.lock === true ? (
-			  <div key={item.id} className='locked-feature filter'>
-				{item.text}
-				<LockIcon />
-			  </div>
-			) : (
-			  <a
-				href={item.domainFilter}
-				key={item.id}
-				className={item.domainFilter === sheetname ? 'filter selected' : 'filter'}
-			  >
-				{item.text}
-			  </a>
-			);
-		  });
-
-	// console.log(data);
-
-	// const colors = [
-    // "#884373",
-    // "#8a4574",
-    // "#8b4875",
-    // "#8c4b76",
-    // "#8d4d77",
-    // "#8f5078",
-    // "#905379",
-    // "#91567a",
-    // "#92597b",
-    // "#945c7c",
-    // "#955e7d",
-    // "#96617e",
-    // "#97647f",
-    // "#996680",
-    // "#9a6981",
-    // "#9b6b82",
-    // "#9d6e83",
-    // "#9e7184",
-    // "#9f7385",
-    // "#a17686",
-    // "#a27987",
-    // "#a37c88",
-    // "#a57e89",
-    // "#a6808a",
-    // "#a7838b",
-    // "#a8868c",
-    // "#a9898d",
-    // "#aa8b8e",
-    // "#ac8e8f",
-    // "#ad9190",
-    // "#ae9491",
-    // "#b09692",
-    // "#b19993",
-    // "#b29c94",
-    // "#b49e95",
-    // "#b5a196",
-    // "#b6a497",
-    // "#b7a698",
-    // "#b9a899",
-    // "#baaa9a",
-    // "#bca99b",
-    // "#bdaa9c",
-    // "#beab9d",
-    // "#c0ac9e",
-    // "#c1ad9f",
-    // "#c2ae9f",
-    // "#c4af9f",
-    // "#c5b0a0",
-    // "#c6b1a0",
-    // "#c8b2a0",
-    // "#c9b3a1",
-    // "#cab4a1",
-    // "#ccb5a1",
-    // "#cdb6a2",
-    // "#ceb7a2",
-    // "#d0b8a2",
-	// ];
-	// const colors = [
-	// 	"#e782c9",
-	// 	"#e887ca",
-	// 	"#e88cca",
-	// 	"#e891cb",
-	// 	"#e895cc",
-	// 	"#e89acd",
-	// 	"#e8a1cd",
-	// 	"#e8a5ce",
-	// 	"#e8aace",
-	// 	"#e8afcf",
-	// 	"#e8b4d0",
-	// 	"#e8b8d1",
-	// 	"#e8bdd2",
-	// 	"#e8c1d3",
-	// 	"#e8c6d4",
-	// 	"#e8cad5",
-	// 	"#e8cfd6",
-	// 	"#e8d3d7",
-	// 	"#e8d8d8",
-	// 	"#e8dcd9",
-	// 	"#e8e1da",
-	// 	"#e8e6db",
-	// 	"#e8eadc",
-	// 	"#e8efdd",
-	// 	"#e8f3de",
-	// 	"#e8f8df",
-	// 	"#e8fcdf",
-	// 	"#e7fbdb",
-	// 	"#e7fbd7",
-	// 	"#e7fad3",
-	// 	"#e7fad0",
-	// 	"#e7facd",
-	// 	"#e7fac9",
-	// 	"#e7f9c5",
-	// 	"#e7f9c2",
-	// 	"#e7f9bf",
-	// 	"#e7f9bb",
-	// 	"#e7f8b7",
-	// 	"#e7f8b4",
-	// 	"#e7f8b1",
-	// 	"#e7f8ad",
-	// 	"#e7f7a9",
-	// 	"#e7f7a6",
-	// 	"#e7f7a3",
-	// 	"#e7f7a0",
-	// 	"#e7f69c",
-	// 	"#e7f699",
-	// 	"#e7f695",
-	// 	"#e7f692",
-	// 	"#e7f68f",
-	// 	"#e7f68c",
-	// 	"#ff7d7c"
-	// ]
-
-	// const colors = [
-	// 	"rgb(223, 121, 239)",
-	// 	"rgb(224, 126, 236)",
-	// 	"rgb(224, 130, 233)",
-	// 	"rgb(224, 134, 230)",
-	// 	"rgb(225, 138, 227)",
-	// 	"rgb(225, 142, 224)",
-	// 	"rgb(226, 147, 221)",
-	// 	"rgb(226, 151, 218)",
-	// 	"rgb(226, 155, 215)",
-	// 	"rgb(227, 159, 212)",
-	// 	"rgb(227, 163, 209)",
-	// 	"rgb(227, 168, 206)",
-	// 	"rgb(228, 172, 203)",
-	// 	"rgb(228, 176, 200)",
-	// 	"rgb(228, 180, 197)",
-	// 	"rgb(229, 184, 194)",
-	// 	"rgb(229, 189, 191)",
-	// 	"rgb(230, 193, 188)",
-	// 	"rgb(230, 197, 185)",
-	// 	"rgb(230, 201, 182)",
-	// 	"rgb(231, 205, 179)",
-	// 	"rgb(231, 210, 176)",
-	// 	"rgb(231, 214, 173)",
-	// 	"rgb(232, 218, 170)",
-	// 	"rgb(232, 222, 167)",
-	// 	"rgb(232, 226, 164)",
-	// 	"rgb(233, 231, 161)",
-	// 	"rgb(233, 235, 158)",
-	// 	"rgb(233, 239, 155)",
-	// 	"rgb(234, 243, 152)",
-	// 	"rgb(234, 247, 149)",
-	// 	"rgb(234, 252, 146)",
-	// 	"rgb(235, 256, 143)",
-	// 	"rgb(235, 255, 140)",
-	// 	"rgb(235, 251, 137)",
-	// 	"rgb(236, 248, 134)",
-	// 	"rgb(236, 244, 131)",
-	// 	"rgb(236, 240, 128)",
-	// 	"rgb(237, 236, 125)",
-	// 	"rgb(237, 232, 122)",
-	// 	"rgb(237, 228, 119)",
-	// 	"rgb(238, 224, 116)",
-	// 	"rgb(238, 221, 113)",
-	// 	"rgb(238, 217, 110)",
-	// 	"rgb(239, 213, 107)",
-	// 	"rgb(239, 209, 104)",
-	// 	"rgb(239, 205, 101)",
-	// 	"rgb(240, 200, 98)",
-	// 	"rgb(240, 196, 95)",
-	// 	"rgb(240, 192, 92)",
-	// 	"#ff7d7c"
-	// ]
+	const progressBarPercent = data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
 	const colors = [
 		"#438194",
@@ -455,10 +290,7 @@ const CodingSheets = () => {
 		"#cba0b6",
 		"#cfa1b7",
 		"#ff7d7c"
-	]
-
-	
-	
+	]	
 	
 	// const colors = [
 	// 	"#a9d18f",
@@ -667,12 +499,17 @@ const CodingSheets = () => {
 	}, [difficulty, userDifficulty])
 
 	useEffect(() => {
+        console.log("I was clicked");
 		if (selectedLabel === 'All') {
+            console.log("Mark 1");
 			setFilteredData(data);
 		} else {
+            console.log("Mark 2");
+            console.log(data);
 			setFilteredData(
 				data.filter(item => item.specialTag == selectedLabel || item.tags.includes(selectedLabel))
 			);
+            console.log(filteredData);
 		}
 	}, [selectedLabel, data]);
 
@@ -724,7 +561,7 @@ const CodingSheets = () => {
 
 	return (
 		<GrandContainer>
-			<MobContainer>
+			{/* <MobContainer>
 				<MobileNavbar />
 				<div className="main-content">
 					<h1 className="main-heading">Coding Sheets</h1>
@@ -804,7 +641,7 @@ const CodingSheets = () => {
 										</div>
 										<div className="done-btn">
 											<CheckCircleOutlineIcon
-												onClick={() => toggleCompleted(item._id)}
+												onClick={() => toggleCompleted(item.quesLink)}
 											/>
 										</div>
 									</div>
@@ -814,38 +651,60 @@ const CodingSheets = () => {
 					</div>
 				</div>
 				<SimpleFooter />
-			</MobContainer>
+			</MobContainer> */}
 			<Container>
 				{
 					selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
 				}
 				{
-					selectedTheme == "dark" ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
+                    selectedTheme == "dark" ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
+
 				}
 				<div className="cc-middle-content">
-					<h1 className="main-heading">Coding Sheets</h1>
-					<p className="heading-supporter">
-						Looking for a convenient way to access a variety of coding practice sheets from different sources? Look no further than Coding Sheets, a feature on the Algolisted website. Not only can you find a wide range of sheets all in one place, but the included analysis graphs make solving them even more enjoyable by allowing you to track your progress. Plus, a discussion section is coming soon to provide support and guidance as you work through each sheet. Happy coding!
-					</p>
-					<div className="message">
+					<div className="sheet-details">
+						<div className="owner-detail-main">
+							<div className="owner-details">
+								<img className="owner-pic" src="https://yt3.googleusercontent.com/ytc/APkrFKbsYv4EsFtPfuUp7Xk9ULYrDBLJ9tgN7SrOyB1Fbw=s900-c-k-c0x00ffffff-no-rj" alt="" />
+							</div>
+						</div>
+						<div className="sheet-detail-main">
+							<h1 className="main-heading">Binary Search for Beginners</h1>
+							<p className="heading-supporter">
+								Explore 'Binary Search for Beginners,' a comprehensive guide by a seasoned LeetCode enthusiast. Discover over 50 LeetCode questions and hone your binary search skills, making complex problem-solving seem like a breeze. Perfect for newcomers seeking a solid foundation in this essential algorithm.        
+							</p>
+							<div className="imp-links">
+								<div className="other-links">
+									<img src="https://cdn.iconscout.com/icon/free/png-256/free-leetcode-3521542-2944960.png" alt="" />
+									<img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" />
+									<img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png?20220706172052" alt="" />
+									<div className="text">Follow <b>@Arsh Goyal</b> for Updates</div>
+								</div>
+								<div className="other-links-2">
+									<VisibilityIcon/>
+									<div className="text">Views <b>286</b></div>
+								</div>
+								<div className="other-links-2">
+									<StarBorderIcon/>
+									<div className="text">Starred <b>36</b></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{/* <div className="message">
 						<div className="icon"></div>
 						<div className="text">
 							As we continue to develop our platform, we do not currently require users to create accounts. As a result, any progress made is saved locally in your device's storage. Therefore, it's recommended to not clear your browser's cache.
 						</div>
-					</div>
+					</div> */}
 					<Filters>
 						<a href="/custom-coding-sheets/create" className="filter2">
-							Explore custom coding sheets
+                            Make your own Custom Problem Sheet
 							<CallMadeIcon />
 							<div className="tag">New Feature 🔥</div>
 						</a>
 					</Filters>
 
-					<Filters>
-						{filters}
-					</Filters>
-
-					<SheetMessage data-theme={selectedTheme}>
+					<SheetMessage>
 						<div className="text">
 							Hey there! With this tool, you can easily see a visual representation of the coding sheet you are working on and track your progress as you go. It also gives you an idea of the types of questions you can expect to find on the sheet. Cool, huh?
 						</div>
@@ -856,14 +715,14 @@ const CodingSheets = () => {
 										<div className="desc">
 											Close Visualiser
 										</div>
-										<ExpandLessIcon color="inherit"/>
+										<ExpandLessIcon />
 									</>
 								) : (
 									<>
 										<div className="desc">
 											Open Visualiser
 										</div>
-										<ExpandMoreIcon color="inherit"/>
+										<ExpandMoreIcon />
 									</>
 								)
 							}
@@ -1016,7 +875,7 @@ const CodingSheets = () => {
 							<label htmlFor="hard">Hard</label>
 						</div>
 						<div className="right">
-							<Tagsfilter data={data} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} />
+							{/* <Tagsfilter data={data} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} /> */}
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
@@ -1084,7 +943,7 @@ const CodingSheets = () => {
 											<Tooltip title={item.completed ? "Mark as Uncompleted" : "Mark as Completed"}>
 												<div className="done-btn">
 													<CheckCircleOutlineIcon
-														onClick={() => toggleCompleted(item._id)}
+														onClick={() => toggleCompleted(item.quesLink)}
 													/>
 												</div>
 											</Tooltip>
@@ -1235,7 +1094,6 @@ const MobContainer = styled.div`
 				border-top-left-radius: 5px;
 				border-top-right-radius: 5px;
 				border-bottom: 1px solid #d1d5db;
-				background-color:var(--body_background);
 
 				.link-row-left {
 					display: flex;
@@ -1256,7 +1114,7 @@ const MobContainer = styled.div`
 							font-size: 0.85rem;
 							font-weight: 500;
 							text-decoration: none;
-							color: var(--body_link);
+							/* color: inherit; */
 
 							&:hover {
 								text-decoration: underline;
@@ -1356,24 +1214,119 @@ const Container = styled.div`
 			padding: 80px 50px 30px 50px;
 		}
 
-		.main-heading {
-			font-size: 1.65rem;
-			font-weight: 600;
-			color: #292929;
-		}
+		.sheet-details{
+			display: flex;
+			align-items: center;
 
-		.heading-supporter {
-			font-size: 1.05rem;
-			margin-bottom: 10px;
-			font-weight: 400;
-			color: #696168;
-
-			a {
-				color: #18489f;
-				font-size: 0.95rem;
-				font-weight: 300;
-				margin-left: 0.25rem;
+			.owner-detail-main{
+				.owner-pic{
+					height: 120px;
+					width: 120px;
+					border-radius: 100px;
+					margin-right: 20px;
+					border: 1px solid #d1d5db;
+					background-color: #e5e5e5;
+					padding: 5px;
+				}
 			}
+			
+			.sheet-detail-main{
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				
+				.main-heading {
+					font-size: 1.65rem;
+					font-weight: 600;
+					color: #292929;
+				}
+
+				.heading-supporter {
+					font-size: 1.05rem;
+					margin-bottom: 10px;
+					font-weight: 400;
+					color: #696168;
+
+					a {
+						color: #18489f;
+						font-size: 0.95rem;
+						font-weight: 300;
+						margin-left: 0.25rem;
+					}
+				}
+
+				.imp-links{
+					display: flex;
+					margin-top: 20px;
+
+					.other-links{
+						height: 40px;
+						display: flex;
+						align-items: center;
+						padding: 0 15px 0 15px;
+						background-color: #f3f1f1;
+						border-radius: 10px;
+						margin-right: 10px;
+						border: 1px solid #d1d5db;
+	
+						img{
+							height: 15px;
+							margin-right: 15px;
+						}
+	
+						.text{
+							font-size: 0.7rem;
+							border-left: 1px solid black;
+							padding-left: 10px;
+						}
+					}
+
+					.other-links-2{
+						cursor: pointer;
+						height: 40px;
+						display: flex;
+						align-items: center;
+						padding: 0 15px 0 15px;
+						background-color: #f3f1f1;
+						border-radius: 10px;
+						margin-right: 10px;
+						border: 1px solid #d1d5db;
+	
+						img{
+							height: 15px;
+							margin-right: 15px;
+						}
+
+						svg{
+							font-size: 1.25rem;
+							margin-right: 15px;
+						}
+	
+						.text{
+							display: flex;
+							align-items: center;
+							height: 100%;
+							font-size: 0.7rem;
+							padding-left: 15px;
+							border-left: 1px solid #d1d5db;
+
+							b{
+								padding: 2.5px 7.5px;
+								/* border: 1px solid black; */
+								margin-left: 5px;
+								border-radius: 100px;
+								font-weight: 600;
+								background-color: #d1d5db;
+							}
+						}
+					}
+				}
+
+			}
+
+			
+
+			
 		}
 
 		.message {
@@ -1416,7 +1369,6 @@ const Container = styled.div`
 				border-top-left-radius: 5px;
 				border-top-right-radius: 5px;
 				border-bottom: 1px solid #d1d5db;
-				background-color:var(--body_background);
 
 				.link-row-left {
 					display: flex;
@@ -1432,7 +1384,6 @@ const Container = styled.div`
 						font-weight: 500;
 						width: 32.5px;
 						text-align: center;
-						color:var(--body_color);
 					}
 
 					.main-row-content {
@@ -1440,7 +1391,7 @@ const Container = styled.div`
 							font-size: 0.9rem;
 							font-weight: 500;
 							text-decoration: none;
-							color: var(--body_link);
+							/* color: inherit; */
 
 							&:hover {
 								text-decoration: underline;
@@ -1453,7 +1404,7 @@ const Container = styled.div`
 							flex-wrap: wrap;
 
 							.tag {
-								background-color: var(--body_tagbackground2);
+								background-color: #f3f4f7;
 								color: inherit;
 								padding: 2.5px 7.5px;
 								border-radius: 100px;
@@ -1547,8 +1498,8 @@ const Container = styled.div`
 const Filters = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	margin: 10px 0 10px 0;
-	color:var(--body_color);
+	margin: 50px 0 10px 0;
+
 	.filter {
 		padding: 7.5px 15px;
 		font-size: 0.8rem;
@@ -1568,15 +1519,9 @@ const Filters = styled.div`
     }
 
 		&:hover {
-<<<<<<< HEAD
-			border-color: #201f1f;
-			background-color: #201f1f;
-			color: var(--body_color);
-=======
 			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
 			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
 			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
->>>>>>> 77cd3430390927240892cd01e8cfa3ca18f8fb85
 			transition-duration: 250ms;
 			cursor: pointer;
 		}
@@ -1652,6 +1597,7 @@ const Filters = styled.div`
 			cursor: pointer;
 		}
 	}
+
 	@media only screen and (max-width: 1100px) {
 		margin: 10px 0 10px 0;
 
@@ -1752,27 +1698,23 @@ const Progress = styled.div`
 const SheetMessage = styled.div`
 	padding: 10px;
 	margin: 20px 0 0px 0;
-	border: 1px solid var(--body_modelborders);
+	/* border: 1px solid black; */
 	border-radius: 5px;
 	/* background-color: #c9e8ff; */
-	background-color:var(--body_background2);
-	color:var(--body_color);
+	background-color: #f0f0f0;
+
 	.text {
 		font-size: 0.8rem;
-		color:var(--body_color);
-	}
-	.desc{
-		color:var(--body_color);
 	}
 
 	.open-btn{
 		display: flex;
 		align-items: center;
 		cursor: pointer;
+		
 		font-size: 0.8rem;
 		font-weight: 500;
 		margin-top: 15px;
-		color:var(--body_color);
 	}
 `;
 
@@ -1782,7 +1724,6 @@ const GiveSpace = styled.div`
 
 const VisualiserConatiner = styled.div`
 	margin: 10px 0 0 0;
-	background:var(--body_background);
     .visualiser-conatiner{
         display: flex;
 		align-items: stretch;
@@ -1790,7 +1731,7 @@ const VisualiserConatiner = styled.div`
         
         .canvas-container{
             border: 1px solid #d1d5db;
-            background:var(--body_background);
+            background-color: rgba(255, 255, 255, 0.83);
             box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
             border-radius: 5px;
             padding: 50px 10px 10px 50px;
@@ -1813,7 +1754,6 @@ const VisualiserConatiner = styled.div`
 				height: 220px;
 				overflow-y: scroll;
 				padding: 0 20px;
-				color:var(--body_color);
 
 				::-webkit-scrollbar {
 					width: 2px;
@@ -1850,7 +1790,6 @@ const VisualiserConatiner = styled.div`
                         font-size: 0.7rem;
                         font-weight: 500;
                         margin-right: 5px;
-						color:var(--body_color);
                     }
     
                     .label-value{
@@ -1858,7 +1797,6 @@ const VisualiserConatiner = styled.div`
                         letter-spacing: 0.07rem;
                         font-weight: 300;
                         font-family: verdana,arial,sans-serif;
-						color:var(--body_color);
                     }
                 }
             }
@@ -1869,7 +1807,7 @@ const VisualiserConatiner = styled.div`
             padding: 10px 30px;
             margin-left: 7.5px;
             border: 1px solid #d1d5db;
-            background-color: var(--body_background);
+            background-color: rgba(255, 255, 255, 0.83);
             box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
             border-radius: 5px;
 			position: relative;
@@ -1885,7 +1823,6 @@ const VisualiserConatiner = styled.div`
                 flex-direction: column;
 				justify-content: center;
                 width: 100%;
-				
 
                 .cat-data{
                     display: flex;
@@ -1896,7 +1833,6 @@ const VisualiserConatiner = styled.div`
                     .name{
                         font-size: 0.9rem;
                         font-weight: 500;
-						color:var(--body_color);
                     }
     
                     .completed{

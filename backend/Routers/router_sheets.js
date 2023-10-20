@@ -8,10 +8,11 @@ router.get('/', (req, res) => {
     res.json('You are at the sheets route');
 });
 
-router.get('/details/:sheetId', (req, res) => {
-    const sheetId = req.params.sheetId;
+router.get('/details', (req, res) => {
+    const sheetId = req.query.sheetId;
     sheetsController.getProblemSheetDetails(sheetId, res);
 });
+
 
 // Post Routes ------->
 

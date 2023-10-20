@@ -8,29 +8,73 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import GradeIcon from '@material-ui/icons/Grade';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import AddIcon from '@material-ui/icons/Add';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import app from '../firebase_Auth/firebaseConfig'
+// import { axios } from 'axios';
+// const axios = require('axios');
+import axios from 'axios';
+
 
 const CreateCustomCodingSheets = () => {
     const [needDarkMode, setNeedDarkMode] = useState(false);
-    
+    const [user, setUser] = useState();
+
     useEffect(() => {
         let selectedTheme = localStorage.getItem("selectedTheme");
         if (selectedTheme === 'dark') setNeedDarkMode(true);
-      }, []);
-    
-      useEffect(() => {
-        document.title = "Contest Archive - Algolisted";
-      }, []);
-    
-      console.log("needDarkMode : ", needDarkMode);
-      const toggleDarkMode = () => {
-        setNeedDarkMode(!needDarkMode);
-      };
+    }, []);
 
-    return ( 
+    useEffect(() => {
+        document.title = "Contest Archive - Algolisted";
+    }, []);
+
+    console.log("needDarkMode : ", needDarkMode);
+    const toggleDarkMode = () => {
+        setNeedDarkMode(!needDarkMode);
+    };
+
+    const handleSubmit = async () => {
+        const provider = new GoogleAuthProvider();
+        // console.log(ap);
+        const auth = getAuth(app);
+        const result = await signInWithPopup(auth, provider)
+        try {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential.accessToken;
+            console.log(result.user);
+            setUser(result.user);
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode + errorMessage);
+
+            // ...
+        };
+        // const newObj = {
+        //     "email": result.user.email,
+        //     "name": result.user.name,
+        //     "profilePictureURL": result.user.profilePictureURL
+        // }
+        try{
+            const response = await axios.post(`http://localhost:8000/user-details/profile-create`,result.user);
+            console.log(response.status);
+        }catch (error) {
+            try{
+                const newResponse = await axios.post(`http://localhost:8000/user-details/profile-update`,result.user);
+            }
+            catch (error) {
+            console.log(error)
+        }
+    }
+        
+
+    }
+
+    return (
         <GrandContainer>
             <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with 
-                width more than 1100px, a standard laptop or tablet landscape. 
+                We are still working on Responsive Version of the website, please view the site with
+                width more than 1100px, a standard laptop or tablet landscape.
                 <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
             </MobContainer>
             <Container>
@@ -38,7 +82,7 @@ const CreateCustomCodingSheets = () => {
                     needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
                 }
                 {
-                    needDarkMode ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
+                    needDarkMode ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
                 }
                 {/* ---> change this all-blogs to your desired page-id */}
 
@@ -52,26 +96,26 @@ const CreateCustomCodingSheets = () => {
                         <div className="text">
                             Curious about how to use it? Watch our <a href="/">youtube video</a> to see how it's done!
                         </div>
-                    </div> 
+                    </div>
                     <UserSheetsLikedList>
                         <h3>You need to have an account to use this feature</h3>
-                        
+
                         <SignUpButton>
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png" alt="" />
-                            <div className="text">Continue with Google</div>
+                            <div className="text" onClick={handleSubmit}>Continue with Google</div>
                         </SignUpButton>
                     </UserSheetsLikedList>
-                    <UserSheetsList>
+                    {user && <UserSheetsList>
                         <h3>Your Sheets</h3>
                         <div className="list">
                             <div className="new-sheet-container">
-                                <AddIcon/>
+                                <AddIcon />
                             </div>
                             {/* <div className="new-sheet-container search-bar"></div> */}
                         </div>
                         <div className="list">
                             <div className="sheet-container">
-                                <div className="title">Binary Search for Beginners <CallMadeIcon/> </div>
+                                <div className="title">Binary Search for Beginners <CallMadeIcon /> </div>
                                 <div className="desc">Explore 'Binary Search for Beginners,' a comprehensive guide by a seasoned LeetCode enthusiast. Discover over 50 LeetCode questions and hone your binary search skills, making complex problem-solving seem like a breeze. Perfect for newcomers seeking a solid foundation in this essential algorithm.</div>
                                 <div className="info">
                                     <div className="one-info">
@@ -87,18 +131,18 @@ const CreateCustomCodingSheets = () => {
                                     <div className="btn">Edit Sheet Content</div>
                                     <div className="right">
                                         <div className="analytics">
-                                            <VisibilityIcon/>
+                                            <VisibilityIcon />
                                             <div className="stats">1,342</div>
                                         </div>
                                         <div className="analytics">
-                                            <GradeIcon/>
+                                            <GradeIcon />
                                             <div className="stats">127</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="sheet-container">
-                                <div className="title">Binary Search for Beginners <CallMadeIcon/> </div>
+                                <div className="title">Binary Search for Beginners <CallMadeIcon /> </div>
                                 <div className="desc">Explore 'Binary Search for Beginners,' a comprehensive guide by a seasoned LeetCode enthusiast. Discover over 50 LeetCode questions and hone your binary search skills, making complex problem-solving seem like a breeze. Perfect for newcomers seeking a solid foundation in this essential algorithm.</div>
                                 <div className="info">
                                     <div className="one-info">
@@ -114,23 +158,23 @@ const CreateCustomCodingSheets = () => {
                                     <div className="btn">Edit Sheet Content</div>
                                     <div className="right">
                                         <div className="analytics">
-                                            <VisibilityIcon/>
+                                            <VisibilityIcon />
                                             <div className="stats">1,342</div>
                                         </div>
                                         <div className="analytics">
-                                            <GradeIcon/>
+                                            <GradeIcon />
                                             <div className="stats">127</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </UserSheetsList>
-                    <UserSheetsLikedList>
+                    </UserSheetsList>}
+                    {user && <UserSheetsLikedList>
                         <h3>Sheets you Star Marked</h3>
                         <div className="list">
                             <div className="sheet-container">
-                                <div className="title">Binary Search for Beginners <CallMadeIcon/> </div>
+                                <div className="title">Binary Search for Beginners <CallMadeIcon /> </div>
                                 <div className="info">
                                     <div className="one-info">
                                         Author{" "}
@@ -177,7 +221,7 @@ const CreateCustomCodingSheets = () => {
                                 </div>
                             </div>
                             <div className="sheet-container">
-                                <div className="title">Binary Search for Beginners <CallMadeIcon/> </div>
+                                <div className="title">Binary Search for Beginners <CallMadeIcon /> </div>
                                 <div className="info">
                                     <div className="one-info">
                                         Author{" "}
@@ -224,8 +268,8 @@ const CreateCustomCodingSheets = () => {
                                 </div>
                             </div>
                         </div>
-                        
-                    </UserSheetsLikedList>
+
+                    </UserSheetsLikedList>}
                 </div>
             </Container>
         </GrandContainer>

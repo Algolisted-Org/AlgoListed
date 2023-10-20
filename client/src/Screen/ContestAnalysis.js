@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { json, useParams } from "react-router-dom";
 import styled from "styled-components";
 import CCHeader from "../Components/CCHeader";
@@ -32,6 +32,11 @@ const ContestAnalysis = () => {
   const [rankings, setRankings] = useState([]);
   const [countryOptions, setCountryOptions] = useState([]);
   const [username, setUsername] = useState("");
+  // const [prediction, setPrediction] = useState({
+  //   "delta_rating" : "-",
+  //   "old_rating" : "-",
+  //   "new_rating" : "-",
+  // });
   const [prediction, setPrediction] = useState(null);
   const [problemLabels, setProblemLabels] = useState([]);
   const [addUser, setadduser] = useState(false);
@@ -42,7 +47,6 @@ const ContestAnalysis = () => {
   const { contestName } = useParams();
 
   useEffect(() => {
-
       document.title = "Contest Analysis - Algolisted";
   }, []);
   
@@ -79,7 +83,7 @@ const ContestAnalysis = () => {
   useEffect(() => {
     axios
       .get(
-        `https://nayak-leetcode-api.vercel.app/?weekly_contest=${contestName}`
+        `https://mark2.vercel.app/?contest=${contestName}`
       )
       // .get(`https://nayak-leetcode-api.vercel.app/?weekly_contest=weekly-contest-352`)
       .then((res) => {
@@ -223,7 +227,7 @@ const ContestAnalysis = () => {
           generateLabels: function () {
             return [
               {
-                text: `Not Accepted Count of Participants`,
+                text: `Wrong submissions count for solution acceptance.`,
                 borderRadius: 4,
                 fillStyle: "#5ab097",
                 strokeStyle: "#5ab097",
@@ -260,9 +264,10 @@ const ContestAnalysis = () => {
         </div>
         <div className="stats">
           <div className="stat">
-            Problem Inspiration : {questions[index].inspired_from}
+            {questions[index].inspired_from}
           </div>
-          <div className="stat">Author : {questions[index].author}</div>
+          {/* <div className="stat">Author : {questions[index].author}</div> */}
+          <div className="stat">Author : Leetcode</div>
         </div>
       </div>
     </div>
@@ -326,19 +331,22 @@ const ContestAnalysis = () => {
     }
   }, [wholeLeetcodeData, selectedCountry, searchUsername]);
 
+  const handleUsernameChange = useCallback((e) => {
+    setUsername(e.target.value);
+  }, []);
+
   const predictRating = () => {
-    const url = `https://nayak-leetcode-api.vercel.app/?username=${username}`;
+    const url = `https://mark2.vercel.app/get-prediction?contest_name=${contestName}&username=${username}`;
 
     axios
       .get(url)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data[0]);
         setPrediction(res.data[0]);
-        // console.log(prediction);
       })
       .catch((error) => {
-        // Handle errors here
         console.error(error);
+        alert("Hello there!3");
       });
   };
 
@@ -454,7 +462,7 @@ const ContestAnalysis = () => {
                     {rankings.map((ranking, index) => (
                       <li className="ranking" key={index}>
                         <div>
-                          <a href={`https://leetcode.com/${ranking.username}`}>
+                          <a target="_blank" href={`https://leetcode.com/${ranking.username}`}>
                             {ranking.username}
                           </a>
                         </div>
@@ -511,6 +519,7 @@ const ContestAnalysis = () => {
                               <a
                                 href={`https://leetcode.com/${eachuser.username}/`}
                                 className="username"
+                                target="_blank" 
                               >
                                 {eachuser.username}
                               </a>
@@ -544,6 +553,7 @@ const ContestAnalysis = () => {
                               <a
                                 href={`https://leetcode.com/${eachuser.username}/`}
                                 className="username"
+                                target="_blank" 
                               >
                                 {eachuser.username}
                               </a>
@@ -584,25 +594,19 @@ const ContestAnalysis = () => {
               <input
                 className="input"
                 type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                // value={username}
+                // onChange={handleUsernameChange}
                 placeholder="Enter your username"
               />
-              <button className="search-btn" onClick={() => predictRating()}>
-                Predict
-              </button>
+
+              {/* <div className="search-btn" onClick={predictRating}> */}
+              <div className="search-btn">
+                <div className="text">Predict</div>
+              </div>
+
               <div className="virtual-btn">{/* Virtual contest ? */}</div>
-              {prediction != null ? (
-                <div>
-                  <p>delta_rating : {prediction.delta_rating}</p>
-                  <p>old_rating : {prediction.old_rating}</p>
-                  <p>new_rating : {prediction.new_rating}</p>
-                </div>
-              ) : (
-                <></>
-              )}
             </div>
-            <div className="info">
+            {/* <div className="info">
               <InfoIcon />
               <div className="text">
                 Because the machine learning model is resource-intensive, it
@@ -612,6 +616,29 @@ const ContestAnalysis = () => {
                   the first 30 minutes of the contest.
                 </b>
               </div>
+            </div> */}
+            <div className="info">
+              <InfoIcon />
+              <div className="text">
+                Sorry for inconvince, but this feature is currently removed because of
+                <b>
+                  {" "}unconsistant results and high response time
+                </b>
+                . If you can us create the predictive model then <br />
+                <a href="/">Resolve issue : Create Leetcode Rating Prediction | Open Discussion + Issue #170</a>
+              </div>
+            </div>
+            <div className="prediction-values">
+              {
+                prediction ? 
+                <div>
+                  <div className="value">delta_rating : {prediction.delta_rating}</div>
+                  <div className="value">old_rating : {prediction.old_rating}</div>
+                  <div className="value">new_rating : {prediction.new_rating}</div>
+                </div>
+                : 
+                <div></div>
+              }
             </div>
           </div>
         </div>
@@ -901,6 +928,15 @@ const Container = styled.div`
           font-weight: 500;
         }
       }
+
+      .prediction-values{
+        margin-top: 30px;
+        .value{
+          font-size: 0.8rem;
+          font-weight: 300;
+          margin-top: 5px;
+        }
+      }
     }
 
     .rank-inputs {
@@ -942,21 +978,45 @@ const Container = styled.div`
       font-weight: 400;
     }
 
-    .search-btn {
-      padding: 10px 15px;
+    .search-btn{
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      background: linear-gradient(150deg, #016df8,#2ba4b4,#d6cd16);
+      background-size: 200% 200%;
+      animation: AnimationName 10s linear infinite;
+      padding: 5px 30px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: 200;
+      border-radius: 100px;
       margin-left: 10px;
-      border-radius: 200px;
-      width: 165px;
-      border: 1px solid #333;
-      font-size: 0.85rem;
-      font-weight: 300;
-      letter-spacing: 0.07rem;
 
-      &:hover {
-        cursor: pointer;
-        box-shadow: rgba(171, 202, 255, 0.5) 0px 7px 29px 0px;
+      .text{
+        font-size: 0.85rem;
+        font-weight: 300;
+        color: #ededf0;
+      }
+
+      svg{
+        fill: #ededf0;
+        font-size: 1.05rem;
       }
     }
+      
+    @keyframes AnimationName {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+      
 
     .virtual-btn {
       padding: 10px 15px;
@@ -1027,10 +1087,11 @@ const Container = styled.div`
 
           .stats {
             display: flex;
-            margin-top: 5px;
             column-gap: 5px;
+            flex-wrap: wrap;
 
             .stat {
+              margin-top: 5px;
               padding: 5px 10px;
               border: 1px solid #b9afaf;
               border-radius: 8px;
