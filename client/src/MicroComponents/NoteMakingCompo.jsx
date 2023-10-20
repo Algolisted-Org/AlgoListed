@@ -117,12 +117,18 @@ const NoteMaking = ({ name }) => {
       </LeftSection>
       <RightSection>
         <NotesInputContainer>
+          <Notice>
+            You can edit a specific left note or create a new one using the 'Add New Note' button at the top left.
+            <br />
+            <br />
+            You are currently {click ? "editing an old note" : "adding a new note"}
+          </Notice>
           <TextInput
             value={notevalue}
             onChange={(e) => setNoteValue(e.target.value)}
             placeholder="Add New Notes"
           />
-          <AddButton onClick={()=>add(specificid)}>{click ? "Edit" : "Add"}</AddButton>
+          <AddButton onClick={()=>add(specificid)}>{click ? "Edit old Note" : "Add new Note"}</AddButton>
         </NotesInputContainer>
       </RightSection>
     </Wrapper>
@@ -138,45 +144,64 @@ const Wrapper = styled.div`
 `;
 
 const LeftSection = styled.div`
-  border-right: 2px solid #ccc;
+  border-right: 1px solid #ccc;
   flex: 1;
   overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-left: 1px solid transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #335ddc;
+    border-radius: 100px;
+  }
 `;
 
 const TextInput = styled.textarea`
-  width: calc(100% - 20px);
-  padding: 10px;
+  width: calc(100% - 5px);
+  padding: 15px;
   box-sizing: border-box;
-  height: calc(100% - 40px);
+  height: calc(100% - 135px);
   resize: none;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 20px;
+  outline: none;
+  font-size: 0.85rem;
+  font-weight: 300;
+  margin-top: 15px;
+  margin-bottom: 5px;
 `;
 
 const RightSection = styled.div`
-  flex: 1;
+  width: 35%;
+  margin-right: 2.5px;
 `;
 
 const ToDoContainer = styled.div`
-  padding: 20px;
-  background-color: #f9f9f9;
+  padding: 20px 20px 0 0;
+  /* background-color: #f9f9f9; */
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   margin-bottom: 20px;
 `;
 
 const Btn = styled.button`
-  background-color: #3498db;
-  color: white;
+  background-color: #e5e5e5;
+  /* color: white; */
   padding: 5px;
   width: 100%;
   border-radius: 10px;
   cursor: pointer;
   border: 0;
   outline: 0;
-  font-weight: bold;
-  margin-bottom: 2px;
+  font-weight: 400;
+  margin-bottom: 20px;
 `;
 
 const ToDoList = styled.ul`
@@ -195,27 +220,42 @@ const ToDoItem = styled.li`
   position: relative;
   z-index: 0;
   cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 300;
+  padding-right: 30px;
+
+  
   &:hover {
     background-color: #f0f0f0;
   }
 `;
 
 const NotesInputContainer = styled.div`
-  padding: 20px;
-  background-color: #f0f0f0;
+  padding: 20px 0 0 20px;
+  /* background-color: #f0f0f0; */
   border-radius: 8px;
   height: 100%;
 `;
 
 const AddButton = styled.button`
   padding: 10px 20px;
-  background-color: #3498db;
-  color: #fff;
+  background-color: #e5e5e5;
+  color: #333;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
   &:hover {
-    background-color: #2980b9;
+    border: 1px solid #333;
+    transition-duration: 250ms;
+    /* background-color: #e5e5e5; */
   }
 `;
+
+
+const Notice = styled.div`
+  font-size: 0.75rem;
+`
