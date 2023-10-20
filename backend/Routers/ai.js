@@ -4,7 +4,9 @@ const fs = require("fs");
 const multer = require("multer");
 const pdf = require("pdf-parse");
 const { OpenAI } = require("openai");
-const OPENAI_KEY =process.env.OPENAI_KEY;
+const OPENAI_KEY =
+  process.env.OPENAI_KEY ??
+  "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";
 const openai = new OpenAI({ apiKey: OPENAI_KEY });
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -45,7 +47,7 @@ router.post("/resume-questions", upload.single("file"), async (req, res) => {
           content: prompt,
         },
       ],
-      max_tokens: 500,
+      max_tokens: 500, //length of data you want
     });
     responsePayload.data = aiCompletion.choices[0].message.content;
     responsePayload.success = true;
