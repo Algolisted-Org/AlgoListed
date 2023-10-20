@@ -8,12 +8,21 @@ import AttachmentIcon from "@material-ui/icons/Attachment";
 import axios from "axios";
 import Markdown from "react-markdown";
 import { PuffLoader } from "react-spinners";
+// import { useFetch } from "@uidotdev/usehooks";
+
+const companies = ["Google", "Zoho", "Microsoft", "Amazon"];
+const difficulties = ["Easy", "Medium", "Hard"];
 
 const ResumeQuestions = () => {
   const [needDarkMode, setNeedDarkMode] = useState(false);
   const [currentFile, setCurrentFile] = useState(null);
   const fileRef = useRef(null);
-  const [questions, setQuestions] = useState({
+  const [basicQuestions, setBasicQuestions] = useState({
+    error: null,
+    data: null,
+    loading: false,
+  });
+  const [codingQuestions, setCodingQuestions] = useState({
     error: null,
     data: null,
     loading: false,
@@ -33,11 +42,11 @@ const ResumeQuestions = () => {
     setNeedDarkMode(!needDarkMode);
   };
   const uploadResume = async () => {
-    if(!currentFile) return;
+    if (!currentFile) return;
     const formData = new FormData();
-    formData.append("file",currentFile);
+    formData.append("file", currentFile);
     try {
-      setQuestions({ ...questions, loading: true });
+      setBasicQuestions({ ...basicQuestions, loading: true });
       const response = await axios.post(
         "http://localhost:8000/ai/resume-questions",
         formData,
@@ -49,13 +58,13 @@ const ResumeQuestions = () => {
       );
       const data = await response.data;
       console.log(data);
-      setQuestions({
-        ...questions,
+      setBasicQuestions({
+        ...basicQuestions,
         loading: false,
         data: data.data,
       });
     } catch (error) {
-      setQuestions({ ...questions, loading: false, error });
+      setBasicQuestions({ ...basicQuestions, loading: false, error });
       console.log(error);
     }
   };
@@ -63,6 +72,27 @@ const ResumeQuestions = () => {
   const onSelectingResume = (fileEvent) => {
     const file = fileEvent.target.files[0];
     setCurrentFile(file);
+  };
+  const getQuestions = async (e) => {
+    try {
+      setCodingQuestions({ ...codingQuestions, loading: true });
+      const response = await axios.post(
+        "http://localhost:8000/coding-questions/gfg",
+        { company: e.target.value },
+      );
+      const data = await response.data;
+      const template = [`# Top Coding Questions of ${e.target.value}`, "Here are some curated problems\n"];
+      const questions = data.map((item)=>`[${item.name}](${item.problem_url})\n`);
+
+      setCodingQuestions({
+        ...codingQuestions,
+        loading: false,
+        data: `${template.join("\n")}\n${questions.join("\n")}`,
+      });
+    } catch (error) {
+      setCodingQuestions({ ...codingQuestions, loading: false, error });
+      console.log(error);
+    }
   };
 
   return (
@@ -127,24 +157,47 @@ const ResumeQuestions = () => {
             className="file_input"
             accept="application/pdf"
           />
+          <select className="btn-1" onChange={getQuestions}>
+            <option value="*">Select company</option>
+            {companies.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          <select className="btn-1" onChange={getQuestions}>
+            <option value="*">Select difficulty</option>
+            {difficulties.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
           <button
             className="btn-1"
             onClick={() => fileRef.current.click()}
-            disabled={questions.loading}
+            disabled={basicQuestions.loading}
           >
             <AttachmentIcon /> Attach your Resume
           </button>
-          {currentFile && <button className="btn-1" onClick={uploadResume}>Upload</button>}
-          {questions.data && !questions.loading && (
-            <Markdown>{questions.data}</Markdown>
+          {currentFile && (
+            <button className="btn-1" onClick={uploadResume}>
+              Upload
+            </button>
           )}
-          {questions.loading && (
+          {basicQuestions.data && !basicQuestions.loading && (
+            <Markdown>{basicQuestions.data}</Markdown>
+          )}
+           {codingQuestions.data && !codingQuestions.loading && (
+            <Markdown>{codingQuestions.data}</Markdown>
+          )}
+          {basicQuestions.loading && (
             <div className="loading-section">
               <PuffLoader />
               <p>Sit back and relax we are analysing your resume...</p>
             </div>
           )}
-          {questions.error && (
+          {basicQuestions.error && (
             <div className="error-section">An unexpected error occurred...</div>
           )}
         </div>
@@ -274,7 +327,7 @@ const Container = styled.div`
       font-size: 0.75rem;
       display: flex;
       align-items: center;
-      margin-bottom:0.25rem;
+      margin-bottom: 0.25rem;
       svg {
         margin-right: 5px;
       }
