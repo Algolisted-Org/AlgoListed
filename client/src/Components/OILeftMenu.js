@@ -13,10 +13,10 @@ const OILeftMenu = ({marked}) => {
     <Container>
       {/* <div className="logo">Atanu Nayak</div> */}
       <Tooltip title="Version - v2.10">
-        <div className="logo">Dev Mode</div>
+        <div className="logo">Algolisted</div>
       </Tooltip>
       <div className="mid-links">
-        <a href='/blogs/all' className="link">
+        <a href='/contests-archive' className="link">
           <ArrowBackIosIcon/>
           Explore Features
         </a>

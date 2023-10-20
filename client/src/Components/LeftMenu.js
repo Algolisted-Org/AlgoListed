@@ -12,7 +12,7 @@ const LeftMenu = ({ marked }) => {
   // ----- FOR DARK MODE -----
 	const [needDarkMode, setNeedDarkMode] = useState(false);
 	let selectedTheme = localStorage.getItem("selectedTheme");
-	console.log("needDarkMode : ", needDarkMode);
+	// console.log("needDarkMode : ", needDarkMode);
 	const toggleDarkMode = () => {
 		setNeedDarkMode(!needDarkMode);
 	};
@@ -24,11 +24,11 @@ const LeftMenu = ({ marked }) => {
     //   showAt: "all-blogs",
     //   link: "/blogs/all",
     // },
-    {
-      value: "Showdown Server",
-      showAt: "showdown-server",
-      link: "/showdown-server",
-    }, 
+    // {
+    //   value: "Showdown Server",
+    //   showAt: "showdown-server",
+    //   link: "/showdown-server",
+    // }, 
     {
       value: "Contests Archive",
       showAt: "contests-archive",
@@ -44,16 +44,25 @@ const LeftMenu = ({ marked }) => {
       showAt: "resources",
       link: "/resources",
     },
-    
     {
       value: "Coding Sheets",
       showAt: "coding-sheets",
       link: "/coding-sheets/striver-sde-sheet",
     },
     {
-      value: "Interview Summaries",
-      showAt: "interview-summaries",
-      link: "/interview-summaries",
+      value: "Create Problem List",
+      showAt: "create-problem-list",
+      link: "/create-problem-list",
+    },
+    // {
+    //   value: "Interview Summaries",
+    //   showAt: "interview-summaries",
+    //   link: "/interview-summaries",
+    // },
+    {
+      value: "Resume Questions",
+      showAt: "resume-questions",
+      link: "/resume-questions",
     },
     
     

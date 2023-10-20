@@ -1,27 +1,32 @@
 import React, { useState,useEffect } from "react";
 import styled from "styled-components";
 import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
+import SearchBar from "./searchbar";
 
-function Tagsfilter({ tags,filterdata,setfilter }) {
+function Tagsfilter({ tags, filterdata,setfilter,data }) {
+  const [tagdat,settagdata]=useState([...tags])
   const [expand, setexpand] = useState(false);
-   const [showAll, setShowAll] = useState(false);
+
    const [ischoose,setischoose]=useState([])
+   
    console.log(ischoose)
+   if(ischoose.length===0){
+    setfilter(data)
+   }
+  
    useEffect(()=>{
     const filteredData = filterdata.filter((item) => {
-        return item.tags.some((tag) => ischoose.includes(tag));
+        return ischoose.every((tag) => item.tags.includes(tag));
       });
       setfilter(filteredData)
-   
+     
    },[ischoose])
    
   const onclicked = () => {
     setexpand((prev) => !prev);
-    setShowAll((prev) => !prev);
+ 
   };
-   const handleToggleShowAll = () => {
-    setShowAll((prev) => !prev);
-  };
+  
   const handletags=(each)=>{
     if (ischoose.includes(each)) {
         setischoose((prev) => prev.filter((tag) => tag !== each));
@@ -31,7 +36,13 @@ function Tagsfilter({ tags,filterdata,setfilter }) {
   }
  
   return (
+    <>
+    {/* {
+      expand && <SearchBar  tagdat={tagdat} tags={tags} settagdata={settagdata}/>
+    } */}
+  
     <Tagscompo>
+      
       <Tags  onClick={onclicked}>
         Filter based on Problem Tags 
         {ischoose.length>0 && <Counts>{ischoose.length}</Counts>}
@@ -43,46 +54,34 @@ function Tagsfilter({ tags,filterdata,setfilter }) {
       </Tags>
       {expand && (
         <Menuexpand expanded={expand}>
-          {tags.slice(0, showAll ? tags.length : 5).map((each, index) => (
+          {tagdat.length===0?<h1>Not present</h1>:tagdat.map((each, index) => (
             <MenuItem 
             key={index}
             isselected={ischoose.includes(each)}
             onClick={()=>handletags(each)}
             >{each}</MenuItem>
           ))}
-          {tags.length > 5 && (
-            <ShowMoreButton onClick={handleToggleShowAll}>
-              {showAll ? "Show Less" : "Show More"}
-            </ShowMoreButton>
-          )}
+          
         </Menuexpand>
       )}
     </Tagscompo>
+    </>
   );
 }
 
 export default Tagsfilter;
 
 const MenuItem = styled.div`
-  font-size: 12px;
-  background-color:${(props) => (props.isselected ? "#3498db" : "white")};
-  padding: 5px 10px;
-  border-radius: 1000px;
-  margin: 5px;
+  font-size: 0.75rem;
+  background-color:${(props) => (props.isselected ? "#e5e5e5" : "#f3f4f7")};
+  padding: 2.5px 7.5px;
+  border-radius: 100px;
+  margin-top: 5px;
+  margin-right: 5px;
+  text-align:center;
   cursor:pointer;
-  color: ${(props) => (props.isselected ? "white":"black")};
-  border: 1px solid black;
-  
-`;
-
-const ShowMoreButton = styled.button`
-  background: none;
-  border: none;
-  color: #3498db;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 5px;
-  margin: 10px 0;
+  /* color: ${(props) => (props.isselected ? "white":"black")}; */
+  border: 1px solid ${(props) => (props.isselected ? "#8d8686":"#cac3c3")};
 `;
 
 const Menuexpand = styled.div`
@@ -91,15 +90,32 @@ const Menuexpand = styled.div`
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   width: 300px;
-  height: auto;
+  height: 200px;
+  overflow-y:auto;
   position: absolute;
-  top: 60px;
-  left: -3px;
+  top: 40px;
+  right: 0px;
   display: flex;
+  border: 1px solid #cccccc;
+  overflow-x: hidden;
   flex-wrap: wrap;
   opacity: ${props => (props.expanded ? 1 : 0)};
   transform: translateY(${props => (props.expanded ? "0" : "-10px")});
   transition: opacity 0.3s ease, transform 0.3s ease;
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-left: 1px solid transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #335ddc;
+    border-radius: 100px;
+  }
 `;
 
 const Tags = styled.div`
@@ -116,8 +132,8 @@ const Counts = styled.span`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #3498db;
-  color: white;
+  background-color: #f3f4f7;
+  border: 1px solid #d0d5db;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -226,39 +226,39 @@ const LandingPage3 = () => {
               <div className="box down-border right-border">
                 <img src='https://leetcode.com/static/images/LeetCode_logo_rvs.png' className="feature-logo"></img>
                 <a href='/contest-analysis' className="feature-name">Leetcode Contest Analysis <CallMadeIcon/> </a> 
-                <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
+                <div className="feature-desc">Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. </div>
               </div>
               <div className="box down-border right-border">
                 <img src='https://play-lh.googleusercontent.com/WsR_f03nbqW3qZjCZeXUYmnmhSWXo3hQhLX9hgl9QHydCgbXQi_VJeAwnmtuIgTHKdQ' className="feature-logo"></img>
                 <a href='/contests-archive' className="feature-name">Contest Problems Collection <CallMadeIcon/> </a> 
-                <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
+                <div className="feature-desc">Explore an organized collection of all past contest problems across various platforms, empowering you to get better efficiency with interactive visuals.</div>
               </div>
               <div className="box down-border right-border">
                 <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJwFbP8A6iFB7mX56y_hTVlTpssz3RpAvSgQ&usqp=CAU' className="feature-logo"></img>
                 <a href='/coding-sheets/striver-sde-sheet' className="feature-name">Coding Sheets with Visualisation <CallMadeIcon/> </a> 
-                <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
+                <div className="feature-desc">Get a wide range of sheets all in one place with the included analysis graphs which make solving them even more enjoyable by allowing you to track your progress.</div>
               </div>
               <div className="box down-border">
                 <img src='https://res.cloudinary.com/practicaldev/image/fetch/s--CsuD8TQh--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yy6g8h2z1y7req5ibczx.jpg' className="feature-logo"></img>
                 <a href='/interview-summaries' className="feature-name">Coding Interview Summarization <CallMadeIcon/> </a> 
-                <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
+                <div className="feature-desc">Get ready for big tech company interviews with a comprehensive collection of resources covering Data Structures and Algorithms (DSA) and core subjects with frequently asked questions.</div>
               </div>
             </div>
             <div className="one-row">
               <div className="box right-border">
                 <img src='https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec' className="feature-logo"></img>
                 <a href='/showdown-server' className="feature-name">Host Friendly Coding Competitions <CallMadeIcon/> </a> 
-                <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
+                <div className="feature-desc">Host coding competitions with your friends and select questions randomly from variety of topics from platforms like Codeforces or LeetCode. </div>
               </div>
               <div className="box right-border">
                 <img src='https://www.grackledocs.com/wp-content/uploads/2023/09/pdf.png' className="feature-logo"></img>
                 <a href='/resources' className="feature-name">Collection of Coding Learning Resources <CallMadeIcon/> </a> 
-                <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
+                <div className="feature-desc">Dive into gems of resources available on different websites like LinkedIn and Leetcode compiled together and organised effectively at a single place.</div>
               </div>
               <div className="box right-border">
                 <img src='https://static.vecteezy.com/system/resources/previews/005/086/755/original/apply-now-banner-label-free-vector.jpg' className="feature-logo"></img>
                 <a href='/opportunities' className="feature-name">Job & Internship Openings <CallMadeIcon/> </a> 
-                <div className="feature-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non asperiores laboriosam officia labore sunt deserunt eaque culpa molestiae et minus.</div>
+                <div className="feature-desc">Apply and find details about various job openings and internship opportunities, along with the corresponding schedules and other necessary details.</div>
               </div>
               <div className="last-box">
                 <div className="circle">
@@ -314,7 +314,7 @@ const LandingPage3 = () => {
         </div>
         <div className="page-4">
           {/* <img className='background' src="https://cutewallpaper.org/24/water-transparent-gif/source-files-gifs-get-the-best-gif-on-giphy.gif" draggable="false" alt="" /> */}
-          <img className='background' src="https://cutewallpaper.org/24/3d-gif-transparent/top-gif-xxx-3-d-stickers-for-android-amp-ios-gfycat.gif" draggable="false" alt="" />
+          {/* <img className='background' src="https://cutewallpaper.org/24/3d-gif-transparent/top-gif-xxx-3-d-stickers-for-android-amp-ios-gfycat.gif" draggable="false" alt="" /> */}
 
           <div className="feature-header">
             <div className="line"></div>
