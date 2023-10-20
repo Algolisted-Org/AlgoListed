@@ -7,7 +7,6 @@ const createProblemSheet = async (req, res) => {
         ownerId,
         sheetName,
         sheetDesc,
-        lastUpdated,
     } = req.body;
 
     try {
@@ -16,7 +15,7 @@ const createProblemSheet = async (req, res) => {
             ownerId,
             sheetName,
             sheetDesc,
-            lastUpdated,
+            lastUpdated: new Date(),
         });
 
         res.status(200).json({ message: "Problem sheet has been created", sheet: newSheet });
@@ -32,8 +31,6 @@ const updateProblemSheet = async (req, res) => {
         sheetName,
         sheetDesc,
         problemIds,
-        countViews,
-        countStars
     } = req.body;
 
     try {
@@ -50,8 +47,7 @@ const updateProblemSheet = async (req, res) => {
         if (sheetName) existingSheet.sheetName = sheetName;
         if (sheetDesc) existingSheet.sheetDesc = sheetDesc;
         if (problemIds) existingSheet.problemIds = problemIds;
-        if (countViews !== undefined) existingSheet.countViews = countViews;
-        if (countStars !== undefined) existingSheet.countStars = countStars;
+        lastUpdated: new Date(),
 
         // Save the updated problem sheet
         await existingSheet.save();
@@ -63,11 +59,11 @@ const updateProblemSheet = async (req, res) => {
     }
 };
 
-const getProblemSheetDetails = async (req, res) => {
-    const sheetId = req.params.sheetId;
-
+const getProblemSheetDetails = async (sheetId, res) => {
     try {
+        console.log(sheetId);
         const problemSheet = await ProblemSheetsModel.findOne({ sheetId });
+        console.log(problemSheet);
 
         if (!problemSheet) {
             return res.status(404).json({ message: "Problem sheet not found." });

@@ -12,7 +12,7 @@ const LeftMenu = ({ marked }) => {
   // ----- FOR DARK MODE -----
 	const [needDarkMode, setNeedDarkMode] = useState(false);
 	let selectedTheme = localStorage.getItem("selectedTheme");
-	console.log("needDarkMode : ", needDarkMode);
+	// console.log("needDarkMode : ", needDarkMode);
 	const toggleDarkMode = () => {
 		setNeedDarkMode(!needDarkMode);
 	};

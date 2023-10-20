@@ -3,14 +3,15 @@ const UsersModel = require("../../Models/userProfileModel");
 const createUserProfile = async (req, res) => {
     const { 
         email,
-        name,
-        profilePictureURL
+        displayName,
+        photoURL,
     } = req.body; 
 
     try { 
         // Check if the email already exists in the collection
+        // console.log(ema)
         const existingUser = await UsersModel.findOne({ email });
-
+        
         if (existingUser) {
             return res.status(400).json({ message: "User with this email already exists." });
         }
@@ -18,8 +19,8 @@ const createUserProfile = async (req, res) => {
         // If the email doesn't exist, create a new user profile
         const newUser = await UsersModel.create({
             email,
-            name,
-            profilePictureURL
+            name:displayName,
+            profilePictureURL : photoURL,
         });
 
         res.status(200).json({ message: "User has been added to the Database" });

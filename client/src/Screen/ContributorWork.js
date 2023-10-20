@@ -137,6 +137,7 @@ const Container = styled.div`
         margin-left: 30px;
         width: 80%;
         h3{
+          margin-top: 0;
           margin-bottom: 5px;
           a{
             text-decoration:none;
@@ -150,6 +151,9 @@ const Container = styled.div`
         }
         p{
           font-size: 0.75rem;
+          font-weight: 200;
+          letter-spacing: 0.05rem;
+          line-height: 1.25rem;
         }
         a{
           margin:2px;

@@ -111,6 +111,20 @@ const Container = styled.div`
           color: #292929;
       }
 
+      h3{
+        font-weight: 500;
+        margin-top: 50px;
+      }
+
+      .founder-photo{
+        img{
+          height: 200px;
+          width: 200px;
+          border-radius: 50%;
+        }
+      }
+
+
       .heading-supporter{
         font-size: 0.85rem;
         font-weight: 200;
