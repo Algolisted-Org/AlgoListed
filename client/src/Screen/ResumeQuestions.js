@@ -13,10 +13,24 @@ import { PuffLoader } from "react-spinners";
 const companies = ["Google", "Zoho", "Microsoft", "Amazon"];
 const difficulties = ["Easy", "Medium", "Hard"];
 
+const generateCodingQuestionsTemplate = (data, company, difficulty = "all") => {
+  if (!data) return "";
+  const template = [
+    `# Top Coding Questions of ${company} of ${difficulty} level`,
+    "Here are some curated problems\n",
+  ];
+  const questions = data.map(
+    (item, index) => `${index + 1}. [${item.name}](${item.problem_url})\n`
+  );
+  const result = `${template.join("\n")}\n${questions.join("\n")}`;
+  return result;
+};
+
 const ResumeQuestions = () => {
   const [needDarkMode, setNeedDarkMode] = useState(false);
   const [currentFile, setCurrentFile] = useState(null);
   const fileRef = useRef(null);
+  const [currentCompany, setCurrentCompany] = useState("*");
   const [basicQuestions, setBasicQuestions] = useState({
     error: null,
     data: null,
@@ -26,6 +40,7 @@ const ResumeQuestions = () => {
     error: null,
     data: null,
     loading: false,
+    filteredData: null,
   });
 
   useEffect(() => {
@@ -46,7 +61,7 @@ const ResumeQuestions = () => {
     const formData = new FormData();
     formData.append("file", currentFile);
     try {
-      setBasicQuestions({ ...basicQuestions, loading: true });
+      setBasicQuestions({ ...basicQuestions, loading: true, error: null });
       const response = await axios.post(
         "http://localhost:8000/ai/resume-questions",
         formData,
@@ -57,12 +72,13 @@ const ResumeQuestions = () => {
         }
       );
       const data = await response.data;
-      console.log(data);
       setBasicQuestions({
         ...basicQuestions,
         loading: false,
         data: data.data,
       });
+
+      console.log(data);
     } catch (error) {
       setBasicQuestions({ ...basicQuestions, loading: false, error });
       console.log(error);
@@ -74,25 +90,47 @@ const ResumeQuestions = () => {
     setCurrentFile(file);
   };
   const getQuestions = async (e) => {
+    if (e.target.value === "*") return;
     try {
       setCodingQuestions({ ...codingQuestions, loading: true });
       const response = await axios.post(
         "http://localhost:8000/coding-questions/gfg",
-        { company: e.target.value },
+        { company: e.target.value }
       );
       const data = await response.data;
-      const template = [`# Top Coding Questions of ${e.target.value}`, "Here are some curated problems\n"];
-      const questions = data.map((item)=>`[${item.name}](${item.problem_url})\n`);
 
       setCodingQuestions({
         ...codingQuestions,
         loading: false,
-        data: `${template.join("\n")}\n${questions.join("\n")}`,
+        data,
+        filteredData: generateCodingQuestionsTemplate(data, e.target.value, ""),
       });
+      setCurrentCompany(e.target.value);
     } catch (error) {
       setCodingQuestions({ ...codingQuestions, loading: false, error });
       console.log(error);
     }
+  };
+  const filterQuestions = (e) => {
+    const value = e.target.value;
+    if (!codingQuestions.data || !currentCompany) return;
+    if (value === "*") {
+      setCodingQuestions({
+        ...codingQuestions,
+        filteredData: generateCodingQuestionsTemplate(
+          codingQuestions.data.filter(
+            (item) => item.difficulty === e.target.value
+          ),
+          currentCompany),
+      });
+      return;
+    }
+    setCodingQuestions({
+      ...codingQuestions,
+      filteredData: generateCodingQuestionsTemplate(
+        codingQuestions.data.filter((item) => item.difficulty === value),currentCompany, value
+      ),
+    });
   };
 
   return (
@@ -165,7 +203,7 @@ const ResumeQuestions = () => {
               </option>
             ))}
           </select>
-          <select className="btn-1" onChange={getQuestions}>
+          <select className="btn-1" onChange={filterQuestions}>
             <option value="*">Select difficulty</option>
             {difficulties.map((item) => (
               <option key={item} value={item}>
@@ -185,17 +223,20 @@ const ResumeQuestions = () => {
               Upload
             </button>
           )}
-          {basicQuestions.data && !basicQuestions.loading && (
-            <Markdown>{basicQuestions.data}</Markdown>
-          )}
-           {codingQuestions.data && !codingQuestions.loading && (
-            <Markdown>{codingQuestions.data}</Markdown>
-          )}
           {basicQuestions.loading && (
             <div className="loading-section">
               <PuffLoader />
               <p>Sit back and relax we are analysing your resume...</p>
             </div>
+          )}
+          {basicQuestions.data?.basicQuestions && !basicQuestions.loading && (
+            <>
+              <Markdown>{basicQuestions.data.basicQuestions}</Markdown>
+              <Markdown>{`# Scores based on resume\n\n${basicQuestions.data.companies}`}</Markdown>
+            </>
+          )}
+          {codingQuestions.filteredData && !codingQuestions.loading && (
+            <Markdown>{codingQuestions.filteredData}</Markdown>
           )}
           {basicQuestions.error && (
             <div className="error-section">An unexpected error occurred...</div>
