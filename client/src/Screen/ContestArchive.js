@@ -24,6 +24,7 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import { FaWineBottle } from 'react-icons/fa';
 import NoteMaking from './../MicroComponents/NoteMakingCompo';
 import { Bar } from 'react-chartjs-2';
+import DoneIcon from '@material-ui/icons/Done';
 
 
 const ContestArchive = () => {
@@ -524,9 +525,14 @@ const datasets = problems
                   <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
                     <EqualizerIcon />
                   </a>
-                  <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
-                    <NotesIcon />
-                  </div>
+                  {notes.includes(contestData.contest_name) ?
+                    <div className="link" onClick={()=>notesadded(contestData.contest_name)} style={{"border" : "1px solid #333"}}>
+                      <NotesIcon style={{"fill" : "#333"}} />
+                    </div> : 
+                    <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
+                      <NotesIcon />
+                    </div>
+                  }
                 </div>
                 {notes.includes(contestData.contest_name)? 
                   <div className="one-contest-problems" style={{"height" : "500px"}}>
@@ -930,6 +936,15 @@ const Container = styled.div`
                   fill: #cacacd;
                   font-size: 1.25rem;
                 }
+
+                .keep-hovered-effect{
+                  border-color: black;
+                  transition-duration: 250ms;
+                  
+                  svg{
+                    fill: #333;
+                  }
+                }
   
                 &:hover{
                   cursor: pointer;
@@ -944,7 +959,8 @@ const Container = styled.div`
             }
 
           .one-contest-problems{
-            transition: height 250ms;
+            transition: height 500ms;
+            transition-timing-function: ease-in-out;
             position: relative;
             height: 200px;
             width: 100%;
@@ -956,10 +972,6 @@ const Container = styled.div`
             overflow: hidden;
             
             /* border: 1px solid #e5e5e5; */
-  
-            
-  
-            
   
             .contest-problem {
               height: 100%;
