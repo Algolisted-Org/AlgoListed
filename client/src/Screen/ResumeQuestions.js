@@ -1,22 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import CCHeaderDarkPlus from "../Components/CCHeaderDarkPlus";
 import CCHeaderPlus from "../Components/CCHeaderPlus";
 import LeftMenu from "../Components/LeftMenu";
 import LeftMenuDark from "../Components/LeftMenuDark";
-// import { PdfReader } from "pdfreader";
-// const { PdfReader } = require('pdfreader');
 import AttachmentIcon from "@material-ui/icons/Attachment";
-import { Document } from "react-pdf";
-// import pdfjs from "pdfjs-dist";
-import * as pdfjs from "pdfjs-dist";
+import axios from "axios";
+import Markdown from "react-markdown";
+import { PuffLoader } from "react-spinners";
+// import { useFetch } from "@uidotdev/usehooks";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+const companies = ["Google", "Zoho", "Microsoft", "Amazon"];
+const difficulties = ["Easy", "Medium", "Hard"];
+
+const generateCodingQuestionsTemplate = (data, company, difficulty = "all") => {
+  if (!data) return "";
+  const template = [
+    `# Top Coding Questions of ${company} of ${difficulty} level`,
+    "Here are some curated problems\n",
+  ];
+  const questions = data.map(
+    (item, index) => `${index + 1}. [${item.name}](${item.problem_url})\n`
+  );
+  const result = `${template.join("\n")}\n${questions.join("\n")}`;
+  return result;
+};
 
 const ResumeQuestions = () => {
   const [needDarkMode, setNeedDarkMode] = useState(false);
-  const [file, setFile] = useState(null);
-  const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
+  const [currentFile, setCurrentFile] = useState(null);
+  const fileRef = useRef(null);
+  const [currentCompany, setCurrentCompany] = useState("*");
+  const [basicQuestions, setBasicQuestions] = useState({
+    error: null,
+    data: null,
+    loading: false,
+  });
+  const [codingQuestions, setCodingQuestions] = useState({
+    error: null,
+    data: null,
+    loading: false,
+    filteredData: null,
+  });
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
@@ -26,31 +51,86 @@ const ResumeQuestions = () => {
   useEffect(() => {
     document.title = "Resume Questions Page";
   }, []);
-  const uploadresume = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-    console.log(textFromPDF)
-  };
-  const handleTextExtraction = async () => {
-    if (file) {
-     
-      const reader = new FileReader();
-      reader.onload = async function () {
-        const pdfData = new Uint8Array(reader.result);
-        const pdf = await pdfjs.getDocument({ data: pdfData }).promise;
-        const page = await pdf.getPage(1); 
-        const textContent = await page.getTextContent();
-        const text = textContent.items.map((item) => item.str).join(" ");
-        setTextFromPDF(text);
-      };
-      reader.readAsArrayBuffer(file);
-
-    }
-  };
 
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
+  };
+  const uploadResume = async () => {
+    if (!currentFile) return;
+    const formData = new FormData();
+    formData.append("file", currentFile);
+    try {
+      setBasicQuestions({ ...basicQuestions, loading: true, error: null });
+      const response = await axios.post(
+        "http://localhost:8000/ai/resume-questions",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      const data = await response.data;
+      setBasicQuestions({
+        ...basicQuestions,
+        loading: false,
+        data: data.data,
+      });
+
+      console.log(data);
+    } catch (error) {
+      setBasicQuestions({ ...basicQuestions, loading: false, error });
+      console.log(error);
+    }
+  };
+
+  const onSelectingResume = (fileEvent) => {
+    const file = fileEvent.target.files[0];
+    setCurrentFile(file);
+  };
+  const getQuestions = async (e) => {
+    if (e.target.value === "*") return;
+    try {
+      setCodingQuestions({ ...codingQuestions, loading: true });
+      const response = await axios.post(
+        "http://localhost:8000/coding-questions/gfg",
+        { company: e.target.value }
+      );
+      const data = await response.data;
+
+      setCodingQuestions({
+        ...codingQuestions,
+        loading: false,
+        data,
+        filteredData: generateCodingQuestionsTemplate(data, e.target.value, ""),
+      });
+      setCurrentCompany(e.target.value);
+    } catch (error) {
+      setCodingQuestions({ ...codingQuestions, loading: false, error });
+      console.log(error);
+    }
+  };
+  const filterQuestions = (e) => {
+    const value = e.target.value;
+    if (!codingQuestions.data || !currentCompany) return;
+    if (value === "*") {
+      setCodingQuestions({
+        ...codingQuestions,
+        filteredData: generateCodingQuestionsTemplate(
+          codingQuestions.data.filter(
+            (item) => item.difficulty === e.target.value
+          ),
+          currentCompany),
+      });
+      return;
+    }
+    setCodingQuestions({
+      ...codingQuestions,
+      filteredData: generateCodingQuestionsTemplate(
+        codingQuestions.data.filter((item) => item.difficulty === value),currentCompany, value
+      ),
+    });
   };
 
   return (
@@ -108,18 +188,59 @@ const ResumeQuestions = () => {
                             Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
                         </div>
                     </div> */}
-
-          <div className="btn-1">
-            <input type="file" accept=".pdf" onChange={uploadresume} />
-            {file && (
-              <div>
-                <Document file={file} onLoadSuccess={handleTextExtraction} />
-                <div> 
-                  <div>{textFromPDF}</div>
-                </div>
-              </div>
-            )}
-          </div>
+          <input
+            type="file"
+            onChange={onSelectingResume}
+            ref={fileRef}
+            className="file_input"
+            accept="application/pdf"
+          />
+          <select className="btn-1" onChange={getQuestions}>
+            <option value="*">Select company</option>
+            {companies.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          <select className="btn-1" onChange={filterQuestions}>
+            <option value="*">Select difficulty</option>
+            {difficulties.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          <button
+            className="btn-1"
+            onClick={() => fileRef.current.click()}
+            disabled={basicQuestions.loading}
+          >
+            <AttachmentIcon /> Attach your Resume
+          </button>
+          {currentFile && (
+            <button className="btn-1" onClick={uploadResume}>
+              Upload
+            </button>
+          )}
+          {basicQuestions.loading && (
+            <div className="loading-section">
+              <PuffLoader />
+              <p>Sit back and relax we are analysing your resume...</p>
+            </div>
+          )}
+          {basicQuestions.data?.basicQuestions && !basicQuestions.loading && (
+            <>
+              <Markdown>{basicQuestions.data.basicQuestions}</Markdown>
+              <Markdown>{`# Scores based on resume\n\n${basicQuestions.data.companies}`}</Markdown>
+            </>
+          )}
+          {codingQuestions.filteredData && !codingQuestions.loading && (
+            <Markdown>{codingQuestions.filteredData}</Markdown>
+          )}
+          {basicQuestions.error && (
+            <div className="error-section">An unexpected error occurred...</div>
+          )}
         </div>
       </Container>
     </GrandContainer>
@@ -127,6 +248,14 @@ const ResumeQuestions = () => {
 };
 
 export default ResumeQuestions;
+
+const LoadingSection = styled.div``;
+
+const QuestionsSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
 
 const GrandContainer = styled.div``;
 
@@ -231,16 +360,32 @@ const Container = styled.div`
         font-weight: 300;
       }
     }
-
+    .file_input {
+      display: none;
+    }
     .btn-1 {
       padding: 5px 10px;
       font-size: 0.75rem;
       display: flex;
-      flex-direction: column;
       align-items: center;
+      margin-bottom: 0.25rem;
       svg {
         margin-right: 5px;
       }
+    }
+    .loading-section {
+      display: flex;
+      flex-direction: column;
+      padding: 4rem 0;
+      justify-content: center;
+      align-items: center;
+    }
+    .error-section {
+      display: flex;
+      flex-direction: column;
+      padding: 4rem 0;
+      justify-content: center;
+      align-items: center;
     }
   }
 `;

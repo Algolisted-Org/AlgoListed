@@ -195,7 +195,7 @@ const ContestArchive = () => {
     const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
     window.location.href = url;
   };
-
+  
   const marks = [
     {
       value: 0,
@@ -285,9 +285,9 @@ const ContestArchive = () => {
 
   function generateContestAnalysisURL(contestName) {
     const contestNameSlug = contestName.replace(/\s+/g, '-').toLowerCase();
-
+  
     const contestAnalysisURL = `/contest-analysis/${contestNameSlug}`;
-
+  
     return contestAnalysisURL;
   }
 
@@ -472,24 +472,24 @@ const datasets = problems
           </div>
 
           <EffectiveFilter className='noselect'>
-            <div className="left">
+						<div className="left"> 
               <div className="filter-item noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
                 {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                 {
                   openModel1 ? (
                     <ShowAbsoluteModelDropDown>
-                      <div className="option" onClick={() => { setFilterContestType("All"); setFilterContestTypeName("Both Contest Types") }}>Both Contest Types</div>
-                      <div className="option" onClick={() => { setFilterContestType("Weekly"); setFilterContestTypeName("Weekly Contests Only") }}>Weekly Contests Only</div>
-                      <div className="option" onClick={() => { setFilterContestType("Biweekly"); setFilterContestTypeName("Biweekly Contests Only") }}>Biweekly Contests Only</div>
+                      <div className="option" onClick={() => {setFilterContestType("All"); setFilterContestTypeName("Both Contest Types")}}>Both Contest Types</div>
+                      <div className="option" onClick={() => {setFilterContestType("Weekly"); setFilterContestTypeName("Weekly Contests Only")}}>Weekly Contests Only</div>
+                      <div className="option" onClick={() => {setFilterContestType("Biweekly"); setFilterContestTypeName("Biweekly Contests Only")}}>Biweekly Contests Only</div>
                     </ShowAbsoluteModelDropDown>
                   ) : <></>
                 }
               </div>
               <div className="filter-item" onClick={() => setOpenModel2(!openModel2)}>Last {sliderInputValue} Contests
-                {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+              {openModel2 == false ? <ExpandMoreIcon/> : <ExpandLessIcon/>} 
               </div>
-            </div>
-            <div className="right">
+						</div>
+						<div className="right">
               {/* <div className="filter-item">A</div>
               <div className="filter-item">B</div>
               <div className="filter-item">C</div>
@@ -509,10 +509,10 @@ const datasets = problems
                   marks={marks}
                 />
               </SliderSelector>
-            ) :
+              ): 
               <div></div>
           }
-
+          
 
           <div className="problems-table">
             {filteredContestData.map((contestData, index) => (
