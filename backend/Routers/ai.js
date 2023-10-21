@@ -4,9 +4,7 @@ const fs = require("fs");
 const multer = require("multer");
 const pdf = require("pdf-parse");
 const { OpenAI } = require("openai");
-const OPENAI_KEY =
-  process.env.OPENAI_KEY ??
-  "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";
+const OPENAI_KEY = "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";
 const openai = new OpenAI({ apiKey: OPENAI_KEY });
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -17,11 +15,19 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-const promptChunks = [
+const promptForBasicQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions i need to prepare with and help me get the job.",
   "Create an markdown text for questions and supported links for resources.",
   "The input:",
+];
+const promptForCompaniesScoreChunks = [
+  "Act as my company eligibility checker.",
+  "You are required to provide me companies im eligible for in terms of score between 1 to 100.",
+  "the companies are amazon, google,microsoft, adobe, adobe and zoho",
+  "produce the output in markdown format like - {Company} {Score}.",
+  "make sure the output is in consistent format.",
+  "here's text:",
 ];
 
 router.post("/resume-questions", upload.single("file"), async (req, res) => {
@@ -37,19 +43,38 @@ router.post("/resume-questions", upload.single("file"), async (req, res) => {
   try {
     const reader = fs.readFileSync(path);
     const data = await pdf(reader);
-    const prompt = `${promptChunks.join("\n")}${data.text}`;
-    const aiCompletion = await openai.chat.completions.create({
+    const promptForBasicQuestions = `${promptForBasicQuestionChunks.join(
+      "\n"
+    )}${data.text}`;
+    const promptForCompaniesScoreQuestions = `${promptForCompaniesScoreChunks.join(
+      "\n"
+    )}${data.text}`;
+    const aiCompletionForBasicQuestions = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      temperature: 0.2,
+      messages: [
+        {
+          role: "system",
+          content: promptForBasicQuestions,
+        },
+      ],
+      max_tokens: 500, //length of data you want
+    });
+    const aiCompletionForCompaniesScore = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       temperature: 0.7,
       messages: [
         {
           role: "system",
-          content: prompt,
+          content: promptForCompaniesScoreQuestions,
         },
       ],
-      max_tokens: 500, //length of data you want
+      max_tokens: 800, //length of data you want
     });
-    responsePayload.data = aiCompletion.choices[0].message.content;
+    responsePayload.data = {
+      basicQuestions: aiCompletionForBasicQuestions.choices[0].message.content,
+      companies: aiCompletionForCompaniesScore.choices[0].message.content
+    };
     responsePayload.success = true;
   } catch (error) {
     console.log(error);
