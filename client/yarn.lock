@@ -1232,6 +1232,17 @@
     "minimatch" "^3.1.2"
     "strip-json-comments" "^3.1.1"
 
+"@firebase/app@^0.9.20":
+  "integrity" "sha512-cMTDHr+1GfYyHBSLLvvTE8ywlDCKk/E8cUZmfv0ODmUBB1vXgrICShj7yH9UYf6m7l6pxad8T+qI/oAoAkCp2Q=="
+  "resolved" "https://registry.npmjs.org/@firebase/app/-/app-0.9.20.tgz"
+  "version" "0.9.20"
+  dependencies:
+    "@firebase/component" "0.6.4"
+    "@firebase/logger" "0.4.0"
+    "@firebase/util" "1.9.3"
+    "idb" "7.1.1"
+    "tslib" "^2.1.0"
+
 "@firebase/auth@^1.3.0":
   "integrity" "sha512-vjK4CHbY9aWdiVOrKi6mpa8z6uxeaf7LB/MZTHuZOiGHMcUoTGB6TeMbRShyqk1uaMrxhhZ5Ar/dR0965E1qyA=="
   "resolved" "https://registry.npmjs.org/@firebase/auth/-/auth-1.3.0.tgz"
@@ -6207,10 +6218,10 @@
   "resolved" "https://registry.npmjs.org/icss-utils/-/icss-utils-5.1.0.tgz"
   "version" "5.1.0"
 
-"idb@^7.0.1":
-  "integrity" "sha512-Wsk07aAxDsntgYJY4h0knZJuTxM73eQ4reRAO+Z1liOh8eMCJ/MoDS8fCui1vGT9mnjtl1sOu3I2i/W1swPYZg=="
-  "resolved" "https://registry.npmjs.org/idb/-/idb-7.1.0.tgz"
-  "version" "7.1.0"
+"idb@^7.0.1", "idb@7.1.1":
+  "integrity" "sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ=="
+  "resolved" "https://registry.npmjs.org/idb/-/idb-7.1.1.tgz"
+  "version" "7.1.1"
 
 "identity-obj-proxy@^3.0.0":
   "integrity" "sha512-00n6YnVHKrinT9t0d9+5yZC6UBNJANpYEQvL2LlX6Ab9lnmxzIRcEmTPuyGScvl1+jKuCICX1Z0Ab1pPKKdikA=="

@@ -8,7 +8,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import GradeIcon from '@material-ui/icons/Grade';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import AddIcon from '@material-ui/icons/Add';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "@firebase/auth";
 import app from '../firebase_Auth/firebaseConfig'
 // import { axios } from 'axios';
 // const axios = require('axios');

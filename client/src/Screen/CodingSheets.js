@@ -46,6 +46,7 @@ const CodingSheets = () => {
 	const [showTags, setShowTags] = useState(true);
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
+	console.log(filteredData)
 	// console.log(filteredData)
 	// ----- FOR DARK MODE -----
 	const [needDarkMode, setNeedDarkMode] = useState(false);
@@ -561,7 +562,7 @@ const CodingSheets = () => {
 				ProblemsTags.push(data[i].tags[j]);
 			}
 		}
-
+console.log(ProblemsTags)
 		// ProblemsTags = ProblemsTags.filter(string => string !== 'Amazon');
 
 		const filteredTags = ProblemsTags.filter(tag => allowedProblemTags.includes(tag));
@@ -665,16 +666,17 @@ const CodingSheets = () => {
 
 		setDifficultyPercentage(difficultyPercentageArray);
 	}, [difficulty, userDifficulty])
-
+console.log(data)
 	useEffect(() => {
 		if (selectedLabel === 'All') {
 			setFilteredData(data);
 		} else {
 			setFilteredData(
-				data.filter(item => item.specialTag == selectedLabel || item.tags.includes(selectedLabel))
+				data.filter(item => item.tags.includes(selectedLabel))
 			);
 		}
-	}, [selectedLabel, data]);
+		console.log(filteredData,selectedLabel)
+	}, [selectedLabel,filteredData]);
 
 	useEffect(() => { // finding unique tags
 		let len = solvedData.length;
@@ -1568,15 +1570,9 @@ const Filters = styled.div`
     }
 
 		&:hover {
-<<<<<<< HEAD
-			border-color: #201f1f;
-			background-color: #201f1f;
-			color: var(--body_color);
-=======
 			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
 			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
 			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
->>>>>>> 77cd3430390927240892cd01e8cfa3ca18f8fb85
 			transition-duration: 250ms;
 			cursor: pointer;
 		}

@@ -24,6 +24,7 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import { FaWineBottle } from 'react-icons/fa';
 import NoteMaking from './../MicroComponents/NoteMakingCompo';
 import { Bar } from 'react-chartjs-2';
+import DoneIcon from '@material-ui/icons/Done';
 
 
 const ContestArchive = () => {
@@ -289,9 +290,6 @@ const ContestArchive = () => {
   
     return contestAnalysisURL;
   }
-<<<<<<< HEAD
-  
-=======
 
   const tagsMappedToProblems = {
     A: {},
@@ -391,7 +389,6 @@ const datasets = problems
       },
     },
   };
->>>>>>> 77cd3430390927240892cd01e8cfa3ca18f8fb85
 
   return (
     <GrandContainer>
@@ -477,11 +474,7 @@ const datasets = problems
           <EffectiveFilter className='noselect'>
 						<div className="left"> 
               <div className="filter-item noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
-<<<<<<< HEAD
-                {openModel1 == false ? <ExpandMoreIcon/> : <ExpandLessIcon/>} 
-=======
                 {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
->>>>>>> 77cd3430390927240892cd01e8cfa3ca18f8fb85
                 {
                   openModel1 ? (
                     <ShowAbsoluteModelDropDown>
@@ -523,7 +516,7 @@ const datasets = problems
 
           <div className="problems-table">
             {filteredContestData.map((contestData, index) => (
-              <div className="one-contest-problems" key={index}>
+              <div className="one-contest-problems-parent" key={index}>
                 <div className="contest-name">{contestData.contest_name}</div>
                 <div className="contest-outlinks">
                   <a href={contestData.contest_link} target='_blank' className="link">
@@ -532,39 +525,51 @@ const datasets = problems
                   <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
                     <EqualizerIcon />
                   </a>
-                  <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
-                    <CreateIcon />
-                  </div>
-                </div>
-                {notes.includes(contestData.contest_name)?<NoteMaking name={contestData.contest_name}/>:Object.values(contestData.problems).map((problem, problemIndex) => (
-                  <div className={`contest-problem ${isQuestionSolved(contestData.contest_name,problem.name)?"solved-problem":""}`} key={problemIndex}>
-                    <div className="problem-main-name">
-                      <label>
-                        <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name,problem.name)}/>
-                        Problem Unsolved
-                      </label>
-                      <div className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</div>
+                  {notes.includes(contestData.contest_name) ?
+                    <div className="link" onClick={()=>notesadded(contestData.contest_name)} style={{"border" : "1px solid #333"}}>
+                      <NotesIcon style={{"fill" : "#333"}} />
+                    </div> : 
+                    <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
+                      <NotesIcon />
                     </div>
-                    {
-                      showTags ? (
-                        <div className="problem-info">
-                          <div className="tag difficulty-tag">{problem.difficulty}</div>
-                          {problem.tags.map((tag, tagIndex) => (
-                            <div className="tag" key={tagIndex}>
-                              {tag}
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="problem-info">
-                          <div className="tag">Problem Tags are Hidden</div>
-                        </div>
-                      )
-                    }
-                    
-                  </div>
-                  ))}
+                  }
                 </div>
+                {notes.includes(contestData.contest_name)? 
+                  <div className="one-contest-problems" style={{"height" : "500px"}}>
+                    <NoteMaking name={contestData.contest_name}/>
+                  </div>
+                  : 
+                  <div className="one-contest-problems">
+                  {Object.values(contestData.problems).map((problem, problemIndex) => (
+                    <div className={`contest-problem ${isQuestionSolved(contestData.contest_name,problem.name)?"solved-problem":""}`} key={problemIndex}>
+                      <div className="problem-main-name">
+                        <label>
+                          <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name,problem.name)}/>
+                          Problem Unsolved
+                        </label>
+                        <div className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</div>
+                      </div>
+                      {
+                        showTags ? (
+                          <div className="problem-info">
+                            <div className="tag difficulty-tag">{problem.difficulty}</div>
+                            {problem.tags.map((tag, tagIndex) => (
+                              <div className="tag" key={tagIndex}>
+                                {tag}
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="problem-info">
+                            <div className="tag">Problem Tags are Hidden</div>
+                          </div>
+                        )
+                      }
+                    </div>
+                  ))}
+                  </div>
+                }
+              </div>
             ))}
           </div>
         </div>
@@ -883,17 +888,10 @@ const Container = styled.div`
         border-radius: 20px;
         margin-top: 60px;
 
-        .one-contest-problems{
+        .one-contest-problems-parent{
           position: relative;
-          height: 200px;
-          width: 100%;
-          background-color: #ffffff;
-          border-radius: 20px;
-          margin-bottom: 30px;
-          display: flex;
-          border: 1px solid rgb(209, 213, 219);
           
-          /* border: 1px solid #e5e5e5; */
+
 
           .contest-name {
             position: absolute;
@@ -908,113 +906,138 @@ const Container = styled.div`
             align-items: center;
             font-size: 0.8rem;
             font-weight: 300;
+            z-index: 1;
           }
 
           .contest-outlinks{
-            width: 45px;
-            /* background-color: black; */
-            border-radius: 1000px;
-            position: absolute;
-            right: -22.5px;
-            top: -15px;
-
-            display: flex;
-            flex-direction: column;
-
-            .link{
-              width: 100%;
-              aspect-ratio: 1/1;
-              background-color: #f3f4f7;
-              border: 1px solid rgb(209, 213, 219);
-              border-radius: 50%;
-              margin-bottom: 7.5px;
-
-              display: grid; 
-              place-items: center;
-              
-              svg{
-                fill: #cacacd;
-                font-size: 1.25rem;
-              }
-
-              &:hover{
-                cursor: pointer;
-                border-color: black;
-                transition-duration: 250ms;
-
-                svg{
-                  fill: #333;
-                }
-              }
-            }
-          }
-
-          .contest-problem {
-            height: 100%;
-            width: 25%;
-            border-right: 1px solid rgb(209, 213, 219);
-            overflow-y: scroll;
-
-            ::-webkit-scrollbar {
-              display: none;
-            }
-            
-            &:last-child {
-              border-right: none;
-            }
-
-            padding: 20px;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            .problem-main-name{
-              margin-bottom: 20px;
-              label{
-                display: flex;
-                align-items: center;
-                margin-bottom: 5px;
-
-                input{
-                  margin-right: 5px;
-                }
-
-                font-size: 0.65rem;
-              }
-
-              .problem-name{
-                font-size: 0.85rem;
-                font-weight: 500;
-                color: cornflowerblue;
-              }
-            }
-
-            .problem-info{
+              z-index: 1;
+              width: 45px;
+              /* background-color: black; */
+              border-radius: 1000px;
+              position: absolute;
+              right: -22.5px;
+              top: -15px;
+  
               display: flex;
-              flex-wrap: wrap;
-
-              .tag{
-                font-size: 0.65rem;
-                padding: 2.5px 7.5px;
-                border: 1px solid rgb(202, 195, 195);
-                border-radius: 100px;
-                margin: 0 2.5px 2.5px 0;
-                font-weight: 300;
+              flex-direction: column;
+  
+              .link{
+                width: 100%;
+                aspect-ratio: 1/1;
                 background-color: #f3f4f7;
-              }
+                border: 1px solid rgb(209, 213, 219);
+                border-radius: 50%;
+                margin-bottom: 7.5px;
+  
+                display: grid; 
+                place-items: center;
+                
+                svg{
+                  fill: #cacacd;
+                  font-size: 1.25rem;
+                }
 
-              .difficulty-tag{
-                border-color: rgb(17, 17, 17);
-                /* background-color: #fff; */
+                .keep-hovered-effect{
+                  border-color: black;
+                  transition-duration: 250ms;
+                  
+                  svg{
+                    fill: #333;
+                  }
+                }
+  
+                &:hover{
+                  cursor: pointer;
+                  border-color: black;
+                  transition-duration: 250ms;
+  
+                  svg{
+                    fill: #333;
+                  }
+                }
               }
             }
 
-
-          }
-
-          .solved-problem{
-            background-color: #dcf8eb;
+          .one-contest-problems{
+            transition: height 500ms;
+            transition-timing-function: ease-in-out;
+            position: relative;
+            height: 200px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            border: 1px solid rgb(209, 213, 219);
+            overflow: hidden;
+            
+            /* border: 1px solid #e5e5e5; */
+  
+            .contest-problem {
+              height: 100%;
+              width: 25%;
+              border-right: 1px solid rgb(209, 213, 219);
+              overflow-y: scroll;
+  
+              ::-webkit-scrollbar {
+                display: none;
+              }
+              
+              &:last-child {
+                border-right: none;
+              }
+  
+              padding: 20px;
+  
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+  
+              .problem-main-name{
+                margin-bottom: 20px;
+                label{
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 5px;
+  
+                  input{
+                    margin-right: 5px;
+                  }
+  
+                  font-size: 0.65rem;
+                }
+  
+                .problem-name{
+                  font-size: 0.85rem;
+                  font-weight: 500;
+                  color: cornflowerblue;
+                }
+              }
+  
+              .problem-info{
+                display: flex;
+                flex-wrap: wrap;
+  
+                .tag{
+                  font-size: 0.65rem;
+                  padding: 2.5px 7.5px;
+                  border: 1px solid rgb(202, 195, 195);
+                  border-radius: 100px;
+                  margin: 0 2.5px 2.5px 0;
+                  font-weight: 300;
+                  background-color: #f3f4f7;
+                }
+  
+                .difficulty-tag{
+                  border-color: rgb(17, 17, 17);
+                  /* background-color: #fff; */
+                }
+              }
+            }
+  
+            .solved-problem{
+              background-color: #dcf8eb;
+            }
           }
         }
       }
