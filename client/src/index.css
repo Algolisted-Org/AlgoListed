@@ -1,30 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Moon+Dance&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("dark_mode_colors_resources.css");
+@import url('https://fonts.googleapis.com/css2?family=Moon+Dance&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('dark_mode_colors_resources.css');
 
-*,
-::after,
-::before {
+*, ::after, ::before{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   /* font-family: sohne-var, "Helvetica Neue", Arial, sans-serif; */
   color: #000;
 }
 
-input,
-textarea,
-select {
-  font-family: "Poppins", sans-serif;
-}
+input, textarea, select { font-family: 'Poppins', sans-serif; }
 
-body {
+body{
   background-color: #fefdff;
   overflow-x: hidden; /* Hide horizontal scrollbar */
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
-.full-btn {
+.full-btn{
   width: 100%;
   display: flex;
   justify-content: center;
@@ -36,7 +30,7 @@ body {
   cursor: pointer;
 }
 
-.default-btn {
+.default-btn{
   width: auto;
   display: flex;
   justify-content: center;
@@ -48,17 +42,17 @@ body {
   cursor: pointer;
 }
 
-a {
+a{
   color: cornflowerblue;
   font-weight: 300;
 }
 
-input {
+input{
   border: 1px solid black;
   outline: none;
 }
 
-.full-width-line {
+.full-width-line{
   width: 100%;
   height: 1px;
   background-color: #e5e7ed;
@@ -80,32 +74,17 @@ input {
 ::-webkit-scrollbar {
   width: 8px;
 }
-
+ 
 ::-webkit-scrollbar-track {
   background-color: #f0e9e9;
   border-left: 1px solid #e9e5e5;
 }
-
+ 
 ::-webkit-scrollbar-thumb {
   background-color: #335ddc;
   border-radius: 100px;
 }
 
-.heading-supporter {
+.heading-supporter{
   margin-top: 10px;
-}
-
-body {
-  background-color: var(--body_background) !important;
-  color: var(--body_color) !important;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span {
-  color: var(--body_color) !important;
 }
