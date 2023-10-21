@@ -666,13 +666,13 @@ console.log(ProblemsTags)
 
 		setDifficultyPercentage(difficultyPercentageArray);
 	}, [difficulty, userDifficulty])
-console.log(data)
+
 	useEffect(() => {
 		if (selectedLabel === 'All') {
-			setFilteredData(data);
+		
 		} else {
 			setFilteredData(
-				data.filter(item => item.tags.includes(selectedLabel))
+			data.filter(item => item.tags.includes(selectedLabel))
 			);
 		}
 		console.log(filteredData,selectedLabel)

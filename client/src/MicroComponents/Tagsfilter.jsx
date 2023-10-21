@@ -12,15 +12,18 @@ function Tagsfilter({ tags, filterdata,setfilter,data }) {
    console.log(ischoose)
    if(ischoose.length===0){
     setfilter(data)
+    console.log(filterdata)
    }
   
    useEffect(()=>{
     const filteredData = filterdata.filter((item) => {
+      
         return ischoose.every((tag) => item.tags.includes(tag));
       });
+      console.log(filterdata)
       setfilter(filteredData)
-     
-   },[ischoose])
+     console.log(filterdata)
+   },[ischoose,filterdata])
    
   const onclicked = () => {
     setexpand((prev) => !prev);
@@ -37,9 +40,7 @@ function Tagsfilter({ tags, filterdata,setfilter,data }) {
  
   return (
     <>
-    {/* {
-      expand && <SearchBar  tagdat={tagdat} tags={tags} settagdata={settagdata}/>
-    } */}
+   
   
     <Tagscompo>
       
@@ -54,6 +55,9 @@ function Tagsfilter({ tags, filterdata,setfilter,data }) {
       </Tags>
       {expand && (
         <Menuexpand expanded={expand}>
+           {
+      expand && <SearchBar  tagdat={tagdat} tags={tags} settagdata={settagdata}/>
+         }
           {tagdat.length===0?<h1>Not present</h1>:tagdat.map((each, index) => (
             <MenuItem 
             key={index}
@@ -74,8 +78,10 @@ export default Tagsfilter;
 const MenuItem = styled.div`
   font-size: 0.75rem;
   background-color:${(props) => (props.isselected ? "#e5e5e5" : "#f3f4f7")};
-  padding: 2.5px 7.5px;
-  border-radius: 100px;
+ height:30px;
+ width: auto;
+  padding:4px;
+  border-radius: 5px;
   margin-top: 5px;
   margin-right: 5px;
   text-align:center;
@@ -90,7 +96,7 @@ const Menuexpand = styled.div`
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   width: 300px;
-  height: 200px;
+  height:200px;
   overflow-y:auto;
   position: absolute;
   top: 40px;
