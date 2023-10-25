@@ -7,7 +7,16 @@ const { isAuthenticatedUser } = require("../Middleware/auth");
 router.get("/", (req, res) => {
   res.json("You are at the sheets route");
 });
+router.get("/get-by-owner/:ownerId", async (req, res) => {
+  const { ownerId } = req.params;
+  const result = await sheetsController.getAllSheetsByOwnerId(ownerId);
 
+  if (result.success) {
+    res.status(200).json({ sheets: result.sheets });
+  } else {
+    res.status(500).json({ message: result.message });
+  }
+});
 router.get("/details", (req, res) => {
   const sheetId = req.query.sheetId;
   sheetsController.getProblemSheetDetails(sheetId, res);
@@ -38,18 +47,6 @@ router.post("/increase-stars", isAuthenticatedUser, async (req, res) => {
     return res.status(200).json({ message: result.message });
   } else {
     return res.status(404).json({ message: result.message });
-  }
-});
-
-router.get("/get-by-owner/:ownerId", async (req, res) => {
-  const ownerId = req.params.ownerId;
-
-  const result = await sheetsController.getAllSheetsByOwnerId(ownerId);
-
-  if (result.success) {
-    res.status(200).json({ sheets: result.sheets });
-  } else {
-    res.status(500).json({ message: result.message });
   }
 });
 
