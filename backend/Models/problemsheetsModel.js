@@ -1,12 +1,13 @@
-const mongoose = require('mongoose');
-
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const createdProblemSheetsSchema = new mongoose.Schema({
   sheetId: {
     type: String,
     required: true,
   },
   ownerId: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "All_Users_Profile",
     required: true,
   },
   sheetName: {
@@ -23,7 +24,7 @@ const createdProblemSheetsSchema = new mongoose.Schema({
   },
   problemIds: {
     type: [String], // Array of strings
-    default: [],     // Default to an empty array
+    default: [], // Default to an empty array
     required: false,
   },
   countViews: {
@@ -38,4 +39,7 @@ const createdProblemSheetsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Sheets_Created_by_Users', createdProblemSheetsSchema);
+module.exports = mongoose.model(
+  "Sheets_Created_by_Users",
+  createdProblemSheetsSchema
+);
