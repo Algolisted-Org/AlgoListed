@@ -36,7 +36,8 @@ const SearchBarWrapper = styled.div`
   padding: 2px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  width: 160px; 
+  width: 100%; 
+  margin:5px;
   margin-right:10px;
 `;
 
