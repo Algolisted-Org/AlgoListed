@@ -18,6 +18,8 @@ import axios from 'axios';
 const CreateCustomCodingSheets = () => {
     const [needDarkMode, setNeedDarkMode] = useState(false);
     const [user, setUser] = useState();
+    const [sheetName, setSheetName] = useState("");
+    const [sheetDesc, setSheetDesc] = useState("");
 
     useEffect(() => {
         let selectedTheme = localStorage.getItem("selectedTheme");
@@ -55,18 +57,47 @@ const CreateCustomCodingSheets = () => {
         //     "name": result.user.name,
         //     "profilePictureURL": result.user.profilePictureURL
         // }
-        try{
-            const response = await axios.post(`http://localhost:8000/user-details/profile-create`,result.user);
+        try {
+            const response = await axios.post(`http://localhost:8000/user-details/profile-create`, result.user);
             console.log(response.status);
-        }catch (error) {
-            try{
-                const newResponse = await axios.post(`http://localhost:8000/user-details/profile-update`,result.user);
+        } catch (error) {
+            try {
+                const newResponse = await axios.post(`http://localhost:8000/user-details/profile-update`, result.user);
             }
             catch (error) {
-            console.log(error)
+                console.log(error)
+            }
         }
     }
-        
+
+    const handleSheetNameChange = (event) => {
+        setSheetName(event.target.value);
+    };
+    
+    const handleSheetDescChange = (event) => {
+        setSheetDesc(event.target.value);
+    };
+
+    const handleSubmitCreate = (event) => {
+        event.preventDefault();
+        // You can do something with the sheetName and sheetDesc values here
+        console.log("Sheet Name: " + sheetName);
+        console.log("Sheet Description: " + sheetDesc);
+    };
+
+    const createNewSheet = async () => {
+        const newObj = {
+            sheetName,
+            sheetDesc               
+        }
+         
+        try {
+            const newResponse = await axios.post(`http://localhost:8000/problem-sheets/create`, newObj, {withCredentials : true});
+            console.log(newResponse);
+        }
+        catch (error) {
+            console.log(error)
+        }
 
     }
 
@@ -105,10 +136,33 @@ const CreateCustomCodingSheets = () => {
                             <div className="text" onClick={handleSubmit}>Continue with Google</div>
                         </SignUpButton>
                     </UserSheetsLikedList>
-                    {user && <UserSheetsList>
+
+                    <form onSubmit={handleSubmitCreate}>
+                        <div>
+                            <label htmlFor="sheetName">Sheet Name:</label>
+                            <input
+                                type="text"
+                                id="sheetName"
+                                value={sheetName}
+                                onChange={handleSheetNameChange}
+                            />
+                            </div>
+                            <div>
+                            <label htmlFor="sheetDesc">Sheet Description:</label>
+                            <input
+                                type="text"
+                                id="sheetDesc"
+                                value={sheetDesc}
+                                onChange={handleSheetDescChange}
+                            />
+                        </div>
+                        <button type="submit">Submit</button>
+                    </form>
+                    {/* {user && <UserSheetsList> */}
+                    {true && <UserSheetsList>
                         <h3>Your Sheets</h3>
                         <div className="list">
-                            <div className="new-sheet-container">
+                            <div className="new-sheet-container" >
                                 <AddIcon />
                             </div>
                             {/* <div className="new-sheet-container search-bar"></div> */}

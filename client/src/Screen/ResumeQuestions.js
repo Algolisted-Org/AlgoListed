@@ -9,6 +9,7 @@ import axios from "axios";
 import Markdown from "react-markdown";
 import { PuffLoader } from "react-spinners";
 // import { useFetch } from "@uidotdev/usehooks";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const companies = ["Google", "Zoho", "Microsoft", "Amazon"];
 const difficulties = ["Easy", "Medium", "Hard"];
@@ -182,20 +183,13 @@ const ResumeQuestions = () => {
             encompasses your preparation for non-technical interview rounds,
             such as HR and project-related discussions.
           </p>
-          {/* <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
-                        </div>
-                    </div> */}
-          <input
-            type="file"
-            onChange={onSelectingResume}
-            ref={fileRef}
-            className="file_input"
-            accept="application/pdf"
-          />
-          <select className="btn-1" onChange={getQuestions}>
+          <div className="message">
+              <div className="icon"></div>
+              <div className="text">
+                  Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
+              </div>
+          </div>
+          {/* <select onChange={getQuestions}>
             <option value="*">Select company</option>
             {companies.map((item) => (
               <option key={item} value={item}>
@@ -203,41 +197,57 @@ const ResumeQuestions = () => {
               </option>
             ))}
           </select>
-          <select className="btn-1" onChange={filterQuestions}>
+          <select onChange={filterQuestions}>
             <option value="*">Select difficulty</option>
             {difficulties.map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
             ))}
-          </select>
-          <button
-            className="btn-1"
-            onClick={() => fileRef.current.click()}
-            disabled={basicQuestions.loading}
-          >
+          </select> */}
+
+          <div className="options">
+            <div className="option">
+              <div className="text">Company Type</div>
+              <ExpandMoreIcon/>
+            </div>
+            <div className="option">
+              <div className="text">Interview Level</div>
+              <ExpandMoreIcon/>
+            </div>
+          </div>
+
+          <input type="file" onChange={onSelectingResume} ref={fileRef} className="file_input" accept="application/pdf"/>
+          <button className="btn-1" onClick={() => fileRef.current.click()} disabled={basicQuestions.loading} >
             <AttachmentIcon /> Attach your Resume
           </button>
+
           {currentFile && (
             <button className="btn-1" onClick={uploadResume}>
               Upload
             </button>
           )}
+
+          
+
           {basicQuestions.loading && (
             <div className="loading-section">
               <PuffLoader />
-              <p>Sit back and relax we are analysing your resume...</p>
+              <p>We are analysing your resume, it will take around 60 seconds...</p>
             </div>
           )}
+
           {basicQuestions.data?.basicQuestions && !basicQuestions.loading && (
-            <>
+            <div className="output-result-container">
               <Markdown>{basicQuestions.data.basicQuestions}</Markdown>
-              <Markdown>{`# Scores based on resume\n\n${basicQuestions.data.companies}`}</Markdown>
-            </>
+              {/* <Markdown>{`# Scores based on resume\n\n${basicQuestions.data.companies}`}</Markdown> */}
+            </div>
           )}
+
           {codingQuestions.filteredData && !codingQuestions.loading && (
             <Markdown>{codingQuestions.filteredData}</Markdown>
           )}
+
           {basicQuestions.error && (
             <div className="error-section">An unexpected error occurred...</div>
           )}
@@ -360,9 +370,69 @@ const Container = styled.div`
         font-weight: 300;
       }
     }
+
+    .options{
+      margin: 20px 0;
+      display: flex;
+      .option{  
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        background-color: #e5e5e5;
+        border-radius: 100px;
+        padding: 7.5px 15px;
+
+        .text{
+          font-size: 0.7rem;
+        }
+
+        svg{
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .output-result-container{
+      margin: 50px 0;
+
+      h6{
+        margin-top: 75px;
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: 600;
+      }
+
+      p{
+        font-size: 0.85rem;
+        font-weight: 300;
+        margin-bottom: 15px;
+        line-height: 1.75rem;
+        color: #333;
+        background-color: #ccdeff;
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      li{
+        font-size: 0.85rem;
+        font-weight: 300;
+        margin-bottom: 15px;
+        margin-left: 15px;
+
+        p{
+          font-weight: 500;
+          background-color: transparent;
+          padding: 0;
+          border-radius: 0;
+        }
+      }
+    }
+
     .file_input {
       display: none;
     }
+
     .btn-1 {
       padding: 5px 10px;
       font-size: 0.75rem;
@@ -373,6 +443,7 @@ const Container = styled.div`
         margin-right: 5px;
       }
     }
+
     .loading-section {
       display: flex;
       flex-direction: column;
@@ -380,6 +451,7 @@ const Container = styled.div`
       justify-content: center;
       align-items: center;
     }
+
     .error-section {
       display: flex;
       flex-direction: column;
