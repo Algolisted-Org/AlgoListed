@@ -5,6 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 dotenv.config();
+const fs = require("fs");
 
 const morgan = require("morgan");
 require("dotenv").config({
@@ -18,6 +19,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.set("trust proxy", 1);
+app.use(express.static("uploads"));
 //Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -38,6 +40,8 @@ app.use("/user-details", require("./Routers/router_user"));
 app.use("/problem-sheets", require("./Routers/router_sheets"));
 app.use("/sheetproblem", require("./Routers/router_problems"));
 
+app.use("/ai", require("./Routers/ai"));
+
 const port = process.env.PORT || 8000;
 
 app.listen(port, "0.0.0.0", (err) => {
@@ -47,7 +51,7 @@ app.listen(port, "0.0.0.0", (err) => {
   }
   console.log(`App Listening at http://localhost:${port}...`);
   mongoose
-    .connect(process.env.DATABASE, {
+    .connect(process.env.DATABASE ?? "mongodb://localhost:27017", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

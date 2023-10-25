@@ -676,7 +676,7 @@ console.log(data)
 			);
 		}
 		console.log(filteredData,selectedLabel)
-	}, [selectedLabel,filteredData]);
+	}, [selectedLabel]);
 
 	useEffect(() => { // finding unique tags
 		let len = solvedData.length;
