@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 const usersProfileSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -15,12 +15,12 @@ const usersProfileSchema = new mongoose.Schema({
   },
   createdSheetsIds: {
     type: [String], // Array of strings
-    default: [],     // Default to an empty array
+    default: [], // Default to an empty array
     required: false,
   },
   staredSheetsIds: {
     type: [String], // Array of strings
-    default: [],     // Default to an empty array
+    default: [], // Default to an empty array
     required: false,
   },
   twitter: {
@@ -49,5 +49,10 @@ const usersProfileSchema = new mongoose.Schema({
     default: "",
   },
 });
+usersProfileSchema.methods.getJWTToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
+};
 
-module.exports = mongoose.model('All_Users_Profile', usersProfileSchema);
+module.exports = mongoose.model("All_Users_Profile", usersProfileSchema);
