@@ -17,6 +17,7 @@ import axios from "axios";
 
 const CreateCustomCodingSheets = () => {
   const [needDarkMode, setNeedDarkMode] = useState(false);
+  const [userSheet, setUserSheet] = useState([]);
   const [user, setUser] = useState();
   const [sheetName, setSheetName] = useState("");
   const [sheetDesc, setSheetDesc] = useState("");
@@ -29,7 +30,13 @@ const CreateCustomCodingSheets = () => {
   useEffect(() => {
     document.title = "Contest Archive - Algolisted";
   }, []);
-
+  useEffect(() => {
+    console.log(user);
+    if (user) {
+      console.log(user._id);
+      getUserSheet(user._id);
+    }
+  }, [user]);
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
@@ -44,7 +51,6 @@ const CreateCustomCodingSheets = () => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
       console.log(result.user);
-      setUser(result.user);
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -63,7 +69,8 @@ const CreateCustomCodingSheets = () => {
         result.user,
         { withCredentials: true }
       );
-      console.log(response.status);
+
+      setUser(response.data.user);
     } catch (error) {
       try {
         const newResponse = await axios.post(
@@ -71,6 +78,7 @@ const CreateCustomCodingSheets = () => {
           result.user,
           { withCredentials: true }
         );
+        setUser(newResponse.data.user);
       } catch (error) {
         console.log(error);
       }
@@ -111,7 +119,17 @@ const CreateCustomCodingSheets = () => {
       console.log(error);
     }
   };
+  const getUserSheet = async (ownerId) => {
+    try {
+      const sheetList = await axios.get(
+        `/problem-sheets/get-by-owner/${ownerId}`
+      );
 
+      setUserSheet(sheetList.data.sheets);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <GrandContainer>
       <MobContainer>
@@ -173,6 +191,7 @@ const CreateCustomCodingSheets = () => {
                 </div>
               </SignUpButton>
             )}
+            {user && <h3>Welcome {user.name}</h3>}
           </UserSheetsLikedList>
 
           <form onSubmit={handleSubmitCreate}>
@@ -206,7 +225,7 @@ const CreateCustomCodingSheets = () => {
             <button type="submit">Submit</button>
           </form>
           {/* {user && <UserSheetsList> */}
-          {true && (
+          {user && (
             <UserSheetsList>
               <h3>Your Sheets</h3>
               <div className="list">
@@ -215,6 +234,42 @@ const CreateCustomCodingSheets = () => {
                 </div>
                 {/* <div className="new-sheet-container search-bar"></div> */}
               </div>
+              <>
+                {userSheet.length > 0 &&
+                  userSheet.map((sheet) => (
+                    <div className="list">
+                      <div className="sheet-container">
+                        <div className="title">
+                          {sheet.sheetName} <CallMadeIcon />{" "}
+                        </div>
+                        <div className="desc">{sheet.sheetDesc}</div>
+                        <div className="info">
+                          <div className="one-info">
+                            <b>Questions count : </b>
+                            {sheet.problemIds.length}
+                          </div>
+                          <div className="one-info">
+                            <b>Latest Edit : </b>
+                            {sheet.lastUpdated}
+                          </div>
+                        </div>
+                        <div className="btns">
+                          <div className="btn">Edit Sheet Content</div>
+                          <div className="right">
+                            <div className="analytics">
+                              <VisibilityIcon />
+                              <div className="stats">{sheet.countViews}</div>
+                            </div>
+                            <div className="analytics">
+                              <GradeIcon />
+                              <div className="stats">{sheet.countStars}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </>
               <div className="list">
                 <div className="sheet-container">
                   <div className="title">
