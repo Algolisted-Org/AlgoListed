@@ -547,7 +547,7 @@ const datasets = problems
                           <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name,problem.name)}/>
                           Problem Unsolved
                         </label>
-                        <div className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</div>
+                        <a href={problem.problemset_problem_link} target='_blank' className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</a>
                       </div>
                       {
                         showTags ? (
@@ -999,6 +999,7 @@ const Container = styled.div`
                   display: flex;
                   align-items: center;
                   margin-bottom: 5px;
+                  cursor: pointer;
   
                   input{
                     margin-right: 5px;
@@ -1011,6 +1012,12 @@ const Container = styled.div`
                   font-size: 0.85rem;
                   font-weight: 500;
                   color: cornflowerblue;
+                  text-decoration: none;
+                  line-height: 0.85rem;
+
+                  &:hover{
+                    text-decoration: underline;
+                  }
                 }
               }
   
