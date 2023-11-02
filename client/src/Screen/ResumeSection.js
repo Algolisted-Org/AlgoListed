@@ -13,8 +13,6 @@ import * as pdfjs from "pdfjs-dist";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-// New Code
-const API_KEY = "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";
 const promptForBasicQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions i need to prepare with and help me get the job.",
