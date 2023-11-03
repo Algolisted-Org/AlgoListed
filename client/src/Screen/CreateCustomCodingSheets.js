@@ -15,7 +15,7 @@ import app from "../firebase_Auth/firebaseConfig";
 // const axios = require('axios');
 import axios from "axios";
 
-const CreateCustomCodingSheets = () => {
+const CreateCustomCodingSheets = ({setUserGlobal}) => {
   const [needDarkMode, setNeedDarkMode] = useState(false);
   const [userSheet, setUserSheet] = useState([]);
   const [creatingSheet, setCreatingSheet] = useState(false)
@@ -87,6 +87,12 @@ const CreateCustomCodingSheets = () => {
       );
 
       setUser(response.data.user);
+      // sessionStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('userId', response.data.user._id);
+      const userId = localStorage.getItem('userId');
+      console.log(user);
+      console.log(userId);
+      setUserGlobal(response.data.user);
     } catch (error) {
       try {
         const newResponse = await axios.post(
@@ -95,6 +101,9 @@ const CreateCustomCodingSheets = () => {
           { withCredentials: true }
         );
         setUser(newResponse.data.user);
+        localStorage.setItem('userId', newResponse.data.user._id);
+        const userId = localStorage.getItem('userId');
+        console.log(userId);
       } catch (error) {
         console.log(error);
       }
@@ -212,12 +221,12 @@ const CreateCustomCodingSheets = () => {
             {!user && (
               <>
                 <h3>You need to have an account to use this feature</h3>
-                <SignUpButton>
+                <SignUpButton onClick={handleSubmit}>
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png"
                     alt=""
                   />
-                  <div className="text" onClick={handleSubmit}>
+                  <div className="text">
                     Continue with Google
                   </div>
                 </SignUpButton>

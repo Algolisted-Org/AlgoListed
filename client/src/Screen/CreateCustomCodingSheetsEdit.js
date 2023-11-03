@@ -19,7 +19,7 @@ import problemsData from "../DummyDB/InterviewSummaries/LcProblems.json";
 import problemsDataServer from "../DummyDB/InterviewSummaries/LcUserServerProblems.json";
 import axios from "axios";
 
-const CreateCustomCodingSheetsEdit = () => {
+const CreateCustomCodingSheetsEdit = (userGlobal) => {
   const [needDarkMode, setNeedDarkMode] = useState(false);
   const [problemLink, setProblemLink] = useState("");
   const [recentlyAddedProblems, setRecentlyAddedProblems] = useState([]);
@@ -28,16 +28,36 @@ const CreateCustomCodingSheetsEdit = () => {
   const [problemsStoredInServer, setProblemsStoredInServer] = useState([]);
   const [ownerId, setOwnerId] = useState(942);
   // const [sheetId, setSheetId] = useState(params.sheetId);
-  const [sheetName, setSheetName] = useState("This is Sheet Name"); // Add this
-  const [sheetDesc, setSheetDesc] = useState("This is Sheet Desc"); // Add this
+  const [sheetName, setSheetName] = useState(""); // Add this
+  const [sheetDesc, setSheetDesc] = useState(""); // Add this
   const [combinedProblems, setCombinedProblems] = useState([]);
   const [exportingSheet, setExportingSheet] = useState(false);
   const params = useParams();
   const { sheetId } = params;
+  const [showModal, setShowModal] = useState(false);
+  const [sheetData, setsheetData] = useState(null);
+  const [OwnerInformation, setOwnerInformation] = useState(null);
+  const [github, setGithub] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [linkedin, setLinkedin] = useState('');
+  const [name, setName] = useState('');
+  const [profilePictureURL, setProfilePictureURL] = useState('');
+  const [twitter, setTwitter] = useState('');
+  const [youtube, setYoutube] = useState('');
+
+  console.log(OwnerInformation);
+
   console.log("sheetId" + sheetId);
   useEffect(() => {
     document.title = "Contest Archive - Algolisted";
   }, []);
+
+  console.log(userGlobal);
+  const userId = localStorage.getItem('userId');
+  console.log(userId);
+
+  const userDataString = sessionStorage.getItem('userData');
+  console.log(userDataString);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
@@ -50,6 +70,41 @@ const CreateCustomCodingSheetsEdit = () => {
         const response = await axios.get(
           `/problem-sheets/details?sheetId=${sheetId}`
         );
+
+        setsheetData(response.data.sheet);
+        setSheetName(response.data.sheet.sheetName);
+        setSheetDesc(response.data.sheet.sheetDesc);
+
+        const sheetOwnerId = response.data.sheet.ownerId;
+
+        try {
+          // alert("Hello World");
+          const response = await fetch(`http://localhost:8000/user-details/profile-details/?ownerId=${sheetOwnerId}`);
+          if (response.ok) {
+            const data = await response.json();
+            // alert("Hello World2");
+            console.log(data.user);
+            setOwnerInformation(data.user);
+
+            setGithub(data.user.github);
+            setInstagram(data.user.instagram);
+            setLinkedin(data.user.linkedin);
+            setName(data.user.name);
+            setProfilePictureURL(data.user.profilePictureURL);
+            setTwitter(data.user.twitter);
+            setYoutube(data.user.youtube);
+          } else {
+            // alert("Hello World3");
+            // Handle any errors here
+            console.error('Failed to fetch data');
+          }
+        } catch (error) {
+          // alert("Hello World4");
+          console.error('Error:', error);
+        }
+
+        console.log(response.data.sheet);
+
         const problemIds = response.data.sheet.problemIds;
 
         // Initialize an array to store the scraped problem data
@@ -182,8 +237,9 @@ const CreateCustomCodingSheetsEdit = () => {
 
     const data = {
       sheetId: sheetId.toString(),
-      sheetDesc: "Ikki Bhen Ki Oye!",
-      problemIds: allProblemsIds, 
+      sheetDesc: sheetDesc,
+      sheetName: sheetName,
+      problemIds: allProblemsIds,
     };
 
     try {
@@ -227,6 +283,69 @@ const CreateCustomCodingSheetsEdit = () => {
 
   return (
     <GrandContainer>
+      {
+        showModal ? (
+          <Modal>
+            <div className="dark"></div>
+            <div className="modal-body">
+              <div className="done-btn" onClick={() => {
+                setShowModal(false);
+                handleExportProblemSheet();
+              }}>
+                <DoneIcon />
+              </div>
+              <div className="input-field">
+                <div className="label">Sheet Name</div>
+                <input
+                  type="text"
+                  value={sheetName}
+                  onChange={(event) => setSheetName(event.target.value)}
+                />
+              </div>
+              <div className="text-field">
+                <div className="label">Sheet Name</div>
+                <textarea
+                  cols="30"
+                  rows="10"
+                  value={sheetDesc}
+                  onChange={(event) => setSheetDesc(event.target.value)}
+                ></textarea>
+              </div>
+              <div className="input-field">
+                <div className="label">Github</div>
+                <input type="text" value={github} onChange={(e) => setGithub(e.target.value)} />
+              </div>
+              <div className="input-field">
+                <div className="label">Instagram</div>
+                <input type="text" value={instagram} onChange={(e) => setInstagram(e.target.value)} />
+              </div>
+              <div className="input-field">
+                <div className="label">LinkedIn</div>
+                <input type="text" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />
+              </div>
+              <div className="input-field">
+                <div className="label">Name</div>
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+              </div>
+              <div className="input-field">
+                <div className="label">Profile Picture URL</div>
+                <input type="text" value={profilePictureURL} onChange={(e) => setProfilePictureURL(e.target.value)} />
+              </div>
+              <div className="input-field">
+                <div className="label">Twitter</div>
+                <input type="text" value={twitter} onChange={(e) => setTwitter(e.target.value)} />
+              </div>
+              <div className="input-field">
+                <div className="label">Youtube</div>
+                <input type="text" value={youtube} onChange={(e) => setYoutube(e.target.value)} />
+              </div>
+            </div>
+          </Modal>
+        ) : (
+          <div></div>
+        )
+      }
+
       <MobContainer>
         We are still working on Responsive Version of the website, please view
         the site with width more than 1100px, a standard laptop or tablet
@@ -256,13 +375,9 @@ const CreateCustomCodingSheetsEdit = () => {
         {/* ---> change this all-blogs to your desired page-id */}
 
         <div className="cc-middle-content">
-          <h1 className="main-heading">Binary Search for Beginners</h1>
+          <h1 className="main-heading">Custom Coding Sheets</h1>
           <p className="heading-supporter">
-            Explore 'Binary Search for Beginners,' a comprehensive guide by a
-            seasoned LeetCode enthusiast. Discover over 50 LeetCode questions
-            and hone your binary search skills, making complex problem-solving
-            seem like a breeze. Perfect for newcomers seeking a solid foundation
-            in this essential algorithm.
+            In this feature, you can make lists of coding problems you like and easily share them with your friends. This helps you remember your favorite problems and lets you share the list link with others. Plus, if you share a link to a problem, we'll automatically scrape information about that problem and show it in your list with visualizations.
           </p>
           <div className="message">
             <div className="icon"></div>
@@ -276,7 +391,8 @@ const CreateCustomCodingSheetsEdit = () => {
                     </Filters> */}
 
           <div className="controls">
-            <div className="export-btn" onClick={handleExportProblemSheet}>
+            <p className="link">Your generated link is <div><a target="_blank" href="/create-problem-list/sheet/6544a8986813dda9c046b101">https://www.algolisted.com/create-problem-list/sheet/6544a8986813dda9c046b101</a></div> <CallMadeIcon/> </p>
+            <div className="export-btn" onClick={() => setShowModal(true)}>
               {exportingSheet ? (
                 <span>Exporting...</span>
               ) : (
@@ -305,7 +421,7 @@ const CreateCustomCodingSheetsEdit = () => {
               <div className="square" onClick={() => handleAddProblem()}>
                 <AddIcon />
               </div>
-              
+
             </div>
           </div>
 
@@ -313,6 +429,7 @@ const CreateCustomCodingSheetsEdit = () => {
                         <div className="model">You material UI modal https://mui.com/material-ui/react-modal/</div>
                     </Model> */}
           <div className="problem-sheet">
+            {/* <h3>Update Sheet Details</h3> */}
             <h3>Newly added Problems</h3>
             {recentlyAddedProblems.length > 0 ? (
               <div>
@@ -556,6 +673,34 @@ const Container = styled.div`
     }
 
     .controls {
+      .link{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 0.85rem;
+
+        div{
+          padding: 5px 10px;
+          margin: 10px 0;
+          background-color: #f7f8f8;
+          border: 1px solid #e5e5e5;
+          margin-left: 5px;
+          border-radius: 10px;
+
+          a{
+            font-size: 0.7rem;
+            /* letter-spacing: 0.05rem; */
+            font-weight: 400;
+            text-decoration: none;
+          }
+        }
+
+        svg{
+          font-size: 1rem;
+          margin-left: 5px;
+        }
+      }
+
       .export-btn {
         cursor: pointer;
         display: flex;
@@ -879,3 +1024,119 @@ const Filters = styled.div`
     }
   }
 `;
+
+
+const Modal = styled.div`
+  z-index: 1000;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  
+  display: grid;
+  place-items: center;
+
+  .dark{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000007d;
+    top: 0;
+    left: 0;
+  }
+
+  .modal-body{
+    position: relative;
+    z-index: 1001;
+    /* height: 500px; */
+    width: 800px;
+    background-color: white;
+    border-radius: 20px;
+
+    padding: 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .done-btn{
+      cursor: pointer;
+      position: absolute;
+      height: 40px;
+      aspect-ratio: 1/1;
+      right: -20px;
+      top: -20px;
+      background-color: white;
+      border-radius: 20px;
+      border: 1px solid #e5e5e5;
+      display: grid;
+      place-items: center;
+      box-shadow: 1px 2px 30px 1px rgba(0,0,0,0.75);
+      -webkit-box-shadow: 1px 2px 30px 1px rgba(0,0,0,0.75);
+      -moz-box-shadow: 1px 2px 30px 1px rgba(0,0,0,0.75);
+    }
+
+
+    .input-field{
+      position: relative;
+      width: calc(50% - 5px);
+
+      .label{
+        position: absolute;
+        font-size: 0.65rem;
+        top: -7.5px;
+        left: 10px;
+        background-color: white;
+        padding: 0 5px;
+        color: grey;
+        letter-spacing: 0.09rem;
+      }
+
+      input{
+        height: 45px;
+        width: 100%;
+        padding: 10px 10px 10px 15px;
+        font-size: 0.75rem;
+        font-weight: 200;
+        margin-bottom: 25px;
+        border-radius: 15px;
+        border: 1px solid #a9a9a9;
+        
+      }
+    }
+
+    .text-field{
+      position: relative;
+      width: 100%;
+
+      .label{
+        position: absolute;
+        font-size: 0.65rem;
+        top: -7.5px;
+        left: 10px;
+        background-color: white;
+        padding: 0 5px;
+        color: grey;
+        letter-spacing: 0.09rem;
+      }
+
+      textarea{
+        width: 100%;
+        padding: 10px;
+        font-size: 0.75rem;
+        font-weight: 200;
+        margin-bottom: 25px;
+        height: 120px;
+        border-radius: 20px;
+        border: 1px solid #a9a9a9;
+        outline: none;
+      }
+    }
+    
+    
+
+
+  }
+
+`

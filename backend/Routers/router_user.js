@@ -9,9 +9,11 @@ router.get("/", (req, res) => {
   res.json("You are at the user detail route");
 });
 
-router.get("/profile-details", (req, res) => {
-  const email = req.body.email;
-  updateProfile.getUserProfile(email, res);
+router.get("/profile-details", async (req, res) => {
+  const { ownerId } = req.query;
+  console.log(ownerId);
+  updateProfile.getUserProfile(ownerId, res);
+  // rest of your code
 });
 
 // Post Routes ------->

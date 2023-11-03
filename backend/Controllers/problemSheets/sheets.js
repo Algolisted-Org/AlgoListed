@@ -66,7 +66,7 @@ const getProblemSheetDetails = async (sheetId, res) => {
         const problemSheet = await ProblemSheetsModel.findById( sheetId );
         console.log(problemSheet);
 
-        if (!problemSheet) {
+        if (!problemSheet) { 
             return res.status(404).json({ message: "Problem sheet not found." });
         }
 

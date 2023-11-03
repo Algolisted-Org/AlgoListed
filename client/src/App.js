@@ -63,6 +63,8 @@ import ResumeSection from "./Screen/ResumeSection";
 
 
 const App = () => {
+  const [userGlobal, setUserGlobal] = useState();
+  
   return (
     <div>
       <ScrollToTop />
@@ -94,8 +96,8 @@ const App = () => {
         <Route path="/selected-profiles" element={<SelectedProfiles/>} />
         {/* <Route path="/coding-sheets" element={<CodingSheets/>} /> */}
         <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
-        <Route path="/create-problem-list" element={<CreateCustomCodingSheets/>} />
-        <Route path="/create-problem-list/sheet-dashboard/:sheetId" element={<CreateCustomCodingSheetsEdit/>} />
+        <Route path="/create-problem-list" element={<CreateCustomCodingSheets setUserGlobal={setUserGlobal} />} />
+        <Route path="/create-problem-list/sheet-dashboard/:sheetId" element={<CreateCustomCodingSheetsEdit userGlobal={userGlobal}/>} />
         <Route path="/create-problem-list/sheet/:sheetId" element={<CustomSheet/>} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />

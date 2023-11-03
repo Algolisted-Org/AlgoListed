@@ -1,5 +1,6 @@
 const UsersModel = require("../../Models/userProfileModel");
 const sendToken = require("../../Utils/jwtToken");
+
 const createUserProfile = async (req, res) => {
   const { email, displayName, photoURL } = req.body;
 
@@ -71,9 +72,11 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-const getUserProfile = async (email, res) => {
+const getUserProfile = async (ownerId, res) => {
   try {
-    const user = await UsersModel.findOne({ email });
+    console.log("ownerId : ",ownerId);
+    const user = await UsersModel.findById(ownerId);
+    console.log(user);
 
     if (!user) {
       return res.status(404).json({ message: "User not found." });
