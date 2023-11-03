@@ -26,7 +26,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
   const [problemStatus, setProblemStatus] = useState({});
   // const [problemsStoredInServer, setProblemsStoredInServer] = useState(problemsDataServer);
   const [problemsStoredInServer, setProblemsStoredInServer] = useState([]);
-  const [ownerId, setOwnerId] = useState(942);
+  const [ownerId, setOwnerId] = useState(null);
   // const [sheetId, setSheetId] = useState(params.sheetId);
   const [sheetName, setSheetName] = useState(""); // Add this
   const [sheetDesc, setSheetDesc] = useState(""); // Add this
@@ -86,6 +86,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
             console.log(data.user);
             setOwnerInformation(data.user);
 
+            setOwnerId(data.user._id);
             setGithub(data.user.github);
             setInstagram(data.user.instagram);
             setLinkedin(data.user.linkedin);
@@ -242,11 +243,28 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
       problemIds: allProblemsIds,
     };
 
+    const userData = {
+      ownerId: ownerId.toString(),
+      github,
+      instagram,
+      linkedin,
+      name,
+      profilePictureURL,
+      twitter,
+      youtube
+    };
+
     try {
       const startTime = Date.now();
+      
       const response = await axios.post("/problem-sheets/update", data, {
         withCredentials: true,
       });
+      
+      const response2 = await axios.post("/user-details/profile-update", userData, {
+        withCredentials: true,
+      });
+
       const endTime = Date.now();
       const timeElapsed = endTime - startTime;
 

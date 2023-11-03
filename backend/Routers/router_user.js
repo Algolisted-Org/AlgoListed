@@ -26,4 +26,8 @@ router.post("/profile-update", (req, res) => {
   updateProfile.updateUserProfile(req, res);
 });
 
+router.post("/profile-update-email", (req, res) => {
+  updateProfile.updateUserProfileByEmail(req, res);
+});
+
 module.exports = router;

@@ -68,7 +68,7 @@ const getProblemSheetDetails = async (sheetId, res) => {
 
         if (!problemSheet) { 
             return res.status(404).json({ message: "Problem sheet not found." });
-        }
+        } 
 
         res.status(200).json({ sheet: problemSheet });
     } catch (error) {

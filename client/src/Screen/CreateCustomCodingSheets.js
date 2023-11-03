@@ -38,6 +38,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
   const [sheetName, setSheetName] = useState("");
   const [sheetDesc, setSheetDesc] = useState("");
   const [sheetId, setSheetId] = useState("");
+  
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === "dark") setNeedDarkMode(true);
@@ -96,7 +97,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
     } catch (error) {
       try {
         const newResponse = await axios.post(
-          `/user-details/profile-update`,
+          `/user-details/profile-update-email`,
           result.user,
           { withCredentials: true }
         );
