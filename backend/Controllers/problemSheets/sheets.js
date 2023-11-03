@@ -3,15 +3,16 @@ const ProblemSheetsModel = require("../../Models/problemsheetsModel");
 
 const createProblemSheet = async (req, res) => {
     const {
-        sheetId,
         ownerId,
         sheetName,
         sheetDesc,
     } = req.body;
 
+    console.log(ownerId, sheetName, sheetDesc);
+
     try {
         const newSheet = await ProblemSheetsModel.create({
-            sheetId,
+            sheetId: "-1",
             ownerId,
             sheetName,
             sheetDesc,
@@ -34,7 +35,7 @@ const updateProblemSheet = async (req, res) => {
     } = req.body;
 
     try {
-        const existingSheet = await ProblemSheetsModel.findOne({ sheetId });
+        const existingSheet = await ProblemSheetsModel.findById( sheetId );
 
         if (!existingSheet) {
             return res.status(404).json({ message: "Problem sheet not found." });
@@ -62,7 +63,7 @@ const updateProblemSheet = async (req, res) => {
 const getProblemSheetDetails = async (sheetId, res) => {
     try {
         console.log(sheetId);
-        const problemSheet = await ProblemSheetsModel.findOne({ sheetId });
+        const problemSheet = await ProblemSheetsModel.findById( sheetId );
         console.log(problemSheet);
 
         if (!problemSheet) {

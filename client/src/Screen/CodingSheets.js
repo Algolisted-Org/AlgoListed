@@ -75,6 +75,7 @@ setFilteredData(data)
 	const allowedProblemTags = [
 		"Array",
 		"String",
+		"Strings",
 		"Hash Table",
 		"Dynamic Programming",
 		"Math",
@@ -1028,7 +1029,7 @@ console.log(ProblemsTags)
 
 					{
 						filteredData.length != data.length ? 
-						<div className="notice">Note : Unclicking a tag may not work. Try deselecting all, then select the filter collection.</div> : 
+						<i><div className="notice">Filters are presently in the process of being developed, so they may occasionally exhibit unusual behavior.</div></i> : 
 						<div></div> 
 					}
 
@@ -1397,6 +1398,7 @@ const Container = styled.div`
 
 		.notice{
 			font-size: 0.8rem;
+			font-weight: 500;
 		}
 
 		.table {

@@ -25,7 +25,7 @@ function Tagsfilter({ tags, filterdata,setfilter,data }) {
       
       setfilter(filteredData)
     
-   },[ischoose])
+   },[ischoose, filterdata])
    
   const onclicked = () => {
     setexpand((prev) => !prev);

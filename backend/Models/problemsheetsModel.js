@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const createdProblemSheetsSchema = new mongoose.Schema({
   sheetId: {
     type: String,
-    required: true,
+    required: false,
   },
   ownerId: {
     type: Schema.Types.ObjectId,

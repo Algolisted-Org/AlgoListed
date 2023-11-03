@@ -18,7 +18,23 @@ import axios from "axios";
 const CreateCustomCodingSheets = () => {
   const [needDarkMode, setNeedDarkMode] = useState(false);
   const [userSheet, setUserSheet] = useState([]);
-  const [user, setUser] = useState();
+  const [creatingSheet, setCreatingSheet] = useState(false)
+
+  // const [user, setUser] = useState({
+  //   createdSheetsIds: ['6539297a4fb984efd157b000'],
+  //   email: "nayak.primary@gmail.com",
+  //   github: "",
+  //   instagram: "",
+  //   linkedin: "",
+  //   name: "Atanu Nayak - updated name",
+  //   profilePictureURL: "https://media.licdn.com/dms/image/D4D03AQG1opv6ps8eNw/profile-displayphoto-shrink_400_400/0/1691004705243?e=1701907200&v=beta&t=eZjXD79p0SR-LraCaQbrNsV5k2LbM63gMHqLS81wSn0",
+  //   staredSheetsIds: [],
+  //   twitter: "",
+  //   youtube: "",
+  //   __v: 1,
+  //   _id: "652e9f75e1359d3fafbbf711"
+  // });
+  const [user, setUser] = useState(``);
   const [sheetName, setSheetName] = useState("");
   const [sheetDesc, setSheetDesc] = useState("");
   const [sheetId, setSheetId] = useState("");
@@ -95,17 +111,16 @@ const CreateCustomCodingSheets = () => {
     setSheetDesc(event.target.value);
   };
 
-  const handleSubmitCreate = (event) => {
-    event.preventDefault();
-    // You can do something with the sheetName and sheetDesc values here
+  const handleSubmitCreate = () => {
     console.log("Sheet Name: " + sheetName);
     console.log("Sheet Description: " + sheetDesc);
+    setCreatingSheet(true);
     createNewSheet();
   };
 
   const createNewSheet = async () => {
     const newObj = {
-      sheetId,
+      ownerId:user._id,
       sheetName,
       sheetDesc,
     };
@@ -118,7 +133,14 @@ const CreateCustomCodingSheets = () => {
     } catch (error) {
       console.log(error);
     }
+    
+    setSheetDesc("");
+    setSheetName("");
+    
+    setCreatingSheet(false);
+    getUserSheet(user._id);
   };
+
   const getUserSheet = async (ownerId) => {
     try {
       const sheetList = await axios.get(
@@ -126,10 +148,19 @@ const CreateCustomCodingSheets = () => {
       );
 
       setUserSheet(sheetList.data.sheets);
+      console.log(userSheet);
     } catch (error) {
       console.log(error.message);
     }
   };
+
+  function formatDate(inputDate) {
+    const date = new Date(inputDate);
+    const options = { year: "numeric", month: "short", day: "2-digit" };
+    return new Intl.DateTimeFormat("en-US", options).format(date);
+  }
+
+
   return (
     <GrandContainer>
       <MobContainer>
@@ -178,99 +209,95 @@ const CreateCustomCodingSheets = () => {
             </div>
           </div>
           <UserSheetsLikedList>
-            <h3>You need to have an account to use this feature</h3>
-
             {!user && (
-              <SignUpButton>
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png"
-                  alt=""
-                />
-                <div className="text" onClick={handleSubmit}>
-                  Continue with Google
-                </div>
-              </SignUpButton>
+              <>
+                <h3>You need to have an account to use this feature</h3>
+                <SignUpButton>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png"
+                    alt=""
+                  />
+                  <div className="text" onClick={handleSubmit}>
+                    Continue with Google
+                  </div>
+                </SignUpButton>
+              </>
             )}
-            {user && <h3>Welcome {user.name}</h3>}
+            {/* {user && <h3>Welcome {user.name}</h3>} */}
           </UserSheetsLikedList>
 
-          <form onSubmit={handleSubmitCreate}>
-            <div>
-              <label htmlFor="sheetId">Sheet Id:</label>
-              <input
-                type="text"
-                id="sheetId"
-                value={sheetId}
-                onChange={handleSheetIdChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="sheetName">Sheet Name:</label>
-              <input
-                type="text"
-                id="sheetName"
-                value={sheetName}
-                onChange={handleSheetNameChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="sheetDesc">Sheet Description:</label>
-              <input
-                type="text"
-                id="sheetDesc"
-                value={sheetDesc}
-                onChange={handleSheetDescChange}
-              />
-            </div>
-            <button type="submit">Submit</button>
-          </form>
           {/* {user && <UserSheetsList> */}
           {user && (
             <UserSheetsList>
+              <div className="owner-detail-main">
+                <img className="owner-pic" src={user.profilePictureURL} alt="" />
+                <h1>Hello <b>{user.name}</b>, you are currently logged in!</h1>
+              </div>
+
+              <h3>Create New Sheet</h3>
+              <div className="create-new-sheet">
+                <div className="newSheetInput">
+                  <input
+                    type="text"
+                    value={sheetName}
+                    onChange={handleSheetNameChange}
+                    placeholder="Sheet Name . . ."
+                  />
+                </div>
+                <div className="newSheetInput">
+                  <input
+                    type="text"
+                    value={sheetDesc}
+                    onChange={handleSheetDescChange}
+                    placeholder="Sheet Description . . ."
+                  />
+                </div>
+                {/* <button type="submit">Submit</button> */}
+                <div className="addNewSheetBtn" onClick={() => handleSubmitCreate()}>
+                  {
+                    creatingSheet ? <img src="https://openaccess.sagepub.com/SciPrisV4S12/Content/images/loading7.gif" alt="" /> : <AddIcon />
+                  }
+                </div>
+              </div>
+              
               <h3>Your Sheets</h3>
-              <div className="list">
-                <div className="new-sheet-container">
-                  <AddIcon />
-                </div>
-                {/* <div className="new-sheet-container search-bar"></div> */}
-              </div>
               <>
-                {userSheet.length > 0 &&
-                  userSheet.map((sheet) => (
-                    <div className="list">
-                      <div className="sheet-container">
-                        <div className="title">
-                          {sheet.sheetName} <CallMadeIcon />{" "}
-                        </div>
-                        <div className="desc">{sheet.sheetDesc}</div>
-                        <div className="info">
-                          <div className="one-info">
-                            <b>Questions count : </b>
-                            {sheet.problemIds.length}
-                          </div>
-                          <div className="one-info">
-                            <b>Latest Edit : </b>
-                            {sheet.lastUpdated}
-                          </div>
-                        </div>
-                        <div className="btns">
-                          <div className="btn">Edit Sheet Content</div>
-                          <div className="right">
-                            <div className="analytics">
-                              <VisibilityIcon />
-                              <div className="stats">{sheet.countViews}</div>
+                <div className="list">
+                  {userSheet.length > 0 &&
+                    userSheet.map((sheet) => (
+                        <div className="sheet-container">
+                          <a href={`create-problem-list/sheet/${sheet._id}`} target="_blank" className="title">
+                            {sheet.sheetName} <CallMadeIcon />{" "}
+                          </a>
+                          <div className="desc">{sheet.sheetDesc}</div>
+                          <div className="info">
+                            <div className="one-info">
+                              <b>Questions count : </b>
+                              {sheet.problemIds.length}
                             </div>
-                            <div className="analytics">
-                              <GradeIcon />
-                              <div className="stats">{sheet.countStars}</div>
+                            <div className="one-info">
+                              <b>Latest Edit : </b>
+                              {formatDate(sheet.lastUpdated)}
                             </div>
                           </div>
+                          <div className="btns">
+                            <a href={`create-problem-list/sheet-dashboard/${sheet._id}`} target="_blank" className="btn">Edit Sheet Content {'>'} </a>
+                            <div className="right">
+                              <div className="analytics">
+                                <VisibilityIcon />
+                                <div className="stats">{sheet.countViews}</div>
+                              </div>
+                              <div className="analytics">
+                                <GradeIcon />
+                                <div className="stats">{sheet.countStars}</div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                </div>
               </>
-              <div className="list">
+              {/* <div className="list">
                 <div className="sheet-container">
                   <div className="title">
                     Binary Search for Beginners <CallMadeIcon />{" "}
@@ -339,12 +366,12 @@ const CreateCustomCodingSheets = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </UserSheetsList>
           )}
           {user && (
             <UserSheetsLikedList>
-              <h3>Sheets you Star Marked</h3>
+              {/* <h3>Sheets you Star Marked</h3>
               <div className="list">
                 <div className="sheet-container">
                   <div className="title">
@@ -385,7 +412,6 @@ const CreateCustomCodingSheets = () => {
                     seeking a solid foundation in this essential algorithm.
                   </div>
                   <Progress>
-                    {/* <div className="text">Solved : </div> */}
                     <div className="value">Solved : 17%</div>
                     <div className="bar">
                       <div className="fill" style={{ width: "17%" }}></div>
@@ -449,7 +475,6 @@ const CreateCustomCodingSheets = () => {
                     seeking a solid foundation in this essential algorithm.
                   </div>
                   <Progress>
-                    {/* <div className="text">Solved : </div> */}
                     <div className="value">Solved : 17%</div>
                     <div className="bar">
                       <div className="fill" style={{ width: "17%" }}></div>
@@ -474,7 +499,7 @@ const CreateCustomCodingSheets = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </UserSheetsLikedList>
           )}
         </div>
@@ -576,9 +601,84 @@ const UserSheetsList = styled.div`
   margin-top: 30px;
   margin-bottom: 60px;
 
+    .owner-detail-main{
+      display: flex;
+      align-items: center;
+      
+      .owner-pic{
+        height: 80px;
+        width: 80px;
+        border-radius: 100px;
+        margin-right: 20px;
+        border: 1px solid #d1d5db;
+        background-color: #e5e5e5;
+        padding: 5px;
+      }
+
+      h1{
+        font-size: 0.85rem;
+        font-weight: 200;
+
+        b{
+          font-weight: 500;
+        }
+      }
+    }
+
   h3 {
     font-size: 1.25rem;
     font-weight: 500;
+    margin-top: 50px;
+  }
+
+  .create-new-sheet{
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    /* flex-wrap: wrap; */
+    width: 100%;
+    /* background-color: black; */
+
+    .newSheetInput{
+      width: calc(50% - 37px);
+      /* background-color: black; */
+      margin: 10px 10px 0 0;
+      border-radius: 10px;
+      border: 1px solid #e7dcdc;
+      
+
+      input{
+        font-size : 0.75rem;
+        border: none;
+        padding: 12.5px;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+      }
+    }
+
+    .addNewSheetBtn{
+      display: grid;
+      place-items: center;
+      border: 1px solid #e7dcdc;
+      height: 45px;
+      width: 45px;
+      border-radius: 10px;
+      position: absolute;
+      right: 10px;
+      bottom: 0px;
+      cursor: pointer;
+      
+      svg{
+        font-size: 1.25rem;
+      }
+
+      img{
+        height: 25px;
+      }
+
+    }
   }
 
   .list {
@@ -592,12 +692,17 @@ const UserSheetsList = styled.div`
       border-radius: 10px;
       border: 1px solid #e7dcdc;
       padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
 
       .title {
         font-weight: 500;
         display: flex;
         align-items: center;
         cursor: pointer;
+        text-decoration: none;
 
         svg {
           font-size: 1rem;
@@ -615,15 +720,16 @@ const UserSheetsList = styled.div`
       }
 
       .desc {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
         font-weight: 200;
         margin-top: 5px;
+        flex: 1;
       }
 
       .info {
-        margin: 10px 0;
+        margin: 20px 0 0px 0;
         .one-info {
-          font-size: 0.85rem;
+          font-size: 0.75rem;
           font-weight: 200;
 
           b {
@@ -633,6 +739,7 @@ const UserSheetsList = styled.div`
       }
 
       .btns {
+        width: 100%;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
@@ -641,10 +748,13 @@ const UserSheetsList = styled.div`
           padding: 5px 10px;
           font-size: 0.75rem;
           font-weight: 300;
-          background-color: cornflowerblue;
-          color: white;
+          background-color: #e5e5e5;
+          /* color: white; */
           border-radius: 10px;
           margin-top: 10px;
+          text-decoration: none;
+          font-weight: 400;
+          color: #333;
         }
 
         .right {
@@ -912,6 +1022,7 @@ const SignUpButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
   cursor: pointer;
 
   img {
