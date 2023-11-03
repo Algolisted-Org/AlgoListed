@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const SearchBar = ({tagdat,tags,settagdata}) => {
     const [inpy,setinpu]=useState("");
-    console.log(inpy,tagdat)
+    
     useEffect(()=>{
             const searchdata=setTimeout((inpu)=>{
                     if(!inpy){
@@ -37,8 +37,10 @@ const SearchBarWrapper = styled.div`
   border-radius: 4px;
   border: 1px solid #ccc;
   width: 100%; 
+  height:30px;
   margin:5px;
   margin-right:10px;
+ 
 `;
 
 const SearchInput = styled.input`
@@ -50,8 +52,10 @@ const SearchInput = styled.input`
   outline: none;
   background: transparent; 
   width: 100%;
-
+  height:20px;
   &::placeholder {
     color: #aaa; 
   }
 `;
+
+

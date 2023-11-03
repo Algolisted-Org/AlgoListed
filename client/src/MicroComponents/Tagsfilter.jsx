@@ -9,21 +9,23 @@ function Tagsfilter({ tags, filterdata,setfilter,data }) {
 
    const [ischoose,setischoose]=useState([])
    
-   console.log(ischoose)
+   
    if(ischoose.length===0){
     setfilter(data)
-    console.log(filterdata)
+
    }
+   console.log(ischoose)
   
    useEffect(()=>{
+    console.log("ischhose kae time")
     const filteredData = filterdata.filter((item) => {
       
         return ischoose.every((tag) => item.tags.includes(tag));
       });
-      console.log(filterdata)
+      
       setfilter(filteredData)
-     console.log(filterdata)
-   },[ischoose,filterdata])
+    
+   },[ischoose])
    
   const onclicked = () => {
     setexpand((prev) => !prev);
