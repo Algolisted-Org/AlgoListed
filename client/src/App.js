@@ -59,6 +59,7 @@ import CreateCustomCodingSheets from './Screen/CreateCustomCodingSheets';
 import CreateCustomCodingSheetsEdit from './Screen/CreateCustomCodingSheetsEdit';
 import CustomSheet from './Screen/CustomSheet';
 import ResumeQuestions from './Screen/ResumeQuestions';
+import ResumeSection from "./Screen/ResumeSection";
 
 
 const App = () => {
@@ -113,7 +114,7 @@ const App = () => {
         {/* <Route path="/showdown-server-anurag/:serverId" element={<ShowdownServerOpenedFBDB/>} /> */}
 
         <Route path="/development" element={<Development/>} />
-        <Route path="/resume-questions" element={<ResumeQuestions/>} />
+        <Route path="/resume-questions" element={<ResumeSection/>} />
         {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="*" element={<PageNotExist/>} />
 
