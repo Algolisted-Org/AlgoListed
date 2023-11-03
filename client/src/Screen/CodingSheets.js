@@ -46,7 +46,9 @@ const CodingSheets = () => {
 	const [showTags, setShowTags] = useState(true);
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
-	console.log(filteredData)
+	useEffect(()=>{
+setFilteredData(data)
+	},[])
 	// console.log(filteredData)
 	// ----- FOR DARK MODE -----
 	const [needDarkMode, setNeedDarkMode] = useState(false);
@@ -666,17 +668,17 @@ console.log(ProblemsTags)
 
 		setDifficultyPercentage(difficultyPercentageArray);
 	}, [difficulty, userDifficulty])
-console.log(data)
+
 	useEffect(() => {
 		if (selectedLabel === 'All') {
-			setFilteredData(data);
+			setFilteredData(filteredData);
 		} else {
 			setFilteredData(
-				data.filter(item => item.tags.includes(selectedLabel))
+				filteredData.filter(item => item.tags.includes(selectedLabel))
 			);
 		}
 		console.log(filteredData,selectedLabel)
-	}, [selectedLabel]);
+	}, [selectedLabel,filteredData]);
 
 	useEffect(() => { // finding unique tags
 		let len = solvedData.length;
