@@ -13,11 +13,34 @@ import * as pdfjs from "pdfjs-dist";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
+const promptForMncQuestionChunks = [
+  "Now you need to act like my mentor to help me get the job",
+  "Given a resume text, provide me some vast number of technical and soft skills questions for MNCs.",
+  "Create an markdown text for questions and supported links for resources.",
+  "The input text is: ",
+];
+const promptForStartup = [
+  "Now you need to act like my mentor to help me get the job",
+  "Given a resume text, provide me some vast number of technical and soft skills questions for Startups.",
+  "Create an markdown text for questions and supported links for resources.",
+  "The input text is: ",
+];
+const promptForUnicorn = [
+  "Now you need to act like my mentor to help me get the job",
+  "Given a resume text, provide me some vast number of technical and soft skills questions for Unicorns.",
+  "Create an markdown text for questions and supported links for resources.",
+  "The input text is: ",
+];
+const promptForRemote = [
+  "Now you need to act like my mentor to help me get the job",
+  "Given a resume text,prove me some vast number of technical and soft skills question for Remote Jobs.",
+  "The input text is:",
+];
 const promptForBasicQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
-  "Given a resume text, provide me some vast number of technical and soft skills questions i need to prepare with and help me get the job.",
+  "Given a resume text, provide me some vast number of technical and soft skills questions for the specific type of company and difficulty level  I need to prepare with and help me get the job.",
   "Create an markdown text for questions and supported links for resources.",
-  "The input:",
+  "The input category of company ,difficuty level and text are:",
 ];
 
 const ResumeSection = () => {
@@ -25,7 +48,11 @@ const ResumeSection = () => {
   const [file, setFile] = useState(null);
   const [apiKey, setApiKey] = useState(null);
   const [responseText, setResponseText] = useState("");
-
+  const [selectedCompany, setSelectedCompany] = useState("0");
+  const [companyName, setCompanyName] = useState("");
+  const [difficultyLevel, setDifficultyLevel] = useState("0");
+  const [difficultyLevelName, setDifficultyLevelName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
   const openai = new OpenAI({
     apiKey: apiKey,
@@ -70,31 +97,64 @@ const ResumeSection = () => {
   //   New Code
   const handleSend = async () => {
     if (textFromPDF) {
+      setIsLoading(true);
       try {
-        const promptForBasicQuestions = `${promptForBasicQuestionChunks.join(
-          "\n"
-        )}${textFromPDF}`;
+        // const promptForBasicQuestions = `${promptForBasicQuestionChunks.join(
+        //   "\n"
+        // )} category of company is ${companyName} with question difficulty level ${difficultyLevelName} ${textFromPDF}`;
+        let prompt = "";
+
+        if (companyName == "Multinational Corporation (MNC)") {
+          prompt = `${promptForMncQuestionChunks.join(
+            "\n"
+          )}${textFromPDF} with question difficulty level ${difficultyLevelName}`;
+        } else if (companyName == "Startups") {
+          prompt = `${promptForStartup.join(
+            "\n"
+          )}${textFromPDF} with question difficulty level ${difficultyLevelName}`;
+        } else if (companyName == "Unicorn") {
+          prompt = `${promptForUnicorn.join(
+            "\n"
+          )}${textFromPDF} with question difficulty level ${difficultyLevelName}`;
+        } else if (companyName == "Remote") {
+          prompt = `${promptForRemote.join(
+            "\n"
+          )}${textFromPDF} with question difficulty level ${difficultyLevelName}`;
+        } else {
+          prompt = `${promptForBasicQuestionChunks.join("\n")}${textFromPDF}`;
+        }
         const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           messages: [
             {
               role: "system",
-              content: promptForBasicQuestions,
+              content: prompt,
             },
           ],
           temperature: 0.5,
           max_tokens: 500,
         });
+
         setResponseText(response.choices[0].message.content);
         console.log(response);
+        console.log(prompt);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error sending message to Chat API:", error);
+        setIsLoading(false);
       }
     } else {
       console.error("No text to send to Chat API.");
     }
   };
-
+  const handleCompany = (e) => {
+    setCompanyName(e.target.options[e.target.selectedIndex].text);
+    setSelectedCompany(e.target.value);
+  };
+  const handleDifficult = (e) => {
+    setDifficultyLevelName(e.target.options[e.target.selectedIndex].text);
+    setDifficultyLevel(e.target.value);
+  };
   return (
     <GrandContainer>
       <MobContainer>
@@ -159,18 +219,50 @@ const ResumeSection = () => {
               className="api_input"
             />
             <input type="file" accept=".pdf" onChange={uploadresume} />
+            <div>
+              <select value={selectedCompany} onChange={handleCompany}>
+                <option value="0">Select Category:</option>
+                <option value="1">Multinational Corporation (MNC)</option>
+                <option value="2">Startups</option>
+                <option value="3">Unicorn</option>
+                <option value="4">Remote</option>
+              </select>
+              <select value={difficultyLevel} onChange={handleDifficult}>
+                <option value="0">Select Difficulty level:</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
             <button className="btn-2" onClick={handleSend}>
               Submit
             </button>
-            {file && (
-              <div>
-                <Document file={file} onLoadSuccess={handleTextExtraction} />
-                {responseText && (
-                  <div className="response-text">
-                    <Markdown>{responseText}</Markdown>
+
+            {isLoading ? (
+              <LoadingSection>Loading....</LoadingSection>
+            ) : (
+              <>
+                {file && (
+                  <div>
+                    <Document
+                      file={file}
+                      onLoadSuccess={handleTextExtraction}
+                    />
+                    {responseText && (
+                      <div className="response-text">
+                        <Markdown>{responseText}</Markdown>
+                      </div>
+                    )}
                   </div>
                 )}
-              </div>
+              </>
             )}
           </div>
         </div>
@@ -281,4 +373,13 @@ const Container = styled.div`
       }
     }
   }
+`;
+const LoadingSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #000;
 `;
