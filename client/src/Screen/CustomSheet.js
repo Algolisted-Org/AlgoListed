@@ -49,6 +49,19 @@ const CodingSheets = () => {
 	const [showTags, setShowTags] = useState(true);
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
+	const [OwnerInformation, setOwnerInformation] = useState(null);
+	const [github, setGithub] = useState('');
+	const [instagram, setInstagram] = useState('');
+	const [linkedin, setLinkedin] = useState('');
+	const [name, setName] = useState('');
+	const [profilePictureURL, setProfilePictureURL] = useState('');
+	const [twitter, setTwitter] = useState('');
+	const [youtube, setYoutube] = useState('');
+	const [ownerId, setOwnerId] = useState(null);
+	const [sheetName, setSheetName] = useState("");
+	const [sheetDesc, setSheetDesc] = useState("");
+
+
 	// console.log(filteredData)
 	// ----- FOR DARK MODE -----
 	const [needDarkMode, setNeedDarkMode] = useState(false);
@@ -72,6 +85,8 @@ const CodingSheets = () => {
 	console.log('sheetId : ', sheetId);
 
 	document.title = `Coding Sheets - Algolisted`;
+
+	
 
 	const allowedProblemTags = [
 		"Array",
@@ -152,60 +167,83 @@ const CodingSheets = () => {
 		"Biconnected Component"
 	];
 
-	useEffect(() => {
-		// retrieve the data from the server
-		axios
-			// .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
-			.get(`http://localhost:8000/problem-sheets/details?sheetId=${sheetId}`)
-			.then((res) => {
-                const problemIds = res.data.sheet.problemIds;
-        
-                // Initialize an array to store the scraped problem data
-                const scrapedProblems = [];
-
-                for (let i = 0; i < problemIds.length; i++) {
-                    const problemId = problemIds[i];
-                    const scrapedProblemData = problemsData[problemId];
-        
-                    if (scrapedProblemData) {
-                        scrapedProblems.push(scrapedProblemData);
-                    }
-                }
-
-                console.log("scrapedProblems : ", scrapedProblems);
-
-
-				// retrieve the "completed" status of each sheet from the local storage
-				const updatedData = scrapedProblems.map((sheet) => {
-                    const sheetLink = sheet.quesLink;
-                    const completed = localStorage.getItem(`completedSheetQuestion-${sheetLink}`);
-                    const marked = localStorage.getItem(`markedSheetQuestion-${sheetLink}`);
-                    return {
-                        ...sheet,
-                        completed: completed === "true",
-                        marked: marked === "true",
-                    };
-                });
-
-                console.log("updatedData : ", updatedData);
-
-				var solvedQuestions = [];
-				let len = updatedData.length;
-				for (let i = 0; i < len; i++) {
-					if (updatedData[i].completed) solvedQuestions.push(updatedData[i]);
-				}
-				setSolvedData(solvedQuestions);
-                
-				// calculate the initial value of completedCount based on the "completed" status of the sheets in updatedData
-				const initialCompletedCount = updatedData.reduce((acc, sheet) => {
-					return acc + (sheet.completed ? 1 : 0);
-				}, 0);
-				setCompletedCount(initialCompletedCount);
-				setData(updatedData);
-				setDataLoading(false);
-			})
-			.catch((err) => console.log(err));
-	}, [sheetId]);
+	useEffect(async () => {
+		try {
+		  const sheetDetailsResponse = await axios.get(`http://localhost:8000/problem-sheets/details?sheetId=${sheetId}`);
+		  const sheetData = sheetDetailsResponse.data.sheet;
+	  
+		  setSheetName(sheetData.sheetName);
+		  setSheetDesc(sheetData.sheetDesc);
+	  
+		  const problemIds = sheetData.problemIds;
+	  
+		  const scrapedProblems = [];
+	  
+		  for (let i = 0; i < problemIds.length; i++) {
+			const problemId = problemIds[i];
+			const scrapedProblemData = problemsData[problemId];
+	  
+			if (scrapedProblemData) {
+			  scrapedProblems.push(scrapedProblemData);
+			}
+		  }
+	  
+		  console.log("scrapedProblems:", scrapedProblems);
+	  
+		  const updatedData = scrapedProblems.map((sheet) => {
+			const sheetLink = sheet.quesLink;
+			const completed = localStorage.getItem(`completedSheetQuestion-${sheetLink}`);
+			const marked = localStorage.getItem(`markedSheetQuestion-${sheetLink}`);
+			return {
+			  ...sheet,
+			  completed: completed === "true",
+			  marked: marked === "true",
+			};
+		  });
+	  
+		  console.log("updatedData:", updatedData);
+	  
+		  const solvedQuestions = updatedData.filter((sheet) => sheet.completed);
+		  setSolvedData(solvedQuestions);
+	  
+		  const initialCompletedCount = updatedData.reduce((acc, sheet) => {
+			return acc + (sheet.completed ? 1 : 0);
+		  }, 0);
+		  setCompletedCount(initialCompletedCount);
+		  setData(updatedData);
+		  setDataLoading(false);
+	  
+		  const sheetOwnerId = sheetData.ownerId;
+	  
+		  console.log(sheetOwnerId);
+	  
+		  try {
+			const response = await fetch(`http://localhost:8000/user-details/profile-details/?ownerId=${sheetOwnerId}`);
+			
+			if (response.ok) {
+			  const data = await response.json();
+			  console.log("data.user:", data.user);
+	  
+			  setOwnerInformation(data.user);
+			  setOwnerId(data.user._id);
+			  setGithub(data.user.github);
+			  setInstagram(data.user.instagram);
+			  setLinkedin(data.user.linkedin);
+			  setName(data.user.name);
+			  setProfilePictureURL(data.user.profilePictureURL);
+			  setTwitter(data.user.twitter);
+			  setYoutube(data.user.youtube);
+			} else {
+			  console.error('Failed to fetch data');
+			}
+		  } catch (error) {
+			console.error('Error:', error);
+		  }
+		} catch (error) {
+		  console.error('Error fetching sheet data:', error);
+		}
+	  }, [sheetId]);
+	  
 
 	// console.log(data);
 
@@ -290,8 +328,8 @@ const CodingSheets = () => {
 		"#cba0b6",
 		"#cfa1b7",
 		"#ff7d7c"
-	]	
-	
+	]
+
 	// const colors = [
 	// 	"#a9d18f",
 	// 	"#aac292",
@@ -499,17 +537,17 @@ const CodingSheets = () => {
 	}, [difficulty, userDifficulty])
 
 	useEffect(() => {
-        console.log("I was clicked");
+		console.log("I was clicked");
 		if (selectedLabel === 'All') {
-            console.log("Mark 1");
+			console.log("Mark 1");
 			setFilteredData(data);
 		} else {
-            console.log("Mark 2");
-            console.log(data);
+			console.log("Mark 2");
+			console.log(data);
 			setFilteredData(
 				data.filter(item => item.specialTag == selectedLabel || item.tags.includes(selectedLabel))
 			);
-            console.log(filteredData);
+			console.log(filteredData);
 		}
 	}, [selectedLabel, data]);
 
@@ -657,34 +695,34 @@ const CodingSheets = () => {
 					selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
 				}
 				{
-                    selectedTheme == "dark" ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
+					selectedTheme == "dark" ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
 
 				}
 				<div className="cc-middle-content">
 					<div className="sheet-details">
 						<div className="owner-detail-main">
 							<div className="owner-details">
-								<img className="owner-pic" src="https://yt3.googleusercontent.com/ytc/APkrFKbsYv4EsFtPfuUp7Xk9ULYrDBLJ9tgN7SrOyB1Fbw=s900-c-k-c0x00ffffff-no-rj" alt="" />
+								<img className="owner-pic" src={profilePictureURL} alt="" />
 							</div>
 						</div>
 						<div className="sheet-detail-main">
-							<h1 className="main-heading">Binary Search for Beginners</h1>
+							<h1 className="main-heading">{sheetName}</h1>
 							<p className="heading-supporter">
-								Explore 'Binary Search for Beginners,' a comprehensive guide by a seasoned LeetCode enthusiast. Discover over 50 LeetCode questions and hone your binary search skills, making complex problem-solving seem like a breeze. Perfect for newcomers seeking a solid foundation in this essential algorithm.        
+								{sheetDesc}
 							</p>
 							<div className="imp-links">
 								<div className="other-links">
-									<img src="https://cdn.iconscout.com/icon/free/png-256/free-leetcode-3521542-2944960.png" alt="" />
-									<img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" />
-									<img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png?20220706172052" alt="" />
-									<div className="text">Follow <b>@Arsh Goyal</b> for Updates</div>
+									<a href={github}><img src="https://cdn.iconscout.com/icon/free/png-256/free-leetcode-3521542-2944960.png" alt="" /></a>
+									<a href={github}><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" /></a>
+									<a href={github}><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png?20220706172052" alt="" /></a>
+									<div className="text">Follow <b>@{name}</b> for Updates</div>
 								</div>
 								<div className="other-links-2">
-									<VisibilityIcon/>
+									<VisibilityIcon />
 									<div className="text">Views <b>286</b></div>
 								</div>
 								<div className="other-links-2">
-									<StarBorderIcon/>
+									<StarBorderIcon />
 									<div className="text">Starred <b>36</b></div>
 								</div>
 							</div>
@@ -698,7 +736,7 @@ const CodingSheets = () => {
 					</div> */}
 					<Filters>
 						<a href="/custom-coding-sheets/create" className="filter2">
-                            Make your own Custom Problem Sheet
+							Make your own Custom Problem Sheet
 							<CallMadeIcon />
 							<div className="tag">New Feature 🔥</div>
 						</a>
@@ -882,9 +920,9 @@ const CodingSheets = () => {
 					</EffectiveFilter>
 
 					{
-						filteredData.length != data.length ? 
-						<div className="notice">Note : Unclicking a tag may not work. Try deselecting all, then select the filter collection.</div> : 
-						<div></div> 
+						filteredData.length != data.length ?
+							<div className="notice">Note : Unclicking a tag may not work. Try deselecting all, then select the filter collection.</div> :
+							<div></div>
 					}
 
 					<div className="table">
