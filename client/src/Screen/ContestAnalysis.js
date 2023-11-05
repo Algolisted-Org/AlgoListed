@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { json, useParams } from "react-router-dom";
 import styled from "styled-components";
 import CCHeader from "../Components/CCHeader";
+import CCHeaderPlus from '../Components/CCHeaderPlus';
 import LeftMenu from "../Components/LeftMenu";
 import axios from "axios";
 import { contestAnalysisFilters } from "../Components/contestAnalysisFilters";
@@ -14,6 +15,8 @@ import InfoIcon from "@material-ui/icons/Info";
 import AddIcon from "@material-ui/icons/Add";
 import ClearIcon from "@material-ui/icons/Clear";
 import AdduserModal from "../MicroComponents/Allmodals/AddfriendModal";
+import LeftMenuDark from '../Components/LeftMenuDark';
+import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
 import * as calcA from "../Components/DummyPredictRatingforLC/calcA";
 import * as calcB from "../Components/DummyPredictRatingforLC/calcA";
 import * as calcC from "../Components/DummyPredictRatingforLC/calcA";
@@ -46,9 +49,24 @@ const ContestAnalysis = () => {
   const [SessionUserCountChange, setSessionUserCountChange] = useState(0);
   const { contestName } = useParams();
 
-  useEffect(() => {
-      document.title = "Contest Analysis - Algolisted";
+  const [needDarkMode, setNeedDarkMode] = useState(true);
+
+  useEffect(() => { 
+    document.title = "Contest Analysis - Algolisted";
   }, []);
+
+  useEffect(() => {
+    let selectedTheme = localStorage.getItem("selectedTheme");
+    if(selectedTheme === 'dark') setNeedDarkMode(true);
+    if(selectedTheme === 'light') setNeedDarkMode(false);
+  }, [])
+  
+  console.log("needDarkMode : ", needDarkMode);
+  
+  const toggleDarkMode = () => {
+    setNeedDarkMode(!needDarkMode);
+  };
+
   
 
   // console.log(calcA.calculateValue(5000));
@@ -121,10 +139,10 @@ const ContestAnalysis = () => {
             datasets: [
               {
                 label: "Fail Count",
-                backgroundColor: "#5ab097",
-                borderColor: "#444",
+                backgroundColor: needDarkMode ? "#e0cf7a" : "#5ab097",
+                borderColor: needDarkMode ? "#e0cf7a" : "#444",
                 borderWidth: 1,
-                hoverBackgroundColor: "#5ab097",
+                // hoverBackgroundColor: "#5ab097",
                 innerWidth: "20px",
                 data,
               },
@@ -206,37 +224,46 @@ const ContestAnalysis = () => {
     );
   });
 
-  const barOptions = {
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-    },
-    datasets: {
-      bar: {
-        barPercentage: 0.3,
-        borderRadius: 4,
-      },
-    },
-    plugins: {
-      legend: {
-        display: true,
-        labels: {
-          generateLabels: function () {
-            return [
-              {
-                text: `Wrong submissions count for solution acceptance.`,
-                borderRadius: 4,
-                fillStyle: "#5ab097",
-                strokeStyle: "#5ab097",
-              },
-            ];
+  const barOptions = (needDarkMode) => {
+    const backgroundColor = needDarkMode ? "#e0cf7a" : "#5ab097";
+    const borderColor = needDarkMode ? "#e0cf7a" : "#5ab097";
+  
+    return {
+      scales: {
+        x: {
+          grid: {
+            display: false,
           },
         },
       },
-    },
+      datasets: {
+        bar: {
+          barPercentage: 0.3,
+          borderRadius: 4,
+          backgroundColor,
+          borderColor,
+        },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            generateLabels: function () {
+              return [
+                {
+                  text: `Wrong submissions count for solution acceptance.`,
+                  // color: needDarkMode ? '#e5e5e5' : '#333', // doesn't work
+                  // fontColor: () => needDarkMode ? '#e5e5e5' : '#333', // doesn't work
+                  borderRadius: 4,
+                  fillStyle: backgroundColor,
+                  strokeStyle: borderColor,
+                },
+              ];
+            },
+          },
+        },
+      },
+    };
   };
 
   const barGraphs = barData.map((data, index) => (
@@ -245,8 +272,8 @@ const ContestAnalysis = () => {
         Problem {IdToProblem[questions[index].question_id]} : <br />{" "}
         <i>{questions[index].title}</i>
       </div>
-      <div className="bar-chart">
-        <Bar data={data} options={barOptions} />
+      <div className={`bar-chart chart-container ${needDarkMode ? 'dark-mode' : 'light-mode'}`}>
+        <Bar data={data} options={barOptions(needDarkMode)} />
       </div>
       <div className="info">
         <InfoIcon />
@@ -352,7 +379,7 @@ const ContestAnalysis = () => {
 
   return (
     <GrandContainer>
-      <AdduserModal
+      <AdduserModal 
         addUser={addUser}
         setadduser={setadduser}
         allcountries={Allcountries}
@@ -369,9 +396,16 @@ const ContestAnalysis = () => {
           alt=""
         />
       </MobContainer>
-      <Container>
-        <CCHeader />
-        <LeftMenu marked={"contest-analysis"} />
+      <Container needDarkMode={needDarkMode}>
+        {/* <CCHeader />
+        <LeftMenu marked={"contest-analysis"} /> */}
+        {
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+        }
+        
+        {
+          needDarkMode ? <LeftMenuDark marked={"contest-analysis"} /> : <LeftMenu marked={"contest-analysis"} />
+        }
         <div className="cc-middle-content">
           <h1 className="main-heading">Contest Analysis</h1>
           <p className="heading-supporter">
@@ -391,7 +425,7 @@ const ContestAnalysis = () => {
               </a>
             </div>
           </div>
-          <Filters>{filters}</Filters>
+          <Filters needDarkMode={needDarkMode}>{filters}</Filters>
           <CleanLine />
           {/* <Filters2>
             <a href='' className="filter selected">Contests Analysis</a>
@@ -407,7 +441,7 @@ const ContestAnalysis = () => {
           <div className="feature-title">1. Question Finished Count</div>
           {showVisuals ? (
             <div className="line-chart">
-              <LineChart chartData={chartData} options={chartOptions} />
+              <LineChart needDarkMode={needDarkMode} chartData={chartData} options={chartOptions} />
             </div>
           ) : (
             <LinearProgress />
@@ -670,6 +704,7 @@ const MobContainer = styled.div`
   }
 `;
 
+
 const Container = styled.div`
   @media only screen and (max-width: 1099px) {
     display: none;
@@ -679,8 +714,18 @@ const Container = styled.div`
   justify-content: space-between;
   padding-left: 200px;
 
-  a {
-    color: #18489f;
+  background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
+
+  a{
+    color: ${(props) => (props.needDarkMode ? '#6d93d8' : '#18489f')};
+  }
+
+  input{
+    background-color: transparent;
+  }
+
+  label{
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
   }
 
   .cc-middle-content {
@@ -698,41 +743,46 @@ const Container = styled.div`
       padding: 80px 50px 50px 50px;
     }
 
-    .main-heading {
-      font-size: 1.65rem;
-      font-weight: 600;
-      color: #292929;
-    }
-
-    .heading-supporter {
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-      font-weight: 400;
-      color: #696168;
-
-      a {
-        color: #18489f;
-        font-size: 0.95rem;
-        font-weight: 300;
-        margin-left: 0.25rem;
+    .main-heading{
+          font-size: 1.65rem;
+          font-weight: 600;
+          color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
       }
-    }
 
-    .message {
-      display: inline-block;
-      /* display: flex; */
-      /* align-items: center; */
-      background-color: #d5f7e1;
-      border-radius: 5px;
-      padding: 10px;
-      margin: 20px 0 10px 0;
-
-      .text {
-        font-size: 0.8rem;
-        color: #13803b;
-        font-weight: 300;
+      .heading-supporter{
+          font-size: 1.05rem;
+          margin-bottom: 10px;
+          font-weight: 400;
+          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
+          
+          a{
+            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-left: 0.25rem;
+          }
       }
-    }
+
+      .message{
+        display: inline-block;
+        /* display: flex; */
+        /* align-items: center; */
+        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
+        border-radius: 5px;
+        padding: 10px;
+        margin: 20px 0 10px 0;
+
+        .text{
+            font-size: 0.8rem;
+            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            font-weight: 300;
+            
+            b{
+                font-weight: 500;
+                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            }
+        }
+      }
 
     .contest-btns {
       margin: 20px 0 10px 0;
@@ -752,6 +802,7 @@ const Container = styled.div`
         svg {
           font-size: 1.25rem;
           margin-right: -5px;
+          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
       }
 
@@ -761,9 +812,11 @@ const Container = styled.div`
         font-weight: 400;
         /* background-color: #dfdff9; */
         display: inline-block;
-        border: 1px solid #b9afaf;
+        /* border: 1px solid #b9afaf; */
         padding: 5px 10px;
         border-radius: 7.5px;
+        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '#b9afaf')};
       }
     }
 
@@ -771,6 +824,7 @@ const Container = styled.div`
       font-size: 1.5rem;
       font-weight: 600;
       margin: 70px 0 30px 0;
+      color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
     }
 
     .country-wise-rank {
@@ -783,13 +837,14 @@ const Container = styled.div`
 
         svg {
           margin-right: 10px;
-          fill: #333;
+          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
 
         .text {
           font-size: 0.8rem;
           font-weight: 200;
           line-height: 1.15rem;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
       }
 
@@ -799,6 +854,7 @@ const Container = styled.div`
         h4 {
           font-size: 1rem;
           font-weight: 500;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
 
         .collection {
@@ -809,18 +865,24 @@ const Container = styled.div`
           h1 {
             margin-top: 10px;
             margin-left: 15px;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           }
 
           .add-btn {
             height: 42px;
             aspect-ratio: 1/1;
             border-radius: 50%;
-            border: 1px solid black;
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+            
             display: grid;
             place-items: center;
             margin-top: 10px;
             /* box-shadow: #c9b9b9 0px 7px 29px 0px; */
             cursor: pointer;
+
+            svg{
+              fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            }
 
             &:hover {
               /* box-shadow: transparent 0px 7px 29px 0px; */
@@ -832,14 +894,14 @@ const Container = styled.div`
             height: 42px;
             min-width: 200px;
             border-radius: 20px;
-            border: 1px solid black;
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'black')};
             margin-left: 10px;
             margin-top: 10px;
             padding: 2.5px;
             padding-right: 15px;
             display: flex;
             align-items: center;
-            background-color: #f8f8f8;
+            background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f8f8f8')};
             text-decoration: none;
             position: relative;
             cursor: pointer;
@@ -847,7 +909,7 @@ const Container = styled.div`
               height: 35px;
               width: 35px;
               border-radius: 100%;
-              border: 1px solid black;
+              border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'black')};
             }
 
             .user-data {
@@ -861,7 +923,16 @@ const Container = styled.div`
 
               .global-rank {
                 font-size: 0.7rem;
+                color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                i{
+                  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                }
+                b{
+                  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                }
               }
+
+              color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
             }
 
             &:hover {
@@ -915,16 +986,18 @@ const Container = styled.div`
 
         svg {
           margin-right: 10px;
-          fill: #333;
+          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
 
         .text {
           font-size: 0.8rem;
           font-weight: 200;
           line-height: 1.15rem;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
 
         b {
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           font-weight: 500;
         }
       }
@@ -950,7 +1023,9 @@ const Container = styled.div`
     .select-input {
       padding: 10px 15px;
       border-radius: 50px;
-      border-color: #9899a3;
+      border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '9899a3')};
+      background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f8f8f8')};
+      color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 
       width: 380px;
       font-size: 0.85rem;
@@ -1028,7 +1103,7 @@ const Container = styled.div`
       font-size: 0.75rem;
       font-weight: 300;
       letter-spacing: 0.07rem;
-      background-color: white;
+      background-color: transparent;
       margin-left: 20%;
       color: cornflowerblue;
     }
@@ -1058,9 +1133,14 @@ const Container = styled.div`
           font-size: 0.9rem;
           margin-bottom: 20px;
           font-weight: 600;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 
           b {
-            color: black;
+            color: ${(props) => (props.needDarkMode ? '#fff' : '#000')};
+          }
+
+          i{
+            color: ${(props) => (props.needDarkMode ? '#fff' : '#000')};
           }
         }
 
@@ -1068,16 +1148,20 @@ const Container = styled.div`
           margin-top: 10px;
           display: flex;
           align-items: center;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+
 
           svg {
             margin-right: 10px;
             fill: #333;
+            fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           }
 
           .text {
             font-size: 0.75rem;
             font-weight: 200;
             line-height: 1.15rem;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           }
         }
 
@@ -1094,12 +1178,25 @@ const Container = styled.div`
               margin-top: 5px;
               padding: 5px 10px;
               border: 1px solid #b9afaf;
+              color: ${(props) => (props.needDarkMode ? '#fff' : '#000')};
               border-radius: 8px;
               height: 36px;
             }
           }
         }
+        
+        /* Dark mode styles */
+        .chart-container.dark-mode .chartjs-legend ul li span {
+          color: #e5e5e5;
+        }
+
+        /* Light mode styles */
+        .chart-container.light-mode .chartjs-legend ul li span {
+          color: #333;
+        }
       }
+
+      
     }
 
     .rankings-holder {
@@ -1114,14 +1211,18 @@ const Container = styled.div`
       .ranking-title {
         display: grid;
         grid-template-columns: 3fr 2fr 2fr 1fr;
-        color: #46515c;
+        color: pink;
+
+
         font-weight: 700;
         padding: 5px 8px;
         margin-right: 35px;
         padding-bottom: 5px;
-        border-bottom: 1px solid #e5e6ed;
-
+        margin-bottom: 5px;
+        border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#e5e5e5' : '#e5e6ed')};
+        
         div {
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#46515c')};
           font-size: 1rem;
           font-weight: 600;
         }
@@ -1159,16 +1260,19 @@ const Container = styled.div`
 
           div {
             font-size: 0.85rem;
+            color: ${(props) => (props.needDarkMode ? '#949ba4' : '#46515c')};
+            font-weight: 300;
           }
 
           a {
             font-size: 0.85rem;
             width: auto;
             display: inline-block;
+            /* color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#46515c')}; */
           }
 
           &:hover {
-            background-color: #e5e5e5;
+            background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
             color: #fff;
             border-radius: 10px;
           }
@@ -1179,68 +1283,81 @@ const Container = styled.div`
 `;
 
 const Filters = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 80px 0 10px 0;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 80px 0 10px 0;
 
-  .filter {
-    padding: 7.5px 15px;
-    font-size: 0.8rem;
-    border: 1px solid #b9afaf;
-    border-radius: 500px;
-    margin: 0px 5px 5px 0px;
-    font-weight: 300;
-    text-decoration: none;
-    color: inherit;
+	.filter {
+		padding: 7.5px 15px;
+		font-size: 0.8rem;
+		border: 1px solid ${(props) => (props.needDarkMode ? '#514f4f' : '#b9afaf')};
+		border-radius: 500px;
+		margin: 0px 5px 5px 0px;
+		font-weight: 300;
+		text-decoration: none;
+    background-color: ${(props) => (props.needDarkMode ? 'transparent' : 'transparent')};
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
 
-    svg {
+    svg{
       font-size: 1rem;
       margin-bottom: -0.2rem;
       margin-left: 5px;
       fill: #71c929;
     }
 
-    &:hover {
-      border-color: #201f1f;
-      background-color: #201f1f;
-      color: #ebdddd;
+		&:hover {
+			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
+			transition-duration: 250ms;
+			cursor: pointer;
+		}
+	}
+
+  .locked-feature{
+    &:hover{
+      background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+      color: ${(props) => (props.needDarkMode ? '#fff' : 'inherit')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
       transition-duration: 250ms;
-      cursor: pointer;
     }
   }
 
-  .locked-feature {
-    &:hover {
-      background-color: #f1f1f1;
-      color: #333;
-    }
-  }
-
-  .selected {
-    /* background-color: #ded7d7;
+	.selected {
+		/* background-color: #ded7d7;
     color: #111; */
-    border-color: #201f1f;
-    background-color: #201f1f;
-    color: #ebdddd;
-  }
+    color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+    border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+    background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
 
-  @media only screen and (max-width: 1100px) {
-    margin: 10px 0 10px 0;
+    &:hover {
+      color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+      background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
+			transition-duration: 250ms;
+			cursor: pointer;
+		}
+	}
 
-    .filter {
-      padding: 5px 15px;
-      font-size: 0.7rem;
-      margin: 0px 5px 5px 0px;
-    }
+	@media only screen and (max-width: 1100px) {
+		margin: 10px 0 10px 0;
 
-    .selected {
-      /* background-color: #ded7d7;
+		.filter {
+			padding: 5px 15px;
+			font-size: 0.7rem;
+			margin: 0px 5px 5px 0px;
+		}
+
+		.selected {
+			/* background-color: #ded7d7;
       color: #111; */
-      border-color: #201f1f;
-      background-color: #201f1f;
-      color: #ebdddd;
-    }
-  }
+			border-color: #201f1f;
+			background-color: #201f1f;
+			color: #ebdddd;
+		}
+	}
+
+  
 `;
 
 const CleanLine = styled.div`

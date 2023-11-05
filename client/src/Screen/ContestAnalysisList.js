@@ -16,16 +16,17 @@ import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
 const ContestAnalysisList = () => {
   const [platformName, setPlatformName] = useState('leetcode');
   const [contestType, setContestType] = useState('Weekly Contest');
-  const [contestNumber, setContestNumber] = useState('361');
-  const [needDarkMode, setNeedDarkMode] = useState(false);
+  const [contestNumber, setContestNumber] = useState('362');
+  const [needDarkMode, setNeedDarkMode] = useState(true);
 
-  useEffect(() => {
+  useEffect(() => { 
     document.title = "Contest Analysis - Algolisted";
   }, []);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if(selectedTheme === 'dark') setNeedDarkMode(true);
+    if(selectedTheme === 'light') setNeedDarkMode(false);
   }, [])
   
   console.log("needDarkMode : ", needDarkMode);

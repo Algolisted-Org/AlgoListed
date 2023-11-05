@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { Line } from "react-chartjs-2";
 import { Chart as chartJS } from "chart.js/auto";
 
-const LineChart = ({chartData, options}) => {
+const LineChart = ({needDarkMode, chartData, options}) => {
   return ( 
     <Container>
-      <Line data={chartData} options={options}></Line>
+      <Line needDarkMode={needDarkMode} data={chartData} options={options}></Line>
     </Container>
   )
 }
