@@ -1703,6 +1703,8 @@ const Progress = styled.div`
 		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 	}
 
+	
+
 	.value {
 		margin: 0 10px;
 		font-size: 0.8rem;
@@ -1719,8 +1721,8 @@ const Progress = styled.div`
 		/* width: 400px; */
 		height: 10px;
 		border-radius: 100px;
-		background-color: whitesmoke;
-		border: 1px solid pink;
+		border: 1px solid ${(props) => (props.needDarkMode ? '#000000' : 'pink')};
+		background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : 'whitesmoke')};
 		flex: 1;
 		overflow: hidden;
 
@@ -1943,12 +1945,14 @@ const VisualiserConatiner = styled.div`
                     height: 7.5px;
                     width: 100%;
                     border-radius: 50px;
-                    background-color: #f1f6f1;
-                    border: 1px solid #dbd5d5;
 					overflow: hidden;
+					border: 1px solid ${(props) => (props.needDarkMode ? '#000000' : '#f1f6f1')};
+					background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#dbd5d5')};
+					/* background-color: #; */
+    				/* border: 1px solid #; */
 
 					.fill{
-						background-color: #b5b3b0;
+						background-color: #;
 						height: 100%;
 						border-radius: 50px;
 					}
@@ -1961,6 +1965,8 @@ const VisualiserConatiner = styled.div`
 
 			.CircularProgressbar-text{
 				color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+				/* border: 1px solid ${(props) => (props.needDarkMode ? '#000000' : '#f1f6f1')};
+				background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#dbd5d5')}; */
 			}
         }
 
