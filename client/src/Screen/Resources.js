@@ -20,14 +20,18 @@ const Resources = () => {
   const [allResources, setAllResources] = useState([]);
   const [filter, setFilter] = useState("All Resources");
   const [showFilters, setShowFilters] = useState(false);
-  const [needDarkMode, setNeedDarkMode] = useState(false);
+  const [needDarkMode, setNeedDarkMode] = useState(!false);
   
-  let selectedTheme = localStorage.getItem("selectedTheme");
-  console.log("needDarkMode : ", needDarkMode);
-  const toggleDarkMode = () => {
-    setNeedDarkMode(!needDarkMode);
-  };
+  useEffect(() => {
+		let selectedTheme = localStorage.getItem("selectedTheme");
+		if (selectedTheme === 'dark') setNeedDarkMode(true);
+		if (selectedTheme === 'light') setNeedDarkMode(false);
+	}, [])
 
+	console.log("needDarkMode : ", needDarkMode);
+	const toggleDarkMode = () => {
+		setNeedDarkMode(!needDarkMode);
+	};
   
   useEffect(() => {
     document.title = "Coding Resources - Algolisted";
@@ -128,14 +132,13 @@ const Resources = () => {
         <SimpleFooter />
       </MobContainer>
  
-      <Container>
+      <Container needDarkMode={needDarkMode}>
         {
-          selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
         }
-        { 
-          selectedTheme == "dark" ? <LeftMenuDark marked={"resources"} /> : <LeftMenu marked={"resources"} />
+        {
+          needDarkMode ? <LeftMenuDark marked={"resources"} /> : <LeftMenu marked={"resources"} />
         }
-        
         <div className="cc-middle-content">
           <h1 className='main-heading'>Coding Resources</h1>
           <p className="heading-supporter">
@@ -148,7 +151,7 @@ const Resources = () => {
             </div>
           </div>
 
-          <Filters>
+          <Filters needDarkMode={needDarkMode}>
             {filters}
           </Filters>
           
@@ -423,6 +426,8 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     padding-left: 200px;
+    
+    background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
 
     a{
       color: #18489f;
@@ -430,7 +435,6 @@ const Container = styled.div`
 
     .cc-middle-content{
       min-height: 100vh;
-      background-color:var(--body_background);
       width: 100%;
       /* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
       padding: 80px 120px 30px 120px;
@@ -447,29 +451,17 @@ const Container = styled.div`
       .main-heading{
           font-size: 1.65rem;
           font-weight: 600;
-          color: var(--body_background5);
-          display: flex; 
-          align-items: center;
-
-          .head-tag{
-            display: inline;
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 0.25rem 0.5rem;
-            border-radius: 100px;
-            background-color: #e5e5e5;
-            margin-left: 10px;
-          }
+          color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
       }
 
       .heading-supporter{
           font-size: 1.05rem;
           margin-bottom: 10px;
           font-weight: 400;
-          color: var(--body_background5);
+          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
 
           a{
-            color: #18489f;
+            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
             font-size: 0.95rem;
             font-weight: 300;
             margin-left: 0.25rem;
@@ -480,16 +472,20 @@ const Container = styled.div`
         display: inline-block;
         /* display: flex; */
         /* align-items: center; */
-        background-color: #d5f7e1;
+        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
         border-radius: 5px;
         padding: 10px;
         margin: 20px 0 10px 0;
 
         .text{
             font-size: 0.8rem;
-            color: #13803b;
+            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
             font-weight: 300;
-            
+
+            b{
+                font-weight: 500;
+                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            }
         }
       }
 
@@ -510,7 +506,7 @@ const Container = styled.div`
           height: auto;
           /* min-height: 280px; */
           /* background-color: white; */
-          border-top: 1px solid rgb(232, 232, 232);
+          border-top: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(232, 232, 232)')};
           /* border: 1px solid rgb(232, 232, 232); */
           padding-top: 20px;
           margin: 10px 15px 30px 15px;
@@ -541,7 +537,7 @@ const Container = styled.div`
             margin-bottom: 10px;
             overflow: hidden;
             border-radius: 10px;
-            border: 1px solid #f3e4e4;
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '#f3e4e4')};
 
             img{
               width: 100%;
@@ -553,12 +549,13 @@ const Container = styled.div`
           .title{
               font-size: 0.85rem;
               font-weight: 500;
-              color: var(--body_background5);
+              color: ${(props) => (props.needDarkMode ? '#b6bff1' : '#374151')};
               cursor: pointer;
               text-decoration: none;
               width: 100%;
               font-family: 'Poppins', sans-serif;
               font-family: "Poppins" !important;
+
               
               &:hover{
                 color: cornflowerblue;
@@ -568,11 +565,11 @@ const Container = styled.div`
 
 
           .short-desc{
-            color: var(--body_background5);
             font-size: 0.75rem;
             font-weight: 200;
             letter-spacing: 0.06rem;
             font-family: 'Poppins', sans-serif;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           }
 
           .tags{
@@ -584,8 +581,8 @@ const Container = styled.div`
                   font-size: 0.7rem;
                   padding: 2.5px 12.5px;
                   border-radius: 100px;
-                  background-color: #f3e8ff;
-                  color: rgb(107, 33, 168);
+                  background-color: ${(props) => (props.needDarkMode ? '#616986' : '#f3e8ff')};
+                  color: ${(props) => (props.needDarkMode ? '#ffffff' : 'rgb(107, 33, 168)')};
                   font-weight: 400;
                   margin: 5px 5px 0 0;
               }
@@ -594,7 +591,8 @@ const Container = styled.div`
                   font-size: 0.7rem;
                   padding: 2.5px 12.5px;
                   border-radius: 100px;
-                  background-color: #eeeeee;
+                  background-color: ${(props) => (props.needDarkMode ? '#404249' : '#eeeeee')};
+                  color: ${(props) => (props.needDarkMode ? '#aaa2a2' : '#333')};
                   font-weight: 300;
                   margin: 5px 5px 0 0;
               }
@@ -605,8 +603,9 @@ const Container = styled.div`
 
             a{
               font-size: 0.75rem;
+              color: ${(props) => (props.needDarkMode ? '#6b66bd' : '#18489f')};
               /* text-decoration: none; */
-              color:var(--body_background5);
+              /* color: inherit; */
 
               &:hover{
                 text-decoration: underline;
@@ -616,61 +615,83 @@ const Container = styled.div`
         }
       }
     }
-    .top-part a{
-      color:var(--body_background5);
-    }
 `
 
 const Filters = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 80px 0 10px 0;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 80px 0 10px 0;
 
-  .filter {
-    padding: 7.5px 15px;
-    font-size: 0.8rem;
-    background-color:var(--body_night);
-    border: 1px solid #b9afaf;
-    border-radius: 500px;
-    margin: 0px 5px 5px 0px;
-    font-weight: 300;
+	.filter {
+		padding: 7.5px 15px;
+		font-size: 0.8rem;
+		border: 1px solid ${(props) => (props.needDarkMode ? '#514f4f' : '#b9afaf')};
+		border-radius: 500px;
+		margin: 0px 5px 5px 0px;
+		font-weight: 300;
+		text-decoration: none;
+    background-color: ${(props) => (props.needDarkMode ? 'transparent' : 'transparent')};
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
+
+    svg{
+      font-size: 1rem;
+      margin-bottom: -0.2rem;
+      margin-left: 5px;
+      fill: #71c929;
+    }
+
+		&:hover {
+			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
+			transition-duration: 250ms;
+			cursor: pointer;
+		}
+	}
+
+  .locked-feature{
+    &:hover{
+      background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+      color: ${(props) => (props.needDarkMode ? '#fff' : 'inherit')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+      transition-duration: 250ms;
+    }
+  }
+
+	.selected {
+		/* background-color: #ded7d7;
+    color: #111; */
+    color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+    border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+    background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
 
     &:hover {
-      border-color: #201f1f;
-      background-color: #201f1f;
-      color: #ebdddd;
-      transition-duration: 250ms;
-      cursor: pointer;
-    }
-  }
+      color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#ebdddd')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#201f1f')};
+      background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')};
+			transition-duration: 250ms;
+			cursor: pointer;
+		}
+	}
 
-  .selected {
-    /* background-color: #ded7d7;
-    color: #111; */
-    border-color: #201f1f;
-    background-color: #201f1f;
-    color: #ebdddd;
-  }
+	@media only screen and (max-width: 1100px) {
+		margin: 10px 0 10px 0;
 
-  @media only screen and (max-width: 1100px) {
-    margin: 10px 0 10px 0;
+		.filter {
+			padding: 5px 15px;
+			font-size: 0.7rem;
+			margin: 0px 5px 5px 0px;
+		}
 
-    .filter {
-      padding: 5px 15px;
-      font-size: 0.7rem;
-      margin: 0px 5px 5px 0px;
-    }
-
-    .selected {
-      /* background-color: #ded7d7;
+		.selected {
+			/* background-color: #ded7d7;
       color: #111; */
-      border-color: #201f1f;
-      background-color: #201f1f;
-      color: #ebdddd;
-    }
-  }
+			border-color: #201f1f;
+			background-color: #201f1f;
+			color: #ebdddd;
+		}
+	}
 `;
-
 const Sort = styled.div`
   display: flex;
   justify-content: flex-end;
