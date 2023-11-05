@@ -62,15 +62,16 @@ const ContestArchive = () => {
   // const [checkboxShared, setCheckboxShared] = useLocalStorageCustom("checkboxShared", []);
   const [checkboxstate,setCheckboxstate]= useState(JSON.parse(localStorage.getItem("checkboxShared")) || null)
   let arr;
-  useEffect(() => {
-    let selectedTheme = localStorage.getItem("selectedTheme");
-    if (selectedTheme === 'dark') setNeedDarkMode(true);
-  }, [])
 
   useEffect(() => {
     document.title = "Contest Archive - Algolisted";
   }, []);
-
+  
+  useEffect(() => {
+    let selectedTheme = localStorage.getItem("selectedTheme");
+    if(selectedTheme === 'dark') setNeedDarkMode(true);
+  }, [])
+  
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
@@ -473,7 +474,7 @@ const datasets = problems
 
           <EffectiveFilter className='noselect'>
             <div className="left">
-              <div className="filter-item noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
+              <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
                 {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                 {
                   openModel1 ? (
@@ -485,7 +486,7 @@ const datasets = problems
                   ) : <></>
                 }
               </div>
-              <div className="filter-item" onClick={() => setOpenModel2(!openModel2)}>Last {sliderInputValue} Contests
+              <div className="filter-item check_color" onClick={() => setOpenModel2(!openModel2)}>Last {sliderInputValue} Contests
                 {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
               </div>
             </div>
@@ -736,8 +737,11 @@ const Container = styled.div`
             position: absolute;
             height: 30px;
             border-radius: 100px;
-            background-color: #f3f4f7;
-            border: 1px solid rgb(209, 213, 219);
+            /* background-color: #f3f4f7; */
+            /* border: 1px solid rgb(209, 213, 219); */
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
             left: -15px;
             top: -15px;
             padding: 0 10px;
@@ -751,6 +755,7 @@ const Container = styled.div`
             }
 
             svg{
+              fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
               font-size: 1.25rem;
               margin-left: 5px;
             }
@@ -759,12 +764,12 @@ const Container = styled.div`
 
       .visualization{
         position: relative;
-        height: 590px;
         width: 100%;
-        background-color: ${(props) => (props.needDarkMode ? '#454754' : '#ffffff')};
+        /* background-color: ${(props) => (props.needDarkMode ? '#282828' : '#ffffff')}; */
+        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#ffffff')};
         border-radius: 20px;
         margin: 50px 0 20px 0;
-        border: 1px solid rgb(209, 213, 219);
+        border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
         animation: slide-down 0.3s linear both;
 
         @keyframes slide-down {
@@ -774,7 +779,7 @@ const Container = styled.div`
 
           100% {
             visibility: visible;
-            height: 590px;
+            height: 100%;
           }
         }
 
@@ -798,6 +803,11 @@ const Container = styled.div`
               flex-direction: row;
               align-items: center;
               justify-content: center;
+              
+              .legend-label{
+                color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+              }
+
 
               .checkbox {
                 height: 12px;
@@ -836,8 +846,9 @@ const Container = styled.div`
             position: absolute;
             height: 30px;
             border-radius: 100px;
-            background-color: #f3f4f7;
-            border: 1px solid rgb(209, 213, 219);
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
             left: -15px;
             top: -15px;
             padding: 0 10px;
@@ -851,6 +862,7 @@ const Container = styled.div`
             }
 
             svg{
+              fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
               font-size: 1.25rem;
               margin-left: 5px;
             }
@@ -889,15 +901,14 @@ const Container = styled.div`
 
         .one-contest-problems-parent{
           position: relative;
-          
-
 
           .contest-name {
             position: absolute;
             height: 30px;
             border-radius: 100px;
-            background-color: #f3f4f7;
-            border: 1px solid rgb(209, 213, 219);
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
             left: -15px;
             top: -15px;
             padding: 0 10px;
@@ -923,8 +934,10 @@ const Container = styled.div`
               .link{
                 width: 100%;
                 aspect-ratio: 1/1;
-                background-color: #f3f4f7;
-                border: 1px solid rgb(209, 213, 219);
+                background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
+                border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+                /* background-color: #f3f4f7; */
+                /* border: 1px solid rgb(209, 213, 219); */
                 border-radius: 50%;
                 margin-bottom: 7.5px;
   
@@ -932,7 +945,7 @@ const Container = styled.div`
                 place-items: center;
                 
                 svg{
-                  fill: #cacacd;
+                  fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#cacacd')};
                   font-size: 1.25rem;
                 }
 
@@ -941,7 +954,7 @@ const Container = styled.div`
                   transition-duration: 250ms;
                   
                   svg{
-                    fill: #333;
+                    fill: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
                   }
                 }
   
@@ -951,7 +964,7 @@ const Container = styled.div`
                   transition-duration: 250ms;
   
                   svg{
-                    fill: #333;
+                    fill: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
                   }
                 }
               }
@@ -963,11 +976,12 @@ const Container = styled.div`
             position: relative;
             height: 200px;
             width: 100%;
-            background-color: #ffffff;
+            background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#ffffff')};
+            /* background-color: #ffffff; */
             border-radius: 20px;
             margin-bottom: 30px;
             display: flex;
-            border: 1px solid rgb(209, 213, 219);
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
             overflow: hidden;
             
             /* border: 1px solid #e5e5e5; */
@@ -975,7 +989,7 @@ const Container = styled.div`
             .contest-problem {
               height: 100%;
               width: 25%;
-              border-right: 1px solid rgb(209, 213, 219);
+              border-right: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
               overflow-y: scroll;
   
               ::-webkit-scrollbar {
@@ -999,6 +1013,8 @@ const Container = styled.div`
                   align-items: center;
                   margin-bottom: 5px;
                   cursor: pointer;
+                  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+
   
                   input{
                     margin-right: 5px;
@@ -1010,7 +1026,8 @@ const Container = styled.div`
                 .problem-name{
                   font-size: 0.85rem;
                   font-weight: 500;
-                  color: cornflowerblue;
+                  color: ${(props) => (props.needDarkMode ? '#8ba0c6' : 'cornflowerblue')};
+
                   text-decoration: none;
                   line-height: 0.85rem;
 
@@ -1027,22 +1044,23 @@ const Container = styled.div`
                 .tag{
                   font-size: 0.65rem;
                   padding: 2.5px 7.5px;
-                  border: 1px solid rgb(202, 195, 195);
+                  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
                   border-radius: 100px;
                   margin: 0 2.5px 2.5px 0;
                   font-weight: 300;
-                  background-color: #f3f4f7;
+                  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                  background-color: ${(props) => (props.needDarkMode ? '#2b2b2b' : '#f3f4f7')};
                 }
   
                 .difficulty-tag{
-                  border-color: rgb(17, 17, 17);
+                  border-color: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(17, 17, 17)')};
                   /* background-color: #fff; */
                 }
               }
             }
   
             .solved-problem{
-              background-color: #dcf8eb;
+              background-color: ${(props) => (props.needDarkMode ? '#404249' : '#dcf8eb')};
             }
           }
         }
@@ -1228,12 +1246,13 @@ const EffectiveFilter = styled.div`
     .filter-item{
 			padding: 5px 10px;
 			font-size: 0.7rem;
-			border: 1px solid #d0d5db;
+			/* border: 1px solid #d0d5db; */
+			border: 1px solid ${(props) => (props.needDarkMode ? 'white' : 'black')};
 			border-radius: 3px;
 			margin-right: 5px;
 			cursor: pointer;
       /* color: #e5e5e5; */
-      color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'black')};
+      color: ${(props) => (props.needDarkMode ? 'white' : 'black')};
       /* background-color: ${(props) => (props.needDarkMode ? 'white' : 'yellow')};  */
 
       position: relative;
@@ -1244,7 +1263,7 @@ const EffectiveFilter = styled.div`
       svg{
         font-size: 1rem;
         margin-left: 5px;
-        fill: #e5e5e5;
+        /* fill: #e5e5e5; */
         /* fill: ${(props) => (props.needDarkMode ? 'white' : 'black')}; */
       }
 		}
@@ -1261,6 +1280,7 @@ const EffectiveFilter = styled.div`
 			border-radius: 3px;
       margin-left: 5px;
 			cursor: pointer;
+      color: ${(props) => (props.needDarkMode ? 'white' : 'black')};
 		}
 	}
 `

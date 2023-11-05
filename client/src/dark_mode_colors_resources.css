@@ -1,4 +1,5 @@
 :root {
+    --check_color:black;
     --body_background: #fefdff;
     --body_background2: #ffffff;
     --body_background3: #e5e5e5;
@@ -40,6 +41,7 @@
 }
 
 [data-theme="dark"] {
+    --check_color:white;
     --body_night:white;
     --body_background: #313338;
     --body_background2: #2b2d31;
