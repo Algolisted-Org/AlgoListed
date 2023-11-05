@@ -79,17 +79,19 @@ export default Tagsfilter;
 
 const MenuItem = styled.div`
   font-size: 0.75rem;
-  background-color:${(props) => (props.isselected ? "#e5e5e5" : "#f3f4f7")};
- height:30px;
- width: auto;
+  background-color:${(props) => (props.needDarkMode ? "#404249" : "#f3f4f7")};
+  height:30px;
+  width: auto;
   padding:4px;
   border-radius: 5px;
   margin-top: 5px;
   margin-right: 5px;
   text-align:center;
   cursor:pointer;
+  /* color: white; */
   /* color: ${(props) => (props.isselected ? "white":"black")}; */
-  border: 1px solid ${(props) => (props.isselected ? "#8d8686":"#cac3c3")};
+  color: ${(props) => (props.needDarkMode ? (props.isselected ? '#fff' : '#ffffff93fff') : (props.isselected ? '#333' : '#333'))};
+  border: 1px solid ${(props) => (props.needDarkMode ? (props.isselected ? '#ffffff' : '#ffffffb9') : (props.isselected ? '#040404' : '#cac3c3b0'))};
 `;
 
 const Menuexpand = styled.div`
@@ -110,6 +112,7 @@ const Menuexpand = styled.div`
   opacity: ${props => (props.expanded ? 1 : 0)};
   transform: translateY(${props => (props.expanded ? "0" : "-10px")});
   transition: opacity 0.3s ease, transform 0.3s ease;
+  background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#fff')};
   
   ::-webkit-scrollbar {
     width: 6px;

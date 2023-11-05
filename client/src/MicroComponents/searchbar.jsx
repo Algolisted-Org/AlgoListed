@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 
-const SearchBar = ({tagdat,tags,settagdata}) => {
+const SearchBar = ({needDarkMode, tagdat,tags,settagdata}) => {
     const [inpy,setinpu]=useState("");
     
     useEffect(()=>{
@@ -21,8 +21,8 @@ const SearchBar = ({tagdat,tags,settagdata}) => {
     },[inpy])
 
   return (
-    <SearchBarWrapper>
-      <SearchInput type="text" onChange={(e)=>setinpu(e.target.value)} placeholder="Search Tags..." />
+    <SearchBarWrapper needDarkMode={needDarkMode}>
+      <SearchInput needDarkMode={needDarkMode} type="text" onChange={(e)=>setinpu(e.target.value)} placeholder="Search Tags..." />
     </SearchBarWrapper>
   );
 };
@@ -31,16 +31,14 @@ export default SearchBar;
 const SearchBarWrapper = styled.div`
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.needDarkMode ? '#404249' : '#ffffff')};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2px;
   border-radius: 4px;
   border: 1px solid #ccc;
   width: 100%; 
   height:30px;
-  margin:5px;
-  margin-right:10px;
- 
+  margin: 5px 10px 5px 0px;
 `;
 
 const SearchInput = styled.input`
@@ -53,6 +51,7 @@ const SearchInput = styled.input`
   background: transparent; 
   width: 100%;
   height:20px;
+  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
   &::placeholder {
     color: #aaa; 
   }

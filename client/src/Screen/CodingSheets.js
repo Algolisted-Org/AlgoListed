@@ -81,7 +81,6 @@ const CodingSheets = () => {
 	const allowedProblemTags = [
 		"Array",
 		"String",
-		"Strings",
 		"Hash Table",
 		"Dynamic Programming",
 		"Math",
