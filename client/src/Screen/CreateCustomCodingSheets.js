@@ -10,43 +10,35 @@ import CallMadeIcon from "@material-ui/icons/CallMade";
 import AddIcon from "@material-ui/icons/Add";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "@firebase/auth";
 import app from "../firebase_Auth/firebaseConfig";
-
+ 
 // import { axios } from 'axios';
 // const axios = require('axios');
 import axios from "axios";
 
 const CreateCustomCodingSheets = ({setUserGlobal}) => {
-  const [needDarkMode, setNeedDarkMode] = useState(false);
+  const [needDarkMode, setNeedDarkMode] = useState(!false);
   const [userSheet, setUserSheet] = useState([]);
   const [creatingSheet, setCreatingSheet] = useState(false)
-
-  // const [user, setUser] = useState({
-  //   createdSheetsIds: ['6539297a4fb984efd157b000'],
-  //   email: "nayak.primary@gmail.com",
-  //   github: "",
-  //   instagram: "",
-  //   linkedin: "",
-  //   name: "Atanu Nayak - updated name",
-  //   profilePictureURL: "https://media.licdn.com/dms/image/D4D03AQG1opv6ps8eNw/profile-displayphoto-shrink_400_400/0/1691004705243?e=1701907200&v=beta&t=eZjXD79p0SR-LraCaQbrNsV5k2LbM63gMHqLS81wSn0",
-  //   staredSheetsIds: [],
-  //   twitter: "",
-  //   youtube: "",
-  //   __v: 1,
-  //   _id: "652e9f75e1359d3fafbbf711"
-  // });
   const [user, setUser] = useState(``);
   const [sheetName, setSheetName] = useState("");
   const [sheetDesc, setSheetDesc] = useState("");
   const [sheetId, setSheetId] = useState("");
-  
+
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if (selectedTheme === "dark") setNeedDarkMode(true);
-  }, []);
+    if(selectedTheme === 'dark') setNeedDarkMode(true);
+    if(selectedTheme === 'light') setNeedDarkMode(false);
+  }, [])
+  
+  console.log("needDarkMode : ", needDarkMode);
+  const toggleDarkMode = () => {
+    setNeedDarkMode(!needDarkMode);
+  };
 
   useEffect(() => {
     document.title = "Contest Archive - Algolisted";
   }, []);
+  
   useEffect(() => {
     console.log(user);
     if (user) {
@@ -54,10 +46,8 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
       getUserSheet(user._id);
     }
   }, [user]);
-  console.log("needDarkMode : ", needDarkMode);
-  const toggleDarkMode = () => {
-    setNeedDarkMode(!needDarkMode);
-  };
+
+  
 
   const handleSubmit = async () => {
     const provider = new GoogleAuthProvider();
@@ -182,23 +172,13 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
           alt=""
         />
       </MobContainer>
-      <Container>
-        {needDarkMode ? (
-          <CCHeaderDarkPlus
-            needDarkMode={needDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-        ) : (
-          <CCHeaderPlus
-            needDarkMode={needDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-        )}
-        {needDarkMode ? (
-          <LeftMenuDark marked={"create-problem-list"} />
-        ) : (
-          <LeftMenu marked={"create-problem-list"} />
-        )}
+      <Container needDarkMode={needDarkMode}>
+        {
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+        }
+        {
+          needDarkMode ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
+        }
         {/* ---> change this all-blogs to your desired page-id */}
 
         <div className="cc-middle-content">
@@ -218,11 +198,11 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
               <a href="/">youtube video</a> to see how it's done!
             </div>
           </div>
-          <UserSheetsLikedList>
+          <UserSheetsLikedList needDarkMode={needDarkMode}>
             {!user && (
               <>
                 <h3>You need to have an account to use this feature</h3>
-                <SignUpButton onClick={handleSubmit}>
+                <SignUpButton needDarkMode={needDarkMode} onClick={handleSubmit}>
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png"
                     alt=""
@@ -238,7 +218,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
 
           {/* {user && <UserSheetsList> */}
           {user && (
-            <UserSheetsList>
+            <UserSheetsList needDarkMode={needDarkMode}>
               <div className="owner-detail-main">
                 <img className="owner-pic" src={user.profilePictureURL} alt="" />
                 <h1>Hello <b>{user.name}</b>, you are currently logged in!</h1>
@@ -550,8 +530,10 @@ const Container = styled.div`
   justify-content: space-between;
   padding-left: 200px;
 
-  a {
-    color: #18489f;
+  background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
+
+  a{
+    color: ${(props) => (props.needDarkMode ? '#6d93d8' : '#18489f')};
   }
 
   .cc-middle-content {
@@ -569,41 +551,46 @@ const Container = styled.div`
       padding: 80px 50px 50px 50px;
     }
 
-    .main-heading {
-      font-size: 1.65rem;
-      font-weight: 600;
-      color: #292929;
-    }
-
-    .heading-supporter {
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-      font-weight: 400;
-      color: #696168;
-
-      a {
-        color: #18489f;
-        font-size: 0.95rem;
-        font-weight: 300;
-        margin-left: 0.25rem;
+    .main-heading{
+          font-size: 1.65rem;
+          font-weight: 600;
+          color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
       }
-    }
 
-    .message {
-      display: inline-block;
-      /* display: flex; */
-      /* align-items: center; */
-      background-color: #d5f7e1;
-      border-radius: 5px;
-      padding: 10px;
-      margin: 20px 0 10px 0;
+      .heading-supporter{
+          font-size: 1.05rem;
+          margin-bottom: 10px;
+          font-weight: 400;
+          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
 
-      .text {
-        font-size: 0.8rem;
-        color: #13803b;
-        font-weight: 300;
+          a{
+            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-left: 0.25rem;
+          }
       }
-    }
+
+      .message{
+        display: inline-block;
+        /* display: flex; */
+        /* align-items: center; */
+        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
+        border-radius: 5px;
+        padding: 10px;
+        margin: 20px 0 10px 0;
+
+        .text{
+            font-size: 0.8rem;
+            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            font-weight: 300;
+
+            b{
+                font-weight: 500;
+                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            }
+        }
+      }
   }
 `;
 
@@ -628,9 +615,11 @@ const UserSheetsList = styled.div`
       h1{
         font-size: 0.85rem;
         font-weight: 200;
+        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 
         b{
           font-weight: 500;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
       }
     }
@@ -639,6 +628,7 @@ const UserSheetsList = styled.div`
     font-size: 1.25rem;
     font-weight: 500;
     margin-top: 50px;
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
   }
 
   .create-new-sheet{
@@ -655,9 +645,9 @@ const UserSheetsList = styled.div`
       /* background-color: black; */
       margin: 10px 10px 0 0;
       border-radius: 10px;
-      border: 1px solid #e7dcdc;
+      border: 1px solid ${(props) => (props.needDarkMode ? '#404249' : '#e7dcdc')};
+      background-color: ${(props) => (props.needDarkMode ? '#454754' : 'transparent')};
       
-
       input{
         font-size : 0.75rem;
         border: none;
@@ -665,13 +655,19 @@ const UserSheetsList = styled.div`
         width: 100%;
         height: 100%;
         background-color: transparent;
+        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+
+        &::placeholder {
+          color: ${(props) => (props.needDarkMode ? '#b0b0b0' : '#6c6c6c')};
+        }
       }
     }
 
     .addNewSheetBtn{
       display: grid;
       place-items: center;
-      border: 1px solid #e7dcdc;
+      border: 1px solid ${(props) => (props.needDarkMode ? '#404249' : '#e7dcdc')};
+      background-color: ${(props) => (props.needDarkMode ? '#404249' : 'transparent')};
       height: 45px;
       width: 45px;
       border-radius: 10px;
@@ -682,6 +678,7 @@ const UserSheetsList = styled.div`
       
       svg{
         font-size: 1.25rem;
+        fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
       }
 
       img{
@@ -700,7 +697,8 @@ const UserSheetsList = styled.div`
       /* background-color: black; */
       margin: 10px 10px 0 0;
       border-radius: 10px;
-      border: 1px solid #e7dcdc;
+      border: 1px solid ${(props) => (props.needDarkMode ? '#3f4042' : '#e7dcdc')};
+      background-color: ${(props) => (props.needDarkMode ? '#404249' : 'transparent')};      
       padding: 10px;
       display: flex;
       flex-direction: column;
@@ -713,10 +711,12 @@ const UserSheetsList = styled.div`
         align-items: center;
         cursor: pointer;
         text-decoration: none;
+        color: ${(props) => (props.needDarkMode ? '#b1bcec' : '#6d93d8')};
 
         svg {
           font-size: 1rem;
           margin-left: 5px;
+          fill: ${(props) => (props.needDarkMode ? '#b1bcec' : '#333')};
         }
 
         &:hover {
@@ -734,6 +734,7 @@ const UserSheetsList = styled.div`
         font-weight: 200;
         margin-top: 5px;
         flex: 1;
+        color: ${(props) => (props.needDarkMode ? '#bababa' : '#333')};
       }
 
       .info {
@@ -741,9 +742,11 @@ const UserSheetsList = styled.div`
         .one-info {
           font-size: 0.75rem;
           font-weight: 200;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 
           b {
             font-weight: 500;
+            color: ${(props) => (props.needDarkMode ? '#bababa' : '#333')};
           }
         }
       }
@@ -758,13 +761,13 @@ const UserSheetsList = styled.div`
           padding: 5px 10px;
           font-size: 0.75rem;
           font-weight: 300;
-          background-color: #e5e5e5;
+          background-color: ${(props) => (props.needDarkMode ? '#222' : '#e5e5e5')};
           /* color: white; */
           border-radius: 10px;
           margin-top: 10px;
           text-decoration: none;
           font-weight: 400;
-          color: #333;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
 
         .right {
@@ -817,6 +820,7 @@ const UserSheetsLikedList = styled.div`
     font-size: 1.25rem;
     font-weight: 500;
     margin-bottom: 10px;
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
   }
 
   .list {
@@ -1026,14 +1030,14 @@ const Progress = styled.div`
 const SignUpButton = styled.div`
   height: 40px;
   width: 220px;
-  background-color: white;
-  border: 1px solid #e5e5e5;
   border-radius: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
   cursor: pointer;
+  background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#fff')};
+  border: 1px solid ${(props) => (props.needDarkMode ? '#5d5e61' : 'rgb(209, 213, 219)')};
 
   img {
     height: 20px;
@@ -1043,5 +1047,6 @@ const SignUpButton = styled.div`
     font-size: 0.8rem;
     font-weight: 500;
     margin-left: 10px;
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
   }
 `;

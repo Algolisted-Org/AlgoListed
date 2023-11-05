@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import CCHeaderPlus from '../Components/CCHeaderPlus';
 import CCHeaderDark from '../Components/CCHeaderDark';
-import LeftMenu from '../Components/LeftMenu';
+import LeftMenu from '../Components/LeftMenu'; 
 import LeftMenuDark from '../Components/LeftMenuDark';
 import axios from 'axios';
 import { contestAnalysisFilters } from '../Components/contestAnalysisFilters';
