@@ -211,59 +211,82 @@ const ResumeSection = () => {
                         </div>
                     </div> */}
 
-          <div className="btn-1">
-            <input
-              type="text"
-              placeholder="Enter your open API KEY here....."
-              onChange={(e) => setApiKey(e.target.value)}
-              className="api_input"
-            />
-            <input type="file" accept=".pdf" onChange={uploadresume} />
-            <div>
-              <select value={selectedCompany} onChange={handleCompany}>
-                <option value="0">Select Category:</option>
-                <option value="1">Multinational Corporation (MNC)</option>
-                <option value="2">Startups</option>
-                <option value="3">Unicorn</option>
-                <option value="4">Remote</option>
-              </select>
-              <select value={difficultyLevel} onChange={handleDifficult}>
-                <option value="0">Select Difficulty level:</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </select>
-            </div>
-            <button className="btn-2" onClick={handleSend}>
-              Submit
-            </button>
 
-            {isLoading ? (
-              <LoadingSection>Loading....</LoadingSection>
-            ) : (
-              <>
-                {file && (
-                  <div>
-                    <Document
-                      file={file}
-                      onLoadSuccess={handleTextExtraction}
-                    />
-                    {responseText && (
-                      <div className="response-text">
-                        <Markdown>{responseText}</Markdown>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </>
-            )}
+
+
+          <div className="main-container">
+            <div className="main-features">
+              <div className="system-inputs">
+                
+                <input type="file" accept=".pdf" onChange={uploadresume} />
+                <div>
+                  
+                  <select value={selectedCompany} onChange={handleCompany}>
+                    <option value="0">Select Category:</option>
+                    <option value="1">Multinational Corporation (MNC)</option>
+                    <option value="2">Startups</option>
+                    <option value="3">Unicorn</option>
+                    <option value="4">Remote</option>
+                  </select>
+                  <select value={difficultyLevel} onChange={handleDifficult}>
+                    <option value="0">Select Difficulty level:</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+
+                  <input
+                  type="text"
+                  placeholder="Enter your open API KEY here....."
+                  onChange={(e) => setApiKey(e.target.value)}
+                  className="api_input"
+                />
+                </div>
+                <button className="btn-2" onClick={handleSend}>
+                  Submit
+                </button>
+              </div>
+              <div className="right-results">
+                <h3>Powered by,</h3>
+                <img src="https://mrvian.com/wp-content/uploads/2023/02/openai-1024x317.png" alt="" />
+                <p>
+                  We've conducted extensive research and developed highly tailored prompts to meet individual user requirements. We have invested considerable effort in prompt engineering, research, and data analysis. However, due to budget constraints, we kindly ask users to utilize their own API keys.
+                </p>
+              </div>
+            </div>
+            <Line></Line>
+            <h3>AI Generated Resume Based Questions</h3>
+            <div className="generated-mark-up">
+              {
+                responseText ? <></> : <p>No questions generated yet!</p>
+              }
+              {isLoading ? (
+                <LoadingSection>Loading....</LoadingSection>
+              ) : (
+                <>
+                  {file && (
+                    <div>
+                      <Document
+                        file={file}
+                        onLoadSuccess={handleTextExtraction}
+                      />
+                      {responseText && (
+                        <div className="response-text">
+                          <Markdown>{responseText}</Markdown>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </Container>
@@ -348,6 +371,7 @@ const Container = styled.div`
         margin-left: 0.25rem;
       }
     }
+
     .message {
       display: inline-block;
       /* display: flex; */
@@ -362,16 +386,79 @@ const Container = styled.div`
         font-weight: 300;
       }
     }
-    .btn-1 {
-      padding: 5px 10px;
-      font-size: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      svg {
-        margin-right: 5px;
+
+
+    .main-container{
+      .main-features{
+        display: flex;
+        margin: 50px 20px 0 0;
+  
+        .system-inputs{
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+          border-right: 1px solid #e6e0e0;
+          padding: 10px 20px 0 0;
+          
+    
+          input, select, button{
+            width: 100%;
+  
+            border: 1px solid #bdbbbb;
+            border-radius: 15px;
+            overflow: hidden;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 0.75rem;
+          }
+  
+          button{
+            margin-bottom: 20px;
+          }
+        }
+  
+        .right-results{
+          flex: 1;
+          padding: 10px 0 20px 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+  
+          img{
+            width: 250px;
+          }
+  
+          h3{
+            font-weight: 500;
+          }
+  
+          p{
+            font-weight: 200;
+            font-size: 0.85rem;
+          }
+  
+        }
+      }
+
+      
+      h3{
+        font-weight: 500;
+      }
+      .generated-mark-up{
+        margin-top: 10px;
+       
+        p{
+          font-size: 0.95rem;
+          font-weight: 300;
+        }
+
+        h2{
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
       }
     }
+
   }
 `;
 const LoadingSection = styled.div`
@@ -383,3 +470,10 @@ const LoadingSection = styled.div`
   font-weight: 500;
   color: #000;
 `;
+
+const Line = styled.div`
+  height: 1px;
+  background-color: #e6e0e0;
+  width: 100%;
+  margin-bottom: 30px;
+`

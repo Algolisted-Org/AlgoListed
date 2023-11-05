@@ -50,13 +50,13 @@ const ContestArchive = () => {
   const [checkbox4, setCheckbox4] = useLocalStorage("checkbox4", false);
   const [notes,setnotes]=useState([]);
   const notesadded=(name)=>{
-       if(notes.includes(name)){
-          const filterdata=notes.filter(each=>each!==name);
-          setnotes([...filterdata])
-       }
-       else{
-        setnotes(prev=>[...prev,name])
-       }
+      if(notes.includes(name)){
+        const filterdata=notes.filter(each=>each!==name);
+        setnotes([...filterdata])
+      }
+      else{
+      setnotes(prev=>[...prev,name])
+      }
   }
   // const [checkboxShared,setCheckboxShared] = useState(localStorage.getItem("checkboxShared") || {0:false, 1:false, 2:false, 3:false});
   // const [checkboxShared, setCheckboxShared] = useLocalStorageCustom("checkboxShared", []);
@@ -761,7 +761,7 @@ const Container = styled.div`
         position: relative;
         height: 590px;
         width: 100%;
-        background-color: #ffffff;
+        background-color: ${(props) => (props.needDarkMode ? '#454754' : '#ffffff')};
         border-radius: 20px;
         margin: 50px 0 20px 0;
         border: 1px solid rgb(209, 213, 219);
@@ -810,7 +810,6 @@ const Container = styled.div`
                 width: 12px;
                 margin: 0px 5px;
               }
-              
               .problem-B {
                 background-color: #23ae20;
                 height: 12px;
@@ -1233,6 +1232,9 @@ const EffectiveFilter = styled.div`
 			border-radius: 3px;
 			margin-right: 5px;
 			cursor: pointer;
+      /* color: #e5e5e5; */
+      color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'black')};
+      /* background-color: ${(props) => (props.needDarkMode ? 'white' : 'yellow')};  */
 
       position: relative;
 
@@ -1242,6 +1244,8 @@ const EffectiveFilter = styled.div`
       svg{
         font-size: 1rem;
         margin-left: 5px;
+        fill: #e5e5e5;
+        /* fill: ${(props) => (props.needDarkMode ? 'white' : 'black')}; */
       }
 		}
 	}

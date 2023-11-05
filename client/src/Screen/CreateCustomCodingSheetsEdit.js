@@ -57,7 +57,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
   console.log(userId);
 
   const userDataString = sessionStorage.getItem('userData');
-  console.log(userDataString);
+  console.log(userDataString); 
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
