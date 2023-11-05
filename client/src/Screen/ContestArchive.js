@@ -32,7 +32,7 @@ const ContestArchive = () => {
   const [contestType, setContestType] = useState('Weekly Contest');
   const [contestNumber, setContestNumber] = useState('361');
   const [openVisualiser, setOpenVisualiser] = useState(true);
-  const [needDarkMode, setNeedDarkMode] = useState(false);
+  const [needDarkMode, setNeedDarkMode] = useState(!false);
   const [showTags, setShowTags] = useLocalStorage("showTags", true);
   const [filterContestType, setFilterContestType] = useState("All");
   const [filterContestTypeName, setFilterContestTypeName] = useState("Both Contest Types");
@@ -70,6 +70,7 @@ const ContestArchive = () => {
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if(selectedTheme === 'dark') setNeedDarkMode(true);
+    if(selectedTheme === 'light') setNeedDarkMode(false);
   }, [])
   
   console.log("needDarkMode : ", needDarkMode);
@@ -472,13 +473,13 @@ const datasets = problems
             </div>
           </div>
 
-          <EffectiveFilter className='noselect'>
+          <EffectiveFilter className='noselect' needDarkMode={needDarkMode}>
             <div className="left">
               <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
                 {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                 {
                   openModel1 ? (
-                    <ShowAbsoluteModelDropDown>
+                    <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
                       <div className="option" onClick={() => { setFilterContestType("All"); setFilterContestTypeName("Both Contest Types") }}>Both Contest Types</div>
                       <div className="option" onClick={() => { setFilterContestType("Weekly"); setFilterContestTypeName("Weekly Contests Only") }}>Weekly Contests Only</div>
                       <div className="option" onClick={() => { setFilterContestType("Biweekly"); setFilterContestTypeName("Biweekly Contests Only") }}>Biweekly Contests Only</div>
@@ -499,10 +500,11 @@ const datasets = problems
               {/* <div className="filter-item">Show Unsolved</div>  */}
             </div>
           </EffectiveFilter>
+
           {
             openModel2 ? (
-              <SliderSelector>
-                <Slider onChange={(_, value) => setSliderInputValue(value)}
+              <SliderSelector needDarkMode={needDarkMode}>
+                <Slider needDarkMode={needDarkMode} onChange={(_, value) => setSliderInputValue(value)}
                   defaultValue={20}
                   aria-label="discrete-slider-custom"
                   step={5}
@@ -527,8 +529,8 @@ const datasets = problems
                     <EqualizerIcon />
                   </a>
                   {notes.includes(contestData.contest_name) ?
-                    <div className="link" onClick={()=>notesadded(contestData.contest_name)} style={{"border" : "1px solid #333"}}>
-                      <NotesIcon style={{"fill" : "#333"}} />
+                    <div className="link" onClick={()=>notesadded(contestData.contest_name)} style={{border: needDarkMode ? "1px solid #e5e5e5" : "1px solid #333"}}>
+                      <NotesIcon style={{fill: needDarkMode ? "#e5e5e5" : "#333"}} />
                     </div> : 
                     <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
                       <NotesIcon />
@@ -537,7 +539,7 @@ const datasets = problems
                 </div>
                 {notes.includes(contestData.contest_name)? 
                   <div className="one-contest-problems" style={{"height" : "500px"}}>
-                    <NoteMaking name={contestData.contest_name}/>
+                    <NoteMaking name={contestData.contest_name}  needDarkMode={needDarkMode}/>
                   </div>
                   : 
                   <div className="one-contest-problems">
@@ -950,7 +952,6 @@ const Container = styled.div`
                 }
 
                 .keep-hovered-effect{
-                  border-color: black;
                   transition-duration: 250ms;
                   
                   svg{
@@ -1246,13 +1247,13 @@ const EffectiveFilter = styled.div`
     .filter-item{
 			padding: 5px 10px;
 			font-size: 0.7rem;
-			/* border: 1px solid #d0d5db; */
-			border: 1px solid ${(props) => (props.needDarkMode ? 'white' : 'black')};
+			color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+      /* background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')}; */
 			border-radius: 3px;
 			margin-right: 5px;
 			cursor: pointer;
       /* color: #e5e5e5; */
-      color: ${(props) => (props.needDarkMode ? 'white' : 'black')};
       /* background-color: ${(props) => (props.needDarkMode ? 'white' : 'yellow')};  */
 
       position: relative;
@@ -1263,6 +1264,7 @@ const EffectiveFilter = styled.div`
       svg{
         font-size: 1rem;
         margin-left: 5px;
+        fill: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
         /* fill: #e5e5e5; */
         /* fill: ${(props) => (props.needDarkMode ? 'white' : 'black')}; */
       }
@@ -1276,27 +1278,30 @@ const EffectiveFilter = styled.div`
 		.filter-item{
 			padding: 5px 10px;
 			font-size: 0.7rem;
-			border: 1px solid #d0d5db;
 			border-radius: 3px;
       margin-left: 5px;
 			cursor: pointer;
-      color: ${(props) => (props.needDarkMode ? 'white' : 'black')};
+      color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 		}
 	}
 `
+
 
 const ShowAbsoluteModelDropDown = styled.div`
   position: absolute;
   max-height: 200px;
   min-height: 30px;
   width: 200px;
-  background-color: #ffffff;
-  border: 1px solid #d0d5db;
+  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+  background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#ffffff')};
+  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
   border-radius: 5px;
   top: 35px;
   left: -5px;
   z-index: 10;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  overflow: hidden;
   cursor: default;
 
   /* -webkit-box-shadow: 0px 0px 60px 0px rgba(219,212,219,1);
@@ -1312,14 +1317,15 @@ const ShowAbsoluteModelDropDown = styled.div`
 
   .option{
     height: 40px;
-    border-bottom: 1px solid #d0d5db;
+    border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
     display: grid;
     padding: 0 10px;
     display: flex;
     align-items: center;
-
+    
     &:hover{
-      background-color: #e5e5e5;
+      background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
       cursor: pointer;
       transition-duration: 250ms;
     }
@@ -1337,9 +1343,18 @@ const SliderSelector = styled.div`
   /* background-color: pink; */
   border-radius: 10px;
 
-  span{
+  span {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: 0.65rem;
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+  }
+
+  .PrivateValueLabel-circle-4{
+    background-color: ${(props) => (props.needDarkMode? '#fff' : '#333')};
+    
+    .PrivateValueLabel-label-5{
+      color: ${(props) => (props.needDarkMode == false ? '#e5e5e5' : '#333')};
+    }
   }
 
   /* padding: 10px 50px; */

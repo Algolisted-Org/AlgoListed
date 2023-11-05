@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MdDelete } from "react-icons/md";
 import ClearIcon from "@material-ui/icons/Clear";
 import uniqid from "uniqid";
-const NoteMaking = ({ name }) => {
+const NoteMaking = ({ name, needDarkMode }) => {
   const [allNotes, setAllNotes] = useState([]);
   const [notevalue, setNoteValue] = useState("");
   const [specificNotes, setSpecificNotes] = useState([]);
@@ -89,11 +89,11 @@ const NoteMaking = ({ name }) => {
   };
 
   return (
-    <Wrapper>
-      <LeftSection>
-        <ToDoContainer>
+    <Wrapper needDarkMode={needDarkMode}>
+      <LeftSection needDarkMode={needDarkMode}>
+        <ToDoContainer needDarkMode={needDarkMode}>
           <div style={{ position: "sticky", top: 0, zIndex: 1, background: "whi" }}>
-            <Btn
+            <Btn needDarkMode={needDarkMode}
               onClick={() => {
                 setNotClick(false);
                 setNoteValue("");
@@ -102,9 +102,10 @@ const NoteMaking = ({ name }) => {
               Add new Notes +
             </Btn>
           </div>
-          <ToDoList>
+          <ToDoList needDarkMode={needDarkMode}>
             {specificNotes.map((notes, index) => (
               <ToDoItem
+                needDarkMode={needDarkMode}
                 key={index}
                 onClick={() => {
                   setNoteValue(notes.content);
@@ -112,9 +113,19 @@ const NoteMaking = ({ name }) => {
                   setid(notes.id);
                   setindex(index);
                 }}
+                // style={{
+                //   backgroundColor: clickedItemIndex === index  && click ? "#dcf8eb" : "#f0f0f0",
+                //   border: clickedItemIndex === index  && click ? "1px solid #d1d5db" : "1px solid #f0f0f0",
+                // }}
+
                 style={{
-                  backgroundColor: clickedItemIndex === index  && click ? "#dcf8eb" : "#f0f0f0",
-                  border: clickedItemIndex === index  && click ? "1px solid #d1d5db" : "1px solid #f0f0f0",
+                  backgroundColor: clickedItemIndex === index && click
+                    ? (needDarkMode ? "#585a62" : "#dcf8eb")
+                    : (needDarkMode ? "#404249" : "#f0f0f0"),
+                  border: clickedItemIndex === index && click
+                    ? (needDarkMode ? "1px solid #595b5f" : "1px solid #cccccc")
+                    : (needDarkMode ? "1px solid #333" : "1px solid #f0f0f0"),
+                  color: needDarkMode ? "#e5e5e5" : "#333",
                 }}
               >
                 {clickedItemIndex === index && click ? (
@@ -131,24 +142,26 @@ const NoteMaking = ({ name }) => {
           </ToDoList>
         </ToDoContainer>
       </LeftSection>
-      <RightSection>
-        <NotesInputContainer>
-          <Notice>
+      <RightSection needDarkMode={needDarkMode}>
+        <NotesInputContainer needDarkMode={needDarkMode}>
+          <Notice needDarkMode={needDarkMode}>
             You can edit a specific left note or create a new one using the 'Add
             New Note' button at the top left.
             <br />
             <br />
-            <b>
-              You are currently{" "}
-              {click ? "editing an old note" : "adding a new note"}
-            </b>
+            <i>
+              <b>
+                You are currently{" "}
+                {click ? "editing an old note" : "adding a new note"}
+              </b>
+            </i>
           </Notice>
-          <TextInput
+          <TextInput needDarkMode={needDarkMode}
             value={notevalue}
             onChange={(e) => setNoteValue(e.target.value)}
             placeholder="Add New Notes"
           />
-          <AddButton onClick={() => add(specificid)}>
+          <AddButton needDarkMode={needDarkMode} onClick={() => add(specificid)}>
             {click ? "Edit old Note" : "Add new Note"}
           </AddButton>
         </NotesInputContainer>
@@ -166,7 +179,7 @@ const Wrapper = styled.div`
 `;
 
 const LeftSection = styled.div`
-  border-right: 1px solid #ccc;
+  border-right: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
   flex: 1;
   overflow-y: auto;
 
@@ -191,14 +204,17 @@ const TextInput = styled.textarea`
   box-sizing: border-box;
   height: calc(100% - 135px);
   resize: none;
-  border: 1px solid #ccc;
   border-radius: 20px;
   outline: none;
   font-size: 0.85rem;
   font-weight: 300;
   margin-top: 15px;
   margin-bottom: 5px;
-  background-color: #f0f0f0;
+  /* border: 1px solid #ccc; */
+  /* background-color: ; */
+  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+  background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#f0f0f0')};
+  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 
   ::-webkit-scrollbar {
     width: 0px;
@@ -265,12 +281,13 @@ const ToDoItem = styled.li`
   .editing-tag {
     position: absolute;
     padding: 5px 10px;
-    background-color: #fff;
+    background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#ffffff')};
+    border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
     font-size: 0.7rem;
     border-radius: 100px;
     top: -17.5px;
     left: 5px;
-    border: 1px solid #b6b9bf;
   }
 
   svg {
@@ -279,13 +296,10 @@ const ToDoItem = styled.li`
     top: -7.5px;
     right: -7.5px;
     padding: 2.5px;
-    background-color: white;
     border-radius: 100px;
-    border: 1px solid #b7b9bf;
-  }
-
-  &:hover {
-    background-color: #f0f0f0;
+    background-color: ${(props) => (props.needDarkMode ? '#404249' : '#ffffff')};
+    border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+    fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
   }
 `;
 
@@ -298,17 +312,18 @@ const NotesInputContainer = styled.div`
 
 const AddButton = styled.button`
   padding: 10px 20px;
-  background-color: #e5e5e5;
-  color: #333;
-  border: none;
+
+  background-color: ${(props) => (props.needDarkMode ? '#404249' : '#ffffff')};
+  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
   font-size: 0.75rem;
   border-radius: 10px;
-  border: 1px solid transparent;
   &:hover {
-    border: 1px solid #333;
+    border-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
     transition-duration: 250ms;
     /* background-color: #e5e5e5; */
   }
@@ -316,8 +331,10 @@ const AddButton = styled.button`
 
 const Notice = styled.div`
   font-size: 0.75rem;
+  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 
   b {
     font-weight: 500;
+    color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
   }
 `;
