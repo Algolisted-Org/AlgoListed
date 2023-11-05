@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
 import SearchBar from "./searchbar";
 
-function Tagsfilter({ tags, filterdata,setfilter,data }) {
+function Tagsfilter({ tags,needDarkMode, filterdata,setfilter,data }) {
   const [tagdat,settagdata]=useState([...tags])
   const [expand, setexpand] = useState(false);
 
@@ -44,9 +44,9 @@ function Tagsfilter({ tags, filterdata,setfilter,data }) {
     <>
    
   
-    <Tagscompo>
+    <Tagscompo needDarkMode={needDarkMode}>
       
-      <Tags  onClick={onclicked}>
+      <Tags needDarkMode={needDarkMode} onClick={onclicked}>
         Filter based on Problem Tags 
         {ischoose.length>0 && <Counts>{ischoose.length}</Counts>}
         {expand ? (
@@ -56,12 +56,12 @@ function Tagsfilter({ tags, filterdata,setfilter,data }) {
         )}
       </Tags>
       {expand && (
-        <Menuexpand expanded={expand}>
+        <Menuexpand needDarkMode={needDarkMode} expanded={expand}>
            {
-      expand && <SearchBar  tagdat={tagdat} tags={tags} settagdata={settagdata}/>
+      expand && <SearchBar needDarkMode={needDarkMode} tagdat={tagdat} tags={tags} settagdata={settagdata}/>
          }
           {tagdat.length===0?<h1>Not present</h1>:tagdat.map((each, index) => (
-            <MenuItem 
+            <MenuItem  needDarkMode={needDarkMode} 
             key={index}
             isselected={ischoose.includes(each)}
             onClick={()=>handletags(each)}
@@ -132,8 +132,16 @@ const Tags = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #555555;
+  /* color: #555555; */
   cursor:pointer;
+  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+
+  svg{
+    fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+  }
+  /* 
+  background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
+  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')}; */
 `;
 
 const Counts = styled.span`
@@ -141,7 +149,7 @@ const Counts = styled.span`
   height: 20px;
   border-radius: 50%;
   background-color: #f3f4f7;
-  border: 1px solid #d0d5db;
+  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,7 +160,7 @@ const Tagscompo = styled.div`
   height: 29px;
   padding: 5px 10px;
   font-size: 0.7rem;
-  border: 1px solid #d0d5db;
+  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
   border-radius: 3px;
   margin-right: 5px;
   cursor: pointer;

@@ -228,8 +228,6 @@ const Container = styled.div`
         }
       }
 
-      
-      
       .message2{
         display: flex;
         align-items: center;

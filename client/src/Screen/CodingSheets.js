@@ -46,18 +46,24 @@ const CodingSheets = () => {
 	const [showTags, setShowTags] = useState(true);
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
-	useEffect(()=>{
-setFilteredData(data)
-	},[])
+	const [needDarkMode, setNeedDarkMode] = useState(!false);
+
+	useEffect(() => {
+		setFilteredData(data)
+	}, [])
 	// console.log(filteredData)
-	// ----- FOR DARK MODE -----
-	const [needDarkMode, setNeedDarkMode] = useState(false);
-	let selectedTheme = localStorage.getItem("selectedTheme");
-	// console.log("needDarkMode : ", needDarkMode);
+
+	useEffect(() => {
+		let selectedTheme = localStorage.getItem("selectedTheme");
+		if (selectedTheme === 'dark') setNeedDarkMode(true);
+		if (selectedTheme === 'light') setNeedDarkMode(false);
+	}, [])
+
+	console.log("needDarkMode : ", needDarkMode);
 	const toggleDarkMode = () => {
 		setNeedDarkMode(!needDarkMode);
 	};
-	// ----- FOR DARK MODE -----
+
 
 	// console.log(selectedLabel);
 	// console.log(data);
@@ -234,83 +240,83 @@ setFilteredData(data)
 	const progressBarPercent =
 		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
-	
-		const filters = codingSheetsFilters.map((item) => {
-			return item.lock === true ? (
-			  <div key={item.id} className='locked-feature filter'>
+
+	const filters = codingSheetsFilters.map((item) => {
+		return item.lock === true ? (
+			<div key={item.id} className='locked-feature filter'>
 				{item.text}
 				<LockIcon />
-			  </div>
-			) : (
-			  <a
+			</div>
+		) : (
+			<a
 				href={item.domainFilter}
 				key={item.id}
 				className={item.domainFilter === sheetname ? 'filter selected' : 'filter'}
-			  >
+			>
 				{item.text}
-			  </a>
-			);
-		  });
+			</a>
+		);
+	});
 
 	// console.log(data);
 
 	// const colors = [
-    // "#884373",
-    // "#8a4574",
-    // "#8b4875",
-    // "#8c4b76",
-    // "#8d4d77",
-    // "#8f5078",
-    // "#905379",
-    // "#91567a",
-    // "#92597b",
-    // "#945c7c",
-    // "#955e7d",
-    // "#96617e",
-    // "#97647f",
-    // "#996680",
-    // "#9a6981",
-    // "#9b6b82",
-    // "#9d6e83",
-    // "#9e7184",
-    // "#9f7385",
-    // "#a17686",
-    // "#a27987",
-    // "#a37c88",
-    // "#a57e89",
-    // "#a6808a",
-    // "#a7838b",
-    // "#a8868c",
-    // "#a9898d",
-    // "#aa8b8e",
-    // "#ac8e8f",
-    // "#ad9190",
-    // "#ae9491",
-    // "#b09692",
-    // "#b19993",
-    // "#b29c94",
-    // "#b49e95",
-    // "#b5a196",
-    // "#b6a497",
-    // "#b7a698",
-    // "#b9a899",
-    // "#baaa9a",
-    // "#bca99b",
-    // "#bdaa9c",
-    // "#beab9d",
-    // "#c0ac9e",
-    // "#c1ad9f",
-    // "#c2ae9f",
-    // "#c4af9f",
-    // "#c5b0a0",
-    // "#c6b1a0",
-    // "#c8b2a0",
-    // "#c9b3a1",
-    // "#cab4a1",
-    // "#ccb5a1",
-    // "#cdb6a2",
-    // "#ceb7a2",
-    // "#d0b8a2",
+	// "#884373",
+	// "#8a4574",
+	// "#8b4875",
+	// "#8c4b76",
+	// "#8d4d77",
+	// "#8f5078",
+	// "#905379",
+	// "#91567a",
+	// "#92597b",
+	// "#945c7c",
+	// "#955e7d",
+	// "#96617e",
+	// "#97647f",
+	// "#996680",
+	// "#9a6981",
+	// "#9b6b82",
+	// "#9d6e83",
+	// "#9e7184",
+	// "#9f7385",
+	// "#a17686",
+	// "#a27987",
+	// "#a37c88",
+	// "#a57e89",
+	// "#a6808a",
+	// "#a7838b",
+	// "#a8868c",
+	// "#a9898d",
+	// "#aa8b8e",
+	// "#ac8e8f",
+	// "#ad9190",
+	// "#ae9491",
+	// "#b09692",
+	// "#b19993",
+	// "#b29c94",
+	// "#b49e95",
+	// "#b5a196",
+	// "#b6a497",
+	// "#b7a698",
+	// "#b9a899",
+	// "#baaa9a",
+	// "#bca99b",
+	// "#bdaa9c",
+	// "#beab9d",
+	// "#c0ac9e",
+	// "#c1ad9f",
+	// "#c2ae9f",
+	// "#c4af9f",
+	// "#c5b0a0",
+	// "#c6b1a0",
+	// "#c8b2a0",
+	// "#c9b3a1",
+	// "#cab4a1",
+	// "#ccb5a1",
+	// "#cdb6a2",
+	// "#ceb7a2",
+	// "#d0b8a2",
 	// ];
 	// const colors = [
 	// 	"#e782c9",
@@ -461,9 +467,9 @@ setFilteredData(data)
 		"#ff7d7c"
 	]
 
-	
-	
-	
+
+
+
 	// const colors = [
 	// 	"#a9d18f",
 	// 	"#aac292",
@@ -565,7 +571,7 @@ setFilteredData(data)
 				ProblemsTags.push(data[i].tags[j]);
 			}
 		}
-console.log(ProblemsTags)
+		console.log(ProblemsTags)
 		// ProblemsTags = ProblemsTags.filter(string => string !== 'Amazon');
 
 		const filteredTags = ProblemsTags.filter(tag => allowedProblemTags.includes(tag));
@@ -678,8 +684,8 @@ console.log(ProblemsTags)
 				filteredData.filter(item => item.tags.includes(selectedLabel))
 			);
 		}
-		console.log(filteredData,selectedLabel)
-	}, [selectedLabel,filteredData]);
+		console.log(filteredData, selectedLabel)
+	}, [selectedLabel, filteredData]);
 
 	useEffect(() => { // finding unique tags
 		let len = solvedData.length;
@@ -820,12 +826,12 @@ console.log(ProblemsTags)
 				</div>
 				<SimpleFooter />
 			</MobContainer>
-			<Container>
+			<Container needDarkMode={needDarkMode}>
 				{
-					selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+					needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
 				}
 				{
-					selectedTheme == "dark" ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
+					needDarkMode ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
 				}
 				<div className="cc-middle-content">
 					<h1 className="main-heading">Coding Sheets</h1>
@@ -838,7 +844,7 @@ console.log(ProblemsTags)
 							As we continue to develop our platform, we do not currently require users to create accounts. As a result, any progress made is saved locally in your device's storage. Therefore, it's recommended to not clear your browser's cache.
 						</div>
 					</div>
-					<Filters>
+					<Filters needDarkMode={needDarkMode}>
 						<a href="/custom-coding-sheets/create" className="filter2">
 							Explore custom coding sheets
 							<CallMadeIcon />
@@ -846,11 +852,11 @@ console.log(ProblemsTags)
 						</a>
 					</Filters>
 
-					<Filters>
+					<Filters needDarkMode={needDarkMode}>
 						{filters}
 					</Filters>
 
-					<SheetMessage>
+					<SheetMessage needDarkMode={needDarkMode}>
 						<div className="text">
 							Hey there! With this tool, you can easily see a visual representation of the coding sheet you are working on and track your progress as you go. It also gives you an idea of the types of questions you can expect to find on the sheet. Cool, huh?
 						</div>
@@ -875,7 +881,7 @@ console.log(ProblemsTags)
 						</div>
 						{
 							openVisualiser ? (
-								<VisualiserConatiner>
+								<VisualiserConatiner needDarkMode={needDarkMode}>
 									<div className="visualiser-conatiner">
 										<div className="canvas-container">
 											<div className="top-label">
@@ -938,7 +944,7 @@ console.log(ProblemsTags)
 													text={`${progressBarPercent}%`}
 													strokeWidth={5}
 													styles={buildStyles({
-														textColor: "red",
+														textColor: needDarkMode ? 'white' : 'black',
 														textSize: "18px",
 														pathColor: "orange",
 														trailColor: "#f0f0f0"
@@ -998,7 +1004,7 @@ console.log(ProblemsTags)
 
 					</SheetMessage>
 
-					<Progress>
+					<Progress needDarkMode={needDarkMode}>
 						<div className="text">Progress : </div>
 						<div className="value">{`${progressBarPercent}%`}</div>
 						<div className="bar">
@@ -1009,7 +1015,7 @@ console.log(ProblemsTags)
 						</div>
 					</Progress>
 
-					<EffectiveFilter>
+					<EffectiveFilter needDarkMode={needDarkMode}>
 						<div className="left">
 							<input type="checkbox" id="all" checked={selectedLabel === 'All'} onChange={() => handleLabelClick('All')} />
 							<label htmlFor="all">All</label>
@@ -1021,16 +1027,16 @@ console.log(ProblemsTags)
 							<label htmlFor="hard">Hard</label>
 						</div>
 						<div className="right">
-							<Tagsfilter data={data} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} />
+							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
 					</EffectiveFilter>
 
 					{
-						filteredData.length != data.length ? 
-						<i><div className="notice">Filters are presently in the process of being developed, so they may occasionally exhibit unusual behavior.</div></i> : 
-						<div></div> 
+						filteredData.length != data.length ?
+							<i><div className="notice">Filters are presently in the process of being developed, so they may occasionally exhibit unusual behavior.</div></i> :
+							<div></div>
 					}
 
 					<div className="table">
@@ -1225,6 +1231,7 @@ const MobContainer = styled.div`
 			width: 100%;
 			/* background-color: #fbf7f7; */
 			border: 1px solid #d1d5db;
+			/* border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')}; */
 			border-radius: 5px;
 			/* padding: 0 15px; */
 			display: flex;
@@ -1341,6 +1348,8 @@ const Container = styled.div`
 	justify-content: space-between;
 	padding-left: 200px;
 
+    background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
+
 	a {
 		color: #18489f;
 	}
@@ -1360,41 +1369,46 @@ const Container = styled.div`
 			padding: 80px 50px 30px 50px;
 		}
 
-		.main-heading {
-			font-size: 1.65rem;
-			font-weight: 600;
-			color: #292929;
-		}
+		.main-heading{
+          font-size: 1.65rem;
+          font-weight: 600;
+          color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
+      }
 
-		.heading-supporter {
-			font-size: 1.05rem;
-			margin-bottom: 10px;
-			font-weight: 400;
-			color: #696168;
+      .heading-supporter{
+          font-size: 1.05rem;
+          margin-bottom: 10px;
+          font-weight: 400;
+          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
 
-			a {
-				color: #18489f;
-				font-size: 0.95rem;
-				font-weight: 300;
-				margin-left: 0.25rem;
-			}
-		}
+          a{
+            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-left: 0.25rem;
+          }
+      }
 
-		.message {
-			display: inline-block;
-			/* display: flex; */
-			/* align-items: center; */
-			background-color: #d5f7e1;
-			border-radius: 5px;
-			padding: 10px;
-			margin: 20px 0 40px 0;
+      .message{
+        display: inline-block;
+        /* display: flex; */
+        /* align-items: center; */
+        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
+        border-radius: 5px;
+        padding: 10px;
+        margin: 20px 0 50px 0;
 
-			.text {
-				font-size: 0.8rem;
-				color: #13803b;
-				font-weight: 300;
-			}
-		}
+        .text{
+            font-size: 0.8rem;
+            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            font-weight: 300;
+
+            b{
+                font-weight: 500;
+                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            }
+        }
+      }
 
 		.notice{
 			font-size: 0.8rem;
@@ -1405,12 +1419,13 @@ const Container = styled.div`
 			margin: 15px 0;
 			width: 100%;
 			/* background-color: #fbf7f7; */
-			border: 1px solid #d1d5db;
+			/* border: 1px solid #d1d5db; */
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 			border-radius: 5px;
 			/* padding: 0 15px; */
 			display: flex;
 			flex-direction: column;
-			background-color: white;
+			background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#fff')};
 			border-bottom-color: transparent;
 
 			.link-row {
@@ -1420,7 +1435,7 @@ const Container = styled.div`
 				justify-content: space-between;
 				border-top-left-radius: 5px;
 				border-top-right-radius: 5px;
-				border-bottom: 1px solid #d1d5db;
+				border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 
 				.link-row-left {
 					display: flex;
@@ -1436,6 +1451,7 @@ const Container = styled.div`
 						font-weight: 500;
 						width: 32.5px;
 						text-align: center;
+						color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 					}
 
 					.main-row-content {
@@ -1444,6 +1460,7 @@ const Container = styled.div`
 							font-weight: 500;
 							text-decoration: none;
 							/* color: inherit; */
+							color: ${(props) => (props.needDarkMode ? 'cornflowerblue' : '#18489f')};
 
 							&:hover {
 								text-decoration: underline;
@@ -1456,23 +1473,27 @@ const Container = styled.div`
 							flex-wrap: wrap;
 
 							.tag {
-								background-color: #f3f4f7;
-								color: inherit;
+								/* background-color: #f3f4f7; */
+								/* color: inherit; */
 								padding: 2.5px 7.5px;
 								border-radius: 100px;
 								font-size: 0.7rem;
 								margin-top: 5px;
 								margin-right: 5px;
-								border: 1px solid #cac3c3;
+								/* border: 1px solid #cac3c3; */
+								border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
+								color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+								background-color: ${(props) => (props.needDarkMode ? '#2b2b2b' : '#f3f4f7')};
 							}
 
 							.special-tag {
 								/* background-color: #ffeac2; */
-								color: inherit;
 								/* background-color: black; */
 								/* color: white; */
 								font-weight: 500;
-								border: 1px solid #111;
+								border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#111')};
+								color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+								/* background-color: ${(props) => (props.needDarkMode ? '#2b2b2b' : '#f3f4f7')}; */
 							}
 						}
 					}
@@ -1513,7 +1534,7 @@ const Container = styled.div`
 			}
 
 			.done-row {
-				background-color: #dcf8eb;
+				background-color: ${(props) => (props.needDarkMode ? '#404249' : '#dcf8eb')};
 				
 				.right-icons{
 					display: flex;
@@ -1527,7 +1548,7 @@ const Container = styled.div`
 			}
 
 			.review-row {
-				background-color: #ffe3e2;
+				background-color: ${(props) => (props.needDarkMode ? '#4f3a3a' : '#ffe3e2')};
 				border-radius: 0;
 				
 				.right-icons{
@@ -1547,10 +1568,12 @@ const Container = styled.div`
 		}
 	}
 `;
+
+
 const Filters = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	margin: 10px 0 10px 0;
+	margin: 20px 0 10px 0;
 
 	.filter {
 		padding: 7.5px 15px;
@@ -1560,15 +1583,15 @@ const Filters = styled.div`
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
 		text-decoration: none;
-    background-color: ${(props) => (props.needDarkMode ? 'transparent' : 'transparent')};
-    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
+    	background-color: ${(props) => (props.needDarkMode ? 'transparent' : 'transparent')};
+    	color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 
-    svg{
-      font-size: 1rem;
-      margin-bottom: -0.2rem;
-      margin-left: 5px;
-      fill: #71c929;
-    }
+		svg{
+			font-size: 1rem;
+			margin-bottom: -0.2rem;
+			margin-left: 5px;
+			fill: #71c929;
+		}
 
 		&:hover {
 			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
@@ -1579,6 +1602,7 @@ const Filters = styled.div`
 		}
 	}
 
+
 	.filter2{
 		position: relative;
 		padding: 7.5px 15px;
@@ -1588,32 +1612,29 @@ const Filters = styled.div`
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
 		text-decoration: none;
-		color: inherit;
+		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		display: flex;
 		align-items: center;
-	
+
 		svg{
 			font-size: 1rem;
 			margin-left: 5px;
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
-	
+
 		&:hover {
-			border-color: #201f1f;
-			background-color: #201f1f;
-			color: #ebdddd;
+			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
 			transition-duration: 250ms;
 			cursor: pointer;
-	
-			svg{
-				fill: #ebdddd;
-			}
 		}
-	
+
 		svg{
 			font-size: 1rem;
 			margin-left: 5px;
 		}
-	
+
 		.tag{
 			position: absolute;
 			padding: 2.5px 7.5px;
@@ -1668,8 +1689,7 @@ const Filters = styled.div`
 		}
 	}
 
-	
-  
+
 `;
 
 const Progress = styled.div`
@@ -1680,6 +1700,7 @@ const Progress = styled.div`
 	.text {
 		font-size: 0.9rem;
 		font-weight: 500;
+		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 	}
 
 	.value {
@@ -1753,10 +1774,11 @@ const SheetMessage = styled.div`
 	/* border: 1px solid black; */
 	border-radius: 5px;
 	/* background-color: #c9e8ff; */
-	background-color: #f0f0f0;
+	background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#f0f0f0')};
 
 	.text {
 		font-size: 0.8rem;
+		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 	}
 
 	.open-btn{
@@ -1767,6 +1789,14 @@ const SheetMessage = styled.div`
 		font-size: 0.8rem;
 		font-weight: 500;
 		margin-top: 15px;
+
+		.desc{
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+
+		svg{
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
 	}
 `;
 
@@ -1782,8 +1812,8 @@ const VisualiserConatiner = styled.div`
         justify-content: space-between;
         
         .canvas-container{
-            border: 1px solid #d1d5db;
-            background-color: rgba(255, 255, 255, 0.83);
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '#d1d5db')};
+			background-color: ${(props) => (props.needDarkMode ? '#404249' : 'rgba(255, 255, 255, 0.83)')};
             box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
             border-radius: 5px;
             padding: 50px 10px 10px 50px;
@@ -1842,6 +1872,7 @@ const VisualiserConatiner = styled.div`
                         font-size: 0.7rem;
                         font-weight: 500;
                         margin-right: 5px;
+						color: ${(props) => (props.needDarkMode ? '#ffffff9e' : '#333')};
                     }
     
                     .label-value{
@@ -1849,6 +1880,7 @@ const VisualiserConatiner = styled.div`
                         letter-spacing: 0.07rem;
                         font-weight: 300;
                         font-family: verdana,arial,sans-serif;
+						color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
                     }
                 }
             }
@@ -1858,8 +1890,8 @@ const VisualiserConatiner = styled.div`
 			flex-grow: 1;
             padding: 10px 30px;
             margin-left: 7.5px;
-            border: 1px solid #d1d5db;
-            background-color: rgba(255, 255, 255, 0.83);
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '#d1d5db')};
+            background-color: ${(props) => (props.needDarkMode ? '#404249' : 'rgba(255, 255, 255, 0.83)')};
             box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
             border-radius: 5px;
 			position: relative;
@@ -1885,6 +1917,7 @@ const VisualiserConatiner = styled.div`
                     .name{
                         font-size: 0.9rem;
                         font-weight: 500;
+						color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
                     }
     
                     .completed{
@@ -1894,10 +1927,11 @@ const VisualiserConatiner = styled.div`
                         .text{
                             font-size: 0.7rem;
                             font-weight: 300;
-                            color: grey;
+                            color: ${(props) => (props.needDarkMode ? 'gray' : 'gray')};
                             margin: 0 7.5px;
                         }
                         .value{
+                            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
                             font-size: 0.9rem;
                             font-weight: 400;
                             font-family: sans-serif;
@@ -1924,6 +1958,10 @@ const VisualiserConatiner = styled.div`
 			.circular-chart{
 				width: 80px;
 			}
+
+			.CircularProgressbar-text{
+				color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+			}
         }
 
 		.top-label{
@@ -1935,14 +1973,16 @@ const VisualiserConatiner = styled.div`
 			.label-item{
 				padding: 5px 10px;
 				font-size: 0.7rem;
-				border: 1px solid #d0d5db;
+				color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+				border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 				border-radius: 3px;
 				margin-right: 5px;
 				cursor: pointer;
 			}
 			
 			.selected{
-				background-color: #f0f0f0;
+				color: ${(props) => (props.needDarkMode ? '#333' : '#333')};
+				background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#f0f0f0')};
 			}
 		}
     }
@@ -1973,19 +2013,21 @@ const EffectiveFilter = styled.div`
 			align-items: center;
 			margin-right: 15px;
 			font-weight: 400;
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
 		
 		input{
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 			cursor: pointer;
 			margin-right: 5px;
 		}
 
 		input[type="checkbox"]:checked + label {
-			color: #333;
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
 		/* Change the color of the checkboxes when they are not selected */
 		input[type="checkbox"] + label {
-			color: gray;
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
 	}
 
@@ -1996,7 +2038,8 @@ const EffectiveFilter = styled.div`
 		.filter-item{
 			padding: 5px 10px;
 			font-size: 0.7rem;
-			border: 1px solid #d0d5db;
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 			border-radius: 3px;
 			margin-right: 5px;
 			cursor: pointer;
