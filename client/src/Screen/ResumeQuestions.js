@@ -50,7 +50,7 @@ const ResumeQuestions = () => {
   }, []);
 
   useEffect(() => {
-    document.title = "Resume Questions Page";
+    document.title = "Resume based Questions | Open AI - Algolisted";
   }, []);
 
   console.log("needDarkMode : ", needDarkMode);

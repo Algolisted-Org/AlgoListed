@@ -44,7 +44,6 @@ const promptForBasicQuestionChunks = [
 ];
 
 const ResumeSection = () => {
-  const [needDarkMode, setNeedDarkMode] = useState(false);
   const [file, setFile] = useState(null);
   const [apiKey, setApiKey] = useState(null);
   const [responseText, setResponseText] = useState("");
@@ -54,21 +53,24 @@ const ResumeSection = () => {
   const [difficultyLevelName, setDifficultyLevelName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
+  const [needDarkMode, setNeedDarkMode] = useState(!false);
   const openai = new OpenAI({
     apiKey: apiKey,
     dangerouslyAllowBrowser: true,
   });
+  
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === "dark") setNeedDarkMode(true);
   }, []);
 
   useEffect(() => {
-    document.title = "Resume Questions Page";
+    document.title = "Resume Based Questions | Open AI - Algolisted";
     if (textFromPDF) {
       handleSend();
     }
   }, []);
+
   const uploadresume = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
@@ -88,7 +90,13 @@ const ResumeSection = () => {
       reader.readAsArrayBuffer(file);
     }
   };
-
+ 
+  useEffect(() => {
+    let selectedTheme = localStorage.getItem("selectedTheme");
+    if(selectedTheme === 'dark') setNeedDarkMode(true);
+    if(selectedTheme === 'light') setNeedDarkMode(false);
+  }, [])
+  
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
@@ -166,23 +174,14 @@ const ResumeSection = () => {
           alt=""
         />
       </MobContainer>
-      <Container>
-        {needDarkMode ? (
-          <CCHeaderDarkPlus
-            needDarkMode={needDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-        ) : (
-          <CCHeaderPlus
-            needDarkMode={needDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-        )}
-        {needDarkMode ? (
-          <LeftMenuDark marked={"resume-questions"} />
-        ) : (
-          <LeftMenu marked={"resume-questions"} />
-        )}
+      <Container needDarkMode={needDarkMode}>
+        {
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+        }
+        {
+          needDarkMode ? <LeftMenuDark marked={"resume-questions"} /> : <LeftMenu marked={"resume-questions"} />
+        }
+        
         {/* ---> change this all-blogs to your desired page-id */}
 
         <div className="cc-middle-content">
@@ -255,7 +254,7 @@ const ResumeSection = () => {
               </div>
               <div className="right-results">
                 <h3>Powered by,</h3>
-                <img src="https://mrvian.com/wp-content/uploads/2023/02/openai-1024x317.png" alt="" />
+                <img src="https://chatgptaihub.com/wp-content/uploads/2023/06/ChatGpt-Logo-with-Black-Background.png" alt="" />
                 <p>
                   We've conducted extensive research and developed highly tailored prompts to meet individual user requirements. We have invested considerable effort in prompt engineering, research, and data analysis. However, due to budget constraints, we kindly ask users to utilize their own API keys.
                 </p>
@@ -318,12 +317,21 @@ const Container = styled.div`
   @media only screen and (max-width: 1099px) {
     display: none;
   }
+  
   display: flex;
   justify-content: space-between;
   padding-left: 200px;
-  a {
-    color: #18489f;
+
+  background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
+
+  a{
+    color: ${(props) => (props.needDarkMode ? '#6d93d8' : '#18489f')};
   }
+
+  input{
+    background-color: transparent;
+  }
+
   .cc-middle-content {
     min-height: 100vh;
     width: 100%;
@@ -337,55 +345,65 @@ const Container = styled.div`
     @media only screen and (max-width: 1200px) {
       padding: 80px 50px 50px 50px;
     }
-    .main-heading {
-      font-size: 1.65rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      .head-tag {
-        display: inline;
-        font-size: 0.75rem;
-        font-weight: 500;
-        padding: 0.25rem 0.5rem;
-        padding-right: 35px;
-        border-radius: 100px;
-        background-color: #a5bb26;
-        margin-left: 10px;
-        img {
-          position: absolute;
-          height: 2rem;
-          margin-top: -7.5px;
-          margin-left: -5px;
+    .main-heading{
+        font-size: 1.65rem;
+        font-weight: 600;
+        color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
+        display: flex;
+        align-items: center;
+        .head-tag {
+          display: inline;
+          font-size: 0.75rem;
+          font-weight: 500;
+          padding: 0.25rem 0.5rem;
+          padding-right: 35px;
+          border-radius: 100px;
+          background-color: #a5bb26;
+          margin-left: 10px;
+          
+          img {
+            position: absolute;
+            height: 2rem;
+            margin-top: -7.5px;
+            margin-left: -5px;
+          }
         }
       }
-    }
-    .heading-supporter {
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-      font-weight: 400;
-      color: #696168;
-      a {
-        color: #18489f;
-        font-size: 0.95rem;
-        font-weight: 300;
-        margin-left: 0.25rem;
-      }
-    }
 
-    .message {
-      display: inline-block;
-      /* display: flex; */
-      /* align-items: center; */
-      background-color: #d5f7e1;
-      border-radius: 5px;
-      padding: 10px;
-      margin: 20px 0 10px 0;
-      .text {
-        font-size: 0.8rem;
-        color: #13803b;
-        font-weight: 300;
+      .heading-supporter{
+          font-size: 1.05rem;
+          margin-bottom: 10px;
+          font-weight: 400;
+          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
+
+          a{
+            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-left: 0.25rem;
+          }
       }
-    }
+
+      .message{
+        display: inline-block;
+        /* display: flex; */
+        /* align-items: center; */
+        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
+        border-radius: 5px;
+        padding: 10px;
+        margin: 20px 0 10px 0;
+
+        .text{
+            font-size: 0.8rem;
+            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            font-weight: 300;
+
+            b{
+                font-weight: 500;
+                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            }
+        }
+      }
 
 
     .main-container{
@@ -399,12 +417,13 @@ const Container = styled.div`
           width: 50%;
           border-right: 1px solid #e6e0e0;
           padding: 10px 20px 0 0;
-          
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
     
           input, select, button{
             width: 100%;
-  
-            border: 1px solid #bdbbbb;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '#bbbbbb')};
+            background-color: transparent;
             border-radius: 15px;
             overflow: hidden;
             padding: 10px;
@@ -414,6 +433,8 @@ const Container = styled.div`
   
           button{
             margin-bottom: 20px;
+            background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
           }
         }
   
@@ -425,16 +446,19 @@ const Container = styled.div`
           justify-content: space-between;
   
           img{
-            width: 250px;
+            height: 80px;
+            width: 80px;
           }
   
           h3{
             font-weight: 500;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           }
   
           p{
             font-weight: 200;
             font-size: 0.85rem;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           }
   
         }
@@ -443,6 +467,7 @@ const Container = styled.div`
       
       h3{
         font-weight: 500;
+        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
       }
       .generated-mark-up{
         margin-top: 10px;
@@ -450,11 +475,13 @@ const Container = styled.div`
         p{
           font-size: 0.95rem;
           font-weight: 300;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
 
         h2{
           font-size: 1.5rem;
           font-weight: 600;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
       }
     }
