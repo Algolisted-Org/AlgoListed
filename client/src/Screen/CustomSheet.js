@@ -24,7 +24,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import Tagsfilter from "../MicroComponents/Tagsfilter";
 import LockIcon from '@material-ui/icons/Lock';
 import problemsData from '../DummyDB/InterviewSummaries/LcProblems.json';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -60,18 +59,19 @@ const CodingSheets = () => {
 	const [ownerId, setOwnerId] = useState(null);
 	const [sheetName, setSheetName] = useState("");
 	const [sheetDesc, setSheetDesc] = useState("");
+	const [needDarkMode, setNeedDarkMode] = useState(!false);
 
+	useEffect(() => {
+		let selectedTheme = localStorage.getItem("selectedTheme");
+		if (selectedTheme === 'dark') setNeedDarkMode(true);
+		if (selectedTheme === 'light') setNeedDarkMode(false);
+	}, [])
+	console.log("needDarkMode : ", needDarkMode);
 
-	// console.log(filteredData)
-	// ----- FOR DARK MODE -----
-	const [needDarkMode, setNeedDarkMode] = useState(false);
-	let selectedTheme = localStorage.getItem("selectedTheme");
-	// console.log("needDarkMode : ", needDarkMode);
 	const toggleDarkMode = () => {
 		setNeedDarkMode(!needDarkMode);
 	};
 
-	// ----- FOR DARK MODE -----
 
 	// console.log(selectedLabel);
 	// console.log(data);
@@ -86,7 +86,7 @@ const CodingSheets = () => {
 
 	document.title = `Coding Sheets - Algolisted`;
 
-	
+
 
 	const allowedProblemTags = [
 		"Array",
@@ -169,81 +169,81 @@ const CodingSheets = () => {
 
 	useEffect(async () => {
 		try {
-		  const sheetDetailsResponse = await axios.get(`http://localhost:8000/problem-sheets/details?sheetId=${sheetId}`);
-		  const sheetData = sheetDetailsResponse.data.sheet;
-	  
-		  setSheetName(sheetData.sheetName);
-		  setSheetDesc(sheetData.sheetDesc);
-	  
-		  const problemIds = sheetData.problemIds;
-	  
-		  const scrapedProblems = [];
-	  
-		  for (let i = 0; i < problemIds.length; i++) {
-			const problemId = problemIds[i];
-			const scrapedProblemData = problemsData[problemId];
-	  
-			if (scrapedProblemData) {
-			  scrapedProblems.push(scrapedProblemData);
+			const sheetDetailsResponse = await axios.get(`http://localhost:8000/problem-sheets/details?sheetId=${sheetId}`);
+			const sheetData = sheetDetailsResponse.data.sheet;
+
+			setSheetName(sheetData.sheetName);
+			setSheetDesc(sheetData.sheetDesc);
+
+			const problemIds = sheetData.problemIds;
+
+			const scrapedProblems = [];
+
+			for (let i = 0; i < problemIds.length; i++) {
+				const problemId = problemIds[i];
+				const scrapedProblemData = problemsData[problemId];
+
+				if (scrapedProblemData) {
+					scrapedProblems.push(scrapedProblemData);
+				}
 			}
-		  }
-	  
-		  console.log("scrapedProblems:", scrapedProblems);
-	  
-		  const updatedData = scrapedProblems.map((sheet) => {
-			const sheetLink = sheet.quesLink;
-			const completed = localStorage.getItem(`completedSheetQuestion-${sheetLink}`);
-			const marked = localStorage.getItem(`markedSheetQuestion-${sheetLink}`);
-			return {
-			  ...sheet,
-			  completed: completed === "true",
-			  marked: marked === "true",
-			};
-		  });
-	  
-		  console.log("updatedData:", updatedData);
-	  
-		  const solvedQuestions = updatedData.filter((sheet) => sheet.completed);
-		  setSolvedData(solvedQuestions);
-	  
-		  const initialCompletedCount = updatedData.reduce((acc, sheet) => {
-			return acc + (sheet.completed ? 1 : 0);
-		  }, 0);
-		  setCompletedCount(initialCompletedCount);
-		  setData(updatedData);
-		  setDataLoading(false);
-	  
-		  const sheetOwnerId = sheetData.ownerId;
-	  
-		  console.log(sheetOwnerId);
-	  
-		  try {
-			const response = await fetch(`http://localhost:8000/user-details/profile-details/?ownerId=${sheetOwnerId}`);
-			
-			if (response.ok) {
-			  const data = await response.json();
-			  console.log("data.user:", data.user);
-	  
-			  setOwnerInformation(data.user);
-			  setOwnerId(data.user._id);
-			  setGithub(data.user.github);
-			  setInstagram(data.user.instagram);
-			  setLinkedin(data.user.linkedin);
-			  setName(data.user.name);
-			  setProfilePictureURL(data.user.profilePictureURL);
-			  setTwitter(data.user.twitter);
-			  setYoutube(data.user.youtube);
-			} else {
-			  console.error('Failed to fetch data');
+
+			console.log("scrapedProblems:", scrapedProblems);
+
+			const updatedData = scrapedProblems.map((sheet) => {
+				const sheetLink = sheet.quesLink;
+				const completed = localStorage.getItem(`completedSheetQuestion-${sheetLink}`);
+				const marked = localStorage.getItem(`markedSheetQuestion-${sheetLink}`);
+				return {
+					...sheet,
+					completed: completed === "true",
+					marked: marked === "true",
+				};
+			});
+
+			console.log("updatedData:", updatedData);
+
+			const solvedQuestions = updatedData.filter((sheet) => sheet.completed);
+			setSolvedData(solvedQuestions);
+
+			const initialCompletedCount = updatedData.reduce((acc, sheet) => {
+				return acc + (sheet.completed ? 1 : 0);
+			}, 0);
+			setCompletedCount(initialCompletedCount);
+			setData(updatedData);
+			setDataLoading(false);
+
+			const sheetOwnerId = sheetData.ownerId;
+
+			console.log(sheetOwnerId);
+
+			try {
+				const response = await fetch(`http://localhost:8000/user-details/profile-details/?ownerId=${sheetOwnerId}`);
+
+				if (response.ok) {
+					const data = await response.json();
+					console.log("data.user:", data.user);
+
+					setOwnerInformation(data.user);
+					setOwnerId(data.user._id);
+					setGithub(data.user.github);
+					setInstagram(data.user.instagram);
+					setLinkedin(data.user.linkedin);
+					setName(data.user.name);
+					setProfilePictureURL(data.user.profilePictureURL);
+					setTwitter(data.user.twitter);
+					setYoutube(data.user.youtube);
+				} else {
+					console.error('Failed to fetch data');
+				}
+			} catch (error) {
+				console.error('Error:', error);
 			}
-		  } catch (error) {
-			console.error('Error:', error);
-		  }
 		} catch (error) {
-		  console.error('Error fetching sheet data:', error);
+			console.error('Error fetching sheet data:', error);
 		}
-	  }, [sheetId]);
-	  
+	}, [sheetId]);
+
 
 	// console.log(data);
 
@@ -690,13 +690,12 @@ const CodingSheets = () => {
 				</div>
 				<SimpleFooter />
 			</MobContainer> */}
-			<Container>
+			<Container needDarkMode={needDarkMode}>
 				{
-					selectedTheme == "dark" ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+					needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
 				}
 				{
-					selectedTheme == "dark" ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
-
+					needDarkMode ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
 				}
 				<div className="cc-middle-content">
 					<div className="sheet-details">
@@ -734,7 +733,7 @@ const CodingSheets = () => {
 							As we continue to develop our platform, we do not currently require users to create accounts. As a result, any progress made is saved locally in your device's storage. Therefore, it's recommended to not clear your browser's cache.
 						</div>
 					</div> */}
-					<Filters>
+					<Filters needDarkMode={needDarkMode}>
 						<a href="/custom-coding-sheets/create" className="filter2">
 							Make your own Custom Problem Sheet
 							<CallMadeIcon />
@@ -742,7 +741,7 @@ const CodingSheets = () => {
 						</a>
 					</Filters>
 
-					<SheetMessage>
+					<SheetMessage needDarkMode={needDarkMode}>
 						<div className="text">
 							Hey there! With this tool, you can easily see a visual representation of the coding sheet you are working on and track your progress as you go. It also gives you an idea of the types of questions you can expect to find on the sheet. Cool, huh?
 						</div>
@@ -767,7 +766,7 @@ const CodingSheets = () => {
 						</div>
 						{
 							openVisualiser ? (
-								<VisualiserConatiner>
+								<VisualiserConatiner needDarkMode={needDarkMode}>
 									<div className="visualiser-conatiner">
 										<div className="canvas-container">
 											<div className="top-label">
@@ -830,7 +829,7 @@ const CodingSheets = () => {
 													text={`${progressBarPercent}%`}
 													strokeWidth={5}
 													styles={buildStyles({
-														textColor: "red",
+														textColor: needDarkMode ? 'white' : 'black',
 														textSize: "18px",
 														pathColor: "orange",
 														trailColor: "#f0f0f0"
@@ -890,7 +889,7 @@ const CodingSheets = () => {
 
 					</SheetMessage>
 
-					<Progress>
+					<Progress needDarkMode={needDarkMode}>
 						<div className="text">Progress : </div>
 						<div className="value">{`${progressBarPercent}%`}</div>
 						<div className="bar">
@@ -901,7 +900,7 @@ const CodingSheets = () => {
 						</div>
 					</Progress>
 
-					<EffectiveFilter>
+					<EffectiveFilter needDarkMode={needDarkMode}>
 						<div className="left">
 							<input type="checkbox" id="all" checked={selectedLabel === 'All'} onChange={() => handleLabelClick('All')} />
 							<label htmlFor="all">All</label>
@@ -913,9 +912,7 @@ const CodingSheets = () => {
 							<label htmlFor="hard">Hard</label>
 						</div>
 						<div className="right">
-							{/* <Tagsfilter data={data} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} /> */}
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
-							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
 					</EffectiveFilter>
 
@@ -1117,6 +1114,7 @@ const MobContainer = styled.div`
 			width: 100%;
 			/* background-color: #fbf7f7; */
 			border: 1px solid #d1d5db;
+			/* border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')}; */
 			border-radius: 5px;
 			/* padding: 0 15px; */
 			display: flex;
@@ -1233,6 +1231,8 @@ const Container = styled.div`
 	justify-content: space-between;
 	padding-left: 200px;
 
+    background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
+
 	a {
 		color: #18489f;
 	}
@@ -1252,151 +1252,174 @@ const Container = styled.div`
 			padding: 80px 50px 30px 50px;
 		}
 
-		.sheet-details{
-			display: flex;
-			align-items: center;
+		.main-heading{
+          font-size: 1.65rem;
+          font-weight: 600;
+          color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
+      }
 
-			.owner-detail-main{
-				.owner-pic{
-					height: 120px;
-					width: 120px;
-					border-radius: 100px;
-					margin-right: 20px;
-					border: 1px solid #d1d5db;
-					background-color: #e5e5e5;
-					padding: 5px;
-				}
-			}
-			
-			.sheet-detail-main{
-				display: flex;
-				flex-direction: column;
-				align-items: flex-start;
-				
-				.main-heading {
-					font-size: 1.65rem;
-					font-weight: 600;
-					color: #292929;
-				}
+	  .sheet-details{
+	display: flex;
+	align-items: center;
 
-				.heading-supporter {
-					font-size: 1.05rem;
-					margin-bottom: 10px;
-					font-weight: 400;
-					color: #696168;
-
-					a {
-						color: #18489f;
-						font-size: 0.95rem;
-						font-weight: 300;
-						margin-left: 0.25rem;
-					}
-				}
-
-				.imp-links{
-					display: flex;
-					margin-top: 20px;
-
-					.other-links{
-						height: 40px;
-						display: flex;
-						align-items: center;
-						padding: 0 15px 0 15px;
-						background-color: #f3f1f1;
-						border-radius: 10px;
-						margin-right: 10px;
-						border: 1px solid #d1d5db;
+	.owner-detail-main{
+		.owner-pic{
+			height: 120px;
+			width: 120px;
+			border-radius: 100px;
+			margin-right: 20px;
+			border: 1px solid #d1d5db;
+			background-color: #e5e5e5;
+			padding: 5px;
+		}
+	}
 	
-						img{
-							height: 15px;
-							margin-right: 15px;
-						}
-	
-						.text{
-							font-size: 0.7rem;
-							border-left: 1px solid black;
-							padding-left: 10px;
-						}
-					}
+	.sheet-detail-main{
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
 
-					.other-links-2{
-						cursor: pointer;
-						height: 40px;
-						display: flex;
-						align-items: center;
-						padding: 0 15px 0 15px;
-						background-color: #f3f1f1;
-						border-radius: 10px;
-						margin-right: 10px;
-						border: 1px solid #d1d5db;
-	
-						img{
-							height: 15px;
-							margin-right: 15px;
-						}
-
-						svg{
-							font-size: 1.25rem;
-							margin-right: 15px;
-						}
-	
-						.text{
-							display: flex;
-							align-items: center;
-							height: 100%;
-							font-size: 0.7rem;
-							padding-left: 15px;
-							border-left: 1px solid #d1d5db;
-
-							b{
-								padding: 2.5px 7.5px;
-								/* border: 1px solid black; */
-								margin-left: 5px;
-								border-radius: 100px;
-								font-weight: 600;
-								background-color: #d1d5db;
-							}
-						}
-					}
-				}
-
-			}
-
-			
-
-			
+		.main-heading {
+			font-size: 1.65rem;
+			font-weight: 600;
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#292929')};
 		}
 
-		.message {
-			display: inline-block;
-			/* display: flex; */
-			/* align-items: center; */
-			background-color: #d5f7e1;
-			border-radius: 5px;
-			padding: 10px;
-			margin: 20px 0 40px 0;
+		.heading-supporter {
+			font-size: 1.05rem;
+			margin-bottom: 10px;
+			font-weight: 400;
+			color: ${(props) => (props.needDarkMode ? '#c3bcbc' : '#696168')};
 
-			.text {
-				font-size: 0.8rem;
-				color: #13803b;
+			a {
+				color: #18489f;
+				font-size: 0.95rem;
 				font-weight: 300;
+				margin-left: 0.25rem;
 			}
 		}
+
+		.imp-links{
+			display: flex;
+			margin-top: 20px;
+
+			.other-links{
+				height: 40px;
+				display: flex;
+				align-items: center;
+				padding: 0 15px 0 15px;
+				background-color: #f3f1f1;
+				border-radius: 10px;
+				margin-right: 10px;
+				border: 1px solid #d1d5db;
+
+				img{
+					height: 15px;
+					margin-right: 15px;
+				}
+
+				.text{
+					font-size: 0.7rem;
+					border-left: 1px solid black;
+					padding-left: 10px;
+				}
+			}
+
+			.other-links-2{
+				cursor: pointer;
+				height: 40px;
+				display: flex;
+				align-items: center;
+				padding: 0 15px 0 15px;
+				background-color: #f3f1f1;
+				border-radius: 10px;
+				margin-right: 10px;
+				border: 1px solid #d1d5db;
+
+				img{
+					height: 15px;
+					margin-right: 15px;
+				}
+
+				svg{
+					font-size: 1.25rem;
+					margin-right: 15px;
+				}
+
+				.text{
+					display: flex;
+					align-items: center;
+					height: 100%;
+					font-size: 0.7rem;
+					padding-left: 15px;
+					border-left: 1px solid #d1d5db;
+
+					b{
+						padding: 2.5px 7.5px;
+						/* border: 1px solid black; */
+						margin-left: 5px;
+						border-radius: 100px;
+						font-weight: 600;
+						background-color: #d1d5db;
+					}
+				}
+			}
+		}
+
+		}
+	}
+
+      .heading-supporter{
+          font-size: 1.05rem;
+          margin-bottom: 10px;
+          font-weight: 400;
+          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
+
+          a{
+            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-left: 0.25rem;
+          }
+      }
+
+      .message{
+        display: inline-block;
+        /* display: flex; */
+        /* align-items: center; */
+        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
+        border-radius: 5px;
+        padding: 10px;
+        margin: 20px 0 50px 0;
+
+        .text{
+            font-size: 0.8rem;
+            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            font-weight: 300;
+
+            b{
+                font-weight: 500;
+                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            }
+        }
+      }
 
 		.notice{
 			font-size: 0.8rem;
+			font-weight: 500;
 		}
 
 		.table {
 			margin: 15px 0;
 			width: 100%;
 			/* background-color: #fbf7f7; */
-			border: 1px solid #d1d5db;
+			/* border: 1px solid #d1d5db; */
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 			border-radius: 5px;
 			/* padding: 0 15px; */
 			display: flex;
 			flex-direction: column;
-			background-color: white;
+			background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#fff')};
 			border-bottom-color: transparent;
 
 			.link-row {
@@ -1406,7 +1429,7 @@ const Container = styled.div`
 				justify-content: space-between;
 				border-top-left-radius: 5px;
 				border-top-right-radius: 5px;
-				border-bottom: 1px solid #d1d5db;
+				border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 
 				.link-row-left {
 					display: flex;
@@ -1422,6 +1445,7 @@ const Container = styled.div`
 						font-weight: 500;
 						width: 32.5px;
 						text-align: center;
+						color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 					}
 
 					.main-row-content {
@@ -1430,6 +1454,7 @@ const Container = styled.div`
 							font-weight: 500;
 							text-decoration: none;
 							/* color: inherit; */
+							color: ${(props) => (props.needDarkMode ? 'cornflowerblue' : '#18489f')};
 
 							&:hover {
 								text-decoration: underline;
@@ -1442,23 +1467,27 @@ const Container = styled.div`
 							flex-wrap: wrap;
 
 							.tag {
-								background-color: #f3f4f7;
-								color: inherit;
+								/* background-color: #f3f4f7; */
+								/* color: inherit; */
 								padding: 2.5px 7.5px;
 								border-radius: 100px;
 								font-size: 0.7rem;
 								margin-top: 5px;
 								margin-right: 5px;
-								border: 1px solid #cac3c3;
+								/* border: 1px solid #cac3c3; */
+								border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
+								color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+								background-color: ${(props) => (props.needDarkMode ? '#2b2b2b' : '#f3f4f7')};
 							}
 
 							.special-tag {
 								/* background-color: #ffeac2; */
-								color: inherit;
 								/* background-color: black; */
 								/* color: white; */
 								font-weight: 500;
-								border: 1px solid #111;
+								border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#111')};
+								color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+								/* background-color: ${(props) => (props.needDarkMode ? '#2b2b2b' : '#f3f4f7')}; */
 							}
 						}
 					}
@@ -1499,7 +1528,7 @@ const Container = styled.div`
 			}
 
 			.done-row {
-				background-color: #dcf8eb;
+				background-color: ${(props) => (props.needDarkMode ? '#404249' : '#dcf8eb')};
 				
 				.right-icons{
 					display: flex;
@@ -1513,7 +1542,7 @@ const Container = styled.div`
 			}
 
 			.review-row {
-				background-color: #ffe3e2;
+				background-color: ${(props) => (props.needDarkMode ? '#4f3a3a' : '#ffe3e2')};
 				border-radius: 0;
 				
 				.right-icons{
@@ -1533,10 +1562,12 @@ const Container = styled.div`
 		}
 	}
 `;
+
+
 const Filters = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	margin: 50px 0 10px 0;
+	margin: 80px 0 10px 0;
 
 	.filter {
 		padding: 7.5px 15px;
@@ -1546,15 +1577,15 @@ const Filters = styled.div`
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
 		text-decoration: none;
-    background-color: ${(props) => (props.needDarkMode ? 'transparent' : 'transparent')};
-    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
+    	background-color: ${(props) => (props.needDarkMode ? 'transparent' : 'transparent')};
+    	color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 
-    svg{
-      font-size: 1rem;
-      margin-bottom: -0.2rem;
-      margin-left: 5px;
-      fill: #71c929;
-    }
+		svg{
+			font-size: 1rem;
+			margin-bottom: -0.2rem;
+			margin-left: 5px;
+			fill: #71c929;
+		}
 
 		&:hover {
 			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
@@ -1565,6 +1596,7 @@ const Filters = styled.div`
 		}
 	}
 
+
 	.filter2{
 		position: relative;
 		padding: 7.5px 15px;
@@ -1574,32 +1606,29 @@ const Filters = styled.div`
 		margin: 0px 5px 5px 0px;
 		font-weight: 300;
 		text-decoration: none;
-		color: inherit;
+		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		display: flex;
 		align-items: center;
-	
+
 		svg{
 			font-size: 1rem;
 			margin-left: 5px;
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
-	
+
 		&:hover {
-			border-color: #201f1f;
-			background-color: #201f1f;
-			color: #ebdddd;
+			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
 			transition-duration: 250ms;
 			cursor: pointer;
-	
-			svg{
-				fill: #ebdddd;
-			}
 		}
-	
+
 		svg{
 			font-size: 1rem;
 			margin-left: 5px;
 		}
-	
+
 		.tag{
 			position: absolute;
 			padding: 2.5px 7.5px;
@@ -1654,8 +1683,7 @@ const Filters = styled.div`
 		}
 	}
 
-	
-  
+
 `;
 
 const Progress = styled.div`
@@ -1666,7 +1694,10 @@ const Progress = styled.div`
 	.text {
 		font-size: 0.9rem;
 		font-weight: 500;
+		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 	}
+
+	
 
 	.value {
 		margin: 0 10px;
@@ -1684,8 +1715,8 @@ const Progress = styled.div`
 		/* width: 400px; */
 		height: 10px;
 		border-radius: 100px;
-		background-color: whitesmoke;
-		border: 1px solid pink;
+		border: 1px solid ${(props) => (props.needDarkMode ? '#000000' : 'pink')};
+		background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : 'whitesmoke')};
 		flex: 1;
 		overflow: hidden;
 
@@ -1739,10 +1770,11 @@ const SheetMessage = styled.div`
 	/* border: 1px solid black; */
 	border-radius: 5px;
 	/* background-color: #c9e8ff; */
-	background-color: #f0f0f0;
+	background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#f0f0f0')};
 
 	.text {
 		font-size: 0.8rem;
+		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 	}
 
 	.open-btn{
@@ -1753,6 +1785,14 @@ const SheetMessage = styled.div`
 		font-size: 0.8rem;
 		font-weight: 500;
 		margin-top: 15px;
+
+		.desc{
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+
+		svg{
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
 	}
 `;
 
@@ -1768,8 +1808,8 @@ const VisualiserConatiner = styled.div`
         justify-content: space-between;
         
         .canvas-container{
-            border: 1px solid #d1d5db;
-            background-color: rgba(255, 255, 255, 0.83);
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '#d1d5db')};
+			background-color: ${(props) => (props.needDarkMode ? '#404249' : 'rgba(255, 255, 255, 0.83)')};
             box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
             border-radius: 5px;
             padding: 50px 10px 10px 50px;
@@ -1828,6 +1868,7 @@ const VisualiserConatiner = styled.div`
                         font-size: 0.7rem;
                         font-weight: 500;
                         margin-right: 5px;
+						color: ${(props) => (props.needDarkMode ? '#ffffff9e' : '#333')};
                     }
     
                     .label-value{
@@ -1835,6 +1876,7 @@ const VisualiserConatiner = styled.div`
                         letter-spacing: 0.07rem;
                         font-weight: 300;
                         font-family: verdana,arial,sans-serif;
+						color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
                     }
                 }
             }
@@ -1844,8 +1886,8 @@ const VisualiserConatiner = styled.div`
 			flex-grow: 1;
             padding: 10px 30px;
             margin-left: 7.5px;
-            border: 1px solid #d1d5db;
-            background-color: rgba(255, 255, 255, 0.83);
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '#d1d5db')};
+            background-color: ${(props) => (props.needDarkMode ? '#404249' : 'rgba(255, 255, 255, 0.83)')};
             box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
             border-radius: 5px;
 			position: relative;
@@ -1871,6 +1913,7 @@ const VisualiserConatiner = styled.div`
                     .name{
                         font-size: 0.9rem;
                         font-weight: 500;
+						color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
                     }
     
                     .completed{
@@ -1880,10 +1923,11 @@ const VisualiserConatiner = styled.div`
                         .text{
                             font-size: 0.7rem;
                             font-weight: 300;
-                            color: grey;
+                            color: ${(props) => (props.needDarkMode ? 'gray' : 'gray')};
                             margin: 0 7.5px;
                         }
                         .value{
+                            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
                             font-size: 0.9rem;
                             font-weight: 400;
                             font-family: sans-serif;
@@ -1895,12 +1939,14 @@ const VisualiserConatiner = styled.div`
                     height: 7.5px;
                     width: 100%;
                     border-radius: 50px;
-                    background-color: #f1f6f1;
-                    border: 1px solid #dbd5d5;
 					overflow: hidden;
+					border: 1px solid ${(props) => (props.needDarkMode ? '#000000' : '#f1f6f1')};
+					background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#dbd5d5')};
+					/* background-color: #; */
+    				/* border: 1px solid #; */
 
 					.fill{
-						background-color: #b5b3b0;
+						background-color: #;
 						height: 100%;
 						border-radius: 50px;
 					}
@@ -1909,6 +1955,12 @@ const VisualiserConatiner = styled.div`
 			
 			.circular-chart{
 				width: 80px;
+			}
+
+			.CircularProgressbar-text{
+				color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+				/* border: 1px solid ${(props) => (props.needDarkMode ? '#000000' : '#f1f6f1')};
+				background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#dbd5d5')}; */
 			}
         }
 
@@ -1921,14 +1973,16 @@ const VisualiserConatiner = styled.div`
 			.label-item{
 				padding: 5px 10px;
 				font-size: 0.7rem;
-				border: 1px solid #d0d5db;
+				color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+				border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 				border-radius: 3px;
 				margin-right: 5px;
 				cursor: pointer;
 			}
 			
 			.selected{
-				background-color: #f0f0f0;
+				color: ${(props) => (props.needDarkMode ? '#333' : '#333')};
+				background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#f0f0f0')};
 			}
 		}
     }
@@ -1959,19 +2013,21 @@ const EffectiveFilter = styled.div`
 			align-items: center;
 			margin-right: 15px;
 			font-weight: 400;
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
 		
 		input{
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 			cursor: pointer;
 			margin-right: 5px;
 		}
 
 		input[type="checkbox"]:checked + label {
-			color: #333;
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
 		/* Change the color of the checkboxes when they are not selected */
 		input[type="checkbox"] + label {
-			color: gray;
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
 	}
 
@@ -1982,7 +2038,8 @@ const EffectiveFilter = styled.div`
 		.filter-item{
 			padding: 5px 10px;
 			font-size: 0.7rem;
-			border: 1px solid #d0d5db;
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 			border-radius: 3px;
 			margin-right: 5px;
 			cursor: pointer;

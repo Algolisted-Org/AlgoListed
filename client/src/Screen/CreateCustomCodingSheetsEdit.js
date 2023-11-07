@@ -364,7 +364,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
           <div></div>
         )
       }
-
+\
       <MobContainer>
         We are still working on Responsive Version of the website, please view
         the site with width more than 1100px, a standard laptop or tablet
@@ -653,42 +653,42 @@ const Container = styled.div`
           font-size: 1.65rem;
           font-weight: 600;
           color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
-      }
+    }
 
-      .heading-supporter{
-          font-size: 1.05rem;
-          margin-bottom: 10px;
-          font-weight: 400;
-          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
+    .heading-supporter{
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+        font-weight: 400;
+        color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
 
-          a{
-            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
-            font-size: 0.95rem;
-            font-weight: 300;
-            margin-left: 0.25rem;
+        a{
+          color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
+          font-size: 0.95rem;
+          font-weight: 300;
+          margin-left: 0.25rem;
+        }
+    }
+
+    .message{
+      display: inline-block;
+      /* display: flex; */
+      /* align-items: center; */
+      background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
+      border-radius: 5px;
+      padding: 10px;
+      margin: 20px 0 10px 0;
+
+      .text{
+          font-size: 0.8rem;
+          color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+          font-weight: 300;
+
+          b{
+              font-weight: 500;
+              color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
           }
       }
-
-      .message{
-        display: inline-block;
-        /* display: flex; */
-        /* align-items: center; */
-        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
-        border-radius: 5px;
-        padding: 10px;
-        margin: 20px 0 10px 0;
-
-        .text{
-            font-size: 0.8rem;
-            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
-            font-weight: 300;
-
-            b{
-                font-weight: 500;
-                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
-            }
-        }
-      }
+    }
 
     .controls {
       .link{
