@@ -36,7 +36,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
   };
 
   useEffect(() => {
-    document.title = "Contest Archive - Algolisted";
+    document.title = "Custom Coding Sheets - Algolisted";
   }, []);
   
   useEffect(() => {
