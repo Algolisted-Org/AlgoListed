@@ -20,7 +20,7 @@ import problemsDataServer from "../DummyDB/InterviewSummaries/LcUserServerProble
 import axios from "axios";
 
 const CreateCustomCodingSheetsEdit = (userGlobal) => {
-  const [needDarkMode, setNeedDarkMode] = useState(false);
+  const [needDarkMode, setNeedDarkMode] = useState(!false);
   const [problemLink, setProblemLink] = useState("");
   const [recentlyAddedProblems, setRecentlyAddedProblems] = useState([]);
   const [problemStatus, setProblemStatus] = useState({});
@@ -49,7 +49,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
 
   console.log("sheetId" + sheetId);
   useEffect(() => {
-    document.title = "Contest Archive - Algolisted";
+    document.title = "Edit your Sheet | Create Custom Coding Sheets - Algolisted";
   }, []);
 
   console.log(userGlobal);
@@ -57,12 +57,18 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
   console.log(userId);
 
   const userDataString = sessionStorage.getItem('userData');
-  console.log(userDataString); 
+  console.log(userDataString);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if (selectedTheme === "dark") setNeedDarkMode(true);
-  }, []);
+    if (selectedTheme === 'dark') setNeedDarkMode(true);
+    if (selectedTheme === 'light') setNeedDarkMode(false);
+  }, [])
+  console.log("needDarkMode : ", needDarkMode);
+  
+  const toggleDarkMode = () => {
+    setNeedDarkMode(!needDarkMode);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -133,11 +139,6 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
   useEffect(() => {
     console.log(problemsStoredInServer);
   }, [problemsStoredInServer]);
-
-  // console.log("needDarkMode : ", needDarkMode);
-  const toggleDarkMode = () => {
-    setNeedDarkMode(!needDarkMode);
-  };
 
   const filters = customCodingSheetsFilters.map((item) => {
     return (
@@ -256,11 +257,11 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
 
     try {
       const startTime = Date.now();
-      
+
       const response = await axios.post("/problem-sheets/update", data, {
         withCredentials: true,
       });
-      
+
       const response2 = await axios.post("/user-details/profile-update", userData, {
         withCredentials: true,
       });
@@ -373,25 +374,14 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
           alt=""
         />
       </MobContainer>
-      <Container>
-        {needDarkMode ? (
-          <CCHeaderDarkPlus
-            needDarkMode={needDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-        ) : (
-          <CCHeaderPlus
-            needDarkMode={needDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-        )}
-        {needDarkMode ? (
-          <LeftMenuDark marked={"create-problem-list"} />
-        ) : (
-          <LeftMenu marked={"create-problem-list"} />
-        )}
+      <Container needDarkMode={needDarkMode}>
+        {
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+        }
+        {
+          needDarkMode ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
+        }
         {/* ---> change this all-blogs to your desired page-id */}
-
         <div className="cc-middle-content">
           <h1 className="main-heading">Custom Coding Sheets</h1>
           <p className="heading-supporter">
@@ -407,12 +397,11 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
           {/* <Filters>
                         {filters}
                     </Filters> */}
-
           <div className="controls">
-            <p className="link">Your generated link is <div><a target="_blank" href="/create-problem-list/sheet/6544a8986813dda9c046b101">https://www.algolisted.com/create-problem-list/sheet/6544a8986813dda9c046b101</a></div> <CallMadeIcon/> </p>
+            <p className="link">Your generated link is <div><a target="_blank" href={`/create-problem-list/sheet/${sheetId}`}>https://www.algolisted.com/create-problem-list/sheet/{sheetId}</a></div> <CallMadeIcon /> </p>
             <div className="export-btn" onClick={() => setShowModal(true)}>
               {exportingSheet ? (
-                <span>Exporting...</span>
+                <>Exporting...</>
               ) : (
                 <>
                   <LinkIcon />
@@ -634,9 +623,15 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   padding-left: 200px;
+  
+  background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
 
-  a {
-    color: #18489f;
+  a{
+    color: ${(props) => (props.needDarkMode ? '#93b5f3' : '#18489f')};
+  }
+
+  input{
+    background-color: transparent;
   }
 
   .cc-middle-content {
@@ -654,41 +649,46 @@ const Container = styled.div`
       padding: 80px 50px 50px 50px;
     }
 
-    .main-heading {
-      font-size: 1.65rem;
-      font-weight: 600;
-      color: #292929;
-    }
-
-    .heading-supporter {
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-      font-weight: 400;
-      color: #696168;
-
-      a {
-        color: #18489f;
-        font-size: 0.95rem;
-        font-weight: 300;
-        margin-left: 0.25rem;
+    .main-heading{
+          font-size: 1.65rem;
+          font-weight: 600;
+          color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
       }
-    }
 
-    .message {
-      display: inline-block;
-      /* display: flex; */
-      /* align-items: center; */
-      background-color: #d5f7e1;
-      border-radius: 5px;
-      padding: 10px;
-      margin: 20px 0 40px 0;
+      .heading-supporter{
+          font-size: 1.05rem;
+          margin-bottom: 10px;
+          font-weight: 400;
+          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
 
-      .text {
-        font-size: 0.8rem;
-        color: #13803b;
-        font-weight: 300;
+          a{
+            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-left: 0.25rem;
+          }
       }
-    }
+
+      .message{
+        display: inline-block;
+        /* display: flex; */
+        /* align-items: center; */
+        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
+        border-radius: 5px;
+        padding: 10px;
+        margin: 20px 0 10px 0;
+
+        .text{
+            font-size: 0.8rem;
+            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            font-weight: 300;
+
+            b{
+                font-weight: 500;
+                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+            }
+        }
+      }
 
     .controls {
       .link{
@@ -696,12 +696,13 @@ const Container = styled.div`
         align-items: center;
         flex-wrap: wrap;
         font-size: 0.85rem;
+        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 
         div{
           padding: 5px 10px;
           margin: 10px 0;
-          background-color: #f7f8f8;
-          border: 1px solid #e5e5e5;
+          background-color:  ${(props) => (props.needDarkMode ? '#454754' : '#f7f8f8')};
+          border: 1px solid ${(props) => (props.needDarkMode ? 'transparent' : '#e5e5e5')};
           margin-left: 5px;
           border-radius: 10px;
 
@@ -716,6 +717,7 @@ const Container = styled.div`
         svg{
           font-size: 1rem;
           margin-left: 5px;
+          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
       }
 
@@ -724,8 +726,9 @@ const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #f7f8f8;
-        border: 1px solid #e5e5e5;
+        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#f7f8f8')};
+        border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
         border-radius: 10px;
         font-size: 0.8rem;
         padding: 5px 15px;
@@ -734,6 +737,7 @@ const Container = styled.div`
 
         svg {
           margin-right: 10px;
+          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
       }
 
@@ -743,10 +747,15 @@ const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: white;
-        border: 1px solid #e5e5e5;
+        
+        background-color: ${(props) => (props.needDarkMode ? '#252526' : 'white')};
+        border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
         border-radius: 10px;
         cursor: pointer;
+
+        svg{
+          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        }
       }
 
       .add-link {
@@ -759,20 +768,30 @@ const Container = styled.div`
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background-color: white;
-          border: 1px solid #e5e5e5;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          background-color: ${(props) => (props.needDarkMode ? '#252526' : '#fff')};
+          border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
           border-radius: 10px;
           font-size: 0.8rem;
           padding: 5px 15px;
           width: 150px;
           height: 50px;
+
+          .platform{
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          }
+
+          svg{
+            fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          }
         }
 
         input {
           display: flex;
           align-items: center;
-          background-color: white;
-          border: 1px solid #e5e5e5;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          background-color: ${(props) => (props.needDarkMode ? '#252526' : '#fff')};
+          border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
           border-radius: 10px;
           font-size: 0.8rem;
           padding: 5px 15px;
@@ -791,11 +810,13 @@ const Container = styled.div`
         font-size: 1.25rem;
         font-weight: 500;
         margin-bottom: 20px;
+        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
       }
 
       .empty-array-message {
         .text {
           font-size: 0.8rem;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
       }
 
@@ -810,9 +831,14 @@ const Container = styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: white;
-          border: 1px solid #e5e5e5;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          background-color: ${(props) => (props.needDarkMode ? '#252526' : '#fff')};
+          border: 1px solid ${(props) => (props.needDarkMode ? '#252526' : 'rgb(209, 213, 219)')};
           border-radius: 10px;
+
+          svg{
+            fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          }
         }
 
         .problem-name {
@@ -821,8 +847,6 @@ const Container = styled.div`
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background-color: #fff;
-          border: 1px solid #e5e5e5;
           border-radius: 10px;
           font-size: 0.8rem;
           padding: 5px 15px;
@@ -830,10 +854,9 @@ const Container = styled.div`
           text-align: center;
           margin: 0 10px;
           text-decoration: none;
-          color: cornflowerblue;
-
-          svg {
-          }
+          /* color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')}; */
+          background-color: ${(props) => (props.needDarkMode ? '#252526' : '#fff')};
+          border: 1px solid ${(props) => (props.needDarkMode ? '#252526' : 'rgb(209, 213, 219)')};
 
           .status-message {
             position: absolute;
@@ -841,6 +864,12 @@ const Container = styled.div`
             right: 55px;
             top: 18px;
             font-size: 0.6rem;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            
+          }
+
+          svg{
+            fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           }
 
           img {
