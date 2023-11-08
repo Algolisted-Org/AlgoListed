@@ -40,5 +40,19 @@
         "created_on": "Apr 23, 2023"
       }
     ]
+  },
+  {
+    "user_name": "RajMhatre20",
+    "name": "Raj Mhatre",
+    "description": "I've been contributing to Algolisted, a fantastic GitHub project aimed at simplifying the coding journey. My involvement has allowed me to enhance the user experience, streamline features, and improve documentation, making coding more accessible and enjoyable for everyone. It's been a rewarding and impactful journey!",
+    "avatar_url": "https://avatars.githubusercontent.com/rajmhatre20",
+    "pull_requests": [
+      {
+        "id": 32,
+        "title": "changed privacy policy 28/11/2022",
+        "url": "https://github.com/Nayaker/AlgoListed/pull/32",
+        "created_on": "Nov 28, 2022"
+      }
+    ]
   }
 ]
