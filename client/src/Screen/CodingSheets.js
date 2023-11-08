@@ -26,6 +26,8 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Tagsfilter from "../MicroComponents/Tagsfilter";
 import LockIcon from '@material-ui/icons/Lock';
+import TimerIcon from '@material-ui/icons/Timer';
+import NotesIcon from '@material-ui/icons/Notes';
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -1024,10 +1026,16 @@ const CodingSheets = () => {
 							<label htmlFor="medium">Medium</label>
 							<input type="checkbox" id="hard" checked={selectedLabel === 'Hard'} onChange={() => handleLabelClick('Hard')} />
 							<label htmlFor="hard">Hard</label>
+							<input type="checkbox" id="hard" checked={selectedLabel === 'Hard'} onChange={() => handleLabelClick('Hard')} />
+							<label htmlFor="hard">Marked for Later</label>
 						</div>
 						<div className="right">
+							{/* <CheckCircleOutlineIcon className="done-btn"/>
+							<UpdateIcon className="review-btn"/> */}
 							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+							{/* <div className="filter-item"><CheckCircleOutlineIcon/></div> */}
+							{/* <div className="filter-item"><UpdateIcon/></div> */}
 							{/* <div className="filter-item">Show Unsolved</div>  */}
 						</div>
 					</EffectiveFilter>
@@ -1066,9 +1074,10 @@ const CodingSheets = () => {
 													rel="noreferrer"
 												>
 													{item.quesName}
+													<div className="time-required">14 Mins 2 Secs</div>
 												</a>
 												<div className="tags">
-													{item.specialTag !== "-" ? (
+													{showTags && item.specialTag !== "-" ? (
 														<div className="tag special-tag">
 															{item.specialTag}
 														</div>
@@ -1105,6 +1114,19 @@ const CodingSheets = () => {
 													/>
 												</div>
 											</Tooltip>
+											<Tooltip title="Start Stop Watch">
+												<div className="stop-watch-btn">
+													<TimerIcon/>
+												</div>
+											</Tooltip>
+											{/* <Tooltip title="Add Notes">
+												<div className="notes-btn">
+													<NotesIcon/>
+												</div>
+											</Tooltip> */}
+											
+											
+											
 											{/* <Tooltip title="Notes">
 												<div className="review-btn">
 													<CreateIcon/>
@@ -1428,6 +1450,7 @@ const Container = styled.div`
 			border-bottom-color: transparent;
 
 			.link-row {
+				min-height: 94px;
 				padding: 20px 20px;
 				display: flex;
 				align-items: center;
@@ -1455,7 +1478,8 @@ const Container = styled.div`
 
 					.main-row-content {
 						a {
-							font-size: 0.9rem;
+							position: relative;
+							font-size: 1rem;
 							font-weight: 500;
 							text-decoration: none;
 							/* color: inherit; */
@@ -1464,6 +1488,16 @@ const Container = styled.div`
 							&:hover {
 								text-decoration: underline;
 							}
+						}
+
+						.time-required{
+							font-size: 0.7rem;
+							color: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#333')};
+							font-weight: 400;
+							position: absolute;
+							top: 3.5px;
+							right: -90px;
+							font-style: italic;
 						}
 
 						.tags {
@@ -1502,10 +1536,17 @@ const Container = styled.div`
 					display: flex;
 					align-items: center;
 
+					svg{
+						font-size: 2rem;
+						fill: #b5a6a6;
+						margin-left: 10px;
+						cursor: pointer;
+					}
+
 					.done-btn {
 						.MuiSvgIcon-root {
 							fill: #b5a6a6;
-							font-size: 2rem;
+							margin-left: 10px;
 	
 							&:hover {
 								transition-duration: 250ms;
@@ -1518,7 +1559,6 @@ const Container = styled.div`
 					.review-btn {
 						.MuiSvgIcon-root {
 							fill: #b5a6a6;
-							font-size: 2rem;
 							margin-left: 10px;
 	
 							&:hover {
@@ -1533,7 +1573,7 @@ const Container = styled.div`
 			}
 
 			.done-row {
-				background-color: ${(props) => (props.needDarkMode ? '#404249' : '#dcf8eb')};
+				background-color: ${(props) => (props.needDarkMode ? '#3e3655' : '#dcf8eb')};
 				
 				.right-icons{
 					display: flex;
@@ -1547,7 +1587,7 @@ const Container = styled.div`
 			}
 
 			.review-row {
-				background-color: ${(props) => (props.needDarkMode ? '#4f3a3a' : '#ffe3e2')};
+				background-color: ${(props) => (props.needDarkMode ? '#bf2149' : '#ffe3e2')};
 				border-radius: 0;
 				
 				.right-icons{
@@ -2048,6 +2088,19 @@ const EffectiveFilter = styled.div`
 			border-radius: 3px;
 			margin-right: 5px;
 			cursor: pointer;
+		}
+		svg{
+			font-size: 1.5rem;
+			margin-left: 7.5px;
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+
+		.done-btn{
+			fill: orange;
+		}
+
+		.review-btn{
+			fill: #cf5f5f;
 		}
 	}
 `
