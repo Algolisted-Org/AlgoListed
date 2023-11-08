@@ -478,9 +478,18 @@ const Container = styled.div`
           color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
 
-        h2{
+        h1, h2, h3, h4, h5, h6 {
           font-size: 1.5rem;
           font-weight: 600;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          margin-top: 50px;
+        }
+
+        ul{
+          margin-left: 50px;
+        }
+
+        span, h1, h2, h3, h4, h5, h6, div, p, section, ul, li, ul > li {
           color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         }
       }
