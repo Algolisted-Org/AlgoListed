@@ -3,29 +3,23 @@ import styled from "styled-components";
 import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
 import SearchBar from "./searchbar";
 
-function Tagsfilter({ tags,needDarkMode, filterdata,setfilter,data }) {
+function Tagsfilter({ tags,needDarkMode, filterdata,setfilter,data,setTags }) {
   const [tagdat,settagdata]=useState([...tags])
   const [expand, setexpand] = useState(false);
-
-   const [ischoose,setischoose]=useState([])
+  const [ischoose,setischoose]=useState([])
+  setTags(ischoose)
    
    
-   if(ischoose.length===0){
-    setfilter(data)
-
-   }
-   console.log(ischoose)
-  
-   useEffect(()=>{
-    console.log("ischhose kae time")
-    const filteredData = filterdata.filter((item) => {
-      
-        return ischoose.every((tag) => item.tags.includes(tag));
-      });
-      
-      setfilter(filteredData)
+  //  if(ischoose.length===0){
+  //   setfilter(data)
+  //  }
+  //  useEffect(()=>{
+  //   const filteredData = filterdata.filter((item) => {
+  //     return ischoose.every((tag) => item.tags.includes(tag));
+  //   });
+  //   setfilter(filteredData)
     
-   },[ischoose, filterdata])
+  //  },[ischoose])
    
   const onclicked = () => {
     setexpand((prev) => !prev);
