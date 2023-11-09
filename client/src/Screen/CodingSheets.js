@@ -684,11 +684,15 @@ const CodingSheets = () => {
 
 	useEffect(() => {
 		const newFilteredData = data.filter(item => {
+			console.log(item)
 		  if (selectedLabel !== 'All' && !item.tags.includes(selectedLabel)) {
 			return false;
 		  }
 	  
 		  if (selectedValue !== 'All' && (selectedValue === 'Marked for later' && !item.marked)) {
+			return false;
+		  }
+		  if (selectedValue !== 'All' && (selectedValue === 'Marked as completed' && !item.completed)) {
 			return false;
 		  }
 
@@ -1044,6 +1048,7 @@ const CodingSheets = () => {
 							<select className="filter-item" value={selectedValue} onChange={(e) => handleValueClick(e.target.value)}>
 								<option value="All">Status</option>
 								<option value="Marked for later">Marked for later</option>
+								<option value="Marked as completed">Marked as completed</option>
 							</select>
 
 							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} setTags={setTags} />
