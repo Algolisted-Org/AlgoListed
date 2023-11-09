@@ -48,20 +48,21 @@ const CodingSheets = () => {
 	const [showTags, setShowTags] = useState(true);
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
+	const [selectedValue, setSelectedValue] = useState('All');
 	const [needDarkMode, setNeedDarkMode] = useState(!false);
+	const [tags, setTags]=useState([])
 
 	useEffect(() => {
 		setFilteredData(data)
-	}, [])
+	}, [data])
 	// console.log(filteredData)
-
+	
 	useEffect(() => {
 		let selectedTheme = localStorage.getItem("selectedTheme");
 		if (selectedTheme === 'dark') setNeedDarkMode(true);
 		if (selectedTheme === 'light') setNeedDarkMode(false);
 	}, [])
 
-	console.log("needDarkMode : ", needDarkMode);
 	const toggleDarkMode = () => {
 		setNeedDarkMode(!needDarkMode);
 	};
@@ -72,6 +73,10 @@ const CodingSheets = () => {
 
 	const handleLabelClick = (label) => {
 		setSelectedLabel(label);
+	}
+
+	const handleValueClick = (label) => {
+		setSelectedValue(label);
 	}
 
 	const params = useParams();
@@ -572,7 +577,7 @@ const CodingSheets = () => {
 				ProblemsTags.push(data[i].tags[j]);
 			}
 		}
-		console.log(ProblemsTags)
+		// console.log(ProblemsTags)
 		// ProblemsTags = ProblemsTags.filter(string => string !== 'Amazon');
 
 		const filteredTags = ProblemsTags.filter(tag => allowedProblemTags.includes(tag));
@@ -678,15 +683,23 @@ const CodingSheets = () => {
 	}, [difficulty, userDifficulty])
 
 	useEffect(() => {
-		if (selectedLabel === 'All') {
-			setFilteredData(filteredData);
-		} else {
-			setFilteredData(
-				filteredData.filter(item => item.tags.includes(selectedLabel))
-			);
-		}
-		console.log(filteredData, selectedLabel)
-	}, [selectedLabel, filteredData]);
+		const newFilteredData = data.filter(item => {
+		  if (selectedLabel !== 'All' && !item.tags.includes(selectedLabel)) {
+			return false;
+		  }
+	  
+		  if (selectedValue !== 'All' && (selectedValue === 'Marked for later' && !item.marked)) {
+			return false;
+		  }
+
+		  if(tags.length && !(tags.length && tags.every(tag=> item.tags.includes(tag)))){
+			return false;
+		  }
+		  return true;
+		});
+		setFilteredData(newFilteredData);
+	  }, [selectedLabel, selectedValue,tags]);
+	  
 
 	useEffect(() => { // finding unique tags
 		let len = solvedData.length;
@@ -1018,21 +1031,22 @@ const CodingSheets = () => {
 
 					<EffectiveFilter needDarkMode={needDarkMode}>
 						<div className="left">
-							<input type="checkbox" id="all" checked={selectedLabel === 'All'} onChange={() => handleLabelClick('All')} />
-							<label htmlFor="all">All</label>
-							<input type="checkbox" id="easy" checked={selectedLabel === 'Easy'} onChange={() => handleLabelClick('Easy')} />
-							<label htmlFor="easy">Easy</label>
-							<input type="checkbox" id="medium" checked={selectedLabel === 'Medium'} onChange={() => handleLabelClick('Medium')} />
-							<label htmlFor="medium">Medium</label>
-							<input type="checkbox" id="hard" checked={selectedLabel === 'Hard'} onChange={() => handleLabelClick('Hard')} />
-							<label htmlFor="hard">Hard</label>
-							<input type="checkbox" id="hard" checked={selectedLabel === 'Hard'} onChange={() => handleLabelClick('Hard')} />
-							<label htmlFor="hard">Marked for Later</label>
 						</div>
 						<div className="right">
 							{/* <CheckCircleOutlineIcon className="done-btn"/>
 							<UpdateIcon className="review-btn"/> */}
-							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} />
+							<select className="filter-item" value={selectedLabel} onChange={(e) => handleLabelClick(e.target.value)}>
+								<option value="All">Difficulty</option>
+								<option value="Easy">Easy</option>
+								<option value="Medium">Medium</option>
+								<option value="Hard">Hard</option>
+							</select>
+							<select className="filter-item" value={selectedValue} onChange={(e) => handleValueClick(e.target.value)}>
+								<option value="All">Status</option>
+								<option value="Marked for later">Marked for later</option>
+							</select>
+
+							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} setTags={setTags} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							{/* <div className="filter-item"><CheckCircleOutlineIcon/></div> */}
 							{/* <div className="filter-item"><UpdateIcon/></div> */}
@@ -2081,6 +2095,7 @@ const EffectiveFilter = styled.div`
 		align-items: center;
 
 		.filter-item{
+			background: none;
 			padding: 5px 10px;
 			font-size: 0.7rem;
 			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
