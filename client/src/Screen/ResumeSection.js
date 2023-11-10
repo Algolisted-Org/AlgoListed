@@ -15,9 +15,13 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const promptForMncQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
-  "Given a resume text, provide me some vast number of technical and soft skills questions for MNCs.",
-  "Create an markdown text for questions and supported links for resources.",
-  "The input text is: ",
+  "Given a resume text, provide me some vast number of technical and soft skills questions for MNCs. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, that project have used. ",
+  "Create an markdown text for 10 questions. Just have two sections techical(10 2-line questions) and soft(2 3.5-line questions), and no other heading. And the questions should have a numbering on left, 1 to 10. Don't use any bold or anything. Just have h1 for heading and ol and li for questions",
+  "Keep it long, and releated so that an student should really have to think about the technology details.",
+  "Sample technical questions : 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimise if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimise it and scale it?",
+  "Sample soft questions : 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values you think that experience thought you which you can bring to out company. 2. How will you resolve a xyz problem with your team, .....",
+  // "Create an JSON of 10 questions like 'questions': and in array ['question1 here', 'question2 here'...]",
+  "The input text for resume is: ",
 ];
 const promptForStartup = [
   "Now you need to act like my mentor to help me get the job",
@@ -76,6 +80,7 @@ const ResumeSection = () => {
     setFile(selectedFile);
     console.log(textFromPDF);
   };
+
   const handleTextExtraction = async () => {
     if (file) {
       const reader = new FileReader();
@@ -145,6 +150,7 @@ const ResumeSection = () => {
 
         setResponseText(response.choices[0].message.content);
         console.log(response);
+        console.log(responseText);
         console.log(prompt);
         setIsLoading(false);
       } catch (error) {
@@ -155,14 +161,19 @@ const ResumeSection = () => {
       console.error("No text to send to Chat API.");
     }
   };
+
+
+
   const handleCompany = (e) => {
     setCompanyName(e.target.options[e.target.selectedIndex].text);
     setSelectedCompany(e.target.value);
   };
+
   const handleDifficult = (e) => {
     setDifficultyLevelName(e.target.options[e.target.selectedIndex].text);
     setDifficultyLevel(e.target.value);
   };
+
   return (
     <GrandContainer>
       <MobContainer>
@@ -479,18 +490,25 @@ const Container = styled.div`
         }
 
         h1, h2, h3, h4, h5, h6 {
-          font-size: 1.5rem;
+          font-size: 1.25rem;
           font-weight: 600;
           color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           margin-top: 50px;
         }
 
-        ul{
-          margin-left: 50px;
+        ul, ol{
+          margin-left: 15px;
         }
 
-        span, h1, h2, h3, h4, h5, h6, div, p, section, ul, li, ul > li {
+        span, h1, h2, h3, h4, h5, h6, div, p, section, ol, ul, li, ul > li {
           color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        }
+
+        li {
+          margin-top: 15px;
+          font-weight: 300;
+          line-height: 1.5rem;
+          font-size: 0.95rem;
         }
       }
     }
