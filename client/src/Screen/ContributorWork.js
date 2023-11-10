@@ -1,13 +1,89 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import data from "../Components/contributorsData.json";
+import axios from 'axios'
 
+//If you want to add your experience go to ../Components/contributorsData.json
 const ContributorWork = () => {
+  const [contributorsData, setContributorsData] = useState([]);
+  const [isLoading,setIsLoading] =useState(true);
+
+  //Fetch the Contributors data
+  useEffect(() => {
+    const owner = "Nayaker";
+    const repo = "AlgoListed";
+  
+    axios.get(`https://api.github.com/repos/${owner}/${repo}/contributors`)
+      .then(async (res) => {
+        const contributors = res.data;  
+        const contributorsData = await Promise.all(contributors.map(async (contributor) => {
+
+          // Per page only 100 requests can be fetched. 
+          // Page1
+          var pullRequestsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?state=all&per_page=100`;
+          const pullRequestsResponse = await axios.get(pullRequestsUrl);
+          const pullRequests = pullRequestsResponse.data
+          .filter(pr => pr.user.login === contributor.login)
+          .map(pr => ({
+            id: pr.id,
+            title: pr.title,
+            url: pr.html_url,
+            created_on: new Date(pr.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+          }));
+          
+          // Page 2
+          pullRequestsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?state=all&per_page=100&page=2`;
+          const pullRequestsResponse2 = await axios.get(pullRequestsUrl);
+          const pullRequests2 = pullRequestsResponse2.data
+          .filter(pr => pr.user.login === contributor.login)
+          .map(pr => ({
+            id: pr.id,
+            title: pr.title,
+            url: pr.html_url,
+            created_on: new Date(pr.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+          }));
+          
+          //Merge two pages
+          const AllPullRequests=pullRequests.concat(pullRequests2);
+
+          const contributorDetailsResponse = await axios.get(`https://api.github.com/users/${contributor.login}`);
+          const contributorDetails = contributorDetailsResponse.data;
+          
+          //Experience are fetched from ./Components/contributorsData.json
+          const manualDescription = data[contributor.login] || "";
+  
+          return {
+            user_name: contributor.login,
+            name: contributorDetails.name || "",
+            description: manualDescription || "",
+            avatar_url: contributorDetails.avatar_url,
+            pull_requests: AllPullRequests,
+          };
+        }));
+
+         // Sort the contributorsData with manual descriptions at the top
+          Promise.all(contributorsData)
+          .then(data => {
+            const sortedData = data.sort((a, b) => {
+              if (a.description && !b.description) return -1;
+              if (!a.description && b.description) return 1;
+              return 0;
+            });
+            setContributorsData(sortedData);
+            setIsLoading(false);
+          })
+          .catch(err => console.log(err));
+          // setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+      // setIsLoading(false);
+  }, []);
+  
+  
   useEffect(() => {
     document.title = "Contributor Work | Organisation Information - Algolisted";
   }, []);
 
-  const [contributorsPullRequests, setContributorsPullRequests] = useState(data);
   const [isVisible, setIsVisible] = useState([]);
 
   const toggleVisibility = (index) => {
@@ -33,9 +109,12 @@ const ContributorWork = () => {
         are the cornerstone of our progress.
       </p>
       
+      {isLoading ? (
+      <div>Loading...</div>
+      ) : (
       <div className="hold-contributors">
-        {contributorsPullRequests != null &&
-          contributorsPullRequests.map((item, index) => {
+        {contributorsData != null &&
+          contributorsData.map((item, index) => {
             return (
               <div key={index} className="contributor-work-container">
                 <div className="contributor-info">
@@ -78,6 +157,7 @@ const ContributorWork = () => {
             );
           })}
       </div>
+      )}
     </Container>
   );
 };
