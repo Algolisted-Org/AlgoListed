@@ -98,6 +98,30 @@ const ContestAnalysis = () => {
     setretrivestorage(parsedArray);
   }, [SessionUserCountChange]);
 
+  const processBarData = (questionData, needDarkMode) => {
+    const barDatasets = questionData.map((question) => {
+      const { title, fail_count } = question;
+      const labels = Object.keys(fail_count);
+      const data = Object.values(fail_count);
+
+      return {
+        labels,
+        datasets: [
+          {
+            label: "Fail Count",
+            backgroundColor: needDarkMode ? "#e0cf7a" : "#5ab097",
+            borderColor: needDarkMode ? "#e0cf7a" : "#444",
+            borderWidth: 1,
+            // hoverBackgroundColor: "#5ab097",
+            innerWidth: "20px",
+            data,
+          },
+        ],
+      };
+    });
+    return barDatasets;
+  }
+
   useEffect(() => {
     axios
       .get(
@@ -128,29 +152,9 @@ const ContestAnalysis = () => {
         });
 
         setIdToProblem(idToProblem); // Set IdToProblem state
+        const processedBarData = processBarData(questionData, needDarkMode);
 
-        const barDatasets = questionData.map((question) => {
-          const { title, fail_count } = question;
-          const labels = Object.keys(fail_count);
-          const data = Object.values(fail_count);
-
-          return {
-            labels,
-            datasets: [
-              {
-                label: "Fail Count",
-                backgroundColor: needDarkMode ? "#e0cf7a" : "#5ab097",
-                borderColor: needDarkMode ? "#e0cf7a" : "#444",
-                borderWidth: 1,
-                // hoverBackgroundColor: "#5ab097",
-                innerWidth: "20px",
-                data,
-              },
-            ],
-          };
-        });
-
-        setBarData(barDatasets);
+        setBarData(processedBarData);
 
         const submissionMap = res.data.submission_map;
         const problemIds = Object.keys(submissionMap);
@@ -191,6 +195,11 @@ const ContestAnalysis = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(()=>{
+    const processedBarData = processBarData(questions, needDarkMode);
+    setBarData(processedBarData);
+  }, [needDarkMode, questions]);
+
   const handleAnalysisName = () => {
     let analysis_heading = "Leetcode ";
     for (let index = 0; index < contestName.length; index++) {
@@ -225,8 +234,6 @@ const ContestAnalysis = () => {
   });
 
   const barOptions = (needDarkMode) => {
-    const backgroundColor = needDarkMode ? "#e0cf7a" : "#5ab097";
-    const borderColor = needDarkMode ? "#e0cf7a" : "#5ab097";
   
     return {
       scales: {
@@ -234,35 +241,51 @@ const ContestAnalysis = () => {
           grid: {
             display: false,
           },
+          ticks: {
+            color: needDarkMode ? '#DDDBD5': '#343a40'
+          }
         },
+        y: {
+          border: {
+            color: needDarkMode ? '#586566': '#e5e5e5', 
+          },
+          grid: {
+            color: needDarkMode ? '#586566': '#e5e5e5'
+          },
+          ticks: {
+            color: needDarkMode ? '#DDDBD5': '#343a40'
+          }
+        }
       },
       datasets: {
         bar: {
           barPercentage: 0.3,
           borderRadius: 4,
-          backgroundColor,
-          borderColor,
         },
       },
       plugins: {
         legend: {
-          display: true,
-          labels: {
-            generateLabels: function () {
-              return [
-                {
-                  text: `Wrong submissions count for solution acceptance.`,
-                  // color: needDarkMode ? '#e5e5e5' : '#333', // doesn't work
-                  // fontColor: () => needDarkMode ? '#e5e5e5' : '#333', // doesn't work
-                  borderRadius: 4,
-                  fillStyle: backgroundColor,
-                  strokeStyle: borderColor,
-                },
-              ];
-            },
-          },
+          display: false,
+          // labels: {
+          //   generateLabels: function () {
+          //     return [
+          //       {
+          //         text: `Wrong submissions count for solution acceptance.`,
+          //         fontColor: needDarkMode ? '#DDDBD5':'black',
+          //         borderRadius: 4,
+          //         fillStyle: backgroundColor,
+          //         strokeStyle: borderColor,
+          //       },
+          //     ];
+          //   },
+          // },
         },
       },
+      yAxes: [{
+        gridLines: {
+          zeroLineColor: needDarkMode ? '#586566': '#e5e5e5'
+        }
+      }]
     };
   };
 
@@ -273,6 +296,10 @@ const ContestAnalysis = () => {
         <i>{questions[index].title}</i>
       </div>
       <div className={`bar-chart chart-container ${needDarkMode ? 'dark-mode' : 'light-mode'}`}>
+        <div className="legend">
+          <div className="box"/>
+          <p className="text">Wrong submissions count for solution acceptance.</p>
+        </div>
         <Bar data={data} options={barOptions(needDarkMode)} />
       </div>
       <div className="info">
@@ -306,29 +333,49 @@ const ContestAnalysis = () => {
         grid: {
           display: false,
         },
+        ticks: {
+          color: needDarkMode ? '#DDDBD5': '#343a40'
+        },
       },
+      y: {
+        border: {
+          color: needDarkMode ? '#586566': '#e5e5e5', 
+        },
+        grid: {
+          color: needDarkMode ? '#586566': '#e5e5e5'
+        },
+        ticks: {
+          color: needDarkMode ? '#DDDBD5': '#343a40'
+        }
+      }
     },
     plugins: {
       legend: {
-        display: true,
-        labels: {
-          generateLabels: function () {
-            return problemLabels.map(function (label, index) {
-              return {
-                text: `Problem ${label}       `,
-                borderRadius: 4,
-                fillStyle: lineGraphColours[index],
-                strokeStyle: lineGraphColours[index],
-                boxHeight: 16,
-                boxWidth: 10,
-                paddingRight: 20,
-              };
-            });
-          },
-          padding: 10,
-        },
+        display: false,
+        // labels: {
+        //   generateLabels: function () {
+        //     return problemLabels.map(function (label, index) {
+        //       return {
+        //         text: `Problem ${label}       `,
+        //         borderRadius: 4,
+        //         fillStyle: lineGraphColours[index],
+        //         strokeStyle: lineGraphColours[index],
+        //         boxHeight: 16,
+        //         boxWidth: 10,
+        //         paddingRight: 20,
+        //         fontColor: needDarkMode ? '#DDDBD5':'black',
+        //       };
+        //     });
+        //   },
+        //   padding: 10,
+        // },
       },
     },
+    xAxes: [{  // Modify yAxes instead of y
+      grid: {
+        color: needDarkMode ? '#586566' : '#e5e5e5',
+      },
+    }],
   };
 
   useEffect(() => {
@@ -441,6 +488,24 @@ const ContestAnalysis = () => {
           <div className="feature-title">1. Question Finished Count</div>
           {showVisuals ? (
             <div className="line-chart">
+              <div className="legends">
+                <div className="legend">
+                  <div className="box problem-A"/>
+                  <p className="text">Problem A</p>
+                </div>
+                <div className="legend">
+                  <div className="box problem-B"/>
+                  <p className="text">Problem B</p>
+                </div>
+                <div className="legend">
+                  <div className="box problem-C"/>
+                  <p className="text">Problem C</p>
+                </div>
+                <div className="legend">
+                  <div className="box problem-D"/>
+                  <p className="text">Problem D</p>
+                </div>
+              </div>
               <LineChart needDarkMode={needDarkMode} chartData={chartData} options={chartOptions} />
             </div>
           ) : (
@@ -1111,6 +1176,50 @@ const Container = styled.div`
     .line-chart {
       width: 100%;
       padding: 10px;
+      display: flex;
+      flex-direction: column;
+
+      .legends {
+        font-size: 13px;
+        display:flex;
+        flex-direction: row;
+        gap: 25px;
+        margin-bottom: 5px;
+        align-self: center;
+        
+        .legend {
+          display: flex;
+          flex-direction: row;
+          gap: 6px;
+          align-items: center;
+
+          .text {
+            color: ${(props) => (props.needDarkMode ? '#DDDBD5' : '#343a40')};
+          }
+        
+          .box {
+            border-radius: 2px;
+            height: 12px;
+            width: 12px;
+          }
+
+          .problem-A {
+            background-color: rgb(149, 164, 252);
+          }
+
+          .problem-B {
+            background-color: rgb(90, 176, 150);
+          }
+
+          .problem-C {
+            background-color: rgb(223, 207, 121);
+          }
+
+          .problem-D {
+            background-color: rgb(236, 159, 154);
+          }
+        }
+      }
     }
 
     .problems {
@@ -1184,6 +1293,32 @@ const Container = styled.div`
             }
           }
         }
+
+        .bar-chart {
+          display: flex;
+          flex-direction: column;
+
+          .legend {
+            display: flex;
+            align-self: center;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+
+            .box {
+              height: 12px;
+              width: 12px;
+              background-color: ${(props) => (props.needDarkMode ? "#e0cf7a" : "#5ab097")};
+              border-radius: 3px;
+            }
+
+            .text {
+              font-size: 12px;
+              color: ${(props) => (props.needDarkMode ? '#DDDBD5' : '#343a40')};
+            }
+          }
+        }
         
         /* Dark mode styles */
         .chart-container.dark-mode .chartjs-legend ul li span {
@@ -1195,8 +1330,6 @@ const Container = styled.div`
           color: #333;
         }
       }
-
-      
     }
 
     .rankings-holder {
