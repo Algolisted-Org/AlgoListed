@@ -349,10 +349,10 @@ const ContestArchive = () => {
   }
   
 const problems = [
-  { isChecked: problemAIsChecked, label: 'Problem A', data: dataForTagsInA, backgroundColor: '#43d640' },
-  { isChecked: problemBIsChecked, label: 'Problem B', data: dataForTagsInB, backgroundColor: '#23ae20' },
-  { isChecked: problemCIsChecked, label: 'Problem C', data: dataForTagsInC, backgroundColor: '#c77248' },
-  { isChecked: problemDIsChecked, label: 'Problem D', data: dataForTagsInD, backgroundColor: '#cf3838' },
+  { isChecked: problemAIsChecked, label: 'Problem A', data: dataForTagsInA, backgroundColor: needDarkMode? '#AAF683' :'#43d640' },
+  { isChecked: problemBIsChecked, label: 'Problem B', data: dataForTagsInB, backgroundColor: needDarkMode? '#60D394' :'#23ae20' },
+  { isChecked: problemCIsChecked, label: 'Problem C', data: dataForTagsInC, backgroundColor: needDarkMode? '#FFD97D' :'#c77248' },
+  { isChecked: problemDIsChecked, label: 'Problem D', data: dataForTagsInD, backgroundColor: needDarkMode? '#EE6055' :'#cf3838' },
 ];
 
 const datasets = problems
@@ -384,9 +384,21 @@ const datasets = problems
         grid: {
           display: false,
         },
+        ticks: {
+          color: needDarkMode ? '#DDDBD5': '#343a40'
+        },
         stacked: true,
       },
       y: {
+        border: {
+          color: needDarkMode ? '#586566': '#e5e5e5', 
+        },
+        grid: {
+          color: needDarkMode ? '#586566': '#e5e5e5'
+        },
+        ticks: {
+          color: needDarkMode ? '#DDDBD5': '#343a40'
+        },
         stacked: true,
       },
     },
@@ -437,7 +449,7 @@ const datasets = problems
                         setProblemAIsChecked((prevState) => {
                         return !prevState
                       })}}/>
-                      <div className='problem-A'/>
+                      <div className='box problem-A'/>
                       <label className='legend-label' for="problem A">Problem A</label>
                     </div>
                     <div className='legend'>
@@ -445,7 +457,7 @@ const datasets = problems
                         setProblemBIsChecked((prevState) => {
                         return !prevState
                       })}}/>
-                      <div className='problem-B'/>
+                      <div className='box problem-B'/>
                       <label className='legend-label' for="problem B">Problem B</label>
                     </div>
                     <div className='legend'>
@@ -453,7 +465,7 @@ const datasets = problems
                         setProblemCIsChecked((prevState) => {
                         return !prevState
                       })}}/>
-                      <div className='problem-C'/>
+                      <div className='box problem-C'/>
                       <label className='legend-label' for="problem C">Problem C</label>
                     </div>
                     <div className='legend'>
@@ -461,7 +473,7 @@ const datasets = problems
                         setProblemDIsChecked((prevState) => {
                         return !prevState
                       })}}/>
-                      <div className='problem-D'/>
+                      <div className='box problem-D'/>
                       <label className='legend-label' for="problem D">Problem D</label>
                     </div>
                 </div>
@@ -810,35 +822,31 @@ const Container = styled.div`
                 color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
               }
 
-
               .checkbox {
                 height: 12px;
                 width: 12px;
               }
+
+              .box {
+                height: 12px;
+                width: 12px;
+                margin: 0px 5px;
+              }
               
               .problem-A {
-                background-color: #43d640;
-                height: 12px;
-                width: 12px;
-                margin: 0px 5px;
+                background-color: ${(props)=> (props.needDarkMode ?'#AAF683':'#43d640')};
               }
+
               .problem-B {
-                background-color: #23ae20;
-                height: 12px;
-                width: 12px;
-                margin: 0px 5px;
+                background-color: ${(props)=> (props.needDarkMode ?'#60D394':'#23ae20')};
               }
+
               .problem-C {
-                background-color: #c77248;
-                height: 12px;
-                width: 12px;
-                margin: 0px 5px;
+                background-color: ${(props)=> (props.needDarkMode ?'#FFD97D':'#c77248')};
               }
+
               .problem-D {
-                background-color: #cf3838;
-                height: 12px;
-                width: 12px;
-                margin: 0px 5px;
+                background-color: ${(props)=> (props.needDarkMode ?'#EE6055':'#cf3838')};
               }
             }
           }
