@@ -28,6 +28,7 @@ import Tagsfilter from "../MicroComponents/Tagsfilter";
 import LockIcon from '@material-ui/icons/Lock';
 import TimerIcon from '@material-ui/icons/Timer';
 import NotesIcon from '@material-ui/icons/Notes';
+import ReplayIcon from '@material-ui/icons/Replay';
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -1035,22 +1036,21 @@ const CodingSheets = () => {
 
 					<EffectiveFilter needDarkMode={needDarkMode}>
 						<div className="left">
-						</div>
-						<div className="right">
-							{/* <CheckCircleOutlineIcon className="done-btn"/>
-							<UpdateIcon className="review-btn"/> */}
 							<select className="filter-item" value={selectedLabel} onChange={(e) => handleLabelClick(e.target.value)}>
-								<option value="All">Difficulty</option>
+								<option value="All">Problem Difficulty</option>
 								<option value="Easy">Easy</option>
 								<option value="Medium">Medium</option>
 								<option value="Hard">Hard</option>
 							</select>
 							<select className="filter-item" value={selectedValue} onChange={(e) => handleValueClick(e.target.value)}>
 								<option value="All">Status</option>
-								<option value="Marked for later">Marked for later</option>
-								<option value="Marked as completed">Marked as completed</option>
+								<option value="Marked for later">Marked</option>
+								<option value="Marked as completed">Completed</option>
 							</select>
-
+						</div>
+						<div className="right">
+							{/* <CheckCircleOutlineIcon className="done-btn"/>
+							<UpdateIcon className="review-btn"/> */}
 							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} setTags={setTags} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							{/* <div className="filter-item"><CheckCircleOutlineIcon/></div> */}
@@ -1084,17 +1084,22 @@ const CodingSheets = () => {
 										}
 									>
 										{" "}
+										<div className="strip"></div>
 										<div className="link-row-left">
 											<div className="count">{index + 1}</div>
 											<div className="main-row-content">
-												<a
-													href={item.quesLink}
-													target="_blank"
-													rel="noreferrer"
-												>
-													{item.quesName}
-													<div className="time-required">14 Mins 2 Secs</div>
-												</a>
+												<div className="question-main">
+													<a
+														href={item.quesLink}
+														target="_blank"
+														rel="noreferrer"
+													>
+														{item.quesName}
+													</a>
+													<div className="time-required">14 Mins 2 Secs
+														<ReplayIcon/>
+													</div>
+												</div>
 												<div className="tags">
 													{showTags && item.specialTag !== "-" ? (
 														<div className="tag special-tag">
@@ -1453,6 +1458,7 @@ const Container = styled.div`
 		.notice{
 			font-size: 0.8rem;
 			font-weight: 500;
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
 
 		.table {
@@ -1478,6 +1484,10 @@ const Container = styled.div`
 				border-top-right-radius: 5px;
 				border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 
+				.strip{
+					display: none;
+				}
+
 				.link-row-left {
 					display: flex;
 					align-items: center;
@@ -1496,27 +1506,41 @@ const Container = styled.div`
 					}
 
 					.main-row-content {
-						a {
+						.question-main{
 							position: relative;
-							font-size: 1rem;
-							font-weight: 500;
-							text-decoration: none;
-							/* color: inherit; */
-							color: ${(props) => (props.needDarkMode ? 'cornflowerblue' : '#18489f')};
+							display: flex;
+							align-items: center;
 
-							&:hover {
-								text-decoration: underline;
+							a {
+								font-size: 1rem;
+								font-weight: 500;
+								text-decoration: none;
+								margin-right: 15px;
+								/* color: inherit; */
+								color: ${(props) => (props.needDarkMode ? 'cornflowerblue' : '#18489f')};
+	
+								&:hover {
+									text-decoration: underline;
+								}
 							}
-						}
+	
+							.time-required{
+								font-size: 0.7rem;
+								color: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#333')};
+								font-weight: 400;
+								/* position: absolute; */
+								/* top: 3.5px; */
+								/* right: 0px; */
+								font-style: italic;
+								display: flex;
+								align-items: center;
 
-						.time-required{
-							font-size: 0.7rem;
-							color: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#333')};
-							font-weight: 400;
-							position: absolute;
-							top: 3.5px;
-							right: -90px;
-							font-style: italic;
+								svg{
+									font-size: 1rem;
+									margin-left: 5px;
+									fill: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#333')};
+								}
+							}
 						}
 
 						.tags {
@@ -1592,7 +1616,7 @@ const Container = styled.div`
 			}
 
 			.done-row {
-				background-color: ${(props) => (props.needDarkMode ? '#3e3655' : '#dcf8eb')};
+				background-color: ${(props) => (props.needDarkMode ? '#2e3b4c' : '#dcf8eb')};
 				
 				.right-icons{
 					display: flex;
@@ -1603,10 +1627,15 @@ const Container = styled.div`
 						}
 					}
 				}
+
+				.strip{
+					display: none;
+				}
 			}
 
 			.review-row {
-				background-color: ${(props) => (props.needDarkMode ? '#bf2149' : '#ffe3e2')};
+				position: relative;
+				background-color: ${(props) => (props.needDarkMode ? '#2b2023' : '#ffe3e2')};
 				border-radius: 0;
 				
 				.right-icons{
@@ -1617,6 +1646,17 @@ const Container = styled.div`
 							fill: #cf5f5f;
 						}
 					}
+				}
+
+				.strip{
+					display: block !important; 
+					position: absolute;
+					width: 7.5px;
+					height: 100%;
+					background-color: #cf5e5f;
+					top: 0;
+					left: 0;
+					
 				}
 			}
 			
@@ -2092,6 +2132,24 @@ const EffectiveFilter = styled.div`
 		/* Change the color of the checkboxes when they are not selected */
 		input[type="checkbox"] + label {
 			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+
+		.filter-item{
+			background: none;
+			padding: 5px 10px;
+			font-size: 0.7rem;
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+			border-radius: 3px;
+			margin-right: 5px;
+			cursor: pointer;
+			outline: none;
+		}
+
+		svg{
+			font-size: 1.5rem;
+			margin-left: 7.5px;
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 		}
 	}
 
