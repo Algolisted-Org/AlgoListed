@@ -178,6 +178,7 @@ const CCHeaderDark = () => {
 export default CCHeaderDark
 
 const Container = styled.div`
+    z-index: 1000;
     display: flex;
     justify-content: center;
     height: 55px;

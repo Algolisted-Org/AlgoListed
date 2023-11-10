@@ -178,8 +178,9 @@ const CCHeader = () => {
 export default CCHeader
 
 const Container = styled.div`
+    z-index: 1000;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     height: 55px;
     /* width: calc(100vw - 200px); */
     width: 100vw;

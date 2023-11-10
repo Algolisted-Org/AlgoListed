@@ -73,7 +73,7 @@ export default Tagsfilter;
 
 const MenuItem = styled.div`
   position: relative;
-  z-index: 10;
+  z-index: 1;
   font-size: 0.65rem;
   background-color:${(props) => (props.needDarkMode ? "#4042490" : "#f3f4f7")};
   width: auto;
@@ -155,7 +155,7 @@ const Counts = styled.span`
 `;
 
 const Tagscompo = styled.div`
-  z-index: 10;
+  z-index: 1;
   height: 29px;
   padding: 5px 10px;
   font-size: 0.7rem;

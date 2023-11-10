@@ -1258,7 +1258,7 @@ const MobContainer = styled.div`
 				padding: 5px 10px;
 				border-radius: 5px;
 				display: none;
-				z-index: 100;
+				z-index: 1;
 
 				.item {
 					font-size: 0.7rem;
@@ -2136,7 +2136,7 @@ const EffectiveFilter = styled.div`
 		}
 
 		.filter-item{
-			z-index: 10;
+			z-index: 1;
 			background: none;
 			padding: 5px 10px;
 			font-size: 0.7rem;
@@ -2160,7 +2160,7 @@ const EffectiveFilter = styled.div`
 		align-items: center;
 
 		.filter-item{
-			z-index: 10;
+			z-index: 1;
 			background: none;
 			padding: 5px 10px;
 			font-size: 0.7rem;
