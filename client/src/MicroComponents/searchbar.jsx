@@ -33,12 +33,13 @@ const SearchBarWrapper = styled.div`
   align-items: center;
   background-color: ${(props) => (props.needDarkMode ? '#404249' : '#ffffff')};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 2px;
+  padding: 4px 10px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid ${(props) => (props.needDarkMode ? 'transparent' : '#ccc')};
   width: 100%; 
-  height:30px;
   margin: 5px 10px 5px 0px;
+  border-radius: 100px;
+  font-size: 0.7rem;
 `;
 
 const SearchInput = styled.input`

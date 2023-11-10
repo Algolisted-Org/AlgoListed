@@ -1634,6 +1634,7 @@ const Container = styled.div`
 			}
 
 			.review-row {
+				z-index: 0;
 				position: relative;
 				background-color: ${(props) => (props.needDarkMode ? '#2b2023' : '#ffe3e2')};
 				border-radius: 0;
@@ -2135,6 +2136,7 @@ const EffectiveFilter = styled.div`
 		}
 
 		.filter-item{
+			z-index: 10;
 			background: none;
 			padding: 5px 10px;
 			font-size: 0.7rem;
@@ -2158,6 +2160,7 @@ const EffectiveFilter = styled.div`
 		align-items: center;
 
 		.filter-item{
+			z-index: 10;
 			background: none;
 			padding: 5px 10px;
 			font-size: 0.7rem;

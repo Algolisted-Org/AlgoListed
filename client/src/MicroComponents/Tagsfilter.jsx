@@ -72,19 +72,20 @@ function Tagsfilter({ tags,needDarkMode, filterdata,setfilter,data,setTags }) {
 export default Tagsfilter;
 
 const MenuItem = styled.div`
-  font-size: 0.75rem;
-  background-color:${(props) => (props.needDarkMode ? "#404249" : "#f3f4f7")};
-  height:30px;
+  position: relative;
+  z-index: 10;
+  font-size: 0.65rem;
+  background-color:${(props) => (props.needDarkMode ? "#4042490" : "#f3f4f7")};
   width: auto;
-  padding:4px;
-  border-radius: 5px;
+  padding: 2.5px 7.5px;
+  border-radius: 500px;
   margin-top: 5px;
   margin-right: 5px;
   text-align:center;
   cursor:pointer;
   /* color: white; */
   /* color: ${(props) => (props.isselected ? "white":"black")}; */
-  color: ${(props) => (props.needDarkMode ? (props.isselected ? '#fff' : '#ffffff93fff') : (props.isselected ? '#333' : '#333'))};
+  color: ${(props) => (props.needDarkMode ? (props.isselected ? '#fff' : '#969696') : (props.isselected ? '#333' : '#b49999'))};
   border: 1px solid ${(props) => (props.needDarkMode ? (props.isselected ? '#ffffff' : '#ffffffb9') : (props.isselected ? '#040404' : '#cac3c3b0'))};
 `;
 
@@ -154,6 +155,7 @@ const Counts = styled.span`
 `;
 
 const Tagscompo = styled.div`
+  z-index: 10;
   height: 29px;
   padding: 5px 10px;
   font-size: 0.7rem;
