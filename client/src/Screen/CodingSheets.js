@@ -29,6 +29,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import TimerIcon from '@material-ui/icons/Timer';
 import NotesIcon from '@material-ui/icons/Notes';
 import ReplayIcon from '@material-ui/icons/Replay';
+import AlarmOnIcon from '@material-ui/icons/AlarmOn';
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -176,10 +177,13 @@ const CodingSheets = () => {
 				let updatedData = res.data.map((sheet) => {
 					const completed = localStorage.getItem(`completedSheetQuestion-${sheet._id}`);
 					const marked = localStorage.getItem(`markedSheetQuestion-${sheet._id}`);
+					const elapsedTime = localStorage.getItem(`elapsedTimeSheetQuestion-${sheet._id}`) || 0;
 					return {
 						...sheet,
 						completed: completed === "true",
 						marked: marked === "true",
+						isRunning: false,
+      					elapsedTime: elapsedTime,
 					};
 				});
 
@@ -243,6 +247,70 @@ const CodingSheets = () => {
 			updatedData[index].marked
 		);
 	};
+
+	// Stopwatch code starts
+	const handleStartStop = (index) => {
+		const updatedData = [...filteredData];
+		updatedData[index].isRunning = !updatedData[index].isRunning;
+		setFilteredData(updatedData);
+	};
+	
+	const handleReset = (index) => {
+		const updatedData = [...filteredData];
+		updatedData[index].isRunning = false;
+		updatedData[index].elapsedTime = 0;
+		setFilteredData(updatedData);
+		localStorage.removeItem(`elapsedTimeSheetQuestion-${updatedData[index]._id}`);
+	};
+
+	const Stopwatch = ({ id, initialElapsed, isRunning }) => {
+		const [elapsedTime, setElapsedTime] = useState(initialElapsed);
+		const intervalRef = React.useRef(null);
+		const updatedData = [...filteredData];
+		
+		// start the timer
+		useEffect(() => {
+			if (isRunning) {
+				intervalRef.current = setInterval(() => {
+					setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
+				}, 1000);
+			} else {
+				clearInterval(intervalRef.current);
+			}
+
+			return () => clearInterval(intervalRef.current);
+		}, [isRunning]);
+
+		// stores the elapsed time into local storage
+		useEffect(() => {
+			if (isRunning && elapsedTime!=0) {
+				localStorage.setItem(`elapsedTimeSheetQuestion-${updatedData[id]._id}`, elapsedTime);
+				updatedData[id].elapsedTime = elapsedTime;
+			}
+		}, [id, isRunning, elapsedTime]);
+
+		// formats the time into hours mins and secs
+		const formatTime = (totalSeconds) => {
+			const hours = Math.floor(totalSeconds / 3600);
+			const remainingSeconds = totalSeconds % 3600;
+			const minutes = Math.floor(remainingSeconds / 60);
+			const seconds = remainingSeconds % 60;
+		  
+			if (hours > 0) {
+			  return `${hours}hours ${minutes}mins ${seconds} secs`;
+			} else if (minutes > 0) {
+			  return `${minutes} mins ${seconds} secs`;
+			} else {
+			  return `${seconds} secs`;
+			}
+		  }
+		  
+		return (
+			formatTime(elapsedTime)
+		);
+	};
+	// Stopwatch code ends
+
 
 	const progressBarPercent =
 		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
@@ -1096,8 +1164,14 @@ const CodingSheets = () => {
 													>
 														{item.quesName}
 													</a>
-													<div className="time-required">14 Mins 2 Secs
-														<ReplayIcon/>
+													<div className="time-required">
+														<Stopwatch
+															id={index}
+															initialElapsed={parseInt(item.elapsedTime, 10)}
+															isRunning={item.isRunning}
+														/>
+														
+														<ReplayIcon onClick={()=>handleReset(index)}/>
 													</div>
 												</div>
 												<div className="tags">
@@ -1139,8 +1213,8 @@ const CodingSheets = () => {
 												</div>
 											</Tooltip>
 											<Tooltip title="Start Stop Watch">
-												<div className="stop-watch-btn">
-													<TimerIcon/>
+												<div className="stop-watch-btn" onClick={()=>handleStartStop(index)}>
+													{item.isRunning ? <AlarmOnIcon/> : <TimerIcon/>}
 												</div>
 											</Tooltip>
 											{/* <Tooltip title="Add Notes">
