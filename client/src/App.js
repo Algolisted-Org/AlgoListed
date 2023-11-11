@@ -62,8 +62,10 @@ import ResumeQuestions from './Screen/ResumeQuestions';
 import ResumeSection from "./Screen/ResumeSection";
 
 
-const App = () => {
+const App = ({currentThemeDark}) => {
   const [userGlobal, setUserGlobal] = useState();
+  
+  
   
   return (
     <div>

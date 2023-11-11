@@ -10,10 +10,9 @@ import LockIcon from '@material-ui/icons/Lock';
 import WarningIcon from '@material-ui/icons/Warning';
 import SearchIcon from '@material-ui/icons/Search';
 import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
+import SimpleFooter from '../Components/SimpleFooter';
 
-
-
-const ContestAnalysisList = () => {
+const ContestAnalysisList = () => { 
   const [platformName, setPlatformName] = useState('leetcode');
   const [contestType, setContestType] = useState('Weekly Contest');
   const [contestNumber, setContestNumber] = useState('362');
@@ -121,6 +120,7 @@ const ContestAnalysisList = () => {
             </div>
           </div> */}
         </div>
+        <SimpleFooter />
       </Container>
     </GrandContainer>
   );
@@ -152,6 +152,9 @@ const MobContainer = styled.div`
 `
 
 const Container = styled.div`
+    position: relative;
+    padding-bottom: 80px;
+    
     @media only screen and (max-width: 1099px){
         display: none;
     }

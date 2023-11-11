@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
+import SimpleFooter from "../Components/SimpleFooter";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -331,8 +332,8 @@ const ResumeSection = () => {
               Presently, the generated results specifically pertain to entry-level Software Development Engineer SDE or equivalent positions. As we expand, we will progressively incorporate additional information for various positions and roles.
             </div>
           </div>
-          
         </div>
+        <SimpleFooter />
       </Container>
     </GrandContainer>
   );
@@ -363,6 +364,9 @@ const MobContainer = styled.div`
 
 
 const Container = styled.div`
+  position: relative;
+  padding-bottom: 80px;
+  
   @media only screen and (max-width: 1099px) {
     display: none;
   }

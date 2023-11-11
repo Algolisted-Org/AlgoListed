@@ -25,14 +25,16 @@ import { FaWineBottle } from 'react-icons/fa';
 import NoteMaking from './../MicroComponents/NoteMakingCompo';
 import { Bar } from 'react-chartjs-2';
 import DoneIcon from '@material-ui/icons/Done';
-
+import SimpleFooter from '../Components/SimpleFooter';
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
   const [contestType, setContestType] = useState('Weekly Contest');
   const [contestNumber, setContestNumber] = useState('361');
   const [openVisualiser, setOpenVisualiser] = useState(true);
-  const [needDarkMode, setNeedDarkMode] = useState(!false);
+  
+  const [needDarkMode, setNeedDarkMode] = useState(true);
+  
   const [showTags, setShowTags] = useLocalStorage("showTags", true);
   const [filterContestType, setFilterContestType] = useState("All");
   const [filterContestTypeName, setFilterContestTypeName] = useState("Both Contest Types");
@@ -588,6 +590,7 @@ const datasets = problems
             ))}
           </div>
         </div>
+        <SimpleFooter />
       </Container>
     </GrandContainer>
   );
@@ -627,6 +630,9 @@ const MobContainer = styled.div`
 `
 
 const Container = styled.div`
+    position: relative;
+    padding-bottom: 80px;
+
     @media only screen and (max-width: 1099px){
         display: none;
     }
@@ -634,6 +640,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     padding-left: 200px;
+    
 
     background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
 

@@ -1163,8 +1163,8 @@ const CodingSheets = () => {
 						)}
 					</div>
 					{data.length === 0 ? <GiveSpace></GiveSpace> : <></>}
-					<SimpleFooter />
 				</div>
+				<SimpleFooter />
 			</Container>
 		</GrandContainer>
 	);
@@ -1385,6 +1385,9 @@ const MobContainer = styled.div`
 `;
 
 const Container = styled.div`
+	position: relative;
+    padding-bottom: 80px;
+	
 	@media only screen and (max-width: 1099px) {
 		display: none;
 	}
@@ -2051,7 +2054,7 @@ const VisualiserConatiner = styled.div`
     				/* border: 1px solid #; */
 
 					.fill{
-						background-color: #;
+						/* background-color: #; */
 						height: 100%;
 						border-radius: 50px;
 					}
@@ -2098,7 +2101,7 @@ const VisualiserConatiner = styled.div`
         font-size: 0.8rem;
         letter-spacing: 0.07rem;
     }
-`
+`;
 
 const EffectiveFilter = styled.div`
 	display: flex;

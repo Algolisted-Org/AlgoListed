@@ -14,6 +14,7 @@ import app from "../firebase_Auth/firebaseConfig";
 // import { axios } from 'axios';
 // const axios = require('axios');
 import axios from "axios";
+import SimpleFooter from "../Components/SimpleFooter";
 
 const CreateCustomCodingSheets = ({setUserGlobal}) => {
   const [needDarkMode, setNeedDarkMode] = useState(!false);
@@ -493,6 +494,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
             </UserSheetsLikedList>
           )}
         </div>
+        <SimpleFooter />
       </Container>
     </GrandContainer>
   );
@@ -522,6 +524,9 @@ const MobContainer = styled.div`
 `;
 
 const Container = styled.div`
+  position: relative;
+  padding-bottom: 80px;
+
   @media only screen and (max-width: 1099px) {
     display: none;
   }

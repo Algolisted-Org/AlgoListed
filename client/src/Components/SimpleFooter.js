@@ -23,8 +23,10 @@ const SimpleFooter = () => {
 export default SimpleFooter
 
 const Container = styled.div`
-    width: 100%;
-    margin-top: 60px;
+    width: calc(100vw - 200px);
+    position: absolute;
+    bottom: 30px;
+    left: 200px;
 
     .links{
         display: flex;

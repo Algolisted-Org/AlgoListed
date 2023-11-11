@@ -88,8 +88,8 @@ const Opportunities = () => {
             </div>
 
           </div>
-          <SimpleFooter></SimpleFooter>
         </div>
+        <SimpleFooter/>
       </Container>
     </GrandContainer>
   )
@@ -122,6 +122,9 @@ const MobContainer = styled.div`
 
 
 const Container = styled.div`
+    position: relative;
+    padding-bottom: 80px;
+    
     @media only screen and (max-width: 1099px){
         display: none;
     }
