@@ -65,8 +65,6 @@ import ResumeSection from "./Screen/ResumeSection";
 const App = ({currentThemeDark}) => {
   const [userGlobal, setUserGlobal] = useState();
   
-  
-  
   return (
     <div>
       <ScrollToTop />
@@ -85,12 +83,12 @@ const App = ({currentThemeDark}) => {
         <Route path="/future-vision" element={<FutureVision/>} />
         <Route path="/request-api" element={<RequestAPI/>} />
         <Route path="/blog/ideas" element={<BlogIdeas/>} />
-        <Route path="/coding-competitions" element={<CodingCompetitions/>} />
+        {/* <Route path="/coding-competitions" element={<CodingCompetitions/>} /> */}
         <Route path="/organisation-information/:showpage" element={<OrganisationInfo/>} />
         <Route path="/issues" element={<Issues/>}/>
         <Route path="/resources" element={<Resources/>} />
-        <Route path="/blogs/:blogid/:blogname" element={<BlogPage/>} />
-        <Route path="/blogs/all" element={<AllBlogs/>} />
+        {/* <Route path="/blogs/:blogid/:blogname" element={<BlogPage/>} />
+        <Route path="/blogs/all" element={<AllBlogs/>} /> */}
         <Route path="/work-with-us" element={<ContributeSite/>} />
         <Route path="/aptitude-round" element={<AptitudeRound/>} />
         <Route path="/opportunities" element={<Opportunities/>} />

@@ -155,21 +155,6 @@ const Resources = () => {
             {filters}
           </Filters>
           
-          <Sort>
-            {/* <Tooltip title="Under Development"> */}
-              <a href='/add-content-core-only' className="box">
-                <AddIcon />
-              </a>
-            {/* </Tooltip> */}
-            <div className="box">
-              <div className="text">By Relevance</div>
-              <FilterListIcon />
-            </div>
-            {/* <InfoIcon style={{ fill: '#333' }} /> */}
-          </Sort>
-
-
-
           {
             allResources.length === 0 ? (
               <div className="linear-progess-holder">
@@ -499,6 +484,7 @@ const Container = styled.div`
         display: flex;
         flex-wrap: wrap;
         align-items: stretch;
+        /* justify-content: space-between; */
         height: auto;
         width: 100%;
         margin-top: 10px;
@@ -511,7 +497,7 @@ const Container = styled.div`
           border-top: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(232, 232, 232)')};
           /* border: 1px solid rgb(232, 232, 232); */
           padding-top: 20px;
-          margin: 10px 15px 30px 15px;
+          margin: 10px 30px 30px 0;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
