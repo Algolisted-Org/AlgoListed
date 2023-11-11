@@ -39,11 +39,11 @@ const LeftMenu = ({ marked }) => {
       showAt: "contest-analysis",
       link: "/contest-analysis",
     },
-    {
-      value: "Coding Resources",
-      showAt: "resources",
-      link: "/resources",
-    },
+    // {
+    //   value: "Coding Resources",
+    //   showAt: "resources",
+    //   link: "/resources",
+    // },
     {
       value: "Coding Sheets",
       showAt: "coding-sheets",
@@ -53,6 +53,11 @@ const LeftMenu = ({ marked }) => {
       value: "Create Problem List",
       showAt: "create-problem-list",
       link: "/create-problem-list",
+    },
+    {
+      value: "Core Subjects Tracker",
+      showAt: "core-subjects-tracker",
+      link: "/core-subjects-tracker",
     },
     // {
     //   value: "Interview Summaries",

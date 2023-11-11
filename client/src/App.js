@@ -60,6 +60,8 @@ import CreateCustomCodingSheetsEdit from './Screen/CreateCustomCodingSheetsEdit'
 import CustomSheet from './Screen/CustomSheet';
 import ResumeQuestions from './Screen/ResumeQuestions';
 import ResumeSection from "./Screen/ResumeSection";
+import CoreSubjectsTracker from "./Screen/CoreSubjectsTracker";
+
 
 
 const App = ({currentThemeDark}) => {
@@ -107,6 +109,7 @@ const App = ({currentThemeDark}) => {
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
+        <Route path="/core-subjects-tracker" element={<CoreSubjectsTracker/>} />
 
         {/* <Route path="/showdown-server" element={<ShowdownServer/>} />
         <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
