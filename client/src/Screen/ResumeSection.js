@@ -7,6 +7,10 @@ import LeftMenuDark from "../Components/LeftMenuDark";
 import Markdown from "react-markdown";
 import AttachmentIcon from "@material-ui/icons/Attachment";
 import { Document } from "react-pdf";
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import CallMadeIcon from '@material-ui/icons/CallMade';
+import InfoIcon from '@material-ui/icons/Info';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
@@ -221,10 +225,7 @@ const ResumeSection = () => {
                         </div>
                     </div> */}
 
-
-
-
-          <div className="main-container">
+          {/* <div className="main-container">
             <div className="main-features">
               <div className="system-inputs">
                 
@@ -297,7 +298,40 @@ const ResumeSection = () => {
                 </>
               )}
             </div>
+          </div> */}
+
+          <div className="input-container">
+            <div className="resume-upload">
+              <CloudUploadIcon/>
+              <div className="text">Click to upload or drag and drop</div>
+            </div>
+            <div className="other-details">
+              <h3 className="text">Additional Information</h3>
+              <div className="details">
+                <div className="detail">
+                  <div className="text">Company Type</div>
+                  <ExpandMoreIcon/>
+                </div>
+                <div className="detail">
+                  <div className="text">Interview Level</div>
+                  <ExpandMoreIcon/>
+                </div>
+              </div>
+
+            </div>
+            <div className="info">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png" alt="" />
+              <div className="text">Learn how to add your own company-problems dataset  </div>
+              <CallMadeIcon/>
+            </div>
           </div>
+          <div className="main-info">
+            <div className="text">
+              <InfoIcon/>
+              Presently, the generated results specifically pertain to entry-level Software Development Engineer SDE or equivalent positions. As we expand, we will progressively incorporate additional information for various positions and roles.
+            </div>
+          </div>
+          
         </div>
       </Container>
     </GrandContainer>
@@ -310,19 +344,23 @@ const GrandContainer = styled.div``;
 
 const MobContainer = styled.div`
   width: 100vw;
-  @@ -72,111 +137,110 @@ const MobContainer = styled.div
+  padding: 40px;
+  text-align: center;
   font-size: 2rem;
   font-weight: 500;
+
   img {
     width: calc(100% - 80px);
     margin: 40px;
     border-radius: 5px;
     display: block;
   }
+
   @media only screen and (min-width: 1099px) {
     display: none;
   }
 `;
+
 
 const Container = styled.div`
   @media only screen and (max-width: 1099px) {
@@ -509,6 +547,149 @@ const Container = styled.div`
           font-weight: 300;
           line-height: 1.5rem;
           font-size: 0.95rem;
+        }
+      }
+    }
+
+    .input-container{
+      margin-top: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100px;
+
+      .resume-upload{
+        width: 24%;
+        height: 100%;
+        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+
+
+        svg{
+          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          font-size: 2rem;
+        }
+
+        .text{
+          max-width: 150px;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          font-size: 0.75rem;
+          text-align: center;
+          margin-top: 5px;
+          font-weight: 200;
+        }
+      }
+
+      .other-details{
+        width: 50%;
+        height: 100%;
+        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 15px 15px;
+
+        .text{
+          font-size: 0.7rem;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        }
+
+        h3{
+          font-size: 1rem !important;
+          font-weight: 500; 
+          margin-left: 5px;
+        }
+
+        .details{
+          margin-top: 10px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          /* justify-content: center; */
+
+          .detail{
+            min-width: 190px;
+            height: 35px;
+            width: 40%;
+            background-color: ${(props) => (props.needDarkMode ? '#313337' : '#d0d0d0')};
+            border: 1px solid ${(props) => (props.needDarkMode ? '#56575d' : '#c3b4b4')};
+            border-radius: 100px;
+            margin-right: 5px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 10px;
+          }
+        }
+
+
+        
+
+        svg{
+          font-size: 1rem;
+          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        }
+        
+      }
+
+      .info{
+        width: 24%;
+        height: 100%;
+        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+        border-radius: 10px;
+        display: flex;
+        /* flex-direction: column; */
+        align-items: center;
+        justify-content: center;
+        padding: 0 15px;
+
+        img{
+          height: 2rem;
+        }
+
+        svg{
+          font-size: 1.25rem;
+          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          background-color: ${(props) => (props.needDarkMode ? '#696764' : '#d2d1d1')};
+          border-radius: 100%;
+          padding: 3.5px;
+        }
+
+        .text{
+          max-width: 150px;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          font-size: 0.75rem;
+          text-align: center;
+          margin: 0 10px;
+          font-weight: 200;
+          /* font-style: italic; */
+        }
+        
+      }
+    }
+
+    .main-info{
+      margin-top: 10px;
+
+      .text{
+        font-size: 0.75rem;
+        font-weight: 200;
+        color: ${(props) => (props.needDarkMode ? '#c6c2c2' : '#333')};
+
+        svg{
+          font-size: 1rem;
+          margin-bottom: -3.5px;
+          margin-right: 3.5px;
+          fill: ${(props) => (props.needDarkMode ? '#c6c2c2' : '#333')};
         }
       }
     }
