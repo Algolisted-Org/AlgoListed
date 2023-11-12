@@ -7,10 +7,10 @@ import LeftMenuDark from "../Components/LeftMenuDark";
 import Markdown from "react-markdown";
 import AttachmentIcon from "@material-ui/icons/Attachment";
 import { Document } from "react-pdf";
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import CallMadeIcon from '@material-ui/icons/CallMade';
-import InfoIcon from '@material-ui/icons/Info';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import CallMadeIcon from "@material-ui/icons/CallMade";
+import InfoIcon from "@material-ui/icons/Info";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
@@ -63,11 +63,12 @@ const ResumeSection = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
   const [needDarkMode, setNeedDarkMode] = useState(!false);
+  const [responseArray,setResponseArray]=useState([])
   const openai = new OpenAI({
-    apiKey: apiKey,
+    apiKey: "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",
     dangerouslyAllowBrowser: true,
   });
-  
+
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === "dark") setNeedDarkMode(true);
@@ -75,14 +76,17 @@ const ResumeSection = () => {
 
   useEffect(() => {
     document.title = "Resume Based Questions | Open AI - Algolisted";
-    if (textFromPDF) {
-      handleSend();
-    }
+    
   }, []);
 
   const uploadresume = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
+    handleTextExtraction();
+    if(textFromPDF){
+      console.log("object")
+      handleSend();
+    }
     console.log(textFromPDF);
   };
 
@@ -100,13 +104,13 @@ const ResumeSection = () => {
       reader.readAsArrayBuffer(file);
     }
   };
- 
+
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if(selectedTheme === 'dark') setNeedDarkMode(true);
-    if(selectedTheme === 'light') setNeedDarkMode(false);
-  }, [])
-  
+    if (selectedTheme === "dark") setNeedDarkMode(true);
+    if (selectedTheme === "light") setNeedDarkMode(false);
+  }, []);
+
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
@@ -152,10 +156,13 @@ const ResumeSection = () => {
           temperature: 0.5,
           max_tokens: 500,
         });
+        
+
 
         setResponseText(response.choices[0].message.content);
         console.log(response);
         console.log(responseText);
+        console.log(responseArray)
         console.log(prompt);
         setIsLoading(false);
       } catch (error) {
@@ -166,9 +173,16 @@ const ResumeSection = () => {
       console.error("No text to send to Chat API.");
     }
   };
+  useEffect(() => {
+    if (responseText) {
+      const newResponseObject = {
+        timestamp: new Date().toISOString(),
+        content: responseText,
+      };
 
-
-
+      setResponseArray((prevArray) => [...prevArray, newResponseObject]);
+    }
+  }, [responseText]);
   const handleCompany = (e) => {
     setCompanyName(e.target.options[e.target.selectedIndex].text);
     setSelectedCompany(e.target.value);
@@ -178,7 +192,22 @@ const ResumeSection = () => {
     setDifficultyLevelName(e.target.options[e.target.selectedIndex].text);
     setDifficultyLevel(e.target.value);
   };
-
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const dropedFile = e.dataTransfer.files[0];
+    setFile(dropedFile);
+    handleTextExtraction();
+    if(textFromPDF){
+      console.log("object")
+      handleSend();
+    }
+    console.log(textFromPDF);
+    
+  };
+  const handleUploadClick = () => {
+    document.getElementById("fileInput").click();
+  };
+  
   return (
     <GrandContainer>
       <MobContainer>
@@ -191,13 +220,23 @@ const ResumeSection = () => {
         />
       </MobContainer>
       <Container needDarkMode={needDarkMode}>
-        {
-          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
-        }
-        {
-          needDarkMode ? <LeftMenuDark marked={"resume-questions"} /> : <LeftMenu marked={"resume-questions"} />
-        }
-        
+        {needDarkMode ? (
+          <CCHeaderDarkPlus
+            needDarkMode={needDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
+        ) : (
+          <CCHeaderPlus
+            needDarkMode={needDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
+        )}
+        {needDarkMode ? (
+          <LeftMenuDark marked={"resume-questions"} />
+        ) : (
+          <LeftMenu marked={"resume-questions"} />
+        )}
+
         {/* ---> change this all-blogs to your desired page-id */}
 
         <div className="cc-middle-content">
@@ -302,34 +341,55 @@ const ResumeSection = () => {
           </div> */}
 
           <div className="input-container">
-            <div className="resume-upload">
-              <CloudUploadIcon/>
+            <div
+              className="resume-upload"
+              onDragOver={(e) => e.preventDefault()}
+              onDragEnter={(e) => e.preventDefault()}
+              onDrop={handleDrop}
+              onClick={handleUploadClick}
+            >
+              <CloudUploadIcon />
               <div className="text">Click to upload or drag and drop</div>
+              <input
+                type="file"
+                id="fileInput"
+                accept=".pdf"
+                style={{ display: "none" }}
+                onChange={uploadresume}
+              />
             </div>
+            
             <div className="other-details">
               <h3 className="text">Additional Information</h3>
               <div className="details">
                 <div className="detail">
                   <div className="text">Company Type</div>
-                  <ExpandMoreIcon/>
+                  <ExpandMoreIcon />
                 </div>
                 <div className="detail">
                   <div className="text">Interview Level</div>
-                  <ExpandMoreIcon/>
+                  <ExpandMoreIcon />
                 </div>
               </div>
-
             </div>
             <div className="info">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png" alt="" />
-              <div className="text">Learn how to add your own company-problems dataset  </div>
-              <CallMadeIcon/>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png"
+                alt=""
+              />
+              <div className="text">
+                Learn how to add your own company-problems dataset{" "}
+              </div>
+              <CallMadeIcon />
             </div>
           </div>
           <div className="main-info">
             <div className="text">
-              <InfoIcon/>
-              Presently, the generated results specifically pertain to entry-level Software Development Engineer SDE or equivalent positions. As we expand, we will progressively incorporate additional information for various positions and roles.
+              <InfoIcon />
+              Presently, the generated results specifically pertain to
+              entry-level Software Development Engineer SDE or equivalent
+              positions. As we expand, we will progressively incorporate
+              additional information for various positions and roles.
             </div>
           </div>
         </div>
@@ -362,26 +422,26 @@ const MobContainer = styled.div`
   }
 `;
 
-
 const Container = styled.div`
   position: relative;
   padding-bottom: 80px;
-  
+
   @media only screen and (max-width: 1099px) {
     display: none;
   }
-  
+
   display: flex;
   justify-content: space-between;
   padding-left: 200px;
 
-  background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
+  background-color: ${(props) =>
+    props.needDarkMode ? "#313338" : "transparent"};
 
-  a{
-    color: ${(props) => (props.needDarkMode ? '#6d93d8' : '#18489f')};
+  a {
+    color: ${(props) => (props.needDarkMode ? "#6d93d8" : "#18489f")};
   }
 
-  input{
+  input {
     background-color: transparent;
   }
 
@@ -398,84 +458,87 @@ const Container = styled.div`
     @media only screen and (max-width: 1200px) {
       padding: 80px 50px 50px 50px;
     }
-    .main-heading{
-        font-size: 1.65rem;
-        font-weight: 600;
-        color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
-        display: flex;
-        align-items: center;
-        .head-tag {
-          display: inline;
-          font-size: 0.75rem;
+    .main-heading {
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: ${(props) => (props.needDarkMode ? "#e5e6e8" : "#292929")};
+      display: flex;
+      align-items: center;
+      .head-tag {
+        display: inline;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 0.25rem 0.5rem;
+        padding-right: 35px;
+        border-radius: 100px;
+        background-color: #a5bb26;
+        margin-left: 10px;
+
+        img {
+          position: absolute;
+          height: 2rem;
+          margin-top: -7.5px;
+          margin-left: -5px;
+        }
+      }
+    }
+
+    .heading-supporter {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: ${(props) => (props.needDarkMode ? "#ffffffa6" : "#696168")};
+
+      a {
+        color: ${(props) => (props.needDarkMode ? "#18489f" : "#18489f")};
+        font-size: 0.95rem;
+        font-weight: 300;
+        margin-left: 0.25rem;
+      }
+    }
+
+    .message {
+      display: inline-block;
+      /* display: flex; */
+      /* align-items: center; */
+      background-color: ${(props) =>
+        props.needDarkMode ? "#444754" : "#d5f7e1"};
+      border-radius: 5px;
+      padding: 10px;
+      margin: 20px 0 10px 0;
+
+      .text {
+        font-size: 0.8rem;
+        color: ${(props) => (props.needDarkMode ? "#b7b8ba" : "#13803b")};
+        font-weight: 300;
+
+        b {
           font-weight: 500;
-          padding: 0.25rem 0.5rem;
-          padding-right: 35px;
-          border-radius: 100px;
-          background-color: #a5bb26;
-          margin-left: 10px;
-          
-          img {
-            position: absolute;
-            height: 2rem;
-            margin-top: -7.5px;
-            margin-left: -5px;
-          }
+          color: ${(props) => (props.needDarkMode ? "#b7b8ba" : "#13803b")};
         }
       }
+    }
 
-      .heading-supporter{
-          font-size: 1.05rem;
-          margin-bottom: 10px;
-          font-weight: 400;
-          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
-
-          a{
-            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
-            font-size: 0.95rem;
-            font-weight: 300;
-            margin-left: 0.25rem;
-          }
-      }
-
-      .message{
-        display: inline-block;
-        /* display: flex; */
-        /* align-items: center; */
-        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
-        border-radius: 5px;
-        padding: 10px;
-        margin: 20px 0 10px 0;
-
-        .text{
-            font-size: 0.8rem;
-            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
-            font-weight: 300;
-
-            b{
-                font-weight: 500;
-                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
-            }
-        }
-      }
-
-
-    .main-container{
-      .main-features{
+    .main-container {
+      .main-features {
         display: flex;
         margin: 50px 20px 0 0;
-  
-        .system-inputs{
+
+        .system-inputs {
           display: flex;
           flex-direction: column;
           width: 50%;
           border-right: 1px solid #e6e0e0;
           padding: 10px 20px 0 0;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
-    
-          input, select, button{
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+
+          input,
+          select,
+          button {
             width: 100%;
-            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
-            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '#bbbbbb')};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+            border: 1px solid
+              ${(props) => (props.needDarkMode ? "#595b5f" : "#bbbbbb")};
             background-color: transparent;
             border-radius: 15px;
             overflow: hidden;
@@ -483,67 +546,87 @@ const Container = styled.div`
             margin-bottom: 10px;
             font-size: 0.75rem;
           }
-  
-          button{
+
+          button {
             margin-bottom: 20px;
-            background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
-            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+            background-color: ${(props) =>
+              props.needDarkMode ? "#201e1e" : "#f3f4f7"};
+            border: 1px solid
+              ${(props) =>
+                props.needDarkMode ? "#595b5f" : "rgb(209, 213, 219)"};
           }
         }
-  
-        .right-results{
+
+        .right-results {
           flex: 1;
           padding: 10px 0 20px 20px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-  
-          img{
+
+          img {
             height: 80px;
             width: 80px;
           }
-  
-          h3{
+
+          h3 {
             font-weight: 500;
-            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           }
-  
-          p{
+
+          p {
             font-weight: 200;
             font-size: 0.85rem;
-            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           }
-  
         }
       }
 
-      
-      h3{
+      h3 {
         font-weight: 500;
-        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
       }
-      .generated-mark-up{
+      .generated-mark-up {
         margin-top: 10px;
-       
-        p{
+
+        p {
           font-size: 0.95rem;
           font-weight: 300;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
           font-size: 1.25rem;
           font-weight: 600;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           margin-top: 50px;
         }
 
-        ul, ol{
+        ul,
+        ol {
           margin-left: 15px;
         }
 
-        span, h1, h2, h3, h4, h5, h6, div, p, section, ol, ul, li, ul > li {
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        span,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        div,
+        p,
+        section,
+        ol,
+        ul,
+        li,
+        ul > li {
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
         }
 
         li {
@@ -555,33 +638,34 @@ const Container = styled.div`
       }
     }
 
-    .input-container{
+    .input-container {
       margin-top: 50px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 100px;
 
-      .resume-upload{
+      .resume-upload {
         width: 24%;
         height: 100%;
-        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border: 1px dashed ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        border: 1px dashed
+          ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
 
-
-        svg{
-          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        svg {
+          fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           font-size: 2rem;
         }
 
-        .text{
+        .text {
           max-width: 150px;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           font-size: 0.75rem;
           text-align: center;
           margin-top: 5px;
@@ -589,10 +673,11 @@ const Container = styled.div`
         }
       }
 
-      .other-details{
+      .other-details {
         width: 50%;
         height: 100%;
-        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -600,30 +685,32 @@ const Container = styled.div`
         justify-content: center;
         padding: 15px 15px;
 
-        .text{
+        .text {
           font-size: 0.7rem;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
         }
 
-        h3{
+        h3 {
           font-size: 1rem !important;
-          font-weight: 500; 
+          font-weight: 500;
           margin-left: 5px;
         }
 
-        .details{
+        .details {
           margin-top: 10px;
           width: 100%;
           display: flex;
           align-items: center;
           /* justify-content: center; */
 
-          .detail{
+          .detail {
             min-width: 190px;
             height: 35px;
             width: 40%;
-            background-color: ${(props) => (props.needDarkMode ? '#313337' : '#d0d0d0')};
-            border: 1px solid ${(props) => (props.needDarkMode ? '#56575d' : '#c3b4b4')};
+            background-color: ${(props) =>
+              props.needDarkMode ? "#313337" : "#d0d0d0"};
+            border: 1px solid
+              ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
             border-radius: 100px;
             margin-right: 5px;
 
@@ -635,20 +722,17 @@ const Container = styled.div`
           }
         }
 
-
-        
-
-        svg{
+        svg {
           font-size: 1rem;
-          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
         }
-        
       }
 
-      .info{
+      .info {
         width: 24%;
         height: 100%;
-        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         /* flex-direction: column; */
@@ -656,48 +740,47 @@ const Container = styled.div`
         justify-content: center;
         padding: 0 15px;
 
-        img{
+        img {
           height: 2rem;
         }
 
-        svg{
+        svg {
           font-size: 1.25rem;
-          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
-          background-color: ${(props) => (props.needDarkMode ? '#696764' : '#d2d1d1')};
+          fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          background-color: ${(props) =>
+            props.needDarkMode ? "#696764" : "#d2d1d1"};
           border-radius: 100%;
           padding: 3.5px;
         }
 
-        .text{
+        .text {
           max-width: 150px;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           font-size: 0.75rem;
           text-align: center;
           margin: 0 10px;
           font-weight: 200;
           /* font-style: italic; */
         }
-        
       }
     }
 
-    .main-info{
+    .main-info {
       margin-top: 10px;
 
-      .text{
+      .text {
         font-size: 0.75rem;
         font-weight: 200;
-        color: ${(props) => (props.needDarkMode ? '#c6c2c2' : '#333')};
+        color: ${(props) => (props.needDarkMode ? "#c6c2c2" : "#333")};
 
-        svg{
+        svg {
           font-size: 1rem;
           margin-bottom: -3.5px;
           margin-right: 3.5px;
-          fill: ${(props) => (props.needDarkMode ? '#c6c2c2' : '#333')};
+          fill: ${(props) => (props.needDarkMode ? "#c6c2c2" : "#333")};
         }
       }
     }
-
   }
 `;
 const LoadingSection = styled.div`
@@ -715,4 +798,4 @@ const Line = styled.div`
   background-color: #e6e0e0;
   width: 100%;
   margin-bottom: 30px;
-`
+`;
