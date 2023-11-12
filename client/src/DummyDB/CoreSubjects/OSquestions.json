@@ -1,0 +1,167 @@
+[
+    {
+        "_id": "63bec1f45d46e237633a9291",
+        "quesName": "What are the different components of an operating system?",
+        "answer": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.486Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a5578",
+        "quesName": "What is the role of the kernel in an operating system?",
+        "answer": "",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a5422",
+        "quesName": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "answer": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a5558",
+        "quesName": "What is the role of the kernel in an operating system?",
+        "answer": "",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a4921",
+        "quesName": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "answer": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a4119",
+        "quesName": "What is the role of the kernel in an operating system?",
+        "answer": "",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a4489",
+        "quesName": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "answer": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a74432",
+        "quesName": "What is the role of the kernel in an operating system?",
+        "answer": "",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a8827",
+        "quesName": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "answer": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a9321",
+        "quesName": "What is the role of the kernel in an operating system?",
+        "answer": "",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a3231",
+        "quesName": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "answer": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a7699",
+        "quesName": "What is the role of the kernel in an operating system?",
+        "answer": "",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a5121",
+        "quesName": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "answer": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a7611",
+        "quesName": "What is the role of the kernel in an operating system?",
+        "answer": "",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    },
+    {
+        "_id": "63bec1f45d46e237633a9999",
+        "quesName": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "answer": "The kernel is a critical component of an operating system (OS) that sits at the core of the system. It provides a bridge between the hardware and software layers of the computer, enabling the various components of the OS to function together efficiently. The kernel performs a wide range of tasks that are essential to the proper functioning of the OS.",
+        "completed": false,
+        "marked": false,
+        "connectOn": "Striver's SDE Sheet",
+        "connectOnDomain": "striver-sde-sheet",
+        "createdAt": "2023-01-11T14:04:36.573Z",
+        "__v": 0
+    }
+]
