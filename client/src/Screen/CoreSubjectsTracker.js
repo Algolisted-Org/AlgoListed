@@ -45,6 +45,10 @@ const CoreSubjectsTracker = () => {
         let selectedTheme = localStorage.getItem("selectedTheme");
         if (selectedTheme === 'dark') setNeedDarkMode(true);
         if (selectedTheme === 'light') setNeedDarkMode(false);
+        const storedCompletedTopics = localStorage.getItem("completedTopics");
+        if (storedCompletedTopics) {
+            setSelectedLabels(JSON.parse(storedCompletedTopics));
+        }
     }, [])
 
     console.log("needDarkMode : ", needDarkMode);
@@ -69,17 +73,23 @@ const CoreSubjectsTracker = () => {
         setDataLoading(false);
     }, [data])
 
-    const handleLabelClick = (label) => {
-        if (selectedLabels.includes(label)) {
-            setSelectedLabels(selectedLabels.filter((selectedLabel) => selectedLabel !== label));
-        } else {
-            setSelectedLabels([...selectedLabels, label]);
-        }
-    };
+    const handleTopicsLabelClick = (label) => {
+        let updatedLabels;
 
-    // const progressBarPercent = data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
-    const progressBarPercent1 = 35.2;
-    const progressBarPercent2 = 18.2;
+        if (selectedLabels.includes(label)) {
+            // If the label is already selected, remove it
+            updatedLabels = selectedLabels.filter((selectedLabel) => selectedLabel !== label);
+        } else {
+            // If the label is not selected, add it
+            updatedLabels = [...selectedLabels, label];
+        }
+
+        // Update state
+        setSelectedLabels(updatedLabels);
+
+        // Update local storage with the completed topics
+        localStorage.setItem("completedTopics", JSON.stringify(updatedLabels));
+    };
 
     const allTopics = [
         {
@@ -125,6 +135,9 @@ const CoreSubjectsTracker = () => {
             name: "File Management",
         }
     ]
+
+    const progressBarPercent1 = data.length === 0 ? 0 : ((selectedLabels.length / allTopics.length) * 100).toFixed(allTopics.length > 100 ? 1 : 0);
+    const progressBarPercent2 = 18.2;
 
     return (
         <GrandContainer needDarkMode={needDarkMode}>
@@ -220,7 +233,7 @@ const CoreSubjectsTracker = () => {
                                     type="checkbox"
                                     id={topic.name.toLowerCase().replace(/\s+/g, "-")}
                                     checked={selectedLabels.includes(topic.name)}
-                                    onChange={() => handleLabelClick(topic.name)}
+                                    onChange={() => handleTopicsLabelClick(topic.name)}
                                 />
                                 <label htmlFor={topic.name.toLowerCase().replace(/\s+/g, "-")}>{topic.name}</label>
                             </div>
