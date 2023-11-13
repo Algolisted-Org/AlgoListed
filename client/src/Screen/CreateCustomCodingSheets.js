@@ -152,9 +152,10 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
     console.log("`/problem-sheets/get-by-owner/${ownerId}` was called!");
     try {
       const sheetList = await axios.get(
-        `/problem-sheets/get-by-owner/${ownerId}`
+        `https://algolisted.cyclic.app/problem-sheets/get-by-owner/${ownerId}`
       );
-
+      
+      console.log(sheetList.data.sheets);
       setUserSheet(sheetList.data.sheets);
       console.log(userSheet);
     } catch (error) {
@@ -227,6 +228,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
           {/* {user && <UserSheetsList> */}
           {user && (
             <UserSheetsList needDarkMode={needDarkMode}>
+              {console.log("we have a user in the house", user.name)}
               <div className="owner-detail-main">
                 <img className="owner-pic" src={user.profilePictureURL} alt="" />
                 <h1>Hello <b>{user.name}</b>, you are currently logged in!</h1>

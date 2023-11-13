@@ -169,7 +169,7 @@ const CodingSheets = () => {
 
 	useEffect(async () => {
 		try {
-			const sheetDetailsResponse = await axios.get(`/problem-sheets/details?sheetId=${sheetId}`);
+			const sheetDetailsResponse = await axios.get(`https://algolisted.cyclic.app/problem-sheets/details?sheetId=${sheetId}`);
 			const sheetData = sheetDetailsResponse.data.sheet;
 
 			setSheetName(sheetData.sheetName);
@@ -218,7 +218,7 @@ const CodingSheets = () => {
 			console.log(sheetOwnerId);
 
 			try {
-				const response = await fetch(`/user-details/profile-details/?ownerId=${sheetOwnerId}`);
+				const response = await fetch(`https://algolisted.cyclic.app/user-details/profile-details/?ownerId=${sheetOwnerId}`);
 
 				if (response.ok) {
 					const data = await response.json();
@@ -1802,7 +1802,8 @@ const GiveSpace = styled.div`
 
 const VisualiserConatiner = styled.div`
 	margin: 10px 0 0 0;
-    .visualiser-conatiner{
+    
+	.visualiser-conatiner{
         display: flex;
 		align-items: stretch;
         justify-content: space-between;
@@ -1946,7 +1947,7 @@ const VisualiserConatiner = styled.div`
     				/* border: 1px solid #; */
 
 					.fill{
-						background-color: #;
+						background-color: orange;
 						height: 100%;
 						border-radius: 50px;
 					}
@@ -1986,10 +1987,8 @@ const VisualiserConatiner = styled.div`
 			}
 		}
     }
-
     
-    
-    p{
+	p{
         font-size: 0.8rem;
         letter-spacing: 0.07rem;
     }
