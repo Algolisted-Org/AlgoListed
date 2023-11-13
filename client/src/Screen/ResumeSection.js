@@ -25,7 +25,6 @@ const promptForMncQuestionChunks = [
   "Keep it long, and releated so that an student should really have to think about the technology details.",
   "Sample technical questions : 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimise if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimise it and scale it?",
   "Sample soft questions : 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values you think that experience thought you which you can bring to out company. 2. How will you resolve a xyz problem with your team, .....",
-  // "Create an JSON of 10 questions like 'questions': and in array ['question1 here', 'question2 here'...]",W
   "Rate all the projects in scale of 10 based on the tech stack they have used for example more complex tech stack more rating.",
   "Give the ATS score of the resume as well in percentage. and Area of imporvement in the resume.",
   "The input text for resume is: ",
@@ -63,6 +62,53 @@ const ResumeSection = () => {
   const [difficultyLevelName, setDifficultyLevelName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
+  const [dummyResponse, setDummyResponse] = useState({
+    technical: [
+      "1. In the project SocialSphere, how did you implement the forum functionality? Can you explain the role of React JS and MongoDB in this project?",
+      "2. For the project Algolisted, what technologies did you use to develop the personalized resume questionnaire feature? How did you integrate OpenAI API into the project?",
+      "3. In Cryptomania, can you explain how you utilized Chartjs and API integration to provide cryptocurrency statistics and real-time news updates?",
+      "4. How did you optimize the performance of the website you built for ArtBeat Entertainment? Can you mention any specific techniques or tools you used?",
+      "5. In the project Sukham Resort, how did you dynamically design web pages using Reactjs and Tailwind CSS? Can you provide an example of a dynamically designed page?",
+      "6. Can you explain the role of Redux in the Algolisted project? How did it enhance the user experience and performance?",
+      "7. For the project SocialSphere, how did you implement the authentication and user authorization features? Which technologies did you use for this?",
+      "8. In Cryptomania, how did you utilize the Rapid API and News API to fetch real-time cryptocurrency data and news updates? Can you explain the implementation?",
+      "9. Can you explain the role of Netlify in the SocialSphere project? How did it contribute to the deployment and hosting of the application?",
+      "10. For the project Algolisted, how did you implement the job listing feature? Can you explain the technology stack used for this?",
+    ],
+    soft: [
+      "1. I see you have worked on the project SocialSphere. What inspired you to create a forum for history and political enthusiasts? How do you think this project aligns with your values?",
+      "2. How did you handle teamwork while collaborating with the web development interns for ArtBeat Entertainment? Can you share an example of a challenge you faced and how you resolved it?",
+      "3. In the project Algolisted, how did you ensure effective communication and collaboration within the team? Can you share an example of a conflict you encountered and how you resolved it?",
+    ],
+    project_ratings: [
+      {
+        project_name: "SocialSphere",
+        rating: 7,
+      },
+      {
+        project_name: "Algolisted",
+        rating: 9,
+      },
+      {
+        project_name: "Cryptomania",
+        rating: 8,
+      },
+      {
+        project_name: "ArtBeat Entertainment",
+        rating: 6,
+      },
+      {
+        project_name: "Sukham Resort",
+        rating: 5,
+      },
+    ],
+    ats_score: 85,
+    improvement_areas: [
+      "Add more specific achievements and responsibilities under work experience",
+      "Include any relevant certifications or online courses in the education section",
+      "Provide more details about the technologies and tools used in each project",
+    ],
+  });
   const [needDarkMode, setNeedDarkMode] = useState(!false);
   const openai = new OpenAI({
     apiKey: "",
@@ -169,7 +215,6 @@ const ResumeSection = () => {
       console.error("No text to send to Chat API.");
     }
   };
-  
 
   const handleCompany = (e) => {
     setCompanyName(e.target.options[e.target.selectedIndex].text);
@@ -273,7 +318,6 @@ const ResumeSection = () => {
                       style={{ display: "none" }}
                       onChange={uploadresume}
                     />
-                    
                   </div>
                   {/* <input type="file" accept=".pdf" onChange={uploadresume} /> */}
                 </div>
@@ -290,7 +334,6 @@ const ResumeSection = () => {
                     <option value="1">Easy</option>
                     <option value="2">Medium</option>
                     <option value="3">Hard</option>
-                    
                   </select>
                 </div>
                 <button className="btn-2" onClick={handleSend}>
@@ -314,6 +357,7 @@ const ResumeSection = () => {
             </div>
             <Line></Line>
             <h3>AI Generated Resume Based Questions</h3>
+
             <div className="generated-mark-up">
               {responseText ? <></> : <p>No questions generated yet!</p>}
               {isLoading ? (
