@@ -312,8 +312,7 @@ const CodingSheets = () => {
 	// Stopwatch code ends
 
 
-	const progressBarPercent =
-		data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
+	const progressBarPercent = data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
 
 	const filters = codingSheetsFilters.map((item) => {

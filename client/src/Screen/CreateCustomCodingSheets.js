@@ -72,8 +72,9 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
     //     "profilePictureURL": result.user.profilePictureURL
     // }
     try {
+      console.log("https://algolisted.cyclic.app/user-details/profile-create was called");
       const response = await axios.post(
-        `/user-details/profile-create`,
+        `https://algolisted.cyclic.app/user-details/profile-create`,
         result.user,
         { withCredentials: true }
       );
@@ -82,13 +83,16 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
       // sessionStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('userId', response.data.user._id);
       const userId = localStorage.getItem('userId');
+      console.log("We got the User ID");
       console.log(user);
       console.log(userId);
       setUserGlobal(response.data.user);
     } catch (error) {
       try {
+        console.log("https://algolisted.cyclic.app/user-details/profile-update-email was called");
+        console.log(result.user);
         const newResponse = await axios.post(
-          `/user-details/profile-update-email`,
+          `https://algolisted.cyclic.app/user-details/profile-update-email`,
           result.user,
           { withCredentials: true }
         );
@@ -101,9 +105,11 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
       }
     }
   };
+
   const handleSheetIdChange = (event) => {
     setSheetId(event.target.value);
   };
+
   const handleSheetNameChange = (event) => {
     setSheetName(event.target.value);
   };
@@ -143,6 +149,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
   };
 
   const getUserSheet = async (ownerId) => {
+    console.log("`/problem-sheets/get-by-owner/${ownerId}` was called!");
     try {
       const sheetList = await axios.get(
         `/problem-sheets/get-by-owner/${ownerId}`
