@@ -290,15 +290,8 @@ const ResumeSection = () => {
             encompasses your preparation for non-technical interview rounds,
             such as HR and project-related discussions.
           </p>
-          <div className="message">
-            <div className="icon"></div>
-            <div className="text">
-              Text here : We are constantly looking for good blogs. Want to be a
-              technical content writer <a href="/">click here</a>
-            </div>
-          </div>
 
-          <div className="main-container">
+          {/* <div className="main-container">
             <div className="main-features">
               <div className="system-inputs ">
                 <div className="input-container">
@@ -319,7 +312,6 @@ const ResumeSection = () => {
                       onChange={uploadresume}
                     />
                   </div>
-                  {/* <input type="file" accept=".pdf" onChange={uploadresume} /> */}
                 </div>
                 <div>
                   <select value={selectedCompany} onChange={handleCompany}>
@@ -380,9 +372,9 @@ const ResumeSection = () => {
                 </>
               )}
             </div>
-          </div>
+          </div> */}
 
-          {/* <div className="input-container">
+          <div className="input-container">
             <div
               className="resume-upload"
               onDragOver={(e) => e.preventDefault()}
@@ -400,7 +392,7 @@ const ResumeSection = () => {
                 onChange={uploadresume}
               />
             </div>
-            
+
             <div className="other-details">
               <h3 className="text">Additional Information</h3>
               <div className="details">
@@ -415,25 +407,59 @@ const ResumeSection = () => {
               </div>
             </div>
             <div className="info">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png"
-                alt=""
-              />
-              <div className="text">
-                Learn how to add your own company-problems dataset{" "}
+              <h3 className="text">Choose Model</h3>
+              <div className="detail">
+                <div className="text">gpt-3.5-turbo</div>
+                <ExpandMoreIcon />
               </div>
-              <CallMadeIcon />
+            </div>
+            <div className="input-api-key">
+              <div className="left-section">
+                Generate your Free Open AI API key
+                <CallMadeIcon />
+              </div>
+              <div className="right-section">
+                <input type="text" placeholder="Enter you Open AI API key eg. sk-.... " />
+              </div>
+            </div>
+            <div className="submit-btn">
+              Generate Result
             </div>
           </div>
           <div className="main-info">
             <div className="text">
               <InfoIcon />
-              Presently, the generated results specifically pertain to
-              entry-level Software Development Engineer SDE or equivalent
-              positions. As we expand, we will progressively incorporate
-              additional information for various positions and roles.
+              We operate as an open-source company without current sponsorship, which is why it's necessary to input your API key. Rest assured, we're committed to introducing a version of the feature that doesn't require a personal API key in the near future. 
             </div>
-          </div> */}
+          </div>
+
+          <div className="display-line"></div>
+          
+          <div className="ai-generated-results">
+            <div className="graphs"></div>
+            <div className="questions">
+              <h2>Technical Questions</h2>
+              <p>1. In the project SocialSphere, how did you implement the forum functionality? Can you explain the role of React JS and MongoDB in this project? </p>
+              <p>2. For the project Algolisted, what technologies did you use to develop the personalized resume questionnaire feature? How did you integrate OpenAI API into the project?</p>
+              <p>3. In Cryptomania, can you explain how you utilized Chartjs and API integration to provide cryptocurrency statistics and real-time news updates?</p>
+              
+              <h2>Soft Questions</h2>
+              <p>1. I see you have worked on the project SocialSphere. What inspired you to create a forum for history and political enthusiasts? How do you think this project aligns with your values?</p>
+            </div>
+            <div className="stats">
+              <h2>Useful Stats about Resumes</h2>
+              <p>This is will be a locally generated stuff!</p>
+            </div>
+            <div className="stats">
+              <h2>Get your Resume Reviewed by Professionals</h2>
+              <p>topmate.io shit! with LLM vector database</p>
+            </div>
+            <div className="stats">
+              <h2>Resourses for Resume</h2>
+              <p>Local stuff!</p>
+            </div>
+          </div>
+
         </div>
         <SimpleFooter />
       </Container>
@@ -470,6 +496,13 @@ const Container = styled.div`
 
   @media only screen and (max-width: 1099px) {
     display: none;
+  }
+
+  .display-line{
+    width: 100%;
+    margin: 20px 0 30px 0;
+    height: 1px;
+    background-color: #404249;
   }
 
   display: flex;
@@ -543,8 +576,7 @@ const Container = styled.div`
       display: inline-block;
       /* display: flex; */
       /* align-items: center; */
-      background-color: ${(props) =>
-        props.needDarkMode ? "#444754" : "#d5f7e1"};
+      background-color: ${(props) => props.needDarkMode ? "#444754" : "#d5f7e1"};
       border-radius: 5px;
       padding: 10px;
       margin: 20px 0 10px 0;
@@ -592,10 +624,10 @@ const Container = styled.div`
           button {
             margin-bottom: 20px;
             background-color: ${(props) =>
-              props.needDarkMode ? "#201e1e" : "#f3f4f7"};
+    props.needDarkMode ? "#201e1e" : "#f3f4f7"};
             border: 1px solid
               ${(props) =>
-                props.needDarkMode ? "#595b5f" : "rgb(209, 213, 219)"};
+    props.needDarkMode ? "#595b5f" : "rgb(209, 213, 219)"};
           }
         }
 
@@ -684,16 +716,14 @@ const Container = styled.div`
       display: flex;
       width: 100%;
       margin-top: 50px;
-      margin-bottom: 20px;
-      align-items: center;
-      justify-content: center;
-      height: 100px;
+      margin-bottom: 10px;
+      justify-content: space-between;
+      flex-wrap: wrap;
 
       .resume-upload {
-        width: 24%;
-        height: 100%;
-        background-color: ${(props) =>
-          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        width: calc(25% - 10px);
+        height: 100px;
+        background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -718,10 +748,9 @@ const Container = styled.div`
       }
 
       .other-details {
-        width: 50%;
-        height: 100%;
-        background-color: ${(props) =>
-          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        width: calc(75% - 190px);
+        height: 100px;
+        background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -751,10 +780,8 @@ const Container = styled.div`
             min-width: 190px;
             height: 35px;
             width: 40%;
-            background-color: ${(props) =>
-              props.needDarkMode ? "#313337" : "#d0d0d0"};
-            border: 1px solid
-              ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
+            background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
+            border: 1px solid ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
             border-radius: 100px;
             margin-right: 5px;
 
@@ -773,40 +800,162 @@ const Container = styled.div`
       }
 
       .info {
-        width: 24%;
-        height: 100%;
-        background-color: ${(props) =>
-          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        width: 180px;
+        height: 100px;
+        background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
-        /* flex-direction: column; */
-        align-items: center;
-        justify-content: center;
-        padding: 0 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 15px 15px;
 
-        img {
-          height: 2rem;
+        .text {
+          font-size: 0.7rem;
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        }
+
+        h3 {
+          font-size: 1rem !important;
+          font-weight: 500;
+          margin-left: 5px;
+        }
+
+        .detail {
+          height: 35px;
+          width: 100%;
+          background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
+          border: 1px solid ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
+          border-radius: 100px;
+          margin-right: 5px;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          padding: 0 10px;
         }
 
         svg {
-          font-size: 1.25rem;
+          font-size: 1rem;
           fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
-          background-color: ${(props) =>
-            props.needDarkMode ? "#696764" : "#d2d1d1"};
-          border-radius: 100%;
-          padding: 3.5px;
         }
+      }
 
-        .text {
-          max-width: 150px;
+      .input-api-key{
+        width: calc(100% - 190px);
+        margin-top: 10px;
+        background-color: #404249;
+        height: 45px;
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .left-section{
+          height: 100%;
+          background-color: #313337;
+          border-radius: 12.5px;
+          padding: 0 20px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          svg {
+            fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+            font-size: 1rem;
+            margin-left: 10px;
+          }
+
           color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           font-size: 0.75rem;
           text-align: center;
-          margin: 0 10px;
-          font-weight: 200;
-          /* font-style: italic; */
+          font-weight: 500;
+        }
+
+        .right-section{
+          flex: 1;
+          border-left: 1px solid #635757;
+          margin-left: 10px;
+          padding: 0 0 0 10px;
+          height: 100%;
+
+          input{
+            height: 100%;
+            background-color: #313337;
+            border-radius: 100px;
+            border: none;
+            width: 100%;
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+            font-size: 0.75rem;
+            font-weight: 200;
+            padding: 0 12.5px;
+          }
         }
       }
+      
+      .submit-btn{
+        width: 180px;
+        margin-top: 10px;
+        background-color: #404249;
+        height: 45px;
+        border-radius: 10px;
+        border: 1px solid #c2b1b1;
+        color: #333;
+        display: inline-block;
+        font-size: 0.85rem;
+        font-weight: 300;
+        text-decoration: none;
+        /* text-transform: uppercase; */
+        border-radius: 100px;
+        background: linear-gradient(300deg,#56f238,#b3adff,#c5c5ef,#bde6ce,#56f238);
+        background-size: 400% 400%;
+        -webkit-animation: AnimationName 10s ease infinite;
+        -moz-animation: AnimationName 10s ease infinite;
+        animation: AnimationName 10s ease infinite;
+        border-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        opacity: 0.75;
+        
+
+        a{
+          color: #333; 
+        }
+
+        &:hover{
+          background-color: whitesmoke;
+          color: #333;
+          cursor: pointer;
+          transition-duration: 500ms;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+
+      @-moz-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+
+      @keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+
     }
 
     .main-info {
@@ -822,6 +971,48 @@ const Container = styled.div`
           margin-bottom: -3.5px;
           margin-right: 3.5px;
           fill: ${(props) => (props.needDarkMode ? "#c6c2c2" : "#333")};
+        }
+      }
+    }
+
+    .ai-generated-results{
+      .graphs{
+        height: 320px;
+        width: 100%;
+        border-radius: 10px;
+        background-color: #404249;
+        margin: 10px 0;
+      }
+
+      .questions{
+        h2{
+          color: ${(props) => (props.needDarkMode ? "#fff" : "#333")};
+          font-size: 1.5rem;
+          font-weight: 500;
+          margin-top: 35px;
+        }
+        
+        p{
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          font-size: 0.9rem;
+          font-weight: 300;
+          margin: 15px 0;
+        }
+      }
+
+      .stats{
+        h2{
+          color: ${(props) => (props.needDarkMode ? "#fff" : "#333")};
+          font-size: 1.5rem;
+          font-weight: 500;
+          margin-top: 35px;
+        }
+
+        p{
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          font-size: 0.9rem;
+          font-weight: 300;
+          margin: 15px 0;
         }
       }
     }
