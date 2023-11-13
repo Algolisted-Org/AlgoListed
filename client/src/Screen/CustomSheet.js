@@ -169,7 +169,7 @@ const CodingSheets = () => {
 
 	useEffect(async () => {
 		try {
-			const sheetDetailsResponse = await axios.get(`http://localhost:8000/problem-sheets/details?sheetId=${sheetId}`);
+			const sheetDetailsResponse = await axios.get(`/problem-sheets/details?sheetId=${sheetId}`);
 			const sheetData = sheetDetailsResponse.data.sheet;
 
 			setSheetName(sheetData.sheetName);
@@ -218,7 +218,7 @@ const CodingSheets = () => {
 			console.log(sheetOwnerId);
 
 			try {
-				const response = await fetch(`http://localhost:8000/user-details/profile-details/?ownerId=${sheetOwnerId}`);
+				const response = await fetch(`/user-details/profile-details/?ownerId=${sheetOwnerId}`);
 
 				if (response.ok) {
 					const data = await response.json();
