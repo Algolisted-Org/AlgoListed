@@ -11,6 +11,7 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import InfoIcon from "@material-ui/icons/Info";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
@@ -435,6 +436,10 @@ const ResumeSection = () => {
 
           <div className="display-line"></div>
           
+          <div className="show-sample">
+            <div className="text">Hide Sample Result</div>
+            <ExpandLessIcon/>
+          </div>
           <div className="ai-generated-results">
             <div className="graphs"></div>
             <div className="questions">
@@ -972,6 +977,24 @@ const Container = styled.div`
           margin-right: 3.5px;
           fill: ${(props) => (props.needDarkMode ? "#c6c2c2" : "#333")};
         }
+      }
+    }
+
+    .show-sample{
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .text{
+        font-size: 0.9rem;
+        color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+      }
+      
+      svg{
+        margin-left: 5px;
+        font-size: 1.25rem;
+        fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        
       }
     }
 
