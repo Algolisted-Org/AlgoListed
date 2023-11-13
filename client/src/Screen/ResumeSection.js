@@ -7,10 +7,10 @@ import LeftMenuDark from "../Components/LeftMenuDark";
 import Markdown from "react-markdown";
 import AttachmentIcon from "@material-ui/icons/Attachment";
 import { Document } from "react-pdf";
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import CallMadeIcon from '@material-ui/icons/CallMade';
-import InfoIcon from '@material-ui/icons/Info';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import CallMadeIcon from "@material-ui/icons/CallMade";
+import InfoIcon from "@material-ui/icons/Info";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
@@ -20,24 +20,26 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const promptForMncQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
-  "Given a resume text, provide me some vast number of technical and soft skills questions for MNCs. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, that project have used. ",
-  "Create an markdown text for 10 questions. Just have two sections techical(10 2-line questions) and soft(2 3.5-line questions), and no other heading. And the questions should have a numbering on left, 1 to 10. Don't use any bold or anything. Just have h1 for heading and ol and li for questions",
+  "Given a resume text, provide me some vast number of technical and soft skills questions for MNCs. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, that project have used. Also rate that project on scale of 10 based on the tech stack used in that project ",
+  "Create an JSON text for 10 questions for example like 'questions': and in array ['question1 here', 'question2 here'...]`. Just have two sections techical(10 2-line questions) and soft(2 3.5-line questions), and no other heading. And the questions should have a numbering on left, 1 to 10. Don't use any bold or anything. Just have h1 for heading and ol and li for questions,Don't give any resuorces.",
   "Keep it long, and releated so that an student should really have to think about the technology details.",
   "Sample technical questions : 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimise if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimise it and scale it?",
   "Sample soft questions : 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values you think that experience thought you which you can bring to out company. 2. How will you resolve a xyz problem with your team, .....",
-  // "Create an JSON of 10 questions like 'questions': and in array ['question1 here', 'question2 here'...]",
+  // "Create an JSON of 10 questions like 'questions': and in array ['question1 here', 'question2 here'...]",W
+  "Rate all the projects in scale of 10 based on the tech stack they have used for example more complex tech stack more rating.",
+  "Give the ATS score of the resume as well in percentage. and Area of imporvement in the resume.",
   "The input text for resume is: ",
 ];
 const promptForStartup = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for Startups.",
-  "Create an markdown text for questions and supported links for resources.",
+
   "The input text is: ",
 ];
 const promptForUnicorn = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for Unicorns.",
-  "Create an markdown text for questions and supported links for resources.",
+
   "The input text is: ",
 ];
 const promptForRemote = [
@@ -48,7 +50,6 @@ const promptForRemote = [
 const promptForBasicQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for the specific type of company and difficulty level  I need to prepare with and help me get the job.",
-  "Create an markdown text for questions and supported links for resources.",
   "The input category of company ,difficuty level and text are:",
 ];
 
@@ -64,10 +65,10 @@ const ResumeSection = () => {
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
   const [needDarkMode, setNeedDarkMode] = useState(!false);
   const openai = new OpenAI({
-    apiKey: apiKey,
+    apiKey: "",
     dangerouslyAllowBrowser: true,
   });
-  
+
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === "dark") setNeedDarkMode(true);
@@ -75,14 +76,16 @@ const ResumeSection = () => {
 
   useEffect(() => {
     document.title = "Resume Based Questions | Open AI - Algolisted";
-    if (textFromPDF) {
-      handleSend();
-    }
   }, []);
 
   const uploadresume = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
+    handleTextExtraction();
+    if (textFromPDF) {
+      console.log("object");
+      handleSend();
+    }
     console.log(textFromPDF);
   };
 
@@ -100,13 +103,13 @@ const ResumeSection = () => {
       reader.readAsArrayBuffer(file);
     }
   };
- 
+
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if(selectedTheme === 'dark') setNeedDarkMode(true);
-    if(selectedTheme === 'light') setNeedDarkMode(false);
-  }, [])
-  
+    if (selectedTheme === "dark") setNeedDarkMode(true);
+    if (selectedTheme === "light") setNeedDarkMode(false);
+  }, []);
+
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
@@ -154,7 +157,7 @@ const ResumeSection = () => {
         });
 
         setResponseText(response.choices[0].message.content);
-        console.log(response);
+        console.log(response.choices[0].message.content);
         console.log(responseText);
         console.log(prompt);
         setIsLoading(false);
@@ -166,8 +169,7 @@ const ResumeSection = () => {
       console.error("No text to send to Chat API.");
     }
   };
-
-
+  
 
   const handleCompany = (e) => {
     setCompanyName(e.target.options[e.target.selectedIndex].text);
@@ -177,6 +179,20 @@ const ResumeSection = () => {
   const handleDifficult = (e) => {
     setDifficultyLevelName(e.target.options[e.target.selectedIndex].text);
     setDifficultyLevel(e.target.value);
+  };
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const dropedFile = e.dataTransfer.files[0];
+    setFile(dropedFile);
+    handleTextExtraction();
+    if (textFromPDF) {
+      console.log("object");
+      handleSend();
+    }
+    console.log(textFromPDF);
+  };
+  const handleUploadClick = () => {
+    document.getElementById("fileInput").click();
   };
 
   return (
@@ -191,13 +207,23 @@ const ResumeSection = () => {
         />
       </MobContainer>
       <Container needDarkMode={needDarkMode}>
-        {
-          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
-        }
-        {
-          needDarkMode ? <LeftMenuDark marked={"resume-questions"} /> : <LeftMenu marked={"resume-questions"} />
-        }
-        
+        {needDarkMode ? (
+          <CCHeaderDarkPlus
+            needDarkMode={needDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
+        ) : (
+          <CCHeaderPlus
+            needDarkMode={needDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
+        )}
+        {needDarkMode ? (
+          <LeftMenuDark marked={"resume-questions"} />
+        ) : (
+          <LeftMenu marked={"resume-questions"} />
+        )}
+
         {/* ---> change this all-blogs to your desired page-id */}
 
         <div className="cc-middle-content">
@@ -219,20 +245,39 @@ const ResumeSection = () => {
             encompasses your preparation for non-technical interview rounds,
             such as HR and project-related discussions.
           </p>
-          {/* <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
-                        </div>
-                    </div> */}
+          <div className="message">
+            <div className="icon"></div>
+            <div className="text">
+              Text here : We are constantly looking for good blogs. Want to be a
+              technical content writer <a href="/">click here</a>
+            </div>
+          </div>
 
-          {/* <div className="main-container">
+          <div className="main-container">
             <div className="main-features">
-              <div className="system-inputs">
-                
-                <input type="file" accept=".pdf" onChange={uploadresume} />
+              <div className="system-inputs ">
+                <div className="input-container">
+                  <div
+                    className="resume-upload"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDragEnter={(e) => e.preventDefault()}
+                    onDrop={handleDrop}
+                    onClick={handleUploadClick}
+                  >
+                    <CloudUploadIcon />
+                    <div className="text">Click to upload or drag and drop</div>
+                    <input
+                      type="file"
+                      id="fileInput"
+                      accept=".pdf"
+                      style={{ display: "none" }}
+                      onChange={uploadresume}
+                    />
+                    
+                  </div>
+                  {/* <input type="file" accept=".pdf" onChange={uploadresume} /> */}
+                </div>
                 <div>
-                  
                   <select value={selectedCompany} onChange={handleCompany}>
                     <option value="0">Select Category:</option>
                     <option value="1">Multinational Corporation (MNC)</option>
@@ -242,24 +287,11 @@ const ResumeSection = () => {
                   </select>
                   <select value={difficultyLevel} onChange={handleDifficult}>
                     <option value="0">Select Difficulty level:</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                    <option value="1">Easy</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Hard</option>
+                    
                   </select>
-
-                  <input
-                  type="text"
-                  placeholder="Enter your open API KEY here....."
-                  onChange={(e) => setApiKey(e.target.value)}
-                  className="api_input"
-                />
                 </div>
                 <button className="btn-2" onClick={handleSend}>
                   Submit
@@ -267,18 +299,23 @@ const ResumeSection = () => {
               </div>
               <div className="right-results">
                 <h3>Powered by,</h3>
-                <img src="https://chatgptaihub.com/wp-content/uploads/2023/06/ChatGpt-Logo-with-Black-Background.png" alt="" />
+                <img
+                  src="https://chatgptaihub.com/wp-content/uploads/2023/06/ChatGpt-Logo-with-Black-Background.png"
+                  alt=""
+                />
                 <p>
-                  We've conducted extensive research and developed highly tailored prompts to meet individual user requirements. We have invested considerable effort in prompt engineering, research, and data analysis. However, due to budget constraints, we kindly ask users to utilize their own API keys.
+                  We've conducted extensive research and developed highly
+                  tailored prompts to meet individual user requirements. We have
+                  invested considerable effort in prompt engineering, research,
+                  and data analysis. However, due to budget constraints, we
+                  kindly ask users to utilize their own API keys.
                 </p>
               </div>
             </div>
             <Line></Line>
             <h3>AI Generated Resume Based Questions</h3>
             <div className="generated-mark-up">
-              {
-                responseText ? <></> : <p>No questions generated yet!</p>
-              }
+              {responseText ? <></> : <p>No questions generated yet!</p>}
               {isLoading ? (
                 <LoadingSection>Loading....</LoadingSection>
               ) : (
@@ -299,39 +336,60 @@ const ResumeSection = () => {
                 </>
               )}
             </div>
-          </div> */}
+          </div>
 
-          <div className="input-container">
-            <div className="resume-upload">
-              <CloudUploadIcon/>
+          {/* <div className="input-container">
+            <div
+              className="resume-upload"
+              onDragOver={(e) => e.preventDefault()}
+              onDragEnter={(e) => e.preventDefault()}
+              onDrop={handleDrop}
+              onClick={handleUploadClick}
+            >
+              <CloudUploadIcon />
               <div className="text">Click to upload or drag and drop</div>
+              <input
+                type="file"
+                id="fileInput"
+                accept=".pdf"
+                style={{ display: "none" }}
+                onChange={uploadresume}
+              />
             </div>
+            
             <div className="other-details">
               <h3 className="text">Additional Information</h3>
               <div className="details">
                 <div className="detail">
                   <div className="text">Company Type</div>
-                  <ExpandMoreIcon/>
+                  <ExpandMoreIcon />
                 </div>
                 <div className="detail">
                   <div className="text">Interview Level</div>
-                  <ExpandMoreIcon/>
+                  <ExpandMoreIcon />
                 </div>
               </div>
-
             </div>
             <div className="info">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png" alt="" />
-              <div className="text">Learn how to add your own company-problems dataset  </div>
-              <CallMadeIcon/>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png"
+                alt=""
+              />
+              <div className="text">
+                Learn how to add your own company-problems dataset{" "}
+              </div>
+              <CallMadeIcon />
             </div>
           </div>
           <div className="main-info">
             <div className="text">
-              <InfoIcon/>
-              Presently, the generated results specifically pertain to entry-level Software Development Engineer SDE or equivalent positions. As we expand, we will progressively incorporate additional information for various positions and roles.
+              <InfoIcon />
+              Presently, the generated results specifically pertain to
+              entry-level Software Development Engineer SDE or equivalent
+              positions. As we expand, we will progressively incorporate
+              additional information for various positions and roles.
             </div>
-          </div>
+          </div> */}
         </div>
         <SimpleFooter />
       </Container>
@@ -362,26 +420,26 @@ const MobContainer = styled.div`
   }
 `;
 
-
 const Container = styled.div`
   position: relative;
   padding-bottom: 80px;
-  
+
   @media only screen and (max-width: 1099px) {
     display: none;
   }
-  
+
   display: flex;
   justify-content: space-between;
   padding-left: 200px;
 
-  background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
+  background-color: ${(props) =>
+    props.needDarkMode ? "#313338" : "transparent"};
 
-  a{
-    color: ${(props) => (props.needDarkMode ? '#6d93d8' : '#18489f')};
+  a {
+    color: ${(props) => (props.needDarkMode ? "#6d93d8" : "#18489f")};
   }
 
-  input{
+  input {
     background-color: transparent;
   }
 
@@ -398,84 +456,87 @@ const Container = styled.div`
     @media only screen and (max-width: 1200px) {
       padding: 80px 50px 50px 50px;
     }
-    .main-heading{
-        font-size: 1.65rem;
-        font-weight: 600;
-        color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
-        display: flex;
-        align-items: center;
-        .head-tag {
-          display: inline;
-          font-size: 0.75rem;
+    .main-heading {
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: ${(props) => (props.needDarkMode ? "#e5e6e8" : "#292929")};
+      display: flex;
+      align-items: center;
+      .head-tag {
+        display: inline;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 0.25rem 0.5rem;
+        padding-right: 35px;
+        border-radius: 100px;
+        background-color: #a5bb26;
+        margin-left: 10px;
+
+        img {
+          position: absolute;
+          height: 2rem;
+          margin-top: -7.5px;
+          margin-left: -5px;
+        }
+      }
+    }
+
+    .heading-supporter {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: ${(props) => (props.needDarkMode ? "#ffffffa6" : "#696168")};
+
+      a {
+        color: ${(props) => (props.needDarkMode ? "#18489f" : "#18489f")};
+        font-size: 0.95rem;
+        font-weight: 300;
+        margin-left: 0.25rem;
+      }
+    }
+
+    .message {
+      display: inline-block;
+      /* display: flex; */
+      /* align-items: center; */
+      background-color: ${(props) =>
+        props.needDarkMode ? "#444754" : "#d5f7e1"};
+      border-radius: 5px;
+      padding: 10px;
+      margin: 20px 0 10px 0;
+
+      .text {
+        font-size: 0.8rem;
+        color: ${(props) => (props.needDarkMode ? "#b7b8ba" : "#13803b")};
+        font-weight: 300;
+
+        b {
           font-weight: 500;
-          padding: 0.25rem 0.5rem;
-          padding-right: 35px;
-          border-radius: 100px;
-          background-color: #a5bb26;
-          margin-left: 10px;
-          
-          img {
-            position: absolute;
-            height: 2rem;
-            margin-top: -7.5px;
-            margin-left: -5px;
-          }
+          color: ${(props) => (props.needDarkMode ? "#b7b8ba" : "#13803b")};
         }
       }
+    }
 
-      .heading-supporter{
-          font-size: 1.05rem;
-          margin-bottom: 10px;
-          font-weight: 400;
-          color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
-
-          a{
-            color: ${(props) => (props.needDarkMode ? '#18489f' : '#18489f')};
-            font-size: 0.95rem;
-            font-weight: 300;
-            margin-left: 0.25rem;
-          }
-      }
-
-      .message{
-        display: inline-block;
-        /* display: flex; */
-        /* align-items: center; */
-        background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
-        border-radius: 5px;
-        padding: 10px;
-        margin: 20px 0 10px 0;
-
-        .text{
-            font-size: 0.8rem;
-            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
-            font-weight: 300;
-
-            b{
-                font-weight: 500;
-                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
-            }
-        }
-      }
-
-
-    .main-container{
-      .main-features{
+    .main-container {
+      .main-features {
         display: flex;
         margin: 50px 20px 0 0;
-  
-        .system-inputs{
+
+        .system-inputs {
           display: flex;
           flex-direction: column;
           width: 50%;
           border-right: 1px solid #e6e0e0;
           padding: 10px 20px 0 0;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
-    
-          input, select, button{
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+
+          input,
+          select,
+          button {
             width: 100%;
-            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
-            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : '#bbbbbb')};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+            border: 1px solid
+              ${(props) => (props.needDarkMode ? "#595b5f" : "#bbbbbb")};
             background-color: transparent;
             border-radius: 15px;
             overflow: hidden;
@@ -483,67 +544,87 @@ const Container = styled.div`
             margin-bottom: 10px;
             font-size: 0.75rem;
           }
-  
-          button{
+
+          button {
             margin-bottom: 20px;
-            background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
-            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+            background-color: ${(props) =>
+              props.needDarkMode ? "#201e1e" : "#f3f4f7"};
+            border: 1px solid
+              ${(props) =>
+                props.needDarkMode ? "#595b5f" : "rgb(209, 213, 219)"};
           }
         }
-  
-        .right-results{
+
+        .right-results {
           flex: 1;
           padding: 10px 0 20px 20px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-  
-          img{
+
+          img {
             height: 80px;
             width: 80px;
           }
-  
-          h3{
+
+          h3 {
             font-weight: 500;
-            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           }
-  
-          p{
+
+          p {
             font-weight: 200;
             font-size: 0.85rem;
-            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           }
-  
         }
       }
 
-      
-      h3{
+      h3 {
         font-weight: 500;
-        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
       }
-      .generated-mark-up{
+      .generated-mark-up {
         margin-top: 10px;
-       
-        p{
+
+        p {
           font-size: 0.95rem;
           font-weight: 300;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
           font-size: 1.25rem;
           font-weight: 600;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           margin-top: 50px;
         }
 
-        ul, ol{
+        ul,
+        ol {
           margin-left: 15px;
         }
 
-        span, h1, h2, h3, h4, h5, h6, div, p, section, ol, ul, li, ul > li {
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        span,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        div,
+        p,
+        section,
+        ol,
+        ul,
+        li,
+        ul > li {
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
         }
 
         li {
@@ -555,33 +636,36 @@ const Container = styled.div`
       }
     }
 
-    .input-container{
-      margin-top: 50px;
+    .input-container {
       display: flex;
+      width: 100%;
+      margin-top: 50px;
+      margin-bottom: 20px;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       height: 100px;
 
-      .resume-upload{
+      .resume-upload {
         width: 24%;
         height: 100%;
-        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border: 1px dashed ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        border: 1px dashed
+          ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
 
-
-        svg{
-          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        svg {
+          fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           font-size: 2rem;
         }
 
-        .text{
+        .text {
           max-width: 150px;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           font-size: 0.75rem;
           text-align: center;
           margin-top: 5px;
@@ -589,10 +673,11 @@ const Container = styled.div`
         }
       }
 
-      .other-details{
+      .other-details {
         width: 50%;
         height: 100%;
-        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -600,30 +685,32 @@ const Container = styled.div`
         justify-content: center;
         padding: 15px 15px;
 
-        .text{
+        .text {
           font-size: 0.7rem;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
         }
 
-        h3{
+        h3 {
           font-size: 1rem !important;
-          font-weight: 500; 
+          font-weight: 500;
           margin-left: 5px;
         }
 
-        .details{
+        .details {
           margin-top: 10px;
           width: 100%;
           display: flex;
           align-items: center;
           /* justify-content: center; */
 
-          .detail{
+          .detail {
             min-width: 190px;
             height: 35px;
             width: 40%;
-            background-color: ${(props) => (props.needDarkMode ? '#313337' : '#d0d0d0')};
-            border: 1px solid ${(props) => (props.needDarkMode ? '#56575d' : '#c3b4b4')};
+            background-color: ${(props) =>
+              props.needDarkMode ? "#313337" : "#d0d0d0"};
+            border: 1px solid
+              ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
             border-radius: 100px;
             margin-right: 5px;
 
@@ -635,20 +722,17 @@ const Container = styled.div`
           }
         }
 
-
-        
-
-        svg{
+        svg {
           font-size: 1rem;
-          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
         }
-        
       }
 
-      .info{
+      .info {
         width: 24%;
         height: 100%;
-        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         /* flex-direction: column; */
@@ -656,48 +740,47 @@ const Container = styled.div`
         justify-content: center;
         padding: 0 15px;
 
-        img{
+        img {
           height: 2rem;
         }
 
-        svg{
+        svg {
           font-size: 1.25rem;
-          fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
-          background-color: ${(props) => (props.needDarkMode ? '#696764' : '#d2d1d1')};
+          fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          background-color: ${(props) =>
+            props.needDarkMode ? "#696764" : "#d2d1d1"};
           border-radius: 100%;
           padding: 3.5px;
         }
 
-        .text{
+        .text {
           max-width: 150px;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           font-size: 0.75rem;
           text-align: center;
           margin: 0 10px;
           font-weight: 200;
           /* font-style: italic; */
         }
-        
       }
     }
 
-    .main-info{
+    .main-info {
       margin-top: 10px;
 
-      .text{
+      .text {
         font-size: 0.75rem;
         font-weight: 200;
-        color: ${(props) => (props.needDarkMode ? '#c6c2c2' : '#333')};
+        color: ${(props) => (props.needDarkMode ? "#c6c2c2" : "#333")};
 
-        svg{
+        svg {
           font-size: 1rem;
           margin-bottom: -3.5px;
           margin-right: 3.5px;
-          fill: ${(props) => (props.needDarkMode ? '#c6c2c2' : '#333')};
+          fill: ${(props) => (props.needDarkMode ? "#c6c2c2" : "#333")};
         }
       }
     }
-
   }
 `;
 const LoadingSection = styled.div`
@@ -715,4 +798,4 @@ const Line = styled.div`
   background-color: #e6e0e0;
   width: 100%;
   margin-bottom: 30px;
-`
+`;
