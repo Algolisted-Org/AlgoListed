@@ -20,24 +20,26 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const promptForMncQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
-  "Given a resume text, provide me some vast number of technical and soft skills questions for MNCs. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, that project have used. ",
-  "Create an markdown text for 10 questions. Just have two sections techical(10 2-line questions) and soft(2 3.5-line questions), and no other heading. And the questions should have a numbering on left, 1 to 10. Don't use any bold or anything. Just have h1 for heading and ol and li for questions",
+  "Given a resume text, provide me some vast number of technical and soft skills questions for MNCs. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, that project have used. Also rate that project on scale of 10 based on the tech stack used in that project ",
+  "Create an JSON text for 10 questions for example like 'questions': and in array ['question1 here', 'question2 here'...]`. Just have two sections techical(10 2-line questions) and soft(2 3.5-line questions), and no other heading. And the questions should have a numbering on left, 1 to 10. Don't use any bold or anything. Just have h1 for heading and ol and li for questions,Don't give any resuorces.",
   "Keep it long, and releated so that an student should really have to think about the technology details.",
   "Sample technical questions : 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimise if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimise it and scale it?",
   "Sample soft questions : 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values you think that experience thought you which you can bring to out company. 2. How will you resolve a xyz problem with your team, .....",
-  // "Create an JSON of 10 questions like 'questions': and in array ['question1 here', 'question2 here'...]",
+  // "Create an JSON of 10 questions like 'questions': and in array ['question1 here', 'question2 here'...]",W
+  "Rate all the projects in scale of 10 based on the tech stack they have used for example more complex tech stack more rating.",
+  "Give the ATS score of the resume as well in percentage. and Area of imporvement in the resume.",
   "The input text for resume is: ",
 ];
 const promptForStartup = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for Startups.",
-  "Create an markdown text for questions and supported links for resources.",
+
   "The input text is: ",
 ];
 const promptForUnicorn = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for Unicorns.",
-  "Create an markdown text for questions and supported links for resources.",
+
   "The input text is: ",
 ];
 const promptForRemote = [
@@ -48,7 +50,6 @@ const promptForRemote = [
 const promptForBasicQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for the specific type of company and difficulty level  I need to prepare with and help me get the job.",
-  "Create an markdown text for questions and supported links for resources.",
   "The input category of company ,difficuty level and text are:",
 ];
 
@@ -63,9 +64,8 @@ const ResumeSection = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
   const [needDarkMode, setNeedDarkMode] = useState(!false);
-  const [responseArray,setResponseArray]=useState([])
   const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "",
     dangerouslyAllowBrowser: true,
   });
 
@@ -76,15 +76,14 @@ const ResumeSection = () => {
 
   useEffect(() => {
     document.title = "Resume Based Questions | Open AI - Algolisted";
-    
   }, []);
 
   const uploadresume = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
     handleTextExtraction();
-    if(textFromPDF){
-      console.log("object")
+    if (textFromPDF) {
+      console.log("object");
       handleSend();
     }
     console.log(textFromPDF);
@@ -156,13 +155,10 @@ const ResumeSection = () => {
           temperature: 0.5,
           max_tokens: 500,
         });
-        
-
 
         setResponseText(response.choices[0].message.content);
-        console.log(response);
+        console.log(response.choices[0].message.content);
         console.log(responseText);
-        console.log(responseArray)
         console.log(prompt);
         setIsLoading(false);
       } catch (error) {
@@ -173,16 +169,8 @@ const ResumeSection = () => {
       console.error("No text to send to Chat API.");
     }
   };
-  useEffect(() => {
-    if (responseText) {
-      const newResponseObject = {
-        timestamp: new Date().toISOString(),
-        content: responseText,
-      };
+  
 
-      setResponseArray((prevArray) => [...prevArray, newResponseObject]);
-    }
-  }, [responseText]);
   const handleCompany = (e) => {
     setCompanyName(e.target.options[e.target.selectedIndex].text);
     setSelectedCompany(e.target.value);
@@ -197,17 +185,16 @@ const ResumeSection = () => {
     const dropedFile = e.dataTransfer.files[0];
     setFile(dropedFile);
     handleTextExtraction();
-    if(textFromPDF){
-      console.log("object")
+    if (textFromPDF) {
+      console.log("object");
       handleSend();
     }
     console.log(textFromPDF);
-    
   };
   const handleUploadClick = () => {
     document.getElementById("fileInput").click();
   };
-  
+
   return (
     <GrandContainer>
       <MobContainer>
@@ -258,20 +245,39 @@ const ResumeSection = () => {
             encompasses your preparation for non-technical interview rounds,
             such as HR and project-related discussions.
           </p>
-          {/* <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
-                        </div>
-                    </div> */}
+          <div className="message">
+            <div className="icon"></div>
+            <div className="text">
+              Text here : We are constantly looking for good blogs. Want to be a
+              technical content writer <a href="/">click here</a>
+            </div>
+          </div>
 
-          {/* <div className="main-container">
+          <div className="main-container">
             <div className="main-features">
-              <div className="system-inputs">
-                
-                <input type="file" accept=".pdf" onChange={uploadresume} />
+              <div className="system-inputs ">
+                <div className="input-container">
+                  <div
+                    className="resume-upload"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDragEnter={(e) => e.preventDefault()}
+                    onDrop={handleDrop}
+                    onClick={handleUploadClick}
+                  >
+                    <CloudUploadIcon />
+                    <div className="text">Click to upload or drag and drop</div>
+                    <input
+                      type="file"
+                      id="fileInput"
+                      accept=".pdf"
+                      style={{ display: "none" }}
+                      onChange={uploadresume}
+                    />
+                    
+                  </div>
+                  {/* <input type="file" accept=".pdf" onChange={uploadresume} /> */}
+                </div>
                 <div>
-                  
                   <select value={selectedCompany} onChange={handleCompany}>
                     <option value="0">Select Category:</option>
                     <option value="1">Multinational Corporation (MNC)</option>
@@ -281,24 +287,11 @@ const ResumeSection = () => {
                   </select>
                   <select value={difficultyLevel} onChange={handleDifficult}>
                     <option value="0">Select Difficulty level:</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                    <option value="1">Easy</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Hard</option>
+                    
                   </select>
-
-                  <input
-                  type="text"
-                  placeholder="Enter your open API KEY here....."
-                  onChange={(e) => setApiKey(e.target.value)}
-                  className="api_input"
-                />
                 </div>
                 <button className="btn-2" onClick={handleSend}>
                   Submit
@@ -306,18 +299,23 @@ const ResumeSection = () => {
               </div>
               <div className="right-results">
                 <h3>Powered by,</h3>
-                <img src="https://chatgptaihub.com/wp-content/uploads/2023/06/ChatGpt-Logo-with-Black-Background.png" alt="" />
+                <img
+                  src="https://chatgptaihub.com/wp-content/uploads/2023/06/ChatGpt-Logo-with-Black-Background.png"
+                  alt=""
+                />
                 <p>
-                  We've conducted extensive research and developed highly tailored prompts to meet individual user requirements. We have invested considerable effort in prompt engineering, research, and data analysis. However, due to budget constraints, we kindly ask users to utilize their own API keys.
+                  We've conducted extensive research and developed highly
+                  tailored prompts to meet individual user requirements. We have
+                  invested considerable effort in prompt engineering, research,
+                  and data analysis. However, due to budget constraints, we
+                  kindly ask users to utilize their own API keys.
                 </p>
               </div>
             </div>
             <Line></Line>
             <h3>AI Generated Resume Based Questions</h3>
             <div className="generated-mark-up">
-              {
-                responseText ? <></> : <p>No questions generated yet!</p>
-              }
+              {responseText ? <></> : <p>No questions generated yet!</p>}
               {isLoading ? (
                 <LoadingSection>Loading....</LoadingSection>
               ) : (
@@ -338,9 +336,9 @@ const ResumeSection = () => {
                 </>
               )}
             </div>
-          </div> */}
+          </div>
 
-          <div className="input-container">
+          {/* <div className="input-container">
             <div
               className="resume-upload"
               onDragOver={(e) => e.preventDefault()}
@@ -391,7 +389,7 @@ const ResumeSection = () => {
               positions. As we expand, we will progressively incorporate
               additional information for various positions and roles.
             </div>
-          </div>
+          </div> */}
         </div>
         <SimpleFooter />
       </Container>
@@ -639,10 +637,12 @@ const Container = styled.div`
     }
 
     .input-container {
-      margin-top: 50px;
       display: flex;
+      width: 100%;
+      margin-top: 50px;
+      margin-bottom: 20px;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       height: 100px;
 
       .resume-upload {
