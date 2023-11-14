@@ -56,10 +56,6 @@ const CoreSubjectsTracker = () => {
         } else setFilteredData(data)
     }, [])
 
-    console.log(data)
-    console.log(filteredData)
-    console.log(filteredData.filter((item) => item.completed === true))
-
     console.log("needDarkMode : ", needDarkMode);
     const toggleDarkMode = () => {
         setNeedDarkMode(!needDarkMode);
@@ -105,6 +101,20 @@ const CoreSubjectsTracker = () => {
         updatedVisibility[index] = !updatedVisibility[index];
         setAnswerVisibility(updatedVisibility);
     };
+
+    const toggleCompleted = (index) => {
+        const updatedData = [...filteredData];
+        updatedData[index].completed = !updatedData[index].completed;
+        setFilteredData(updatedData);
+        localStorage.setItem("storedQuestions", JSON.stringify(updatedData));
+    }
+    
+    const toggleMarked = (index) => {
+        const updatedData = [...filteredData];
+        updatedData[index].marked = !updatedData[index].marked;
+        setFilteredData(updatedData);
+        localStorage.setItem("storedQuestions", JSON.stringify(updatedData));
+    }    
 
     const allTopics = [
         {
@@ -274,7 +284,7 @@ const CoreSubjectsTracker = () => {
                                 <LinearProgress />
                             </>
                         ) : (
-                            data.length === 0 ? <></> : data.map((item, index) => {
+                            filteredData.length === 0 ? <></> : filteredData.map((item, index) => {
                                 return (
                                     <div
                                         key={index}
@@ -301,7 +311,7 @@ const CoreSubjectsTracker = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="seperator-line"></div>
+                                                <div className="seperator-line" style={{ display: answerVisibility[index] ? 'block' : 'none' }}></div>
 
                                                 <div className="answer-main" style={{ display: answerVisibility[index] ? 'block' : 'none' }}>
                                                     {item.answer}
@@ -312,14 +322,14 @@ const CoreSubjectsTracker = () => {
                                             <Tooltip title={item.completed ? "Mark as Uncompleted" : "Mark as Completed"}>
                                                 <div className="done-btn">
                                                     <CheckCircleOutlineIcon
-                                                    // onClick={() => toggleCompleted(item._id)}
+                                                        onClick={() => toggleCompleted(index)}
                                                     />
                                                 </div>
                                             </Tooltip>
                                             <Tooltip title={item.marked ? "Unmark" : "Mark for Later"}>
                                                 <div className="review-btn">
                                                     <BookmarkIcon
-                                                    // onClick={() => toggleMarked(index)}
+                                                        onClick={() => toggleMarked(index)}
                                                     />
                                                 </div>
                                             </Tooltip>
