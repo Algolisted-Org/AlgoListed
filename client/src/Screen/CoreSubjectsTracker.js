@@ -38,8 +38,9 @@ const CoreSubjectsTracker = () => {
     const [openVisualiser, setOpenVisualiser] = useState(false);
     const [selectedLabels, setSelectedLabels] = useState([]);
     const [data, setData] = useState(OSquestions);
-    const [filteredData, setFilteredData] = useState(data);
+    const [filteredData, setFilteredData] = useState([]);
     const [dataLoading, setDataLoading] = useState(true);
+    const [answerVisibility, setAnswerVisibility] = useState(data.map(() => false));
 
     useEffect(() => {
         let selectedTheme = localStorage.getItem("selectedTheme");
@@ -49,7 +50,15 @@ const CoreSubjectsTracker = () => {
         if (storedCompletedTopics) {
             setSelectedLabels(JSON.parse(storedCompletedTopics));
         }
+        const storedQuestions = localStorage.getItem("storedQuestions");
+        if (storedQuestions) {
+            setFilteredData(JSON.parse(storedQuestions));
+        } else setFilteredData(data)
     }, [])
+
+    console.log(data)
+    console.log(filteredData)
+    console.log(filteredData.filter((item) => item.completed === true))
 
     console.log("needDarkMode : ", needDarkMode);
     const toggleDarkMode = () => {
@@ -89,6 +98,12 @@ const CoreSubjectsTracker = () => {
 
         // Update local storage with the completed topics
         localStorage.setItem("completedTopics", JSON.stringify(updatedLabels));
+    };
+    
+    const toggleAnswerVisibility = (index) => {
+        const updatedVisibility = [...answerVisibility];
+        updatedVisibility[index] = !updatedVisibility[index];
+        setAnswerVisibility(updatedVisibility);
     };
 
     const allTopics = [
@@ -136,8 +151,8 @@ const CoreSubjectsTracker = () => {
         }
     ]
 
-    const progressBarPercent1 = data.length === 0 ? 0 : ((selectedLabels.length / allTopics.length) * 100).toFixed(allTopics.length > 100 ? 1 : 0);
-    const progressBarPercent2 = 18.2;
+    const topicsProgressBarPercent = allTopics.length === 0 ? 0 : ((selectedLabels.length / allTopics.length) * 100).toFixed(allTopics.length > 100 ? 1 : 0);
+    const questionsProgressBarPercent = data.length === 0 ? 0 : ((filteredData.filter((item) => item.completed === true).length / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
     return (
         <GrandContainer needDarkMode={needDarkMode}>
@@ -218,11 +233,11 @@ const CoreSubjectsTracker = () => {
                     <h4>Topics</h4>
                     <Progress needDarkMode={needDarkMode}>
                         <div className="text">Progress : </div>
-                        <div className="value">{`${progressBarPercent1}%`}</div>
+                        <div className="value">{`${topicsProgressBarPercent}%`}</div>
                         <div className="bar">
                             <div
                                 className="fill"
-                                style={{ width: `${progressBarPercent1}%` }}
+                                style={{ width: `${topicsProgressBarPercent}%` }}
                             ></div>
                         </div>
                     </Progress>
@@ -244,11 +259,11 @@ const CoreSubjectsTracker = () => {
 
                     <Progress needDarkMode={needDarkMode}>
                         <div className="text">Progress : </div>
-                        <div className="value">{`${progressBarPercent2}%`}</div>
+                        <div className="value">{`${questionsProgressBarPercent}%`}</div>
                         <div className="bar">
                             <div
                                 className="fill"
-                                style={{ width: `${progressBarPercent2}%` }}
+                                style={{ width: `${questionsProgressBarPercent}%` }}
                             ></div>
                         </div>
                     </Progress>
@@ -259,7 +274,7 @@ const CoreSubjectsTracker = () => {
                                 <LinearProgress />
                             </>
                         ) : (
-                            filteredData.length === 0 ? <></> : filteredData.map((item, index) => {
+                            data.length === 0 ? <></> : data.map((item, index) => {
                                 return (
                                     <div
                                         key={index}
@@ -278,12 +293,17 @@ const CoreSubjectsTracker = () => {
                                             <div className="main-row-content">
                                                 <div className="question-main">
                                                     {item.quesName}
-                                                    <div className="show-answer">Hide Answer</div>
+                                                    <div
+                                                        className="toggle-answer"
+                                                        onClick={() => toggleAnswerVisibility(index)}
+                                                    >
+                                                        {answerVisibility[index] ? 'Hide Answer' : 'Show Answer'}
+                                                    </div>
                                                 </div>
 
                                                 <div className="seperator-line"></div>
 
-                                                <div className="answer-main">
+                                                <div className="answer-main" style={{ display: answerVisibility[index] ? 'block' : 'none' }}>
                                                     {item.answer}
                                                 </div>
                                             </div>
@@ -563,10 +583,15 @@ const Container = styled.div`
                             margin-right: 15px;
                             color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
                             
-                            .show-answer{
+                            .toggle-answer{
+                                cursor: pointer;
                                 margin-top: 5px;
                                 font-weight: 300;
                                 color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                            }
+
+                            .toggle-answer:hover {
+                                filter: brightness(150%);
                             }
 						}
 
