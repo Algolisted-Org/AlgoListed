@@ -15,14 +15,6 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MobileNavbar from "../Components/MobileNavbar";
 import DoughnutChart from '../Components/DoughnutChart';
 import Tooltip from '@material-ui/core/Tooltip';
-import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
-import UpdateIcon from '@material-ui/icons/Update';
-import CreateIcon from '@material-ui/icons/Create';
-import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
-import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
-import { Link as RouterLink } from 'react-router-dom';
-import CallMadeIcon from '@material-ui/icons/CallMade';
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Tagsfilter from "../MicroComponents/Tagsfilter";
 import LockIcon from '@material-ui/icons/Lock';
@@ -31,6 +23,7 @@ import NotesIcon from '@material-ui/icons/Notes';
 import ReplayIcon from '@material-ui/icons/Replay';
 import { coreSubjectsTrackerFilters } from '../Components/coreSubjectsTrackerFilters';
 import OSquestions from '../DummyDB/CoreSubjects/OSquestions.json';
+import OSTopics from '../DummyDB/CoreSubjects/OSTopics.json';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 
 const CoreSubjectsTracker = () => {
@@ -46,15 +39,6 @@ const CoreSubjectsTracker = () => {
         let selectedTheme = localStorage.getItem("selectedTheme");
         if (selectedTheme === 'dark') setNeedDarkMode(true);
         if (selectedTheme === 'light') setNeedDarkMode(false);
-        const storedCompletedTopics = localStorage.getItem("completedTopics");
-        if (storedCompletedTopics) {
-            setSelectedLabels(JSON.parse(storedCompletedTopics));
-        }
-        // const storedQuestions = localStorage.getItem("storedQuestions");
-        // if (storedQuestions) {
-        //     setFilteredData(JSON.parse(storedQuestions));
-        // } else setFilteredData(data)
-        setFilteredData(data);
     }, [])
 
     console.log("needDarkMode : ", needDarkMode);
@@ -66,6 +50,27 @@ const CoreSubjectsTracker = () => {
         document.title = "Core Subjects Tracker - Algolisted";
     }, []);
 
+
+
+    useEffect(() => {
+        const storedCompletedTopics = localStorage.getItem("completedTopics");
+        if (storedCompletedTopics) setSelectedLabels(JSON.parse(storedCompletedTopics));
+
+        const updatedData = data.map((item) => {
+            const completed = localStorage.getItem(`completedquestion-coresheet-${item._id}`);
+            const marked = localStorage.getItem(`markedquestion-coresheet-${item._id}`);
+
+            return {
+                ...item,
+                completed: completed === "true",
+                marked: marked == "true",
+            };
+        });
+
+        setFilteredData(updatedData);
+    }, [data])
+
+    
     const filters = coreSubjectsTrackerFilters.map((item) => {
         return (
             <div key={item.id} className={item.domainFilter === "operating-systems" ? 'filter selected' : (item.lock === true ? 'locked-feature filter' : 'filter')} >
@@ -83,20 +88,16 @@ const CoreSubjectsTracker = () => {
         let updatedLabels;
 
         if (selectedLabels.includes(label)) {
-            // If the label is already selected, remove it
             updatedLabels = selectedLabels.filter((selectedLabel) => selectedLabel !== label);
         } else {
-            // If the label is not selected, add it
             updatedLabels = [...selectedLabels, label];
         }
 
-        // Update state
         setSelectedLabels(updatedLabels);
 
-        // Update local storage with the completed topics
         localStorage.setItem("completedTopics", JSON.stringify(updatedLabels));
     };
-    
+
     const toggleAnswerVisibility = (index) => {
         const updatedVisibility = [...answerVisibility];
         updatedVisibility[index] = !updatedVisibility[index];
@@ -104,63 +105,33 @@ const CoreSubjectsTracker = () => {
     };
 
     const toggleCompleted = (index) => {
-        const updatedData = [...filteredData];
+        const updatedData = [...data];
+        
         updatedData[index].completed = !updatedData[index].completed;
-        setFilteredData(updatedData);
-        localStorage.setItem("storedQuestions", JSON.stringify(updatedData));
-    }
-    
-    const toggleMarked = (index) => {
-        const updatedData = [...filteredData];
-        updatedData[index].marked = !updatedData[index].marked;
-        setFilteredData(updatedData);
-        localStorage.setItem("storedQuestions", JSON.stringify(updatedData));
-    }    
 
-    const allTopics = [
-        {
-            name: "Types of OS",
-        },
-        {
-            name: "Components of OS",
-        },
-        {
-            name: "Process Management",
-        },
-        {
-            name: "Context Switching",
-        },
-        {
-            name: "CPU Scheduling Algorithms",
-        },
-        {
-            name: "Multi-Threading",
-        },
-        {
-            name: "Race Condition",
-        },
-        {
-            name: "Semaphores",
-        },
-        {
-            name: "Deadlock - Detection and Recovery",
-        },
-        {
-            name: "Paging & Segmentation",
-        },
-        {
-            name: "Virtual Memory",
-        },
-        {
-            name: "Page Replacement Algorithms",
-        },
-        {
-            name: "Trashing",
-        },
-        {
-            name: "File Management",
-        }
-    ]
+        localStorage.setItem(
+            `completedquestion-coresheet-${updatedData[index]._id}`,
+            updatedData[index].completed
+        );
+
+        setData(updatedData);
+        filteredData(updatedData);
+    };
+
+    const toggleMarked = (index) => {
+        const updatedData = [...data];
+
+        updatedData[index].marked = !updatedData[index].marked;
+
+        localStorage.setItem(
+            `markedquestion-coresheet-${updatedData[index]._id}`,
+            updatedData[index].marked
+        );
+
+        setData(updatedData);
+    }
+
+    const allTopics = OSTopics;
 
     const topicsProgressBarPercent = allTopics.length === 0 ? 0 : ((selectedLabels.length / allTopics.length) * 100).toFixed(allTopics.length > 100 ? 1 : 0);
     const questionsProgressBarPercent = data.length === 0 ? 0 : ((filteredData.filter((item) => item.completed === true).length / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
@@ -228,18 +199,18 @@ const CoreSubjectsTracker = () => {
                             }
                         </div>
                         {
-							openVisualiser ? (
-								<div className="all-resources">
+                            openVisualiser ? (
+                                <div className="all-resources">
                                     <a target="_blank" href="https://www.youtube.com/watch?v=_TpOHMCODXo&list=PLDzeHZWIZsTr3nwuTegHLa2qlI81QweYG">
                                         <img src="https://i.ytimg.com/vi/_TpOHMCODXo/maxresdefault.jpg" alt="" />
                                     </a>
                                     <a target="_blank" href="https://www.youtube.com/watch?v=8XBtAjKwCm4">
                                         <img src="https://i.ytimg.com/vi/8XBtAjKwCm4/maxresdefault.jpg" alt="" />
                                     </a>
-                                    
+
                                 </div>
-							) : (<></>)
-						}
+                            ) : (<></>)
+                        }
                     </SheetMessage>
                     <h4>Topics</h4>
                     <Progress needDarkMode={needDarkMode}>
@@ -590,7 +561,7 @@ const Container = styled.div`
 
 					.main-row-content {
                         flex: 1;
-                        
+
 						.question-main{
 							position: relative;
                             font-size: 0.8rem;
