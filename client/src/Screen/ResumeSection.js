@@ -125,7 +125,7 @@ const ResumeSection = () => {
   const [resultDummy, setResultDummy] = useState(false);
   const [needDarkMode, setNeedDarkMode] = useState(!false);
   const openai = new OpenAI({
-    apiKey: "",
+    apiKey: apiKey,
     dangerouslyAllowBrowser: true,
   });
 
@@ -216,6 +216,7 @@ const ResumeSection = () => {
         setResponseText(response.choices[0].message.content);
         // console.log(JSON.parse(response.choices[0].message.content));
         responseArray = JSON.parse(response.choices[0].message.content);
+        console.log("object")
         console.log(responseArray)
         setIsLoading(false);
       } catch (error) {
