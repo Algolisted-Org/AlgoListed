@@ -50,15 +50,12 @@ const CoreSubjectsTracker = () => {
         if (storedCompletedTopics) {
             setSelectedLabels(JSON.parse(storedCompletedTopics));
         }
-        const storedQuestions = localStorage.getItem("storedQuestions");
-        if (storedQuestions) {
-            setFilteredData(JSON.parse(storedQuestions));
-        } else setFilteredData(data)
+        // const storedQuestions = localStorage.getItem("storedQuestions");
+        // if (storedQuestions) {
+        //     setFilteredData(JSON.parse(storedQuestions));
+        // } else setFilteredData(data)
+        setFilteredData(data);
     }, [])
-
-    console.log(data)
-    console.log(filteredData)
-    console.log(filteredData.filter((item) => item.completed === true))
 
     console.log("needDarkMode : ", needDarkMode);
     const toggleDarkMode = () => {
@@ -105,6 +102,20 @@ const CoreSubjectsTracker = () => {
         updatedVisibility[index] = !updatedVisibility[index];
         setAnswerVisibility(updatedVisibility);
     };
+
+    const toggleCompleted = (index) => {
+        const updatedData = [...filteredData];
+        updatedData[index].completed = !updatedData[index].completed;
+        setFilteredData(updatedData);
+        localStorage.setItem("storedQuestions", JSON.stringify(updatedData));
+    }
+    
+    const toggleMarked = (index) => {
+        const updatedData = [...filteredData];
+        updatedData[index].marked = !updatedData[index].marked;
+        setFilteredData(updatedData);
+        localStorage.setItem("storedQuestions", JSON.stringify(updatedData));
+    }    
 
     const allTopics = [
         {
@@ -274,7 +285,7 @@ const CoreSubjectsTracker = () => {
                                 <LinearProgress />
                             </>
                         ) : (
-                            data.length === 0 ? <></> : data.map((item, index) => {
+                            filteredData.length === 0 ? <></> : filteredData.map((item, index) => {
                                 return (
                                     <div
                                         key={index}
@@ -301,7 +312,7 @@ const CoreSubjectsTracker = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="seperator-line"></div>
+                                                <div className="seperator-line" style={{ display: answerVisibility[index] ? 'block' : 'none' }}></div>
 
                                                 <div className="answer-main" style={{ display: answerVisibility[index] ? 'block' : 'none' }}>
                                                     {item.answer}
@@ -312,14 +323,14 @@ const CoreSubjectsTracker = () => {
                                             <Tooltip title={item.completed ? "Mark as Uncompleted" : "Mark as Completed"}>
                                                 <div className="done-btn">
                                                     <CheckCircleOutlineIcon
-                                                    // onClick={() => toggleCompleted(item._id)}
+                                                        onClick={() => toggleCompleted(index)}
                                                     />
                                                 </div>
                                             </Tooltip>
                                             <Tooltip title={item.marked ? "Unmark" : "Mark for Later"}>
                                                 <div className="review-btn">
                                                     <BookmarkIcon
-                                                    // onClick={() => toggleMarked(index)}
+                                                        onClick={() => toggleMarked(index)}
                                                     />
                                                 </div>
                                             </Tooltip>
@@ -545,11 +556,12 @@ const Container = styled.div`
 				min-height: 94px;
 				padding: 20px 20px;
 				display: flex;
-				align-items: center;
+				align-items: flex-start;
 				justify-content: space-between;
 				border-top-left-radius: 5px;
 				border-top-right-radius: 5px;
 				border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+                
 
 				.strip{
 					display: none;
@@ -557,9 +569,10 @@ const Container = styled.div`
 
 				.link-row-left {
 					display: flex;
-					align-items: center;
+					align-items: flex-start;
 
 					.count {
+                        width: 30px;
 						font-size: 1.25rem;
 						font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
 							BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
@@ -572,9 +585,12 @@ const Container = styled.div`
 						color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
                         display: flex;
                         justify-content: space-between;
+                        /* background-color: yellow; */
 					}
 
 					.main-row-content {
+                        flex: 1;
+                        
 						.question-main{
 							position: relative;
                             font-size: 0.8rem;
@@ -858,7 +874,7 @@ const Progress = styled.div`
 		/* width: 400px; */
 		height: 10px;
 		border-radius: 100px;
-		border: 1px solid ${(props) => (props.needDarkMode ? '#000000' : 'pink')};
+		border: 1px solid ${(props) => (props.needDarkMode ? '#222' : 'pink')};
 		background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : 'whitesmoke')};
 		flex: 1;
 		overflow: hidden;
