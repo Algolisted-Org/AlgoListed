@@ -560,6 +560,8 @@ const datasets = problems
                   {Object.values(contestData.problems).map((problem, problemIndex) => (
                     <div className={`contest-problem ${isQuestionSolved(contestData.contest_name,problem.name)?"solved-problem":""}`} key={problemIndex}>
                       <div className="problem-main-name">
+                        <div className="strip"></div>
+
                         <label>
                           <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name,problem.name)}/>
                           Problem Unsolved
@@ -1003,6 +1005,7 @@ const Container = styled.div`
             /* border: 1px solid #e5e5e5; */
   
             .contest-problem {
+              position: relative;
               height: 100%;
               width: 25%;
               border-right: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
@@ -1021,9 +1024,20 @@ const Container = styled.div`
               display: flex;
               flex-direction: column;
               justify-content: space-between;
+              
+              .strip{
+                display: none;
+                position: absolute;
+                height: 10px;
+                width: 100%;
+                background-color: cornflowerblue;
+                top: 0;
+                left: 0;
+              }
   
               .problem-main-name{
                 margin-bottom: 20px;
+                
                 label{
                   display: flex;
                   align-items: center;
@@ -1076,7 +1090,12 @@ const Container = styled.div`
             }
   
             .solved-problem{
-              background-color: ${(props) => (props.needDarkMode ? '#404249' : '#dcf8eb')};
+              background-color: ${(props) => (props.needDarkMode ? '#2e3b4c' : '#dcf8eb')};
+              
+              .strip{
+                display: block;
+                background-color: ${(props) => (props.needDarkMode ? '#253141' : '#b6ebd3')};
+              }
             }
           }
         }
