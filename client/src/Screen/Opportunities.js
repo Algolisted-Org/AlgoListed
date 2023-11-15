@@ -17,9 +17,16 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const Opportunities = () => {
   const [needDarkMode, setNeedDarkMode] = useState(!false);
+  const [openVisualiser, setOpenVisualiser] = useState(false);
+  const [filterContestType, setFilterContestType] = useState("All");
+  const [filterContestTypeName, setFilterContestTypeName] = useState("Job Type");
+  const [openModel1, setOpenModel1] = useState(false);
+  const [openModel2, setOpenModel2] = useState(false);
+  const [sliderInputValue, setSliderInputValue] = useState("No Experience");
 
   useEffect(() => {
     document.title = "All Internship and Job Opportunities - Algolisted";
@@ -36,11 +43,7 @@ const Opportunities = () => {
     setNeedDarkMode(!needDarkMode);
   };
 
-  const [filterContestType, setFilterContestType] = useState("All");
-  const [filterContestTypeName, setFilterContestTypeName] = useState("Job Type");
-  const [openModel1, setOpenModel1] = useState(false);
-  const [openModel2, setOpenModel2] = useState(false);
-  const [sliderInputValue, setSliderInputValue] = useState("No Experience");
+
 
   return (
     <GrandContainer>
@@ -60,7 +63,7 @@ const Opportunities = () => {
           <div className="cc-middle-content">
             <h1 className='main-heading'>All Internship & Job Opportunities
               <div className="head-tag">
-                Powered by Algolisted Ai{" "}
+                Powered by Algolisted Scraper-Ai{" "}
                 <img
                   draggable="false"
                   src="https://static.wixstatic.com/media/592002_0f04cb41e098424588d09e2fba76ec65~mv2.gif"
@@ -80,6 +83,45 @@ const Opportunities = () => {
                 </div>
               </div>
             </div> */}
+            <h4>Information Extracted From : </h4>
+            <div className="resources-used">
+              {/* <div className="special-thanks"><img src="https://res.cloudinary.com/adaface/image/upload/v1583493789/adaface_logo.png" alt="" /></div> */}
+              <div className="resource"><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" /></div>
+              <div className="resource"><img src="https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png" alt="" /></div>
+              <div className="resource"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" alt="" /></div>
+              <div className="resource"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png" alt="" /></div>
+            </div>
+            <SheetMessage needDarkMode={needDarkMode}>
+              <div className="text">
+                Explore the dynamics of the IT job market over the past six months to gain a comprehensive understanding of its current state. This page presents graphical representations of company job openings data, providing valuable insights into the prevailing trends and opportunities within the industry.
+              </div>
+              <div className="open-btn" onClick={() => setOpenVisualiser(!openVisualiser)}>
+                {
+                  openVisualiser ? (
+                    <>
+                      <div className="desc">
+                        Close Visualization
+                      </div>
+                      <ExpandLessIcon />
+                    </>
+                  ) : (
+                    <>
+                      <div className="desc">
+                        Open Visualization
+                      </div>
+                      <ExpandMoreIcon />
+                    </>
+                  )
+                }
+              </div>
+              {
+                openVisualiser ? (
+                  <div className="all-resources">
+                    Hello!
+                  </div>
+                ) : (<></>)
+              }
+            </SheetMessage>
             <EffectiveFilter className='noselect' needDarkMode={needDarkMode}>
               <div className="left">
                 <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
@@ -97,6 +139,9 @@ const Opportunities = () => {
                 <div className="filter-item check_color">{sliderInputValue}
                   {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                 </div>
+                <div className="filter-item check_color">Status
+                  {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                </div>
               </div>
               <div className="right">
                 {/* <div className="filter-item">A</div>
@@ -104,8 +149,8 @@ const Opportunities = () => {
               <div className="filter-item">C</div>
               <div className="filter-item">D</div> */}
                 <div className="filter-item">
-                  Filter based on Status
-                  <FilterListIcon />
+                  Show for tier 1 & 2 college CSE students
+                  <ChevronRightIcon />
                 </div>
                 {/* <div className="filter-item">Hide Problem Tags</div> */}
                 {/* <div className="filter-item">Show Unsolved</div>  */}
@@ -177,7 +222,7 @@ const Opportunities = () => {
                     {/* <div className="exp">Experience</div> */}
                     {/* <div className="branch">2025</div> */}
                     <div className="source">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/WhatsApp_Logo.svg/2048px-WhatsApp_Logo.svg.png" alt="" />
+                      <img src="https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png" alt="" />
                     </div>
                   </div>
                   <div className="row">
@@ -203,7 +248,7 @@ const Opportunities = () => {
                     {/* <div className="exp">Experience</div> */}
                     {/* <div className="branch">2025</div> */}
                     <div className="source">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/WhatsApp_Logo.svg/2048px-WhatsApp_Logo.svg.png" alt="" />
+                      <img src="https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png" alt="" />
                     </div>
                   </div>
                   <div className="row">
@@ -375,7 +420,49 @@ const Container = styled.div`
           }
       }
 
-      
+      h4{
+            margin-top: 40px;
+            font-size: 1.05rem;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            font-weight: 500;
+      }
+
+      .resources-used{
+          display: flex;
+          flex-wrap: wrap;
+          margin: 20px 0;
+
+          .resource{
+              margin: 0 7.5px 7.5px 0;
+              border-radius: 50%;
+              /* background-color: #f0f0f0; */
+              border: 1px solid black;
+              overflow: hidden;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              img{    
+                  height: 30px;
+              }
+          }
+
+          .special-thanks{
+            height: 50px;
+            background-color: white;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            margin: 0 7.5px 7.5px 0;
+
+            img{    
+                height: 30px;
+                border-radius: 100px;
+                margin-top: -7.5px;
+            }
+          }
+      }
 
       .messages{
         .message{
@@ -440,7 +527,7 @@ const Table = styled.div`
     
     .opportunity{
       flex: 1;
-      padding: 10px 15px;
+      padding: 15px 15px;
       background-color: white;
       border-right: 1px solid #c1c1c1;
       font-size: 0.85rem;
@@ -533,7 +620,7 @@ const Table = styled.div`
       font-size: 0.85rem;
 
       img{
-        height: 30px;
+        height: 25px;
       }
     }
   }
@@ -590,7 +677,7 @@ const EffectiveFilter = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin: 50px 0 20px 0;
+	margin: 20px 0 20px 0;
 
 	.left{
 		display: flex;
@@ -644,6 +731,55 @@ const EffectiveFilter = styled.div`
         margin-left: 5px;
       }
 		}
+
+    .magic-filter{
+        background-color: #404249;
+        color: #333;
+        background: linear-gradient(300deg,#56f238,#b3adff,#c5c5ef,#bde6ce,#56f238);
+        background-size: 400% 400%;
+        -webkit-animation: AnimationName 10s ease infinite;
+        -moz-animation: AnimationName 10s ease infinite;
+        animation: AnimationName 10s ease infinite;
+        border-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        opacity: 0.75;
+        /* border-radius: 100px; */
+        
+
+        a{
+          color: #333; 
+        }
+
+        &:hover{
+          background-color: whitesmoke;
+          color: #333;
+          cursor: pointer;
+          transition-duration: 500ms;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+
+      @-moz-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+
+      @keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
 	}
 `
 
@@ -696,3 +832,45 @@ const ShowAbsoluteModelDropDown = styled.div`
   }
 
 `
+
+const SheetMessage = styled.div`
+	padding: 10px;
+	margin: 50px 0 10px 0;
+	/* border: 1px solid black; */
+	border-radius: 5px;
+	/* background-color: #c9e8ff; */
+	background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#f0f0f0')};
+
+	.text {
+		font-size: 0.8rem;
+		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+	}
+
+	.open-btn{
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		
+		font-size: 0.8rem;
+		font-weight: 500;
+		margin-top: 15px;
+
+		.desc{
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+
+		svg{
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+	}
+
+    .all-resources{
+        margin-top: 7.5px;
+
+        img{
+            height: 100px;
+            border-radius: 10px;
+            margin: 7.5px 7.5px 0 0;
+        }
+    }
+`;

@@ -276,7 +276,7 @@ const ResumeSection = () => {
           <h1 className="main-heading">
             Resume Based Questions{" "}
             <div className="head-tag">
-              Powered by Algolisted Ai{" "}
+              Powered by Algolisted GPT-Ai{" "}
               <img
                 draggable="false"
                 src="https://static.wixstatic.com/media/592002_0f04cb41e098424588d09e2fba76ec65~mv2.gif"
