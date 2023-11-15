@@ -10,6 +10,7 @@ import CCHeaderDark from '../Components/CCHeaderDark';
 import LeftMenu from '../Components/LeftMenu';
 import LeftMenuDark from '../Components/LeftMenuDark';
 import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
+import axios from "axios";
 import { LinearProgress } from "@material-ui/core";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import DoneIcon from '@material-ui/icons/Done';
@@ -27,7 +28,7 @@ const Opportunities = () => {
   const [openModel1, setOpenModel1] = useState(false);
   const [openModel2, setOpenModel2] = useState(false);
   const [sliderInputValue, setSliderInputValue] = useState("No Experience");
-
+  const [allOpportunities, setAllOpportunities] = useState([])
   useEffect(() => {
     document.title = "All Internship and Job Opportunities - Algolisted";
   }, []);
@@ -43,6 +44,18 @@ const Opportunities = () => {
     setNeedDarkMode(!needDarkMode);
   };
 
+  useEffect(() => {
+    axios
+      .get(
+        `https://script.googleusercontent.com/macros/echo?user_content_key=j9Co0fA6rp5kG1v2ji1_cWNf0Qyd9PiRVSMEFlosmhJLm00_tFel6zYGRqfJxOlWenWb_Exj0y9g-ljCbWFdh6qpF5o4vuRbm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA8Tr49F1Ivtr0o6Yp4fjnD9VY8k1Q0AdNpbEobTJSVU02RPIupYF5H0LqOn1gHHuTQr3i-TjMlDArlJytlu8mpjZbJ2bHHlb9z9Jw9Md8uu&lib=M_adtjhtYqTY4x3CHvLkZEzxNTvjCbw04`
+      )
+      // .get(`https://nayak-leetcode-api.vercel.app/?weekly_contest=weekly-contest-352`)
+      .then((res) => {
+        setAllOpportunities(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
 
   return (
@@ -167,142 +180,44 @@ const Opportunities = () => {
                 <div className="source">Source</div>
               </div>
 
-              {false ? (
+              {allOpportunities.length == 0 ? (
                 <div className="linear-progess-holder">
                   <LinearProgress />
                 </div>
               ) : (
                 <>
-                  <div className="row">
-                    <div className="hash">1</div>
-                    {/* <div className="company">Google India</div> */}
-                    <div className="opportunity">
-                      <div className="left">
-                        <div className="link">Google Test Engineer - Bangalore, India</div>
-                        <div className="extra-info">
-                          <div className="info">Test Engineer</div>
-                          <div className="info">FTE</div>
-                          <div className="info">2+ Year Exp</div>
-                          <div className="info">19 - 25 LPA</div>
+                  {
+
+                  }
+                  {
+                    allOpportunities.map((item, index) => {
+                      return (
+                        <div className="row">
+                          <div className="hash">{index + 1}</div>
+                          {/* <div className="company">Google India</div> */}
+                          <div className="opportunity">
+                            <div className="left">
+                              <a href={item.job_link} target='_blank' className="link">{item.job_title} <CallMadeIcon/></a>
+                              <div className="extra-info">
+                                <div className="info">{item.role}</div>
+                                <div className="info">{item.type}</div>
+                                <div className="info">{item.years_exp}{item.years_exp == 'Fresher' ? null : "+ Year Exp"}</div>
+                                <div className="info">{item.salary_low} {item.salary_low != item.salary_high ? `- ${item.salary_high}` : null}  {item.type == "FTE" ? "LPA" : "INR"}</div>
+                              </div>
+                            </div>
+                            <div className="right">
+                              <CheckCircleOutlineIcon />
+                              <RemoveCircleOutlineIcon />
+                              <FavoriteBorderIcon />
+                            </div>
+                          </div>
+                          <div className="source">
+                            <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" />
+                          </div>
                         </div>
-                      </div>
-                      <div className="right">
-                        <CheckCircleOutlineIcon />
-                        <RemoveCircleOutlineIcon />
-                        <FavoriteBorderIcon />
-                      </div>
-                    </div>
-                    {/* <div className="salary">Salary</div> */}
-                    {/* <div className="exp">Experience</div> */}
-                    {/* <div className="branch">2025</div> */}
-                    <div className="source">
-                      <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="hash">2</div>
-                    {/* <div className="company">Amazon India</div> */}
-                    <div className="opportunity">
-                      <div className="left">
-                        <div className="link">Amazon Cloud Engineer - Mumbai, India</div>
-                        <div className="extra-info">
-                          <div className="info">Cloud Engineer</div>
-                          <div className="info">FTE</div>
-                          <div className="info">4+ Year Exp</div>
-                          <div className="info">20 - 26 LPA</div>
-                        </div>
-                      </div>
-                      <div className="right">
-                        <CheckCircleOutlineIcon />
-                        <RemoveCircleOutlineIcon />
-                        <FavoriteBorderIcon />
-                      </div>
-                    </div>
-                    {/* <div className="salary">Salary</div> */}
-                    {/* <div className="exp">Experience</div> */}
-                    {/* <div className="branch">2025</div> */}
-                    <div className="source">
-                      <img src="https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png" alt="" />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="hash">3</div>
-                    {/* <div className="company">Facebook India</div> */}
-                    <div className="opportunity">
-                      <div className="left">
-                        <div className="link">Facebook UX Designer - Delhi, India</div>
-                        <div className="extra-info">
-                          <div className="info">UX Designer</div>
-                          <div className="info">FTE</div>
-                          <div className="info">5+ Year Exp</div>
-                          <div className="info">24 - 30 LPA</div>
-                        </div>
-                      </div>
-                      <div className="right">
-                        <CheckCircleOutlineIcon />
-                        <RemoveCircleOutlineIcon />
-                        <FavoriteBorderIcon />
-                      </div>
-                    </div>
-                    {/* <div className="salary">Salary</div> */}
-                    {/* <div className="exp">Experience</div> */}
-                    {/* <div className="branch">2025</div> */}
-                    <div className="source">
-                      <img src="https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png" alt="" />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="hash">4</div>
-                    {/* <div className="company">Apple India</div> */}
-                    <div className="opportunity">
-                      <div className="left">
-                        <div className="link">Apple iOS Developer - Pune, India</div>
-                        <div className="extra-info">
-                          <div className="info">iOS Developer</div>
-                          <div className="info">FTE</div>
-                          <div className="info">3+ Year Exp</div>
-                          <div className="info">21 - 27 LPA</div>
-                        </div>
-                      </div>
-                      <div className="right">
-                        <CheckCircleOutlineIcon />
-                        <RemoveCircleOutlineIcon />
-                        <FavoriteBorderIcon />
-                      </div>
-                    </div>
-                    {/* <div className="salary">Salary</div> */}
-                    {/* <div className="exp">Experience</div> */}
-                    {/* <div className="branch">2025</div> */}
-                    <div className="source">
-                      <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="hash">5</div>
-                    {/* <div className="company">Adobe India</div> */}
-                    <div className="opportunity">
-                      <div className="left">
-                        <div className="link">Adobe Frontend Developer - Noida, India</div>
-                        <div className="extra-info">
-                          <div className="info">Frontend Developer</div>
-                          <div className="info">FTE</div>
-                          <div className="info">4+ Year Exp</div>
-                          <div className="info">23 - 29 LPA</div>
-                        </div>
-                      </div>
-                      <div className="right">
-                        <CheckCircleOutlineIcon />
-                        <RemoveCircleOutlineIcon />
-                        <FavoriteBorderIcon />
-                      </div>
-                    </div>
-                    {/* <div className="salary">Salary</div> */}
-                    {/* <div className="exp">Experience</div> */}
-                    {/* <div className="branch">2025</div> */}
-                    <div className="source">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" alt="" />
-                    </div>
-                  </div>
+                      )
+                    })
+                  }
                 </>
               )}
             </Table>
@@ -542,6 +457,11 @@ const Table = styled.div`
           color: cornflowerblue;
           font-size: 0.85rem;
           font-weight: 500;
+          
+          svg{
+            fill: cornflowerblue;
+            font-size: 0.85rem;
+          }
         }
 
         .extra-info{
