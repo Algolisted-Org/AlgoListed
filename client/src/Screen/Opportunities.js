@@ -10,24 +10,52 @@ import CCHeaderDark from '../Components/CCHeaderDark';
 import LeftMenu from '../Components/LeftMenu';
 import LeftMenuDark from '../Components/LeftMenuDark';
 import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
+import axios from "axios";
+import { LinearProgress } from "@material-ui/core";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import DoneIcon from '@material-ui/icons/Done';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const Opportunities = () => {
   const [needDarkMode, setNeedDarkMode] = useState(!false);
-  
+  const [openVisualiser, setOpenVisualiser] = useState(false);
+  const [filterContestType, setFilterContestType] = useState("All");
+  const [filterContestTypeName, setFilterContestTypeName] = useState("Job Type");
+  const [openModel1, setOpenModel1] = useState(false);
+  const [openModel2, setOpenModel2] = useState(false);
+  const [sliderInputValue, setSliderInputValue] = useState("No Experience");
+  const [allOpportunities, setAllOpportunities] = useState([])
   useEffect(() => {
     document.title = "All Internship and Job Opportunities - Algolisted";
   }, []);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if(selectedTheme === 'dark') setNeedDarkMode(true);
-    if(selectedTheme === 'light') setNeedDarkMode(false);
+    if (selectedTheme === 'dark') setNeedDarkMode(true);
+    if (selectedTheme === 'light') setNeedDarkMode(false);
   }, [])
-  
+
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://script.googleusercontent.com/macros/echo?user_content_key=j9Co0fA6rp5kG1v2ji1_cWNf0Qyd9PiRVSMEFlosmhJLm00_tFel6zYGRqfJxOlWenWb_Exj0y9g-ljCbWFdh6qpF5o4vuRbm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA8Tr49F1Ivtr0o6Yp4fjnD9VY8k1Q0AdNpbEobTJSVU02RPIupYF5H0LqOn1gHHuTQr3i-TjMlDArlJytlu8mpjZbJ2bHHlb9z9Jw9Md8uu&lib=M_adtjhtYqTY4x3CHvLkZEzxNTvjCbw04`
+      )
+      .then((res) => {
+        setAllOpportunities(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
 
   return (
     <GrandContainer>
@@ -38,21 +66,27 @@ const Opportunities = () => {
       </MobContainer>
       <Container needDarkMode={needDarkMode}>
         {
-          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode}/>
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
         }
         {
           needDarkMode ? <LeftMenuDark marked={"opportunities"} /> : <LeftMenu marked={"opportunities"} />
         }
         <div className='show-middle-content'>
           <div className="cc-middle-content">
-            <h1 className='main-heading'>All Internship & Job Opportunities <div className="head-tag">coming soon</div> </h1>
+            <h1 className='main-heading'>All Internship & Job Opportunities
+              <div className="head-tag">
+                Powered by Algolisted Scraper-Ai{" "}
+                <img
+                  draggable="false"
+                  src="https://static.wixstatic.com/media/592002_0f04cb41e098424588d09e2fba76ec65~mv2.gif"
+                  alt=""
+                />
+              </div>
+            </h1>
             <p className="heading-supporter">
-              On this page, you'll find details about various job openings and internship opportunities, along with the corresponding schedules. We are presently in the process of planning and will be unveiling this page shortly.
+              This page provides information on a range of job openings and internship possibilities. While these opportunities are primarily tailored for students in India, we are actively working to incorporate opportunities from around the world as well.
             </p>
-            <p className="heading-supporter">
-              We currently have two plans :
-            </p>
-            <div className="messages">
+            {/* <div className="messages">
               <div className="message">
                 <div className="icon"></div>
                 <div className="text">
@@ -60,36 +94,135 @@ const Opportunities = () => {
                   If interested <i><a href="mailto:nayak.primary@gmail.com">contact here</a></i>
                 </div>
               </div>
-              <div className="message">
-                <div className="icon"></div>
-                <div className="text">
-                  Make a public JSON file on GitHub that anyone can add to. You can include links to job openings at the company, and we'll display them on our website. These job listings will only be visible for one week, or a maximum of 7 days. To do this, we need people to help manage and ensure the job opportunities are valid. If you're interested in being a maintainer, please get in touch with us. <i><a href="mailto:nayak.primary@gmail.com">contact here</a></i>
-                </div>
-              </div>
-              <div className="messages2">
-                <h3>Have got an innovative way to resolve this issue? </h3>
-                <div className="message2">
-                  <a href="/" className="text">
-                    Express your thoughts on github issue #145
-                  </a>
-                  <div className="icon">
-                    <CallMadeIcon />
-                  </div>
-                </div>
-                <div className="message2">
-                  <a href="/" className="text">
-                    Express your with Algolisted owner
-                  </a>
-                  <div className="icon">
-                    <CallMadeIcon />
-                  </div>
-                </div>
-              </div>
+            </div> */}
+            <h4>Information Extracted From : </h4>
+            <div className="resources-used">
+              {/* <div className="special-thanks"><img src="https://res.cloudinary.com/adaface/image/upload/v1583493789/adaface_logo.png" alt="" /></div> */}
+              <div className="resource"><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" /></div>
+              <div className="resource"><img src="https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png" alt="" /></div>
+              <div className="resource"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" alt="" /></div>
+              <div className="resource"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png" alt="" /></div>
             </div>
+            <SheetMessage needDarkMode={needDarkMode}>
+              <div className="text">
+                Explore the dynamics of the IT job market over the past six months to gain a comprehensive understanding of its current state. This page presents graphical representations of company job openings data, providing valuable insights into the prevailing trends and opportunities within the industry.
+              </div>
+              <div className="open-btn" onClick={() => setOpenVisualiser(!openVisualiser)}>
+                {
+                  openVisualiser ? (
+                    <>
+                      <div className="desc">
+                        Close Visualization
+                      </div>
+                      <ExpandLessIcon />
+                    </>
+                  ) : (
+                    <>
+                      <div className="desc">
+                        Open Visualization
+                      </div>
+                      <ExpandMoreIcon />
+                    </>
+                  )
+                }
+              </div>
+              {
+                openVisualiser ? (
+                  <div className="all-resources">
+                    Hello!
+                  </div>
+                ) : (<></>)
+              }
+            </SheetMessage>
+            <EffectiveFilter className='noselect' needDarkMode={needDarkMode}>
+              <div className="left">
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
+                  {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                  {
+                    openModel1 ? (
+                      <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
+                        <div className="option">Job Type</div>
+                        <div className="option">Intern</div>
+                        <div className="option">Full Time</div>
+                      </ShowAbsoluteModelDropDown>
+                    ) : <></>
+                  }
+                </div>
+                <div className="filter-item check_color">{sliderInputValue}
+                  {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                </div>
+                <div className="filter-item check_color">Status
+                  {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                </div>
+              </div>
+              <div className="right">
+                {/* <div className="filter-item">A</div>
+              <div className="filter-item">B</div>
+              <div className="filter-item">C</div>
+              <div className="filter-item">D</div> */}
+                <div className="filter-item">
+                  Show for tier 1 & 2 college CSE students
+                  <ChevronRightIcon />
+                </div>
+                {/* <div className="filter-item">Hide Problem Tags</div> */}
+                {/* <div className="filter-item">Show Unsolved</div>  */}
+              </div>
+            </EffectiveFilter>
+            <Table>
+              <div className="row top-row">
+                <div className="hash">Count</div>
+                {/* <div className="company">Company</div> */}
+                <div className="opportunity">Opportunity</div>
+                {/* <div className="salary">Salary</div> */}
+                {/* <div className="exp">Experience</div> */}
+                {/* <div className="branch">Branch</div> */}
+                <div className="source">Source</div>
+              </div>
 
+              {allOpportunities.length == 0 ? (
+                <div className="linear-progess-holder">
+                  <LinearProgress />
+                </div>
+              ) : (
+                <>
+                  {
+
+                  }
+                  {
+                    allOpportunities.map((item, index) => {
+                      return (
+                        <div className="row">
+                          <div className="hash">{index + 1}</div>
+                          {/* <div className="company">Google India</div> */}
+                          <div className="opportunity">
+                            <div className="left">
+                              <a href={item.job_link} target='_blank' className="link">{item.job_title} <CallMadeIcon/></a>
+                              <div className="extra-info">
+                                <div className="info">{item.role}</div>
+                                <div className="info">{item.type}</div>
+                                <div className="info">{item.years_exp}{item.years_exp == 'Fresher' ? null : "+ Year Exp"}</div>
+                                <div className="info">{item.salary_low} {item.salary_low != item.salary_high ? `- ${item.salary_high}` : null}  {item.type == "FTE" ? "LPA" : "INR"}</div>
+                              </div>
+                            </div>
+                            <div className="right">
+                              <CheckCircleOutlineIcon />
+                              <RemoveCircleOutlineIcon />
+                              <FavoriteBorderIcon />
+                            </div>
+                          </div>
+                          <div className="source">
+                            <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" />
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
+                </>
+              )}
+            </Table>
           </div>
         </div>
-        <SimpleFooter/>
+        <SimpleFooter />
       </Container>
     </GrandContainer>
   )
@@ -173,10 +306,17 @@ const Container = styled.div`
           font-size: 0.75rem;
           font-weight: 500;
           padding: 0.25rem 0.5rem;
+          padding-right: 35px;
           border-radius: 100px;
           background-color: #a5bb26;
           margin-left: 10px;
-          
+
+          img {
+            position: absolute;
+            height: 2rem;
+            margin-top: -7.5px;
+            margin-left: -5px;
+          }
         }
       }
 
@@ -194,7 +334,49 @@ const Container = styled.div`
           }
       }
 
-      
+      h4{
+            margin-top: 40px;
+            font-size: 1.05rem;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            font-weight: 500;
+      }
+
+      .resources-used{
+          display: flex;
+          flex-wrap: wrap;
+          margin: 20px 0;
+
+          .resource{
+              margin: 0 7.5px 7.5px 0;
+              border-radius: 50%;
+              /* background-color: #f0f0f0; */
+              border: 1px solid black;
+              overflow: hidden;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              img{    
+                  height: 30px;
+              }
+          }
+
+          .special-thanks{
+            height: 50px;
+            background-color: white;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            margin: 0 7.5px 7.5px 0;
+
+            img{    
+                height: 30px;
+                border-radius: 100px;
+                margin-top: -7.5px;
+            }
+          }
+      }
 
       .messages{
         .message{
@@ -218,44 +400,396 @@ const Container = styled.div`
         }
       }
       }
+    }
+`
 
-      .messages2{
-        margin: 30px 0 10px 0;
-        
-        h3{
-          font-size: 1.25rem;
+
+const Table = styled.div`
+  border: 1px solid #c1c1c1;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .row{
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    border-top: 1px solid #c1c1c1;
+
+    .hash{
+      width: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      /* background-color: orange; */
+      font-weight: 200;
+      font-size: 0.85rem;
+      border-right: 1px solid #c1c1c1;
+    }
+    
+    .company{
+      width: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: white;
+      font-weight: 200;
+      font-size: 0.85rem;
+      border-right: 1px solid #c1c1c1;
+    }
+    
+    .opportunity{
+      flex: 1;
+      padding: 15px 15px;
+      background-color: white;
+      border-right: 1px solid #c1c1c1;
+      font-size: 0.85rem;
+      font-weight: 500;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      
+      .left{
+        .link{
+          color: cornflowerblue;
+          font-size: 0.85rem;
           font-weight: 500;
-          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
-        }
-        .message2{
-          display: flex;
-          align-items: center;
-          border-radius: 5px;
-          margin: 10px 0 0 0;
-  
-          .text{
-              font-size: 0.9rem;
-              font-weight: 300;
-              margin-right: 5px;
-              
-              b{
-                font-weight: 400;
-              }
-  
-              a{
-                margin-left: 2.5px;
-                text-decoration: none;
-              }
-          }
-  
+          
           svg{
-            font-size: 1rem;
-            fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            fill: cornflowerblue;
+            font-size: 0.85rem;
           }
-  
-  
+        }
+
+        .extra-info{
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 10px;
+          
+          .info{
+            font-size: 0.7rem;
+            font-weight: 300;
+            padding: 2.5px 7.5px;
+            background-color: whitesmoke;
+            border-radius: 100px;
+            margin-right: 5px;
+            border: 1px solid #c1c1c1;
+          }
         }
       }
 
+      .right{
+        display: flex;
+        align-items: center;
+
+        svg{
+          font-size: 2rem;
+          margin-left: 5px;
+          fill: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#b5a6a6;')};
+        }
+      }
     }
+
+    .salary{
+      width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: white;
+      font-weight: 200;
+      font-size: 0.85rem;
+      border-right: 1px solid #c1c1c1;
+    }
+
+    .exp{
+      width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: white;
+      font-weight: 200;
+      font-size: 0.85rem;
+      border-right: 1px solid #c1c1c1;
+    }
+
+    .branch{
+      width: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: white;
+      font-weight: 200;
+      font-size: 0.85rem;
+      border-right: 1px solid #c1c1c1;
+    }
+
+    .source{
+      width: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: white;
+      font-weight: 200;
+      font-size: 0.85rem;
+
+      img{
+        height: 25px;
+      }
+    }
+  }
+
+  .top-row{
+    border-top: none;
+
+    .hash{
+      background-color: whitesmoke;
+      font-weight: 500;
+      border-right: 1px solid #c1c1c1;
+    }
+    
+    .company{
+      background-color: whitesmoke;
+      font-weight: 500;
+      border-right: 1px solid #c1c1c1;
+    }
+    
+    .opportunity{
+      background-color: whitesmoke;
+      font-weight: 500;
+      border-right: 1px solid #c1c1c1;
+      color: #333;
+    }
+
+    .salary{
+      background-color: whitesmoke;
+      font-weight: 500;
+      border-right: 1px solid #c1c1c1;
+    }
+
+    .exp{
+      background-color: whitesmoke;
+      font-weight: 500;
+      border-right: 1px solid #c1c1c1;
+    }
+
+
+    .branch{
+      background-color: whitesmoke;
+      font-weight: 500;
+      border-right: 1px solid #c1c1c1;
+    }
+
+    .source{
+      background-color: whitesmoke;
+      font-weight: 500;
+    }
+  }
 `
+
+const EffectiveFilter = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 20px 0 20px 0;
+
+	.left{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+    .filter-item{
+			padding: 5px 10px;
+			font-size: 0.7rem;
+			color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+      /* background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')}; */
+			border-radius: 3px;
+			margin-right: 5px;
+			cursor: pointer;
+      /* color: #e5e5e5; */
+      /* background-color: ${(props) => (props.needDarkMode ? 'white' : 'yellow')};  */
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      svg{
+        font-size: 1rem;
+        margin-left: 5px;
+        fill: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
+        /* fill: #e5e5e5; */
+        /* fill: ${(props) => (props.needDarkMode ? 'white' : 'black')}; */
+      }
+		}
+	}
+
+	.right{
+		display: flex;
+		align-items: center;
+
+		.filter-item{
+			padding: 5px 10px;
+			font-size: 0.7rem;
+			border-radius: 3px;
+      margin-left: 5px;
+			cursor: pointer;
+      color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
+      border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+      display: flex;
+      align-items: center;
+
+      svg{
+        font-size: 1rem;
+        margin-left: 5px;
+      }
+		}
+
+    .magic-filter{
+        background-color: #404249;
+        color: #333;
+        background: linear-gradient(300deg,#56f238,#b3adff,#c5c5ef,#bde6ce,#56f238);
+        background-size: 400% 400%;
+        -webkit-animation: AnimationName 10s ease infinite;
+        -moz-animation: AnimationName 10s ease infinite;
+        animation: AnimationName 10s ease infinite;
+        border-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        opacity: 0.75;
+        /* border-radius: 100px; */
+        
+
+        a{
+          color: #333; 
+        }
+
+        &:hover{
+          background-color: whitesmoke;
+          color: #333;
+          cursor: pointer;
+          transition-duration: 500ms;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+
+      @-moz-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+
+      @keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+	}
+`
+
+
+const ShowAbsoluteModelDropDown = styled.div`
+  position: absolute;
+  max-height: 200px;
+  min-height: 30px;
+  width: 200px;
+  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+  background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#ffffff')};
+  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+  border-radius: 5px;
+  top: 35px;
+  left: -5px;
+  z-index: 10;
+  /* overflow-y: scroll; */
+  overflow: hidden;
+  cursor: default;
+
+  /* -webkit-box-shadow: 0px 0px 60px 0px rgba(219,212,219,1);
+  -moz-box-shadow: 0px 0px 60px 0px rgba(219,212,219,1);
+  box-shadow: 0px 0px 60px 0px rgba(219,212,219,1); */
+    
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  display: flex;
+  flex-direction: column;
+
+  .option{
+    height: 40px;
+    border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+    color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+    display: grid;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    
+    &:hover{
+      background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
+      cursor: pointer;
+      transition-duration: 250ms;
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+`
+
+const SheetMessage = styled.div`
+	padding: 10px;
+	margin: 50px 0 10px 0;
+	/* border: 1px solid black; */
+	border-radius: 5px;
+	/* background-color: #c9e8ff; */
+	background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#f0f0f0')};
+
+	.text {
+		font-size: 0.8rem;
+		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+	}
+
+	.open-btn{
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		
+		font-size: 0.8rem;
+		font-weight: 500;
+		margin-top: 15px;
+
+		.desc{
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+
+		svg{
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+	}
+
+    .all-resources{
+        margin-top: 7.5px;
+
+        img{
+            height: 100px;
+            border-radius: 10px;
+            margin: 7.5px 7.5px 0 0;
+        }
+    }
+`;

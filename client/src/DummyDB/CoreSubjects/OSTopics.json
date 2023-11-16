@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Types of OS"
+    },
+    {
+        "name": "Components of OS"
+    },
+    {
+        "name": "Process Management"
+    },
+    {
+        "name": "Context Switching"
+    },
+    {
+        "name": "CPU Scheduling Algorithms"
+    },
+    {
+        "name": "Multi-Threading"
+    },
+    {
+        "name": "Race Condition"
+    },
+    {
+        "name": "Semaphores"
+    },
+    {
+        "name": "Deadlock - Detection and Recovery"
+    },
+    {
+        "name": "Paging & Segmentation"
+    },
+    {
+        "name": "Virtual Memory"
+    },
+    {
+        "name": "Page Replacement Algorithms"
+    },
+    {
+        "name": "Trashing"
+    },
+    {
+        "name": "File Management"
+    }
+]

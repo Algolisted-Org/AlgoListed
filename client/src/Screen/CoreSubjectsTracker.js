@@ -15,14 +15,6 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MobileNavbar from "../Components/MobileNavbar";
 import DoughnutChart from '../Components/DoughnutChart';
 import Tooltip from '@material-ui/core/Tooltip';
-import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
-import UpdateIcon from '@material-ui/icons/Update';
-import CreateIcon from '@material-ui/icons/Create';
-import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
-import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
-import { Link as RouterLink } from 'react-router-dom';
-import CallMadeIcon from '@material-ui/icons/CallMade';
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Tagsfilter from "../MicroComponents/Tagsfilter";
 import LockIcon from '@material-ui/icons/Lock';
@@ -31,6 +23,7 @@ import NotesIcon from '@material-ui/icons/Notes';
 import ReplayIcon from '@material-ui/icons/Replay';
 import { coreSubjectsTrackerFilters } from '../Components/coreSubjectsTrackerFilters';
 import OSquestions from '../DummyDB/CoreSubjects/OSquestions.json';
+import OSTopics from '../DummyDB/CoreSubjects/OSTopics.json';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 
 const CoreSubjectsTracker = () => {
@@ -38,17 +31,14 @@ const CoreSubjectsTracker = () => {
     const [openVisualiser, setOpenVisualiser] = useState(false);
     const [selectedLabels, setSelectedLabels] = useState([]);
     const [data, setData] = useState(OSquestions);
-    const [filteredData, setFilteredData] = useState(data);
+    const [filteredData, setFilteredData] = useState([]);
     const [dataLoading, setDataLoading] = useState(true);
+    const [answerVisibility, setAnswerVisibility] = useState(data.map(() => false));
 
     useEffect(() => {
         let selectedTheme = localStorage.getItem("selectedTheme");
         if (selectedTheme === 'dark') setNeedDarkMode(true);
         if (selectedTheme === 'light') setNeedDarkMode(false);
-        const storedCompletedTopics = localStorage.getItem("completedTopics");
-        if (storedCompletedTopics) {
-            setSelectedLabels(JSON.parse(storedCompletedTopics));
-        }
     }, [])
 
     console.log("needDarkMode : ", needDarkMode);
@@ -60,6 +50,24 @@ const CoreSubjectsTracker = () => {
         document.title = "Core Subjects Tracker - Algolisted";
     }, []);
 
+    useEffect(() => {
+        const storedCompletedTopics = localStorage.getItem("completedTopics");
+        if (storedCompletedTopics) setSelectedLabels(JSON.parse(storedCompletedTopics));
+
+        const updatedData = data.map((item) => {
+            const completed = localStorage.getItem(`completedquestion-coresheet-${item._id}`);
+            const marked = localStorage.getItem(`markedquestion-coresheet-${item._id}`);
+
+            return {
+                ...item,
+                completed: completed === "true",
+                marked: marked == "true",
+            };
+        });
+
+        setFilteredData(updatedData);
+    }, [data])
+    
     const filters = coreSubjectsTrackerFilters.map((item) => {
         return (
             <div key={item.id} className={item.domainFilter === "operating-systems" ? 'filter selected' : (item.lock === true ? 'locked-feature filter' : 'filter')} >
@@ -77,67 +85,53 @@ const CoreSubjectsTracker = () => {
         let updatedLabels;
 
         if (selectedLabels.includes(label)) {
-            // If the label is already selected, remove it
             updatedLabels = selectedLabels.filter((selectedLabel) => selectedLabel !== label);
         } else {
-            // If the label is not selected, add it
             updatedLabels = [...selectedLabels, label];
         }
 
-        // Update state
         setSelectedLabels(updatedLabels);
 
-        // Update local storage with the completed topics
         localStorage.setItem("completedTopics", JSON.stringify(updatedLabels));
     };
 
-    const allTopics = [
-        {
-            name: "Types of OS",
-        },
-        {
-            name: "Components of OS",
-        },
-        {
-            name: "Process Management",
-        },
-        {
-            name: "Context Switching",
-        },
-        {
-            name: "CPU Scheduling Algorithms",
-        },
-        {
-            name: "Multi-Threading",
-        },
-        {
-            name: "Race Condition",
-        },
-        {
-            name: "Semaphores",
-        },
-        {
-            name: "Deadlock - Detection and Recovery",
-        },
-        {
-            name: "Paging & Segmentation",
-        },
-        {
-            name: "Virtual Memory",
-        },
-        {
-            name: "Page Replacement Algorithms",
-        },
-        {
-            name: "Trashing",
-        },
-        {
-            name: "File Management",
-        }
-    ]
+    const toggleAnswerVisibility = (index) => {
+        const updatedVisibility = [...answerVisibility];
+        updatedVisibility[index] = !updatedVisibility[index];
+        setAnswerVisibility(updatedVisibility);
+    };
 
-    const progressBarPercent1 = data.length === 0 ? 0 : ((selectedLabels.length / allTopics.length) * 100).toFixed(allTopics.length > 100 ? 1 : 0);
-    const progressBarPercent2 = 18.2;
+    const toggleCompleted = (index) => {
+        const updatedData = [...data];
+        
+        updatedData[index].completed = !updatedData[index].completed;
+
+        localStorage.setItem(
+            `completedquestion-coresheet-${updatedData[index]._id}`,
+            updatedData[index].completed
+        );
+
+        setData(updatedData);
+        filteredData(updatedData);
+    };
+
+    const toggleMarked = (index) => {
+        const updatedData = [...data];
+
+        updatedData[index].marked = !updatedData[index].marked;
+
+        localStorage.setItem(
+            `markedquestion-coresheet-${updatedData[index]._id}`,
+            updatedData[index].marked
+        );
+
+        setData(updatedData);
+    }
+
+    const allTopics = OSTopics;
+
+    const topicsProgressBarPercent = allTopics.length === 0 ? 0 : ((selectedLabels.length / allTopics.length) * 100).toFixed(allTopics.length > 100 ? 1 : 0);
+    const questionsProgressBarPercent = data.length === 0 ? 0 : ((filteredData.filter((item) => item.completed === true).length / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
     return (
         <GrandContainer needDarkMode={needDarkMode}>
@@ -202,27 +196,27 @@ const CoreSubjectsTracker = () => {
                             }
                         </div>
                         {
-							openVisualiser ? (
-								<div className="all-resources">
+                            openVisualiser ? (
+                                <div className="all-resources">
                                     <a target="_blank" href="https://www.youtube.com/watch?v=_TpOHMCODXo&list=PLDzeHZWIZsTr3nwuTegHLa2qlI81QweYG">
                                         <img src="https://i.ytimg.com/vi/_TpOHMCODXo/maxresdefault.jpg" alt="" />
                                     </a>
                                     <a target="_blank" href="https://www.youtube.com/watch?v=8XBtAjKwCm4">
                                         <img src="https://i.ytimg.com/vi/8XBtAjKwCm4/maxresdefault.jpg" alt="" />
                                     </a>
-                                    
+
                                 </div>
-							) : (<></>)
-						}
+                            ) : (<></>)
+                        }
                     </SheetMessage>
                     <h4>Topics</h4>
                     <Progress needDarkMode={needDarkMode}>
                         <div className="text">Progress : </div>
-                        <div className="value">{`${progressBarPercent1}%`}</div>
+                        <div className="value">{`${topicsProgressBarPercent}%`}</div>
                         <div className="bar">
                             <div
                                 className="fill"
-                                style={{ width: `${progressBarPercent1}%` }}
+                                style={{ width: `${topicsProgressBarPercent}%` }}
                             ></div>
                         </div>
                     </Progress>
@@ -244,11 +238,11 @@ const CoreSubjectsTracker = () => {
 
                     <Progress needDarkMode={needDarkMode}>
                         <div className="text">Progress : </div>
-                        <div className="value">{`${progressBarPercent2}%`}</div>
+                        <div className="value">{`${questionsProgressBarPercent}%`}</div>
                         <div className="bar">
                             <div
                                 className="fill"
-                                style={{ width: `${progressBarPercent2}%` }}
+                                style={{ width: `${questionsProgressBarPercent}%` }}
                             ></div>
                         </div>
                     </Progress>
@@ -278,12 +272,17 @@ const CoreSubjectsTracker = () => {
                                             <div className="main-row-content">
                                                 <div className="question-main">
                                                     {item.quesName}
-                                                    <div className="show-answer">Hide Answer</div>
+                                                    <div
+                                                        className="toggle-answer"
+                                                        onClick={() => toggleAnswerVisibility(index)}
+                                                    >
+                                                        {answerVisibility[index] ? 'Hide Answer' : 'Show Answer'}
+                                                    </div>
                                                 </div>
 
-                                                <div className="seperator-line"></div>
+                                                <div className="seperator-line" style={{ display: answerVisibility[index] ? 'block' : 'none' }}></div>
 
-                                                <div className="answer-main">
+                                                <div className="answer-main" style={{ display: answerVisibility[index] ? 'block' : 'none' }}>
                                                     {item.answer}
                                                 </div>
                                             </div>
@@ -292,14 +291,14 @@ const CoreSubjectsTracker = () => {
                                             <Tooltip title={item.completed ? "Mark as Uncompleted" : "Mark as Completed"}>
                                                 <div className="done-btn">
                                                     <CheckCircleOutlineIcon
-                                                    // onClick={() => toggleCompleted(item._id)}
+                                                        onClick={() => toggleCompleted(index)}
                                                     />
                                                 </div>
                                             </Tooltip>
                                             <Tooltip title={item.marked ? "Unmark" : "Mark for Later"}>
                                                 <div className="review-btn">
                                                     <BookmarkIcon
-                                                    // onClick={() => toggleMarked(index)}
+                                                        onClick={() => toggleMarked(index)}
                                                     />
                                                 </div>
                                             </Tooltip>
@@ -525,11 +524,12 @@ const Container = styled.div`
 				min-height: 94px;
 				padding: 20px 20px;
 				display: flex;
-				align-items: center;
+				align-items: flex-start;
 				justify-content: space-between;
 				border-top-left-radius: 5px;
 				border-top-right-radius: 5px;
 				border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+                
 
 				.strip{
 					display: none;
@@ -537,9 +537,10 @@ const Container = styled.div`
 
 				.link-row-left {
 					display: flex;
-					align-items: center;
+					align-items: flex-start;
 
 					.count {
+                        width: 30px;
 						font-size: 1.25rem;
 						font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
 							BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
@@ -552,9 +553,12 @@ const Container = styled.div`
 						color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
                         display: flex;
                         justify-content: space-between;
+                        /* background-color: yellow; */
 					}
 
 					.main-row-content {
+                        flex: 1;
+
 						.question-main{
 							position: relative;
                             font-size: 0.8rem;
@@ -563,10 +567,15 @@ const Container = styled.div`
                             margin-right: 15px;
                             color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
                             
-                            .show-answer{
+                            .toggle-answer{
+                                cursor: pointer;
                                 margin-top: 5px;
                                 font-weight: 300;
                                 color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                            }
+
+                            .toggle-answer:hover {
+                                filter: brightness(150%);
                             }
 						}
 
@@ -833,7 +842,7 @@ const Progress = styled.div`
 		/* width: 400px; */
 		height: 10px;
 		border-radius: 100px;
-		border: 1px solid ${(props) => (props.needDarkMode ? '#000000' : 'pink')};
+		border: 1px solid ${(props) => (props.needDarkMode ? '#222' : 'pink')};
 		background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : 'whitesmoke')};
 		flex: 1;
 		overflow: hidden;
