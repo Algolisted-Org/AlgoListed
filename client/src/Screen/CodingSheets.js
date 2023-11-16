@@ -51,6 +51,7 @@ const CodingSheets = () => {
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
 	const [selectedValue, setSelectedValue] = useState('All');
+	const [selectedSort, setSelectedSort] = useState('All');
 	const [needDarkMode, setNeedDarkMode] = useState(!false);
 	const [tags, setTags]=useState([])
 
@@ -81,6 +82,9 @@ const CodingSheets = () => {
 		setSelectedValue(label);
 	}
 
+	const handleSortClick = (label) => {
+		setSelectedSort(label);
+	}
 	const params = useParams();
 	const { sheetname } = params;
 	// console.log(sheetname);
@@ -771,7 +775,25 @@ const CodingSheets = () => {
 		});
 		setFilteredData(newFilteredData);
 	  }, [selectedLabel, selectedValue,tags]);
-	  
+	
+	// For sorting filter
+	useEffect(() => {
+		let newSortedData=[...filteredData];
+		if(selectedSort === "All") {
+			//Stores the indices of original data array and later compares to get original sort
+			const indexMap = new Map();
+			data.forEach((element, index) => {
+				indexMap.set(element, index);
+			});
+
+			// Sort the second array based on the indices from the orignal data array
+			newSortedData.sort((a, b) => indexMap.get(a) - indexMap.get(b));
+		}
+		else if (selectedSort === "Time") {
+			newSortedData.sort((a, b) => b.elapsedTime - a.elapsedTime);
+		}
+		setFilteredData(newSortedData);
+	},[selectedSort])
 
 	useEffect(() => { // finding unique tags
 		let len = solvedData.length;
@@ -1120,6 +1142,10 @@ const CodingSheets = () => {
 							<UpdateIcon className="review-btn"/> */}
 							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} setTags={setTags} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
+							<select className="filter-item" value={selectedSort} onChange={(e) => handleSortClick(e.target.value)}>
+								<option value="All">Sort Based on</option>
+								<option value="Time">Time</option>
+							</select>
 							{/* <div className="filter-item"><CheckCircleOutlineIcon/></div> */}
 							{/* <div className="filter-item"><UpdateIcon/></div> */}
 							{/* <div className="filter-item">Show Unsolved</div>  */}
