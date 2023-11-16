@@ -51,22 +51,35 @@ const CoreSubjectsTracker = () => {
     }, []);
 
     useEffect(() => {
-        const storedCompletedTopics = localStorage.getItem("completedTopics");
-        if (storedCompletedTopics) setSelectedLabels(JSON.parse(storedCompletedTopics));
+        try {
+            const storedCompletedTopics = JSON.parse(localStorage.getItem("completedTopics"));
 
-        const updatedData = data.map((item) => {
-            const completed = localStorage.getItem(`completedquestion-coresheet-${item._id}`);
-            const marked = localStorage.getItem(`markedquestion-coresheet-${item._id}`);
+            if (storedCompletedTopics) {
+                const updatedCompletedTopics = OSTopics
+                    .filter((item) => storedCompletedTopics.includes(item.name))
+                    .map((item) => item.name);
 
-            return {
-                ...item,
-                completed: completed === "true",
-                marked: marked == "true",
-            };
-        });
+                localStorage.setItem("completedTopics", JSON.stringify(updatedCompletedTopics));
+                setSelectedLabels([...updatedCompletedTopics]);
+            }
 
-        setFilteredData(updatedData);
-    }, [data])
+            const updatedData = data.map((item) => {
+                const completed = localStorage.getItem(`completedquestion-coresheet-${item._id}`);
+                const marked = localStorage.getItem(`markedquestion-coresheet-${item._id}`);
+
+                return {
+                    ...item,
+                    completed: completed === "true",
+                    marked: marked === "true",
+                };
+            });
+
+            setFilteredData(updatedData);
+        } catch (error) {
+            console.error("Error in useEffect:", error);
+        }
+    }, [data]);
+    
     
     const filters = coreSubjectsTrackerFilters.map((item) => {
         return (
@@ -102,7 +115,7 @@ const CoreSubjectsTracker = () => {
     };
 
     const toggleCompleted = (index) => {
-        const updatedData = [...data];
+        const updatedData = [...filteredData];
         
         updatedData[index].completed = !updatedData[index].completed;
 
@@ -111,12 +124,11 @@ const CoreSubjectsTracker = () => {
             updatedData[index].completed
         );
 
-        setData(updatedData);
-        filteredData(updatedData);
+        setFilteredData(updatedData);
     };
 
     const toggleMarked = (index) => {
-        const updatedData = [...data];
+        const updatedData = [...filteredData];
 
         updatedData[index].marked = !updatedData[index].marked;
 
@@ -125,7 +137,7 @@ const CoreSubjectsTracker = () => {
             updatedData[index].marked
         );
 
-        setData(updatedData);
+        setFilteredData(updatedData);
     }
 
     const allTopics = OSTopics;
