@@ -50,8 +50,6 @@ const CoreSubjectsTracker = () => {
         document.title = "Core Subjects Tracker - Algolisted";
     }, []);
 
-
-
     useEffect(() => {
         const storedCompletedTopics = localStorage.getItem("completedTopics");
         if (storedCompletedTopics) setSelectedLabels(JSON.parse(storedCompletedTopics));
@@ -69,7 +67,6 @@ const CoreSubjectsTracker = () => {
 
         setFilteredData(updatedData);
     }, [data])
-
     
     const filters = coreSubjectsTrackerFilters.map((item) => {
         return (
