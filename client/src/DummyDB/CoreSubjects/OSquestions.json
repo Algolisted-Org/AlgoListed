@@ -173,5 +173,12 @@
         "answer": "Different scheduling algorithms govern the execution order of processes in operating systems. First Come First Serve (FCFS) serves processes in the order of arrival, while Round Robin (RR) allocates a fixed time quantum to each process, rotating through them. Shortest Job First (SJF) prioritizes the process with the shortest execution time. Priority Scheduling (PS) assigns priority values (nice values) to processes, and the one with the highest priority gets executed first. Each algorithm aims to optimize system performance based on specific criteria like turnaround time, response time, or prioritization.",
         "completed": false,
         "marked": false
+    },
+    {
+        "_id": "16-nov-2023-20'44-@IrfanSalim",
+        "quesName": "What is the purpose of the 'ls' command in Unix/Linux?",
+        "answer": "The 'ls' command in Unix/Linux is used to list the files and directories in the current working directory.",
+        "completed": false,
+        "marked": false
     }
 ]
