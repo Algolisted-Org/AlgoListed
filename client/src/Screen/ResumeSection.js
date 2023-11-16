@@ -12,6 +12,7 @@ import CallMadeIcon from "@material-ui/icons/CallMade";
 import InfoIcon from "@material-ui/icons/Info";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import { PuffLoader } from "react-spinners";
 
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
@@ -22,9 +23,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const promptForMncQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for MNCs. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, the project have used.",
-  "Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here'. Don't give any resources.",
-  "Keep it long and related so that a student should really have to think about the technology details.",
-  "Sample technical questions: 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimize if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimize it and scale it?",
+  "IMPORTANT 1 : Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here'. Don't give any resources.",
+  "IMPORTANT 2 : Keep it related to the a student - Sample technical questions: 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimize if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimize it and scale it?",
   "Sample soft questions: 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values do you think that experience taught you which you can bring to our company. 2. How will you resolve an xyz problem with your team, ...",
   "Rate all the projects on a scale of 10 based on the tech stack they have used, for example, more complex tech stack gets a higher rating. For example, xyz projects have used react, redux, tailwind, mongodb, rate 8/10 like this.",
   "Give the ATS score of the resume as well in percentage. and Area of improvement in the resume.",
@@ -180,7 +180,7 @@ const ResumeSection = () => {
     console.log("This is usestate temp : ", iamTemp);
   }, [iamTemp])
 
-  //   New Code
+
   const handleSend = async () => {
     if (textFromPDF) {
       setIsLoading(true);
@@ -206,6 +206,8 @@ const ResumeSection = () => {
         } else {
           prompt = `${promptForBasicQuestionChunks.join("\n")}${textFromPDF}`;
         }
+        console.log(prompt);
+
         const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           messages: [
@@ -214,7 +216,7 @@ const ResumeSection = () => {
               content: prompt,
             },
           ],
-          temperature: 0.5,
+          temperature: 0.8,
           max_tokens: 800,
         });
 
@@ -235,9 +237,11 @@ const ResumeSection = () => {
       console.error("No text to send to Chat API.");
     }
   };
+
   const toggleResultDummy = () => {
     setResultDummy(!resultDummy);
   };
+
   const handleCompany = (e) => {
     setCompanyName(e.target.options[e.target.selectedIndex].text);
     setSelectedCompany(e.target.value);
@@ -247,6 +251,7 @@ const ResumeSection = () => {
     setDifficultyLevelName(e.target.options[e.target.selectedIndex].text);
     setDifficultyLevel(e.target.value);
   };
+
   const handleDrop = (e) => {
     e.preventDefault();
     const dropedFile = e.dataTransfer.files[0];
@@ -258,9 +263,12 @@ const ResumeSection = () => {
     }
     console.log(textFromPDF);
   };
+
   const handleUploadClick = () => {
     document.getElementById("fileInput").click();
   };
+
+  const loaderColor = needDarkMode ? "#FFFFFF" : "#000000"; // Set your light and dark mode colors
 
   return (
     <GrandContainer>
@@ -321,7 +329,7 @@ const ResumeSection = () => {
               onClick={handleUploadClick}
             >
               <CloudUploadIcon />
-              <div className="text">Click to upload or drag and drop</div>
+              <div className="text btn-clickable">Click to upload or drag and drop</div>
               <input
                 type="file"
                 id="fileInput"
@@ -396,56 +404,6 @@ const ResumeSection = () => {
 
           <div className="display-line"></div>
 
-          <div className="show-sample">
-            <div className="text" onClick={toggleResultDummy}>
-              {resultDummy ? "Hide Sample Results" : "Show Sample Results"}
-              {resultDummy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </div>
-            {resultDummy && (
-              <div className="ai-generated-results">
-                <div className="graphs"></div>
-                <div className="questions">
-                  <h2>Technical Questions</h2>
-                  <p>
-                    1. In the project SocialSphere, how did you implement the
-                    forum functionality? Can you explain the role of React JS
-                    and MongoDB in this project?{" "}
-                  </p>
-                  <p>
-                    2. For the project Algolisted, what technologies did you use
-                    to develop the personalized resume questionnaire feature?
-                    How did you integrate OpenAI API into the project?
-                  </p>
-                  <p>
-                    3. In Cryptomania, can you explain how you utilized Chartjs
-                    and API integration to provide cryptocurrency statistics and
-                    real-time news updates?
-                  </p>
-
-                  <h2>Soft Questions</h2>
-                  <p>
-                    1. I see you have worked on the project SocialSphere. What
-                    inspired you to create a forum for history and political
-                    enthusiasts? How do you think this project aligns with your
-                    values?
-                  </p>
-                </div>
-                <div className="stats">
-                  <h2>Useful Stats about Resumes</h2>
-                  <p>This is will be a locally generated stuff!</p>
-                </div>
-                <div className="stats">
-                  <h2>Get your Resume Reviewed by Professionals</h2>
-                  <p>topmate.io shit! with LLM vector database</p>
-                </div>
-                <div className="stats">
-                  <h2>Resourses for Resume</h2>
-                  <p>Local stuff!</p>
-                </div>
-              </div>
-            )}
-          </div>
-
           <div className="ai-generated-results">
             {responseText ? (
               <>
@@ -489,18 +447,71 @@ const ResumeSection = () => {
                 </div>
               </>
             ) : (
-              <p>No questions generated yet!</p>
+              <div className="show-sample">
+                <div className="text btn-clickable" onClick={toggleResultDummy}>
+                  {resultDummy ? "Hide Sample Results" : "Show Sample Results"}
+                  {resultDummy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                </div>
+                {resultDummy && (
+                  <div className="ai-generated-results">
+                    <div className="graphs"></div>
+                    <div className="questions">
+                      <h2>Technical Questions</h2>
+                      <p>
+                        1. In the project SocialSphere, how did you implement the
+                        forum functionality? Can you explain the role of React JS
+                        and MongoDB in this project?{" "}
+                      </p>
+                      <p>
+                        2. For the project Algolisted, what technologies did you use
+                        to develop the personalized resume questionnaire feature?
+                        How did you integrate OpenAI API into the project?
+                      </p>
+                      <p>
+                        3. In Cryptomania, can you explain how you utilized Chartjs
+                        and API integration to provide cryptocurrency statistics and
+                        real-time news updates?
+                      </p>
+
+                      <h2>Soft Questions</h2>
+                      <p>
+                        1. I see you have worked on the project SocialSphere. What
+                        inspired you to create a forum for history and political
+                        enthusiasts? How do you think this project aligns with your
+                        values?
+                      </p>
+                    </div>
+                    <div className="stats">
+                      <h2>Useful Stats about Resumes</h2>
+                      <p>This is will be a locally generated stuff!</p>
+                    </div>
+                    <div className="stats">
+                      <h2>Get your Resume Reviewed by Professionals</h2>
+                      <p>topmate.io shit! with LLM vector database</p>
+                    </div>
+                    <div className="stats">
+                      <h2>Resourses for Resume</h2>
+                      <p>Local stuff!</p>
+                    </div>
+                  </div>
+                )}
+              </div>
             )}
             {isLoading ? (
-              <LoadingSection>Loading....</LoadingSection>
+              <div className="loader-section">
+                <PuffLoader color={loaderColor} size={100} />
+                <div className="text">
+                  <div className="notice">Get ready for the magic! Your returns are cooking up— generally, it's just a quick minute. Shoutout to your patience skills!</div>
+                  <div className="supply">
+                    Until then, <a href="https://levelup.gitconnected.com/why-i-keep-failing-candidates-during-google-interviews-dc8f865b2c19" target="_blank">explore why Google recruiters decline a majority of candidates</a> <CallMadeIcon/>
+                  </div>
+                </div>
+              </div>
             ) : (
               <>
                 {file && (
                   <div>
-                    <Document
-                      file={file}
-                      onLoadSuccess={handleTextExtraction}
-                    />
+                    <Document file={file} onLoadSuccess={handleTextExtraction} />
                   </div>
                 )}
               </>
@@ -515,7 +526,11 @@ const ResumeSection = () => {
 
 export default ResumeSection;
 
-const GrandContainer = styled.div``;
+const GrandContainer = styled.div`
+  .btn-clickable{
+    cursor: pointer;
+  }
+`;
 
 const MobContainer = styled.div`
   width: 100vw;
@@ -623,7 +638,7 @@ const Container = styled.div`
       /* display: flex; */
       /* align-items: center; */
       background-color: ${(props) =>
-        props.needDarkMode ? "#444754" : "#d5f7e1"};
+    props.needDarkMode ? "#444754" : "#d5f7e1"};
       border-radius: 5px;
       padding: 10px;
       margin: 20px 0 10px 0;
@@ -671,10 +686,10 @@ const Container = styled.div`
           button {
             margin-bottom: 20px;
             background-color: ${(props) =>
-              props.needDarkMode ? "#201e1e" : "#f3f4f7"};
+    props.needDarkMode ? "#201e1e" : "#f3f4f7"};
             border: 1px solid
               ${(props) =>
-                props.needDarkMode ? "#595b5f" : "rgb(209, 213, 219)"};
+    props.needDarkMode ? "#595b5f" : "rgb(209, 213, 219)"};
           }
         }
 
@@ -771,7 +786,7 @@ const Container = styled.div`
         width: calc(25% - 10px);
         height: 100px;
         background-color: ${(props) =>
-          props.needDarkMode ? "#404249" : "#e5e5e5"};
+    props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -798,8 +813,7 @@ const Container = styled.div`
       .other-details {
         width: calc(75% - 190px);
         height: 100px;
-        background-color: ${(props) =>
-          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -829,10 +843,8 @@ const Container = styled.div`
             min-width: 190px;
             height: 35px;
             width: 40%;
-            background-color: ${(props) =>
-              props.needDarkMode ? "#313337" : "#d0d0d0"};
-            border: 1px solid
-              ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
+            background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
+            border: 1px solid ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
             border-radius: 100px;
             margin-right: 5px;
             color: #000;
@@ -861,8 +873,7 @@ const Container = styled.div`
       .info {
         width: 180px;
         height: 100px;
-        background-color: ${(props) =>
-          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -884,8 +895,7 @@ const Container = styled.div`
         .detail {
           height: 35px;
           width: 100%;
-          background-color: ${(props) =>
-            props.needDarkMode ? "#313337" : "#d0d0d0"};
+          background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
           border: 1px solid
             ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
           border-radius: 100px;
@@ -915,12 +925,17 @@ const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
 
         .left-section {
           height: 100%;
-          background-color: #313337;
+          /* background-color: #313337; */
           border-radius: 12.5px;
           padding: 0 20px;
+          /* background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"}; */
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
+          /* border: 1px solid ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")}; */
 
           display: flex;
           align-items: center;
@@ -947,14 +962,15 @@ const Container = styled.div`
 
           input {
             height: 100%;
-            background-color: #313337;
             border-radius: 100px;
             border: none;
             width: 100%;
-            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
             font-size: 0.75rem;
             font-weight: 200;
             padding: 0 12.5px;
+            background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+            /* border: 1px solid ${(props) => (props.needDarkMode ? "" : "#c3b4b4")}; */
           }
         }
       }
@@ -1066,6 +1082,8 @@ const Container = styled.div`
       align-items: start;
       justify-content: center;
       margin-bottom: 20px;
+      
+      
 
       .text {
         font-size: 0.9rem;
@@ -1082,8 +1100,52 @@ const Container = styled.div`
       }
     }
 
-    .ai-generated-results {
+    .loader-section{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      padding: 50px 150px;
+
+      .text{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        
+        .notice{
+          width: 400px;
+          margin: 20px 0;
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        }
+
+        .supply{
+          font-style: italic;
+          width: 550px;
+          font-size: 0.8rem;
+          font-weight: 200;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          
+          svg{
+            font-size: 0.8rem;
+            fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          }
+
+          a{
+            text-decoration: none;
+          }
+        }
+      }
       
+    }
+
+    .ai-generated-results {
       .ai-text-gradient{
         font-weight: 500;
         background-color: #f3ec78;
