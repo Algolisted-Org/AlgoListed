@@ -56,6 +56,26 @@ const Opportunities = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const getImageLink = (source) => {
+    const linkedinRegex = /linkedin\.com/;
+    const whatsappRegex = /whatsapp\.com/;
+    const telegramRegex = /telegram\.org/;
+    const youtubeRegex = /youtube\.com/;
+
+    if (linkedinRegex.test(source)) {
+      return 'https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png';
+    } else if (whatsappRegex.test(source)) {
+      return 'https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png';
+    } else if (telegramRegex.test(source)) {
+      return 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png';
+    } else if (youtubeRegex.test(source)) {
+      return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png';
+    } else {
+      // If no match, return a default image link
+      return 'https://imageio.forbes.com/specials-images/imageserve/63dd379b9ef3cd559331b7e2/Illustration-of-the-word--Ai---in-the-style-of-the-Google-logo/0x0.jpg?format=jpg&height=1080&width=1920';
+    }
+  };
+
 
   return (
     <GrandContainer>
@@ -168,10 +188,9 @@ const Opportunities = () => {
                 {/* <div className="filter-item">Show Unsolved</div>  */}
               </div>
             </EffectiveFilter>
-            <Table>
+            <Table needDarkMode={needDarkMode}>
               <div className="row top-row">
                 <div className="hash">Count</div>
-                {/* <div className="company">Company</div> */}
                 <div className="opportunity">Opportunity</div>
                 {/* <div className="salary">Salary</div> */}
                 {/* <div className="exp">Experience</div> */}
@@ -189,14 +208,13 @@ const Opportunities = () => {
 
                   }
                   {
-                    allOpportunities.map((item, index) => {
+                    allOpportunities.slice().reverse().map((item, index) => {
                       return (
                         <div className="row">
                           <div className="hash">{index + 1}</div>
-                          {/* <div className="company">Google India</div> */}
                           <div className="opportunity">
                             <div className="left">
-                              <a href={item.job_link} target='_blank' className="link">{item.job_title} <CallMadeIcon/></a>
+                              <a href={item.job_link} target='_blank' className="link">{item.job_title} <CallMadeIcon /></a>
                               <div className="extra-info">
                                 <div className="info">{item.role}</div>
                                 <div className="info">{item.type}</div>
@@ -211,7 +229,9 @@ const Opportunities = () => {
                             </div>
                           </div>
                           <div className="source">
-                            <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" />
+                            <a href={item.source} target='_blank'>
+                              <img src={getImageLink(item.source)} alt="" />
+                            </a>
                           </div>
                         </div>
                       )
@@ -363,7 +383,7 @@ const Container = styled.div`
 
           .special-thanks{
             height: 50px;
-            background-color: white;
+            background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : 'whitesmoke')};
             border-radius: 100px;
             display: flex;
             align-items: center;
@@ -405,7 +425,7 @@ const Container = styled.div`
 
 
 const Table = styled.div`
-  border: 1px solid #c1c1c1;
+  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
   border-radius: 5px;
   overflow: hidden;
 
@@ -413,7 +433,7 @@ const Table = styled.div`
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    border-top: 1px solid #c1c1c1;
+    border-top: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
 
     .hash{
       width: 80px;
@@ -424,26 +444,16 @@ const Table = styled.div`
       /* background-color: orange; */
       font-weight: 200;
       font-size: 0.85rem;
-      border-right: 1px solid #c1c1c1;
-    }
-    
-    .company{
-      width: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      background-color: white;
-      font-weight: 200;
-      font-size: 0.85rem;
-      border-right: 1px solid #c1c1c1;
+      border-right: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
+      color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+      background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#fff')};
     }
     
     .opportunity{
       flex: 1;
       padding: 15px 15px;
-      background-color: white;
-      border-right: 1px solid #c1c1c1;
+      background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#fff')};
+      border-right: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
       font-size: 0.85rem;
       font-weight: 500;
 
@@ -453,12 +463,13 @@ const Table = styled.div`
       
       .left{
         .link{
-          color: cornflowerblue;
+          color: ${(props) => (props.needDarkMode ? '#94b2e6' : 'cornflowerblue')};
           font-size: 0.85rem;
           font-weight: 500;
+          text-decoration: ${(props) => (props.needDarkMode ? 'none' : 'default')};
           
           svg{
-            fill: cornflowerblue;
+            fill: ${(props) => (props.needDarkMode ? '#94b2e6' : 'cornflowerblue')};
             font-size: 0.85rem;
           }
         }
@@ -472,10 +483,11 @@ const Table = styled.div`
             font-size: 0.7rem;
             font-weight: 300;
             padding: 2.5px 7.5px;
-            background-color: whitesmoke;
+            background-color: ${(props) => (props.needDarkMode ? '#232323' : 'whitesmoke')};
             border-radius: 100px;
             margin-right: 5px;
-            border: 1px solid #c1c1c1;
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
+            color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
           }
         }
       }
@@ -487,45 +499,9 @@ const Table = styled.div`
         svg{
           font-size: 2rem;
           margin-left: 5px;
-          fill: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#b5a6a6;')};
+          fill: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#b5a6a6')};
         }
       }
-    }
-
-    .salary{
-      width: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      background-color: white;
-      font-weight: 200;
-      font-size: 0.85rem;
-      border-right: 1px solid #c1c1c1;
-    }
-
-    .exp{
-      width: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      background-color: white;
-      font-weight: 200;
-      font-size: 0.85rem;
-      border-right: 1px solid #c1c1c1;
-    }
-
-    .branch{
-      width: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      background-color: white;
-      font-weight: 200;
-      font-size: 0.85rem;
-      border-right: 1px solid #c1c1c1;
     }
 
     .source{
@@ -534,12 +510,13 @@ const Table = styled.div`
       align-items: center;
       justify-content: center;
       padding: 10px;
-      background-color: white;
+      background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#fff')};
       font-weight: 200;
       font-size: 0.85rem;
 
       img{
         height: 25px;
+        border-radius: 100px;
       }
     }
   }
@@ -548,45 +525,22 @@ const Table = styled.div`
     border-top: none;
 
     .hash{
-      background-color: whitesmoke;
+      background-color: ${(props) => (props.needDarkMode ? '#232323' : 'whitesmoke')};
       font-weight: 500;
-      border-right: 1px solid #c1c1c1;
-    }
-    
-    .company{
-      background-color: whitesmoke;
-      font-weight: 500;
-      border-right: 1px solid #c1c1c1;
+      border-right: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
+      color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
     }
     
     .opportunity{
-      background-color: whitesmoke;
+      background-color: ${(props) => (props.needDarkMode ? '#232323' : 'whitesmoke')};
       font-weight: 500;
-      border-right: 1px solid #c1c1c1;
-      color: #333;
-    }
-
-    .salary{
-      background-color: whitesmoke;
-      font-weight: 500;
-      border-right: 1px solid #c1c1c1;
-    }
-
-    .exp{
-      background-color: whitesmoke;
-      font-weight: 500;
-      border-right: 1px solid #c1c1c1;
-    }
-
-
-    .branch{
-      background-color: whitesmoke;
-      font-weight: 500;
-      border-right: 1px solid #c1c1c1;
+      border-right: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
+      color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
     }
 
     .source{
-      background-color: whitesmoke;
+      color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+      background-color: ${(props) => (props.needDarkMode ? '#232323' : 'whitesmoke')};
       font-weight: 500;
     }
   }
@@ -648,6 +602,7 @@ const EffectiveFilter = styled.div`
       svg{
         font-size: 1rem;
         margin-left: 5px;
+        fill: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#333')};
       }
 		}
 
@@ -674,7 +629,7 @@ const EffectiveFilter = styled.div`
         }
 
         &:hover{
-          background-color: whitesmoke;
+          background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : 'whitesmoke')};
           color: #333;
           cursor: pointer;
           transition-duration: 500ms;
@@ -684,7 +639,7 @@ const EffectiveFilter = styled.div`
 
       @-webkit-keyframes AnimationName {
           0%{background-position:0% 50%}
-          50%{background-position:100% 50%}
+          50%{background-position:100% 50%} 
           100%{background-position:0% 50%}
       }
 
@@ -758,7 +713,7 @@ const SheetMessage = styled.div`
 	/* border: 1px solid black; */
 	border-radius: 5px;
 	/* background-color: #c9e8ff; */
-	background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#f0f0f0')};
+	background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#f0f0f0')}; 
 
 	.text {
 		font-size: 0.8rem;
