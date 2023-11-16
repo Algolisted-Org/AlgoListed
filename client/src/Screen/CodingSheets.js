@@ -30,6 +30,7 @@ import TimerIcon from '@material-ui/icons/Timer';
 import NotesIcon from '@material-ui/icons/Notes';
 import ReplayIcon from '@material-ui/icons/Replay';
 import AlarmOnIcon from '@material-ui/icons/AlarmOn';
+import PauseIcon from '@material-ui/icons/Pause';
 import SortIcon from '@material-ui/icons/Sort';
 
 const CodingSheets = () => {
@@ -836,6 +837,10 @@ const CodingSheets = () => {
 
 	// console.log(sortedSolvedTopicTagsKeys);
 
+	useEffect(() => {
+		console.log("I changed to : ", selectedSort);
+	}, [selectedSort])
+
 	return (
 		<GrandContainer>
 			<MobContainer>
@@ -1137,7 +1142,9 @@ const CodingSheets = () => {
 							<UpdateIcon className="review-btn"/> */}
 							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} setTags={setTags} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
-							<SortIcon onChange={() => setSelectedSort(!selectedSort)}/>
+							<Tooltip title={selectedSort ? "Unsort" : "Sort based on Time"}>
+								<SortIcon onClick={() => setSelectedSort(!selectedSort)}/>
+							</Tooltip>
 							{/* <div className="filter-item"><CheckCircleOutlineIcon/></div> */}
 							{/* <div className="filter-item"><UpdateIcon/></div> */}
 							{/* <div className="filter-item">Show Unsolved</div>  */}
@@ -1181,7 +1188,7 @@ const CodingSheets = () => {
 													>
 														{item.quesName}
 													</a>
-													<div className="time-required">
+													<div className="time-required" style={{ color: needDarkMode ? (item.isRunning ? "white" : "#b4a7a6") : (item.isRunning ? "black" : "#333") }}>
 														<Stopwatch
 															id={index}
 															initialElapsed={parseInt(item.elapsedTime, 10)}
@@ -1229,9 +1236,9 @@ const CodingSheets = () => {
 													/>
 												</div>
 											</Tooltip>
-											<Tooltip title="Start Stop Watch">
+											<Tooltip title="Stop Watch">
 												<div className="stop-watch-btn" onClick={()=>handleStartStop(index)}>
-													{item.isRunning ? <AlarmOnIcon/> : <TimerIcon/>}
+													{item.isRunning ? <PauseIcon style={{ fill: "orange" }} /> : <TimerIcon/>}
 												</div>
 											</Tooltip>
 											{/* <Tooltip title="Add Notes">
