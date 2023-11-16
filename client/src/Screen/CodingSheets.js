@@ -756,7 +756,6 @@ const CodingSheets = () => {
 
 	useEffect(() => {
 		const newFilteredData = data.filter(item => {
-			console.log(item)
 		  if (selectedLabel !== 'All' && !item.tags.includes(selectedLabel)) {
 			return false;
 		  }
@@ -773,12 +772,9 @@ const CodingSheets = () => {
 		  }
 		  return true;
 		});
-		setFilteredData(newFilteredData);
-	  }, [selectedLabel, selectedValue,tags]);
-	
-	// For sorting filter
-	useEffect(() => {
-		let newSortedData=[...filteredData];
+
+		// For sorting filter
+		let newSortedData=[...newFilteredData];
 		if(selectedSort === "All") {
 			//Stores the indices of original data array and later compares to get original sort
 			const indexMap = new Map();
@@ -792,8 +788,9 @@ const CodingSheets = () => {
 		else if (selectedSort === "Time") {
 			newSortedData.sort((a, b) => b.elapsedTime - a.elapsedTime);
 		}
+
 		setFilteredData(newSortedData);
-	},[selectedSort])
+	  }, [selectedLabel, selectedValue,tags, selectedSort]);
 
 	useEffect(() => { // finding unique tags
 		let len = solvedData.length;
