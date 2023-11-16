@@ -899,4 +899,6 @@ const Progress = styled.div`
 			}
 		}
 	}	
+
+
 `;
