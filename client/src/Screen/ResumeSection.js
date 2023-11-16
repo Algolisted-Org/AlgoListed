@@ -86,6 +86,7 @@ const ResumeSection = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [responseArray, setResponseArray] = useState([]); // Array of responses
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
+  const [iamTemp, setIamTemp] = useState(null);
   const [dummyResponse, setDummyResponse] = useState({
     technicalQuestions: [
       "In the SocialSphere project, how did you implement user authentication and authorization?",
@@ -175,6 +176,10 @@ const ResumeSection = () => {
     setNeedDarkMode(!needDarkMode);
   };
 
+  useEffect(() => {
+    console.log("This is usestate temp : ", iamTemp);
+  }, [iamTemp])
+
   //   New Code
   const handleSend = async () => {
     if (textFromPDF) {
@@ -214,10 +219,13 @@ const ResumeSection = () => {
         });
 
         setResponseText(response.choices[0].message.content);
-        // console.log(JSON.parse(response.choices[0].message.content));
+        console.log(JSON.parse(response.choices[0].message.content));
+        const temp = JSON.parse(response.choices[0].message.content);
+        console.log("I am temp : ", temp);
+        setIamTemp(temp);
         responseArray = JSON.parse(response.choices[0].message.content);
-        console.log("object")
-        console.log(responseArray)
+        console.log("object");
+        console.log(responseArray);
         setIsLoading(false);
       } catch (error) {
         console.error("Error sending message to Chat API:", error);
@@ -437,43 +445,47 @@ const ResumeSection = () => {
               </div>
             )}
           </div>
-          <h3>AI Generated Resume Based Questions</h3>
 
-          <div className="generated-mark-up">
+          <div className="ai-generated-results">
             {responseText ? (
               <>
+                <h2 className="ai-text-gradient">AI Generated Resume Based Questions</h2>
                 <p>Good Luck with your Interview ✨✨</p>
-                <div>
-                  <h2>Technical Questions</h2>
-                  <ul>
-                    {responseArray.technicalQuestions?.map(
+                <div className="questions">
+                  <h2 className="ai-text-gradient">Technical Questions</h2>
+                  <div>
+                    {iamTemp.technicalQuestions?.map(
                       (question, index) => (
-                        <li key={index}>{question}</li>
+                        <p key={index}>{index + 1}. {question}</p>
                       )
                     )}
-                  </ul>
-
-                  <h2>Soft Skill Questions</h2>
-                  <ul>
-                    {responseArray.softSkillQuestions?.map(
+                  </div>
+                </div>
+                <div className="questions">
+                  <h2 className="ai-text-gradient">Soft Skill Questions</h2>
+                  <div>
+                    {iamTemp.softSkillQuestions?.map(
                       (question, index) => (
-                        <li key={index}>{question}</li>
+                        <p key={index}>{index + 1}. {question}</p>
                       )
                     )}
-                  </ul>
+                  </div>
+                </div>
 
-                  <h2>Project Ratings</h2>
-                  <ul>
-                    {responseArray.projectRatings?.map((rating, index) => (
-                      <li key={index}>{rating}</li>
+                <div className="questions">
+                  <h2 className="ai-text-gradient">Project Ratings</h2>
+                  <div>
+                    {iamTemp.projectRatings?.map((rating, index) => (
+                      <p key={index}>{index + 1}. {rating}</p>
                     ))}
-                  </ul>
+                  </div>
+                </div>
+                <div className="questions">
+                  <h2 className="ai-text-gradient">ATS Score</h2>
+                  <p>{iamTemp.atsScore}</p>
 
-                  <h2>ATS Score</h2>
-                  <p>{responseArray.atsScore}</p>
-
-                  <h2>Area of Improvement</h2>
-                  <p>{responseArray.areaOfImprovement}</p>
+                  <h2 className="ai-text-gradient">Area of Improvement</h2>
+                  <p>{iamTemp.areaOfImprovement}</p>
                 </div>
               </>
             ) : (
@@ -1071,6 +1083,18 @@ const Container = styled.div`
     }
 
     .ai-generated-results {
+      
+      .ai-text-gradient{
+        font-weight: 500;
+        background-color: #f3ec78;
+        background-image: linear-gradient(284deg,#10ff00,#2c6dad);
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent; 
+        -moz-text-fill-color: transparent;
+      }
+
       .graphs {
         height: 320px;
         width: 100%;
@@ -1086,13 +1110,13 @@ const Container = styled.div`
           font-weight: 500;
           margin-top: 35px;
         }
+      }
 
-        p {
-          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
-          font-size: 0.9rem;
-          font-weight: 300;
-          margin: 15px 0;
-        }
+      p {
+        color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        font-size: 0.9rem;
+        font-weight: 300;
+        margin: 15px 0;
       }
 
       .stats {
