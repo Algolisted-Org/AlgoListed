@@ -30,6 +30,8 @@ import TimerIcon from '@material-ui/icons/Timer';
 import NotesIcon from '@material-ui/icons/Notes';
 import ReplayIcon from '@material-ui/icons/Replay';
 import AlarmOnIcon from '@material-ui/icons/AlarmOn';
+import PauseIcon from '@material-ui/icons/Pause';
+import SortIcon from '@material-ui/icons/Sort';
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -51,7 +53,7 @@ const CodingSheets = () => {
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
 	const [selectedValue, setSelectedValue] = useState('All');
-	const [selectedSort, setSelectedSort] = useState('All');
+	const [selectedSort, setSelectedSort] = useState(false);
 	const [needDarkMode, setNeedDarkMode] = useState(!false);
 	const [tags, setTags]=useState([])
 
@@ -82,9 +84,6 @@ const CodingSheets = () => {
 		setSelectedValue(label);
 	}
 
-	const handleSortClick = (label) => {
-		setSelectedSort(label);
-	}
 	const params = useParams();
 	const { sheetname } = params;
 	// console.log(sheetname);
@@ -775,7 +774,7 @@ const CodingSheets = () => {
 
 		// For sorting filter
 		let newSortedData=[...newFilteredData];
-		if(selectedSort === "All") {
+		if(selectedSort == false) {
 			//Stores the indices of original data array and later compares to get original sort
 			const indexMap = new Map();
 			data.forEach((element, index) => {
@@ -785,7 +784,7 @@ const CodingSheets = () => {
 			// Sort the second array based on the indices from the orignal data array
 			newSortedData.sort((a, b) => indexMap.get(a) - indexMap.get(b));
 		}
-		else if (selectedSort === "Time") {
+		else if (selectedSort == true) {
 			newSortedData.sort((a, b) => b.elapsedTime - a.elapsedTime);
 		}
 
@@ -837,6 +836,10 @@ const CodingSheets = () => {
 	}, [solvedData])
 
 	// console.log(sortedSolvedTopicTagsKeys);
+
+	useEffect(() => {
+		console.log("I changed to : ", selectedSort);
+	}, [selectedSort])
 
 	return (
 		<GrandContainer>
@@ -1139,10 +1142,9 @@ const CodingSheets = () => {
 							<UpdateIcon className="review-btn"/> */}
 							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} setTags={setTags} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
-							<select className="filter-item" value={selectedSort} onChange={(e) => handleSortClick(e.target.value)}>
-								<option value="All">Sort Based on</option>
-								<option value="Time">Time</option>
-							</select>
+							<Tooltip title={selectedSort ? "Unsort" : "Sort based on Time"}>
+								<SortIcon onClick={() => setSelectedSort(!selectedSort)}/>
+							</Tooltip>
 							{/* <div className="filter-item"><CheckCircleOutlineIcon/></div> */}
 							{/* <div className="filter-item"><UpdateIcon/></div> */}
 							{/* <div className="filter-item">Show Unsolved</div>  */}
@@ -1186,7 +1188,7 @@ const CodingSheets = () => {
 													>
 														{item.quesName}
 													</a>
-													<div className="time-required">
+													<div className="time-required" style={{ color: needDarkMode ? (item.isRunning ? "white" : "#b4a7a6") : (item.isRunning ? "black" : "#333") }}>
 														<Stopwatch
 															id={index}
 															initialElapsed={parseInt(item.elapsedTime, 10)}
@@ -1234,9 +1236,9 @@ const CodingSheets = () => {
 													/>
 												</div>
 											</Tooltip>
-											<Tooltip title="Start Stop Watch">
+											<Tooltip title="Stop Watch">
 												<div className="stop-watch-btn" onClick={()=>handleStartStop(index)}>
-													{item.isRunning ? <AlarmOnIcon/> : <TimerIcon/>}
+													{item.isRunning ? <PauseIcon style={{ fill: "orange" }} /> : <TimerIcon/>}
 												</div>
 											</Tooltip>
 											{/* <Tooltip title="Add Notes">
@@ -2204,6 +2206,10 @@ const EffectiveFilter = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	margin: 20px 0;
+
+	svg{
+		cursor: pointer;
+	}
 
 	.left{
 		display: flex;
