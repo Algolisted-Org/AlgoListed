@@ -789,7 +789,7 @@ const Container = styled.div`
         position: relative;
         width: 100%;
         /* background-color: ${(props) => (props.needDarkMode ? '#282828' : '#ffffff')}; */
-        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#ffffff')};
+        background-color: ${(props) => (props.needDarkMode ? '#232425' : '#ffffff')};
         border-radius: 20px;
         margin: 50px 0 20px 0;
         border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
@@ -1028,7 +1028,7 @@ const Container = styled.div`
               .strip{
                 display: none;
                 position: absolute;
-                height: 10px;
+                height: 2.5px;
                 width: 100%;
                 background-color: cornflowerblue;
                 top: 0;
@@ -1090,11 +1090,11 @@ const Container = styled.div`
             }
   
             .solved-problem{
-              background-color: ${(props) => (props.needDarkMode ? '#2e3b4c' : '#dcf8eb')};
+              background-color: ${(props) => (props.needDarkMode ? '#232425' : '#dcf8eb')};
               
               .strip{
                 display: block;
-                background-color: ${(props) => (props.needDarkMode ? '#253141' : '#b6ebd3')};
+                background-color: ${(props) => (props.needDarkMode ? '#9affab' : 'transparent')};
               }
             }
           }
