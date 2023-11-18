@@ -25,6 +25,7 @@ import { coreSubjectsTrackerFilters } from '../Components/coreSubjectsTrackerFil
 import OSquestions from '../DummyDB/CoreSubjects/OSquestions.json';
 import OSTopics from '../DummyDB/CoreSubjects/OSTopics.json';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
+import CallMadeIcon from '@material-ui/icons/CallMade';
 
 const CoreSubjectsTracker = () => {
     const [needDarkMode, setNeedDarkMode] = useState(!false);
@@ -166,17 +167,15 @@ const CoreSubjectsTracker = () => {
                     <p className="heading-supporter">
                         We've compiled a comprehensive set of interview questions sourced from reputable websites such as GeeksforGeeks and InterviewBit. Additionally, we've incorporated core subject knowledge shared by renowned YouTubers like Striver, Fraz, etc. The questions undergo thorough parsing using AI to filter out the most relevant ones, and our AI system provides ideal candidate answers.
                     </p>
-                    <h4>Information Extracted From : </h4>
-                    <div className="resources-used">
-                        {/* <div className="special-thanks"><img src="https://res.cloudinary.com/adaface/image/upload/v1583493789/adaface_logo.png" alt="" /></div> */}
-                        <div className="resource"><img src="https://media.licdn.com/dms/image/D5622AQES3mxq38i5Bw/feedshare-shrink_800/0/1679999565760?e=1701907200&v=beta&t=xGdQ1cBUVfIbejNMIB2VuJqqNUwvOFPMRikQFnLhUz8" alt="" /></div>
-                        <div className="resource"><img src="https://yt3.googleusercontent.com/FitboDHvZPrXqXtbe1JjfeN9x_wgNxv58GDadFqIf5nu1peeADWpWdW82Sb7eBaFH-TNy9AqgbM=s900-c-k-c0x00ffffff-no-rj" alt="" /></div>
-                        <div className="resource"><img src="https://cdn-1.webcatalog.io/catalog/geeksforgeeks/geeksforgeeks-icon-filled-256.png?v=1675596635395" alt="" /></div>
-                        <div className="resource"><img src="data:image/png;base64,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" alt="" /></div>
-                        <div className="resource">
-                            <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" style={{ marginBottom: '-7.5px' }} alt="" />
-                        </div>
-                    </div>
+                    
+                    <Filters needDarkMode={needDarkMode}>
+                        <a href="https://github.com/Nayaker/AlgoListed/tree/main/client/src/DummyDB/CoreSubjects" target="_blank" className="filter2">
+							Contribute Topics or Questions
+							<CallMadeIcon />
+							<div className="tag">Open Sourced 🚀</div>
+						</a>   
+                    </Filters>
+
                     <Filters needDarkMode={needDarkMode}>{filters}</Filters>
                     {/* <div className="message">
                         <div className="icon"></div>
@@ -232,6 +231,7 @@ const CoreSubjectsTracker = () => {
                             ></div>
                         </div>
                     </Progress>
+                    
                     <div className="topics-container">
                         {allTopics.map((topic) => (
                             <div className="topic" key={topic.name}>
@@ -258,6 +258,33 @@ const CoreSubjectsTracker = () => {
                             ></div>
                         </div>
                     </Progress>
+
+                    <EffectiveFilter needDarkMode={needDarkMode}>
+						{/* <div className="left">
+							<select className="filter-item">
+								<option value="All">Problem Difficulty</option>
+								<option value="Easy">Easy</option>
+								<option value="Medium">Medium</option>
+								<option value="Hard">Hard</option>
+							</select>
+							<select className="filter-item">
+								<option value="All">Status</option>
+								<option value="Marked for later">Marked</option>
+								<option value="Marked as completed">Completed</option>
+							</select>
+						</div> */}
+                        <div className="left">
+							<input type="checkbox" id="all"/>
+							<label htmlFor="all">All Questions</label>
+							<input type="checkbox" id="easy"/>
+							<label htmlFor="easy">Solved</label>
+							<input type="checkbox" id="medium"/>
+							<label htmlFor="medium">Marked</label>
+						</div>
+						<div className="right">
+							<a href="https://github.com/Nayaker/AlgoListed/blob/main/client/src/DummyDB/CoreSubjects/OSquestions.json" target="_blank" className="filter-item">Contribute - New or Enhancement <CallMadeIcon/></a>
+						</div>
+					</EffectiveFilter>
 
                     <div className="table">
                         {dataLoading ? (
@@ -494,18 +521,23 @@ const Container = styled.div`
 
       .topics-container{
         display: flex;
-        flex-direction: column;
-        margin: 10px 0 60px 0;
+        flex-wrap: wrap;
+        /* flex-direction: column; */
+        margin: 10px 0 80px 0;
 
         .topic{
-            margin-top: 20px;
+            width: 33.33%;
             display: flex;
             align-items: center;
+            /* border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')}; */
+            /* padding: 10px 20px; */
+            /* margin: 2.5px 2.5px 0 0; */
+            margin-top: 20px;
 
             label{
                 color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
                 margin-left: 5px;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
                 font-weight: 300;
                 
             }
@@ -573,8 +605,8 @@ const Container = styled.div`
 
 						.question-main{
 							position: relative;
-                            font-size: 0.8rem;
-                            font-weight: 500;
+                            font-size: 0.85rem;
+                            font-weight: 600;
                             text-decoration: none;
                             margin-right: 15px;
                             color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
@@ -593,14 +625,14 @@ const Container = styled.div`
 
                         .seperator-line{
                             height: 1px;
-                            width: 100px;
+                            width: 80px;
                             background-color: #595b5f;
                             margin: 10px 0;
                         }
                         
 						.answer-main{
                             position: relative;
-                            font-size: 0.8rem;
+                            font-size: 0.85rem;
                             font-weight: 300;
                             text-decoration: none;
                             margin-right: 15px;
@@ -709,7 +741,7 @@ const Container = styled.div`
 const Filters = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	margin: 40px 0 10px 0;
+	margin: 20px 0 10px 0;
 
 	.filter {
         padding: 7.5px 15px;
@@ -735,6 +767,49 @@ const Filters = styled.div`
 			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
 			transition-duration: 250ms;
 			cursor: pointer;
+		}
+	}
+
+    .filter2{
+		position: relative;
+		padding: 7.5px 15px;
+		font-size: 0.8rem;
+		border: 1px solid #b9afaf;
+		border-radius: 500px;
+		margin: 40px 5px 5px 0px;
+		font-weight: 300;
+		text-decoration: none;
+		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		display: flex;
+		align-items: center;
+
+		svg{
+			font-size: 1rem;
+			margin-left: 5px;
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+
+		&:hover {
+			background-color: ${(props) => (props.needDarkMode ? '#4a4d5a' : '#f1f1f1')};
+			border: 1px solid ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
+			transition-duration: 250ms;
+			cursor: pointer;
+		}
+
+		svg{
+			font-size: 1rem;
+			margin-left: 5px;
+		}
+
+		.tag{
+			position: absolute;
+			padding: 2.5px 7.5px;
+			font-size: 0.65rem;
+			background-color: orange;
+			border-radius: 100px;
+			left: -10px;
+			top: -12.5px;
 		}
 	}
 
@@ -836,8 +911,6 @@ const Progress = styled.div`
 		color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
 	}
 
-	
-
 	.value {
 		margin: 0 10px;
 		font-size: 0.8rem;
@@ -902,3 +975,95 @@ const Progress = styled.div`
 
 
 `;
+
+const EffectiveFilter = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 30px 0 20px 0;
+
+	svg{
+		cursor: pointer;
+	}
+
+	.left{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		label{
+			font-size: 0.75rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-right: 15px;
+			font-weight: 400;
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+		
+		input{
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+			cursor: pointer;
+			margin-right: 5px;
+		}
+
+		input[type="checkbox"]:checked + label {
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+		/* Change the color of the checkboxes when they are not selected */
+		input[type="checkbox"] + label {
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+
+		.filter-item{
+			z-index: 1;
+			background: none;
+			padding: 5px 10px;
+			font-size: 0.7rem;
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+			border-radius: 3px;
+			margin-right: 5px;
+			cursor: pointer;
+			outline: none;
+		}
+
+		svg{
+			font-size: 1.5rem;
+			margin-left: 7.5px;
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+	}
+
+	.right{
+		display: flex;
+		align-items: center;
+
+		.filter-item{
+			z-index: 1;
+			background: none;
+			padding: 5px 10px;
+			font-size: 0.7rem;
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+			border-radius: 3px;
+			margin-right: 5px;
+			cursor: pointer;
+            text-decoration: none;
+		}
+		svg{
+			font-size: 0.9rem;
+            margin-bottom: -2.5px;
+			margin-left: 5px;
+			fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+		}
+
+		.done-btn{
+			fill: orange;
+		}
+
+		.review-btn{
+			fill: #cf5f5f;
+		}
+	}
+`
