@@ -312,17 +312,17 @@ const ContestAnalysis = () => {
       <div className="bar-stats">
         <div className="stats">
           <div className="stat">Problem credit : {questions[index].credit}</div>
-          <div className="stat">
+          {/* <div className="stat">
             Predicted codeforces rating : {questions[index].codeforces_rating}
-          </div>
-        </div>
-        <div className="stats">
+          </div> */}
           <div className="stat">
             {questions[index].inspired_from}
           </div>
-          {/* <div className="stat">Author : {questions[index].author}</div> */}
-          <div className="stat">Author : Leetcode</div>
         </div>
+        {/* <div className="stats">
+          <div className="stat">Author : {questions[index].author}</div>
+          <div className="stat">Author : Leetcode</div>
+        </div> */}
       </div>
     </div>
   ));
@@ -693,7 +693,7 @@ const ContestAnalysis = () => {
               <input
                 className="input"
                 type="text"
-                // value={username}
+                value=""
                 // onChange={handleUsernameChange}
                 placeholder="Enter your username"
               />
@@ -1039,6 +1039,7 @@ const Container = styled.div`
 
         input {
           margin: 0;
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
           width: auto;
           flex: 1;
         }
