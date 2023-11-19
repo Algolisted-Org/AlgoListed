@@ -231,9 +231,10 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
               {console.log("we have a user in the house", user.name)}
               <div className="owner-detail-main">
                 <img className="owner-pic" src={user.profilePictureURL} alt="" />
-                <h1>Hello <b>{user.name}</b>, you are currently logged in!</h1>
+                <p>
+                  Greetings, <b>{user.name}</b>! As of November 9th, you are now logged in. Feel free to generate a new sheet or modify an existing one. Additionally, you can share the sheet link with others for collaborative solving. Enjoy coding! 🚀
+                </p>
               </div>
-
               <h3>Create New Sheet</h3>
               <div className="create-new-sheet">
                 <div className="newSheetInput">
@@ -270,28 +271,18 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
                             {sheet.sheetName} <CallMadeIcon />{" "}
                           </a>
                           <div className="desc">{sheet.sheetDesc}</div>
-                          <div className="info">
-                            <div className="one-info">
-                              <b>Questions count : </b>
-                              {sheet.problemIds.length}
-                            </div>
-                            <div className="one-info">
-                              <b>Latest Edit : </b>
-                              {formatDate(sheet.lastUpdated)}
-                            </div>
-                          </div>
                           <div className="btns">
-                            <a href={`create-problem-list/sheet-dashboard/${sheet._id}`} target="_blank" className="btn">Edit Sheet Content {'>'} </a>
-                            <div className="right">
-                              <div className="analytics">
-                                <VisibilityIcon />
-                                <div className="stats">{sheet.countViews}</div>
+                            <div className="info">
+                              <div className="one-info">
+                                <b>Questions count : </b>
+                                {sheet.problemIds.length}
                               </div>
-                              <div className="analytics">
-                                <GradeIcon />
-                                <div className="stats">{sheet.countStars}</div>
+                              <div className="one-info">
+                                <b>Latest Edit : </b>
+                                {formatDate(sheet.lastUpdated)}
                               </div>
                             </div>
+                            <a href={`create-problem-list/sheet-dashboard/${sheet._id}`} target="_blank" className="btn">Edit Sheet Content {'>'} </a>
                           </div>
                         </div>
                     ))}
@@ -617,19 +608,19 @@ const UserSheetsList = styled.div`
       align-items: center;
       
       .owner-pic{
-        height: 80px;
-        width: 80px;
+        height: 75px;
+        aspect-ratio: 1/1;
         border-radius: 100px;
         margin-right: 20px;
         border: 1px solid #d1d5db;
         background-color: #e5e5e5;
-        padding: 5px;
+        padding: 2.5px;
       }
 
-      h1{
+      p{
         font-size: 0.85rem;
         font-weight: 200;
-        color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+        color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#333')};
 
         b{
           font-weight: 500;
@@ -660,7 +651,7 @@ const UserSheetsList = styled.div`
       margin: 10px 10px 0 0;
       border-radius: 10px;
       border: 1px solid ${(props) => (props.needDarkMode ? '#404249' : '#e7dcdc')};
-      background-color: ${(props) => (props.needDarkMode ? '#454754' : 'transparent')};
+      background-color: ${(props) => (props.needDarkMode ? '#232425' : 'transparent')};
       
       input{
         font-size : 0.75rem;
@@ -712,7 +703,7 @@ const UserSheetsList = styled.div`
       margin: 10px 10px 0 0;
       border-radius: 10px;
       border: 1px solid ${(props) => (props.needDarkMode ? '#3f4042' : '#e7dcdc')};
-      background-color: ${(props) => (props.needDarkMode ? '#404249' : 'transparent')};      
+      background-color: ${(props) => (props.needDarkMode ? '#232425' : 'transparent')};      
       padding: 10px;
       display: flex;
       flex-direction: column;
@@ -775,7 +766,7 @@ const UserSheetsList = styled.div`
           padding: 5px 10px;
           font-size: 0.75rem;
           font-weight: 300;
-          background-color: ${(props) => (props.needDarkMode ? '#222' : '#e5e5e5')};
+          background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
           /* color: white; */
           border-radius: 10px;
           margin-top: 10px;
@@ -1050,7 +1041,7 @@ const SignUpButton = styled.div`
   justify-content: center;
   margin-top: 20px;
   cursor: pointer;
-  background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#fff')};
+  background-color: ${(props) => (props.needDarkMode ? '#454754' : '#fff')};
   border: 1px solid ${(props) => (props.needDarkMode ? '#5d5e61' : 'rgb(209, 213, 219)')};
 
   img {
@@ -1062,5 +1053,10 @@ const SignUpButton = styled.div`
     font-weight: 500;
     margin-left: 10px;
     color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+  }
+
+  &:hover{
+    border: 1px solid ${(props) => (props.needDarkMode ? '#b6b6b6' : '#9c9c9c')};
+    transition-duration: 250ms;
   }
 `;
