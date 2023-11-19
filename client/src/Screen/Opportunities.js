@@ -60,13 +60,14 @@ const Opportunities = () => {
     const linkedinRegex = /linkedin\.com/;
     const whatsappRegex = /whatsapp\.com/;
     const telegramRegex = /telegram\.org/;
+    const telegramRegex2 = /t\.me/;
     const youtubeRegex = /youtube\.com/;
 
     if (linkedinRegex.test(source)) {
       return 'https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png';
     } else if (whatsappRegex.test(source)) {
       return 'https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png';
-    } else if (telegramRegex.test(source)) {
+    } else if (telegramRegex.test(source) || telegramRegex2.test(source)) {
       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png';
     } else if (youtubeRegex.test(source)) {
       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png';
@@ -215,12 +216,18 @@ const Opportunities = () => {
                           <div className="opportunity">
                             <div className="left">
                               <a href={item.job_link} target='_blank' className="link">{item.job_title} <CallMadeIcon /></a>
+                              {/* <div className='extra-link'>
+                                <InfoIcon/>
+                                <a href="/">How to apply?</a>
+                              </div> */}
                               <div className="extra-info">
+                                {item.location ? <div className="info">{item.location}</div> : <></>}
                                 <div className="info">{item.role}</div>
                                 <div className="info">{item.type}</div>
                                 <div className="info">{item.years_exp}{item.years_exp == 'Fresher' ? null : "+ Year Exp"}</div>
                                 <div className="info">{item.salary_low} {item.salary_low != item.salary_high ? `- ${item.salary_high}` : null}  {item.type == "FTE" ? "LPA" : "INR"}</div>
                               </div>
+                              
                             </div>
                             <div className="right">
                               <CheckCircleOutlineIcon />
@@ -464,13 +471,17 @@ const Table = styled.div`
       .left{
         .link{
           color: ${(props) => (props.needDarkMode ? '#94b2e6' : 'cornflowerblue')};
-          font-size: 0.85rem;
+          font-size: 0.9rem;
           font-weight: 500;
           text-decoration: ${(props) => (props.needDarkMode ? 'none' : 'default')};
           
           svg{
             fill: ${(props) => (props.needDarkMode ? '#94b2e6' : 'cornflowerblue')};
             font-size: 0.85rem;
+          }
+
+          &:hover{
+            text-decoration: underline;
           }
         }
 
@@ -488,6 +499,28 @@ const Table = styled.div`
             margin-right: 5px;
             border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
             color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+          }
+        }
+
+        .extra-link{
+          margin-top: 5px;
+          margin-bottom: 15px;
+          /* font-style: italic; */
+          display: flex;
+          align-items: center;
+          
+          a{
+            font-size: 0.75rem;
+            font-weight: 300;
+            text-decoration: underline;
+            color: ${(props) => (props.needDarkMode ? '#94b2e6' : 'cornflowerblue')};
+          }
+          
+          svg{
+            fill: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+            margin-right: 5px;
+            /* fill: ${(props) => (props.needDarkMode ? '#94b2e6' : 'cornflowerblue')}; */
+            font-size: 0.85rem;
           }
         }
       }
