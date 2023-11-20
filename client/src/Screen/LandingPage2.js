@@ -8,7 +8,8 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import axios from "axios";
-import logo from "../Images/logo.png";
+import logo from "../Images/logo-temp10.png";
+import sideImage from "../Images/side-image-hero-page.png";
 import MobileNavbar from '../Components/MobileNavbar'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Fade from 'react-reveal/Fade';
@@ -29,34 +30,34 @@ const LandingPage2 = () => {
 
   const modules = [
     {
-        "name" : "All Upcoming Coding Competitions",
-        "desc" : "There are several websites, such as CLIST and Unstop, that provide information about upcoming contests. However, our list is specifically geared towards Indians and is curated by an Indian who understands the types of competitions that are most relevant to this audience.",
-        "link" : "/coding-competitions"
+        "name" : "Contest Archive",
+        "desc" : "Cruise through a seamless and organized collection of all contest problems, empowering you to tackle them with maximum efficiency. On top of that, we enrich your contest experience with interactive visualizations and engaging infographics that bring the game to life and help you grasp it more effectively.",
+        "link" : "/contests-archive"
+    },
+    {
+        "name" : "Contest Analysis",
+        "desc" : "Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!",
+        "link" : "/contest-analysis"
     },
     {
         "name" : "Coding Sheets",
-        "desc" : "Coding Sheets is a website that offers a range of software engineering practice sheets to select from in a single location. The discussion section, which will be available soon, will provide support and guidance while working on a specific sheet.",
+        "desc" : "Looking for a convenient way to access a variety of coding practice sheets from different sources? Look no further than Coding Sheets, a feature on the Algolisted website. Not only can you find a wide range of sheets all in one place, but the included analysis graphs make solving them even more enjoyable by allowing you to track your progress. Happy coding!",
         "link" : "/coding-sheets/striver-sde-sheet"
     },
     {
-        "name" : "Coding Resources",
-        "desc" : "There is a wealth of disorganized notes and other resources available on websites like LinkedIn and Leetcode, but they can be difficult to find because they are not listed in a organized manner. To make your life easier, we have compiled all of these resources by topic in a single location.",
-        "link" : "/resources"
+        "name" : "Core Subjects Tracker",
+        "desc" : "We've compiled a comprehensive set of interview questions sourced from reputable websites such as GeeksforGeeks and InterviewBit. Additionally, we've incorporated core subject knowledge shared by renowned YouTubers like Striver, Fraz, etc. The questions undergo thorough parsing using AI to filter out the most relevant ones, and our AI system provides ideal candidate answers.",
+        "link" : "/selected-profiles"
     },
-    // {
-    //     "name" : "Selected Profiles",
-    //     "desc" : "This can be helpful for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular company. This will also be machine learning model based that would enable you to get the hiring infographics for a perticular company.",
-    //     "link" : "/selected-profiles"
-    // },
+    {
+      "name": "Resume Based Questions",
+      "desc": "Using this feature, once you've uploaded your resume, our AI identifies the specific qualities your target company is looking for and then poses questions that match those company preferences. This encompasses your preparation for non-technical interview rounds, such as HR and project-related discussions.",
+      "link": "/resume-questions"
+    },
     {
       "name" : "All Internship & Job Opportunities",
       "desc" : "This page is very similar to the coding competitions list page, here in this page we will provide information about all available hiring and internship opportunities, including the timing of these opportunities. We are currently in the planning stages and will be launching this page soon.",
       "link" : "/opportunities"
-    },
-    {
-        "name" : "Beginner Friendly Blogs",
-        "desc" : "We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.",
-        "link" : "/blogs/all"
     },
   ]
 
@@ -226,11 +227,11 @@ const LandingPage2 = () => {
                 </div>
             </div>
             <div className="menu-list">
-                <a href='/blogs/all' className="item">All Blogs</a>
-                <a href='/resources' className="item">Resources</a>
+                <a href='/contests-archive' className="item">Archive</a>
+                <a href='/contest-analysis' className="item">Analysis</a>
                 <a href='/coding-sheets/striver-sde-sheet' className="item">Coding Sheets</a>
-                <a href='/coding-competitions' className="item">Competitions</a>
-                {/* <a href='/selected-profiles' className="item">Selected Resumes</a> */}
+                <a href='/core-subjects-tracker' className="item">Tracker</a>
+                <a href='/resume-questions' className="item">Resume AI</a>
                 <a href='/opportunities' className="item">Opportunities</a>
             </div>
         </Navbar>
@@ -239,13 +240,13 @@ const LandingPage2 = () => {
             <div className="left">
             <Fade>
               <div className="heading">
-                <h1 className='gradient-text'>Open Community.</h1>
-                <h1>Better Information.</h1>
+                <h1>Elevate Your Coding Skills with</h1>
+                <h1 className='gradient-text'>Infographic Brilliance.</h1>
               </div>
             </Fade>
             <Fade>
               <div className="small-desc">
-                Algolisted is a community-driven platform for learning and improving coding skills. It offers a wealth of information on data structures and algorithms, and allows coders to interact with, modify, and contribute to the content.
+                Discover an AI-powered coding website that combines elegant design with powerful features. Track your progress, access contest insights, and challenge friends in coding competitions.
               </div>
             </Fade>
             <Fade left>
@@ -260,7 +261,10 @@ const LandingPage2 = () => {
             <div className="right">
               <Fade>
                 <div className="img-container">
-                  <img src="https://assets.website-files.com/624ac40503a5277051af4162/6346dab74a46df9125bf12bf_Speed%20up%20your%20annotation%20work%20with%20the%20help%20of%20AI.gif" alt="" draggable="false"/>
+                  {/* <img src="https://spideo.com/wp-content/uploads/2021/12/Gif-Analytics-50-2.gif" alt="" draggable="false"/> */}
+                  {/* <img src="https://analytics-smart.com/wp-content/uploads/2022/06/Data-Science1-1.gif" alt="" /> */}
+                  {/* <img src={sideImage} alt="" /> */}
+                  <img src="https://media.baamboozle.com/uploads/images/717818/1650961977_61450_gif-url.gif" alt="" draggable="false" />
                 </div>
               </Fade>
             </div>
@@ -313,6 +317,24 @@ const LandingPage2 = () => {
                 </Fade>
             </div>
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
+          <h1 className="sub-page-head">Technologies Used</h1>
+          <div className="hold-contributors">
+            <div className="contributor"><img src="https://icons-for-free.com/iconfiles/png/512/logo+react+react+js+icon-1320184811840217251.png" alt="" /></div>
+            <div className="contributor"><img src="https://vistaran-tech.s3.ap-south-1.amazonaws.com/wp-content/uploads/2022/05/13104926/nodejs-logo.png" alt="" /></div>
+            <div className="contributor"><img src="https://ajeetchaulagain.com/static/7cb4af597964b0911fe71cb2f8148d64/87351/express-js.png" alt="" /></div>
+            <div className="contributor"><img src="https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/erkxwhl1gd48xfhe2yld" alt="" /></div>
+            <div className="contributor"><img src="https://mui.com/static/logo.png" alt="" /></div>
+            <div className="contributor"><img src="https://www.styled-components.com/atom.png" alt="" /></div>
+            <div className="contributor"><img src="https://openastronomy.org/pyastro/images/pyastro_logo.svg" alt="" /></div>
+            <div className="contributor"><img src="https://static.javatpoint.com/tutorial/flask/images/flask-tutorial.png" alt="" /></div>
+            <div className="contributor"><img src="https://play-lh.googleusercontent.com/yMjUC6LBh7uOCK6wUcIEf5MHZQmSqDPXoInOQLZzw0DWQsPJuvkwSymX2zI4Ok7i_BY" alt="" /></div>
+            <div className="contributor"><img src="https://firebase.google.com/static/images/brand-guidelines/logo-logomark.png" alt="" /></div>
+            <div className="contributor"><img src="https://media.licdn.com/dms/image/C4D0BAQFBESIaXqZ9sg/company-logo_200_200/0/1631285887620?e=2147483647&v=beta&t=7U1O5C3TnMlpihufNmmRMaiMawMAwt0ZXE_87JRFFJ4" alt="" /></div>
+            <div className="contributor"><img src="https://egw2023.eurac.edu/favicon.ico" alt="" /></div>
+            <div className="contributor"><img src="https://microstream.one/blog/wp-content/uploads/2023/06/redis_logo-1.png" alt="" /></div>
+            <div className="contributor"><img src="https://cdn.iconscout.com/icon/free/png-256/free-aws-3215369-2673787.png" alt="" /></div>
+            <div className="contributor"><img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/docker_tile_logo_icon_168248.png" alt="" /></div>
+          </div>
           <div className="sub-page-head">Our Contributors</div>
           <div className="hold-contributors">
             {
@@ -812,22 +834,23 @@ const Container = styled.div`
         }
 
         .heading{
-            h1{
-                /* color: white; */
-                font-size: 65px;
-                font-weight: 400;
-            }
-
-            .gradient-text {
-                background-color: #f3ec78;
-                background-image: linear-gradient(92deg,#0066ff,#5dff00);
-                background-size: 100%;
-                -webkit-background-clip: text;
-                -moz-background-clip: text;
-                -webkit-text-fill-color: transparent; 
-                -moz-text-fill-color: transparent;
-            }
+        h1{
+            color: #29a4b3;
+            font-size: 35px;
+            font-weight: 400;
         }
+
+        .gradient-text {
+            font-size: 65px;
+            background-color: #f3ec78;
+            background-image: linear-gradient(92deg,#0066ff,#5dff00);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent; 
+            -moz-text-fill-color: transparent;
+        }
+      }
 
         .small-desc{
             /* color: white; */
@@ -841,7 +864,6 @@ const Container = styled.div`
         .right{
           .img-container{
             height: 300px;
-            width: 300px;
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -858,7 +880,7 @@ const Container = styled.div`
     }
 
     .btn{
-      background: linear-gradient(102deg,#87a9dc,#5dff00,#5dff00);
+      background: linear-gradient(270deg,#56f238,#c5c5ef,#56f238);
       background-size: 400% 400%;
 
       -webkit-animation: AnimationName 10s ease infinite;
@@ -870,10 +892,6 @@ const Container = styled.div`
       font-size: 0.8rem;
       padding: 10px 15px;
       margin: auto;
-
-      /* border: 1px solid #bfa6a6; */
-      &:hover{
-      }
     }
 
     @-webkit-keyframes AnimationName {
@@ -1065,6 +1083,7 @@ const Container = styled.div`
     }
 
     .sub-page-head{
+      margin-top: 50px;
       font-size: 1.75rem;
       font-weight: 500;
     }
@@ -1072,21 +1091,31 @@ const Container = styled.div`
     .hold-contributors{
       display: flex;
       flex-wrap: wrap;
-      width: 700px;
+      width: 350px;
       justify-content: center;
       margin-top: 30px;
 
       .contributor{
-        background-color: pink;
+        cursor: pointer;
+        background-color: white;
         overflow: hidden;
-        height: 48px;
-        width: 48px;
+        height: 47.5px;
+        width: 47.5px;
         margin: 0 7.5px 7.5px 0;  
         border-radius: 100px;
-        border: 1px solid #b7a6a6;
+        border: 1px solid #bab6b6;
+        /* box-shadow: 0px 0px 9px 2px rgb(0 0 0 / 12%); */
+        /* transition-timing-function: ease-in-out; */
 
         img{
           height: 100%;
+        }
+
+        &:hover{
+          z-index: 10;
+          scale: 1.5;
+          transition-duration: 500ms;
+          transition-timing-function: cubic-bezier(0, 1.04, 0, 1.73);
         }
       }
     }
