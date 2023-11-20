@@ -13,6 +13,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { PuffLoader } from "react-spinners";
+import { Doughnut } from 'react-chartjs-2';
 
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
@@ -120,6 +121,9 @@ const ResumeSection = () => {
       "Sukham Resort: 8/10",
     ],
     atsScore: "85%",
+    atsScoreValue: 65,
+    grammer: 82.5,
+    impact: 53,
     areaOfImprovement:
       "Improvement in communication skills and gaining more experience with different programming languages and technologies.",
   });
@@ -269,6 +273,34 @@ const ResumeSection = () => {
   };
 
   const loaderColor = needDarkMode ? "#FFFFFF" : "#000000"; // Set your light and dark mode colors
+
+  const data = (percentage) => {
+    return {
+      datasets: [
+        {
+          label: 'Percentage',
+          data: [percentage, 100 - percentage],
+          backgroundColor: needDarkMode
+            ? ['#e0cf7a', '#586566']
+            : ['#5ab097', '#e5e5e5'],
+          borderColor: needDarkMode ? ['#404249'] : ['#fff'],
+          hoverOffset: 1,
+          borderRadius: 20,
+        },
+      ],
+    }
+  }
+
+  const doughnutOptions = {
+    responsive: true,
+    cutout: 85,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  }
+
 
   return (
     <GrandContainer>
@@ -454,7 +486,51 @@ const ResumeSection = () => {
                 </div>
                 {resultDummy && (
                   <div className="ai-generated-results">
-                    <div className="graphs"></div>
+                    {/* ADD GRAPH HERE */}
+                    <div className="graphs">
+                      <div className="column">
+                        <div className="doughnut">
+                          <div className="percentage">
+                            {dummyResponse.atsScoreValue}%
+                          </div>
+                          <div className="graph">
+                            <Doughnut
+                              options={doughnutOptions}
+                              data={data(dummyResponse.atsScoreValue)}
+                            />
+                          </div>
+                        </div>
+                        <div className="title">ATS Score</div>
+                      </div>
+                      <div className="column">
+                        <div className="doughnut">
+                          <div className="percentage">
+                            {dummyResponse.grammer}%
+                          </div>
+                          <div className="graph">
+                            <Doughnut
+                              options={doughnutOptions}
+                              data={data(dummyResponse.grammer)}
+                            />
+                          </div>
+                        </div>
+                        <div className="title">Grammer</div>
+                      </div>
+                      <div className="column">
+                        <div className="doughnut">
+                          <div className="percentage">
+                            {dummyResponse.impact}%
+                          </div>
+                          <div className="graph">
+                            <Doughnut
+                              options={doughnutOptions}
+                              data={data(dummyResponse.impact)}
+                            />
+                          </div>
+                        </div>
+                        <div className="title">Impact</div>
+                      </div>
+                    </div>
                     <div className="questions">
                       <h2>Technical Questions</h2>
                       <p>
@@ -1161,8 +1237,40 @@ const Container = styled.div`
         height: 320px;
         width: 100%;
         border-radius: 10px;
-        background-color: #404249;
+        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#fff')};
         margin: 10px 0;
+        display: grid;
+        padding: 40px 90px;
+        grid-template-columns: 1fr 1fr 1fr;
+        border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+
+        .column {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          gap: 15px;
+
+          .title {
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          }
+
+          .doughnut {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+  
+            .percentage {
+              position: absolute;
+              font-size: 25px;
+              color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            }
+            
+            .graph {
+              height: 205px;
+              width: 100%;
+            }
+          }
+        }
       }
 
       .questions {
