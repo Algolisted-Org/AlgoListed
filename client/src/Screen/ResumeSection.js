@@ -16,6 +16,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
 import SimpleFooter from "../Components/SimpleFooter";
+import { teal } from "@material-ui/core/colors";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -84,9 +85,10 @@ const ResumeSection = () => {
   const [difficultyLevel, setDifficultyLevel] = useState("0");
   const [difficultyLevelName, setDifficultyLevelName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [responseArray, setResponseArray] = useState([]); // Array of responses
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
   const [iamTemp, setIamTemp] = useState(null);
+  const [promptGPT, setPromptGPT] = useState("");
+  const [moreQuestion,setMoreQuestion]=useState("");
   const [dummyResponse, setDummyResponse] = useState({
     technicalQuestions: [
       "In the SocialSphere project, how did you implement user authentication and authorization?",
@@ -176,17 +178,16 @@ const ResumeSection = () => {
     setNeedDarkMode(!needDarkMode);
   };
 
-  useEffect(() => {
-    console.log("This is usestate temp : ", iamTemp);
-  }, [iamTemp])
+  // useEffect(() => {
+  //   console.log("This is usestate temp : ", iamTemp);
+  // }, [iamTemp])
 
   //   New Code
+  let prompt = "";
   const handleSend = async () => {
     if (textFromPDF) {
       setIsLoading(true);
       try {
-        let prompt = "";
-
         if (companyName == "Multinational Corporation (MNC)") {
           prompt = `${promptForMncQuestionChunks.join(
             "\n"
@@ -206,6 +207,7 @@ const ResumeSection = () => {
         } else {
           prompt = `${promptForBasicQuestionChunks.join("\n")}${textFromPDF}`;
         }
+        setPromptGPT(prompt);
         const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           messages: [
@@ -219,13 +221,11 @@ const ResumeSection = () => {
         });
 
         setResponseText(response.choices[0].message.content);
-        console.log(JSON.parse(response.choices[0].message.content));
+        // console.log(JSON.parse(response.choices[0].message.content));
         const temp = JSON.parse(response.choices[0].message.content);
-        console.log("I am temp : ", temp);
+        // console.log("I am temp : ", temp);
         setIamTemp(temp);
-        responseArray = JSON.parse(response.choices[0].message.content);
-        console.log("object");
-        console.log(responseArray);
+
         setIsLoading(false);
       } catch (error) {
         console.error("Error sending message to Chat API:", error);
@@ -233,6 +233,41 @@ const ResumeSection = () => {
       }
     } else {
       console.error("No text to send to Chat API.");
+    }
+  };
+
+  const techMore = async () => {
+    if (responseText) {
+      setIsLoading(true);
+      
+     
+      try {
+        prompt = ` ${iamTemp.technicalQuestions} add just 10 more questions to it in JSON format. Don't give any answers. `;
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content: prompt,
+            },
+          ],
+          temperature: 0.5,
+          max_tokens: 500,
+        });
+        // console.log(prompt)
+        console.log("Hi")
+        console.log(JSON.parse(response.choices[0].message.content))
+        // console.log(response.choices[0].message.content)
+        const temp=JSON.parse(response.choices[0].message.content)
+        // console.log("I am more question: ",temp)
+        
+       
+      } catch (error) {
+        console.log("Error sending message to Chat API:", error);
+        setIsLoading(false);
+      }
+    } else {
+      console.log("No More Questions");
     }
   };
   const toggleResultDummy = () => {
@@ -313,23 +348,29 @@ const ResumeSection = () => {
             such as HR and project-related discussions.
           </p>
           <div className="input-container">
-            <div
-              className="resume-upload"
-              onDragOver={(e) => e.preventDefault()}
-              onDragEnter={(e) => e.preventDefault()}
-              onDrop={handleDrop}
-              onClick={handleUploadClick}
-            >
-              <CloudUploadIcon />
-              <div className="text">Click to upload or drag and drop</div>
-              <input
-                type="file"
-                id="fileInput"
-                accept=".pdf"
-                style={{ display: "none" }}
-                onChange={uploadresume}
-              />
-            </div>
+            {!textFromPDF ? (
+              <div
+                className="resume-upload"
+                onDragOver={(e) => e.preventDefault()}
+                onDragEnter={(e) => e.preventDefault()}
+                onDrop={handleDrop}
+                onClick={handleUploadClick}
+              >
+                <CloudUploadIcon />
+                <div className="text">Click to upload or drag and drop</div>
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept=".pdf"
+                  style={{ display: "none" }}
+                  onChange={uploadresume}
+                />
+              </div>
+            ) : (
+              <div className="file-name-display">
+                <p>File Name: {file?.name}</p>
+              </div>
+            )}
 
             <div className="other-details">
               <h3 className="text">Additional Information</h3>
@@ -449,26 +490,30 @@ const ResumeSection = () => {
           <div className="ai-generated-results">
             {responseText ? (
               <>
-                <h2 className="ai-text-gradient">AI Generated Resume Based Questions</h2>
+                <h2 className="ai-text-gradient">
+                  AI Generated Resume Based Questions
+                </h2>
                 <p>Good Luck with your Interview ✨✨</p>
                 <div className="questions">
                   <h2 className="ai-text-gradient">Technical Questions</h2>
                   <div>
-                    {iamTemp.technicalQuestions?.map(
-                      (question, index) => (
-                        <p key={index}>{index + 1}. {question}</p>
-                      )
-                    )}
+                    {iamTemp.technicalQuestions?.map((question, index) => (
+                      <p key={index}>
+                        {index + 1}. {question}
+                      </p>
+                    ))}
+                    <button onClick={techMore}>Show More</button>
                   </div>
                 </div>
                 <div className="questions">
                   <h2 className="ai-text-gradient">Soft Skill Questions</h2>
                   <div>
-                    {iamTemp.softSkillQuestions?.map(
-                      (question, index) => (
-                        <p key={index}>{index + 1}. {question}</p>
-                      )
-                    )}
+                    {iamTemp.softSkillQuestions?.map((question, index) => (
+                      <p key={index}>
+                        {index + 1}. {question}
+                      </p>
+                    ))}
+                    
                   </div>
                 </div>
 
@@ -476,7 +521,9 @@ const ResumeSection = () => {
                   <h2 className="ai-text-gradient">Project Ratings</h2>
                   <div>
                     {iamTemp.projectRatings?.map((rating, index) => (
-                      <p key={index}>{index + 1}. {rating}</p>
+                      <p key={index}>
+                        {index + 1}. {rating}
+                      </p>
                     ))}
                   </div>
                 </div>
@@ -794,6 +841,14 @@ const Container = styled.div`
           font-weight: 200;
         }
       }
+      .file-name-display {
+        max-width: 150px;
+        color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        font-size: 0.75rem;
+        text-align: center;
+        margin-top: 5px;
+        font-weight: 200;
+      }
 
       .other-details {
         width: calc(75% - 190px);
@@ -1083,15 +1138,14 @@ const Container = styled.div`
     }
 
     .ai-generated-results {
-      
-      .ai-text-gradient{
+      .ai-text-gradient {
         font-weight: 500;
         background-color: #f3ec78;
-        background-image: linear-gradient(284deg,#10ff00,#2c6dad);
+        background-image: linear-gradient(284deg, #10ff00, #2c6dad);
         background-size: 100%;
         -webkit-background-clip: text;
         -moz-background-clip: text;
-        -webkit-text-fill-color: transparent; 
+        -webkit-text-fill-color: transparent;
         -moz-text-fill-color: transparent;
       }
 
