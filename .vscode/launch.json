@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/atanunayak/Desktop/Coding",
-      "program": "/Users/atanunayak/Desktop/Coding/build/Debug/outDebug"
+      "cwd": "/Users/atanunayak/Desktop",
+      "program": "/Users/atanunayak/Desktop/build/Debug/outDebug"
     }
   ]
 }

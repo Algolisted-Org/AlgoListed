@@ -62,6 +62,7 @@ const Opportunities = () => {
     const telegramRegex = /telegram\.org/;
     const telegramRegex2 = /t\.me/;
     const youtubeRegex = /youtube\.com/;
+    const googleRegex = /google\.com/;
 
     if (linkedinRegex.test(source)) {
       return 'https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png';
@@ -71,6 +72,8 @@ const Opportunities = () => {
       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png';
     } else if (youtubeRegex.test(source)) {
       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png';
+    } else if (googleRegex.test(source)) {
+      return 'https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png';
     } else {
       // If no match, return a default image link
       return 'https://imageio.forbes.com/specials-images/imageserve/63dd379b9ef3cd559331b7e2/Illustration-of-the-word--Ai---in-the-style-of-the-Google-logo/0x0.jpg?format=jpg&height=1080&width=1920';
@@ -225,9 +228,17 @@ const Opportunities = () => {
                                 <div className="info">{item.role}</div>
                                 <div className="info">{item.type}</div>
                                 <div className="info">{item.years_exp}{item.years_exp == 'Fresher' ? null : "+ Year Exp"}</div>
-                                <div className="info">{item.salary_low} {item.salary_low != item.salary_high ? `- ${item.salary_high}` : null}  {item.type == "FTE" ? "LPA" : "INR"}</div>
+                                
+                                {item.salary_low !== '-' ? 
+                                <div className="info">
+                                  <>
+                                    {item.salary_low}
+                                    {item.salary_low !== item.salary_high ? `- ${item.salary_high}` : null}
+                                    {item.type === "FTE" ? " LPA" : " INR"}
+                                  </>
+                                </div> : null
+                                }
                               </div>
-                              
                             </div>
                             <div className="right">
                               <CheckCircleOutlineIcon />
