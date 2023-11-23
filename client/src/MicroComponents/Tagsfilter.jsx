@@ -7,7 +7,10 @@ function Tagsfilter({ tags,needDarkMode, filterdata,setfilter,data,setTags }) {
   const [tagdat,settagdata]=useState([...tags])
   const [expand, setexpand] = useState(false);
   const [ischoose,setischoose]=useState([])
-  setTags(ischoose)
+  
+  useEffect(() => {
+    setTags(ischoose);
+  }, [ischoose]);
    
    
   //  if(ischoose.length===0){
