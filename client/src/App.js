@@ -73,7 +73,6 @@ const App = ({currentThemeDark}) => {
       <Routes>
         {/* <Route path="/development" element={<CompetitionApi/>} /> */}
         <Route path="/" element={<LandingPage2/>} />
-
         {/* <Route path="/" element={<LandingPage3/>} /> */}
         <Route path="/auth" element={<AuthPage/>} />
         <Route path="/sign-in" element={<AuthPage/>} />

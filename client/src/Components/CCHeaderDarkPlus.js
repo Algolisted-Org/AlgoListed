@@ -38,8 +38,6 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
   };
   
   let selectedTheme = localStorage.getItem("selectedTheme");
-
-  console.log(selectedTheme);
   
   if (selectedTheme === "dark") {
       setDarkModeFunc();

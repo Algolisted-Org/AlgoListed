@@ -15,21 +15,16 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MobileNavbar from "../Components/MobileNavbar";
 import DoughnutChart from '../Components/DoughnutChart';
 import Tooltip from '@material-ui/core/Tooltip';
-import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 import UpdateIcon from '@material-ui/icons/Update';
-import CreateIcon from '@material-ui/icons/Create';
-import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
-import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
-import { Link as RouterLink } from 'react-router-dom';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Tagsfilter from "../MicroComponents/Tagsfilter";
 import LockIcon from '@material-ui/icons/Lock';
 import TimerIcon from '@material-ui/icons/Timer';
-import NotesIcon from '@material-ui/icons/Notes';
 import ReplayIcon from '@material-ui/icons/Replay';
-import AlarmOnIcon from '@material-ui/icons/AlarmOn';
+import PauseIcon from '@material-ui/icons/Pause';
+import SortIcon from '@material-ui/icons/Sort';
 
 const CodingSheets = () => {
 	const [data, setData] = useState([]);
@@ -51,45 +46,58 @@ const CodingSheets = () => {
 	const [showSolvedChart, setShowSolvedChart] = useState(false);
 	const [selectedLabel, setSelectedLabel] = useState('All');
 	const [selectedValue, setSelectedValue] = useState('All');
-	const [selectedSort, setSelectedSort] = useState('All');
+	const [selectedSort, setSelectedSort] = useState(false);
 	const [needDarkMode, setNeedDarkMode] = useState(!false);
-	const [tags, setTags]=useState([])
+	const [tags, setTags] = useState([])
 
-	useEffect(() => {
-		setFilteredData(data)
-	}, [data])
-	// console.log(filteredData)
-	
-	useEffect(() => {
-		let selectedTheme = localStorage.getItem("selectedTheme");
-		if (selectedTheme === 'dark') setNeedDarkMode(true);
-		if (selectedTheme === 'light') setNeedDarkMode(false);
-	}, [])
-
-	const toggleDarkMode = () => {
-		setNeedDarkMode(!needDarkMode);
-	};
-
-
-	// console.log(selectedLabel);
-	// console.log(data);
-
-	const handleLabelClick = (label) => {
-		setSelectedLabel(label);
-	}
-
-	const handleValueClick = (label) => {
-		setSelectedValue(label);
-	}
-
-	const handleSortClick = (label) => {
-		setSelectedSort(label);
-	}
-	const params = useParams();
-	const { sheetname } = params;
-	// console.log(sheetname);
-
-	document.title = `Coding Sheets - Algolisted`;
+	// Colours
+	const colors = [
+		"#438194",
+		"#478295",
+		"#4b8496",
+		"#4f8597",
+		"#538798",
+		"#578999",
+		"#5b8b9a",
+		"#5f8c9b",
+		"#638d9c",
+		"#678f9d",
+		"#6b909e",
+		"#6f919f",
+		"#7393a0",
+		"#7794a1",
+		"#7b95a2",
+		"#7f96a3",
+		"#8398a4",
+		"#8799a5",
+		"#8b9aa6",
+		"#8f9ca7",
+		"#939da8",
+		"#979ea9",
+		"#9ba0aa",
+		"#9fa1ab",
+		"#a3a2ac",
+		"#a7a4ad",
+		"#aba5ae",
+		"#afa6af",
+		"#b3a8b0",
+		"#b7a9b1",
+		"#bbaab2",
+		"#bfacb3",
+		"#c3adb4",
+		"#c7aeb5",
+		"#cba0b6",
+		"#cfa1b7",
+		"#ff7d7c"
+	]
+	const borderColors = [
+		"#000"
+	];
+	const difficultyColors = [
+		"#9ed0fa",
+		"#ffb800",
+		"#ef4643"
+	];
 
 	const allowedProblemTags = [
 		"Array",
@@ -170,47 +178,75 @@ const CodingSheets = () => {
 		"Biconnected Component"
 	];
 
-	useEffect(() => {
-		// retrieve the data from the server
-		axios
-			// .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
-			.get(`https://algolisted.cyclic.app/coding-questions/question/${sheetname}`)
-			.then((res) => {
+	const params = useParams();
+	const { sheetname } = params;
 
-				// retrieve the "completed" status of each sheet from the local storage
-				let updatedData = res.data.map((sheet) => {
-					const completed = localStorage.getItem(`completedSheetQuestion-${sheet._id}`);
-					const marked = localStorage.getItem(`markedSheetQuestion-${sheet._id}`);
-					const elapsedTime = localStorage.getItem(`elapsedTimeSheetQuestion-${sheet._id}`) || 0;
-					return {
-						...sheet,
-						completed: completed === "true",
-						marked: marked === "true",
-						isRunning: false,
-      					elapsedTime: elapsedTime,
-					};
-				});
+	const toggleDarkMode = () => {
+		setNeedDarkMode(!needDarkMode);
+	};
 
-				var solvedQuestions = [];
-				let len = updatedData.length;
-				for (let i = 0; i < len; i++) {
-					if (updatedData[i].completed) solvedQuestions.push(updatedData[i]);
-				}
-				setSolvedData(solvedQuestions);
+	// Visualizer helping functions
+	const progressBarPercent = data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
-				// calculate the initial value of completedCount based on the "completed" status of the sheets in updatedData
-				const initialCompletedCount = updatedData.reduce((acc, sheet) => {
-					return acc + (sheet.completed ? 1 : 0);
-				}, 0);
-				setCompletedCount(initialCompletedCount);
-				setData(updatedData);
-				setDataLoading(false);
-			})
-			.catch((err) => console.log(err));
-	}, [sheetname]);
+	var chartData = {
+		title: { text: 'Chart Title', display: true },
+		labels: sortedTopicTagsKeys,
+		datasets: [{
+			label: "Number of questions by Tag",
+			data: sortedTopicTagsValues,
+			backgroundColor: colors,
+			borderColor: borderColors,
+			borderWidth: 0.25,
+		}],
+	};
 
-	// console.log(data);
+	var chartDataSolved = {
+		title: { text: 'Chart Title', display: true },
+		labels: sortedSolvedTopicTagsKeys,
+		datasets: [{
+			label: "Number of questions by Tag",
+			data: sortedSolvedTopicTagsValues,
+			backgroundColor: colors,
+			borderColor: borderColors,
+			borderWidth: 0.25,
+		}],
+	};
 
+	const options = {
+		plugins: {
+			legend: {
+				display: false,
+			},
+		},
+	};
+
+	// Filters helping functions
+	const filters = codingSheetsFilters.map((item) => {
+		return item.lock === true ? (
+			<div key={item.id} className='locked-feature filter'>
+				{item.text}
+				<LockIcon />
+			</div>
+		) : (
+			<a
+				href={item.domainFilter}
+				key={item.id}
+				className={item.domainFilter === sheetname ? 'filter selected' : 'filter'}
+			>
+				{item.text}
+			</a>
+		);
+	});
+
+	const handleLabelClick = (label) => {
+		setSelectedLabel(label);
+	}
+
+	const handleValueClick = (label) => {
+		setSelectedValue(label);
+	}
+
+	// Buttons helping functions
 	const toggleCompleted = (id) => {
 		// update the "completed" field for the coding sheet at the specified index
 		const updatedData = [...data];
@@ -252,7 +288,6 @@ const CodingSheets = () => {
 		);
 	};
 
-	// Stopwatch code starts
 	const handleStartStop = (index) => {
 		const updatedData = [...filteredData];
 		updatedData[index].isRunning = !updatedData[index].isRunning;
@@ -266,6 +301,7 @@ const CodingSheets = () => {
 		setFilteredData(updatedData);
 		localStorage.removeItem(`elapsedTimeSheetQuestion-${updatedData[index]._id}`);
 	};
+
 
 	const Stopwatch = ({ id, initialElapsed, isRunning }) => {
 		const [elapsedTime, setElapsedTime] = useState(initialElapsed);
@@ -313,334 +349,60 @@ const CodingSheets = () => {
 			formatTime(elapsedTime)
 		);
 	};
-	// Stopwatch code ends
 
+	// UseEffect 1: for setting document title and selected theme on initial component mount
+	useEffect(() => {
+		document.title = `Coding Sheets - Algolisted`;
 
-	const progressBarPercent = data.length === 0 ? 0 : ((completedCount / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
+		let selectedTheme = localStorage.getItem("selectedTheme");
+		if (selectedTheme === 'dark') setNeedDarkMode(true);
+		if (selectedTheme === 'light') setNeedDarkMode(false);
+	}, [])
+	
+	// UseEffect 2: to fetch data from the server based on 'sheetname', process the data, and update state variables
+	useEffect(() => {
+		// retrieve the data from the server
+		axios
+			.get(`https://algolisted.cyclic.app/coding-questions/question/${sheetname}`)
+			.then((res) => {
 
+				// retrieve the "completed" status of each sheet from the local storage
+				let updatedData = res.data.map((sheet) => {
+					const completed = localStorage.getItem(`completedSheetQuestion-${sheet._id}`);
+					const marked = localStorage.getItem(`markedSheetQuestion-${sheet._id}`);
+					const elapsedTime = localStorage.getItem(`elapsedTimeSheetQuestion-${sheet._id}`) || 0;
+					return {
+						...sheet,
+						completed: completed === "true",
+						marked: marked === "true",
+						isRunning: false,
+      					elapsedTime: elapsedTime,
+					};
+				});
 
-	const filters = codingSheetsFilters.map((item) => {
-		return item.lock === true ? (
-			<div key={item.id} className='locked-feature filter'>
-				{item.text}
-				<LockIcon />
-			</div>
-		) : (
-			<a
-				href={item.domainFilter}
-				key={item.id}
-				className={item.domainFilter === sheetname ? 'filter selected' : 'filter'}
-			>
-				{item.text}
-			</a>
-		);
-	});
+				var solvedQuestions = [];
+				let len = updatedData.length;
+				for (let i = 0; i < len; i++) {
+					if (updatedData[i].completed) solvedQuestions.push(updatedData[i]);
+				}
+				setSolvedData(solvedQuestions);
 
-	// console.log(data);
+				// calculate the initial value of completedCount based on the "completed" status of the sheets in updatedData
+				const initialCompletedCount = updatedData.reduce((acc, sheet) => {
+					return acc + (sheet.completed ? 1 : 0);
+				}, 0);
+				setCompletedCount(initialCompletedCount);
+				setData(updatedData);
+				setDataLoading(false);
+			})
+			.catch((err) => console.log(err));
+	}, [sheetname]);
 
-	// const colors = [
-	// "#884373",
-	// "#8a4574",
-	// "#8b4875",
-	// "#8c4b76",
-	// "#8d4d77",
-	// "#8f5078",
-	// "#905379",
-	// "#91567a",
-	// "#92597b",
-	// "#945c7c",
-	// "#955e7d",
-	// "#96617e",
-	// "#97647f",
-	// "#996680",
-	// "#9a6981",
-	// "#9b6b82",
-	// "#9d6e83",
-	// "#9e7184",
-	// "#9f7385",
-	// "#a17686",
-	// "#a27987",
-	// "#a37c88",
-	// "#a57e89",
-	// "#a6808a",
-	// "#a7838b",
-	// "#a8868c",
-	// "#a9898d",
-	// "#aa8b8e",
-	// "#ac8e8f",
-	// "#ad9190",
-	// "#ae9491",
-	// "#b09692",
-	// "#b19993",
-	// "#b29c94",
-	// "#b49e95",
-	// "#b5a196",
-	// "#b6a497",
-	// "#b7a698",
-	// "#b9a899",
-	// "#baaa9a",
-	// "#bca99b",
-	// "#bdaa9c",
-	// "#beab9d",
-	// "#c0ac9e",
-	// "#c1ad9f",
-	// "#c2ae9f",
-	// "#c4af9f",
-	// "#c5b0a0",
-	// "#c6b1a0",
-	// "#c8b2a0",
-	// "#c9b3a1",
-	// "#cab4a1",
-	// "#ccb5a1",
-	// "#cdb6a2",
-	// "#ceb7a2",
-	// "#d0b8a2",
-	// ];
-	// const colors = [
-	// 	"#e782c9",
-	// 	"#e887ca",
-	// 	"#e88cca",
-	// 	"#e891cb",
-	// 	"#e895cc",
-	// 	"#e89acd",
-	// 	"#e8a1cd",
-	// 	"#e8a5ce",
-	// 	"#e8aace",
-	// 	"#e8afcf",
-	// 	"#e8b4d0",
-	// 	"#e8b8d1",
-	// 	"#e8bdd2",
-	// 	"#e8c1d3",
-	// 	"#e8c6d4",
-	// 	"#e8cad5",
-	// 	"#e8cfd6",
-	// 	"#e8d3d7",
-	// 	"#e8d8d8",
-	// 	"#e8dcd9",
-	// 	"#e8e1da",
-	// 	"#e8e6db",
-	// 	"#e8eadc",
-	// 	"#e8efdd",
-	// 	"#e8f3de",
-	// 	"#e8f8df",
-	// 	"#e8fcdf",
-	// 	"#e7fbdb",
-	// 	"#e7fbd7",
-	// 	"#e7fad3",
-	// 	"#e7fad0",
-	// 	"#e7facd",
-	// 	"#e7fac9",
-	// 	"#e7f9c5",
-	// 	"#e7f9c2",
-	// 	"#e7f9bf",
-	// 	"#e7f9bb",
-	// 	"#e7f8b7",
-	// 	"#e7f8b4",
-	// 	"#e7f8b1",
-	// 	"#e7f8ad",
-	// 	"#e7f7a9",
-	// 	"#e7f7a6",
-	// 	"#e7f7a3",
-	// 	"#e7f7a0",
-	// 	"#e7f69c",
-	// 	"#e7f699",
-	// 	"#e7f695",
-	// 	"#e7f692",
-	// 	"#e7f68f",
-	// 	"#e7f68c",
-	// 	"#ff7d7c"
-	// ]
+	// UseEffect 3: to process data, calculate tag-related statistics, and update state variables
+	useEffect(() => { 
+		setFilteredData(data)
 
-	// const colors = [
-	// 	"rgb(223, 121, 239)",
-	// 	"rgb(224, 126, 236)",
-	// 	"rgb(224, 130, 233)",
-	// 	"rgb(224, 134, 230)",
-	// 	"rgb(225, 138, 227)",
-	// 	"rgb(225, 142, 224)",
-	// 	"rgb(226, 147, 221)",
-	// 	"rgb(226, 151, 218)",
-	// 	"rgb(226, 155, 215)",
-	// 	"rgb(227, 159, 212)",
-	// 	"rgb(227, 163, 209)",
-	// 	"rgb(227, 168, 206)",
-	// 	"rgb(228, 172, 203)",
-	// 	"rgb(228, 176, 200)",
-	// 	"rgb(228, 180, 197)",
-	// 	"rgb(229, 184, 194)",
-	// 	"rgb(229, 189, 191)",
-	// 	"rgb(230, 193, 188)",
-	// 	"rgb(230, 197, 185)",
-	// 	"rgb(230, 201, 182)",
-	// 	"rgb(231, 205, 179)",
-	// 	"rgb(231, 210, 176)",
-	// 	"rgb(231, 214, 173)",
-	// 	"rgb(232, 218, 170)",
-	// 	"rgb(232, 222, 167)",
-	// 	"rgb(232, 226, 164)",
-	// 	"rgb(233, 231, 161)",
-	// 	"rgb(233, 235, 158)",
-	// 	"rgb(233, 239, 155)",
-	// 	"rgb(234, 243, 152)",
-	// 	"rgb(234, 247, 149)",
-	// 	"rgb(234, 252, 146)",
-	// 	"rgb(235, 256, 143)",
-	// 	"rgb(235, 255, 140)",
-	// 	"rgb(235, 251, 137)",
-	// 	"rgb(236, 248, 134)",
-	// 	"rgb(236, 244, 131)",
-	// 	"rgb(236, 240, 128)",
-	// 	"rgb(237, 236, 125)",
-	// 	"rgb(237, 232, 122)",
-	// 	"rgb(237, 228, 119)",
-	// 	"rgb(238, 224, 116)",
-	// 	"rgb(238, 221, 113)",
-	// 	"rgb(238, 217, 110)",
-	// 	"rgb(239, 213, 107)",
-	// 	"rgb(239, 209, 104)",
-	// 	"rgb(239, 205, 101)",
-	// 	"rgb(240, 200, 98)",
-	// 	"rgb(240, 196, 95)",
-	// 	"rgb(240, 192, 92)",
-	// 	"#ff7d7c"
-	// ]
-
-	const colors = [
-		"#438194",
-		"#478295",
-		"#4b8496",
-		"#4f8597",
-		"#538798",
-		"#578999",
-		"#5b8b9a",
-		"#5f8c9b",
-		"#638d9c",
-		"#678f9d",
-		"#6b909e",
-		"#6f919f",
-		"#7393a0",
-		"#7794a1",
-		"#7b95a2",
-		"#7f96a3",
-		"#8398a4",
-		"#8799a5",
-		"#8b9aa6",
-		"#8f9ca7",
-		"#939da8",
-		"#979ea9",
-		"#9ba0aa",
-		"#9fa1ab",
-		"#a3a2ac",
-		"#a7a4ad",
-		"#aba5ae",
-		"#afa6af",
-		"#b3a8b0",
-		"#b7a9b1",
-		"#bbaab2",
-		"#bfacb3",
-		"#c3adb4",
-		"#c7aeb5",
-		"#cba0b6",
-		"#cfa1b7",
-		"#ff7d7c"
-	]
-
-
-
-
-	// const colors = [
-	// 	"#a9d18f",
-	// 	"#aac292",
-	// 	"#acc496",
-	// 	"#adc699",
-	// 	"#aec99c",
-	// 	"#b0cca0",
-	// 	"#b1cfa3",
-	// 	"#b2d2a6",
-	// 	"#b4d5aa",
-	// 	"#b5d8ad",
-	// 	"#b6dbb0",
-	// 	"#b8deb4",
-	// 	"#b9e1b7",
-	// 	"#bae4ba",
-	// 	"#bce7be",
-	// 	"#bdeac1",
-	// 	"#bfebce",
-	// 	"#c1eeda",
-	// 	"#c3f1e7",
-	// 	"#c4f4f4",
-	// 	"#c6f7f0",
-	// 	"#c7fafd",
-	// 	"#c9fdfa",
-	// 	"#cafeee",
-	// 	"#ccf9e2",
-	// 	"#cdf6d7",
-	// 	"#cff3cc",
-	// 	"#d0f0c1",
-	// 	"#d2edb6",
-	// 	"#d3eaab",
-	// 	"#d5e7a0",
-	// 	"#d6e495",
-	// 	"#d7e18a",
-	// 	"#d9de7f",
-	// 	"#dadb74",
-	// 	"#dcd869",
-	// 	"#dde55e",
-	// 	"#dfe253",
-	// 	"#e0df48",
-	// 	"#e2dc3d",
-	// 	"#e3d932",
-	// 	"#e5d627",
-	// 	"#e6d31c",
-	// 	"#e7d111",
-	// 	"#e9ce06",
-	// 	"#eadb00",
-	// 	"#ebd900",
-	// 	"#eddd00",
-	// 	"#eeda00",
-	// 	"#f0d700",
-	// 	"#f1d400",
-	// 	"#f3d100",
-	// 	"#dfebf7"
-	// ]
-
-	const borderColors = [
-		"#000"
-	];
-
-	var chartData = {
-		title: { text: 'Chart Title', display: true },
-		labels: sortedTopicTagsKeys.map((items) => { return (items) }),
-		datasets: [{
-			label: "Number of questions by Tag",
-			data: sortedTopicTagsValues.map((items) => { return (items) }),
-			backgroundColor: colors,
-			borderColor: borderColors,
-			borderWidth: 0.25,
-		}],
-	};
-
-	var chartDataSolved = {
-		title: { text: 'Chart Title', display: true },
-		labels: sortedSolvedTopicTagsKeys.map((items) => { return (items) }),
-		datasets: [{
-			label: "Number of questions by Tag",
-			data: sortedSolvedTopicTagsValues.map((items) => { return (items) }),
-			backgroundColor: colors,
-			borderColor: borderColors,
-			borderWidth: 0.25,
-		}],
-	};
-
-	const options = {
-		plugins: {
-			legend: {
-				display: false,
-			},
-		},
-	};
-
-	useEffect(() => { // finding unique tags
+		// finding unique tags
 		let len = data.length;
 		let ProblemsTags = [];
 		for (let i = 0; i < len; i++) {
@@ -649,14 +411,12 @@ const CodingSheets = () => {
 				ProblemsTags.push(data[i].tags[j]);
 			}
 		}
-		// console.log(ProblemsTags)
-		// ProblemsTags = ProblemsTags.filter(string => string !== 'Amazon');
 
 		const filteredTags = ProblemsTags.filter(tag => allowedProblemTags.includes(tag));
 		ProblemsTags = filteredTags;
 
 		const allTagsLen = ProblemsTags.length;
-		const elementCounts = {};
+		var elementCounts = {};
 		for (let i = 0; i < allTagsLen; i++) {
 			const element = ProblemsTags[i];
 			if (elementCounts[element]) {
@@ -684,14 +444,7 @@ const CodingSheets = () => {
 		setSortedTopicTagsKeys(Object.keys(filteredCounts));
 		setSortedTopicTagsValues(Object.values(filteredCounts));
 
-		// setSortedTopicTagsKeys(Object.keys(sortedElementCounts));
-		// setSortedTopicTagsValues(Object.values(sortedElementCounts));
-	}, [data])
-
-
-	useEffect(() => {
-		let len = data.length;
-		const elementCounts = {};
+		elementCounts = {};
 		elementCounts['Easy'] = 0;
 		elementCounts['Medium'] = 0;
 		elementCounts['Hard'] = 0;
@@ -707,15 +460,14 @@ const CodingSheets = () => {
 				elementCounts[element] = 1;
 			}
 		}
-		// console.log(elementCounts);
 		setDifficulty(elementCounts);
+
 	}, [data])
 
-	const difficultyColors = ["#9ed0fa", "#ffb800", "#ef4643"];
-
+	// UseEffect 4: to calculate user's solved question difficulties and update state variable accordingly
 	useEffect(() => {
 		let len = solvedData.length;
-		// console.log(solvedData);
+
 		const elementCounts = {};
 		elementCounts['Easy'] = 0;
 		elementCounts['Medium'] = 0;
@@ -726,7 +478,6 @@ const CodingSheets = () => {
 			if (element != 'Easy' && element != 'Medium' && element != 'Hard') {
 				element = solvedData[i].specialTag;
 			}
-			// console.log(element);
 			if (element == 'Basic') element = 'Easy';
 			if (elementCounts[element]) {
 				elementCounts[element]++;
@@ -735,25 +486,24 @@ const CodingSheets = () => {
 			}
 		}
 
-		// console.log(elementCounts);
 		setUserDifficulty(elementCounts);
 	}, [solvedData, data, toggleEffect])
 
+	// UseEffect 5: to calculate and update difficulty percentage based on user's solved question difficulties
 	useEffect(() => {
 		let num1 = (userDifficulty.Easy / difficulty.Easy) * 100;
 		let num2 = (userDifficulty.Medium / difficulty.Medium) * 100;
 		let num3 = (userDifficulty.Hard / difficulty.Hard) * 100;
 
-		// console.log(num1, num2, num3);
 		let difficultyPercentageArray = [];
 		difficultyPercentageArray.push(num1.toFixed(2));
 		difficultyPercentageArray.push(num2.toFixed(2));
 		difficultyPercentageArray.push(num3.toFixed(2));
-		// console.log(difficultyPercentageArray);
 
 		setDifficultyPercentage(difficultyPercentageArray);
 	}, [difficulty, userDifficulty])
 
+	// UseEffect 6: to filter and sort data based on selected label, value, tags, and sorting criteria
 	useEffect(() => {
 		const newFilteredData = data.filter(item => {
 		  if (selectedLabel !== 'All' && !item.tags.includes(selectedLabel)) {
@@ -775,7 +525,7 @@ const CodingSheets = () => {
 
 		// For sorting filter
 		let newSortedData=[...newFilteredData];
-		if(selectedSort === "All") {
+		if(selectedSort == false) {
 			//Stores the indices of original data array and later compares to get original sort
 			const indexMap = new Map();
 			data.forEach((element, index) => {
@@ -785,14 +535,15 @@ const CodingSheets = () => {
 			// Sort the second array based on the indices from the orignal data array
 			newSortedData.sort((a, b) => indexMap.get(a) - indexMap.get(b));
 		}
-		else if (selectedSort === "Time") {
+		else if (selectedSort == true) {
 			newSortedData.sort((a, b) => b.elapsedTime - a.elapsedTime);
 		}
 
 		setFilteredData(newSortedData);
 	  }, [selectedLabel, selectedValue,tags, selectedSort]);
-
-	useEffect(() => { // finding unique tags
+	
+	// UseEffect 7: to find unique tags from solved data and update state variables for solved data tags
+	useEffect(() => {
 		let len = solvedData.length;
 		let ProblemsTags = [];
 		for (let i = 0; i < len; i++) {
@@ -820,23 +571,13 @@ const CodingSheets = () => {
 		});
 
 		const filteredCounts = {};
-		// let otherValue = 0;
 		for (let key in sortedElementCounts) {
 			filteredCounts[key] = sortedElementCounts[key];
-
-			// if (sortedElementCounts[key] >= data.length * 0.015) {
-			// 	filteredCounts[key] = sortedElementCounts[key];
-			// } else {
-			// 	otherValue += sortedElementCounts[key];
-			// }
 		}
-		// filteredCounts["others"] = otherValue;
 
 		setSortedSolvedTopicTagsKeys(Object.keys(filteredCounts));
 		setSortedSolvedTopicTagsValues(Object.values(filteredCounts));
 	}, [solvedData])
-
-	// console.log(sortedSolvedTopicTagsKeys);
 
 	return (
 		<GrandContainer>
@@ -888,7 +629,7 @@ const CodingSheets = () => {
 							data.map((item, index) => {
 								return (
 									<div
-										key={item.name}
+										key={item._id}
 										className={
 											item.completed ? "link-row done-row" : "link-row"
 										}
@@ -1139,10 +880,9 @@ const CodingSheets = () => {
 							<UpdateIcon className="review-btn"/> */}
 							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} setTags={setTags} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
-							<select className="filter-item" value={selectedSort} onChange={(e) => handleSortClick(e.target.value)}>
-								<option value="All">Sort Based on</option>
-								<option value="Time">Time</option>
-							</select>
+							<Tooltip title={selectedSort ? "Unsort" : "Sort based on Time"}>
+								<SortIcon onClick={() => setSelectedSort(!selectedSort)}/>
+							</Tooltip>
 							{/* <div className="filter-item"><CheckCircleOutlineIcon/></div> */}
 							{/* <div className="filter-item"><UpdateIcon/></div> */}
 							{/* <div className="filter-item">Show Unsolved</div>  */}
@@ -1186,7 +926,7 @@ const CodingSheets = () => {
 													>
 														{item.quesName}
 													</a>
-													<div className="time-required">
+													<div className="time-required" style={{ color: needDarkMode ? (item.isRunning ? "white" : "#b4a7a6") : (item.isRunning ? "black" : "#333") }}>
 														<Stopwatch
 															id={index}
 															initialElapsed={parseInt(item.elapsedTime, 10)}
@@ -1234,9 +974,9 @@ const CodingSheets = () => {
 													/>
 												</div>
 											</Tooltip>
-											<Tooltip title="Start Stop Watch">
+											<Tooltip title="Stop Watch">
 												<div className="stop-watch-btn" onClick={()=>handleStartStop(index)}>
-													{item.isRunning ? <AlarmOnIcon/> : <TimerIcon/>}
+													{item.isRunning ? <PauseIcon style={{ fill: "orange" }} /> : <TimerIcon/>}
 												</div>
 											</Tooltip>
 											{/* <Tooltip title="Add Notes">
@@ -2204,6 +1944,10 @@ const EffectiveFilter = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	margin: 20px 0;
+
+	svg{
+		cursor: pointer;
+	}
 
 	.left{
 		display: flex;
