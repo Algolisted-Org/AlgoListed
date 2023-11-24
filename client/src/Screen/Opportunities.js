@@ -19,6 +19,7 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const Opportunities = () => {
   const [needDarkMode, setNeedDarkMode] = useState(!false);
@@ -27,8 +28,16 @@ const Opportunities = () => {
   const [filterContestTypeName, setFilterContestTypeName] = useState("Job Type");
   const [openModel1, setOpenModel1] = useState(false);
   const [openModel2, setOpenModel2] = useState(false);
-  const [sliderInputValue, setSliderInputValue] = useState("No Experience");
-  const [allOpportunities, setAllOpportunities] = useState([])
+  const [openModel3, setOpenModel3] = useState(false);
+  const [openModel4, setOpenModel4] = useState(false);
+  const [applyMagicFilter, setApplyMagicFilter] = useState(false);
+  const [sliderInputValue, setSliderInputValue] = useState("Fresher");
+  const [location, setLocation] = useState("All Location");
+  const [status, setStatus] = useState("Status")
+  const [allOpportunities, setAllOpportunities] = useState([]);
+
+  let count = 0;
+
   useEffect(() => {
     document.title = "All Internship and Job Opportunities - Algolisted";
   }, []);
@@ -62,6 +71,7 @@ const Opportunities = () => {
     const telegramRegex = /telegram\.org/;
     const telegramRegex2 = /t\.me/;
     const youtubeRegex = /youtube\.com/;
+    const googleRegex = /google\.com/;
 
     if (linkedinRegex.test(source)) {
       return 'https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png';
@@ -71,6 +81,8 @@ const Opportunities = () => {
       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png';
     } else if (youtubeRegex.test(source)) {
       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png';
+    } else if (googleRegex.test(source)) {
+      return 'https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png';
     } else {
       // If no match, return a default image link
       return 'https://imageio.forbes.com/specials-images/imageserve/63dd379b9ef3cd559331b7e2/Illustration-of-the-word--Ai---in-the-style-of-the-Google-logo/0x0.jpg?format=jpg&height=1080&width=1920';
@@ -150,12 +162,12 @@ const Opportunities = () => {
               {
                 openVisualiser ? (
                   <div className="all-resources">
-                    Hello!
+                    Under Development
                   </div>
                 ) : (<></>)
               }
             </SheetMessage>
-            <EffectiveFilter className='noselect' needDarkMode={needDarkMode}>
+            <EffectiveFilter className='noselect' needDarkMode={needDarkMode} applyMagicFilter={applyMagicFilter}>
               <div className="left">
                 <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
                   {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
@@ -169,11 +181,42 @@ const Opportunities = () => {
                     ) : <></>
                   }
                 </div>
-                <div className="filter-item check_color">{sliderInputValue}
-                  {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel2(!openModel2)}> {sliderInputValue}
+                  {openModel2 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                  {
+                    openModel2 ? (
+                      <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
+                        <div className="option">Fresher</div>
+                        <div className="option">Experienced</div>
+                      </ShowAbsoluteModelDropDown>
+                    ) : <></>
+                  }
                 </div>
-                <div className="filter-item check_color">Status
-                  {openModel2 == false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel3(!openModel3)}> {location}
+                  {openModel3 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                  {
+                    openModel3 ? (
+                      <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
+                        <div className="option">All Locations</div>
+                        <div className="option">India</div>
+                        <div className="option">Out of India</div>
+                        <div className="option">Remote</div>
+                      </ShowAbsoluteModelDropDown>
+                    ) : <></>
+                  }
+                </div>
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel4(!openModel4)}> {status}
+                  {openModel4 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                  {
+                    openModel4 ? (
+                      <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
+                        <div className="option">All Status</div>
+                        <div className="option">Liked</div>
+                        <div className="option">Filled</div>
+                        <div className="option">Not Interested</div>
+                      </ShowAbsoluteModelDropDown>
+                    ) : <></>
+                  }
                 </div>
               </div>
               <div className="right">
@@ -181,7 +224,7 @@ const Opportunities = () => {
               <div className="filter-item">B</div>
               <div className="filter-item">C</div>
               <div className="filter-item">D</div> */}
-                <div className="filter-item">
+                <div className="filter-item filter-right" onClick={() => setApplyMagicFilter(!applyMagicFilter)}>
                   Show for tier 1 & 2 college CSE students
                   <ChevronRightIcon />
                 </div>
@@ -199,51 +242,54 @@ const Opportunities = () => {
                 <div className="source">Source</div>
               </div>
 
-              {allOpportunities.length == 0 ? (
+              {allOpportunities.length === 0 ? (
                 <div className="linear-progess-holder">
                   <LinearProgress />
                 </div>
               ) : (
                 <>
-                  {
-
-                  }
-                  {
-                    allOpportunities.slice().reverse().map((item, index) => {
-                      return (
-                        <div className="row">
-                          <div className="hash">{index + 1}</div>
-                          <div className="opportunity">
-                            <div className="left">
-                              <a href={item.job_link} target='_blank' className="link">{item.job_title} <CallMadeIcon /></a>
-                              {/* <div className='extra-link'>
-                                <InfoIcon/>
-                                <a href="/">How to apply?</a>
-                              </div> */}
-                              <div className="extra-info">
-                                {item.location ? <div className="info">{item.location}</div> : <></>}
-                                <div className="info">{item.role}</div>
-                                <div className="info">{item.type}</div>
-                                <div className="info">{item.years_exp}{item.years_exp == 'Fresher' ? null : "+ Year Exp"}</div>
-                                <div className="info">{item.salary_low} {item.salary_low != item.salary_high ? `- ${item.salary_high}` : null}  {item.type == "FTE" ? "LPA" : "INR"}</div>
+                  {allOpportunities
+                    .filter(item => applyMagicFilter ? item.magic_filter === 'yes' : true)
+                    .reverse()
+                    .map((item, index) => (
+                      <div className="row" key={item.uniqueIdentifier}>
+                        <div className="hash">{++count}</div>
+                        <div className="opportunity">
+                          <div className="left">
+                            <a href={item.job_link} target="_blank" className="link">
+                              {item.job_title} <CallMadeIcon />
+                            </a>
+                            <div className="extra-info">
+                              {item.location && <div className="info">{item.location}</div>}
+                              <div className="info">{item.role}</div>
+                              <div className="info">{item.type}</div>
+                              <div className="info">
+                                {item.years_exp}
+                                {item.years_exp === 'Fresher' ? null : "+ Year Exp"}
                               </div>
-                              
-                            </div>
-                            <div className="right">
-                              <CheckCircleOutlineIcon />
-                              <RemoveCircleOutlineIcon />
-                              <FavoriteBorderIcon />
+                              {item.salary_low !== '-' ? (
+                                <div className="info">
+                                  {item.salary_low}
+                                  {item.salary_low !== item.salary_high ? `- ${item.salary_high}` : null}
+                                  {item.type === "FTE" ? " LPA" : " INR"}
+                                </div>
+                              ) : null}
                             </div>
                           </div>
-                          <div className="source">
-                            <a href={item.source} target='_blank'>
-                              <img src={getImageLink(item.source)} alt="" />
-                            </a>
+                          <div className="right">
+                            <CheckCircleOutlineIcon />
+                            <RemoveCircleOutlineIcon />
+                            <FavoriteBorderIcon />
+                            {/* <FavoriteIcon style={{"fill" : "#dd6565"}}/> */}
                           </div>
                         </div>
-                      )
-                    })
-                  }
+                        <div className="source">
+                          <a href={item.source} target="_blank">
+                            <img src={getImageLink(item.source)} alt="" />
+                          </a>
+                        </div>
+                      </div>
+                    ))}
                 </>
               )}
             </Table>
@@ -628,7 +674,14 @@ const EffectiveFilter = styled.div`
       margin-left: 5px;
 			cursor: pointer;
       color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
-      border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+      border: 1px solid ${(props) =>
+      props.needDarkMode
+        ? props.applyMagicFilter
+          ? 'white'
+          : '#595b5f'
+        : props.applyMagicFilter
+        ? 'black'
+        : 'rgb(209, 213, 219)'};
       display: flex;
       align-items: center;
 
@@ -772,7 +825,10 @@ const SheetMessage = styled.div`
 	}
 
     .all-resources{
+  			color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
         margin-top: 7.5px;
+        font-size: 0.75rem;
+        font-style: italic;
 
         img{
             height: 100px;
