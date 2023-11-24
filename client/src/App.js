@@ -108,7 +108,7 @@ const App = ({currentThemeDark}) => {
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
-        <Route path="/core-subjects-tracker" element={<CoreSubjectsTracker/>} />
+        <Route path="/core-subjects-tracker/:subjectName" element={<CoreSubjectsTracker/>} />
 
         {/* <Route path="/showdown-server" element={<ShowdownServer/>} />
         <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}

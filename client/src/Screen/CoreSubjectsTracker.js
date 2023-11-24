@@ -23,6 +23,9 @@ import NotesIcon from '@material-ui/icons/Notes';
 import ReplayIcon from '@material-ui/icons/Replay';
 import { coreSubjectsTrackerFilters } from '../Components/coreSubjectsTrackerFilters';
 import OSquestions from '../DummyDB/CoreSubjects/OSquestions.json';
+import OOPSquestions from '../DummyDB/CoreSubjects/OOPSquestions.json';
+import CNquestions from '../DummyDB/CoreSubjects/CNquestions.json';
+import DBMSquestions from '../DummyDB/CoreSubjects/DBMSquestions.json';
 import OSTopics from '../DummyDB/CoreSubjects/OSTopics.json';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import CallMadeIcon from '@material-ui/icons/CallMade';
@@ -31,10 +34,16 @@ const CoreSubjectsTracker = () => {
     const [needDarkMode, setNeedDarkMode] = useState(!false);
     const [openVisualiser, setOpenVisualiser] = useState(false);
     const [selectedLabels, setSelectedLabels] = useState([]);
-    const [data, setData] = useState(OSquestions);
+    const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [dataLoading, setDataLoading] = useState(true);
     const [answerVisibility, setAnswerVisibility] = useState(data.map(() => false));
+    const [resourcesListFileName, setResourcesListFileName] = useState("");
+    const [topicListFileName, setTopicListFileName] = useState("");
+    const [questionsListFileName, setQuestionsListFileName] = useState("");
+
+    const params = useParams();
+	const { subjectName } = params;
 
     useEffect(() => {
         let selectedTheme = localStorage.getItem("selectedTheme");
@@ -51,50 +60,66 @@ const CoreSubjectsTracker = () => {
         document.title = "Core Subjects Tracker - Algolisted";
     }, []);
 
+    const questionsMapping = {
+        'operating-systems': OSquestions,
+        'oops': OOPSquestions,
+        'computer-networks': CNquestions,
+        'dbms': DBMSquestions,
+    };
+
+
     useEffect(() => {
-        try {
-            const storedCompletedTopics = JSON.parse(localStorage.getItem("completedTopics"));
+        setData(questionsMapping[subjectName]);
+    }, [])
 
-            if (storedCompletedTopics) {
-                const updatedCompletedTopics = OSTopics
-                    .filter((item) => storedCompletedTopics.includes(item.name))
-                    .map((item) => item.name);
 
-                localStorage.setItem("completedTopics", JSON.stringify(updatedCompletedTopics));
-                setSelectedLabels([...updatedCompletedTopics]);
+    useEffect(() => {
+        if(data.length > 0){
+            try {
+                const storedCompletedTopics = JSON.parse(localStorage.getItem("completedTopics"));
+    
+                if (storedCompletedTopics) {
+                    const updatedCompletedTopics = OSTopics
+                        .filter((item) => storedCompletedTopics.includes(item.name))
+                        .map((item) => item.name);
+    
+                    localStorage.setItem("completedTopics", JSON.stringify(updatedCompletedTopics));
+                    setSelectedLabels([...updatedCompletedTopics]);
+                }
+    
+                const updatedData = data.map((item) => {
+                    const completed = localStorage.getItem(`completedquestion-coresheet-${item._id}`);
+                    const marked = localStorage.getItem(`markedquestion-coresheet-${item._id}`);
+    
+                    return {
+                        ...item,
+                        completed: completed === "true",
+                        marked: marked === "true",
+                    };
+                });
+    
+                setFilteredData(updatedData);
+            } catch (error) {
+                console.error("Error in useEffect:", error);
             }
-
-            const updatedData = data.map((item) => {
-                const completed = localStorage.getItem(`completedquestion-coresheet-${item._id}`);
-                const marked = localStorage.getItem(`markedquestion-coresheet-${item._id}`);
-
-                return {
-                    ...item,
-                    completed: completed === "true",
-                    marked: marked === "true",
-                };
-            });
-
-            setFilteredData(updatedData);
-        } catch (error) {
-            console.error("Error in useEffect:", error);
         }
     }, [data]);
     
     
     const filters = coreSubjectsTrackerFilters.map((item) => {
         return (
-            <div key={item.id} className={item.domainFilter === "operating-systems" ? 'filter selected' : (item.lock === true ? 'locked-feature filter' : 'filter')} >
+            <a href={item.domainFilter} key={item.id} className={item.domainFilter === subjectName ? 'filter selected' : (item.lock === true ? 'locked-feature filter' : 'filter')} >
                 {item.text}
                 {item.lock === true ? <LockIcon /> : <></>}
-            </div>
+            </a>
         );
     });
 
     useEffect(() => {
         setDataLoading(false);
-    }, [data])
+    }, [data]);
 
+    
     const handleTopicsLabelClick = (label) => {
         let updatedLabels;
 
@@ -107,8 +132,8 @@ const CoreSubjectsTracker = () => {
         setSelectedLabels(updatedLabels);
 
         localStorage.setItem("completedTopics", JSON.stringify(updatedLabels));
-    };
-
+    };   
+    
     const toggleAnswerVisibility = (index) => {
         const updatedVisibility = [...answerVisibility];
         updatedVisibility[index] = !updatedVisibility[index];
