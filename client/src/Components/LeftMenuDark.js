@@ -48,7 +48,7 @@ const LeftMenuDark = ({ marked }) => {
     {
       value: "Core Subjects Tracker",
       showAt: "core-subjects-tracker",
-      link: "/core-subjects-tracker/operating-system",
+      link: "/core-subjects-tracker/operating-systems",
     },
     // {
     //   value: "Interview Summaries",
