@@ -25,7 +25,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const promptForMncQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for MNCs. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, the project have used.",
-  "IMPORTANT 1 : Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here'. Don't give any resources.",
+  "IMPORTANT 1 : Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements,Impact score. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here','impScore':'impScore'. Don't give any resources.",
   "IMPORTANT 2 : Keep it related to the a student - Sample technical questions: 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimize if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimize it and scale it?",
   "Sample soft questions: 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values do you think that experience taught you which you can bring to our company. 2. How will you resolve an xyz problem with your team, ...",
   "Rate all the projects on a scale of 10 based on the tech stack they have used, for example, more complex tech stack gets a higher rating. For example, xyz projects have used react, redux, tailwind, mongodb, rate 8/10 like this.",
@@ -35,7 +35,7 @@ const promptForMncQuestionChunks = [
 const promptForStartup = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for StartUps. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, the project have used.",
-  "Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here'. Don't give any resources.",
+  "Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements,Impact score. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here','impScore':'impScore'. Don't give any resources.",
   "Keep it long and related so that a student should really have to think about the technology details.",
   "Sample technical questions: 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimize if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimize it and scale it?",
   "Sample soft questions: 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values do you think that experience taught you which you can bring to our company. 2. How will you resolve an xyz problem with your team, ...",
@@ -46,7 +46,7 @@ const promptForStartup = [
 const promptForUnicorn = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for Unicorn Company. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, the project have used.",
-  "Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here'. Don't give any resources.",
+  "Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements,Impact score. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here','impScore':'impScore'. Don't give any resources.",
   "Keep it long and related so that a student should really have to think about the technology details.",
   "Sample technical questions: 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimize if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimize it and scale it?",
   "Sample soft questions: 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values do you think that experience taught you which you can bring to our company. 2. How will you resolve an xyz problem with your team, ...",
@@ -57,7 +57,7 @@ const promptForUnicorn = [
 const promptForRemote = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for Remote Jobs. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, the project have used.",
-  "Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here'. Don't give any resources.",
+  "Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements,Impact score. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here','impScore':'impScore'. Don't give any resources.",
   "Keep it long and related so that a student should really have to think about the technology details.",
   "Sample technical questions: 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimize if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimize it and scale it?",
   "Sample soft questions: 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values do you think that experience taught you which you can bring to our company. 2. How will you resolve an xyz problem with your team, ...",
@@ -68,7 +68,7 @@ const promptForRemote = [
 const promptForBasicQuestionChunks = [
   "Now you need to act like my mentor to help me get the job",
   "Given a resume text, provide me some vast number of technical and soft skills questions for a Company. Keep it very much in sync with the resume, like 'say the name of the project' and then ask a technical question on the topics that, the project have used.",
-  "Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here'. Don't give any resources.",
+  "Create a JSON text for 10 questions of technical and 2 questions of soft skills, ratings, ATS Score, Area Of Improvements,Impact score. For example like 'technicalQuestions': and in array ['question1 here', 'question2 here'...], 'softSkillQuestions': and in array ['question1 here', 'question2 here'...], 'projectRatings': and in array ['project1 rating here', 'project2 rating here'...], 'atsScore': 'ATS Score here', 'areaOfImprovement': 'Area of Improvement here','impScore':'impScore'. Don't give any resources.",
   "Keep it long and related so that a student should really have to think about the technology details.",
   "Sample technical questions: 1. How did you implement xyz, can you tell why abc and not mn. What is a1b1 in xyz. 2. How will you optimize if xyz happens in mn. 3. Can you explain the implementation of abc function, and how would you optimize it and scale it?",
   "Sample soft questions: 1. I see you have worked in xyz, where did you get the inspiration for working with xyz. What did you learn from it, and what values do you think that experience taught you which you can bring to our company. 2. How will you resolve an xyz problem with your team, ...",
@@ -89,7 +89,7 @@ const ResumeSection = () => {
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
   const [iamTemp, setIamTemp] = useState(null);
   const [promptGPT, setPromptGPT] = useState("");
-  const [moreQuestion, setMoreQuestion] = useState("");
+  const [moreQuestion, setMoreQuestion] = useState(null);
   const [dummyResponse, setDummyResponse] = useState({
     technicalQuestions: [
       "In the SocialSphere project, how did you implement user authentication and authorization?",
@@ -123,9 +123,9 @@ const ResumeSection = () => {
       "Sukham Resort: 8/10",
     ],
     atsScore: "85%",
+    impact: 7/10,
     atsScoreValue: 65,
     grammer: 82.5,
-    impact: 53,
     areaOfImprovement:
       "Improvement in communication skills and gaining more experience with different programming languages and technologies.",
   });
@@ -224,7 +224,7 @@ const ResumeSection = () => {
         setResponseText(response.choices[0].message.content);
         // console.log(JSON.parse(response.choices[0].message.content));
         const temp = JSON.parse(response.choices[0].message.content);
-        // console.log("I am temp : ", temp);
+        console.log("I am temp : ", temp);
         setIamTemp(temp);
 
         setIsLoading(false);
@@ -241,7 +241,7 @@ const ResumeSection = () => {
       setIsLoading(true);
 
       try {
-        prompt = ` ${iamTemp.technicalQuestions} add just 10 more questions to it in JSON format. Don't give any answers. `;
+        prompt = ` ${iamTemp.technicalQuestions} add just 10 more questions to it in JSON format with object name of technical. Don't give any answers. `;
         const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           messages: [
@@ -253,12 +253,12 @@ const ResumeSection = () => {
           temperature: 0.5,
           max_tokens: 500,
         });
-        // console.log(prompt)
-        console.log("Hi");
-        console.log(JSON.parse(response.choices[0].message.content));
-        // console.log(response.choices[0].message.content)
         const temp = JSON.parse(response.choices[0].message.content);
-        // console.log("I am more question: ",temp)
+        console.log(temp)
+        setMoreQuestion(temp);
+        console.log(moreQuestion);
+
+        console.log(moreQuestion.technical);
       } catch (error) {
         console.log("Error sending message to Chat API:", error);
         setIsLoading(false);
@@ -473,6 +473,37 @@ const ResumeSection = () => {
                 </h2>
                 <p>Good Luck with your Interview ✨✨</p>
                 <div className="questions">
+                <div className="graphs">
+                        <div className="column">
+                          <div className="doughnut">
+                            <div className="percentage">
+                              {iamTemp.atsScore}
+                            </div>
+                            <div className="graph">
+                              <Doughnut
+                                options={doughnutOptions}
+                                data={data(parseFloat(iamTemp.atsScore))}
+                              />
+                            </div>
+                          </div>
+                          <div className="title">ATS Score</div>
+                        </div>
+                        <div className="column">
+                          <div className="doughnut">
+                            <div className="percentage">
+                              {parseFloat(iamTemp.impScore)*10}%
+                            </div>
+                            <div className="graph">
+                              <Doughnut
+                                options={doughnutOptions}
+                                data={data(parseFloat(iamTemp.impScore)*10)}
+                              />
+                            </div>
+                          </div>
+                          <div className="title">Impact</div>
+                        </div>
+                        
+                      </div>
                   <h2 className="ai-text-gradient">Technical Questions</h2>
                   <div>
                     {iamTemp.technicalQuestions?.map((question, index) => (
@@ -633,7 +664,30 @@ const ResumeSection = () => {
                                 </p>
                               )
                             )}
-                            <button className="btn-1">Show more</button>
+                            {moreQuestion && (
+                              <>
+                                <h2 className="ai-text-gradient">
+                                  More Questions
+                                </h2>
+                                <div>
+                                  {moreQuestion.technical?.map(
+                                    (question, index) => (
+                                      <p key={index}>
+                                        {iamTemp.technicalQuestions.length +
+                                          index +
+                                          1}
+                                        . {question}
+                                      </p>
+                                    )
+                                  )}
+                                </div>
+                              </>
+                            )}
+                            {!moreQuestion && (
+                              <button className="btn-1" onClick={techMore}>
+                                Show more
+                              </button>
+                            )}
                           </>
                         </div>
                       </div>
