@@ -27,6 +27,9 @@ import OOPSquestions from '../DummyDB/CoreSubjects/OOPSquestions.json';
 import CNquestions from '../DummyDB/CoreSubjects/CNquestions.json';
 import DBMSquestions from '../DummyDB/CoreSubjects/DBMSquestions.json';
 import OSTopics from '../DummyDB/CoreSubjects/OSTopics.json';
+import OOPSTopics from '../DummyDB/CoreSubjects/OOPSTopics.json';
+import CNTopics from '../DummyDB/CoreSubjects/CNTopics.json';
+import DBMSTopics from '../DummyDB/CoreSubjects/DBMSTopics.json';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 
@@ -67,6 +70,13 @@ const CoreSubjectsTracker = () => {
         'dbms': DBMSquestions,
     };
 
+    const topicsMapping = {
+        'operating-systems': OSTopics,
+        'oops': OOPSTopics,
+        'computer-networks': CNTopics,
+        'dbms': DBMSTopics,
+    };
+
 
     useEffect(() => {
         setData(questionsMapping[subjectName]);
@@ -79,7 +89,7 @@ const CoreSubjectsTracker = () => {
                 const storedCompletedTopics = JSON.parse(localStorage.getItem("completedTopics"));
     
                 if (storedCompletedTopics) {
-                    const updatedCompletedTopics = OSTopics
+                    const updatedCompletedTopics = topicsMapping[subjectName]
                         .filter((item) => storedCompletedTopics.includes(item.name))
                         .map((item) => item.name);
     
@@ -166,7 +176,7 @@ const CoreSubjectsTracker = () => {
         setFilteredData(updatedData);
     }
 
-    const allTopics = OSTopics;
+    const allTopics = topicsMapping[subjectName];
 
     const topicsProgressBarPercent = allTopics.length === 0 ? 0 : ((selectedLabels.length / allTopics.length) * 100).toFixed(allTopics.length > 100 ? 1 : 0);
     const questionsProgressBarPercent = data.length === 0 ? 0 : ((filteredData.filter((item) => item.completed === true).length / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
