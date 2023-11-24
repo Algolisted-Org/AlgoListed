@@ -41,8 +41,8 @@ import DBMSResources from '../DummyDB/CoreSubjects/DBMSResources.json';
 const CoreSubjectsTracker = () => {
     const [needDarkMode, setNeedDarkMode] = useState(!false);
     const [openVisualiser, setOpenVisualiser] = useState(false);
-    const [selectedLabels, setSelectedLabels] = useState([]);
     const [data, setData] = useState([]);
+    const [topicsData, setTopicsData] = useState([]);
     const [resources, setResources] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [dataLoading, setDataLoading] = useState(true);
@@ -93,6 +93,7 @@ const CoreSubjectsTracker = () => {
 
     useEffect(() => {
         setData(questionsMapping[subjectName]);
+        setTopicsData(topicsMapping[subjectName]);
         setResources(resourceMapping[subjectName]);
     }, [])
 
@@ -100,16 +101,16 @@ const CoreSubjectsTracker = () => {
     useEffect(() => {
         if (data.length > 0) {
             try {
-                const storedCompletedTopics = JSON.parse(localStorage.getItem("completedTopics"));
+                const updatedFilterData = topicsData.map((item) => {
+                    const completed = localStorage.getItem(`completedtopic-coresheet-${item._id}`);
 
-                if (storedCompletedTopics) {
-                    const updatedCompletedTopics = topicsMapping[subjectName]
-                        .filter((item) => storedCompletedTopics.includes(item.name))
-                        .map((item) => item.name);
+                    return {
+                        ...item,
+                        completed: completed === "true",
+                    };
+                });
 
-                    localStorage.setItem("completedTopics", JSON.stringify(updatedCompletedTopics));
-                    setSelectedLabels([...updatedCompletedTopics]);
-                }
+                setTopicsData(updatedFilterData);
 
                 const updatedData = data.map((item) => {
                     const completed = localStorage.getItem(`completedquestion-coresheet-${item._id}`);
@@ -144,18 +145,17 @@ const CoreSubjectsTracker = () => {
     }, [data]);
 
 
-    const handleTopicsLabelClick = (label) => {
-        let updatedLabels;
+    const handleTopicsLabelClick = (index) => {
+        let updatedLabels = [...topicsData];
 
-        if (selectedLabels.includes(label)) {
-            updatedLabels = selectedLabels.filter((selectedLabel) => selectedLabel !== label);
-        } else {
-            updatedLabels = [...selectedLabels, label];
-        }
+        updatedLabels[index].completed = !updatedLabels[index].completed;
 
-        setSelectedLabels(updatedLabels);
+        localStorage.setItem(
+            `completedtopic-coresheet-${updatedLabels[index]._id}`,
+            updatedLabels[index].completed
+        );
 
-        localStorage.setItem("completedTopics", JSON.stringify(updatedLabels));
+        setTopicsData(updatedLabels);
     };
 
     const toggleAnswerVisibility = (index) => {
@@ -190,9 +190,7 @@ const CoreSubjectsTracker = () => {
         setFilteredData(updatedData);
     }
 
-    const allTopics = topicsMapping[subjectName];
-
-    const topicsProgressBarPercent = allTopics.length === 0 ? 0 : ((selectedLabels.length / allTopics.length) * 100).toFixed(allTopics.length > 100 ? 1 : 0);
+    const topicsProgressBarPercent = topicsData.length === 0 ? 0 : ((topicsData.length / topicsData.length) * 100).toFixed(topicsData.length > 100 ? 1 : 0);
     const questionsProgressBarPercent = data.length === 0 ? 0 : ((filteredData.filter((item) => item.completed === true).length / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
     return (
@@ -284,13 +282,13 @@ const CoreSubjectsTracker = () => {
                     </Progress>
 
                     <div className="topics-container">
-                        {allTopics.map((topic) => (
+                        {topicsData.map((topic, index) => (
                             <div className="topic" key={topic.name}>
                                 <input
                                     type="checkbox"
                                     id={topic.name.toLowerCase().replace(/\s+/g, "-")}
-                                    checked={selectedLabels.includes(topic.name)}
-                                    onChange={() => handleTopicsLabelClick(topic.name)}
+                                    checked={topic.completed}
+                                    onChange={() => handleTopicsLabelClick(index)}
                                 />
                                 <label htmlFor={topic.name.toLowerCase().replace(/\s+/g, "-")}>{topic.name}</label>
                             </div>

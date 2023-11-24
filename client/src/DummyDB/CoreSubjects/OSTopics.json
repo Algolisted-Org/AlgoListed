@@ -1,44 +1,86 @@
 [
     {
-        "name": "Types of OS"
+        "_id": "15-nov-2023-06'25-@Nayaker",
+        "name": "Types of OS",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Components of OS"
+        "_id": "15-nov-2023-06'26-@Nayaker",
+        "name": "Components of OS",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Process Management"
+        "_id": "15-nov-2023-06'27-@Nayaker",
+        "name": "Process Management",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Context Switching"
+        "_id": "15-nov-2023-06'28-@Nayaker",
+        "name": "Context Switching",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "CPU Scheduling Algorithms"
+        "_id": "15-nov-2023-06'29-@Nayaker",
+        "name": "CPU Scheduling Algorithms",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Multi-Threading"
+        "_id": "15-nov-2023-06'30-@Nayaker",
+        "name": "Multi-Threading" ,
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Race Condition"
+        "_id": "15-nov-2023-06'31-@Nayaker",
+        "name": "Race Condition",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Semaphores"
+        "_id": "15-nov-2023-06'32-@Nayaker",
+        "name": "Semaphores",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Deadlock - Detection and Recovery"
+        "_id": "15-nov-2023-06'33-@Nayaker",
+        "name": "Deadlock - Detection and Recovery",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Paging & Segmentation"
+        "_id": "15-nov-2023-06'34-@Nayaker",
+        "name": "Paging & Segmentation",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Virtual Memory"
+        "_id": "15-nov-2023-06'35-@Nayaker",
+        "name": "Virtual Memory",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Page Replacement Algorithms"
+        "_id": "15-nov-2023-06'36-@Nayaker",
+        "name": "Page Replacement Algorithms",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "Trashing"
+        "_id": "15-nov-2023-06'37-@Nayaker",
+        "name": "Trashing",
+        "completed": false,
+        "marked": false
     },
     {
-        "name": "File Management"
+        "_id": "15-nov-2023-06'38-@Nayaker",
+        "name": "File Management",
+        "completed": false,
+        "marked": false
     }
 ]
