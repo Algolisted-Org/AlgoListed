@@ -13,7 +13,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { PuffLoader } from "react-spinners";
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut } from "react-chartjs-2";
 
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
@@ -89,7 +89,7 @@ const ResumeSection = () => {
   const [textFromPDF, setTextFromPDF] = useState(""); // Extracted text from
   const [iamTemp, setIamTemp] = useState(null);
   const [promptGPT, setPromptGPT] = useState("");
-  const [moreQuestion,setMoreQuestion]=useState("");
+  const [moreQuestion, setMoreQuestion] = useState("");
   const [dummyResponse, setDummyResponse] = useState({
     technicalQuestions: [
       "In the SocialSphere project, how did you implement user authentication and authorization?",
@@ -186,7 +186,6 @@ const ResumeSection = () => {
   //   console.log("This is usestate temp : ", iamTemp);
   // }, [iamTemp])
 
-
   const handleSend = async () => {
     if (textFromPDF) {
       setIsLoading(true);
@@ -237,6 +236,37 @@ const ResumeSection = () => {
       console.error("No text to send to Chat API.");
     }
   };
+  const techMore = async () => {
+    if (responseText) {
+      setIsLoading(true);
+
+      try {
+        prompt = ` ${iamTemp.technicalQuestions} add just 10 more questions to it in JSON format. Don't give any answers. `;
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content: prompt,
+            },
+          ],
+          temperature: 0.5,
+          max_tokens: 500,
+        });
+        // console.log(prompt)
+        console.log("Hi");
+        console.log(JSON.parse(response.choices[0].message.content));
+        // console.log(response.choices[0].message.content)
+        const temp = JSON.parse(response.choices[0].message.content);
+        // console.log("I am more question: ",temp)
+      } catch (error) {
+        console.log("Error sending message to Chat API:", error);
+        setIsLoading(false);
+      }
+    } else {
+      console.log("No More Questions");
+    }
+  };
   const toggleResultDummy = () => {
     setResultDummy(!resultDummy);
   };
@@ -273,18 +303,18 @@ const ResumeSection = () => {
     return {
       datasets: [
         {
-          label: 'Percentage',
+          label: "Percentage",
           data: [percentage, 100 - percentage],
           backgroundColor: needDarkMode
-            ? ['#e0cf7a', '#586566']
-            : ['#5ab097', '#e5e5e5'],
-          borderColor: needDarkMode ? ['#404249'] : ['#fff'],
+            ? ["#e0cf7a", "#586566"]
+            : ["#5ab097", "#e5e5e5"],
+          borderColor: needDarkMode ? ["#404249"] : ["#fff"],
           hoverOffset: 1,
           borderRadius: 20,
         },
       ],
-    }
-  }
+    };
+  };
 
   const doughnutOptions = {
     responsive: true,
@@ -294,8 +324,7 @@ const ResumeSection = () => {
         display: false,
       },
     },
-  }
-
+  };
 
   return (
     <GrandContainer>
@@ -348,24 +377,29 @@ const ResumeSection = () => {
             such as HR and project-related discussions.
           </p>
           <div className="input-container">
-            <div
-              className="resume-upload"
-              onDragOver={(e) => e.preventDefault()}
-              onDragEnter={(e) => e.preventDefault()}
-              onDrop={handleDrop}
-              onClick={handleUploadClick}
-            >
-              <CloudUploadIcon />
-              <div className="text">Click to upload or drag and drop</div>
-              <input
-                type="file"
-                id="fileInput"
-                accept=".pdf"
-                style={{ display: "none" }}
-                onChange={uploadresume}
-              />
-            </div>
-
+            {!textFromPDF ? (
+              <div
+                className="resume-upload"
+                onDragOver={(e) => e.preventDefault()}
+                onDragEnter={(e) => e.preventDefault()}
+                onDrop={handleDrop}
+                onClick={handleUploadClick}
+              >
+                <CloudUploadIcon />
+                <div className="text">Click to upload or drag and drop</div>
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept=".pdf"
+                  style={{ display: "none" }}
+                  onChange={uploadresume}
+                />
+              </div>
+            ) : (
+              <div className="file-name-display">
+                <p>File Name: {file?.name}</p>
+              </div>
+            )}
             <div className="other-details">
               <h3 className="text">Additional Information</h3>
               <div className="details">
@@ -434,26 +468,29 @@ const ResumeSection = () => {
           <div className="ai-generated-results">
             {responseText ? (
               <>
-                <h2 className="ai-text-gradient">AI Generated Resume Based Questions</h2>
+                <h2 className="ai-text-gradient">
+                  AI Generated Resume Based Questions
+                </h2>
                 <p>Good Luck with your Interview ✨✨</p>
                 <div className="questions">
                   <h2 className="ai-text-gradient">Technical Questions</h2>
                   <div>
-                    {iamTemp.technicalQuestions?.map(
-                      (question, index) => (
-                        <p key={index}>{index + 1}. {question}</p>
-                      )
-                    )}
+                    {iamTemp.technicalQuestions?.map((question, index) => (
+                      <p key={index}>
+                        {index + 1}. {question}
+                      </p>
+                    ))}
+                    <button onClick={techMore}>Show More</button>
                   </div>
                 </div>
                 <div className="questions">
                   <h2 className="ai-text-gradient">Soft Skill Questions</h2>
                   <div>
-                    {iamTemp.softSkillQuestions?.map(
-                      (question, index) => (
-                        <p key={index}>{index + 1}. {question}</p>
-                      )
-                    )}
+                    {iamTemp.softSkillQuestions?.map((question, index) => (
+                      <p key={index}>
+                        {index + 1}. {question}
+                      </p>
+                    ))}
                   </div>
                 </div>
 
@@ -461,7 +498,9 @@ const ResumeSection = () => {
                   <h2 className="ai-text-gradient">Project Ratings</h2>
                   <div>
                     {iamTemp.projectRatings?.map((rating, index) => (
-                      <p key={index}>{index + 1}. {rating}</p>
+                      <p key={index}>
+                        {index + 1}. {rating}
+                      </p>
                     ))}
                   </div>
                 </div>
@@ -474,154 +513,183 @@ const ResumeSection = () => {
                 </div>
               </>
             ) : (
-              <div className="show-sample">
-                <div className="text btn-clickable" onClick={toggleResultDummy}>
-                  {resultDummy ? "Hide Sample Results" : "Show Sample Results"}
-                  {resultDummy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                </div>
-                {resultDummy && (
-                  <div className="ai-generated-results">
-                    {/* ADD GRAPH HERE */}
-                    <div className="graphs">
-                      <div className="column">
-                        <div className="doughnut">
-                          <div className="percentage">
-                            {dummyResponse.atsScoreValue}%
+              <>
+                <div className="show-sample">
+                  <div
+                    className="text btn-clickable"
+                    onClick={toggleResultDummy}
+                  >
+                    {resultDummy
+                      ? "Hide Sample Results"
+                      : "Show Sample Results"}
+                    {resultDummy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  </div>
+                  {resultDummy && (
+                    <div className="ai-generated-results">
+                      {/* ADD GRAPH HERE */}
+                      <div className="graphs">
+                        <div className="column">
+                          <div className="doughnut">
+                            <div className="percentage">
+                              {dummyResponse.atsScoreValue}%
+                            </div>
+                            <div className="graph">
+                              <Doughnut
+                                options={doughnutOptions}
+                                data={data(dummyResponse.atsScoreValue)}
+                              />
+                            </div>
                           </div>
-                          <div className="graph">
-                            <Doughnut
-                              options={doughnutOptions}
-                              data={data(dummyResponse.atsScoreValue)}
-                            />
-                          </div>
+                          <div className="title">ATS Score</div>
                         </div>
-                        <div className="title">ATS Score</div>
+                        <div className="column">
+                          <div className="doughnut">
+                            <div className="percentage">
+                              {dummyResponse.grammer}%
+                            </div>
+                            <div className="graph">
+                              <Doughnut
+                                options={doughnutOptions}
+                                data={data(dummyResponse.grammer)}
+                              />
+                            </div>
+                          </div>
+                          <div className="title">Grammer</div>
+                        </div>
+                        <div className="column">
+                          <div className="doughnut">
+                            <div className="percentage">
+                              {dummyResponse.impact}%
+                            </div>
+                            <div className="graph">
+                              <Doughnut
+                                options={doughnutOptions}
+                                data={data(dummyResponse.impact)}
+                              />
+                            </div>
+                          </div>
+                          <div className="title">Impact</div>
+                        </div>
                       </div>
-                      <div className="column">
-                        <div className="doughnut">
-                          <div className="percentage">
-                            {dummyResponse.grammer}%
-                          </div>
-                          <div className="graph">
-                            <Doughnut
-                              options={doughnutOptions}
-                              data={data(dummyResponse.grammer)}
-                            />
-                          </div>
-                        </div>
-                        <div className="title">Grammer</div>
+                      <div className="questions">
+                        <h2>Technical Questions</h2>
+                        <p>
+                          1. In the project SocialSphere, how did you implement
+                          the forum functionality? Can you explain the role of
+                          React JS and MongoDB in this project?{" "}
+                        </p>
+                        <p>
+                          2. For the project Algolisted, what technologies did
+                          you use to develop the personalized resume
+                          questionnaire feature? How did you integrate OpenAI
+                          API into the project?
+                        </p>
+                        <p>
+                          3. In Cryptomania, can you explain how you utilized
+                          Chartjs and API integration to provide cryptocurrency
+                          statistics and real-time news updates?
+                        </p>
+
+                        <h2>Soft Questions</h2>
+                        <p>
+                          1. I see you have worked on the project SocialSphere.
+                          What inspired you to create a forum for history and
+                          political enthusiasts? How do you think this project
+                          aligns with your values?
+                        </p>
                       </div>
-                      <div className="column">
-                        <div className="doughnut">
-                          <div className="percentage">
-                            {dummyResponse.impact}%
-                          </div>
-                          <div className="graph">
-                            <Doughnut
-                              options={doughnutOptions}
-                              data={data(dummyResponse.impact)}
-                            />
-                          </div>
-                        </div>
-                        <div className="title">Impact</div>
+                      <div className="stats">
+                        <h2>Useful Stats about Resumes</h2>
+                        <p>This is will be a locally generated stuff!</p>
+                      </div>
+                      <div className="stats">
+                        <h2>Get your Resume Reviewed by Professionals</h2>
+                        <p>topmate.io shit! with LLM vector database</p>
+                      </div>
+                      <div className="stats">
+                        <h2>Resourses for Resume</h2>
+                        <p>Local stuff!</p>
                       </div>
                     </div>
-                    <div className="questions">
-                      <h2>Technical Questions</h2>
-                      <p>
-                        1. In the project SocialSphere, how did you implement the
-                        forum functionality? Can you explain the role of React JS
-                        and MongoDB in this project?{" "}
-                      </p>
-                      <p>
-                        2. For the project Algolisted, what technologies did you use
-                        to develop the personalized resume questionnaire feature?
-                        How did you integrate OpenAI API into the project?
-                      </p>
-                      <p>
-                        3. In Cryptomania, can you explain how you utilized Chartjs
-                        and API integration to provide cryptocurrency statistics and
-                        real-time news updates?
-                      </p>
+                  )}
+                </div>
+                <div className="ai-generated-results">
+                  {responseText ? (
+                    <>
+                      <h2 className="ai-text-gradient">
+                        AI Generated Resume Based Questions
+                      </h2>
+                      <p>Good Luck with your Interview ✨✨</p>
+                      <div className="questions">
+                        <h2 className="ai-text-gradient">
+                          Technical Questions
+                        </h2>
+                        <div>
+                          <>
+                            {iamTemp.technicalQuestions?.map(
+                              (question, index) => (
+                                <p key={index}>
+                                  {index + 1}. {question}
+                                </p>
+                              )
+                            )}
+                            <button className="btn-1">Show more</button>
+                          </>
+                        </div>
+                      </div>
+                      <div className="questions">
+                        <h2 className="ai-text-gradient">
+                          Soft Skill Questions
+                        </h2>
+                        <div>
+                          {iamTemp.softSkillQuestions?.map(
+                            (question, index) => (
+                              <p key={index}>
+                                {index + 1}. {question}
+                              </p>
+                            )
+                          )}
+                        </div>
+                      </div>
 
-                  <h2>Soft Questions</h2>
-                  <p>
-                    1. I see you have worked on the project SocialSphere. What
-                    inspired you to create a forum for history and political
-                    enthusiasts? How do you think this project aligns with your
-                    values?
-                  </p>
-                </div>
-                <div className="stats">
-                  <h2>Useful Stats about Resumes</h2>
-                  <p>This is will be a locally generated stuff!</p>
-                </div>
-                <div className="stats">
-                  <h2>Get your Resume Reviewed by Professionals</h2>
-                  <p>topmate.io shit! with LLM vector database</p>
-                </div>
-                <div className="stats">
-                  <h2>Resourses for Resume</h2>
-                  <p>Local stuff!</p>
-                </div>
-              </div>
-            )}
-          </div>
+                      <div className="questions">
+                        <h2 className="ai-text-gradient">Project Ratings</h2>
+                        <div>
+                          {iamTemp.projectRatings?.map((rating, index) => (
+                            <p key={index}>
+                              {index + 1}. {rating}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="questions">
+                        <h2 className="ai-text-gradient">ATS Score</h2>
+                        <p>{iamTemp.atsScore}</p>
 
-          <div className="ai-generated-results">
-            {responseText ? (
-              <>
-                <h2 className="ai-text-gradient">AI Generated Resume Based Questions</h2>
-                <p>Good Luck with your Interview ✨✨</p>
-                <div className="questions">
-                  <h2 className="ai-text-gradient">Technical Questions</h2>
-                  <div>
-                    {iamTemp.technicalQuestions?.map(
-                      (question, index) => (
-                        <p key={index}>{index + 1}. {question}</p>
-                      )
-                    )}
-                  </div>
+                        <h2 className="ai-text-gradient">
+                          Area of Improvement
+                        </h2>
+                        <p>{iamTemp.areaOfImprovement}</p>
+                      </div>
+                    </>
+                  ) : (
+                    <p>No questions generated yet!</p>
+                  )}
+                  {isLoading ? (
+                    <LoadingSection>Loading....</LoadingSection>
+                  ) : (
+                    <>
+                      {file && (
+                        <div>
+                          <Document
+                            file={file}
+                            onLoadSuccess={handleTextExtraction}
+                          />
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
-                <div className="questions">
-                  <h2 className="ai-text-gradient">Soft Skill Questions</h2>
-                  <div>
-                    {iamTemp.softSkillQuestions?.map(
-                      (question, index) => (
-                        <p key={index}>{index + 1}. {question}</p>
-                      )
-                    )}
-                  </div>
-                </div>
-
-                <div className="questions">
-                  <h2 className="ai-text-gradient">Project Ratings</h2>
-                  <div>
-                    {iamTemp.projectRatings?.map((rating, index) => (
-                      <p key={index}>{index + 1}. {rating}</p>
-                    ))}
-                  </div>
-                </div>
-                <div className="questions">
-                  <h2 className="ai-text-gradient">ATS Score</h2>
-                  <p>{iamTemp.atsScore}</p>
-
-                  <h2 className="ai-text-gradient">Area of Improvement</h2>
-                  <p>{iamTemp.areaOfImprovement}</p>
-                </div>
-              </>
-            ) : (
-              <p>No questions generated yet!</p>
-            )}
-            {isLoading ? (
-              <LoadingSection>Loading....</LoadingSection>
-            ) : (
-              <>
-                {file && (
-                  <div>
-                    <Document file={file} onLoadSuccess={handleTextExtraction} />
-                  </div>
-                )}
               </>
             )}
           </div>
@@ -635,7 +703,7 @@ const ResumeSection = () => {
 export default ResumeSection;
 
 const GrandContainer = styled.div`
-  .btn-clickable{
+  .btn-clickable {
     cursor: pointer;
   }
 `;
@@ -746,7 +814,7 @@ const Container = styled.div`
       /* display: flex; */
       /* align-items: center; */
       background-color: ${(props) =>
-    props.needDarkMode ? "#444754" : "#d5f7e1"};
+        props.needDarkMode ? "#444754" : "#d5f7e1"};
       border-radius: 5px;
       padding: 10px;
       margin: 20px 0 10px 0;
@@ -794,10 +862,10 @@ const Container = styled.div`
           button {
             margin-bottom: 20px;
             background-color: ${(props) =>
-    props.needDarkMode ? "#201e1e" : "#f3f4f7"};
+              props.needDarkMode ? "#201e1e" : "#f3f4f7"};
             border: 1px solid
               ${(props) =>
-    props.needDarkMode ? "#595b5f" : "rgb(209, 213, 219)"};
+                props.needDarkMode ? "#595b5f" : "rgb(209, 213, 219)"};
           }
         }
 
@@ -894,7 +962,7 @@ const Container = styled.div`
         width: calc(25% - 10px);
         height: 100px;
         background-color: ${(props) =>
-    props.needDarkMode ? "#404249" : "#e5e5e5"};
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -929,7 +997,8 @@ const Container = styled.div`
       .other-details {
         width: calc(75% - 190px);
         height: 100px;
-        background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -959,8 +1028,10 @@ const Container = styled.div`
             min-width: 190px;
             height: 35px;
             width: 40%;
-            background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
-            border: 1px solid ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
+            background-color: ${(props) =>
+              props.needDarkMode ? "#313337" : "#d0d0d0"};
+            border: 1px solid
+              ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
             border-radius: 100px;
             margin-right: 5px;
             color: #000;
@@ -989,7 +1060,8 @@ const Container = styled.div`
       .info {
         width: 180px;
         height: 100px;
-        background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -1011,7 +1083,8 @@ const Container = styled.div`
         .detail {
           height: 35px;
           width: 100%;
-          background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
+          background-color: ${(props) =>
+            props.needDarkMode ? "#313337" : "#d0d0d0"};
           border: 1px solid
             ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
           border-radius: 100px;
@@ -1041,17 +1114,21 @@ const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
 
         .left-section {
           height: 100%;
           /* background-color: #313337; */
           border-radius: 12.5px;
           padding: 0 20px;
-          /* background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"}; */
+          /* background-color: ${(props) =>
+            props.needDarkMode ? "#404249" : "#e5e5e5"}; */
           color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
-          background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
-          /* border: 1px solid ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")}; */
+          background-color: ${(props) =>
+            props.needDarkMode ? "#313337" : "#d0d0d0"};
+          /* border: 1px solid ${(props) =>
+            props.needDarkMode ? "#56575d" : "#c3b4b4"}; */
 
           display: flex;
           align-items: center;
@@ -1084,9 +1161,11 @@ const Container = styled.div`
             font-size: 0.75rem;
             font-weight: 200;
             padding: 0 12.5px;
-            background-color: ${(props) => props.needDarkMode ? "#313337" : "#d0d0d0"};
+            background-color: ${(props) =>
+              props.needDarkMode ? "#313337" : "#d0d0d0"};
             color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
-            /* border: 1px solid ${(props) => (props.needDarkMode ? "" : "#c3b4b4")}; */
+            /* border: 1px solid ${(props) =>
+              props.needDarkMode ? "" : "#c3b4b4"}; */
           }
         }
       }
@@ -1198,8 +1277,6 @@ const Container = styled.div`
       align-items: start;
       justify-content: center;
       margin-bottom: 20px;
-      
-      
 
       .text {
         font-size: 0.9rem;
@@ -1217,8 +1294,7 @@ const Container = styled.div`
     }
 
     .ai-generated-results {
-      
-      .ai-text-gradient{
+      .ai-text-gradient {
         font-weight: 500;
         background-color: #f3ec78;
         background-image: linear-gradient(284deg, #10ff00, #2c6dad);
@@ -1233,12 +1309,14 @@ const Container = styled.div`
         height: 320px;
         width: 100%;
         border-radius: 10px;
-        background-color: ${(props) => (props.needDarkMode ? '#404249' : '#fff')};
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#fff"};
         margin: 10px 0;
         display: grid;
         padding: 40px 90px;
         grid-template-columns: 1fr 1fr 1fr;
-        border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+        border: 1px solid
+          ${(props) => (props.needDarkMode ? "#595b5f" : "rgb(209, 213, 219)")};
 
         .column {
           display: flex;
@@ -1247,20 +1325,20 @@ const Container = styled.div`
           gap: 15px;
 
           .title {
-            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
           }
 
           .doughnut {
-            display:flex;
+            display: flex;
             justify-content: center;
             align-items: center;
-  
+
             .percentage {
               position: absolute;
               font-size: 25px;
-              color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+              color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
             }
-            
+
             .graph {
               height: 205px;
               width: 100%;
