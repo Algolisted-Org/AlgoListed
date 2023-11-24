@@ -59,6 +59,11 @@ const LeftMenu = ({ marked }) => {
       showAt: "core-subjects-tracker",
       link: "/core-subjects-tracker/operating-systems",
     },
+    {
+      value: "Mock Assessment",
+      showAt: "mock-assessment",
+      link: "/mock-assessment",
+    },
     // {
     //   value: "Interview Summaries",
     //   showAt: "interview-summaries",
