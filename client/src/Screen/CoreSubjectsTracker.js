@@ -38,6 +38,7 @@ import CNResources from '../DummyDB/CoreSubjects/CNResources.json';
 import DBMSResources from '../DummyDB/CoreSubjects/DBMSResources.json';
 
 
+
 const CoreSubjectsTracker = () => {
     const [needDarkMode, setNeedDarkMode] = useState(!false);
     const [openVisualiser, setOpenVisualiser] = useState(false);
@@ -201,7 +202,7 @@ const CoreSubjectsTracker = () => {
             <MobContainer>
                 We are still working on Responsive Version of the website, please view the site with
                 width more than 1100px, a standard laptop or tablet landscape.
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" loading="lazy"/>
             </MobContainer>
             <Container needDarkMode={needDarkMode}>
                 {
@@ -263,7 +264,7 @@ const CoreSubjectsTracker = () => {
                                     resources.map((item, index) => {
                                         return (
                                             <a target="_blank" href={item.link}>
-                                                <img src={item.image} alt="" />
+                                                <img src={item.image} alt="" loading="lazy" />
                                             </a>
                                         )
                                     })
