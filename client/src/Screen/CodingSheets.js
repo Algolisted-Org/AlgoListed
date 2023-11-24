@@ -953,7 +953,7 @@ const CodingSheets = () => {
 						</div>
 					</div>
 					<Filters needDarkMode={needDarkMode}>
-						<a href="/custom-coding-sheets/create" className="filter2">
+						<a href="/create-problem-list" target="_blank" className="filter2">
 							Explore custom coding sheets
 							<CallMadeIcon />
 							<div className="tag">New Feature 🔥</div>

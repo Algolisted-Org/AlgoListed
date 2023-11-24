@@ -49,11 +49,11 @@ const LeftMenu = ({ marked }) => {
       showAt: "coding-sheets",
       link: "/coding-sheets/striver-sde-sheet",
     },
-    {
-      value: "Create Problem List",
-      showAt: "create-problem-list",
-      link: "/create-problem-list",
-    },
+    // {
+    //   value: "Create Problem List",
+    //   showAt: "create-problem-list",
+    //   link: "/create-problem-list",
+    // },
     {
       value: "Core Subjects Tracker",
       showAt: "core-subjects-tracker",
