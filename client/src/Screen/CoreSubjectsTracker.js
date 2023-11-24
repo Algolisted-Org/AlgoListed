@@ -190,7 +190,10 @@ const CoreSubjectsTracker = () => {
         setFilteredData(updatedData);
     }
 
-    const topicsProgressBarPercent = topicsData.length === 0 ? 0 : ((topicsData.length / topicsData.length) * 100).toFixed(topicsData.length > 100 ? 1 : 0);
+    const completedTopicsCount = topicsData.filter(topic => topic.completed).length;
+    const totalTopicsCount = topicsData.length;
+
+    const topicsProgressBarPercent = totalTopicsCount === 0 ? 0 : ((completedTopicsCount / totalTopicsCount) * 100).toFixed(0);
     const questionsProgressBarPercent = data.length === 0 ? 0 : ((filteredData.filter((item) => item.completed === true).length / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
     return (
