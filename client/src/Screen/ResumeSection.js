@@ -15,7 +15,6 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { PuffLoader } from "react-spinners";
 import { Doughnut } from "react-chartjs-2";
 
-
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
 import SimpleFooter from "../Components/SimpleFooter";
@@ -124,7 +123,7 @@ const ResumeSection = () => {
       "Sukham Resort: 8/10",
     ],
     atsScore: "85%",
-    impact: 7/10,
+    impact: 7 / 10,
     atsScoreValue: 65,
     grammer: 82.5,
     areaOfImprovement:
@@ -242,7 +241,7 @@ const ResumeSection = () => {
       setIsLoading(true);
 
       try {
-        prompt = ` ${iamTemp.technicalQuestions} add just 10 more questions to it in JSON format with object name of technical. Don't give any answers. `;
+        prompt = ` ${iamTemp.technicalQuestions} add just 10 more questions to it in JSON format. 'technical': and in array ['question1 here', 'question2 here'...], `;
         const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           messages: [
@@ -255,11 +254,9 @@ const ResumeSection = () => {
           max_tokens: 500,
         });
         const temp = JSON.parse(response.choices[0].message.content);
-        console.log(temp)
+        // console.log(temp)
         setMoreQuestion(temp);
         console.log(moreQuestion);
-
-        console.log(moreQuestion.technical);
       } catch (error) {
         console.log("Error sending message to Chat API:", error);
         setIsLoading(false);
@@ -474,45 +471,61 @@ const ResumeSection = () => {
                 </h2>
                 <p>Good Luck with your Interview ✨✨</p>
                 <div className="questions">
-                <div className="graphs">
-                        <div className="column">
-                          <div className="doughnut">
-                            <div className="percentage">
-                              {iamTemp.atsScore}
-                            </div>
-                            <div className="graph">
-                              <Doughnut
-                                options={doughnutOptions}
-                                data={data(parseFloat(iamTemp.atsScore))}
-                              />
-                            </div>
-                          </div>
-                          <div className="title">ATS Score</div>
+                  <div className="graphs">
+                    <div className="column">
+                      <div className="doughnut">
+                        <div className="percentage">{iamTemp.atsScore}</div>
+                        <div className="graph">
+                          <Doughnut
+                            options={doughnutOptions}
+                            data={data(parseFloat(iamTemp.atsScore))}
+                          />
                         </div>
-                        <div className="column">
-                          <div className="doughnut">
-                            <div className="percentage">
-                              {parseFloat(iamTemp.impScore)*10}%
-                            </div>
-                            <div className="graph">
-                              <Doughnut
-                                options={doughnutOptions}
-                                data={data(parseFloat(iamTemp.impScore)*10)}
-                              />
-                            </div>
-                          </div>
-                          <div className="title">Impact</div>
-                        </div>
-                        
                       </div>
+                      <div className="title">ATS Score</div>
+                    </div>
+                    <div className="column">
+                      <div className="doughnut">
+                        <div className="percentage">
+                          {parseFloat(iamTemp.impScore) * 10}%
+                        </div>
+                        <div className="graph">
+                          <Doughnut
+                            options={doughnutOptions}
+                            data={data(parseFloat(iamTemp.impScore) * 10)}
+                          />
+                        </div>
+                      </div>
+                      <div className="title">Impact</div>
+                    </div>
+                  </div>
                   <h2 className="ai-text-gradient">Technical Questions</h2>
                   <div>
-                    {iamTemp.technicalQuestions?.map((question, index) => (
-                      <p key={index}>
-                        {index + 1}. {question}
-                      </p>
-                    ))}
-                    <button onClick={techMore}>Show More</button>
+                    <>
+                      {iamTemp.technicalQuestions?.map((question, index) => (
+                        <p key={index}>
+                          {index + 1}. {question}
+                        </p>
+                      ))}
+                      {moreQuestion && (
+                        <>
+                          <h2 className="ai-text-gradient">More Questions</h2>
+                          <div>
+                            {moreQuestion.technical?.map((question, index) => (
+                              <p key={index}>
+                                {iamTemp.technicalQuestions.length + index + 1}.{" "}
+                                {question}
+                              </p>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                      {!moreQuestion && (
+                        <button className="btn-1" onClick={techMore}>
+                          Show more
+                        </button>
+                      )}
+                    </>
                   </div>
                 </div>
                 <div className="questions">
