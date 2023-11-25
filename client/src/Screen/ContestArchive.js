@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import CCHeaderPlus from '../Components/CCHeaderPlus';
 import CCHeaderDark from '../Components/CCHeaderDark';
@@ -26,6 +26,7 @@ import NoteMaking from './../MicroComponents/NoteMakingCompo';
 import { Bar } from 'react-chartjs-2';
 import DoneIcon from '@material-ui/icons/Done';
 import SimpleFooter from '../Components/SimpleFooter';
+import StyledModal from '../MicroComponents/Allmodals/StyledModal';
 
 const ContestArchive = () => {
   const [platformName, setPlatformName] = useState('leetcode');
@@ -50,6 +51,38 @@ const ContestArchive = () => {
   const [checkbox2, setCheckbox2] = useLocalStorage("checkbox2", false);
   const [checkbox3, setCheckbox3] = useLocalStorage("checkbox3", false);
   const [checkbox4, setCheckbox4] = useLocalStorage("checkbox4", false);
+  // modal  code start
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const inputRef = useRef(null);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleSubscription =()=>{
+    const inputValue = inputRef.current.value;
+    console.log(inputValue);
+    //  rest of the function
+    setIsModalOpen(false);
+  }
+  const renderModalBody =()=>{
+    return(
+      <>
+       <TextHeader>Stay in touch </TextHeader>
+        <TextMuted>
+          Exciting premium features are on the way, and to stay in the loop
+          about their release, simply share your email address. We'll ensure you
+          stay updated.
+        </TextMuted>
+        <div className="">
+          <InputField type="text" ref={inputRef} placeholder="Enter your email" />
+          <SubmitButton onClick={handleSubscription}>Subscribe</SubmitButton>
+        </div>
+      </>
+    )
+  }
   const [notes,setnotes]=useState([]);
   const notesadded=(name)=>{
       if(notes.includes(name)){
@@ -60,6 +93,7 @@ const ContestArchive = () => {
       setnotes(prev=>[...prev,name])
       }
   }
+
   // const [checkboxShared,setCheckboxShared] = useState(localStorage.getItem("checkboxShared") || {0:false, 1:false, 2:false, 3:false});
   // const [checkboxShared, setCheckboxShared] = useLocalStorageCustom("checkboxShared", []);
   const [checkboxstate,setCheckboxstate]= useState(JSON.parse(localStorage.getItem("checkboxShared")) || null)
@@ -106,6 +140,12 @@ const ContestArchive = () => {
             item.lock === true ? 'locked-feature filter' : 'filter'
           )
         }
+        onClick={()=>{
+         if(item.lock){
+          openModal()
+         }
+
+        }}
       >
         {item.text}
         {item.lock === true ? <LockIcon /> : <></>}
@@ -407,7 +447,7 @@ const datasets = problems
   };
 
   return (
-    <GrandContainer>
+    <GrandContainer aria-disabled={isModalOpen}>
       <MobContainer>
         We are still working on Responsive Version of the website, please view the site with
         width more than 1100px, a standard laptop or tablet landscape.
@@ -592,6 +632,8 @@ const datasets = problems
             ))}
           </div>
         </div>
+        {/* modal ( can move inside the content if needed ) */}
+        {isModalOpen && <StyledModal body={renderModalBody()} onClose={closeModal} />}
         <SimpleFooter />
       </Container>
     </GrandContainer>
@@ -1393,3 +1435,30 @@ const SliderSelector = styled.div`
 
   /* padding: 10px 50px; */
 `
+const InputField = styled.input`
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+`;
+
+const SubmitButton = styled.button`
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+`;
+
+const TextMuted = styled.p`
+  color: #666;
+  font-size: 14px;
+`;
+
+const TextHeader = styled.h4`
+  padding: 5px 0;
+`;
