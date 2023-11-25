@@ -27,6 +27,7 @@ const createProblemSheet = async (req, res) => {
 };
 
 const updateProblemSheet = async (req, res) => {
+    console.log("Hello from updateProblemSheet!");
     const {
         sheetId,
         sheetName,

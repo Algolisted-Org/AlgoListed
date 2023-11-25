@@ -9,18 +9,18 @@ export const coreSubjectsTrackerFilters = [
     text: "OOPs",
     domainFilter: "oops",
     id: 2,
-    lock: true,
+    lock: false,
   },
   {
     text: "Computer Networks",
     domainFilter: "computer-networks",
     id: 3,
-    lock: true,
+    lock: false,
   },
   {
     text: "DBMS",
     domainFilter: "dbms",
     id: 4,
-    lock: true,
+    lock: false,
   }
 ];

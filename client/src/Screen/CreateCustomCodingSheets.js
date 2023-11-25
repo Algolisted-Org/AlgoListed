@@ -186,7 +186,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
           needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
         }
         {
-          needDarkMode ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
+          needDarkMode ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
         }
         {/* ---> change this all-blogs to your desired page-id */}
 
@@ -213,7 +213,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
                 <h3>You need to have an account to use this feature</h3>
                 <SignUpButton needDarkMode={needDarkMode} onClick={handleSubmit}>
                   <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png"
+                    src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png"
                     alt=""
                   />
                   <div className="text">

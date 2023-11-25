@@ -20,6 +20,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import LazyLoad from 'react-lazy-load';
 
 const Opportunities = () => {
   const [needDarkMode, setNeedDarkMode] = useState(!false);
@@ -131,10 +132,26 @@ const Opportunities = () => {
             <h4>Information Extracted From : </h4>
             <div className="resources-used">
               {/* <div className="special-thanks"><img src="https://res.cloudinary.com/adaface/image/upload/v1583493789/adaface_logo.png" alt="" /></div> */}
-              <div className="resource"><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" /></div>
-              <div className="resource"><img src="https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png" alt="" /></div>
-              <div className="resource"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" alt="" /></div>
-              <div className="resource"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png" alt="" /></div>
+              <div className="resource">
+                <LazyLoad height={30}>
+                  <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" />
+                </LazyLoad>
+              </div>
+              <div className="resource">
+                <LazyLoad height={30}>
+                  <img src="https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png" alt="" />
+                </LazyLoad>
+              </div>
+              <div className="resource">
+                <LazyLoad height={30}>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" alt="" />
+                </LazyLoad>
+              </div>
+              <div className="resource">
+                <LazyLoad height={30}>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png" alt="" />
+                </LazyLoad>
+              </div>
             </div>
             <SheetMessage needDarkMode={needDarkMode}>
               <div className="text">

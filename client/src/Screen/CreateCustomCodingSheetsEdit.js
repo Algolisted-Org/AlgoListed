@@ -258,7 +258,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
     try {
       const startTime = Date.now();
 
-      const response = await axios.post("https://algolisted.cyclic.app/problem-sheets/update", data, {
+      const response = await axios.post("http://localhost:8000/problem-sheets/update", data, {
         withCredentials: true,
       });
 
@@ -379,7 +379,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
           needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
         }
         {
-          needDarkMode ? <LeftMenuDark marked={"create-problem-list"} /> : <LeftMenu marked={"create-problem-list"} />
+          needDarkMode ? <LeftMenuDark marked={"coding-sheets"} /> : <LeftMenu marked={"coding-sheets"} />
         }
         {/* ---> change this all-blogs to your desired page-id */}
         <div className="cc-middle-content">

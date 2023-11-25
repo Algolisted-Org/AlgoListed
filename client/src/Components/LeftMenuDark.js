@@ -40,15 +40,20 @@ const LeftMenuDark = ({ marked }) => {
       showAt: "coding-sheets",
       link: "/coding-sheets/striver-sde-sheet",
     },
-    {
-      value: "Create Problem List",
-      showAt: "create-problem-list",
-      link: "/create-problem-list",
-    },
+    // {
+    //   value: "Create Problem List",
+    //   showAt: "create-problem-list",
+    //   link: "/create-problem-list",
+    // },
     {
       value: "Core Subjects Tracker",
       showAt: "core-subjects-tracker",
-      link: "/core-subjects-tracker",
+      link: "/core-subjects-tracker/operating-systems",
+    },
+    {
+      value: "Mock Assessment",
+      showAt: "mock-assessment",
+      link: "/mock-assessment",
     },
     // {
     //   value: "Interview Summaries",

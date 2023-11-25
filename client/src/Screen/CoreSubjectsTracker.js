@@ -23,18 +23,37 @@ import NotesIcon from '@material-ui/icons/Notes';
 import ReplayIcon from '@material-ui/icons/Replay';
 import { coreSubjectsTrackerFilters } from '../Components/coreSubjectsTrackerFilters';
 import OSquestions from '../DummyDB/CoreSubjects/OSquestions.json';
+import OOPSquestions from '../DummyDB/CoreSubjects/OOPSquestions.json';
+import CNquestions from '../DummyDB/CoreSubjects/CNquestions.json';
+import DBMSquestions from '../DummyDB/CoreSubjects/DBMSquestions.json';
 import OSTopics from '../DummyDB/CoreSubjects/OSTopics.json';
+import OOPSTopics from '../DummyDB/CoreSubjects/OOPSTopics.json';
+import CNTopics from '../DummyDB/CoreSubjects/CNTopics.json';
+import DBMSTopics from '../DummyDB/CoreSubjects/DBMSTopics.json';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import CallMadeIcon from '@material-ui/icons/CallMade';
+import OSResources from '../DummyDB/CoreSubjects/OSResources.json';
+import OOPSResources from '../DummyDB/CoreSubjects/OOPSResources.json';
+import CNResources from '../DummyDB/CoreSubjects/CNResources.json';
+import DBMSResources from '../DummyDB/CoreSubjects/DBMSResources.json';
+
+
 
 const CoreSubjectsTracker = () => {
     const [needDarkMode, setNeedDarkMode] = useState(!false);
     const [openVisualiser, setOpenVisualiser] = useState(false);
-    const [selectedLabels, setSelectedLabels] = useState([]);
-    const [data, setData] = useState(OSquestions);
+    const [data, setData] = useState([]);
+    const [topicsData, setTopicsData] = useState([]);
+    const [resources, setResources] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [dataLoading, setDataLoading] = useState(true);
     const [answerVisibility, setAnswerVisibility] = useState(data.map(() => false));
+    const [resourcesListFileName, setResourcesListFileName] = useState("");
+    const [topicListFileName, setTopicListFileName] = useState("");
+    const [questionsListFileName, setQuestionsListFileName] = useState("");
+
+    const params = useParams();
+    const { subjectName } = params;
 
     useEffect(() => {
         let selectedTheme = localStorage.getItem("selectedTheme");
@@ -51,62 +70,93 @@ const CoreSubjectsTracker = () => {
         document.title = "Core Subjects Tracker - Algolisted";
     }, []);
 
+    const questionsMapping = {
+        'operating-systems': OSquestions,
+        'oops': OOPSquestions,
+        'computer-networks': CNquestions,
+        'dbms': DBMSquestions,
+    };
+
+    const topicsMapping = {
+        'operating-systems': OSTopics,
+        'oops': OOPSTopics,
+        'computer-networks': CNTopics,
+        'dbms': DBMSTopics,
+    };
+
+    const resourceMapping = {
+        'operating-systems': OSResources,
+        'oops': OOPSResources,
+        'computer-networks': CNResources,
+        'dbms': DBMSResources,
+    };
+
+
     useEffect(() => {
-        try {
-            const storedCompletedTopics = JSON.parse(localStorage.getItem("completedTopics"));
+        setData(questionsMapping[subjectName]);
+        setTopicsData(topicsMapping[subjectName]);
+        setResources(resourceMapping[subjectName]);
+    }, [])
 
-            if (storedCompletedTopics) {
-                const updatedCompletedTopics = OSTopics
-                    .filter((item) => storedCompletedTopics.includes(item.name))
-                    .map((item) => item.name);
 
-                localStorage.setItem("completedTopics", JSON.stringify(updatedCompletedTopics));
-                setSelectedLabels([...updatedCompletedTopics]);
+    useEffect(() => {
+        if (data.length > 0) {
+            try {
+                const updatedFilterData = topicsData.map((item) => {
+                    const completed = localStorage.getItem(`completedtopic-coresheet-${item._id}`);
+
+                    return {
+                        ...item,
+                        completed: completed === "true",
+                    };
+                });
+
+                setTopicsData(updatedFilterData);
+
+                const updatedData = data.map((item) => {
+                    const completed = localStorage.getItem(`completedquestion-coresheet-${item._id}`);
+                    const marked = localStorage.getItem(`markedquestion-coresheet-${item._id}`);
+
+                    return {
+                        ...item,
+                        completed: completed === "true",
+                        marked: marked === "true",
+                    };
+                });
+
+                setFilteredData(updatedData);
+            } catch (error) {
+                console.error("Error in useEffect:", error);
             }
-
-            const updatedData = data.map((item) => {
-                const completed = localStorage.getItem(`completedquestion-coresheet-${item._id}`);
-                const marked = localStorage.getItem(`markedquestion-coresheet-${item._id}`);
-
-                return {
-                    ...item,
-                    completed: completed === "true",
-                    marked: marked === "true",
-                };
-            });
-
-            setFilteredData(updatedData);
-        } catch (error) {
-            console.error("Error in useEffect:", error);
         }
     }, [data]);
-    
-    
+
+
     const filters = coreSubjectsTrackerFilters.map((item) => {
         return (
-            <div key={item.id} className={item.domainFilter === "operating-systems" ? 'filter selected' : (item.lock === true ? 'locked-feature filter' : 'filter')} >
+            <a href={item.domainFilter} key={item.id} className={item.domainFilter === subjectName ? 'filter selected' : (item.lock === true ? 'locked-feature filter' : 'filter')} >
                 {item.text}
                 {item.lock === true ? <LockIcon /> : <></>}
-            </div>
+            </a>
         );
     });
 
     useEffect(() => {
         setDataLoading(false);
-    }, [data])
+    }, [data]);
 
-    const handleTopicsLabelClick = (label) => {
-        let updatedLabels;
 
-        if (selectedLabels.includes(label)) {
-            updatedLabels = selectedLabels.filter((selectedLabel) => selectedLabel !== label);
-        } else {
-            updatedLabels = [...selectedLabels, label];
-        }
+    const handleTopicsLabelClick = (index) => {
+        let updatedLabels = [...topicsData];
 
-        setSelectedLabels(updatedLabels);
+        updatedLabels[index].completed = !updatedLabels[index].completed;
 
-        localStorage.setItem("completedTopics", JSON.stringify(updatedLabels));
+        localStorage.setItem(
+            `completedtopic-coresheet-${updatedLabels[index]._id}`,
+            updatedLabels[index].completed
+        );
+
+        setTopicsData(updatedLabels);
     };
 
     const toggleAnswerVisibility = (index) => {
@@ -117,7 +167,7 @@ const CoreSubjectsTracker = () => {
 
     const toggleCompleted = (index) => {
         const updatedData = [...filteredData];
-        
+
         updatedData[index].completed = !updatedData[index].completed;
 
         localStorage.setItem(
@@ -141,9 +191,10 @@ const CoreSubjectsTracker = () => {
         setFilteredData(updatedData);
     }
 
-    const allTopics = OSTopics;
+    const completedTopicsCount = topicsData.filter(topic => topic.completed).length;
+    const totalTopicsCount = topicsData.length;
 
-    const topicsProgressBarPercent = allTopics.length === 0 ? 0 : ((selectedLabels.length / allTopics.length) * 100).toFixed(allTopics.length > 100 ? 1 : 0);
+    const topicsProgressBarPercent = totalTopicsCount === 0 ? 0 : ((completedTopicsCount / totalTopicsCount) * 100).toFixed(0);
     const questionsProgressBarPercent = data.length === 0 ? 0 : ((filteredData.filter((item) => item.completed === true).length / data.length) * 100).toFixed(data.length > 100 ? 1 : 0);
 
     return (
@@ -151,7 +202,7 @@ const CoreSubjectsTracker = () => {
             <MobContainer>
                 We are still working on Responsive Version of the website, please view the site with
                 width more than 1100px, a standard laptop or tablet landscape.
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" loading="lazy"/>
             </MobContainer>
             <Container needDarkMode={needDarkMode}>
                 {
@@ -167,13 +218,13 @@ const CoreSubjectsTracker = () => {
                     <p className="heading-supporter">
                         We've compiled a comprehensive set of interview questions sourced from reputable websites such as GeeksforGeeks and InterviewBit. Additionally, we've incorporated core subject knowledge shared by renowned YouTubers like Striver, Fraz, etc. The questions undergo thorough parsing using AI to filter out the most relevant ones, and our AI system provides ideal candidate answers.
                     </p>
-                    
+
                     <Filters needDarkMode={needDarkMode}>
                         <a href="https://github.com/Nayaker/AlgoListed/tree/main/client/src/DummyDB/CoreSubjects" target="_blank" className="filter2">
-							Contribute Topics or Questions
-							<CallMadeIcon />
-							<div className="tag">Open Sourced 🚀</div>
-						</a>   
+                            Contribute Topics or Questions
+                            <CallMadeIcon />
+                            <div className="tag">Open Sourced 🚀</div>
+                        </a>
                     </Filters>
 
                     <Filters needDarkMode={needDarkMode}>{filters}</Filters>
@@ -209,15 +260,17 @@ const CoreSubjectsTracker = () => {
                         {
                             openVisualiser ? (
                                 <div className="all-resources">
-                                    <a target="_blank" href="https://www.youtube.com/watch?v=_TpOHMCODXo&list=PLDzeHZWIZsTr3nwuTegHLa2qlI81QweYG">
-                                        <img src="https://i.ytimg.com/vi/_TpOHMCODXo/maxresdefault.jpg" alt="" />
-                                    </a>
-                                    <a target="_blank" href="https://www.youtube.com/watch?v=8XBtAjKwCm4">
-                                        <img src="https://i.ytimg.com/vi/8XBtAjKwCm4/maxresdefault.jpg" alt="" />
-                                    </a>
-
+                                {
+                                    resources.map((item, index) => {
+                                        return (
+                                            <a target="_blank" href={item.link}>
+                                                <img src={item.image} alt="" loading="lazy" />
+                                            </a>
+                                        )
+                                    })
+                                }
                                 </div>
-                            ) : (<></>)
+                            ) : null
                         }
                     </SheetMessage>
                     <h4>Topics</h4>
@@ -231,15 +284,15 @@ const CoreSubjectsTracker = () => {
                             ></div>
                         </div>
                     </Progress>
-                    
+
                     <div className="topics-container">
-                        {allTopics.map((topic) => (
+                        {topicsData.map((topic, index) => (
                             <div className="topic" key={topic.name}>
                                 <input
                                     type="checkbox"
                                     id={topic.name.toLowerCase().replace(/\s+/g, "-")}
-                                    checked={selectedLabels.includes(topic.name)}
-                                    onChange={() => handleTopicsLabelClick(topic.name)}
+                                    checked={topic.completed}
+                                    onChange={() => handleTopicsLabelClick(index)}
                                 />
                                 <label htmlFor={topic.name.toLowerCase().replace(/\s+/g, "-")}>{topic.name}</label>
                             </div>
@@ -260,7 +313,7 @@ const CoreSubjectsTracker = () => {
                     </Progress>
 
                     <EffectiveFilter needDarkMode={needDarkMode}>
-						{/* <div className="left">
+                        {/* <div className="left">
 							<select className="filter-item">
 								<option value="All">Problem Difficulty</option>
 								<option value="Easy">Easy</option>
@@ -274,17 +327,17 @@ const CoreSubjectsTracker = () => {
 							</select>
 						</div> */}
                         <div className="left">
-							<input type="checkbox" id="all"/>
-							<label htmlFor="all">All Questions</label>
-							<input type="checkbox" id="easy"/>
-							<label htmlFor="easy">Solved</label>
-							<input type="checkbox" id="medium"/>
-							<label htmlFor="medium">Marked</label>
-						</div>
-						<div className="right">
-							<a href="https://github.com/Nayaker/AlgoListed/blob/main/client/src/DummyDB/CoreSubjects/OSquestions.json" target="_blank" className="filter-item">Contribute - New or Enhancement <CallMadeIcon/></a>
-						</div>
-					</EffectiveFilter>
+                            <input type="checkbox" id="all" />
+                            <label htmlFor="all">All Questions</label>
+                            <input type="checkbox" id="easy" />
+                            <label htmlFor="easy">Solved</label>
+                            <input type="checkbox" id="medium" />
+                            <label htmlFor="medium">Marked</label>
+                        </div>
+                        <div className="right">
+                            <a href="https://github.com/Nayaker/AlgoListed/blob/main/client/src/DummyDB/CoreSubjects/OSquestions.json" target="_blank" className="filter-item">Contribute - New or Enhancement <CallMadeIcon /></a>
+                        </div>
+                    </EffectiveFilter>
 
                     <div className="table">
                         {dataLoading ? (
