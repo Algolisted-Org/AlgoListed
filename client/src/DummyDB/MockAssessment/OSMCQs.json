@@ -1,0 +1,14 @@
+[
+    {
+        "_id": "25-nov-2023-15'15-@Nayaker",
+        "question": "enter question here",
+        "question-image": "enter url here",
+        "a": "enter option 'a' here",
+        "b": "enter option 'b' here",
+        "c": "enter option 'c' here",
+        "d": "enter option 'd' here",
+        "correct_ans": "b",
+        "answer-image": "enter url here",
+        "topic": "Operating Systems"
+    }
+]
