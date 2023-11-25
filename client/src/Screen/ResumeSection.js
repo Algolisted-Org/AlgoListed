@@ -15,6 +15,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { PuffLoader } from "react-spinners";
 import { Doughnut } from 'react-chartjs-2';
 
+
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
 import SimpleFooter from "../Components/SimpleFooter";

@@ -61,6 +61,7 @@ import CustomSheet from './Screen/CustomSheet';
 import ResumeQuestions from './Screen/ResumeQuestions';
 import ResumeSection from "./Screen/ResumeSection";
 import CoreSubjectsTracker from "./Screen/CoreSubjectsTracker";
+import MockAssignment from "./Screen/MockAssignment";
 
 
 
@@ -109,6 +110,7 @@ const App = ({currentThemeDark}) => {
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
         <Route path="/core-subjects-tracker/:subjectName" element={<CoreSubjectsTracker/>} />
+        <Route path="/mock-assessment" element={<MockAssignment/>} />
 
         {/* <Route path="/showdown-server" element={<ShowdownServer/>} />
         <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
