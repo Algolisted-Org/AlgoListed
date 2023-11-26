@@ -9,7 +9,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
-const MockAssignment = () => {
+const MockAssessment = () => {
   const [needDarkMode, setNeedDarkMode] = useState(true);
 
   useEffect(() => {
@@ -155,7 +155,7 @@ const MockAssignment = () => {
   )
 }
 
-export default MockAssignment
+export default MockAssessment
 
 const GrandContainer = styled.div`
 
