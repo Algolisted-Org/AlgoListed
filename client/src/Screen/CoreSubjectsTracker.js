@@ -54,6 +54,10 @@ const CoreSubjectsTracker = () => {
 
     const params = useParams();
     const { subjectName } = params;
+    const [showAllQuestions, setShowAllQuestions] = useState(true);
+    const [showSolvedQuestions, setShowSolvedQuestions] = useState(false);
+    const [showMarkedQuestions, setShowMarkedQuestions] = useState(false);
+
 
     useEffect(() => {
         let selectedTheme = localStorage.getItem("selectedTheme");
@@ -123,13 +127,18 @@ const CoreSubjectsTracker = () => {
                         marked: marked === "true",
                     };
                 });
+                const filteredData = updatedData.filter((item) => {
+                    return (
+                      (showAllQuestions || (showSolvedQuestions && item.completed) || (showMarkedQuestions && item.marked))
+                    );
+                  });
 
-                setFilteredData(updatedData);
+                setFilteredData(filteredData);
             } catch (error) {
                 console.error("Error in useEffect:", error);
             }
         }
-    }, [data]);
+    }, [data, showAllQuestions, showSolvedQuestions, showMarkedQuestions]);
 
 
     const filters = coreSubjectsTrackerFilters.map((item) => {
@@ -327,11 +336,24 @@ const CoreSubjectsTracker = () => {
 							</select>
 						</div> */}
                         <div className="left">
-                            <input type="checkbox" id="all" />
+                            <input type="checkbox" id="all" checked={showAllQuestions} onChange={() => {
+            setShowAllQuestions(true);
+            setShowSolvedQuestions(false);
+            setShowMarkedQuestions(false);
+          }}/>
                             <label htmlFor="all">All Questions</label>
-                            <input type="checkbox" id="easy" />
+                            <input type="checkbox" id="easy" checked={showSolvedQuestions} onChange={() => {
+            setShowAllQuestions(false);
+            setShowSolvedQuestions(!showSolvedQuestions);
+            setShowMarkedQuestions(false);
+          }} />
                             <label htmlFor="easy">Solved</label>
-                            <input type="checkbox" id="medium" />
+                            <input type="checkbox" id="medium"   checked={showMarkedQuestions}
+          onChange={() => {
+            setShowAllQuestions(false);
+            setShowSolvedQuestions(false);
+            setShowMarkedQuestions(!showMarkedQuestions);
+          }}/>
                             <label htmlFor="medium">Marked</label>
                         </div>
                         <div className="right">
