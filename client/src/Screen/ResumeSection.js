@@ -90,6 +90,7 @@ const ResumeSection = () => {
   const [iamTemp, setIamTemp] = useState(null);
   const [promptGPT, setPromptGPT] = useState("");
   const [moreQuestion, setMoreQuestion] = useState(null);
+  const [additionalQuestionsCount, setAdditionalQuestionsCount] = useState(0);
   const [dummyResponse, setDummyResponse] = useState({
     technicalQuestions: [
       "In the SocialSphere project, how did you implement user authentication and authorization?",
@@ -241,7 +242,7 @@ const ResumeSection = () => {
       setIsLoading(true);
 
       try {
-        prompt = ` ${iamTemp.technicalQuestions} add just 10 more questions to it in JSON format. 'technical': and in array ['question1 here', 'question2 here'...], `;
+        prompt = ` ${iamTemp.technicalQuestions} add ${additionalQuestionsCount} more questions to it in JSON format. 'technical': and in array ['question1 here', 'question2 here'...], `;
         const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
           messages: [
@@ -257,6 +258,9 @@ const ResumeSection = () => {
         // console.log(temp)
         setMoreQuestion(temp);
         console.log(moreQuestion);
+        
+        setAdditionalQuestionsCount(additionalQuestionsCount+ 10);
+        console.log(additionalQuestionsCount);
       } catch (error) {
         console.log("Error sending message to Chat API:", error);
         setIsLoading(false);
@@ -509,7 +513,6 @@ const ResumeSection = () => {
                       ))}
                       {moreQuestion && (
                         <>
-                          <h2 className="ai-text-gradient">More Questions</h2>
                           <div>
                             {moreQuestion.technical?.map((question, index) => (
                               <p key={index}>
@@ -520,11 +523,11 @@ const ResumeSection = () => {
                           </div>
                         </>
                       )}
-                      {!moreQuestion && (
+                      
                         <button className="btn-1" onClick={techMore}>
                           Show more
                         </button>
-                      )}
+                      
                     </>
                   </div>
                 </div>
@@ -680,9 +683,7 @@ const ResumeSection = () => {
                             )}
                             {moreQuestion && (
                               <>
-                                <h2 className="ai-text-gradient">
-                                  More Questions
-                                </h2>
+                                
                                 <div>
                                   {moreQuestion.technical?.map(
                                     (question, index) => (
@@ -697,11 +698,11 @@ const ResumeSection = () => {
                                 </div>
                               </>
                             )}
-                            {!moreQuestion && (
+                            
                               <button className="btn-1" onClick={techMore}>
                                 Show more
                               </button>
-                            )}
+                            
                           </>
                         </div>
                       </div>
