@@ -49,7 +49,8 @@ const Opportunities = () => {
     if (selectedTheme === 'light') setNeedDarkMode(false);
   }, [])
 
-  console.log("needDarkMode : ", needDarkMode);
+  //console.log("needDarkMode : ", needDarkMode);
+  //console.log(applyMagicFilter);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
@@ -61,7 +62,7 @@ const Opportunities = () => {
       )
       .then((res) => {
         setAllOpportunities(res.data);
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -89,6 +90,37 @@ const Opportunities = () => {
       return 'https://imageio.forbes.com/specials-images/imageserve/63dd379b9ef3cd559331b7e2/Illustration-of-the-word--Ai---in-the-style-of-the-Google-logo/0x0.jpg?format=jpg&height=1080&width=1920';
     }
   };
+
+  // Function to filter opportunities based on various criteria
+  const filterOpportunities = (opportunities) => {
+    return opportunities
+      .filter(item => applyMagicFilter ? item.magic_filter === 'yes' : true)
+      .filter(item => {
+        if (filterContestTypeName === 'Intern') {
+          return item.type === 'Intern';
+        } else if (filterContestTypeName === 'Full Time') {
+          return item.type === 'FTE';
+        } else if (filterContestTypeName === 'Job Type') {
+          return true; // If no filter selected, show all
+        }
+      })
+      .filter(item => {
+        if (sliderInputValue === 'Fresher') {
+          return item.years_exp === 'Fresher' || item.years_exp === 'fresher';
+        } else if (sliderInputValue === 'Experienced') {
+          return item.years_exp !== 'Fresher' && item.years_exp !== 'fresher';
+        }
+      })
+      .reverse();
+  };
+
+// Usage in the component
+{filterOpportunities(allOpportunities).map((item, index) => (
+  <div className="row" key={item.uniqueIdentifier}>
+    {/* Your JSX code for rendering individual opportunities */}
+  </div>
+))}
+
 
 
   return (
@@ -191,9 +223,9 @@ const Opportunities = () => {
                   {
                     openModel1 ? (
                       <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
-                        <div className="option">Job Type</div>
-                        <div className="option">Intern</div>
-                        <div className="option">Full Time</div>
+                        <div className="option" data-value="Job Type" onClick={(e) => setFilterContestTypeName(e.target.dataset.value)}>Job Type</div>
+                        <div className="option" data-value="Intern" onClick={(e) => setFilterContestTypeName(e.target.dataset.value)}>Intern</div>
+                        <div className="option" data-value="Full Time" onClick={(e) => setFilterContestTypeName(e.target.dataset.value)}>Full Time</div>
                       </ShowAbsoluteModelDropDown>
                     ) : <></>
                   }
@@ -203,8 +235,8 @@ const Opportunities = () => {
                   {
                     openModel2 ? (
                       <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
-                        <div className="option">Fresher</div>
-                        <div className="option">Experienced</div>
+                        <div className="option" data-value="Fresher" onClick={(e) => setSliderInputValue(e.target.dataset.value)}>Fresher</div>
+                        <div className="option" data-value="Experienced" onClick={(e) => setSliderInputValue(e.target.dataset.value)}>Experienced</div>
                       </ShowAbsoluteModelDropDown>
                     ) : <></>
                   }
@@ -265,9 +297,9 @@ const Opportunities = () => {
                 </div>
               ) : (
                 <>
-                  {allOpportunities
-                    .filter(item => applyMagicFilter ? item.magic_filter === 'yes' : true)
-                    .reverse()
+                  {/* {console.log(filterContestTypeName)} */}
+                  {/* {console.log(sliderInputValue)} */}
+                  {filterOpportunities(allOpportunities)
                     .map((item, index) => (
                       <div className="row" key={item.uniqueIdentifier}>
                         <div className="hash">{++count}</div>
@@ -306,7 +338,8 @@ const Opportunities = () => {
                           </a>
                         </div>
                       </div>
-                    ))}
+                    ))
+                  }
                 </>
               )}
             </Table>
