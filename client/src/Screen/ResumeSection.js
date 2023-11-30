@@ -14,7 +14,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { PuffLoader } from "react-spinners";
 import { Doughnut } from "react-chartjs-2";
-
+import loader from "../Images/loader.gif";
 import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
 import SimpleFooter from "../Components/SimpleFooter";
@@ -257,10 +257,10 @@ const ResumeSection = () => {
         const temp = JSON.parse(response.choices[0].message.content);
         // console.log(temp)
         setMoreQuestion(temp);
-        console.log(moreQuestion);
-        
-        setAdditionalQuestionsCount(additionalQuestionsCount+ 10);
-        console.log(additionalQuestionsCount);
+        // console.log(moreQuestion);
+        additionalQuestionsCount = additionalQuestionsCount + 10;
+        setAdditionalQuestionsCount(additionalQuestionsCount);
+        // console.log(additionalQuestionsCount);
       } catch (error) {
         console.log("Error sending message to Chat API:", error);
         setIsLoading(false);
@@ -399,7 +399,7 @@ const ResumeSection = () => {
               </div>
             ) : (
               <div className="file-name-display">
-                <p>File Name: {file?.name}</p>
+                <p> {file?.name}</p>
               </div>
             )}
             <div className="other-details">
@@ -523,11 +523,10 @@ const ResumeSection = () => {
                           </div>
                         </>
                       )}
-                      
-                        <button className="btn-1" onClick={techMore}>
-                          Show more
-                        </button>
-                      
+
+                      <div className="submit-btn" onClick={techMore}>
+                        Show more
+                      </div>
                     </>
                   </div>
                 </div>
@@ -683,7 +682,6 @@ const ResumeSection = () => {
                             )}
                             {moreQuestion && (
                               <>
-                                
                                 <div>
                                   {moreQuestion.technical?.map(
                                     (question, index) => (
@@ -698,11 +696,10 @@ const ResumeSection = () => {
                                 </div>
                               </>
                             )}
-                            
-                              <button className="btn-1" onClick={techMore}>
-                                Show more
-                              </button>
-                            
+
+                            <button className="submit-btn" onClick={techMore}>
+                              Show more
+                            </button>
                           </>
                         </div>
                       </div>
@@ -745,7 +742,16 @@ const ResumeSection = () => {
                     <p>No questions generated yet!</p>
                   )}
                   {isLoading ? (
-                    <LoadingSection>Loading....</LoadingSection>
+                    <LoadingSection>
+                      <div className="loading-section">
+                        {/* <img src={loader} alt="Loading" /> */}
+                        <PuffLoader />
+                        <p>
+                          We are analysing your resume, it will take around 60
+                          seconds...
+                        </p>
+                      </div>
+                    </LoadingSection>
                   ) : (
                     <>
                       {file && (
@@ -1055,12 +1061,25 @@ const Container = styled.div`
         }
       }
       .file-name-display {
-        max-width: 150px;
-        color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
-        font-size: 0.75rem;
-        text-align: center;
-        margin-top: 5px;
-        font-weight: 200;
+        width: calc(25% - 10px);
+        height: 100px;
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed
+          ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        p {
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          font-size: 1rem;
+
+          text-align: center;
+          margin-top: 5px;
+          font-weight: 200;
+        }
       }
 
       .other-details {
@@ -1423,6 +1442,52 @@ const Container = styled.div`
           font-weight: 500;
           margin-top: 35px;
         }
+        .submit-btn {
+          width: 180px;
+          margin-top: 10px;
+          background-color: #404249;
+          height: 45px;
+          border-radius: 10px;
+          border: 1px solid #c2b1b1;
+          color: #333;
+          display: inline-block;
+          font-size: 0.85rem;
+          font-weight: 300;
+          text-decoration: none;
+          /* text-transform: uppercase; */
+          border-radius: 100px;
+          background: linear-gradient(
+            300deg,
+            #56f238,
+            #b3adff,
+            #c5c5ef,
+            #bde6ce,
+            #56f238
+          );
+          background-size: 400% 400%;
+          -webkit-animation: AnimationName 10s ease infinite;
+          -moz-animation: AnimationName 10s ease infinite;
+          animation: AnimationName 10s ease infinite;
+          border-color: transparent;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          opacity: 0.75;
+
+          a {
+            color: #333;
+          }
+
+          &:hover {
+            background-color: whitesmoke;
+            color: #333;
+            cursor: pointer;
+            transition-duration: 500ms;
+            opacity: 1;
+          }
+        }
       }
 
       p {
@@ -1458,6 +1523,14 @@ const LoadingSection = styled.div`
   font-size: 1.5rem;
   font-weight: 500;
   color: #000;
+  .loading-section {
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 0;
+    justify-content: center;
+    align-items: center;
+  }
+
 `;
 
 const Line = styled.div`
