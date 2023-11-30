@@ -1,0 +1,39 @@
+[
+  {
+    "_id": "30-nov-2023-15'07-@lchauha",
+    "question": "What is the primary function of routers in a network?",
+    "question-image": "",
+    "a": "To provide a user interface",
+    "b": "To direct data packets to their destination",
+    "c": "To store data",
+    "d": "To increase the speed of the network",
+    "correct_ans": "b",
+    "answer-image": "",
+    "topic": "Computer Networks"
+  },
+  {
+    "_id": "30-nov-2023-15'08-@lchauha",
+    "question": "Which of the following is a characteristic of TCP/IP protocol?",
+    "question-image": "",
+    "a": "Connectionless communication",
+    "b": "Unreliable data transfer",
+    "c": "Connection-oriented communication",
+    "d": "Does not require IP addresses",
+    "correct_ans": "c",
+    "answer-image": "",
+    "topic": "Computer Networks"
+  },
+  {
+    "_id": "30-nov-2023-15'09-@lchauha",
+    "question": "What is the purpose of a subnet mask?",
+    "question-image": "",
+    "a": "To identify the network and host portions of an IP address",
+    "b": "To encrypt data",
+    "c": "To identify the protocol used",
+    "d": "To speed up data transfer",
+    "correct_ans": "a",
+    "answer-image": "",
+    "topic": "Computer Networks"
+  },
+  // ... and so on for the remaining questions.
+]
