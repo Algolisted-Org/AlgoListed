@@ -185,15 +185,6 @@ const Opportunities = () => {
     }
   };
 
-// Usage in the component
-{filterOpportunities(allOpportunities).map((item, index) => (
-  <div className="row" key={item.uniqueIdentifier}>
-    {/* Your JSX code for rendering individual opportunities */}
-  </div>
-))}
-
-
-
   return (
     <GrandContainer>
       <MobContainer>
