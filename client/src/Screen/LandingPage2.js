@@ -264,7 +264,8 @@ const LandingPage2 = () => {
                   {/* <img src="https://spideo.com/wp-content/uploads/2021/12/Gif-Analytics-50-2.gif" alt="" draggable="false"/> */}
                   {/* <img src="https://analytics-smart.com/wp-content/uploads/2022/06/Data-Science1-1.gif" alt="" /> */}
                   {/* <img src={sideImage} alt="" /> */}
-                  <img src="https://media.baamboozle.com/uploads/images/717818/1650961977_61450_gif-url.gif" alt="" draggable="false" />
+                  <img src="https://img1.picmix.com/output/stamp/normal/1/9/5/4/2444591_542b7.gif" alt="" draggable="false" />
+                  {/* <img src="https://i.gifer.com/embedded/download/XDZc.gif" alt=""  draggable="false"/> */}
                 </div>
               </Fade>
             </div>

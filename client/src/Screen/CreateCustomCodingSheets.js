@@ -8,8 +8,9 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import GradeIcon from "@material-ui/icons/Grade";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import AddIcon from "@material-ui/icons/Add";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "@firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence, onAuthStateChanged  } from "@firebase/auth";
 import app from "../firebase_Auth/firebaseConfig";
+import loader from "../Images/loader.svg";
  
 // import { axios } from 'axios';
 // const axios = require('axios');
@@ -24,12 +25,46 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
   const [sheetName, setSheetName] = useState("");
   const [sheetDesc, setSheetDesc] = useState("");
   const [sheetId, setSheetId] = useState("");
+  const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if(selectedTheme === 'dark') setNeedDarkMode(true);
-    if(selectedTheme === 'light') setNeedDarkMode(false);
-  }, [])
+    if (selectedTheme === "dark") setNeedDarkMode(true);
+    if (selectedTheme === "light") setNeedDarkMode(false);
+
+    // Initialize Firebase Authentication listener
+    const auth = getAuth(app);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            setIsPending(true)
+          try {
+            console.log(user)
+            console.log("https://algolisted.cyclic.app/user-details/profile-update-email was called");
+            const response = await axios.post(
+              "https://algolisted.cyclic.app/user-details/profile-update-email",
+              user,
+              { withCredentials: true }
+            );
+            setUser(response.data.user);
+            localStorage.setItem('userId', response.data.user._id);
+            const userId = localStorage.getItem('userId');
+            console.log("We got the User ID");
+            console.log(user);
+            console.log(userId);
+            setUserGlobal(response.data.user);
+            setIsPending(false);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          setUser(null);
+          setIsPending(false);
+        }
+      });      
+
+    // Cleanup the listener when the component unmounts
+    return () => unsubscribe();
+  }, [setUserGlobal]);
   
   console.log("needDarkMode : ", needDarkMode);
   const toggleDarkMode = () => {
@@ -54,7 +89,11 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
     const provider = new GoogleAuthProvider();
     // console.log(ap);
     const auth = getAuth(app);
+    setPersistence(auth, browserLocalPersistence)
     const result = await signInWithPopup(auth, provider);
+    if (!result) {
+        throw new Error("Could not complete login");
+      }
     try {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
@@ -78,7 +117,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
         result.user,
         { withCredentials: true }
       );
-
+      setIsPending(false);
       setUser(response.data.user);
       // sessionStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('userId', response.data.user._id);
@@ -133,7 +172,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
     };
     console.log(newObj);
     try {
-      const newResponse = await axios.post(`/problem-sheets/create`, newObj, {
+      const newResponse = await axios.post(`https://algolisted.cyclic.app/problem-sheets/create`, newObj, {
         withCredentials: true,
       });
       console.log(newResponse);
@@ -149,7 +188,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
   };
 
   const getUserSheet = async (ownerId) => {
-    console.log("`/problem-sheets/get-by-owner/${ownerId}` was called!");
+    console.log(`/problem-sheets/get-by-owner/${ownerId} was called!`);
     try {
       const sheetList = await axios.get(
         `https://algolisted.cyclic.app/problem-sheets/get-by-owner/${ownerId}`
@@ -208,22 +247,26 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
             </div>
           </div>
           <UserSheetsLikedList needDarkMode={needDarkMode}>
-            {!user && (
-              <>
-                <h3>You need to have an account to use this feature</h3>
-                <SignUpButton needDarkMode={needDarkMode} onClick={handleSubmit}>
-                  <img
-                    src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png"
-                    alt=""
-                  />
-                  <div className="text">
-                    Continue with Google
-                  </div>
-                </SignUpButton>
-              </>
+            {!user && isPending ? (
+                <div>
+                <img src={loader} alt="Loading..." />
+                </div>
+            ) : (
+                <>
+                {!user && (
+                    <>
+                    <h3>You need to have an account to use this feature</h3>
+                    <SignUpButton needDarkMode={needDarkMode} onClick={handleSubmit}>
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48">
+                        <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                        </svg>
+                        <div className="text">Continue with Google</div>
+                    </SignUpButton>
+                    </>
+                )}
+                </>
             )}
-            {/* {user && <h3>Welcome {user.name}</h3>} */}
-          </UserSheetsLikedList>
+            </UserSheetsLikedList>
 
           {/* {user && <UserSheetsList> */}
           {user && (

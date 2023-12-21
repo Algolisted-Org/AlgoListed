@@ -35,6 +35,7 @@ const Opportunities = () => {
   const [sliderInputValue, setSliderInputValue] = useState("Fresher");
   const [location, setLocation] = useState("All Location");
   const [status, setStatus] = useState("Status")
+  const [cities,setCities]=useState([])
   const [allOpportunities, setAllOpportunities] = useState([]);
 
   let count = 0;
@@ -91,37 +92,98 @@ const Opportunities = () => {
     }
   };
 
+  // Function to get cities by country using an external API
+  const getCitiesByCountry = async (country = "India") => {
+    try {
+      // Make a POST request to the countriesnow API to fetch cities for the given country
+      const response = await axios.post(
+        "https://countriesnow.space/api/v0.1/countries/cities",
+        {
+          country: country,
+        }
+      );
+      if (response?.status === 200) {
+        const cities = response.data.data;
+        setCities(cities);
+      }
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+      throw error;
+    }
+  };
+
+  // useEffect to fetch cities when the component mounts
+  useEffect(() => {
+    // Define an asynchronous function to use the getCitiesByCountry function
+    const fetchData = async () => {
+      try {
+         await getCitiesByCountry("India");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   // Function to filter opportunities based on various criteria
+  // Main filtering function for opportunities
   const filterOpportunities = (opportunities) => {
     return opportunities
-      .filter(item => applyMagicFilter ? item.magic_filter === 'yes' : true)
-      .filter(item => {
-        if (filterContestTypeName === 'Intern') {
-          return item.type === 'Intern';
-        } else if (filterContestTypeName === 'Full Time') {
-          return item.type === 'FTE';
-        } else if (filterContestTypeName === 'Job Type') {
-          return true; // If no filter selected, show all
-        }
-      })
-      .filter(item => {
-        if (sliderInputValue === 'Fresher') {
-          return item.years_exp === 'Fresher' || item.years_exp === 'fresher';
-        } else if (sliderInputValue === 'Experienced') {
-          return item.years_exp !== 'Fresher' && item.years_exp !== 'fresher';
-        }
-      })
+      .filter((item) => (applyMagicFilter ? item.magic_filter === "yes" : true))
+      .filter(filterByContestType)
+      .filter(filterByExperience)
+      .filter(filterByLocation)
       .reverse();
   };
 
-// Usage in the component
-{filterOpportunities(allOpportunities).map((item, index) => (
-  <div className="row" key={item.uniqueIdentifier}>
-    {/* Your JSX code for rendering individual opportunities */}
-  </div>
-))}
+  // Filter opportunities based on contest type
+  const filterByContestType = (item) => {
+    switch (filterContestTypeName) {
+      case "Intern":
+        return item.type === "Intern";
+      case "Full Time":
+        return item.type === "FTE";
+      case "Job Type":
+        return true; // If no filter selected, show all
+      default:
+        return false;
+    }
+  };
 
+  // Filter opportunities based on experience level
+  const filterByExperience = (item) => {
+    switch (sliderInputValue) {
+      case "Fresher":
+        return item.years_exp === "Fresher" || item.years_exp === "fresher";
+      case "Experienced":
+        return item.years_exp !== "Fresher" && item.years_exp !== "fresher";
+      default:
+        return false;
+    }
+  };
 
+  // Filter opportunities based on location
+  const filterByLocation = (item) => {
+    const lowerLocation = item.location.toLowerCase();
+    switch (location) {
+      case "Remote":
+        return (
+          lowerLocation.includes("remote") || lowerLocation.includes("wfh")
+        );
+      case "All Location":
+        return true; // Show all locations
+      case "India":
+        return cities.some((city) =>
+          lowerLocation.includes(city.toLowerCase())
+        );
+      case "Out of India":
+        return !cities.some((city) =>
+          lowerLocation.includes(city.toLowerCase())
+        );
+      default:
+        return false;
+    }
+  };
 
   return (
     <GrandContainer>
@@ -246,11 +308,11 @@ const Opportunities = () => {
                   {
                     openModel3 ? (
                       <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
-                        <div className="option">All Locations</div>
-                        <div className="option">India</div>
-                        <div className="option">Out of India</div>
-                        <div className="option">Remote</div>
-                      </ShowAbsoluteModelDropDown>
+                      <div className="option" data-value="All Locations" onClick={(e) => setLocation(e.target.dataset.value)}>All Locations</div>
+                      <div className="option" data-value="India" onClick={(e) => setLocation(e.target.dataset.value)}>India</div>
+                      <div className="option" data-value="Out of India" onClick={(e) => setLocation(e.target.dataset.value)}>Out of India</div>
+                      <div className="option" data-value="Remote" onClick={(e) => setLocation(e.target.dataset.value)}>Remote</div>
+                    </ShowAbsoluteModelDropDown>
                     ) : <></>
                   }
                 </div>
