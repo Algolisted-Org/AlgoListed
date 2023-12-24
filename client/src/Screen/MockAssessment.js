@@ -8,6 +8,7 @@ import SimpleFooter from '../Components/SimpleFooter'
 import InfoIcon from "@material-ui/icons/Info";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import CNMCQs from '../DummyDB/MockAssessment/CNMCQs.json';
 
 const MockAssessment = () => {
   const [needDarkMode, setNeedDarkMode] = useState(true);
@@ -25,6 +26,28 @@ const MockAssessment = () => {
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
+
+  const [cNQUESTIONS, setCNQUESTIONS] = useState([]);
+
+  function generateRandomValuesCN(n, r) {
+    const values = [];
+    for (let i = 0; i < r; i++) {
+      const randomValue = Math.floor(Math.random() * n);
+      values.push(randomValue);
+    }
+    return values;
+  }
+
+  useEffect(() => {
+    const randomValuesCNIndices = generateRandomValuesCN(CNMCQs.length, 10);
+    const randomCNQuestions = randomValuesCNIndices.map(index => CNMCQs[index]);
+
+    setCNQUESTIONS(randomCNQuestions);
+    console.log(randomCNQuestions);
+  }, []);
+
+  console.log(cNQUESTIONS);
+
 
   return (
     <GrandContainer needDarkMode={needDarkMode}>
@@ -108,7 +131,7 @@ const MockAssessment = () => {
 
               <div className="input-api-key">
                 <div className="left-section">
-                  Already have Test ID ? 
+                  Already have Test ID ?
                 </div>
                 <div className="right-section">
                   <input
@@ -136,16 +159,53 @@ const MockAssessment = () => {
           <div className="main-info">
             <div className="text">
               <InfoIcon />
-              If someone gave you an ID then enter in the above requested box, else ignore the box to 
-              create a new OA. 
+              If someone gave you an ID then enter in the above requested box, else ignore the box to
+              create a new OA.
             </div>
           </div>
 
           <div className="display-line"></div>
 
-          <div className="text btn-clickable">
-            Show Sample Results
-            <ExpandMoreIcon />
+          <div className="questions">
+            {cNQUESTIONS.length > 0 ? (
+              cNQUESTIONS.map((question_main) => (
+                <div className="question" key={question_main._id}>
+                  <div className="main-question">
+                    {console.log(question_main.question)}
+                    <b>Question : </b> {question_main.question}
+                  </div>
+                  <div className="options">
+                    <div className="option">
+                      <input type="checkbox" id="all" />
+                      <label htmlFor="all">A. {question_main.a}</label>
+                    </div>
+                    <div className="option">
+                      <input type="checkbox" id="easy" />
+                      <label htmlFor="easy">B. {question_main.b}</label>
+                    </div>
+                    <div className="option">
+                      <input type="checkbox" id="medium" />
+                      <label htmlFor="medium">C. {question_main.c}</label>
+                    </div>
+                    <div className="option">
+                      <input type="checkbox" id="medium" />
+                      <label htmlFor="medium">D. {question_main.d}</label>
+                    </div>
+                  </div>
+                  <div className="options">
+                    <div className="option"></div>
+                    <div className="option"></div>
+                    <div className="option"></div>
+                    <div className="option"></div>
+                  </div>
+                  <div className="problem-tag">{question_main.topic}</div>
+                </div>
+              ))
+            ) : (
+              <p>Loading questions...</p>
+            )}
+            <div >
+            </div>
           </div>
         </div>
 
@@ -198,7 +258,64 @@ const Container = styled.div`
       height: 1px;
       background-color: #404249;
     }
+
+    .questions{
+      display: flex;
+      flex-direction: column;
+
+      .question{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 50px;
+
+        .main-question{
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          font-size: 0.9rem;
+          font-weight: 300;
+
+          b{
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            font-weight: 600;
+          }
+        }
+       
+        .options{
+            display: flex;
+            flex-direction: column;
+
+            .option{
+              display: flex;
+              align-items: center;
+              margin-top: 10px;
+              
+              label{
+                  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                  margin-left: 5px;
+                  font-size: 0.9rem;
+                  font-weight: 300;
+              }
     
+              input[type="checkbox"] {
+                  margin-right: 2.5px;
+                  border: none;
+                  cursor: pointer;
+                  scale: 1.15;
+              }
+            }
+            
+          }
+
+        .problem-tag{
+          background-color: ${(props) => props.needDarkMode ? "#404249" : "#e5e5e5"};
+          color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+          font-size: 0.75rem;
+          padding: 5px 10px;
+          border-radius: 10px;
+          font-weight: 200;
+        }
+      }
+    }
 
     background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
 
