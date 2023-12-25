@@ -8,7 +8,9 @@ import SimpleFooter from '../Components/SimpleFooter'
 import InfoIcon from "@material-ui/icons/Info";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+
 import CNMCQs from '../DummyDB/MockAssessment/CNMCQs.json';
+const seedrandom = require('seedrandom');
 
 const MockAssessment = () => {
   const [needDarkMode, setNeedDarkMode] = useState(true);
@@ -29,17 +31,22 @@ const MockAssessment = () => {
 
   const [cNQUESTIONS, setCNQUESTIONS] = useState([]);
 
-  function generateRandomValuesCN(n, r) {
+  function generateRandomValuesCN(n, r, x) {
     const values = [];
+    
+    // Use x as the seed for the random number generator
+    const rng = seedrandom(x);
+  
     for (let i = 0; i < r; i++) {
-      const randomValue = Math.floor(Math.random() * n);
+      const randomValue = Math.floor(rng() * n);
       values.push(randomValue);
     }
+  
     return values;
   }
 
   useEffect(() => {
-    const randomValuesCNIndices = generateRandomValuesCN(CNMCQs.length, 10);
+    const randomValuesCNIndices = generateRandomValuesCN(CNMCQs.length, 107, 212);
     const randomCNQuestions = randomValuesCNIndices.map(index => CNMCQs[index]);
 
     setCNQUESTIONS(randomCNQuestions);
@@ -168,11 +175,16 @@ const MockAssessment = () => {
 
           <div className="questions">
             {cNQUESTIONS.length > 0 ? (
-              cNQUESTIONS.map((question_main) => (
+              cNQUESTIONS.map((question_main, index) => (
                 <div className="question" key={question_main._id}>
                   <div className="main-question">
                     {console.log(question_main.question)}
-                    <b>Question : </b> {question_main.question}
+                    <b>Question {index + 1} : </b> {question_main.question}
+                    {/* ------ IMAGE NOT SHOWING UP ------ */}
+                    {/* <img src={question_main.question_image} alt="" /> */}
+                    {/* <img src={question_main.question_image} alt="" /> */}
+                    {/* <img src="client/src/DummyDB/MockAssessment/CNimages/q12-question.PNG" alt="" /> */}
+                    {/* <img src={`../DummyDB/MockAssessment/CNimages/q12-question.PNG`} alt="" /> */}
                   </div>
                   <div className="options">
                     <div className="option">
@@ -191,12 +203,6 @@ const MockAssessment = () => {
                       <input type="checkbox" id="medium" />
                       <label htmlFor="medium">D. {question_main.d}</label>
                     </div>
-                  </div>
-                  <div className="options">
-                    <div className="option"></div>
-                    <div className="option"></div>
-                    <div className="option"></div>
-                    <div className="option"></div>
                   </div>
                   <div className="problem-tag">{question_main.topic}</div>
                 </div>
@@ -278,6 +284,12 @@ const Container = styled.div`
             color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
             font-weight: 600;
           }
+
+          img{
+            height: 250px;
+            display: block;
+            margin: 10px 0 15px 0;
+          }
         }
        
         .options{
@@ -313,6 +325,7 @@ const Container = styled.div`
           padding: 5px 10px;
           border-radius: 10px;
           font-weight: 200;
+          margin-top: 20px;
         }
       }
     }
