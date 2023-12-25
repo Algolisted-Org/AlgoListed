@@ -10,6 +10,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 import CNMCQs from '../DummyDB/MockAssessment/CNMCQs.json';
+import OSMCQs from '../DummyDB/MockAssessment/OSMCQs.json';
+
 const seedrandom = require('seedrandom');
 
 const MockAssessment = () => {
@@ -29,7 +31,7 @@ const MockAssessment = () => {
     setNeedDarkMode(!needDarkMode);
   };
 
-  const [cNQUESTIONS, setCNQUESTIONS] = useState([]);
+  const [allQuestions, setAllQuestions] = useState([]);
 
   function generateRandomValuesCN(n, r, x) {
     const values = [];
@@ -45,16 +47,30 @@ const MockAssessment = () => {
     return values;
   }
 
+  function generateRandomValuesOS(n, r, x) {
+    const values = [];
+    
+    // Use x as the seed for the random number generator
+    const rng = seedrandom(x);
+  
+    for (let i = 0; i < r; i++) {
+      const randomValue = Math.floor(rng() * n);
+      values.push(randomValue);
+    }
+  
+    return values;
+  }
+
   useEffect(() => {
-    const randomValuesCNIndices = generateRandomValuesCN(CNMCQs.length, 107, 212);
+    const randomValuesCNIndices = generateRandomValuesCN(CNMCQs.length, 10, 212);
+    const randomValuesOSIndices = generateRandomValuesOS(OSMCQs.length, 10, 212);
     const randomCNQuestions = randomValuesCNIndices.map(index => CNMCQs[index]);
+    const randomOSQuestions = randomValuesOSIndices.map(index => OSMCQs[index]);
 
-    setCNQUESTIONS(randomCNQuestions);
-    console.log(randomCNQuestions);
+    const Questions = randomCNQuestions.concat(randomOSQuestions);
+
+    setAllQuestions(Questions);
   }, []);
-
-  console.log(cNQUESTIONS);
-
 
   return (
     <GrandContainer needDarkMode={needDarkMode}>
@@ -174,8 +190,8 @@ const MockAssessment = () => {
           <div className="display-line"></div>
 
           <div className="questions">
-            {cNQUESTIONS.length > 0 ? (
-              cNQUESTIONS.map((question_main, index) => (
+            {allQuestions.length > 0 ? (
+              allQuestions.map((question_main, index) => (
                 <div className="question" key={question_main._id}>
                   <div className="main-question">
                     {console.log(question_main.question)}
