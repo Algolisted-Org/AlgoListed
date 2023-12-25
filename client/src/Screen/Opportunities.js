@@ -223,9 +223,9 @@ const Opportunities = () => {
                 </div>
               </div>
             </div> */}
-            <h4>Information Extracted From : </h4>
+            {/* <h4>Information Extracted From : </h4>
             <div className="resources-used">
-              {/* <div className="special-thanks"><img src="https://res.cloudinary.com/adaface/image/upload/v1583493789/adaface_logo.png" alt="" /></div> */}
+              <div className="special-thanks"><img src="https://res.cloudinary.com/adaface/image/upload/v1583493789/adaface_logo.png" alt="" /></div>
               <div className="resource">
                 <LazyLoad height={30}>
                   <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" />
@@ -246,7 +246,7 @@ const Opportunities = () => {
                   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png" alt="" />
                 </LazyLoad>
               </div>
-            </div>
+            </div> */}
             <SheetMessage needDarkMode={needDarkMode}>
               <div className="text">
                 Explore the dynamics of the IT job market over the past six months to gain a comprehensive understanding of its current state. This page presents graphical representations of company job openings data, providing valuable insights into the prevailing trends and opportunities within the industry.
