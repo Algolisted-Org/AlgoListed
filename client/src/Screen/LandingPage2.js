@@ -230,7 +230,7 @@ const LandingPage2 = () => {
                 <a href='/contests-archive' className="item">Archive</a>
                 <a href='/contest-analysis' className="item">Analysis</a>
                 <a href='/coding-sheets/striver-sde-sheet' className="item">Coding Sheets</a>
-                <a href='/core-subjects-tracker' className="item">Tracker</a>
+                <a href='/core-subjects-tracker/operating-systems' className="item">Tracker</a>
                 <a href='/resume-questions' className="item">Resume AI</a>
                 <a href='/opportunities' className="item">Opportunities</a>
             </div>
