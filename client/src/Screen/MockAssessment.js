@@ -36,7 +36,6 @@ const MockAssessment = () => {
   function generateRandomValuesCN(n, r, x) {
     const values = [];
     
-    // Use x as the seed for the random number generator
     const rng = seedrandom(x);
   
     for (let i = 0; i < r; i++) {
@@ -50,7 +49,6 @@ const MockAssessment = () => {
   function generateRandomValuesOS(n, r, x) {
     const values = [];
     
-    // Use x as the seed for the random number generator
     const rng = seedrandom(x);
   
     for (let i = 0; i < r; i++) {
@@ -62,8 +60,8 @@ const MockAssessment = () => {
   }
 
   useEffect(() => {
-    const randomValuesCNIndices = generateRandomValuesCN(CNMCQs.length, 10, 212);
-    const randomValuesOSIndices = generateRandomValuesOS(OSMCQs.length, 10, 212);
+    const randomValuesCNIndices = generateRandomValuesCN(CNMCQs.length, 10, 412); // last is the test ID
+    const randomValuesOSIndices = generateRandomValuesOS(OSMCQs.length, 10, 412);
     const randomCNQuestions = randomValuesCNIndices.map(index => CNMCQs[index]);
     const randomOSQuestions = randomValuesOSIndices.map(index => OSMCQs[index]);
 
