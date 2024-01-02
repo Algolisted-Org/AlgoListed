@@ -67,7 +67,7 @@ Go to the client folder in the terminal  cd client
 Now to install the required dependencies use npm i --force.
 And once the required dependencies are installed just use npm start to run the repo on your local machine.
 -------
-Currently Working on the redux part on the frontend.
+Currently Working on the redux part on the front-end.
 <br/><br/>
 
 ## License
