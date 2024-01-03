@@ -7,90 +7,195 @@ import { contestAnalysisFilters } from '../Components/contestAnalysisFilters';
 import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
 import SimpleFooter from '../Components/SimpleFooter';
 import LockIcon from '@material-ui/icons/Lock';
+import axios from 'axios';
 
 const ContestArchiveCF = () => {
-    const [needDarkMode, setNeedDarkMode] = useState(false);
-    const platform = "codeforces";
-    
-    useEffect(() => {
-        document.title = "ContestArchiveCF Page - Algolisted";
+  const [needDarkMode, setNeedDarkMode] = useState(false);
+  const [problemsMap, setProblemsMap] = useState(null);
+  const platform = "codeforces";
+
+  useEffect(() => {
+    document.title = "ContestArchiveCF Page - Algolisted";
+  
+    let selectedTheme = localStorage.getItem("selectedTheme");
+    if (selectedTheme === 'dark') setNeedDarkMode(true);
+  
+    const getContestsAndProblems = async () => {
+      const contestListUrl = "https://codeforces.com/api/contest.list";
+      const problemsUrl = "https://codeforces.com/api/problemset.problems";
+  
+      try {
+        // Fetch the list of contests
+        const contestResponse = await axios.get(contestListUrl);
+        const contests = contestResponse.data.result;
+  
+        // Filter out completed contests and take the latest 100
+        const completedContests = contests
+          .filter(contest => contest.phase === "FINISHED")
+          .slice(0, 100);
+  
+        // Extract contest IDs
+        const contestIds = completedContests.map(contest => contest.id);
+  
+        const problemsResponse = await axios.get(problemsUrl);
+  
+        const problemsMapLocal = new Map();
+  
+        problemsResponse.data.result.problems.forEach(problem => {
+          const contestId = problem.contestId;
         
-        let selectedTheme = localStorage.getItem("selectedTheme");
-        if (selectedTheme === 'dark') setNeedDarkMode(true);
-
-        const getContestData = async () => {
-            const url = "https://codeforces.com/api/contest.list";
-            
-            try {
-                const response = await axios.get(url);
-                console.log(response.data);
-            } catch (error) {
-                console.error("Error fetching contest data:", error);
+          // Check if the contestId is in the array of completed contest IDs
+          if (contestIds.includes(contestId)) {
+            if (!problemsMapLocal.has(contestId)) {
+              problemsMapLocal.set(contestId, []);
             }
-        };
-
-        getContestData();
-
-    }, []);
-
-    console.log("needDarkMode : ", needDarkMode);
-   
-    const toggleDarkMode = () => {
-        setNeedDarkMode(!needDarkMode);
+        
+            problemsMapLocal.get(contestId).push({
+              name: problem.name,
+              index: problem.index,
+              type: problem.type,
+              rating: problem.rating,
+              tags: problem.tags,
+            });
+          }
+        });
+  
+        console.log(problemsMapLocal);
+        setProblemsMap(problemsMapLocal);
+      } catch (error) {
+        console.error('Error fetching contest list or problems:', error);
+      }
     };
+  
+    getContestsAndProblems();
+  }, []);
 
-    const filters = contestAnalysisFilters.map((item) => {
-        return item.lock === true ? (
-            <div key={item.id} className='locked-feature filter'>
-                {item.text}
-                <LockIcon />
+  useEffect(() => {
+    console.log(problemsMap);
+  }, [problemsMap])
+
+  console.log("needDarkMode : ", needDarkMode);
+
+  const toggleDarkMode = () => {
+    setNeedDarkMode(!needDarkMode);
+  };
+
+  const filters = contestAnalysisFilters.map((item) => {
+    return item.lock === true ? (
+      <div key={item.id} className='locked-feature filter'>
+        {item.text}
+        <LockIcon />
+      </div>
+    ) : (
+      <a
+        href={item.domainFilter}
+        key={item.id}
+        className={item.domainFilter === platform ? 'filter selected' : 'filter'}
+      >
+        {item.text}
+      </a>
+    );
+  });
+
+
+
+
+  return (
+    <GrandContainer needDarkMode={needDarkMode}>
+      <MobContainer>
+        We are still working on Responsive Version of the website, please view the site with
+        width more than 1100px, a standard laptop or tablet landscape.
+        <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+      </MobContainer>
+      <Container needDarkMode={needDarkMode}>
+        {
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+        }
+        {
+          needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
+        }
+        <div className="cc-middle-content">
+          <h1 className='main-heading'>Contest Archive</h1>
+          <p className="heading-supporter">
+            Cruise through a seamless and organized collection of all contest problems, empowering you to tackle them with maximum efficiency. On top of that, we enrich your contest experience with interactive visualizations and engaging infographics that bring the game to life and help you grasp it more effectively.
+          </p>
+          <div className="message">
+            <div className="icon"></div>
+            <div className="text">
+              A particular feature you have in mind that you'd like to see implemented on this page? <a href="https://github.com/Nayaker/AlgoListed/issues/new">create an enhancement issue</a>
             </div>
-        ) : (
-            <a
-                href={item.domainFilter}
-                key={item.id}
-                className={item.domainFilter === platform ? 'filter selected' : 'filter'}
-            >
-                {item.text}
-            </a>
-        );
-    });
-
-
-    
-
-    return (
-        <GrandContainer needDarkMode={needDarkMode}>
-            <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with
-                width more than 1100px, a standard laptop or tablet landscape.
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
-            </MobContainer>
-            <Container needDarkMode={needDarkMode}>
-                {
-                    needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
-                }
-                {
-                    needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
-                }
-                <div className="cc-middle-content">
-                    <h1 className='main-heading'>Contest Archive</h1>
-                    <p className="heading-supporter">
-                        Cruise through a seamless and organized collection of all contest problems, empowering you to tackle them with maximum efficiency. On top of that, we enrich your contest experience with interactive visualizations and engaging infographics that bring the game to life and help you grasp it more effectively.
-                    </p>
-                    <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            A particular feature you have in mind that you'd like to see implemented on this page? <a href="https://github.com/Nayaker/AlgoListed/issues/new">create an enhancement issue</a>
-                        </div>
-                    </div>
-                    <Filters needDarkMode={needDarkMode}>{filters}</Filters>
-                    <CleanLine />
-                </div>
-                <SimpleFooter />
-            </Container>
-        </GrandContainer>
-    )
+          </div>
+          <Filters needDarkMode={needDarkMode}>{filters}</Filters>
+          <CleanLine />
+          <div>
+            {problemsMap && (
+              <div className="problems-table">
+                {[...problemsMap].map(([contestId, problems]) => (
+                  <div className="one-contest-problems-parent" key={contestId}>
+                    <div className="contest-name">Contest {contestId}</div>
+                    {/* <div className="contest-outlinks">
+                    <a href={contestData.contest_link} target='_blank' className="link">
+                      <CallMadeIcon />
+                    </a>
+                    <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
+                      <EqualizerIcon />
+                    </a>
+                    {notes.includes(contestData.contest_name) ?
+                      <div className="link" onClick={() => notesadded(contestData.contest_name)} style={{ border: needDarkMode ? "1px solid #e5e5e5" : "1px solid #333" }}>
+                        <NotesIcon style={{ fill: needDarkMode ? "#e5e5e5" : "#333" }} />
+                      </div> :
+                      <div className="link" onClick={() => notesadded(contestData.contest_name)}>
+                        <NotesIcon />
+                      </div>
+                    }
+                  </div> */}
+                    {/* {notes.includes(contestData.contest_name) ? */}
+                    {false ?
+                      <div className="one-contest-problems" style={{ "height": "500px" }}>
+                        {/* <NoteMaking name={contestData.contest_name} needDarkMode={needDarkMode} /> */}
+                      </div>
+                      :
+                      <div className="one-contest-problems">
+                        {problems.map((problem, problemIndex) => (
+                          <div className="contest-problem" key={problemIndex}>
+                            <div className="problem-main-name">
+                              <div className="strip"></div>
+                              <label>
+                                <input type="checkbox" />
+                                Problem Unsolved
+                              </label>
+                              <a href="/" target='_blank' className="problem-name">{problem.name}</a>
+                            </div>
+                            {/* {
+                            showTags ? (
+                              <div className="problem-info">
+                                <div className="tag difficulty-tag">{problem.difficulty}</div>
+                                {problem.tags.map((tag, tagIndex) => (
+                                  <div className="tag" key={tagIndex}>
+                                    {tag}
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              <div className="problem-info">
+                                <div className="tag">Problem Tags are Hidden</div>
+                              </div>
+                            )
+                          } */}
+                          </div>
+                        ))}
+                      </div>
+                    }
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        <SimpleFooter />
+      </Container>
+    </GrandContainer>
+  )
 }
 
 export default ContestArchiveCF
@@ -195,6 +300,219 @@ const Container = styled.div`
                 font-weight: 500;
                 color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
             }
+        }
+      }
+
+      .problems-table{
+        width: 100%;
+        border-radius: 20px;
+        margin-top: 60px;
+        
+        .one-contest-problems-parent{
+          position: relative;
+          
+
+          .contest-name {
+            position: absolute;
+            height: 30px;
+            border-radius: 100px;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+            background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+            left: -15px;
+            top: -15px;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 300;
+            z-index: 1;
+          }
+
+          .contest-outlinks{
+              z-index: 1;
+              width: 45px;
+              /* background-color: black; */
+              border-radius: 1000px;
+              position: absolute;
+              right: -22.5px;
+              top: -15px;
+  
+              display: flex;
+              flex-direction: column;
+  
+              .link{
+                width: 100%;
+                aspect-ratio: 1/1;
+                background-color: ${(props) => (props.needDarkMode ? '#201e1e' : '#f3f4f7')};
+                border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+                /* background-color: #f3f4f7; */
+                /* border: 1px solid rgb(209, 213, 219); */
+                border-radius: 50%;
+                margin-bottom: 7.5px;
+  
+                display: grid; 
+                place-items: center;
+                
+                svg{
+                  fill: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#cacacd')};
+                  font-size: 1.25rem;
+                }
+
+                .keep-hovered-effect{
+                  transition-duration: 250ms;
+                  
+                  svg{
+                    fill: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+                  }
+                }
+  
+                &:hover{
+                  cursor: pointer;
+                  border-color: black;
+                  transition-duration: 250ms;
+  
+                  svg{
+                    fill: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
+                  }
+                }
+              }
+            }
+
+          .one-contest-problems{
+            transition: height 500ms;
+            transition-timing-function: ease-in-out;
+            position: relative;
+            height: 200px;
+            width: 100%;
+            background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#ffffff')};
+            /* background-color: #ffffff; */
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+            overflow: hidden;
+            overflow-x: scroll;
+            display: flex;
+
+            ::-webkit-scrollbar {
+              height: 3px;
+              width: 3px; 
+            }
+
+            ::-webkit-scrollbar-thumb {
+              /* background-color: #211f1f; */
+            }
+
+            ::-webkit-scrollbar-track {
+              background-color: transparent !important;
+            }
+
+            ::-webkit-scrollbar-track-piece:end {
+              background-color: transparent; 
+            }
+
+            ::-webkit-scrollbar-corner {
+              background-color: transparent; 
+            }
+
+            
+            /* border: 1px solid #e5e5e5; */
+  
+            .contest-problem {
+              position: relative;
+              height: 100%;
+              width: 25%;
+              flex: 0 0 25%;
+              border-right: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+              overflow-y: scroll;
+  
+              ::-webkit-scrollbar {
+                display: none;
+              }
+              
+              &:last-child {
+                border-right: none;
+              }
+  
+              padding: 20px;
+  
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              
+              .strip{
+                display: none;
+                position: absolute;
+                height: 2.5px;
+                width: 100%;
+                background-color: cornflowerblue;
+                top: 0;
+                left: 0;
+              }
+  
+              .problem-main-name{
+                margin-bottom: 20px;
+                
+                label{
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 5px;
+                  cursor: pointer;
+                  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+
+  
+                  input{
+                    margin-right: 5px;
+                  }
+  
+                  font-size: 0.65rem;
+                }
+  
+                .problem-name{
+                  font-size: 0.85rem;
+                  font-weight: 500;
+                  color: ${(props) => (props.needDarkMode ? '#8ba0c6' : 'cornflowerblue')};
+
+                  text-decoration: none;
+                  line-height: 0.85rem;
+
+                  &:hover{
+                    text-decoration: underline;
+                  }
+                }
+              }
+  
+              .problem-info{
+                display: flex;
+                flex-wrap: wrap;
+  
+                .tag{
+                  font-size: 0.65rem;
+                  padding: 2.5px 7.5px;
+                  border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
+                  border-radius: 100px;
+                  margin: 0 2.5px 2.5px 0;
+                  font-weight: 300;
+                  color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                  background-color: ${(props) => (props.needDarkMode ? '#2b2b2b' : '#f3f4f7')};
+                }
+  
+                .difficulty-tag{
+                  border-color: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(17, 17, 17)')};
+                  /* background-color: #fff; */
+                }
+              }
+            }
+  
+            .solved-problem{
+              background-color: ${(props) => (props.needDarkMode ? '#232425' : '#dcf8eb')};
+              
+              .strip{
+                display: block;
+                background-color: ${(props) => (props.needDarkMode ? '#9affab' : 'transparent')};
+              }
+            }
+          }
         }
       }
     }
