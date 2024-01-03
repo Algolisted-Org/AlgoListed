@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import CCHeaderPlus from '../Components/CCHeaderPlus';
 import CCHeaderDark from '../Components/CCHeaderDark';
-import LeftMenu from '../Components/LeftMenu'; 
+import LeftMenu from '../Components/LeftMenu';
 import LeftMenuDark from '../Components/LeftMenuDark';
 import axios from 'axios';
 import { contestAnalysisFilters } from '../Components/contestAnalysisFilters';
@@ -27,15 +27,13 @@ import { Bar } from 'react-chartjs-2';
 import DoneIcon from '@material-ui/icons/Done';
 import SimpleFooter from '../Components/SimpleFooter';
 import StyledModal from '../MicroComponents/Allmodals/StyledModal';
+import { useParams } from "react-router-dom";
 
 const ContestArchive = () => {
-  const [platformName, setPlatformName] = useState('leetcode');
-  const [contestType, setContestType] = useState('Weekly Contest');
-  const [contestNumber, setContestNumber] = useState('361');
   const [openVisualiser, setOpenVisualiser] = useState(true);
-  
+
   const [needDarkMode, setNeedDarkMode] = useState(true);
-  
+
   const [showTags, setShowTags] = useLocalStorage("showTags", true);
   const [filterContestType, setFilterContestType] = useState("All");
   const [filterContestTypeName, setFilterContestTypeName] = useState("Both Contest Types");
@@ -58,19 +56,25 @@ const ContestArchive = () => {
     setIsModalOpen(true);
   };
 
+  // const params = useParams();
+	// const { platform } = params;
+
+  const platform = "leetcode";
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const handleSubscription =()=>{
+
+  const handleSubscription = () => {
     const inputValue = inputRef.current.value;
     console.log(inputValue);
-    //  rest of the function
     setIsModalOpen(false);
   }
-  const renderModalBody =()=>{
-    return(
+
+  const renderModalBody = () => {
+    return (
       <>
-       <TextHeader>Stay in touch </TextHeader>
+        <TextHeader>Stay in touch </TextHeader>
         <TextMuted>
           Exciting premium features are on the way, and to stay in the loop
           about their release, simply share your email address. We'll ensure you
@@ -83,33 +87,35 @@ const ContestArchive = () => {
       </>
     )
   }
-  const [notes,setnotes]=useState([]);
-  const notesadded=(name)=>{
-      if(notes.includes(name)){
-        const filterdata=notes.filter(each=>each!==name);
-        setnotes([...filterdata])
-      }
-      else{
-      setnotes(prev=>[...prev,name])
-      }
+
+  const [notes, setnotes] = useState([]);
+  const notesadded = (name) => {
+    if (notes.includes(name)) {
+      const filterdata = notes.filter(each => each !== name);
+      setnotes([...filterdata])
+    }
+    else {
+      setnotes(prev => [...prev, name])
+    }
   }
 
   // const [checkboxShared,setCheckboxShared] = useState(localStorage.getItem("checkboxShared") || {0:false, 1:false, 2:false, 3:false});
   // const [checkboxShared, setCheckboxShared] = useLocalStorageCustom("checkboxShared", []);
-  const [checkboxstate,setCheckboxstate]= useState(JSON.parse(localStorage.getItem("checkboxShared")) || null)
+  const [checkboxstate, setCheckboxstate] = useState(JSON.parse(localStorage.getItem("checkboxShared")) || null)
   let arr;
 
   useEffect(() => {
     document.title = "Contest Archive - Algolisted";
   }, []);
-  
+
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if(selectedTheme === 'dark') setNeedDarkMode(true);
-    if(selectedTheme === 'light') setNeedDarkMode(false);
+    if (selectedTheme === 'dark') setNeedDarkMode(true);
+    if (selectedTheme === 'light') setNeedDarkMode(false);
   }, [])
-  
+
   console.log("needDarkMode : ", needDarkMode);
+
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
@@ -131,27 +137,24 @@ const ContestArchive = () => {
   }, [filterContestType, sliderInputValue]);
 
 
-  const filters = contestAnalysisFilters.map((item) => {
-    return (
-      <div
-        key={item.id}
-        className={
-          item.domainFilter === platformName ? 'filter selected' : (
-            item.lock === true ? 'locked-feature filter' : 'filter'
-          )
-        }
-        onClick={()=>{
-         if(item.lock){
-          openModal()
-         }
 
-        }}
-      >
-        {item.text}
-        {item.lock === true ? <LockIcon /> : <></>}
-      </div>
-    );
-  });
+
+  const filters = contestAnalysisFilters.map((item) => {
+    return item.lock === true ? (
+			<div key={item.id} className='locked-feature filter'>
+				{item.text}
+				<LockIcon />
+			</div>
+		) : (
+			<a
+				href={item.domainFilter}
+				key={item.id}
+				className={item.domainFilter === platform ? 'filter selected' : 'filter'}
+			>
+				{item.text}
+			</a>
+		);
+	});
 
   const onClick1 = (e) => {
     setCheckbox1(e.target.checked)
@@ -168,77 +171,71 @@ const ContestArchive = () => {
   }
 
 
-    const onClickShared = (pname, cname) => {
-      pname = pname.toLowerCase().replaceAll(" ", "_");
-      cname = cname.toLowerCase().replaceAll(" ", "_");
-      let x = JSON.parse(window.localStorage.getItem("checkboxShared"));
-      if (!x) {
-        const objToSave = {
-          [cname]: {
-            [pname]: true,
-          }
+  const onClickShared = (pname, cname) => {
+    pname = pname.toLowerCase().replaceAll(" ", "_");
+    cname = cname.toLowerCase().replaceAll(" ", "_");
+    let x = JSON.parse(window.localStorage.getItem("checkboxShared"));
+    if (!x) {
+      const objToSave = {
+        [cname]: {
+          [pname]: true,
         }
-        window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
-        setCheckboxstate(objToSave);
-        return;
       }
+      window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+      setCheckboxstate(objToSave);
+      return;
+    }
 
-      if (!Object.keys(x).includes(cname)) {
-        const objToSave = {
-          ...x,
-          [cname]: {
-            [pname]: true,
-          }
-        }
-        window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
-        // console.log(objToSave);
-        setCheckboxstate(objToSave);
-
-        return;
-      }
-
-      if (!Object.keys(x[cname]).includes(pname)) {
-        const objToSave = {
-          ...x,
-          [cname]:
-          {
-            ...x[cname],
-            [pname]: true
-          }
-        }
-        window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
-        // console.log(objToSave);
-        setCheckboxstate(objToSave);
-
-
-        return;
-      }
-
-      const newObject = { ...x[cname] }
-      delete newObject[pname];
-
+    if (!Object.keys(x).includes(cname)) {
       const objToSave = {
         ...x,
-        [cname]: newObject
+        [cname]: {
+          [pname]: true,
+        }
       }
-
-      localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+      window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
       // console.log(objToSave);
-      setCheckboxstate(objToSave)
-      
+      setCheckboxstate(objToSave);
+
+      return;
     }
 
-    const isQuestionSolved = (cname,pname)=>{
-      cname = cname.toLowerCase().replaceAll(" ","_");
-      pname = pname.toLowerCase().replaceAll(" ","_");
-      return checkboxstate && checkboxstate?.[cname]&& checkboxstate[cname]?.[pname]
-    }
-  
+    if (!Object.keys(x[cname]).includes(pname)) {
+      const objToSave = {
+        ...x,
+        [cname]:
+        {
+          ...x[cname],
+          [pname]: true
+        }
+      }
+      window.localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+      // console.log(objToSave);
+      setCheckboxstate(objToSave);
 
-  const redirectToContest = () => {
-    const url = `/contest-analysis/${contestType.toLowerCase().replace(' ', '-')}-${contestNumber}`;
-    window.location.href = url;
-  };
+
+      return;
+    }
+
+    const newObject = { ...x[cname] }
+    delete newObject[pname];
+
+    const objToSave = {
+      ...x,
+      [cname]: newObject
+    }
+
+    localStorage.setItem("checkboxShared", JSON.stringify(objToSave));
+    // console.log(objToSave);
+    setCheckboxstate(objToSave)
+
+  }
+
+  const isQuestionSolved = (cname, pname) => {
+    cname = cname.toLowerCase().replaceAll(" ", "_");
+    pname = pname.toLowerCase().replaceAll(" ", "_");
+    return checkboxstate && checkboxstate?.[cname] && checkboxstate[cname]?.[pname]
+  }
 
   const marks = [
     {
@@ -374,36 +371,36 @@ const ContestArchive = () => {
     })
   })
   console.log(tagsMappedToProblems)
-  
-  
+
+
   const sortedTags = Object.keys(tagsMappedToProblems['A'])
   sortedTags.sort();
-  
+
   const dataForTagsInA = [];
   const dataForTagsInB = [];
   const dataForTagsInC = [];
   const dataForTagsInD = [];
-  for(const tag of sortedTags) {
+  for (const tag of sortedTags) {
     dataForTagsInA.push(tagsMappedToProblems['A'][tag].length);
     dataForTagsInB.push(tagsMappedToProblems['B'][tag].length);
     dataForTagsInC.push(tagsMappedToProblems['C'][tag].length);
     dataForTagsInD.push(tagsMappedToProblems['D'][tag].length);
   }
-  
-const problems = [
-  { isChecked: problemAIsChecked, label: 'Problem A', data: dataForTagsInA, backgroundColor: needDarkMode? '#AAF683' :'#43d640' },
-  { isChecked: problemBIsChecked, label: 'Problem B', data: dataForTagsInB, backgroundColor: needDarkMode? '#60D394' :'#23ae20' },
-  { isChecked: problemCIsChecked, label: 'Problem C', data: dataForTagsInC, backgroundColor: needDarkMode? '#FFD97D' :'#c77248' },
-  { isChecked: problemDIsChecked, label: 'Problem D', data: dataForTagsInD, backgroundColor: needDarkMode? '#EE6055' :'#cf3838' },
-];
 
-const datasets = problems
-  .filter(problem => problem.isChecked)
-  .map(problem => ({
-    label: problem.label,
-    data: problem.data,
-    backgroundColor: problem.backgroundColor,
-  }));
+  const problems = [
+    { isChecked: problemAIsChecked, label: 'Problem A', data: dataForTagsInA, backgroundColor: needDarkMode ? '#AAF683' : '#43d640' },
+    { isChecked: problemBIsChecked, label: 'Problem B', data: dataForTagsInB, backgroundColor: needDarkMode ? '#60D394' : '#23ae20' },
+    { isChecked: problemCIsChecked, label: 'Problem C', data: dataForTagsInC, backgroundColor: needDarkMode ? '#FFD97D' : '#c77248' },
+    { isChecked: problemDIsChecked, label: 'Problem D', data: dataForTagsInD, backgroundColor: needDarkMode ? '#EE6055' : '#cf3838' },
+  ];
+
+  const datasets = problems
+    .filter(problem => problem.isChecked)
+    .map(problem => ({
+      label: problem.label,
+      data: problem.data,
+      backgroundColor: problem.backgroundColor,
+    }));
 
   const data = {
     labels: sortedTags,
@@ -427,24 +424,26 @@ const datasets = problems
           display: false,
         },
         ticks: {
-          color: needDarkMode ? '#DDDBD5': '#343a40'
+          color: needDarkMode ? '#DDDBD5' : '#343a40'
         },
         stacked: true,
       },
       y: {
         border: {
-          color: needDarkMode ? '#586566': '#e5e5e5', 
+          color: needDarkMode ? '#586566' : '#e5e5e5',
         },
         grid: {
-          color: needDarkMode ? '#586566': '#e5e5e5'
+          color: needDarkMode ? '#586566' : '#e5e5e5'
         },
         ticks: {
-          color: needDarkMode ? '#DDDBD5': '#343a40'
+          color: needDarkMode ? '#DDDBD5' : '#343a40'
         },
         stacked: true,
       },
     },
   };
+
+
 
   return (
     <GrandContainer aria-disabled={isModalOpen}>
@@ -484,46 +483,50 @@ const datasets = problems
           <div className={openVisualiser ? "visualization" : "closed-visualization"}>
             {openVisualiser ?
               <div className='stacked-bar-chart'>
-                <Bar options={barChartOptions} data={data}/>
+                <Bar options={barChartOptions} data={data} />
                 <div className='legends'>
-                    <div className='legend'>
-                      <input type="checkbox" className="checkbox" checked={problemAIsChecked} onChange={()=>{
-                        setProblemAIsChecked((prevState) => {
+                  <div className='legend'>
+                    <input type="checkbox" className="checkbox" checked={problemAIsChecked} onChange={() => {
+                      setProblemAIsChecked((prevState) => {
                         return !prevState
-                      })}}/>
-                      <div className='box problem-A'/>
-                      <label className='legend-label' for="problem A">Problem A</label>
-                    </div>
-                    <div className='legend'>
-                      <input type="checkbox" checked={problemBIsChecked} className="checkbox" onChange={()=> {
-                        setProblemBIsChecked((prevState) => {
+                      })
+                    }} />
+                    <div className='box problem-A' />
+                    <label className='legend-label' for="problem A">Problem A</label>
+                  </div>
+                  <div className='legend'>
+                    <input type="checkbox" checked={problemBIsChecked} className="checkbox" onChange={() => {
+                      setProblemBIsChecked((prevState) => {
                         return !prevState
-                      })}}/>
-                      <div className='box problem-B'/>
-                      <label className='legend-label' for="problem B">Problem B</label>
-                    </div>
-                    <div className='legend'>
-                      <input type="checkbox" checked={problemCIsChecked} className="checkbox" onChange={()=> {
-                        setProblemCIsChecked((prevState) => {
+                      })
+                    }} />
+                    <div className='box problem-B' />
+                    <label className='legend-label' for="problem B">Problem B</label>
+                  </div>
+                  <div className='legend'>
+                    <input type="checkbox" checked={problemCIsChecked} className="checkbox" onChange={() => {
+                      setProblemCIsChecked((prevState) => {
                         return !prevState
-                      })}}/>
-                      <div className='box problem-C'/>
-                      <label className='legend-label' for="problem C">Problem C</label>
-                    </div>
-                    <div className='legend'>
-                      <input type="checkbox" checked={problemDIsChecked} className="checkbox" onChange={()=> {
-                        setProblemDIsChecked((prevState) => {
+                      })
+                    }} />
+                    <div className='box problem-C' />
+                    <label className='legend-label' for="problem C">Problem C</label>
+                  </div>
+                  <div className='legend'>
+                    <input type="checkbox" checked={problemDIsChecked} className="checkbox" onChange={() => {
+                      setProblemDIsChecked((prevState) => {
                         return !prevState
-                      })}}/>
-                      <div className='box problem-D'/>
-                      <label className='legend-label' for="problem D">Problem D</label>
-                    </div>
+                      })
+                    }} />
+                    <div className='box problem-D' />
+                    <label className='legend-label' for="problem D">Problem D</label>
+                  </div>
                 </div>
               </div>
-            : <div></div>}
-            <div className="visualization-cap"  onClick={() => setOpenVisualiser((prevState) => !prevState)}>
+              : <div></div>}
+            <div className="visualization-cap" onClick={() => setOpenVisualiser((prevState) => !prevState)}>
               {openVisualiser ? 'Close Visualization' : 'Open Visualization'}
-              {openVisualiser ? <ExpandLessIcon /> : <ExpandMoreIcon/>}
+              {openVisualiser ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </div>
           </div>
 
@@ -583,49 +586,49 @@ const datasets = problems
                     <EqualizerIcon />
                   </a>
                   {notes.includes(contestData.contest_name) ?
-                    <div className="link" onClick={()=>notesadded(contestData.contest_name)} style={{border: needDarkMode ? "1px solid #e5e5e5" : "1px solid #333"}}>
-                      <NotesIcon style={{fill: needDarkMode ? "#e5e5e5" : "#333"}} />
-                    </div> : 
-                    <div className="link" onClick={()=>notesadded(contestData.contest_name)}>
+                    <div className="link" onClick={() => notesadded(contestData.contest_name)} style={{ border: needDarkMode ? "1px solid #e5e5e5" : "1px solid #333" }}>
+                      <NotesIcon style={{ fill: needDarkMode ? "#e5e5e5" : "#333" }} />
+                    </div> :
+                    <div className="link" onClick={() => notesadded(contestData.contest_name)}>
                       <NotesIcon />
                     </div>
                   }
                 </div>
-                {notes.includes(contestData.contest_name)? 
-                  <div className="one-contest-problems" style={{"height" : "500px"}}>
-                    <NoteMaking name={contestData.contest_name}  needDarkMode={needDarkMode}/>
+                {notes.includes(contestData.contest_name) ?
+                  <div className="one-contest-problems" style={{ "height": "500px" }}>
+                    <NoteMaking name={contestData.contest_name} needDarkMode={needDarkMode} />
                   </div>
-                  : 
+                  :
                   <div className="one-contest-problems">
-                  {Object.values(contestData.problems).map((problem, problemIndex) => (
-                    <div className={`contest-problem ${isQuestionSolved(contestData.contest_name,problem.name)?"solved-problem":""}`} key={problemIndex}>
-                      <div className="problem-main-name">
-                        <div className="strip"></div>
+                    {Object.values(contestData.problems).map((problem, problemIndex) => (
+                      <div className={`contest-problem ${isQuestionSolved(contestData.contest_name, problem.name) ? "solved-problem" : ""}`} key={problemIndex}>
+                        <div className="problem-main-name">
+                          <div className="strip"></div>
 
-                        <label>
-                          <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name,problem.name)}/>
-                          Problem Unsolved
-                        </label>
-                        <a href={problem.problemset_problem_link} target='_blank' className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</a>
+                          <label>
+                            <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name, problem.name)} />
+                            Problem Unsolved
+                          </label>
+                          <a href={problem.problemset_problem_link} target='_blank' className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</a>
+                        </div>
+                        {
+                          showTags ? (
+                            <div className="problem-info">
+                              <div className="tag difficulty-tag">{problem.difficulty}</div>
+                              {problem.tags.map((tag, tagIndex) => (
+                                <div className="tag" key={tagIndex}>
+                                  {tag}
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="problem-info">
+                              <div className="tag">Problem Tags are Hidden</div>
+                            </div>
+                          )
+                        }
                       </div>
-                      {
-                        showTags ? (
-                          <div className="problem-info">
-                            <div className="tag difficulty-tag">{problem.difficulty}</div>
-                            {problem.tags.map((tag, tagIndex) => (
-                              <div className="tag" key={tagIndex}>
-                                {tag}
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className="problem-info">
-                            <div className="tag">Problem Tags are Hidden</div>
-                          </div>
-                        )
-                      }
-                    </div>
-                  ))}
+                    ))}
                   </div>
                 }
               </div>
@@ -885,19 +888,19 @@ const Container = styled.div`
               }
               
               .problem-A {
-                background-color: ${(props)=> (props.needDarkMode ?'#AAF683':'#43d640')};
+                background-color: ${(props) => (props.needDarkMode ? '#AAF683' : '#43d640')};
               }
 
               .problem-B {
-                background-color: ${(props)=> (props.needDarkMode ?'#60D394':'#23ae20')};
+                background-color: ${(props) => (props.needDarkMode ? '#60D394' : '#23ae20')};
               }
 
               .problem-C {
-                background-color: ${(props)=> (props.needDarkMode ?'#FFD97D':'#c77248')};
+                background-color: ${(props) => (props.needDarkMode ? '#FFD97D' : '#c77248')};
               }
 
               .problem-D {
-                background-color: ${(props)=> (props.needDarkMode ?'#EE6055':'#cf3838')};
+                background-color: ${(props) => (props.needDarkMode ? '#EE6055' : '#cf3838')};
               }
             }
           }
@@ -1426,7 +1429,7 @@ const SliderSelector = styled.div`
   }
 
   .PrivateValueLabel-circle-4{
-    background-color: ${(props) => (props.needDarkMode? '#fff' : '#333')};
+    background-color: ${(props) => (props.needDarkMode ? '#fff' : '#333')};
     
     .PrivateValueLabel-label-5{
       color: ${(props) => (props.needDarkMode == false ? '#e5e5e5' : '#333')};

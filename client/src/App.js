@@ -62,6 +62,7 @@ import ResumeQuestions from './Screen/ResumeQuestions';
 import ResumeSection from "./Screen/ResumeSection";
 import CoreSubjectsTracker from "./Screen/CoreSubjectsTracker";
 import MockAssessment from "./Screen/MockAssessment";
+import ContestArchiveCF from "./Screen/ContestArchiveCF";
 
 
 
@@ -104,7 +105,8 @@ const App = ({currentThemeDark}) => {
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />
         <Route path="/contest-analysis" element={<ContestAnalysisList/>} />
-        <Route path="/contests-archive" element={<ContestArchive/>} />
+        <Route path="/contests-archive/leetcode" element={<ContestArchive/>} />
+        <Route path="/contests-archive/codeforces" element={<ContestArchiveCF/>} />
         <Route path="/contest-analysis/:contestName" element={<ContestAnalysis/>} />
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
