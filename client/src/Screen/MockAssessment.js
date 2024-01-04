@@ -11,13 +11,17 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 import CNMCQs from '../DummyDB/MockAssessment/CNMCQs.json';
 import OSMCQs from '../DummyDB/MockAssessment/OSMCQs.json';
+import APTIMCQs from '../DummyDB/MockAssessment/AptitudeMCQs.json';
+import DBMSMCQs from '../DummyDB/MockAssessment/DBMSMCQs.json';
+import OOPSMCQs from '../DummyDB/MockAssessment/OOPSMCQs.json';
 
-const seedrandom = require('seedrandom');
 
 const MockAssessment = () => {
   const [needDarkMode, setNeedDarkMode] = useState(true);
+  const [numberofQuestion,setNumberOfQuestion]=useState(null);
 
   useEffect(() => {
+    
     let selectedTheme = localStorage.getItem("selectedTheme");
     if (selectedTheme === 'dark') setNeedDarkMode(true);
   }, []);
@@ -33,43 +37,84 @@ const MockAssessment = () => {
 
   const [allQuestions, setAllQuestions] = useState([]);
 
-  function generateRandomValuesCN(n, r, x) {
+  function generateRandomValues(n, r, x) {
     const values = [];
     
-    const rng = seedrandom(x);
+    // const rng = seedrandom(x);
   
     for (let i = 0; i < r; i++) {
-      const randomValue = Math.floor(rng() * n);
+      const randomValue = Math.floor(Math.random() * n);
       values.push(randomValue);
     }
   
     return values;
   }
 
-  function generateRandomValuesOS(n, r, x) {
-    const values = [];
+  const handleNumberquestion=(e)=>{
+    setNumberOfQuestion(e.target.options[e.target.selectedIndex].text)
     
-    const rng = seedrandom(x);
-  
-    for (let i = 0; i < r; i++) {
-      const randomValue = Math.floor(rng() * n);
-      values.push(randomValue);
-    }
-  
-    return values;
   }
+ 
+  // const generateQuestions=()=>{
+  //   console.log(numberofQuestion)
+  //   const randomValuesCNIndices = generateRandomValues(CNMCQs.length, numberofQuestion, 412); // last is the test ID
+  //   const randomValuesOSIndices = generateRandomValues(OSMCQs.length, numberofQuestion, 412);
+  //   const randomValuesAPTIndices=generateRandomValues(APTIMCQs.length,numberofQuestion,412); 
+  //   const randomValuesDBMSIndices=generateRandomValues(DBMSMCQs.length,numberofQuestion,412);
+  //   const randomValuesOOPSIndices=generateRandomValues(OOPSMCQs.length,numberofQuestion,412);
 
-  useEffect(() => {
-    const randomValuesCNIndices = generateRandomValuesCN(CNMCQs.length, 10, 412); // last is the test ID
-    const randomValuesOSIndices = generateRandomValuesOS(OSMCQs.length, 10, 412);
-    const randomCNQuestions = randomValuesCNIndices.map(index => CNMCQs[index]);
-    const randomOSQuestions = randomValuesOSIndices.map(index => OSMCQs[index]);
+  //   const randomCNQuestions = randomValuesCNIndices.map(index => CNMCQs[index]);
+  //   const randomOSQuestions = randomValuesOSIndices.map(index => OSMCQs[index]);
+  //   const randomAPTIQuestions=randomValuesAPTIndices.map(index=> APTIMCQs[index]);
+  //   const randomDBMSQuestions=randomValuesDBMSIndices.map(index=> DBMSMCQs[index]);
+  //   const randomOOPSQuestions=randomValuesOOPSIndices.map(index=> OOPSMCQs[index]);
 
-    const Questions = randomCNQuestions.concat(randomOSQuestions);
+  //   // const Questions = randomCNQuestions.concat(randomOSQuestions);
+  //   const Questions=randomOOPSQuestions;
 
-    setAllQuestions(Questions);
-  }, []);
-
+  //   setAllQuestions(Questions);
+  // }
+  const generateQuestions = () => {
+    console.log(numberofQuestion);
+  
+    const selectedTopics = [];
+  
+    // Check which topics are selected
+    document.querySelectorAll('.options input:checked').forEach((checkbox) => {
+      selectedTopics.push(checkbox.id);
+    });
+  
+    const generateQuestionsForTopic = (topic, mcqArray) => {
+      const randomValuesIndices = generateRandomValues(mcqArray.length, numberofQuestion, 412);
+      return randomValuesIndices.map(index => mcqArray[index]);
+    };
+  
+    const generatedQuestions = [];
+  
+    // Generate questions for selected topics
+    selectedTopics.forEach((topic) => {
+      switch (topic) {
+        case 'aptitude':
+          generatedQuestions.push(...generateQuestionsForTopic('aptitude',APTIMCQs))
+          break;
+        case 'operating':
+          generatedQuestions.push(...generateQuestionsForTopic('operating', OSMCQs));
+          break;
+        case 'dbms':
+          generatedQuestions.push(...generateQuestionsForTopic('dbms', DBMSMCQs));
+          break;
+        case 'cn':
+          generatedQuestions.push(...generateQuestionsForTopic('cn',CNMCQs));
+          break;
+        case 'oops':
+          generatedQuestions.push(...generateQuestionsForTopic('oops',OOPSMCQs));
+        default:
+          break;
+      }
+    });
+  
+    setAllQuestions(generatedQuestions);
+  };
   return (
     <GrandContainer needDarkMode={needDarkMode}>
       <MobContainer>
@@ -103,24 +148,24 @@ const MockAssessment = () => {
               {/* <h3>Topics to Include</h3> */}
               <div className="options">
                 <div className="option">
-                  <input type="checkbox" id="all" />
-                  <label htmlFor="all">Aptitude</label>
+                  <input type="checkbox" id="aptitude" />
+                  <label htmlFor="aptitude">Aptitude</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="easy" />
-                  <label htmlFor="easy">Operating System</label>
+                  <input type="checkbox" id="operating" />
+                  <label htmlFor="operating">Operating System</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="medium" />
-                  <label htmlFor="medium">DBMS</label>
+                  <input type="checkbox" id="dbms" />
+                  <label htmlFor="dbms">DBMS</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="medium" />
-                  <label htmlFor="medium">Computer Networks</label>
+                  <input type="checkbox" id="cn" />
+                  <label htmlFor="cn">Computer Networks</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="medium" />
-                  <label htmlFor="medium">OOPs</label>
+                  <input type="checkbox" id="oops" />
+                  <label htmlFor="oops">OOPs</label>
                 </div>
               </div>
             </div>
@@ -130,13 +175,13 @@ const MockAssessment = () => {
                 <h3 className="text">Assessment Information</h3>
                 <div className="details">
                   <div className="detail">
-                    <select value="" className="text" >
+                    <select value={numberofQuestion} className="text" onChange={handleNumberquestion}>
                       <option value="0">Number of Questions :</option>
-                      <option value="1">10</option>
-                      <option value="2">15</option>
-                      <option value="3">20</option>
-                      <option value="4">25</option>
-                      <option value="4">30</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="25">25</option>
+                      <option value="30">30</option>
                     </select>
                   </div>
                   <div className="detail">
@@ -172,7 +217,7 @@ const MockAssessment = () => {
                 </div>
               </div>
 
-              <div className="submit-btn">
+              <div className="submit-btn" onClick={generateQuestions}>
                 Generate Test
               </div>
             </div>
