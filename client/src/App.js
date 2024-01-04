@@ -38,8 +38,6 @@ import CCHeader from "./Components/CCHeader";
 // import CompetitionApi from './DevelopmentLocal/CompetitionApi';
 import CoursesReview from "./Screen/CoursesReview";
 import OnlineAssessment from "./Screen/OnlineAssessment";
-// import CodeClub from './Screen/CodeClub';
-
 import ContestAnalysis from './Screen/ContestAnalysis';
 import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
@@ -62,6 +60,7 @@ import ResumeQuestions from './Screen/ResumeQuestions';
 import ResumeSection from "./Screen/ResumeSection";
 import CoreSubjectsTracker from "./Screen/CoreSubjectsTracker";
 import MockAssessment from "./Screen/MockAssessment";
+import ContestArchiveCF from "./Screen/ContestArchiveCF";
 
 
 
@@ -104,7 +103,8 @@ const App = ({currentThemeDark}) => {
         <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
         <Route path="/readme" element={<Readme/>} />
         <Route path="/contest-analysis" element={<ContestAnalysisList/>} />
-        <Route path="/contests-archive" element={<ContestArchive/>} />
+        <Route path="/contests-archive/leetcode" element={<ContestArchive/>} />
+        <Route path="/contests-archive/codeforces" element={<ContestArchiveCF/>} />
         <Route path="/contest-analysis/:contestName" element={<ContestAnalysis/>} />
         <Route path="/courses-review" element={<CoursesReview/>} />
         <Route path="/online-assessment" element={<OnlineAssessment/>} />
@@ -121,7 +121,6 @@ const App = ({currentThemeDark}) => {
 
         <Route path="/development" element={<Development/>} />
         <Route path="/resume-questions" element={<ResumeSection/>} />
-        {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="*" element={<PageNotExist/>} />
 
       </Routes>

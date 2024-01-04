@@ -6,15 +6,15 @@ export const contestAnalysisFilters = [
       lock: false,
     },
     {
-      text: "Unstop",
-      domainFilter: "Unstop",
-      id: 5,
-      lock: true,
-    },
-    {
       text: "Codeforces",
       domainFilter: "codeforces",
       id: 2,
+      lock: false,
+    },
+    {
+      text: "Unstop",
+      domainFilter: "Unstop",
+      id: 5,
       lock: true,
     },
     {
