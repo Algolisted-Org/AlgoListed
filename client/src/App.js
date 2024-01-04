@@ -38,8 +38,6 @@ import CCHeader from "./Components/CCHeader";
 // import CompetitionApi from './DevelopmentLocal/CompetitionApi';
 import CoursesReview from "./Screen/CoursesReview";
 import OnlineAssessment from "./Screen/OnlineAssessment";
-// import CodeClub from './Screen/CodeClub';
-
 import ContestAnalysis from './Screen/ContestAnalysis';
 import ContestAnalysisList from './Screen/ContestAnalysisList';
 import InterviewSummaries from './Screen/InterviewSummaries';
@@ -123,7 +121,6 @@ const App = ({currentThemeDark}) => {
 
         <Route path="/development" element={<Development/>} />
         <Route path="/resume-questions" element={<ResumeSection/>} />
-        {/* <Route path="/codeclub/jadavpur-university" element={<CodeClub/>} /> */}
         <Route path="*" element={<PageNotExist/>} />
 
       </Routes>

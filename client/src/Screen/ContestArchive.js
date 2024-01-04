@@ -49,9 +49,11 @@ const ContestArchive = () => {
   const [checkbox2, setCheckbox2] = useLocalStorage("checkbox2", false);
   const [checkbox3, setCheckbox3] = useLocalStorage("checkbox3", false);
   const [checkbox4, setCheckbox4] = useLocalStorage("checkbox4", false);
+  
   // modal  code start
   const [isModalOpen, setIsModalOpen] = useState(false);
   const inputRef = useRef(null);
+  
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -135,8 +137,6 @@ const ContestArchive = () => {
 
     setFilteredContestData(filteredData);
   }, [filterContestType, sliderInputValue]);
-
-
 
 
   const filters = contestAnalysisFilters.map((item) => {
