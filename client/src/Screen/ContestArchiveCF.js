@@ -12,6 +12,7 @@ import axios from 'axios';
 const ContestArchiveCF = () => {
   const [needDarkMode, setNeedDarkMode] = useState(false);
   const [problemsMap, setProblemsMap] = useState(null);
+  const [idNameMapping, setIDNameMapping] = useState({});
   const platform = "codeforces";
 
   useEffect(() => {
@@ -28,6 +29,10 @@ const ContestArchiveCF = () => {
         // Fetch the list of contests
         const contestResponse = await axios.get(contestListUrl);
         const contests = contestResponse.data.result;
+        const contestIdToNameMap = new Map(contests.map(contest => [contest.id, contest.name]));
+        setIDNameMapping(contestIdToNameMap);
+
+        // console.log(contestIdToNameMap.get(1920));
   
         // Filter out completed contests and take the latest 100
         const completedContests = contests
@@ -132,7 +137,7 @@ const ContestArchiveCF = () => {
               <div className="problems-table">
                 {[...problemsMap].map(([contestId, problems]) => (
                   <div className="one-contest-problems-parent" key={contestId}>
-                    <div className="contest-name">Contest {contestId}</div>
+                    <div className="contest-name">{idNameMapping.get(contestId)}</div>
                     {/* <div className="contest-outlinks">
                     <a href={contestData.contest_link} target='_blank' className="link">
                       <CallMadeIcon />
