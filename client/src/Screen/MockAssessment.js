@@ -42,11 +42,10 @@ const MockAssessment = () => {
     }));
   };
   const checkAnswer = (questionId) => {
-    // Compare selected answer with correct answer for the specific question
+
     const correctAnswer = allQuestions.find((question) => question._id === questionId)?.correct_ans;
     const isCorrect = selectedAnswers[questionId] === correctAnswer;
     console.log(correctAnswer,isCorrect)
-    // Update state to display correct answer message for the specific question
     setIsAnswerCorrect((prevIsAnswerCorrect) => ({
       ...prevIsAnswerCorrect,
       [questionId]: isCorrect,
@@ -57,7 +56,6 @@ const MockAssessment = () => {
   function generateRandomValues(n, r, x) {
     const values = [];
 
-    // const rng = seedrandom(x);
 
     for (let i = 0; i < r; i++) {
       const randomValue = Math.floor(Math.random() * n);
@@ -76,7 +74,6 @@ const MockAssessment = () => {
 
     const selectedTopics = [];
 
-    // Check which topics are selected
     document.querySelectorAll(".options input:checked").forEach((checkbox) => {
       selectedTopics.push(checkbox.id);
     });
@@ -92,7 +89,6 @@ const MockAssessment = () => {
 
     const generatedQuestions = [];
 
-    // Generate questions for selected topics
     selectedTopics.forEach((topic) => {
       switch (topic) {
         case "aptitude":
