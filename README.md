@@ -59,9 +59,12 @@ Screenshot will be added soon
 If you encounter a bug, or have a request for a new feature, please open a [New Issue](https://github.com/Nayaker/Algorithmist/issues).
 
 ## Want to Contribute?
-This project is looking for new contributors.  If you are interested in contributing,then follow this
-=>FRONTEND
-To run the front end of the project follow these steps.
+This project is looking for new contributors.  If you are interested in contributing, then follow this
+
+1. Your PR Title should be "Aisa Gand Faad Issue resolve kiya hai jii !!!"
+
+2. =>FRONTEND To run the front end of the project follow these steps.
+write ****
 
 Go to the client folder in the terminal  cd client
 Now to install the required dependencies use npm i --force.
