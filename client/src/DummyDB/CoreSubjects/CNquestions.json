@@ -1,8 +1,148 @@
 [
     {
-        "_id": "25-nov-2023-02'46-@Nayaker",
-        "quesName": "Write Computer Networks Question Here",
-        "answer": "Write Computer Networks Answer Here!",
+        "_id": "21-jan-2024-10'30-@AnuragJha003",
+        "quesName": "What is a computer network?",
+        "answer": "A computer network is a set of interconnected devices, such as computers, servers, and routers, that share resources and information through communication channels.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "22-jan-2024-10'31-@AnuragJha003",
+        "quesName": "Explain the OSI model and its seven layers.",
+        "answer": "The OSI (Open Systems Interconnection) model is a conceptual framework that standardizes the functions of a telecommunication or computing system into seven layers: Physical, Data Link, Network, Transport, Session, Presentation, and Application.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "23-jan-2024-10'32-@AnuragJha003",
+        "quesName": "What is the difference between TCP and UDP?",
+        "answer": "TCP (Transmission Control Protocol) is a connection-oriented protocol that ensures reliable and ordered delivery of data, while UDP (User Datagram Protocol) is a connectionless protocol that provides faster but unreliable data delivery.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "24-jan-2024-10'33-@AnuragJha003",
+        "quesName": "Explain the concept of IP addressing and its types.",
+        "answer": "IP addressing is a numerical label assigned to each device participating in a computer network. Types include IPv4 (32-bit) and IPv6 (128-bit) addresses, used for identifying hosts and routing traffic on the Internet.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "25-jan-2024-10'34-@AnuragJha003",
+        "quesName": "What is a subnet in computer networks?",
+        "answer": "A subnet is a logical subdivision of an IP network. It allows for better organization of IP addresses and helps in efficient routing within the network.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "26-jan-2024-10'35-@AnuragJha003",
+        "quesName": "Explain the purpose of ARP (Address Resolution Protocol).",
+        "answer": "ARP is used to map a 32-bit IP address to a MAC (Media Access Control) address in a local network. It helps in identifying the hardware address associated with a given IP address.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "27-jan-2024-10'36-@AnuragJha003",
+        "quesName": "What is DNS (Domain Name System)?",
+        "answer": "DNS is a system that translates domain names into IP addresses, allowing users to access websites using human-readable names instead of numerical IP addresses.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "28-jan-2024-10'37-@AnuragJha003",
+        "quesName": "Explain the concept of NAT (Network Address Translation).",
+        "answer": "NAT is a technique that allows multiple devices on a local network to share a single public IP address. It helps in conserving public IP addresses and enhancing security.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "29-jan-2024-10'38-@AnuragJha003",
+        "quesName": "What is the purpose of a firewall in a computer network?",
+        "answer": "A firewall is a network security device that monitors and controls incoming and outgoing network traffic based on predetermined security rules. It acts as a barrier between a trusted internal network and untrusted external networks.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "30-jan-2024-10'39-@AnuragJha003",
+        "quesName": "Explain the concept of VLAN (Virtual Local Area Network).",
+        "answer": "A VLAN is a logical segmentation of a physical network into multiple broadcast domains. It allows for better network management, security, and flexibility.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "31-jan-2024-10'40-@AnuragJha003",
+        "quesName": "What is the purpose of a router in a computer network?",
+        "answer": "A router is a networking device that forwards data packets between computer networks. It operates at the network layer of the OSI model and helps in directing traffic between different networks.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "01-feb-2024-10'41-@AnuragJha003",
+        "quesName": "Explain the concept of DHCP (Dynamic Host Configuration Protocol).",
+        "answer": "DHCP is a network protocol that automatically assigns IP addresses and other network configuration information to devices on a network. It eliminates the need for manual IP configuration.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "02-feb-2024-10'42-@AnuragJha003",
+        "quesName": "What is a switch in computer networks?",
+        "answer": "A switch is a networking device that operates at the data link layer of the OSI model. It connects devices within the same local area network and uses MAC addresses to forward data.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "03-feb-2024-10'43-@AnuragJha003",
+        "quesName": "Explain the concept of a proxy server.",
+        "answer": "A proxy server is an intermediate server that acts as a gateway between a local network and the internet. It intercepts requests from clients and forwards them to the destination, enhancing security and performance.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "04-feb-2024-10'44-@AnuragJha003",
+        "quesName": "What is the purpose of ICMP (Internet Control Message Protocol)?",
+        "answer": "ICMP is a network layer protocol used to send error messages and operational information about network conditions. It is commonly used for diagnostic and error reporting purposes.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "05-feb-2024-10'45-@AnuragJha003",
+        "quesName": "Explain the concept of SSL/TLS in network security.",
+        "answer": "SSL (Secure Sockets Layer) and TLS (Transport Layer Security) are cryptographic protocols that provide secure communication over a computer network. They ensure data confidentiality and integrity between applications.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "06-feb-2024-10'46-@AnuragJha003",
+        "quesName": "What is a DDoS attack?",
+        "answer": "A Distributed Denial of Service (DDoS) attack is a malicious attempt to disrupt the regular functioning of a network, service, or website by overwhelming it with a flood of internet traffic from multiple sources.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "07-feb-2024-10'47-@AnuragJha003",
+        "quesName": "Explain the concept of a MAC address.",
+        "answer": "A MAC (Media Access Control) address is a unique identifier assigned to the network interface card (NIC) of a device. It is used for communication within a local network.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "08-feb-2024-10'48-@AnuragJha003",
+        "quesName": "What is the purpose of subnet mask in networking?",
+        "answer": "A subnet mask is used to divide an IP address into network and host portions. It helps in identifying the network to which an IP address belongs and the host within that network.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "09-feb-2024-10'49-@AnuragJha003",
+        "quesName": "What is the role of an IP gateway?",
+        "answer": "An IP gateway connects two different networks and serves as a translator between different network protocols. It enables communication between devices on different networks.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "10-feb-2024-10'50-@AnuragJha003",
+        "quesName": "Explain the concept of multicast in networking.",
+        "answer": "Multicast is a communication mode where data is sent from one sender to multiple receivers simultaneously. It is an efficient way to deliver content to multiple recipients.",
         "completed": false,
         "marked": false
     }

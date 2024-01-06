@@ -103,6 +103,111 @@
       "answer": "A database schema defines the structure of the database, including tables, fields, relationships, and constraints. It provides a blueprint for organizing and representing data in the database.",
       "completed": false,
       "marked": false
-    }
-  ]
+    },
+    {
+            "_id": "06-jan-2024-10'15-@AnuragJha003",
+            "quesName": "What is the purpose of the GROUP BY clause in SQL?",
+            "answer": "The GROUP BY clause in SQL is used to arrange identical data into groups. It is often used with aggregate functions to perform operations on each group separately.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "07-jan-2024-10'16-@AnuragJha003",
+            "quesName": "Explain the concept of a database transaction log.",
+            "answer": "A database transaction log is a file that records the changes made to the database. It is crucial for ensuring data consistency and recovery in case of system failures.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "08-jan-2024-10'17-@AnuragJha003",
+            "quesName": "What is the difference between DELETE and TRUNCATE statements in SQL?",
+            "answer": "DELETE is a DML command used to remove rows from a table based on a condition, while TRUNCATE is a DDL command used to remove all rows from a table, providing a faster operation.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "09-jan-2024-10'18-@AnuragJha003",
+            "quesName": "How does the JOIN operation work in SQL? Provide an example.",
+            "answer": "The JOIN operation in SQL combines rows from two or more tables based on a related column between them. An example is the INNER JOIN, which returns rows with matching values in both tables.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "10-jan-2024-10'19-@AnuragJha003",
+            "quesName": "What is the purpose of the HAVING clause in SQL?",
+            "answer": "The HAVING clause in SQL is used to filter the results of aggregate functions applied to grouped data. It is similar to the WHERE clause but operates on grouped data.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "11-jan-2024-10'20-@AnuragJha003",
+            "quesName": "Explain the concept of a database transaction isolation level.",
+            "answer": "A transaction isolation level defines the degree to which one transaction must be isolated from the effects of other concurrent transactions. Common levels include READ COMMITTED and SERIALIZABLE.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "12-jan-2024-10'21-@AnuragJha003",
+            "quesName": "What is the purpose of the ORDER BY clause in SQL?",
+            "answer": "The ORDER BY clause in SQL is used to sort the result set of a query based on one or more columns. It can sort in ascending (ASC) or descending (DESC) order.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "13-jan-2024-10'22-@AnuragJha003",
+            "quesName": "Explain the concept of a database index and its types.",
+            "answer": "A database index is a data structure that improves the speed of data retrieval operations on a database table. Common types include clustered, non-clustered, and composite indexes.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "14-jan-2024-10'23-@AnuragJha003",
+            "quesName": "What is a self-join in SQL?",
+            "answer": "A self-join in SQL is a regular join, but the table is joined with itself. It is used when a table has a foreign key that references its own primary key.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "15-jan-2024-10'24-@AnuragJha003",
+            "quesName": "Explain the concept of a database trigger.",
+            "answer": "A database trigger is a set of instructions that are automatically executed or 'triggered' in response to certain events on a particular table or view in a database.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "16-jan-2024-10'25-@AnuragJha003",
+            "quesName": "What is the purpose of the DISTINCT keyword in SQL?",
+            "answer": "The DISTINCT keyword in SQL is used to retrieve unique values from a specified column in a table. It eliminates duplicate values in the result set.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "17-jan-2024-10'26-@AnuragJha003",
+            "quesName": "Explain the concept of data integrity in databases.",
+            "answer": "Data integrity in databases ensures the accuracy, consistency, and reliability of data. It is maintained through constraints, relationships, and validation rules.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "18-jan-2024-10'27-@AnuragJha003",
+            "quesName": "What is a composite key in a database?",
+            "answer": "A composite key in a database is a combination of two or more columns that uniquely identifies a record. It is used when a single column cannot provide a unique identifier.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "19-jan-2024-10'28-@AnuragJha003",
+            "quesName": "Explain the concept of database normalization forms.",
+            "answer": "Database normalization forms (e.g., 1NF, 2NF, 3NF) are systematic approaches to organizing data to eliminate redundancy and dependency, ensuring efficient data storage and retrieval.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "20-jan-2024-10'29-@AnuragJha003",
+            "quesName": "What is the purpose of the UNION operator in SQL?",
+            "answer": "The UNION operator in SQL is used to combine the result sets of two or more SELECT statements. It retrieves distinct rows from the combined result sets.",
+            "completed": false,
+            "marked": false
+        }
+    ]
   
