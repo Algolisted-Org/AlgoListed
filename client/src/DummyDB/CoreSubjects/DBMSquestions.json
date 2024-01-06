@@ -1,9 +1,108 @@
 [
     {
-        "_id": "25-nov-2023-02'47-@Nayaker",
-        "quesName": "Write DBMS Question Here",
-        "answer": "Write DBMS Answer Here!",
-        "completed": false,
-        "marked": false
+      "_id": "01-jan-2024-10'00-@AnuragJha003",
+      "quesName": "What is a database?",
+      "answer": "A database is a structured collection of data that is organized and stored for efficient retrieval and manipulation.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "02-jan-2024-10'01-@AnuragJha003",
+      "quesName": "What is a DBMS?",
+      "answer": "A Database Management System (DBMS) is software that provides an interface to interact with databases, allowing users to store, retrieve, update, and manage data.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "03-jan-2024-10'02-@AnuragJha003",
+      "quesName": "Explain the difference between DBMS and RDBMS.",
+      "answer": "DBMS is a software that manages databases, while RDBMS (Relational Database Management System) is a specific type of DBMS that stores data in a tabular form with relations between tables.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "04-jan-2024-10'03-@AnuragJha003",
+      "quesName": "What is normalization in the context of databases?",
+      "answer": "Normalization is the process of organizing data in a database to reduce redundancy and dependency by organizing tables and fields of a database.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "05-jan-2024-10'04-@AnuragJha003",
+      "quesName": "What is a primary key?",
+      "answer": "A primary key is a unique identifier for each record in a database table. It ensures that each record can be uniquely identified and is used to establish relationships between tables.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "01-jan-2024-10'05-@AnuragJha003",
+      "quesName": "Explain ACID properties in the context of database transactions.",
+      "answer": "ACID stands for Atomicity, Consistency, Isolation, and Durability. These properties ensure that database transactions are reliable even in the case of system failures or crashes.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "02-jan-2024-10'06-@AnuragJha003",
+      "quesName": "What is a foreign key?",
+      "answer": "A foreign key is a field in a database table that is used to establish a link between the data in two tables. It creates a relationship between the tables by referencing the primary key of another table.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "03-jan-2024-10'07-@AnuragJha003",
+      "quesName": "What is SQL and its role in DBMS?",
+      "answer": "SQL (Structured Query Language) is a domain-specific language used to manage and manipulate relational databases. It is used for tasks such as querying data, updating records, and defining and modifying the structure of databases.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "04-jan-2024-10'08-@AnuragJha003",
+      "quesName": "What is a stored procedure?",
+      "answer": "A stored procedure is a precompiled collection of one or more SQL statements that can be executed as a single unit. It is stored in the database and can be invoked by applications or other stored procedures.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "05-jan-2024-10'09-@AnuragJha003",
+      "quesName": "Explain the concept of indexing in databases.",
+      "answer": "Indexing is the process of creating a data structure (an index) to improve the speed of data retrieval operations on a database table. Indexes can be created on one or more columns of a table.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "01-jan-2024-10'10-@AnuragJha003",
+      "quesName": "What is a view in a database?",
+      "answer": "A view is a virtual table derived from one or more tables in a database. It does not store the data itself but provides a way to represent data stored in other tables.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "02-jan-2024-10'11-@AnuragJha003",
+      "quesName": "What are the advantages of using a NoSQL database?",
+      "answer": "NoSQL databases provide flexibility in handling unstructured data, scalability, and better performance for certain types of applications compared to traditional relational databases.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "03-jan-2024-10'12-@AnuragJha003",
+      "quesName": "What is a transaction in a database?",
+      "answer": "A transaction is a sequence of one or more operations that are executed as a single unit. It ensures that the database remains in a consistent state even in the case of failures.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "04-jan-2024-10'13-@AnuragJha003",
+      "quesName": "Explain the concept of database indexing.",
+      "answer": "Database indexing is a technique to improve the speed of data retrieval operations on a database table by creating a data structure (an index) that allows for faster access to the rows.",
+      "completed": false,
+      "marked": false
+    },
+    {
+      "_id": "05-jan-2024-10'14-@AnuragJha003",
+      "quesName": "What is the purpose of a database schema?",
+      "answer": "A database schema defines the structure of the database, including tables, fields, relationships, and constraints. It provides a blueprint for organizing and representing data in the database.",
+      "completed": false,
+      "marked": false
     }
-]
+  ]
+  
