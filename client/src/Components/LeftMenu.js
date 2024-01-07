@@ -32,7 +32,7 @@ const LeftMenu = ({ marked }) => {
     {
       value: "Contests Archive",
       showAt: "contests-archive",
-      link: "/contests-archive",
+      link: "/contests-archive/leetcode",
     },
     {
       value: "Contest Analysis",
