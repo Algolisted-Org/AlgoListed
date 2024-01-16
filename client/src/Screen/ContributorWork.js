@@ -242,7 +242,7 @@ const Container = styled.div`
           cursor: pointer;
         }
         .show {
-          max-height: 100%; 
+          max-height: 500px; 
           overflow: hidden;
           transition:  3s ease-in;
         }
