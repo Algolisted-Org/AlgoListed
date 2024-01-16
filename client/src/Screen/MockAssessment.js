@@ -255,7 +255,7 @@ const MockAssessment = () => {
             </div>
           </div>
 
-          <div className="display-line"></div>
+          {/* <div className="display-line"></div> */}
 
           <div className="questions">
             {allQuestions.length > 0 ? (
@@ -299,7 +299,7 @@ const MockAssessment = () => {
             </div>
               ))
             ) : (
-              <p>Loading questions...</p>
+              <p></p>
             )}
           </div>
         </div>

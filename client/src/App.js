@@ -61,6 +61,7 @@ import ResumeSection from "./Screen/ResumeSection";
 import CoreSubjectsTracker from "./Screen/CoreSubjectsTracker";
 import MockAssessment from "./Screen/MockAssessment";
 import ContestArchiveCF from "./Screen/ContestArchiveCF";
+import MockAssessmentRunning from "./Screen/MockAssessmentRunning";
 
 
 
@@ -88,8 +89,10 @@ const App = ({currentThemeDark}) => {
         <Route path="/organisation-information/:showpage" element={<OrganisationInfo/>} />
         <Route path="/issues" element={<Issues/>}/>
         <Route path="/resources" element={<Resources/>} />
+        
         {/* <Route path="/blogs/:blogid/:blogname" element={<BlogPage/>} />
         <Route path="/blogs/all" element={<AllBlogs/>} /> */}
+
         <Route path="/work-with-us" element={<ContributeSite/>} />
         <Route path="/aptitude-round" element={<AptitudeRound/>} />
         <Route path="/opportunities" element={<Opportunities/>} />
@@ -111,6 +114,7 @@ const App = ({currentThemeDark}) => {
         <Route path="/interview-summaries" element={<InterviewSummaries/>} />
         <Route path="/core-subjects-tracker/:subjectName" element={<CoreSubjectsTracker/>} />
         <Route path="/mock-assessment" element={<MockAssessment/>} />
+        <Route path="/mock-assessment/:contestId" element={<MockAssessmentRunning/>} />
 
         {/* <Route path="/showdown-server" element={<ShowdownServer/>} />
         <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
@@ -122,7 +126,6 @@ const App = ({currentThemeDark}) => {
         <Route path="/development" element={<Development/>} />
         <Route path="/resume-questions" element={<ResumeSection/>} />
         <Route path="*" element={<PageNotExist/>} />
-
       </Routes>
       <GoToTop />
     </div>
