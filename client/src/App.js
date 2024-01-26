@@ -62,6 +62,7 @@ import CoreSubjectsTracker from "./Screen/CoreSubjectsTracker";
 import MockAssessment from "./Screen/MockAssessment";
 import ContestArchiveCF from "./Screen/ContestArchiveCF";
 import MockAssessmentRunning from "./Screen/MockAssessmentRunning";
+import Profile from "./Screen/Profile";
 
 
 
@@ -123,6 +124,7 @@ const App = ({currentThemeDark}) => {
         {/* <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
         {/* <Route path="/showdown-server-anurag/:serverId" element={<ShowdownServerOpenedFBDB/>} /> */}
 
+        <Route path="/profile/:profileId" element={<Profile/>} />
         <Route path="/development" element={<Development/>} />
         <Route path="/resume-questions" element={<ResumeSection/>} />
         <Route path="*" element={<PageNotExist/>} />
