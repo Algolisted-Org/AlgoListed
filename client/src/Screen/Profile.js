@@ -2,8 +2,37 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import LinkIcon from '@material-ui/icons/Link';
+import CallMadeIcon from '@material-ui/icons/CallMade';
 
 const Profile = () => {
+    const linksData = [
+        {
+            id: 1,
+            url: '/',
+            imageSrc: 'https://www.freepnglogos.com/uploads/gmail-email-logo-png-16.png',
+        },
+        {
+            id: 2,
+            url: '/',
+            imageSrc: 'https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png',
+        },
+        {
+            id: 3,
+            url: '/',
+            imageSrc: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
+        },
+        {
+            id: 4,
+            url: '/',
+            imageSrc: 'https://cdn.iconscout.com/icon/free/png-256/free-code-forces-3628695-3029920.png',
+        },
+        {
+            id: 5,
+            url: '/',
+            imageSrc: 'https://cdn.iconscout.com/icon/free/png-256/free-leetcode-3628885-3030025.png',
+        }
+    ];
+
     return (
         <Container>
             <div className="intro">
@@ -27,10 +56,10 @@ const Profile = () => {
             <div className="table-of-contents">
                 <h2>Table of Contents</h2>
                 <div className="links">
-                    <a href="/"><LinkIcon/> Work Experience</a>
-                    <a href="/"><LinkIcon/> NOTABLE PROJECTS</a>
-                    <a href="/"><LinkIcon/> Open Source Contributions</a>
-                    <a href="/"><LinkIcon/> Achievements</a>
+                    <a href="/"><LinkIcon /> Work Experience</a>
+                    <a href="/"><LinkIcon /> NOTABLE PROJECTS</a>
+                    <a href="/"><LinkIcon /> Open Source Contributions</a>
+                    <a href="/"><LinkIcon /> Achievements</a>
                 </div>
             </div>
             <div className="section">
@@ -108,6 +137,22 @@ const Profile = () => {
             <div className="section">
                 <h2><LinkIcon /> Open Source Contributions</h2>
             </div>
+            <div className="section">
+                <h2><LinkIcon /> ACHIEVEMENTS</h2>
+            </div>
+            <LinksFixed>
+                {linksData.map(link => (
+                    <a key={link.id} href={link.url} className="link">
+                        <img src={link.imageSrc} alt="" />
+                    </a>
+                ))}
+            </LinksFixed>
+            <Promotion>
+                Create a similar page with <b>business.algolisted.com/build-portfolio</b> <CallMadeIcon/>
+            </Promotion>
+            <PromotionFooter>
+                Developed and maintained by <b>business.algolisted.com/build-portfolio</b> - a <i>algolisted.com</i> product
+            </PromotionFooter>
         </Container>
     )
 }
@@ -115,7 +160,10 @@ const Profile = () => {
 export default Profile
 
 const Container = styled.div`
+    position: relative;
     padding: 100px 200px;
+    padding-bottom: calc(0.8rem + 240px);
+
 
     *{
         /* font-family: 'Open Sans', sans-serif; */
@@ -285,5 +333,108 @@ const Container = styled.div`
             }
         }
 
+    }
+`
+
+const LinksFixed = styled.div`
+    position: fixed;
+    left: 0;
+    top: 200px;
+    width: 50px;
+    background-color: whitesmoke;
+    border: 1px solid #cecaca;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+
+    .link{
+        width: 100%;
+        aspect-ratio: 1/1;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 12.5px;
+
+        img{
+            width: 100%;
+        }
+
+        &:hover{
+            background-color: #e5e5e5;
+            transition-duration: 250ms;
+        }
+    }
+
+    .link:not(:last-child) {
+        border-bottom: 1px solid #cecaca;
+    }
+`
+
+const Promotion = styled.div`
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    /* height: 50px; */
+    /* width: 220px; */
+    /* background-color: whitesmoke; */
+    /* border: 1px solid #cecaca; */
+    background-color: #ffffffb5;
+    font-size: 0.75rem;
+    padding: 10px;
+    cursor: pointer;
+    color: cornflowerblue;
+
+    display: flex;
+    align-items: center;
+
+    b{
+        font-weight: 600;
+        color: cornflowerblue;
+        margin: 0 3.5px;
+    }
+    
+    svg{
+        font-size: 0.85rem;
+        fill: cornflowerblue;
+    }
+`
+
+const PromotionFooter = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+
+    padding: 25px 0;
+
+    font-size: 0.85rem;
+    cursor: pointer;
+    /* color: cornflowerblue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f2f2f2;
+
+    b{
+        font-weight: 600;
+        color: cornflowerblue;
+        margin: 0 3.5px;
+    }
+
+    i{
+        font-weight: 600;
+        margin: 0 3.5px;
+    }
+    
+    svg{
+        font-size: 0.85rem;
+        fill: cornflowerblue;
     }
 `
