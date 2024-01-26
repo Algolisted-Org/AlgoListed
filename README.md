@@ -61,12 +61,7 @@ If you encounter a bug, or have a request for a new feature, please open a [New 
 ## Want to Contribute?
 This project is looking for new contributors.  If you are interested in contributing, then follow this
 
-1. Your PR Title should be
-
-**"Aisa Gand Faad Issue resolve kiya hai jii !!!"**
--------
-
-2. To run the front end of the project follow these steps.
+To run the front end of the project follow these steps.
 
 Go to the client folder in the terminal  cd client
 Now to install the required dependencies use npm i --force.
