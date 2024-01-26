@@ -7,154 +7,344 @@ import LeftMenuDark from "../Components/LeftMenuDark";
 import SimpleFooter from "../Components/SimpleFooter";
 import InfoIcon from "@material-ui/icons/Info";
 
-const MockAssessmentRunning = () => {
-    const [needDarkMode, setNeedDarkMode] = useState(true);
-    const [numberofQuestion, setNumberOfQuestion] = useState(null);
-    const [selectedAnswers, setSelectedAnswers] = useState({});
-    const [isAnswerCorrect, setIsAnswerCorrect] = useState({});
+const MockAssessmentRunning = ({ allQuestions }) => {
+  const [needDarkMode, setNeedDarkMode] = useState(true);
+  const [numberofQuestion, setNumberOfQuestion] = useState(null);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState({});
+  const [startTest, setStartTest] = useState(false);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(null);
+  const [correctAnswers, setCorrectAnswers] = useState({});
+  const calculateScore = () => {
+    let scoreCount = 0;
+    const correctAnswersData = {};
+    allQuestions.forEach((question) => {
+      const { _id, correct_ans } = question;
+      if (selectedAnswers[_id] === correct_ans) {
+        scoreCount++;
+      }
+      correctAnswersData[_id] = correct_ans;
+    });
+    setScore(scoreCount);
+    setCorrectAnswers(correctAnswersData);
+  };
+  useEffect(() => {
+    let selectedTheme = localStorage.getItem("selectedTheme");
+    if (selectedTheme === "dark") setNeedDarkMode(true);
+  }, []);
 
-    useEffect(() => {
-        let selectedTheme = localStorage.getItem("selectedTheme");
-        if (selectedTheme === "dark") setNeedDarkMode(true);
-    }, []);
+  useEffect(() => {
+    document.title = "Generate Mock Online Assessment - Algolisted";
+  }, []);
 
-    useEffect(() => {
-        document.title = "Generate Mock Online Assessment - Algolisted";
-    }, []);
+  console.log("needDarkMode : ", needDarkMode);
+  const toggleDarkMode = () => {
+    setNeedDarkMode(!needDarkMode);
+  };
+  const startTestButton = () => {
+    setStartTest(true);
+    console.log(allQuestions);
+  };
+  const handleCheckboxChange = (questionId, option) => {
+    // Update selectedAnswers when user selects an option
+    setSelectedAnswers((prevSelectedAnswers) => ({
+      ...prevSelectedAnswers,
+      [questionId]: option,
+    }));
+  };
+  const checkAnswer = (questionId) => {
+    const correctAnswer = allQuestions.find(
+      (question) => question._id === questionId
+    )?.correct_ans;
+    const isCorrect = selectedAnswers[questionId] === correctAnswer;
+    console.log(correctAnswer, isCorrect);
+    setIsAnswerCorrect((prevIsAnswerCorrect) => ({
+      ...prevIsAnswerCorrect,
+      [questionId]: isCorrect,
+    }));
+  };
+  const goToQuestion = (index) => {
+    setCurrentQuestionIndex(index);
+  };
+  const goToNextQuestion = () => {
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  };
 
-    console.log("needDarkMode : ", needDarkMode);
-    const toggleDarkMode = () => {
-        setNeedDarkMode(!needDarkMode);
-    };
+  const goToPrevQuestion = () => {
+    setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+  };
 
-    return (
-        <GrandContainer needDarkMode={needDarkMode}>
-            <MobContainer>
-                We are still working on Responsive Version of the website, please view
-                the site with width more than 1100px, a standard laptop or tablet
-                landscape.
-                <img
-                    src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif"
-                    alt=""
-                />
-            </MobContainer>
-            <Container needDarkMode={needDarkMode}>
-                {needDarkMode ? (
-                    <CCHeaderDarkPlus
-                        needDarkMode={needDarkMode}
-                        toggleDarkMode={toggleDarkMode}
-                    />
-                ) : (
-                    <CCHeaderPlus
-                        needDarkMode={needDarkMode}
-                        toggleDarkMode={toggleDarkMode}
-                    />
-                )}
-                {needDarkMode ? (
-                    <LeftMenuDark marked={"mock-assessment"} />
-                ) : (
-                    <LeftMenu marked={"mock-assessment"} />
-                )}
-                {/* ---> change this all-blogs to your desired page-id */}
+  return (
+    <GrandContainer needDarkMode={needDarkMode}>
+      <MobContainer>
+        We are still working on Responsive Version of the website, please view
+        the site with width more than 1100px, a standard laptop or tablet
+        landscape.
+        <img
+          src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif"
+          alt=""
+        />
+      </MobContainer>
+      <Container needDarkMode={needDarkMode}>
+        {needDarkMode ? (
+          <CCHeaderDarkPlus
+            needDarkMode={needDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
+        ) : (
+          <CCHeaderPlus
+            needDarkMode={needDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
+        )}
+        {needDarkMode ? (
+          <LeftMenuDark marked={"mock-assessment"} />
+        ) : (
+          <LeftMenu marked={"mock-assessment"} />
+        )}
+        {/* ---> change this all-blogs to your desired page-id */}
 
-                <div className="cc-middle-content">
-                    <h1 className="main-heading">Mock Online Assessment - SET (A-8020)</h1>
-                    <p className="heading-supporter">
-                        We've designed this page as a platform for students to hone their
-                        skills in tackling Online Assessments from various companies. Here,
-                        you'll find MCQs to solve within a specified time frame, simulating
-                        real competition scenarios. Additionally, we provide comprehensive
-                        analytics at the end to enhance your understanding of the subjects.
-                    </p>
+        <div className="cc-middle-content">
+          <h1 className="main-heading">
+            Mock Online Assessment - SET (A-8020)
+          </h1>
+          <p className="heading-supporter">
+            We've designed this page as a platform for students to hone their
+            skills in tackling Online Assessments from various companies. Here,
+            you'll find MCQs to solve within a specified time frame, simulating
+            real competition scenarios. Additionally, we provide comprehensive
+            analytics at the end to enhance your understanding of the subjects.
+          </p>
 
-                    <div className="display-line"></div>
-                    
-                    <div className="main-content">
-                        <div className="questions">
-                            <div className="question">
-                                <div className="main-question">
-                                    <b>Question 1. : </b> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum exercitationem modi neque ipsam doloribus blanditiis laudantium sunt dolorem, id consectetur cupiditate rerum repellendus illum cumque possimus est! Eveniet, deserunt illo!
-                                </div>
-                                <div className="options">
-                                    <div className="option">
-                                        <input
-                                            type="checkbox"
-                                        />
-                                        <label>
-                                            "Option A"
-                                        </label>
-                                    </div>
-                                    <div className="option">
-                                        <input
-                                            type="checkbox"
-                                        />
-                                        <label>
-                                            "Option B"
-                                        </label>
-                                    </div>
-                                    <div className="option">
-                                        <input
-                                            type="checkbox"
-                                        />
-                                        <label>
-                                            "Option C"
-                                        </label>
-                                    </div>
-                                    <div className="option">
-                                        <input
-                                            type="checkbox"
-                                        />
-                                        <label>
-                                            "Option D"
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="problem-tag">Operating System</div>
+          <div className="display-line"></div>
+
+          <div className="main-content">
+            {!startTest ? (
+              <button className="btn" onClick={startTestButton}>
+                Start test
+              </button>
+            ) : (
+              <>
+                {/* <div className="questions">
+                  <div className="question">
+                    <div className="questions">
+                      {allQuestions.length > 0 ? (
+                        allQuestions.map((question_main, index) => (
+                          <div className="question" key={question_main._id}>
+                            <div className="main-question">
+                              <b>Question {index + 1} : </b>{" "}
+                              {question_main.question}
+                             
                             </div>
-                        </div>
-                        <div className="tracker">
-                            <div className="time-left">
-                                00:45:23
+                            <div className="options">
+                              {["a", "b", "c", "d"].map(
+                                (option, optionIndex) => (
+                                  <div className="option" key={optionIndex}>
+                                    <input
+                                      type="checkbox"
+                                      id={`${question_main._id}-${option}`}
+                                      onChange={() =>
+                                        handleCheckboxChange(
+                                          question_main._id,
+                                          option
+                                        )
+                                      }
+                                      checked={
+                                        selectedAnswers[question_main._id] ===
+                                        option
+                                      }
+                                    />
+                                    <label
+                                      htmlFor={`${question_main._id}-${option}`}
+                                    >
+                                      {`${option}. ${
+                                        question_main[option.toLowerCase()]
+                                      }`}
+                                    </label>
+                                  </div>
+                                )
+                              )}
                             </div>
-                            <div className="questions-track">
-                                <div className="question done-question">1</div>
-                                <div className="question">2</div>
-                                <div className="question done-question">3</div>
-                                <div className="question">4</div>
-                                <div className="question">5</div>
-                                <div className="question done-question">6</div>
-                                <div className="question done-question">7</div>
-                                <div className="question">8</div>
-                                <div className="question done-question">9</div>
-                                <div className="question done-question">10</div>
-                                <div className="question done-question">11</div>
-                                <div className="question done-question">12</div>
-                                <div className="question">13</div>
-                                <div className="question">14</div>
-                                <div className="question">15</div>
-                                <div className="question done-question">16</div>
-                                <div className="question">17</div>
-                                <div className="question done-question">18</div>
-                                <div className="question">19</div>
-                                <div className="question done-question">20</div>
-                                <div className="question done-question">21</div>
-                                <div className="question done-question">22</div>
-                                <div className="question">23</div>
-                                <div className="question done-question">24</div>
-                                <div className="question">25</div>
+                            <div className="problem-tag">
+                              {question_main.topic}
                             </div>
-                            <div className="move-prev-next">
-                                <div className="btn">Prev</div>
-                                <div className="btn">Next</div>
-                            </div>
-                        </div>
+                            <button
+                              onClick={() => checkAnswer(question_main._id)}
+                              className="btn"
+                            >
+                              Check Answer
+                            </button>
+                            {isAnswerCorrect[question_main._id] !==
+                              undefined && (
+                              <div className="correct-answer-message">
+                                {isAnswerCorrect[question_main._id]
+                                  ? "Your answer is correct!"
+                                  : `Unfortunately, you selected the wrong answer. The correct answer is ${question_main.correct_ans}.`}
+                              </div>
+                            )}
+                          </div>
+                        ))
+                      ) : (
+                        <p></p>
+                      )}
                     </div>
+                  </div>
                 </div>
+                <div className="tracker">
+                  <div className="time-left">00:45:23</div>
+                  <div className="questions-track">
+                    <div className="question done-question">1</div>
+                    <div className="question">2</div>
+                    <div className="question done-question">3</div>
+                    <div className="question">4</div>
+                    <div className="question">5</div>
+                    <div className="question done-question">6</div>
+                    <div className="question done-question">7</div>
+                    <div className="question">8</div>
+                    <div className="question done-question">9</div>
+                    <div className="question done-question">10</div>
+                    <div className="question done-question">11</div>
+                    <div className="question done-question">12</div>
+                    <div className="question">13</div>
+                    <div className="question">14</div>
+                    <div className="question">15</div>
+                    <div className="question done-question">16</div>
+                    <div className="question">17</div>
+                    <div className="question done-question">18</div>
+                    <div className="question">19</div>
+                    <div className="question done-question">20</div>
+                    <div className="question done-question">21</div>
+                    <div className="question done-question">22</div>
+                    <div className="question">23</div>
+                    <div className="question done-question">24</div>
+                    <div className="question">25</div>
+                  </div>
+                  <div className="move-prev-next">
+                    <div className="btn">Prev</div>
+                    <div className="btn">Next</div>
+                  </div>
+                </div> */}
+                <>
+                  <div className="questions">
+                    <div className="question">
+                      <div className="questions">
+                        {allQuestions.length > 0 && (
+                          <div
+                            className="question"
+                            key={allQuestions[currentQuestionIndex]._id}
+                          >
+                            <div className="main-question">
+                              <b>Question {currentQuestionIndex + 1} : </b>{" "}
+                              {allQuestions[currentQuestionIndex].question}
+                            </div>
+                            {/* Your options rendering code */}
+                            <div className="options">
+                              {["a", "b", "c", "d"].map(
+                                (option, optionIndex) => (
+                                  <div className="option" key={optionIndex}>
+                                    <input
+                                      type="checkbox"
+                                      id={`${allQuestions[currentQuestionIndex]._id}-${option}`}
+                                      onChange={() =>
+                                        handleCheckboxChange(
+                                          allQuestions[currentQuestionIndex]
+                                            ._id,
+                                          option
+                                        )
+                                      }
+                                      checked={
+                                        selectedAnswers[
+                                          allQuestions[currentQuestionIndex]._id
+                                        ] === option
+                                      }
+                                    />
+                                    <label
+                                      htmlFor={`${allQuestions[currentQuestionIndex]._id}-${option}`}
+                                    >
+                                      {`${option}. ${
+                                        allQuestions[currentQuestionIndex][
+                                          option.toLowerCase()
+                                        ]
+                                      }`}
+                                    </label>
+                                  </div>
+                                )
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      {score !== null && (
+                        <div>
+                          <h2>Your Score: {score}</h2>
+                          <h3>Correct Answers:</h3>
+                          <ul>
+                            {allQuestions.map((question,index) => (
+                              <li key={question._id}>
+                                Question {index+1}:{" "}
+                                {correctAnswers[question._id]}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
-                <SimpleFooter />
-            </Container>
-        </GrandContainer>
-    );
+                  <div className="tracker">
+                    <div className="time-left">00:45:23</div>
+
+                    <div className="questions-track">
+                      {allQuestions.map((question, index) => (
+                        <div
+                          key={question._id}
+                          className={`question ${
+                            index === currentQuestionIndex
+                              ? "active-question"
+                              : ""
+                          } ${
+                            selectedAnswers[question._id] ? "done-question" : ""
+                          }`}
+                          onClick={() => goToQuestion(index)}
+                        >
+                          {index + 1}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="move-prev-next">
+                      <button
+                        className="btn"
+                        onClick={goToPrevQuestion}
+                        disabled={currentQuestionIndex === 0}
+                      >
+                        Prev
+                      </button>
+                      <button
+                        className="btn"
+                        onClick={goToNextQuestion}
+                        disabled={
+                          currentQuestionIndex === allQuestions.length - 1
+                        }
+                      >
+                        Next
+                      </button>
+                      <button className="btn" onClick={calculateScore}>
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </>
+              </>
+            )}
+          </div>
+        </div>
+
+        <SimpleFooter />
+      </Container>
+    </GrandContainer>
+  );
 };
 
 export default MockAssessmentRunning;
@@ -200,7 +390,7 @@ const Container = styled.div`
   }
 
   background-color: ${(props) =>
-        props.needDarkMode ? "#313338" : "transparent"};
+    props.needDarkMode ? "#313338" : "transparent"};
 
   a {
     color: ${(props) => (props.needDarkMode ? "#6d93d8" : "#18489f")};
@@ -218,7 +408,7 @@ const Container = styled.div`
     position: relative;
     width: 100%;
     max-width: 1360px;
-    min-width: 850px;
+    min-width: 1000px;
     margin: auto;
 
     @media only screen and (max-width: 1200px) {
@@ -267,190 +457,192 @@ const Container = styled.div`
       }
     }
 
-    
-    .main-content{
-        width: 100%;
+    .main-content {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+
+      .questions {
+        width: calc(100% - 200px);
         display: flex;
-        align-items: flex-start;
+        flex-direction: column;
 
-        .questions {
-            width: calc(100% - 200px);
+        .question {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: 50px;
+
+          .main-question {
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+            font-size: 0.9rem;
+            font-weight: 300;
+
+            b {
+              color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+              font-weight: 600;
+            }
+
+            img {
+              height: 250px;
+              display: block;
+              margin: 10px 0 15px 0;
+            }
+          }
+
+          .options {
             display: flex;
             flex-direction: column;
 
-            .question {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 50px;
+            .option {
+              display: flex;
+              align-items: center;
+              margin-top: 10px;
 
-            .main-question {
+              label {
                 color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+                margin-left: 5px;
                 font-size: 0.9rem;
                 font-weight: 300;
+              }
 
-                b {
-                color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
-                font-weight: 600;
-                }
-
-                img {
-                height: 250px;
-                display: block;
-                margin: 10px 0 15px 0;
-                }
-            }
-
-            .options {
-                display: flex;
-                flex-direction: column;
-
-                .option {
-                display: flex;
-                align-items: center;
-                margin-top: 10px;
-
-                label {
-                    color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
-                    margin-left: 5px;
-                    font-size: 0.9rem;
-                    font-weight: 300;
-                }
-
-                input[type="checkbox"] {
-                    margin-right: 2.5px;
-                    border: none;
-                    cursor: pointer;
-                    scale: 1.15;
-                }
-                }
-            }
-
-            .problem-tag {
-                background-color: ${(props) =>
-                props.needDarkMode ? "#404249" : "#e5e5e5"};
-                color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
-                font-size: 0.75rem;
-                padding: 5px 10px;
-                border-radius: 10px;
-                font-weight: 200;
-                margin-top: 20px;
-            }
-            .btn {
-                width: 180px;
-                margin-top: 10px;
-                background-color: #404249;
-                height: 45px;
-                border-radius: 10px;
-                border: 1px solid #c2b1b1;
-                color: #333;
-                display: inline-block;
-                font-size: 0.85rem;
-                font-weight: 300;
-                text-decoration: none;
-                /* text-transform: uppercase; */
-                border-radius: 100px;
-                background: linear-gradient(
-                300deg,
-                #56f238,
-                #b3adff,
-                #c5c5ef,
-                #bde6ce,
-                #56f238
-                );
-                background-size: 400% 400%;
-                -webkit-animation: AnimationName 10s ease infinite;
-                -moz-animation: AnimationName 10s ease infinite;
-                animation: AnimationName 10s ease infinite;
-                border-color: transparent;
+              input[type="checkbox"] {
+                margin-right: 2.5px;
+                border: none;
                 cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                opacity: 0.75;
-
-                a {
-                color: #333;
-                }
-
-                &:hover {
-                background-color: whitesmoke;
-                color: #333;
-                cursor: pointer;
-                transition-duration: 500ms;
-                opacity: 1;
-                }
+                scale: 1.15;
+              }
             }
+          }
+
+          .problem-tag {
+            background-color: ${(props) =>
+              props.needDarkMode ? "#404249" : "#e5e5e5"};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+            font-size: 0.75rem;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-weight: 200;
+            margin-top: 20px;
+          }
+          .btn {
+            width: 180px;
+            margin-top: 10px;
+            background-color: #404249;
+            height: 45px;
+            border-radius: 10px;
+            border: 1px solid #c2b1b1;
+            color: #333;
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 300;
+            text-decoration: none;
+            /* text-transform: uppercase; */
+            border-radius: 100px;
+            background: linear-gradient(
+              300deg,
+              #56f238,
+              #b3adff,
+              #c5c5ef,
+              #bde6ce,
+              #56f238
+            );
+            background-size: 400% 400%;
+            -webkit-animation: AnimationName 10s ease infinite;
+            -moz-animation: AnimationName 10s ease infinite;
+            animation: AnimationName 10s ease infinite;
+            border-color: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0.75;
+
+            a {
+              color: #333;
+            }
+
+            &:hover {
+              background-color: whitesmoke;
+              color: #333;
+              cursor: pointer;
+              transition-duration: 500ms;
+              opacity: 1;
+            }
+          }
         }
-    }
-    .tracker{
+      }
+      .tracker {
         width: 200px;
         height: 40px;
         margin-left: 20px;
-        
-        .time-left{
-            width: 100%;
+
+        .time-left {
+          width: 100%;
+          background-color: white;
+          color: #333;
+          text-align: center;
+          padding: 5px;
+          font-size: 0.85rem;
+          border-radius: 5px;
+          letter-spacing: 0.25rem;
+          font-weight: 500;
+        }
+
+        .questions-track {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0;
+          margin-top: 20px;
+
+          .question {
+            width: calc(20% - 5px);
+            height: 35px;
+            margin-bottom: 6.25px;
+            background-color: #2b2d31;
+
+            display: grid;
+            place-items: center;
+
+            color: white;
+            font-size: 0.65rem;
+            border-radius: 5px;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+          .done-question {
+            background-color: green;
+            color: #333;
+          }
+          .active-question {
+            background-color: orange;
+            color: #333;
+          }
+        }
+
+        .move-prev-next {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 10px;
+
+          .btn {
+            width: calc(50% - 3.15px);
             background-color: white;
             color: #333;
             text-align: center;
             padding: 5px;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             border-radius: 5px;
-            letter-spacing: 0.25rem;
-            font-weight: 500;
+          }
         }
-
-        .questions-track{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0;
-            margin-top: 20px;
-            
-            .question{
-                width: calc(20% - 5px);
-                height: 35px;
-                margin-bottom: 6.25px;
-                background-color: #2b2d31;
-
-                display: grid;
-                place-items: center;
-
-                color: white;
-                font-size: 0.65rem;
-                border-radius: 5px;
-
-                &:hover{
-                    cursor: pointer;
-                }
-            }
-            
-            .done-question{
-                background-color: orange;
-                color: #333;
-            }
-        }  
-        
-        .move-prev-next{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 10px;
-
-            .btn{
-                width: calc(50% - 3.15px);
-                background-color: white;
-                color: #333;
-                text-align: center;
-                padding: 5px;
-                font-size: 0.75rem;
-                border-radius: 5px;
-            }
-        } 
-    }
+      }
     }
   }
- 
 `;
