@@ -6,9 +6,6 @@ import LeftMenu from "../Components/LeftMenu";
 import LeftMenuDark from "../Components/LeftMenuDark";
 import SimpleFooter from "../Components/SimpleFooter";
 import InfoIcon from "@material-ui/icons/Info";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-
 import CNMCQs from "../DummyDB/MockAssessment/CNMCQs.json";
 import OSMCQs from "../DummyDB/MockAssessment/OSMCQs.json";
 import APTIMCQs from "../DummyDB/MockAssessment/AptitudeMCQs.json";
@@ -22,6 +19,7 @@ const MockAssessment = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [isAnswerCorrect, setIsAnswerCorrect] = useState({});
   const [genratedQuestion, setGenratedQuestion] = useState(false);
+  const [time,setTime]=useState(0);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
@@ -53,6 +51,10 @@ const MockAssessment = () => {
   const handleNumberquestion = (e) => {
     setNumberOfQuestion(e.target.options[e.target.selectedIndex].text);
   };
+  const handleTime=(e)=>{
+    setTime(e.target.options[e.target.selectedIndex].value);
+  }
+
 
   const generateQuestions = () => {
     setGenratedQuestion(true);
@@ -208,11 +210,13 @@ const MockAssessment = () => {
                         </select>
                       </div>
                       <div className="detail">
-                        <select value="" className="text">
-                          <option value="0">Assessment Duration :</option>
-                          <option value="1">Easy</option>
-                          <option value="2">Medium</option>
-                          <option value="3">Hard</option>
+                        <select value={time} className="text" onChange={handleTime}>
+                          <option value="0">Duration :</option>
+                          <option value="1">1min </option>
+                          <option value="20">20min </option>
+                          <option value="30">30min </option>
+                          <option value="45">45min </option>
+                          <option value="60">60min </option>
                         </select>
                       </div>
                     </div>
@@ -243,7 +247,7 @@ const MockAssessment = () => {
                 </div>
               </>
             ) : (
-              <MockAssessmentRunning allQuestions={allQuestions} />
+              <MockAssessmentRunning allQuestions={allQuestions} time={time} />
             )}
           </div>
           <div className="main-info">

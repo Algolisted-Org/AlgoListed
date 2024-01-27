@@ -7,7 +7,7 @@ import LeftMenuDark from "../Components/LeftMenuDark";
 import SimpleFooter from "../Components/SimpleFooter";
 import InfoIcon from "@material-ui/icons/Info";
 
-const MockAssessmentRunning = ({ allQuestions }) => {
+const MockAssessmentRunning = ({ allQuestions, time }) => {
   const [needDarkMode, setNeedDarkMode] = useState(true);
   const [numberofQuestion, setNumberOfQuestion] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -16,6 +16,8 @@ const MockAssessmentRunning = ({ allQuestions }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(null);
   const [correctAnswers, setCorrectAnswers] = useState({});
+  const [timer, setTimer] = useState(0); 
+  const [submitted, setSubmitted] = useState(false);
   const calculateScore = () => {
     let scoreCount = 0;
     const correctAnswersData = {};
@@ -31,7 +33,6 @@ const MockAssessmentRunning = ({ allQuestions }) => {
   };
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if (selectedTheme === "dark") setNeedDarkMode(true);
   }, []);
 
   useEffect(() => {
@@ -44,10 +45,23 @@ const MockAssessmentRunning = ({ allQuestions }) => {
   };
   const startTestButton = () => {
     setStartTest(true);
+    setTimer(time * 60);
     console.log(allQuestions);
   };
+  useEffect(() => {
+    let interval;
+    if (startTest && timer > 0 && !submitted) { 
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else if (timer === 0 || submitted) { 
+      clearInterval(interval);
+      calculateScore();
+    }
+
+    return () => clearInterval(interval);
+  }, [startTest, timer, submitted]);
   const handleCheckboxChange = (questionId, option) => {
-    // Update selectedAnswers when user selects an option
     setSelectedAnswers((prevSelectedAnswers) => ({
       ...prevSelectedAnswers,
       [questionId]: option,
@@ -74,7 +88,15 @@ const MockAssessmentRunning = ({ allQuestions }) => {
   const goToPrevQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
   };
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
 
+  const handleSubmit = () => {
+    setSubmitted(true); 
+  };
   return (
     <GrandContainer needDarkMode={needDarkMode}>
       <MobContainer>
@@ -126,216 +148,112 @@ const MockAssessmentRunning = ({ allQuestions }) => {
               </button>
             ) : (
               <>
-                {/* <div className="questions">
+                <div className="questions">
                   <div className="question">
                     <div className="questions">
-                      {allQuestions.length > 0 ? (
-                        allQuestions.map((question_main, index) => (
-                          <div className="question" key={question_main._id}>
-                            <div className="main-question">
-                              <b>Question {index + 1} : </b>{" "}
-                              {question_main.question}
-                             
-                            </div>
-                            <div className="options">
-                              {["a", "b", "c", "d"].map(
-                                (option, optionIndex) => (
-                                  <div className="option" key={optionIndex}>
-                                    <input
-                                      type="checkbox"
-                                      id={`${question_main._id}-${option}`}
-                                      onChange={() =>
-                                        handleCheckboxChange(
-                                          question_main._id,
-                                          option
-                                        )
-                                      }
-                                      checked={
-                                        selectedAnswers[question_main._id] ===
-                                        option
-                                      }
-                                    />
-                                    <label
-                                      htmlFor={`${question_main._id}-${option}`}
-                                    >
-                                      {`${option}. ${
-                                        question_main[option.toLowerCase()]
-                                      }`}
-                                    </label>
-                                  </div>
-                                )
-                              )}
-                            </div>
-                            <div className="problem-tag">
-                              {question_main.topic}
-                            </div>
-                            <button
-                              onClick={() => checkAnswer(question_main._id)}
-                              className="btn"
-                            >
-                              Check Answer
-                            </button>
-                            {isAnswerCorrect[question_main._id] !==
-                              undefined && (
-                              <div className="correct-answer-message">
-                                {isAnswerCorrect[question_main._id]
-                                  ? "Your answer is correct!"
-                                  : `Unfortunately, you selected the wrong answer. The correct answer is ${question_main.correct_ans}.`}
-                              </div>
-                            )}
+                      {allQuestions.length > 0 && (
+                        <div
+                          className="question"
+                          key={allQuestions[currentQuestionIndex]._id}
+                        >
+                          <div className="main-question">
+                            <b>Question {currentQuestionIndex + 1} : </b>{" "}
+                            {allQuestions[currentQuestionIndex].question}
                           </div>
-                        ))
-                      ) : (
-                        <p></p>
+                          {/* Your options rendering code */}
+                          <div className="options">
+                            {["a", "b", "c", "d"].map((option, optionIndex) => (
+                              <div className="option" key={optionIndex}>
+                                <input
+                                  type="checkbox"
+                                  id={`${allQuestions[currentQuestionIndex]._id}-${option}`}
+                                  onChange={() =>
+                                    handleCheckboxChange(
+                                      allQuestions[currentQuestionIndex]._id,
+                                      option
+                                    )
+                                  }
+                                  checked={
+                                    selectedAnswers[
+                                      allQuestions[currentQuestionIndex]._id
+                                    ] === option
+                                  }
+                                />
+                                <label
+                                  htmlFor={`${allQuestions[currentQuestionIndex]._id}-${option}`}
+                                >
+                                  {`${option}. ${
+                                    allQuestions[currentQuestionIndex][
+                                      option.toLowerCase()
+                                    ]
+                                  }`}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       )}
                     </div>
+                    {submitted && (
+                      <div>
+                        <h2>Your Score: {score}</h2>
+                        <h3>Correct Answers:</h3>
+                        <ul>
+                          {allQuestions.map((question, index) => (
+                            <li key={question._id}>
+                              Question {index + 1}:{" "}
+                              {correctAnswers[question._id]}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
+
                 <div className="tracker">
-                  <div className="time-left">00:45:23</div>
+                  {startTest && <div className="time-left">{formatTime(timer)} mins</div>}
+
                   <div className="questions-track">
-                    <div className="question done-question">1</div>
-                    <div className="question">2</div>
-                    <div className="question done-question">3</div>
-                    <div className="question">4</div>
-                    <div className="question">5</div>
-                    <div className="question done-question">6</div>
-                    <div className="question done-question">7</div>
-                    <div className="question">8</div>
-                    <div className="question done-question">9</div>
-                    <div className="question done-question">10</div>
-                    <div className="question done-question">11</div>
-                    <div className="question done-question">12</div>
-                    <div className="question">13</div>
-                    <div className="question">14</div>
-                    <div className="question">15</div>
-                    <div className="question done-question">16</div>
-                    <div className="question">17</div>
-                    <div className="question done-question">18</div>
-                    <div className="question">19</div>
-                    <div className="question done-question">20</div>
-                    <div className="question done-question">21</div>
-                    <div className="question done-question">22</div>
-                    <div className="question">23</div>
-                    <div className="question done-question">24</div>
-                    <div className="question">25</div>
-                  </div>
-                  <div className="move-prev-next">
-                    <div className="btn">Prev</div>
-                    <div className="btn">Next</div>
-                  </div>
-                </div> */}
-                <>
-                  <div className="questions">
-                    <div className="question">
-                      <div className="questions">
-                        {allQuestions.length > 0 && (
-                          <div
-                            className="question"
-                            key={allQuestions[currentQuestionIndex]._id}
-                          >
-                            <div className="main-question">
-                              <b>Question {currentQuestionIndex + 1} : </b>{" "}
-                              {allQuestions[currentQuestionIndex].question}
-                            </div>
-                            {/* Your options rendering code */}
-                            <div className="options">
-                              {["a", "b", "c", "d"].map(
-                                (option, optionIndex) => (
-                                  <div className="option" key={optionIndex}>
-                                    <input
-                                      type="checkbox"
-                                      id={`${allQuestions[currentQuestionIndex]._id}-${option}`}
-                                      onChange={() =>
-                                        handleCheckboxChange(
-                                          allQuestions[currentQuestionIndex]
-                                            ._id,
-                                          option
-                                        )
-                                      }
-                                      checked={
-                                        selectedAnswers[
-                                          allQuestions[currentQuestionIndex]._id
-                                        ] === option
-                                      }
-                                    />
-                                    <label
-                                      htmlFor={`${allQuestions[currentQuestionIndex]._id}-${option}`}
-                                    >
-                                      {`${option}. ${
-                                        allQuestions[currentQuestionIndex][
-                                          option.toLowerCase()
-                                        ]
-                                      }`}
-                                    </label>
-                                  </div>
-                                )
-                              )}
-                            </div>
-                          </div>
-                        )}
+                    {allQuestions.map((question, index) => (
+                      <div
+                        key={question._id}
+                        className={`question ${
+                          index === currentQuestionIndex
+                            ? "active-question"
+                            : ""
+                        } ${
+                          selectedAnswers[question._id] ? "done-question" : ""
+                        }`}
+                        onClick={() => goToQuestion(index)}
+                      >
+                        {index + 1}
                       </div>
-                      {score !== null && (
-                        <div>
-                          <h2>Your Score: {score}</h2>
-                          <h3>Correct Answers:</h3>
-                          <ul>
-                            {allQuestions.map((question,index) => (
-                              <li key={question._id}>
-                                Question {index+1}:{" "}
-                                {correctAnswers[question._id]}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
+                    ))}
                   </div>
 
-                  <div className="tracker">
-                    <div className="time-left">00:45:23</div>
-
-                    <div className="questions-track">
-                      {allQuestions.map((question, index) => (
-                        <div
-                          key={question._id}
-                          className={`question ${
-                            index === currentQuestionIndex
-                              ? "active-question"
-                              : ""
-                          } ${
-                            selectedAnswers[question._id] ? "done-question" : ""
-                          }`}
-                          onClick={() => goToQuestion(index)}
-                        >
-                          {index + 1}
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="move-prev-next">
-                      <button
-                        className="btn"
-                        onClick={goToPrevQuestion}
-                        disabled={currentQuestionIndex === 0}
-                      >
-                        Prev
-                      </button>
-                      <button
-                        className="btn"
-                        onClick={goToNextQuestion}
-                        disabled={
-                          currentQuestionIndex === allQuestions.length - 1
-                        }
-                      >
-                        Next
-                      </button>
-                      <button className="btn" onClick={calculateScore}>
-                        Submit
-                      </button>
-                    </div>
+                  <div className="move-prev-next">
+                    <button
+                      className="btn"
+                      onClick={goToPrevQuestion}
+                      disabled={currentQuestionIndex === 0}
+                    >
+                      Prev
+                    </button>
+                    <button
+                      className="btn"
+                      onClick={goToNextQuestion}
+                      disabled={
+                        currentQuestionIndex === allQuestions.length - 1
+                      }
+                    >
+                      Next
+                    </button>
+                    <button className="btn" onClick={handleSubmit}>
+                      Submit
+                    </button>
                   </div>
-                </>
+                </div>
               </>
             )}
           </div>
