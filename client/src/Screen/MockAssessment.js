@@ -6,20 +6,20 @@ import LeftMenu from "../Components/LeftMenu";
 import LeftMenuDark from "../Components/LeftMenuDark";
 import SimpleFooter from "../Components/SimpleFooter";
 import InfoIcon from "@material-ui/icons/Info";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-
 import CNMCQs from "../DummyDB/MockAssessment/CNMCQs.json";
 import OSMCQs from "../DummyDB/MockAssessment/OSMCQs.json";
 import APTIMCQs from "../DummyDB/MockAssessment/AptitudeMCQs.json";
 import DBMSMCQs from "../DummyDB/MockAssessment/DBMSMCQs.json";
 import OOPSMCQs from "../DummyDB/MockAssessment/OOPSMCQs.json";
+import MockAssessmentRunning from "./MockAssessmentRunning";
 
 const MockAssessment = () => {
   const [needDarkMode, setNeedDarkMode] = useState(true);
   const [numberofQuestion, setNumberOfQuestion] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [isAnswerCorrect, setIsAnswerCorrect] = useState({});
+  const [genratedQuestion, setGenratedQuestion] = useState(false);
+  const [time,setTime]=useState(0);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
@@ -34,28 +34,11 @@ const MockAssessment = () => {
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
-  const handleCheckboxChange = (questionId, option) => {
-    // Update selectedAnswers when user selects an option
-    setSelectedAnswers((prevSelectedAnswers) => ({
-      ...prevSelectedAnswers,
-      [questionId]: option,
-    }));
-  };
-  const checkAnswer = (questionId) => {
-
-    const correctAnswer = allQuestions.find((question) => question._id === questionId)?.correct_ans;
-    const isCorrect = selectedAnswers[questionId] === correctAnswer;
-    console.log(correctAnswer,isCorrect)
-    setIsAnswerCorrect((prevIsAnswerCorrect) => ({
-      ...prevIsAnswerCorrect,
-      [questionId]: isCorrect,
-    }));
-  };
+ 
   const [allQuestions, setAllQuestions] = useState([]);
 
   function generateRandomValues(n, r, x) {
     const values = [];
-
 
     for (let i = 0; i < r; i++) {
       const randomValue = Math.floor(Math.random() * n);
@@ -68,8 +51,13 @@ const MockAssessment = () => {
   const handleNumberquestion = (e) => {
     setNumberOfQuestion(e.target.options[e.target.selectedIndex].text);
   };
+  const handleTime=(e)=>{
+    setTime(e.target.options[e.target.selectedIndex].value);
+  }
+
 
   const generateQuestions = () => {
+    setGenratedQuestion(true);
     console.log(numberofQuestion);
 
     const selectedTopics = [];
@@ -152,14 +140,21 @@ const MockAssessment = () => {
         {/* ---> change this all-blogs to your desired page-id */}
 
         <div className="cc-middle-content">
-          <h1 className="main-heading">Generate Mock Online Assessment</h1>
-          <p className="heading-supporter">
-            We've designed this page as a platform for students to hone their
-            skills in tackling Online Assessments from various companies. Here,
-            you'll find MCQs to solve within a specified time frame, simulating
-            real competition scenarios. Additionally, we provide comprehensive
-            analytics at the end to enhance your understanding of the subjects.
-          </p>
+          {genratedQuestion ? (
+            ""
+          ) : (
+            <>
+              <h1 className="main-heading">Generate Mock Online Assessment</h1>
+              <p className="heading-supporter">
+                We've designed this page as a platform for students to hone
+                their skills in tackling Online Assessments from various
+                companies. Here, you'll find MCQs to solve within a specified
+                time frame, simulating real competition scenarios. Additionally,
+                we provide comprehensive analytics at the end to enhance your
+                understanding of the subjects.
+              </p>
+            </>
+          )}
           {/* <div className="message">
                         <div className="icon"></div>
                         <div className="text">
@@ -168,84 +163,92 @@ const MockAssessment = () => {
                     </div> */}
 
           <div className="input-container">
-            <div className="resume-upload">
-              {/* <h3>Topics to Include</h3> */}
-              <div className="options">
-                <div className="option">
-                  <input type="checkbox" id="aptitude" />
-                  <label htmlFor="aptitude">Aptitude</label>
-                </div>
-                <div className="option">
-                  <input type="checkbox" id="operating" />
-                  <label htmlFor="operating">Operating System</label>
-                </div>
-                <div className="option">
-                  <input type="checkbox" id="dbms" />
-                  <label htmlFor="dbms">DBMS</label>
-                </div>
-                <div className="option">
-                  <input type="checkbox" id="cn" />
-                  <label htmlFor="cn">Computer Networks</label>
-                </div>
-                <div className="option">
-                  <input type="checkbox" id="oops" />
-                  <label htmlFor="oops">OOPs</label>
-                </div>
-              </div>
-            </div>
-
-            <div className="mid">
-              <div className="other-details">
-                <h3 className="text">Assessment Information</h3>
-                <div className="details">
-                  <div className="detail">
-                    <select
-                      value={numberofQuestion}
-                      className="text"
-                      onChange={handleNumberquestion}
-                    >
-                      <option value="0">Number of Questions :</option>
-                      <option value="10">10</option>
-                      <option value="15">15</option>
-                      <option value="20">20</option>
-                      <option value="25">25</option>
-                      <option value="30">30</option>
-                    </select>
-                  </div>
-                  <div className="detail">
-                    <select value="" className="text">
-                      <option value="0">Assessment Duration :</option>
-                      <option value="1">Easy</option>
-                      <option value="2">Medium</option>
-                      <option value="3">Hard</option>
-                    </select>
+            {!genratedQuestion ? (
+              <>
+                <div className="resume-upload">
+                  {/* <h3>Topics to Include</h3> */}
+                  <div className="options">
+                    <div className="option">
+                      <input type="checkbox" id="aptitude" />
+                      <label htmlFor="aptitude">Aptitude</label>
+                    </div>
+                    <div className="option">
+                      <input type="checkbox" id="operating" />
+                      <label htmlFor="operating">Operating System</label>
+                    </div>
+                    <div className="option">
+                      <input type="checkbox" id="dbms" />
+                      <label htmlFor="dbms">DBMS</label>
+                    </div>
+                    <div className="option">
+                      <input type="checkbox" id="cn" />
+                      <label htmlFor="cn">Computer Networks</label>
+                    </div>
+                    <div className="option">
+                      <input type="checkbox" id="oops" />
+                      <label htmlFor="oops">OOPs</label>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="input-api-key">
-                <div className="left-section">Already have Test ID ?</div>
-                <div className="right-section">
-                  <input
-                    type="text"
-                    placeholder="Enter your Test ID (optional) "
-                  />
+                <div className="mid">
+                  <div className="other-details">
+                    <h3 className="text">Assessment Information</h3>
+                    <div className="details">
+                      <div className="detail">
+                        <select
+                          value={numberofQuestion}
+                          className="text"
+                          onChange={handleNumberquestion}
+                        >
+                          <option value="0">Number of Questions :</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                          <option value="25">25</option>
+                          <option value="30">30</option>
+                        </select>
+                      </div>
+                      <div className="detail">
+                        <select value={time} className="text" onChange={handleTime}>
+                          <option value="0">Duration :</option>
+                          <option value="1">1min </option>
+                          <option value="20">20min </option>
+                          <option value="30">30min </option>
+                          <option value="45">45min </option>
+                          <option value="60">60min </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="input-api-key">
+                    <div className="left-section">Already have Test ID ?</div>
+                    <div className="right-section">
+                      <input
+                        type="text"
+                        placeholder="Enter your Test ID (optional) "
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <div className="right-end">
-              <div className="info">
-                <h3 className="text">Data Source</h3>
-                <div className="detail">
-                  <div className="text">algolisted.com</div>
+                <div className="right-end">
+                  <div className="info">
+                    <h3 className="text">Data Source</h3>
+                    <div className="detail">
+                      <div className="text">algolisted.com</div>
+                    </div>
+                  </div>
+
+                  <div className="submit-btn" onClick={generateQuestions}>
+                    Generate Test
+                  </div>
                 </div>
-              </div>
-
-              <div className="submit-btn" onClick={generateQuestions}>
-                Generate Test
-              </div>
-            </div>
+              </>
+            ) : (
+              <MockAssessmentRunning allQuestions={allQuestions} time={time} />
+            )}
           </div>
           <div className="main-info">
             <div className="text">
@@ -257,51 +260,6 @@ const MockAssessment = () => {
 
           {/* <div className="display-line"></div> */}
 
-          <div className="questions">
-            {allQuestions.length > 0 ? (
-              allQuestions.map((question_main, index) => (
-                <div className="question" key={question_main._id}>
-                  <div className="main-question">
-                  
-                    <b>Question {index + 1} : </b> {question_main.question}
-                    {/* ------ IMAGE NOT SHOWING UP ------ */}
-                    {/* <img src={question_main.question_image} alt="" /> */}
-                    {/* <img src={question_main.question_image} alt="" /> */}
-                    {/* <img src="client/src/DummyDB/MockAssessment/CNimages/q12-question.PNG" alt="" /> */}
-                    {/* <img src={`../DummyDB/MockAssessment/CNimages/q12-question.PNG`} alt="" /> */}
-                  </div>
-                  <div className="options">
-                {['a', 'b', 'c', 'd'].map((option, optionIndex) => (
-                  <div className="option" key={optionIndex}>
-                    <input
-                      type="checkbox"
-                      id={`${question_main._id}-${option}`}
-                      onChange={() => handleCheckboxChange(question_main._id, option)}
-                      checked={selectedAnswers[question_main._id] === option}
-                    />
-                    <label htmlFor={`${question_main._id}-${option}`}>
-                      {`${option}. ${question_main[option.toLowerCase()]}`}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              <div className="problem-tag">{question_main.topic}</div>
-              <button onClick={() => checkAnswer(question_main._id)} className="btn">Check Answer</button>
-              {isAnswerCorrect[question_main._id] !== undefined && (
-                <div className="correct-answer-message">
-                  {isAnswerCorrect[question_main._id] ? (
-                    "Your answer is correct!"
-                  ) : (
-                    `Unfortunately, you selected the wrong answer. The correct answer is ${question_main.correct_ans}.`
-                  )}
-                </div>
-              )}
-            </div>
-              ))
-            ) : (
-              <p></p>
-            )}
-          </div>
         </div>
 
         <SimpleFooter />
