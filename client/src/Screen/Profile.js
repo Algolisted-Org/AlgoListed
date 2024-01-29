@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import LinkIcon from '@material-ui/icons/Link';
 import CallMadeIcon from '@material-ui/icons/CallMade';
+import BeenhereIcon from '@material-ui/icons/Beenhere';
 
 const Profile = () => {
     const linksData = [
@@ -59,13 +60,38 @@ const Profile = () => {
                     <a href="/"><LinkIcon /> Work Experience</a>
                     <a href="/"><LinkIcon /> NOTABLE PROJECTS</a>
                     <a href="/"><LinkIcon /> Open Source Contributions</a>
-                    <a href="/"><LinkIcon /> Achievements</a>
+                    <a href="/"><LinkIcon /> Professional Achievements</a>
+                </div>
+            </div>
+            <div className="section">
+                <h2><LinkIcon /> Work Experience</h2>
+
+                <div className="section-item">
+                    <h3>1. Writee AI [ Electron App Developer ]
+                        <span>Remote</span>
+                        <span>May - June 2023</span>
+                    </h3>
+                    <p className="desc">
+                        Writee is a copywriting platform driven by AI, designed specifically for marketers. An Electron JS application was developed to function both as a Chrome extension and independently from the browser. This software is accessible across various platforms, aiding users in crafting marketing-friendly and SEO-optimized content.
+                    </p>
+                    <p className="desc">
+                        <b className='highlight'>My work</b> : Created the frontend and implemented a text input-driven suggestion feature for users in the electron App, leveraging the prebuilt Writee AI API. Additionally, spearheaded the design and deployment of a demo backend for the Tray app, facilitating seamless user interaction and testing processes.
+                    </p>
+                </div>
+                <div className="section-item">
+                    <h3>2. Samsung [ Upcoming Software Development Intern ]
+                        <span>Hybrid</span>
+                        <span>June - July 2024</span>
+                    </h3>
+                    <p className="desc">
+                        Secured this opportunity through participation in Jadavpur University's Internship drive.
+                    </p>
                 </div>
             </div>
             <div className="section">
                 <h2><LinkIcon /> Notable Projects</h2>
 
-                <div className="project">
+                <div className="section-item">
                     <h3>1. algolisted.com
                         <span>Web Application</span>
                         <span>Open Sourced</span>
@@ -77,7 +103,7 @@ const Profile = () => {
                         The primary technology stack employed in constructing the website is <b>MERN</b>. <b>Python</b> and <b>Flask</b> were utilized for scraping and processing data. The deployment was executed through <b>Google Firebase</b>, <b>cyclic.sh</b>, and <b>Vercel</b>.
                     </p>
                     {/* <p className="desc">
-                        <b className='highlight'>Data Encryption</b> : To safeguard API data, I implemented a custom <b>npm package</b> called <b>easy-api-encryptor</b>. The encryption algorithm is elucidated in the subsequent section of the projects.
+                        <b className='highlight'>Data Encryption</b> : To safeguard API data, I implemented a custom <b>npm package</b> called <b>easy-api-encryptor</b>. The encryption algorithm is elucidated in the subsequent section of the section-items.
                     </p>
                     <p className="desc">
                         <b className='highlight'>Scalability Measures</b>: Implemented effective scalability strategies for the website, employing a <b>CDN</b> to cache and swiftly deliver static assets near users, thereby reducing server load and improving latency. Furthermore, we've integrated caching mechanisms platforms like <b>Redis</b> to alleviate the database load, resulting in enhanced response times. To optimize traffic distribution and ensure smooth operations, we've introduced a fundamental load balancer, leveraging the capabilities of <b>NGINX</b>, across multiple server instances.
@@ -87,7 +113,7 @@ const Profile = () => {
                     </p>
                 </div>
 
-                <div className="project">
+                <div className="section-item">
                     <h3>2. Slurp Software
                         <span>Web Application</span>
                         <span>Profitable Software</span>
@@ -100,7 +126,7 @@ const Profile = () => {
                     </p>
                 </div>
 
-                <div className="project">
+                <div className="section-item">
                     <h3>3. Vision Bridge [ Hackathon Winning Project ]
                         <span>Machine Learning</span>
                         <span>Web Simulator</span>
@@ -113,7 +139,7 @@ const Profile = () => {
                     </p>
                 </div>
 
-                <div className="project">
+                <div className="section-item">
                     <h3>4. Leetcode Friends Live Contest Ranking
                         <span>Chrome Extension</span>
                     </h3>
@@ -122,7 +148,7 @@ const Profile = () => {
                     </p>
                 </div>
 
-                <div className="project">
+                <div className="section-item">
                     <h3>5. easy-api-encryptor
                         <span>NPM Package</span>
                     </h3>
@@ -136,9 +162,34 @@ const Profile = () => {
             </div>
             <div className="section">
                 <h2><LinkIcon /> Open Source Contributions</h2>
+                <div className="section-item">
+                    <h3>1. Circuit Verse
+                        <span>GSOC recognised organisation</span>
+                    </h3>
+                    <p className="desc">
+                        I made significant contributions to the Vue.js-based simulator platform, implementing optimized enhancements to enhance its performance. Additionally, I developed the <b>Piana Store</b> for efficient global store management within the application.
+                    </p>
+                    <p className="desc">
+                       <b className='highlight'>Notable Pull Requests : </b>
+                    </p>
+                    <div className="showcase-links">
+                        <a className='showcase-link' href="https://github.com/CircuitVerse/cv-frontend-vue/pull/223" target='_blank'>github.com/CircuitVerse/cv-frontend-vue/pull/223</a>
+                        <a className='showcase-link' href="https://github.com/CircuitVerse/cv-frontend-vue/pull/224" target='_blank'>github.com/CircuitVerse/cv-frontend-vue/pull/224</a>
+                    </div>
+                </div>
             </div>
             <div className="section">
-                <h2><LinkIcon /> ACHIEVEMENTS</h2>
+                <h2><LinkIcon /> Professional ACHIEVEMENTS</h2>
+                <div className="section-item">
+                    <h4><BeenhereIcon/><a>Selected in <b>@FOSSASIA</b> 2023 - [ South Asia Region ]</a><CallMadeIcon/></h4>
+                    <h4><BeenhereIcon/><a>Expert on <b>@Codeforces</b> [ Top 2000 Coders in India ] </a><CallMadeIcon/></h4>
+                    <h4><BeenhereIcon/><a>Knight on <b>@Leetcode</b> [ Top 4% Globally ] </a><CallMadeIcon/></h4>
+                    <h4><BeenhereIcon/><a>Top 1% Developers Globally on <b>@CSSBattles</b> [ Global Rank 5, India Rank 1 - Weekly Contest 83 ] </a><CallMadeIcon/></h4>
+                    <h4><BeenhereIcon/><a>Successfully Hacked <b>@HacktoberFest</b> 2022 organised by DigitalOcean</a><CallMadeIcon/></h4>
+                    <h4><BeenhereIcon/><a>Stood 28 amongst 750+ teams globally in <b>@Hacksquad</b></a><CallMadeIcon/></h4>
+                    <h4><BeenhereIcon/><a>Selected for <b>@Flipkart</b> Grid Final Round</a><CallMadeIcon/></h4>
+                    <h4><BeenhereIcon/><a><b>@Smart India Hackathon</b> 2022 Finalist</a><CallMadeIcon/></h4>
+                </div>
             </div>
             <LinksFixed>
                 {linksData.map(link => (
@@ -160,16 +211,17 @@ const Profile = () => {
 export default Profile
 
 const Container = styled.div`
+    *{
+        /* font-family: 'Open Sans', sans-serif; */
+        font-family: 'Montserrat', sans-serif;
+        color: #30415c;
+    }
+
     position: relative;
     padding: 100px 200px;
     padding-bottom: calc(0.8rem + 240px);
 
-
-    *{
-        /* font-family: 'Open Sans', sans-serif; */
-        font-family: 'Montserrat', sans-serif;
-        color: #1e293b;
-    }
+    /* background-color: #333; */
     
     .intro{
         h3{
@@ -190,6 +242,7 @@ const Container = styled.div`
         .links{
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
             margin-bottom: 35px;
 
             a{
@@ -212,6 +265,7 @@ const Container = styled.div`
             margin-top: 20px;
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
 
             svg{
                 font-size: 1.5rem;
@@ -257,6 +311,7 @@ const Container = styled.div`
             a{
                 display: flex;
                 align-items: center;
+                flex-wrap: wrap;
                 text-decoration: none;
                 margin-top: 20px;
                 text-transform: uppercase;
@@ -288,14 +343,16 @@ const Container = styled.div`
             }
         }
 
-        .project{
+        .section-item{
             margin-top: 50px;
+            
             h3{
                 font-size: 1.5rem;
                 font-weight: 600;
                 letter-spacing: 0.07rem;
                 display: flex;
                 align-items: center;
+                flex-wrap: wrap;
 
                 span{
                     font-size: 0.8rem;
@@ -309,6 +366,38 @@ const Container = styled.div`
                 }
 
                 margin-bottom: 15px;
+            }
+
+            h4{
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                margin-left: 42.5px;
+                margin-bottom: 25px;
+                
+                a{
+                    font-size: 1rem;
+                    font-weight: 500;
+                    /* letter-spacing: 0.06rem; */
+                    /* text-decoration: none; */
+                    /* color: cornflowerblue; */
+                }
+
+                svg{
+                    font-size: 1rem;
+                    margin: 0 10px;
+                }
+
+                span{
+                    font-size: 0.8rem;
+                    letter-spacing: 0.03rem;
+                    margin-left: 10px;
+                    font-weight: 400;
+                    padding: 3.5px 10px;
+                    border-radius: 100px;
+                    border: 1px solid #cbceee;
+                    background-color: #eaecff;
+                }
             }
 
             .desc{
@@ -331,8 +420,253 @@ const Container = styled.div`
                     padding: 0 5px;
                 }
             }
+
+            .showcase-links{
+                padding-left: 27.5px;
+                padding-top: 15px;
+
+                a{
+                    display: block;
+                    margin-bottom: 12.5px;
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    /* text-decoration: none; */
+                    color: cornflowerblue;
+                }
+            }
         }
 
+    }
+
+    @media only screen and (max-width: 1099px) {
+        position: relative;
+        padding: 80px 30px;
+        padding-bottom: 180px;
+
+        /* background-color: #333; */
+        
+        .intro{
+            h3{
+                font-size: 1rem;
+                font-weight: 500;
+                letter-spacing: 0.15rem;
+                margin-bottom: 10px;
+            }
+
+            h1{
+                font-size: 4.25rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.3rem;
+                margin-bottom: 15px;
+            }
+
+            .links{
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                margin-bottom: 35px;
+
+                a{
+                    font-size: 0.85rem;
+                    margin-right: 10px;
+                    text-decoration: none;
+                    color: #1f468c;
+                    font-weight: 400;
+                    margin-top: 10px;
+                }
+            }
+
+            .desc{
+                font-size: 0.95rem;
+                line-height: 1.7rem;
+                font-weight: 400;
+                letter-spacing: 0.08rem;
+            }
+
+            .tags{
+                margin-top: 20px;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+
+                svg{
+                    font-size: 1.5rem;
+                    margin: -5px 5px 0 0;
+                }
+
+                .tag{
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    padding: 5px 10px;
+                    margin-right: 5px;
+                    margin-bottom: 5px;
+                    color: #c9b11a;
+                    border: 2px solid #f4ddb54f;
+                    border-radius: 100px;
+                    background-color: #a9f4cf47;
+                }
+            }
+        }
+
+        .table-of-contents{
+            margin-top: 60px;
+            margin-bottom: -60px;
+
+            h2{
+                font-size: 1.25rem;
+                font-weight: 600;
+                /* text-transform: uppercase; */
+                letter-spacing: 0.05rem;
+                /* color: #85c4eb; */
+
+                svg{
+                    font-size: 2rem;
+                }
+            }
+
+            .links{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 15px;
+                /* margin-top: 10px; */
+
+                a{
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    text-decoration: none;
+                    margin-top: 20px;
+                    text-transform: uppercase;
+                    /* color: cornflowerblue; */
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    letter-spacing: 0.1rem;
+
+                    svg{
+                        margin-right: 10px;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+        
+        .section{
+            margin-top: 120px;
+
+            h2{
+                font-size: 1.5rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.15rem;
+                margin-bottom: -15px;
+                /* color: #85c4eb; */
+
+                display: flex;
+                align-items: center;
+
+                svg{
+                    font-size: 1.25rem;
+                    margin-right: 5px;
+                }
+            }
+
+            .section-item{
+                margin-top: 50px;
+                
+                h3{
+                    font-size: 1.35rem;
+                    font-weight: 600;
+                    letter-spacing: 0.07rem;
+                    margin-left: 27.5px; 
+
+                    span{
+                        display: none;
+                        font-size: 0.8rem;
+                        letter-spacing: 0.03rem;
+                        margin-left: 10px;
+                        font-weight: 400;
+                        padding: 3.5px 10px;
+                        border-radius: 100px;
+                        border: 1px solid #cbceee;
+                        background-color: #eaecff;
+                        margin-top: 10px;
+                    }
+
+                    margin-bottom: 15px;
+                }
+
+                h4{
+                    display: flex;
+                    align-items: center;
+                    /* flex-wrap: wrap; */
+                    margin-left: 42.5px;
+                    margin-bottom: 25px;
+                    
+                    a{
+                        font-size: 1rem;
+                        font-weight: 500;
+                        flex: 1;
+                        /* letter-spacing: 0.06rem; */
+                        /* text-decoration: none; */
+                        /* color: cornflowerblue; */
+                    }
+
+                    svg{
+                        font-size: 1rem;
+                        margin: 0 10px;
+                    }
+
+                    span{
+                        font-size: 0.8rem;
+                        letter-spacing: 0.03rem;
+                        margin-left: 10px;
+                        font-weight: 400;
+                        padding: 3.5px 10px;
+                        border-radius: 100px;
+                        border: 1px solid #cbceee;
+                        background-color: #eaecff;
+                    }
+                }
+
+                .desc{
+                    font-size: 0.95rem;
+                    line-height: 1.85rem;
+                    font-weight: 400;
+                    letter-spacing: 0.07rem;
+                    margin-top: 15px;
+                    margin-left: 27.5px;
+
+                    b{
+                        font-weight: 500;
+                        background-color: #95c0e430;
+                        padding: 0 5px;
+                    }
+                    
+                    .highlight{
+                        font-weight: 600;
+                        background-color: #9acd3236;
+                        padding: 0 5px;
+                    }
+                }
+
+                .showcase-links{
+                    padding-left: 27.5px;
+                    padding-top: 15px;
+
+                    a{
+                        display: block;
+                        margin-bottom: 12.5px;
+                        font-weight: 500;
+                        font-size: 0.9rem;
+                        /* text-decoration: none; */
+                        color: cornflowerblue;
+                    }
+                }
+            }
+
+        }
     }
 `
 
@@ -347,6 +681,7 @@ const LinksFixed = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
 
     overflow: hidden;
 
@@ -356,6 +691,7 @@ const LinksFixed = styled.div`
 
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         justify-content: center;
 
         padding: 12.5px;
@@ -372,6 +708,54 @@ const LinksFixed = styled.div`
 
     .link:not(:last-child) {
         border-bottom: 1px solid #cecaca;
+    }
+
+    @media only screen and (max-width: 1099px){ 
+        position: fixed;
+        left: auto;
+        top: calc(50vh - 125px);
+        right: 10px;
+
+
+        border: 1px solid #cecaca;
+
+        background-color: #ffffff9c;
+        backdrop-filter: blur(2px);
+
+        display: flex;
+        /* justify-content: space-between; */
+        /* flex-wrap: nowrap; */
+
+        border-radius: 100px;
+
+        overflow: hidden;
+
+        .link{
+            height: 100%;
+            width: 49.55px;
+            /* aspect-ratio: 1/1; */
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 12.5px;
+            margin: 0;
+
+            background-color: transparent;
+
+            img{
+                width: 100%;
+            }
+
+            &:hover{
+                background-color: #e5e5e5;
+                transition-duration: 250ms;
+            }
+        }
+
+        .link:not(:last-child) {
+        }
     }
 `
 
@@ -391,17 +775,30 @@ const Promotion = styled.div`
 
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
     b{
         font-weight: 600;
         color: cornflowerblue;
-        margin: 0 3.5px;
+        margin: 0 3.5px 0 0;
     }
     
     svg{
         font-size: 0.85rem;
         fill: cornflowerblue;
     }
+    
+    @media only screen and (max-width: 1099px){ 
+        display: none;
+        width: 100vw;
+        top: 0;
+        right: 0;
+
+        padding: 10px 25px;
+        backdrop-filter: blur(2px);
+        border-bottom: 1px solid whitesmoke;
+        /* background-color: whitesmoke; */
+     }
 `
 
 const PromotionFooter = styled.div`
@@ -411,13 +808,14 @@ const PromotionFooter = styled.div`
     width: 100%;
     text-align: center;
 
-    padding: 25px 0;
+    padding: 25px;
 
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     cursor: pointer;
     /* color: cornflowerblue; */
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
 
     background-color: #f2f2f2;
