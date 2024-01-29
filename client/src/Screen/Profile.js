@@ -712,37 +712,34 @@ const LinksFixed = styled.div`
 
     @media only screen and (max-width: 1099px){ 
         position: fixed;
-        left: auto;
-        top: calc(50vh - 125px);
-        right: 10px;
-
-
+        left: calc(50vw - 125px);
+        top: 10px;
+        width: 250px;
+        height: 50px;
         border: 1px solid #cecaca;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
+
+        overflow: hidden;
 
         background-color: #ffffff9c;
         backdrop-filter: blur(2px);
 
-        display: flex;
-        /* justify-content: space-between; */
-        /* flex-wrap: nowrap; */
-
         border-radius: 100px;
 
-        overflow: hidden;
-
         .link{
-            height: 100%;
-            width: 49.55px;
-            /* aspect-ratio: 1/1; */
+            width: 49.5px;
+            height: 50px;
 
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
 
             padding: 12.5px;
-            margin: 0;
-
-            background-color: transparent;
 
             img{
                 width: 100%;
@@ -755,7 +752,10 @@ const LinksFixed = styled.div`
         }
 
         .link:not(:last-child) {
+            border: none;
+            border-right: 1px solid #cecaca; 
         }
+        
     }
 `
 
