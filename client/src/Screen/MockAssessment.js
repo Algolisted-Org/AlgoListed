@@ -19,7 +19,7 @@ const MockAssessment = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [isAnswerCorrect, setIsAnswerCorrect] = useState({});
   const [genratedQuestion, setGenratedQuestion] = useState(false);
-  const [time,setTime]=useState(0);
+  const [time, setTime] = useState(0);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
@@ -34,7 +34,7 @@ const MockAssessment = () => {
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
- 
+
   const [allQuestions, setAllQuestions] = useState([]);
 
   function generateRandomValues(n, r, x) {
@@ -51,7 +51,7 @@ const MockAssessment = () => {
   const handleNumberquestion = (e) => {
     setNumberOfQuestion(e.target.options[e.target.selectedIndex].text);
   };
-  const handleTime=(e)=>{
+  const handleTime = (e) => {
     setTime(e.target.options[e.target.selectedIndex].value);
   }
 
@@ -109,6 +109,42 @@ const MockAssessment = () => {
     setAllQuestions(generatedQuestions);
   };
 
+
+  // ------------------- generateUniqueIndexes -------------------
+
+  const seededRandom = (seed) => {
+    let x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+
+  const generateUniqueIndexes = (x, y, randomGeneratorId) => {
+    const seed = parseInt(randomGeneratorId, 10) || 0; 
+    const indexes = [];
+
+    const range = Array.from({ length: y }, (_, i) => i);
+
+    for (let i = range.length - 1; i > 0 && indexes.length < x; i--) {
+      const j = Math.floor(seededRandom(seed) * (i + 1));
+      [range[i], range[j]] = [range[j], range[i]];
+    }
+
+    return range.slice(0, x);
+  };
+
+  useEffect(() => {
+    const uniqueIndexes1 = generateUniqueIndexes(10, 40, 1);
+    const uniqueIndexes2 = generateUniqueIndexes(10, 40, 1);
+    const uniqueIndexes3 = generateUniqueIndexes(20, 40, 1);
+    const uniqueIndexes4 = generateUniqueIndexes(10, 40, 2);
+    const uniqueIndexes5 = generateUniqueIndexes(10, 40, 3);
+
+    console.log("uniqueIndexes1 : ", uniqueIndexes1.join(', '));
+    console.log("uniqueIndexes2 : ", uniqueIndexes2.join(', '));
+    console.log("uniqueIndexes3 : ", uniqueIndexes3.join(', '));
+    console.log("uniqueIndexes4 : ", uniqueIndexes4.join(', '));
+  }, [])
+
+
   return (
     <GrandContainer needDarkMode={needDarkMode}>
       <MobContainer>
@@ -156,11 +192,11 @@ const MockAssessment = () => {
             </>
           )}
           {/* <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
-                        </div>
-                    </div> */}
+                <div className="icon"></div>
+                <div className="text">
+                    Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
+                </div>
+            </div> */}
 
           <div className="input-container">
             {!genratedQuestion ? (
@@ -250,13 +286,17 @@ const MockAssessment = () => {
               <MockAssessmentRunning allQuestions={allQuestions} time={time} />
             )}
           </div>
-          <div className="main-info">
-            <div className="text">
-              <InfoIcon />
-              If someone gave you an ID then enter in the above requested box,
-              else ignore the box to create a new OA.
-            </div>
-          </div>
+          {
+            !genratedQuestion ? (
+              <div className="main-info">
+                <div className="text">
+                  <InfoIcon />
+                  If someone gave you an ID then enter in the above requested box,
+                  else ignore the box to create a new OA.
+                </div>
+              </div> 
+            ) : null
+          }
 
           {/* <div className="display-line"></div> */}
 
@@ -364,7 +404,7 @@ const Container = styled.div`
 
       .problem-tag {
         background-color: ${(props) =>
-          props.needDarkMode ? "#404249" : "#e5e5e5"};
+    props.needDarkMode ? "#404249" : "#e5e5e5"};
         color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
         font-size: 0.75rem;
         padding: 5px 10px;
@@ -472,7 +512,7 @@ const Container = styled.div`
       /* display: flex; */
       /* align-items: center; */
       background-color: ${(props) =>
-        props.needDarkMode ? "#444754" : "#d5f7e1"};
+    props.needDarkMode ? "#444754" : "#d5f7e1"};
       border-radius: 5px;
       padding: 10px;
       margin: 20px 0 10px 0;
@@ -501,7 +541,7 @@ const Container = styled.div`
         width: 240px;
         height: 155px;
         background-color: ${(props) =>
-          props.needDarkMode ? "#404249" : "#e5e5e5"};
+    props.needDarkMode ? "#404249" : "#e5e5e5"};
         border-radius: 10px;
         padding: 7.5px 15px 15px 15px;
 
@@ -559,7 +599,7 @@ const Container = styled.div`
           width: 100%;
           height: 100px;
           background-color: ${(props) =>
-            props.needDarkMode ? "#404249" : "#e5e5e5"};
+    props.needDarkMode ? "#404249" : "#e5e5e5"};
           border-radius: 10px;
           display: flex;
           flex-direction: column;
@@ -590,7 +630,7 @@ const Container = styled.div`
               height: 35px;
               width: 40%;
               background-color: ${(props) =>
-                props.needDarkMode ? "#313337" : "#d0d0d0"};
+    props.needDarkMode ? "#313337" : "#d0d0d0"};
               border: 1px solid
                 ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
               border-radius: 100px;
@@ -630,7 +670,7 @@ const Container = styled.div`
           align-items: center;
           justify-content: space-between;
           background-color: ${(props) =>
-            props.needDarkMode ? "#404249" : "#e5e5e5"};
+    props.needDarkMode ? "#404249" : "#e5e5e5"};
 
           .left-section {
             height: 100%;
@@ -638,12 +678,12 @@ const Container = styled.div`
             border-radius: 12.5px;
             padding: 0 20px;
             /* background-color: ${(props) =>
-              props.needDarkMode ? "#404249" : "#e5e5e5"}; */
+    props.needDarkMode ? "#404249" : "#e5e5e5"}; */
             color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
             background-color: ${(props) =>
-              props.needDarkMode ? "#313337" : "#d0d0d0"};
+    props.needDarkMode ? "#313337" : "#d0d0d0"};
             /* border: 1px solid ${(props) =>
-              props.needDarkMode ? "#56575d" : "#c3b4b4"}; */
+    props.needDarkMode ? "#56575d" : "#c3b4b4"}; */
 
             display: flex;
             align-items: center;
@@ -677,10 +717,10 @@ const Container = styled.div`
               font-weight: 200;
               padding: 0 12.5px;
               background-color: ${(props) =>
-                props.needDarkMode ? "#313337" : "#d0d0d0"};
+    props.needDarkMode ? "#313337" : "#d0d0d0"};
               color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
               /* border: 1px solid ${(props) =>
-                props.needDarkMode ? "" : "#c3b4b4"}; */
+    props.needDarkMode ? "" : "#c3b4b4"}; */
             }
           }
         }
@@ -694,7 +734,7 @@ const Container = styled.div`
           width: 180px;
           height: 100px;
           background-color: ${(props) =>
-            props.needDarkMode ? "#404249" : "#e5e5e5"};
+    props.needDarkMode ? "#404249" : "#e5e5e5"};
           border-radius: 10px;
           display: flex;
           flex-direction: column;
@@ -717,7 +757,7 @@ const Container = styled.div`
             height: 35px;
             width: 100%;
             background-color: ${(props) =>
-              props.needDarkMode ? "#313337" : "#d0d0d0"};
+    props.needDarkMode ? "#313337" : "#d0d0d0"};
             border: 1px solid
               ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
             border-radius: 100px;

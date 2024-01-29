@@ -99,35 +99,7 @@ const MockAssessmentRunning = ({ allQuestions, time }) => {
   };
   return (
     <GrandContainer needDarkMode={needDarkMode}>
-      <MobContainer>
-        We are still working on Responsive Version of the website, please view
-        the site with width more than 1100px, a standard laptop or tablet
-        landscape.
-        <img
-          src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif"
-          alt=""
-        />
-      </MobContainer>
-      <Container needDarkMode={needDarkMode}>
-        {needDarkMode ? (
-          <CCHeaderDarkPlus
-            needDarkMode={needDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-        ) : (
-          <CCHeaderPlus
-            needDarkMode={needDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-        )}
-        {needDarkMode ? (
-          <LeftMenuDark marked={"mock-assessment"} />
-        ) : (
-          <LeftMenu marked={"mock-assessment"} />
-        )}
-        {/* ---> change this all-blogs to your desired page-id */}
-
-        <div className="cc-middle-content">
+        <div className="main-content">
           <h1 className="main-heading">
             Mock Online Assessment - SET (A-8020)
           </h1>
@@ -143,7 +115,7 @@ const MockAssessmentRunning = ({ allQuestions, time }) => {
 
           <div className="main-content">
             {!startTest ? (
-              <button className="btn" onClick={startTestButton}>
+              <button className="start-btn" onClick={startTestButton}>
                 Start test
               </button>
             ) : (
@@ -258,47 +230,18 @@ const MockAssessmentRunning = ({ allQuestions, time }) => {
             )}
           </div>
         </div>
-
-        <SimpleFooter />
-      </Container>
     </GrandContainer>
   );
 };
 
 export default MockAssessmentRunning;
 
-const GrandContainer = styled.div``;
-
-const MobContainer = styled.div`
-  width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
-
-  img {
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
-  }
-
-  @media only screen and (min-width: 1099px) {
-    display: none;
-  }
-`;
-
-const Container = styled.div`
+const GrandContainer = styled.div`
   position: relative;
-  padding-bottom: 80px;
-
-  @media only screen and (max-width: 1099px) {
-    display: none;
-  }
-
+  margin-top: -40px;
+  
   display: flex;
   justify-content: space-between;
-  padding-left: 200px;
 
   .display-line {
     width: 100%;
@@ -318,20 +261,11 @@ const Container = styled.div`
     background-color: transparent;
   }
 
-  .cc-middle-content {
-    min-height: 100vh;
+  .main-content {
     width: 100%;
-    /* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
-    padding: 80px 120px 50px 120px;
     position: relative;
     width: 100%;
-    max-width: 1360px;
-    min-width: 1000px;
     margin: auto;
-
-    @media only screen and (max-width: 1200px) {
-      padding: 80px 50px 50px 50px;
-    }
 
     .main-heading {
       font-size: 1.65rem;
@@ -351,6 +285,18 @@ const Container = styled.div`
         font-weight: 300;
         margin-left: 0.25rem;
       }
+    }
+
+    .start-btn{
+      padding: 10px 20px;
+      background-color: #404249;
+      border: none;
+      color: white;
+      font-size: 0.75rem;
+      /* font-weight: 300; */
+      text-transform: uppercase;
+      letter-spacing: 0.15rem;
+      border-radius: 5px;
     }
 
     .message {
@@ -551,13 +497,14 @@ const Container = styled.div`
           margin-top: 10px;
 
           .btn {
-            width: calc(50% - 3.15px);
+            width: calc(33% - 3.15px);
             background-color: white;
             color: #333;
             text-align: center;
             padding: 5px;
             font-size: 0.75rem;
             border-radius: 5px;
+            border: none;
           }
         }
       }
