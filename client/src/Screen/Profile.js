@@ -43,6 +43,13 @@ const Profile = () => {
                     <a href="/">nayak.primary@gmail.com</a>
                     <a href="/">+91 9306191179</a>
                 </div>
+                <div className="social-links">
+                    {linksData.map(link => (
+                        <a key={link.id} href={link.url} className="link">
+                            <img src={link.imageSrc} alt="" />
+                        </a>
+                    ))}
+                </div>
                 <p className="desc">
                     Presently, I am in my third year pursuing computer science at Jadavpur University in Kolkata, India. My interests lie in constructing scalable cloud architectures, developing scalable websites, and implementing time-optimized algorithms. Over the recent months, I have delved into the realms of machine learning and cloud architecture. I pride myself on being a proficient problem solver, holding the title of an Expert on Codeforces and achieving the status of a knight on LeetCode.
                 </p>
@@ -254,6 +261,10 @@ const Container = styled.div`
             }
         }
 
+        .social-links{
+            display: none;
+        }
+
         .desc{
             font-size: 1.15rem;
             line-height: 2rem;
@@ -372,7 +383,7 @@ const Container = styled.div`
                 display: flex;
                 align-items: center;
                 flex-wrap: wrap;
-                margin-left: 42.5px;
+                margin-left: 32.5px;
                 margin-bottom: 25px;
                 
                 a{
@@ -474,6 +485,24 @@ const Container = styled.div`
                     color: #1f468c;
                     font-weight: 400;
                     margin-top: 10px;
+                }
+            }
+
+            .social-links{
+                display: flex;
+                align-items: center;
+                overflow: hidden;
+                margin: -20px 0 30px 0;
+
+                .link{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 20px;
+
+                    img{
+                        height: 22.5px;
+                    }
                 }
             }
 
@@ -601,11 +630,11 @@ const Container = styled.div`
                     display: flex;
                     align-items: center;
                     /* flex-wrap: wrap; */
-                    margin-left: 42.5px;
+                    margin-left: 20px;
                     margin-bottom: 25px;
                     
                     a{
-                        font-size: 1rem;
+                        font-size: 0.95rem;
                         font-weight: 500;
                         flex: 1;
                         /* letter-spacing: 0.06rem; */
@@ -711,35 +740,37 @@ const LinksFixed = styled.div`
     }
 
     @media only screen and (max-width: 1099px){ 
+        display: none;
         position: fixed;
-        left: calc(50vw - 125px);
-        top: 10px;
-        width: 250px;
-        height: 50px;
+        left: auto;
+        /* top: calc(50vh - 125px); */
+        top: 20px;
+        right: 5px;
+
+
         border: 1px solid #cecaca;
-
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        flex-wrap: nowrap;
-
-        overflow: hidden;
+        /* border: 1px solid transparent; */
 
         background-color: #ffffff9c;
         backdrop-filter: blur(2px);
 
         border-radius: 100px;
 
+        overflow: hidden;
+
         .link{
-            width: 49.5px;
-            height: 50px;
+            height: 100%;
+            width: 45px;
+            /* aspect-ratio: 1/1; */
 
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
             justify-content: center;
 
-            padding: 12.5px;
+            padding: 0 12.5px;
+            margin: 0;
+
+            background-color: transparent;
 
             img{
                 width: 100%;
@@ -753,9 +784,7 @@ const LinksFixed = styled.div`
 
         .link:not(:last-child) {
             border: none;
-            border-right: 1px solid #cecaca; 
         }
-        
     }
 `
 
