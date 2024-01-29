@@ -227,7 +227,7 @@ const LandingPage2 = () => {
                 </div>
             </div>
             <div className="menu-list">
-                <a href='/contests-archive' className="item">Archive</a>
+                <a href='/contests-archive/leetcode' className="item">Archive</a>
                 <a href='/contest-analysis' className="item">Analysis</a>
                 <a href='/coding-sheets/striver-sde-sheet' className="item">Coding Sheets</a>
                 <a href='/core-subjects-tracker/operating-systems' className="item">Tracker</a>

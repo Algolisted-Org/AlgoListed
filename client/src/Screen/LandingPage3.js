@@ -32,39 +32,6 @@ const LandingPage3 = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const modules = [
-    {
-      "name": "All Upcoming Coding Competitions",
-      "desc": "There are several websites, such as CLIST and Unstop, that provide information about upcoming contests. However, our list is specifically geared towards Indians and is curated by an Indian who understands the types of competitions that are most relevant to this audience.",
-      "link": "/coding-competitions"
-    },
-    {
-      "name": "Coding Sheets",
-      "desc": "Coding Sheets is a website that offers a range of software engineering practice sheets to select from in a single location. The discussion section, which will be available soon, will provide support and guidance while working on a specific sheet.",
-      "link": "/coding-sheets/striver-sde-sheet"
-    },
-    {
-      "name": "Coding Resources",
-      "desc": "There is a wealth of disorganized notes and other resources available on websites like LinkedIn and Leetcode, but they can be difficult to find because they are not listed in a organized manner. To make your life easier, we have compiled all of these resources by topic in a single location.",
-      "link": "/resources"
-    },
-    // {
-    //     "name" : "Selected Profiles",
-    //     "desc" : "This can be helpful for those who want to know what kind of resumes or skills they need to build in order to be selected for a particular company. This will also be machine learning model based that would enable you to get the hiring infographics for a perticular company.",
-    //     "link" : "/selected-profiles"
-    // },
-    {
-      "name": "All Internship & Job Opportunities",
-      "desc": "This page is very similar to the coding competitions list page, here in this page we will provide information about all available hiring and internship opportunities, including the timing of these opportunities. We are currently in the planning stages and will be launching this page soon.",
-      "link": "/opportunities"
-    },
-    {
-      "name": "Beginner Friendly Blogs",
-      "desc": "We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.",
-      "link": "/blogs/all"
-    },
-  ]
-
   const featuresDisplayData = [
     {
       // "img-url": featureAnalysis1, // create GIFs here
