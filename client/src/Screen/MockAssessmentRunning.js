@@ -63,6 +63,10 @@ const MockAssessmentRunning = ({ allQuestions, time, testId }) => {
         handleSubmit();
       }
     }
+    else{
+      clearInterval(interval);
+      calculateScore()
+    }
 
     return () => clearInterval(interval);
   }, [startTest, timer, submitted]);
