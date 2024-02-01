@@ -7,7 +7,7 @@ import LeftMenuDark from "../Components/LeftMenuDark";
 import SimpleFooter from "../Components/SimpleFooter";
 import InfoIcon from "@material-ui/icons/Info";
 
-const MockAssessmentRunning = ({ allQuestions, time }) => {
+const MockAssessmentRunning = ({ allQuestions, time, testId }) => {
   const [needDarkMode, setNeedDarkMode] = useState(true);
   const [numberofQuestion, setNumberOfQuestion] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -16,7 +16,7 @@ const MockAssessmentRunning = ({ allQuestions, time }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(null);
   const [correctAnswers, setCorrectAnswers] = useState({});
-  const [timer, setTimer] = useState(0); 
+  const [timer, setTimer] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const calculateScore = () => {
     let scoreCount = 0;
@@ -50,13 +50,18 @@ const MockAssessmentRunning = ({ allQuestions, time }) => {
   };
   useEffect(() => {
     let interval;
-    if (startTest && timer > 0 && !submitted) { 
+    if (startTest && timer > 0 && !submitted) {
       interval = setInterval(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
-    } else if (timer === 0 || submitted) { 
-      clearInterval(interval);
-      calculateScore();
+    } else if (timer === 0) {
+      if (submitted) {
+        clearInterval(interval);
+        calculateScore();
+      }
+      else{
+        handleSubmit();
+      }
     }
 
     return () => clearInterval(interval);
@@ -91,145 +96,140 @@ const MockAssessmentRunning = ({ allQuestions, time }) => {
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
   const handleSubmit = () => {
-    setSubmitted(true); 
+    setSubmitted(true);
   };
   return (
     <GrandContainer needDarkMode={needDarkMode}>
+      <div className="main-content">
+        <h1 className="main-heading">
+          Mock Online Assessment - SET (A-{testId})
+        </h1>
+        <p className="heading-supporter">
+          We've designed this page as a platform for students to hone their
+          skills in tackling Online Assessments from various companies. Here,
+          you'll find MCQs to solve within a specified time frame, simulating
+          real competition scenarios. Additionally, we provide comprehensive
+          analytics at the end to enhance your understanding of the subjects.
+        </p>
+
+        <div className="display-line"></div>
+
         <div className="main-content">
-          <h1 className="main-heading">
-            Mock Online Assessment - SET (A-8020)
-          </h1>
-          <p className="heading-supporter">
-            We've designed this page as a platform for students to hone their
-            skills in tackling Online Assessments from various companies. Here,
-            you'll find MCQs to solve within a specified time frame, simulating
-            real competition scenarios. Additionally, we provide comprehensive
-            analytics at the end to enhance your understanding of the subjects.
-          </p>
-
-          <div className="display-line"></div>
-
-          <div className="main-content">
-            {!startTest ? (
-              <button className="start-btn" onClick={startTestButton}>
-                Start test
-              </button>
-            ) : (
-              <>
-                <div className="questions">
-                  <div className="question">
-                    <div className="questions">
-                      {allQuestions.length > 0 && (
-                        <div
-                          className="question"
-                          key={allQuestions[currentQuestionIndex]._id}
-                        >
-                          <div className="main-question">
-                            <b>Question {currentQuestionIndex + 1} : </b>{" "}
-                            {allQuestions[currentQuestionIndex].question}
-                          </div>
-                          {/* Your options rendering code */}
-                          <div className="options">
-                            {["a", "b", "c", "d"].map((option, optionIndex) => (
-                              <div className="option" key={optionIndex}>
-                                <input
-                                  type="checkbox"
-                                  id={`${allQuestions[currentQuestionIndex]._id}-${option}`}
-                                  onChange={() =>
-                                    handleCheckboxChange(
-                                      allQuestions[currentQuestionIndex]._id,
-                                      option
-                                    )
-                                  }
-                                  checked={
-                                    selectedAnswers[
-                                      allQuestions[currentQuestionIndex]._id
-                                    ] === option
-                                  }
-                                />
-                                <label
-                                  htmlFor={`${allQuestions[currentQuestionIndex]._id}-${option}`}
-                                >
-                                  {`${option}. ${
-                                    allQuestions[currentQuestionIndex][
-                                      option.toLowerCase()
-                                    ]
-                                  }`}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
+          {!startTest ? (
+            <button className="start-btn" onClick={startTestButton}>
+              Start test
+            </button>
+          ) : (
+            <>
+              <div className="questions">
+                <div className="question">
+                  <div className="questions">
+                    {allQuestions.length > 0 && (
+                      <div
+                        className="question"
+                        key={allQuestions[currentQuestionIndex]._id}
+                      >
+                        <div className="main-question">
+                          <b>Question {currentQuestionIndex + 1} : </b>{" "}
+                          {allQuestions[currentQuestionIndex].question}
                         </div>
-                      )}
-                    </div>
-                    {submitted && (
-                      <div>
-                        <h2>Your Score: {score}</h2>
-                        <h3>Correct Answers:</h3>
-                        <ul>
-                          {allQuestions.map((question, index) => (
-                            <li key={question._id}>
-                              Question {index + 1}:{" "}
-                              {correctAnswers[question._id]}
-                            </li>
+                        {/* Your options rendering code */}
+                        <div className="options">
+                          {["a", "b", "c", "d"].map((option, optionIndex) => (
+                            <div className="option" key={optionIndex}>
+                              <input
+                                type="checkbox"
+                                id={`${allQuestions[currentQuestionIndex]._id}-${option}`}
+                                onChange={() =>
+                                  handleCheckboxChange(
+                                    allQuestions[currentQuestionIndex]._id,
+                                    option
+                                  )
+                                }
+                                checked={
+                                  selectedAnswers[
+                                    allQuestions[currentQuestionIndex]._id
+                                  ] === option
+                                }
+                              />
+                              <label
+                                htmlFor={`${allQuestions[currentQuestionIndex]._id}-${option}`}
+                              >
+                                {`${option}. ${
+                                  allQuestions[currentQuestionIndex][
+                                    option.toLowerCase()
+                                  ]
+                                }`}
+                              </label>
+                            </div>
                           ))}
-                        </ul>
+                          {submitted && (
+                            <div>
+                              Correct Answer is Opition :{" "}
+                              {allQuestions[currentQuestionIndex].correct_ans}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>
+                  {submitted && (
+                    <div>
+                      <h2>Your Score: {score}</h2>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="tracker">
+                {startTest && (
+                  <div className="time-left">{formatTime(timer)} mins</div>
+                )}
+
+                <div className="questions-track">
+                  {allQuestions.map((question, index) => (
+                    <div
+                      key={question._id}
+                      className={`question ${
+                        index === currentQuestionIndex ? "active-question" : ""
+                      } ${
+                        selectedAnswers[question._id] ? "done-question" : ""
+                      }`}
+                      onClick={() => goToQuestion(index)}
+                    >
+                      {index + 1}
+                    </div>
+                  ))}
                 </div>
 
-                <div className="tracker">
-                  {startTest && <div className="time-left">{formatTime(timer)} mins</div>}
-
-                  <div className="questions-track">
-                    {allQuestions.map((question, index) => (
-                      <div
-                        key={question._id}
-                        className={`question ${
-                          index === currentQuestionIndex
-                            ? "active-question"
-                            : ""
-                        } ${
-                          selectedAnswers[question._id] ? "done-question" : ""
-                        }`}
-                        onClick={() => goToQuestion(index)}
-                      >
-                        {index + 1}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="move-prev-next">
-                    <button
-                      className="btn"
-                      onClick={goToPrevQuestion}
-                      disabled={currentQuestionIndex === 0}
-                    >
-                      Prev
-                    </button>
-                    <button
-                      className="btn"
-                      onClick={goToNextQuestion}
-                      disabled={
-                        currentQuestionIndex === allQuestions.length - 1
-                      }
-                    >
-                      Next
-                    </button>
-                    <button className="btn" onClick={handleSubmit}>
-                      Submit
-                    </button>
-                  </div>
+                <div className="move-prev-next">
+                  <button
+                    className="btn"
+                    onClick={goToPrevQuestion}
+                    disabled={currentQuestionIndex === 0}
+                  >
+                    Prev
+                  </button>
+                  <button
+                    className="btn"
+                    onClick={goToNextQuestion}
+                    disabled={currentQuestionIndex === allQuestions.length - 1}
+                  >
+                    Next
+                  </button>
+                  <button className="btn" onClick={handleSubmit}>
+                    Submit
+                  </button>
                 </div>
-              </>
-            )}
-          </div>
+              </div>
+            </>
+          )}
         </div>
+      </div>
     </GrandContainer>
   );
 };
@@ -239,7 +239,7 @@ export default MockAssessmentRunning;
 const GrandContainer = styled.div`
   position: relative;
   margin-top: -40px;
-  
+
   display: flex;
   justify-content: space-between;
 
@@ -287,7 +287,7 @@ const GrandContainer = styled.div`
       }
     }
 
-    .start-btn{
+    .start-btn {
       padding: 10px 20px;
       background-color: #404249;
       border: none;
