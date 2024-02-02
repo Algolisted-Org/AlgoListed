@@ -19,6 +19,7 @@ const MockAssessment = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [isAnswerCorrect, setIsAnswerCorrect] = useState({});
   const [genratedQuestion, setGenratedQuestion] = useState(false);
+  const [testId, setTestId] = useState(null);
   const [time, setTime] = useState(0);
 
   useEffect(() => {
@@ -59,56 +60,79 @@ const MockAssessment = () => {
   const generateQuestions = () => {
     setGenratedQuestion(true);
     console.log(numberofQuestion);
-
+  
     const selectedTopics = [];
-
+  
     document.querySelectorAll(".options input:checked").forEach((checkbox) => {
       selectedTopics.push(checkbox.id);
     });
-
-    const generateQuestionsForTopic = (topic, mcqArray) => {
-      const randomValuesIndices = generateRandomValues(
-        mcqArray.length,
-        numberofQuestion,
-        412
-      );
-      return randomValuesIndices.map((index) => mcqArray[index]);
-    };
-
-    const generatedQuestions = [];
-
+  
+    const totalCount = parseInt(numberofQuestion);
+  
+    const topicCounts = {}; 
+  
     selectedTopics.forEach((topic) => {
       switch (topic) {
         case "aptitude":
-          generatedQuestions.push(
-            ...generateQuestionsForTopic("aptitude", APTIMCQs)
-          );
+          topicCounts["aptitude"] = Math.floor(totalCount / selectedTopics.length);
           break;
         case "operating":
-          generatedQuestions.push(
-            ...generateQuestionsForTopic("operating", OSMCQs)
-          );
+          topicCounts["operating"] = Math.floor(totalCount / selectedTopics.length);
           break;
         case "dbms":
-          generatedQuestions.push(
-            ...generateQuestionsForTopic("dbms", DBMSMCQs)
-          );
+          topicCounts["dbms"] = Math.floor(totalCount / selectedTopics.length);
           break;
         case "cn":
-          generatedQuestions.push(...generateQuestionsForTopic("cn", CNMCQs));
+          topicCounts["cn"] = Math.floor(totalCount / selectedTopics.length);
           break;
         case "oops":
-          generatedQuestions.push(
-            ...generateQuestionsForTopic("oops", OOPSMCQs)
-          );
+          topicCounts["oops"] = Math.floor(totalCount / selectedTopics.length);
+          break;
         default:
           break;
       }
     });
+  
+    const generatedQuestions = [];
 
+    const generateQuestionsForTopic = (topic, count) => {
+      const mcqArray = getMCQsForTopic(topic);
+      // const randomValuesIndices = generateRandomValues(
+      //   mcqArray.length,
+      //   count,
+      //   412
+      // );
+      const randomValuesIndices=generateUniqueIndexes(count,mcqArray.length,testId)
+      console.log(randomValuesIndices)
+      return randomValuesIndices.map((index) => mcqArray[index]);
+    };
+  
+   
+    Object.keys(topicCounts).forEach((topic) => {
+      generatedQuestions.push(
+        ...generateQuestionsForTopic(topic, topicCounts[topic])
+      );
+    });
+  
     setAllQuestions(generatedQuestions);
   };
-
+  const getMCQsForTopic = (topic) => {
+    switch (topic) {
+      case "aptitude":
+        return APTIMCQs; 
+      case "operating":
+        return OSMCQs;
+      case "dbms":
+        return DBMSMCQs;
+      case "cn":
+        return CNMCQs;
+      case "oops":
+        return OOPSMCQs; 
+      default:
+        return []; 
+    }
+  };
+  
 
   // ------------------- generateUniqueIndexes -------------------
 
@@ -132,16 +156,17 @@ const MockAssessment = () => {
   };
 
   useEffect(() => {
-    const uniqueIndexes1 = generateUniqueIndexes(10, 40, 1);
-    const uniqueIndexes2 = generateUniqueIndexes(10, 40, 1);
-    const uniqueIndexes3 = generateUniqueIndexes(20, 40, 1);
-    const uniqueIndexes4 = generateUniqueIndexes(10, 40, 2);
-    const uniqueIndexes5 = generateUniqueIndexes(10, 40, 3);
+    const uniqueIndexesOS = generateUniqueIndexes(10, OSMCQs.length, testId);
+    const uniqueIndexesCN = generateUniqueIndexes(numberofQuestion, CNMCQs.length, testId);
+    const uniqueIndexesDBMS = generateUniqueIndexes(numberofQuestion, DBMSMCQs.length, testId);
+    const uniqueIndexesOOPs = generateUniqueIndexes(numberofQuestion, OOPSMCQs.length, testId);
+    const uniqueIndexesapti = generateUniqueIndexes(numberofQuestion, APTIMCQs.length, testId);
 
-    console.log("uniqueIndexes1 : ", uniqueIndexes1.join(', '));
-    console.log("uniqueIndexes2 : ", uniqueIndexes2.join(', '));
-    console.log("uniqueIndexes3 : ", uniqueIndexes3.join(', '));
-    console.log("uniqueIndexes4 : ", uniqueIndexes4.join(', '));
+    console.log("uniqueIndexes1 : ", uniqueIndexesOS.join(', '));
+    console.log("uniqueIndexes2 : ", uniqueIndexesCN.join(', '));
+    console.log("uniqueIndexes3 : ", uniqueIndexesDBMS.join(', '));
+    console.log("uniqueIndexes4 : ", uniqueIndexesOOPs.join(', '));
+    console.log("uniqueIndexes4 : ", uniqueIndexesapti.join(', '));
   }, [])
 
 
@@ -264,6 +289,7 @@ const MockAssessment = () => {
                       <input
                         type="text"
                         placeholder="Enter your Test ID (optional) "
+                        onChange={(e) => setTestId(e.target.value)}
                       />
                     </div>
                   </div>
@@ -283,7 +309,7 @@ const MockAssessment = () => {
                 </div>
               </>
             ) : (
-              <MockAssessmentRunning allQuestions={allQuestions} time={time} />
+              <MockAssessmentRunning allQuestions={allQuestions} time={time} testId={testId}/>
             )}
           </div>
           {
