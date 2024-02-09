@@ -10,7 +10,6 @@
 ![ViewCount](https://views.whatilearened.today/views/github/Nayaker/Algolisted.svg?cache=remove)
 
 
-
 ## About
 Explore a coding platform that harmoniously blends stylish design with robust capabilities. Track your coding progress, gain access to valuable contest insights, and partake in coding competitions with friends. We are a technology company fueled by artificial intelligence, committed to aiding individuals in their quest for employment by offering comprehensive insights into the IT industry.
 
