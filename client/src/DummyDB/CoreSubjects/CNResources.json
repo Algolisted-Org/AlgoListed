@@ -1,10 +1,14 @@
 [
     {
-        "link" : "https://www.youtube.com/watch?v=_TpOHMCODXo&list=PLDzeHZWIZsTr3nwuTegHLa2qlI81QweYG",
-        "image" : "https://i.ytimg.com/vi/_TpOHMCODXo/maxresdefault.jpg"
+        "link" : "https://www.youtube.com/watch?v=IPvYjXCsTg8",
+        "image" : "https://i.ytimg.com/vi/IPvYjXCsTg8/hq720.jpg?sqp=-…AFwAcABBg==&rs=AOn4CLB4E6OfIsAhFgI3Ro2Qu6nZjFIDog"
     },
     {
-        "link" : "https://www.youtube.com/watch?v=8XBtAjKwCm4",
-        "image" : "https://i.ytimg.com/vi/8XBtAjKwCm4/maxresdefault.jpg"
+        "link" : "https://www.geeksforgeeks.org/basics-computer-networking/",
+        "image" : "https://media.geeksforgeeks.org/wp-content/uploads/20230406152358/CN-(1).jpg"
+    },
+    {
+        "link" : "https://www.spiceworks.com/tech/networking/articles/what-is-a-computer-network/",
+        "image" : "https://images.spiceworks.com/wp-content/uploads/2021/12/08135425/Main-Components-of-a-Computer-Network.jpg"
     }
 ]

@@ -1,9 +1,206 @@
 [
     {
-        "_id": "25-nov-2023-02'45-@Nayaker",
-        "quesName": "Write Question Here",
-        "answer": "Write Answer Here!",
+    "_id": "15-feb-2024-09'30-@Mohit030802",
+    "quesName": "Explain the concept of inheritance in object-oriented programming.",
+    "answer": "In object-oriented programming, inheritance allows a class (subclass) to inherit attributes and methods from another class (superclass). This promotes code reusability and establishes a hierarchical relationship between classes. Subclasses can extend or override the functionality of the superclass. For example, a 'Car' class can inherit properties like 'color' and 'speed' from a more general 'Vehicle' class, while adding specific features like 'drive' and 'stop'.",
+    "completed": false,
+    "marked": false
+},
+{
+    "_id": "03-apr-2024-15'15-@Mohit030802",
+    "quesName": "What are the advantages of encapsulation in object-oriented programming?",
+    "answer": "Encapsulation is a fundamental concept in object-oriented programming that involves bundling data (attributes) and methods (functions) that operate on the data into a single unit, called a class. This promotes data hiding, as the internal implementation details of a class are hidden from outside access. Encapsulation also helps in achieving modularity, reusability, and maintainability of code. It reduces the complexity by controlling access to the class members and allows for easier debugging and testing.",
+    "completed": false,
+    "marked": false
+},
+{
+    "_id": "22-may-2024-11'55-@Mohit030802",
+    "quesName": "Differentiate between abstract classes and interfaces in Java.",
+    "answer": "In Java, abstract classes and interfaces are both used to achieve abstraction, but they have key differences. Abstract classes can have both abstract and concrete methods, and they can also have instance variables. They can't be instantiated and may contain constructors. Interfaces, on the other hand, can only declare abstract methods and constants (variables are implicitly public, static, and final). They provide a way for multiple inheritance in Java as a class can implement multiple interfaces, but it can only extend one class.",
+    "completed": false,
+    "marked": false
+},
+{
+    "_id": "07-jun-2024-14'20-@Mohit030802",
+    "quesName": "Discuss the concept of polymorphism in object-oriented programming with an example.",
+    "answer": "Polymorphism refers to the ability of different objects to respond to the same message (method call) in different ways. It allows objects of different classes to be treated as objects of a common superclass. There are two types of polymorphism: compile-time (method overloading) and runtime (method overriding). For example, consider a superclass 'Shape' with a method 'draw()'. Subclasses like 'Circle' and 'Rectangle' can override the 'draw()' method to provide their specific implementation, demonstrating polymorphic behavior.",
+    "completed": false,
+    "marked": false
+},
+{
+    "_id": "18-jul-2024-10'10-@Mohit030802",
+    "quesName": "Explain the concept of composition in object-oriented programming.",
+    "answer": "Composition is a design principle in object-oriented programming where a class is composed of objects of other classes as its members. Unlike inheritance, which emphasizes 'is-a' relationships, composition focuses on 'has-a' relationships. It allows for building complex objects by combining simpler ones, promoting code reuse and flexibility. For instance, a 'Car' class may contain objects of 'Engine', 'Wheel', and 'Transmission' classes as its components, each responsible for specific functionality.",
+    "completed": false,
+    "marked": false
+},
+{
+    "_id": "09-aug-2024-13'45-@Mohit030802",
+    "quesName": "What is the purpose of the 'super' keyword in Java?",
+    "answer": "In Java, the 'super' keyword is used to refer to the superclass (parent class) of the current object. It is primarily used to call methods, access fields, and invoke constructors of the superclass. 'super()' is used to call the superclass constructor from the subclass constructor. It is also used to differentiate between overridden methods and superclass methods with the same name. 'super' is particularly useful in scenarios where subclasses extend the functionality of the superclass.",
+    "completed": false,
+    "marked": false
+},
+{
+    "_id": "28-sep-2024-16'25-@Mohit030802",
+    "quesName": "Discuss the concept of aggregation in object-oriented programming.",
+    "answer": "Aggregation is a type of association in object-oriented programming where one class (the whole) contains references to other classes (the parts) as its members. Unlike composition, aggregation represents a weaker relationship where the parts can exist independently of the whole. It is often depicted as a 'has-a' relationship. For example, a 'University' class may aggregate 'Department' objects, where each department can exist without the university, but still maintains a relationship with it.",
+    "completed": false,
+    "marked": false
+},
+{
+    "_id": "11-oct-2024-12'55-@Mohit030802",
+    "quesName": "What is method overriding in Java? Provide an example.",
+    "answer": "Method overriding in Java allows a subclass to provide a specific implementation of a method that is already defined in its superclass. The method signature, including the name, return type, and parameters, must be the same in both the superclass and subclass. This enables polymorphic behavior, where the method called on a superclass reference can execute the subclass's version of that method. For instance, a 'Bird' subclass can override the 'sound()' method inherited from the 'Animal' superclass to produce bird-specific sounds.",
+    "completed": false,
+    "marked": false
+},
+{
+    "_id": "05-nov-2024-09'40-@Mohit030802",
+    "quesName": "Explain the concept of constructor chaining in Java.",
+    "answer": "Constructor chaining in Java refers to the process of calling one constructor from another constructor within the same class or from the constructor of its immediate superclass. This is achieved using the 'this()' and 'super()' keywords. Constructor chaining helps in reusing the code and avoiding redundancy by allowing constructors to call other constructors to perform common initialization tasks. It ensures that all constructors in the class hierarchy are executed when an object is created.",
+    "completed": false,
+    "marked": false
+},
+    {
+        "_id": "02-jan-2025-08'50-@Mohit030802",
+        "quesName": "Explain the concept of static and instance methods in Java.",
+        "answer": "In Java, static methods belong to the class rather than to any instance of the class. They can be called without creating an instance of the class. Static methods are commonly used for utility functions or for operations that do not require access to instance variables. Instance methods, on the other hand, are associated with objects of the class and can access and modify instance variables. They are called on instances of the class and operate on the specific state of that instance.",
         "completed": false,
         "marked": false
-    }
-]
+    },
+    {
+        "_id": "14-feb-2025-11'20-@Mohit030802",
+        "quesName": "What is the role of the 'this' keyword in Java?",
+        "answer": "In Java, the 'this' keyword refers to the current instance of the class. It can be used to access instance variables and methods within the class. 'this' is particularly useful when there is ambiguity between instance variables and parameters with the same name. It allows differentiating between local variables and instance variables. Additionally, 'this' can be used to invoke one constructor from another constructor within the same class, facilitating constructor chaining.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "25-mar-2025-15'45-@Mohit030802",
+        "quesName": "Discuss the concept of method overloading in Java with an example.",
+        "answer": "Method overloading in Java allows multiple methods within the same class to have the same name but with different parameters. This provides a way to define methods that perform similar tasks but with variations in the type or number of parameters. Overloaded methods are differentiated based on the number or types of parameters in their signature. For example, a class might have multiple 'calculateArea()' methods—one for calculating the area of a circle, another for a rectangle, and so on—each accepting different parameters.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "08-apr-2025-09'55-@Mohit030802",
+        "quesName": "Explain the importance of access modifiers in Java.",
+        "answer": "Access modifiers in Java control the visibility and accessibility of classes, variables, methods, and constructors. They help in enforcing encapsulation and defining the scope of class members. Java provides four access modifiers: 'public', 'private', 'protected', and 'default' (no modifier). 'Public' members are accessible from any other class. 'Private' members are accessible only within the same class. 'Protected' members are accessible within the same package or by subclasses. 'Default' access allows access only within the same package.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "12-may-2025-14'30-@Mohit030802",
+        "quesName": "Discuss the role of the 'final' keyword in Java.",
+        "answer": "In Java, the 'final' keyword is used to restrict the further modification of classes, methods, and variables. When applied to a class, it indicates that the class cannot be subclassed, making it effectively immutable. When applied to a method, it means the method cannot be overridden by subclasses. When applied to a variable, it indicates a constant value that cannot be changed once initialized. 'Final' variables must be initialized either at the time of declaration or in a constructor.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "21-jun-2025-12'20-@Mohit030802",
+        "quesName": "What is the difference between composition and aggregation in object-oriented programming?",
+        "answer": "In object-oriented programming, both composition and aggregation are forms of association between classes, but they represent different kinds of relationships. Composition implies a strong relationship where the contained objects are part of the whole object's lifecycle. In aggregation, the contained objects have an independent lifecycle from the whole object. In simpler terms, composition implies ownership, while aggregation implies a relationship where the associated objects are independent.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "03-jul-2025-09'15-@Mohit030802",
+        "quesName": "Explain the concept of method overriding in object-oriented programming.",
+        "answer": "Method overriding is a feature of object-oriented programming languages that allows a subclass to provide a specific implementation of a method that is already defined in its superclass. The method signature, including the name, return type, and parameters, must be the same in both the superclass and subclass. This enables polymorphic behavior, where the method called on a superclass reference can execute the subclass's version of that method. Method overriding is essential for achieving runtime polymorphism.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "09-aug-2025-14'05-@Mohit030802",
+        "quesName": "What are the different types of inheritance in Java?",
+        "answer": "In Java, inheritance allows a class to inherit properties and behavior from another class. There are five types of inheritance: single inheritance, where a class inherits from only one superclass; multiple inheritance, which Java does not support for classes due to ambiguity issues; multilevel inheritance, where a class inherits from a superclass, and another class inherits from this subclass; hierarchical inheritance, where multiple classes inherit from a single superclass; and hybrid inheritance, which is a combination of two or more types of inheritance.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "18-sep-2025-10'45-@Mohit030802",
+        "quesName": "What is the role of interfaces in achieving multiple inheritance in Java?",
+        "answer": "In Java, interfaces play a crucial role in achieving multiple inheritance, as Java does not support multiple inheritance for classes due to the 'diamond problem.' A class can implement multiple interfaces, thus inheriting abstract methods from each interface. By implementing interfaces, a class can inherit from multiple sources while avoiding the complexities and ambiguities associated with multiple inheritance of classes. This allows for achieving the benefits of multiple inheritance through interface implementation.",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "27-oct-2025-12'55-@Mohit030802",
+        "quesName": "Discuss the concept of method hiding in Java.",
+        "answer": "Method hiding in Java occurs when a subclass defines a static method with the same signature as a static method in its superclass. This hides the superclass's static method in the subclass. Unlike method overriding, which occurs with instance methods and involves dynamic binding, method hiding is a compile-time concept. When a static method is called on a reference of the superclass, the version defined in the superclass is invoked, demonstrating compile-time polymorphism.",
+        "completed": false,
+        "marked": false
+    },
+
+        {
+            "_id": "14-nov-2025-09'30-@Mohit030802",
+            "quesName": "Explain the concept of encapsulation and how it is implemented in Java.",
+            "answer": "Encapsulation is a fundamental principle in object-oriented programming that involves bundling data (attributes) and methods (behaviors) that operate on the data into a single unit, called a class. It restricts direct access to the data, ensuring that it can only be accessed through well-defined methods. In Java, encapsulation is implemented using access modifiers such as 'private', 'public', 'protected', and 'default' to control the visibility of variables and methods. Getters and setters are commonly used to access and modify encapsulated data.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "22-dec-2025-11'45-@Mohit030802",
+            "quesName": "Discuss the concept of constructor overloading in Java with an example.",
+            "answer": "Constructor overloading in Java allows a class to have multiple constructors with different parameter lists. This enables the creation of objects in different ways, providing flexibility and ease of use. Constructor overloading is achieved by defining constructors with different numbers or types of parameters. For example, a 'Rectangle' class might have constructors to initialize the rectangle's dimensions with length and width, or with just a single parameter representing the length (assuming width is predefined or defaulted).",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "03-jan-2026-13'20-@Mohit030802",
+            "quesName": "What is the role of the 'instanceof' operator in Java?",
+            "answer": "The 'instanceof' operator in Java is used to test whether an object is an instance of a particular class or interface. It returns true if the object is an instance of the specified type, including if the object is an instance of any subclass. The operator also returns true if the object implements the specified interface. 'instanceof' is often used in scenarios where casting of objects is required to perform specific operations, ensuring type safety during runtime.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "14-feb-2026-15'55-@Mohit030802",
+            "quesName": "Explain the concept of method chaining in Java.",
+            "answer": "Method chaining, also known as cascading, is a technique in Java where multiple method calls are chained together in a single statement. This is achieved by designing methods to return the object itself (usually 'this') after performing their operations. The returned object can then be used to call another method, and so on. Method chaining enhances code readability and conciseness, making it easier to write and understand fluent interfaces.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "28-mar-2026-10'10-@Mohit030802",
+            "quesName": "Discuss the advantages and disadvantages of using inheritance in object-oriented programming.",
+            "answer": "Inheritance in object-oriented programming offers several advantages, including code reuse, extensibility, and the promotion of a hierarchical structure. It allows new classes to be built upon existing classes, inheriting their attributes and behaviors. However, inheritance can also lead to tight coupling between classes, making the codebase less flexible and harder to maintain. It can introduce complexities in understanding the flow of control and can sometimes violate encapsulation, especially if superclass implementation details change.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "09-apr-2026-14'20-@Mohit030802",
+            "quesName": "What is the purpose of the 'abstract' keyword in Java?",
+            "answer": "In Java, the 'abstract' keyword is used to declare abstract classes and methods. An abstract class is a class that cannot be instantiated on its own and may contain abstract methods, which are declared without an implementation. Abstract methods must be implemented by concrete subclasses. Abstract classes serve as blueprints for other classes, providing common functionality and defining methods that subclasses must implement. Abstract methods allow for runtime polymorphism and dynamic method resolution.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "12-may-2026-09'45-@Mohit030802",
+            "quesName": "Discuss the concept of method visibility in Java.",
+            "answer": "Method visibility in Java is controlled by access modifiers, which specify the level of access that other classes have to the method. There are four access modifiers in Java: 'public', 'private', 'protected', and 'default'. 'Public' methods are accessible from any other class. 'Private' methods are only accessible within the same class. 'Protected' methods are accessible within the same package or by subclasses. 'Default' methods (no modifier) are accessible only within the same package.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "21-jun-2026-11'35-@Mohit030802",
+            "quesName": "What is the role of the 'super()' constructor in Java?",
+            "answer": "In Java, the 'super()' constructor is used to call the constructor of the superclass from the subclass. It must be the first statement in the subclass constructor if used explicitly. If the superclass has multiple constructors, 'super()' can be used to invoke a specific constructor of the superclass. If 'super()' is not explicitly called in the subclass constructor, the compiler automatically inserts a call to the no-argument constructor of the superclass.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "08-aug-2026-15'20-@Mohit030802",
+            "quesName": "Discuss the role of interfaces in achieving abstraction in Java.",
+            "answer": "In Java, interfaces provide a way to achieve abstraction by defining a contract that classes must adhere to. An interface declares a set of methods that implementing classes must define. This allows classes to be treated polymorphically based on their common interface rather than their specific implementation. Interfaces enable loose coupling and flexibility in design, as classes can implement multiple interfaces and provide their own implementations of interface methods.",
+            "completed": false,
+            "marked": false
+        },
+        {
+            "_id": "19-sep-2026-10'55-@Mohit030802",
+            "quesName": "What is method overloading and how does it differ from method overriding in Java?",
+            "answer": "Method overloading in Java allows multiple methods with the same name but different parameter lists to coexist within the same class. It provides a way to define methods that perform similar tasks but with variations in the type or number of parameters. Method overriding, on the other hand, occurs when a subclass provides a specific implementation of a method that is already defined in its superclass. Overridden methods have the same signature in both the superclass and subclass.",
+            "completed": false,
+            "marked": false
+        }
+    ]
