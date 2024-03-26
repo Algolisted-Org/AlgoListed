@@ -1,5 +1,32 @@
 [
     {
-        "name": "CN Topic"
+        "_id": "23-March-2024-18'50-@Mohit030802",
+        "name": "Network Types",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "23-March-2024-18'51-@Mohit030802",
+        "name": "Components",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "23-March-2024-18'52-@Mohit030802",
+        "name": "OSI Model",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "23-March-2024-18'53-@Mohit030802",
+        "name": "Network Topologies",
+        "completed": false,
+        "marked": false
+    },
+    {
+        "_id": "23-March-2024-18'54-@Mohit030802",
+        "name": "Network Security",
+        "completed": false,
+        "marked": false
     }
 ]
