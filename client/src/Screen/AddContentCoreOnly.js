@@ -130,7 +130,7 @@ const AddContentCoreOnly = () => {
             selectTypeValue
         );
 
-        await fetch('https://algolisted.cyclic.app/resources/create', {
+        await fetch('http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/resources/create', {
             method: 'post',
             headers: { 'content-type': 'application/json' },
 

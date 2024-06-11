@@ -39,8 +39,8 @@ const BlogResources = ({ ResourceType,  blogname }) => {
     useEffect(() => {
         // retrieve the data from the server
         axios
-            // .get(`https://algolisted.cyclic.app/coding-sheets/sheet/${sheetname}`)
-            .get(`https://algolisted.cyclic.app/blog-resources/blog/${blogname}`)
+            // .get(`http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/coding-sheets/sheet/${sheetname}`)
+            .get(`http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/blog-resources/blog/${blogname}`)
             .then((res) => {
                 // retrieve the "completed" status of each sheet from the local storage
                 const updatedData = res.data.map((sheet) => {

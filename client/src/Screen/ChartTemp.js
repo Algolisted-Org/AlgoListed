@@ -80,7 +80,7 @@ const ChartTemp = () => {
     useEffect(() => {
         axios
             .get(
-                `https://algolisted.cyclic.app/coding-questions/question/striver-sde-sheet`
+                `http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/coding-questions/question/striver-sde-sheet`
             )
             .then((res) => {
                 setData(res.data);

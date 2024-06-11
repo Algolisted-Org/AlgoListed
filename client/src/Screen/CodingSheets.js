@@ -363,7 +363,7 @@ const CodingSheets = () => {
 	useEffect(() => {
 		// retrieve the data from the server
 		axios
-			.get(`https://algolisted.cyclic.app/coding-questions/question/${sheetname}`)
+			.get(`http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/coding-questions/question/${sheetname}`)
 			.then((res) => {
 
 				// retrieve the "completed" status of each sheet from the local storage
