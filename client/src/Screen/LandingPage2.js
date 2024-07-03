@@ -32,7 +32,7 @@ const LandingPage2 = () => {
     {
         "name" : "Contest Archive",
         "desc" : "Cruise through a seamless and organized collection of all contest problems, empowering you to tackle them with maximum efficiency. On top of that, we enrich your contest experience with interactive visualizations and engaging infographics that bring the game to life and help you grasp it more effectively.",
-        "link" : "/contests-archive"
+        "link" : "/contests-archive/leetcode"
     },
     {
         "name" : "Contest Analysis",
@@ -47,7 +47,7 @@ const LandingPage2 = () => {
     {
         "name" : "Core Subjects Tracker",
         "desc" : "We've compiled a comprehensive set of interview questions sourced from reputable websites such as GeeksforGeeks and InterviewBit. Additionally, we've incorporated core subject knowledge shared by renowned YouTubers like Striver, Fraz, etc. The questions undergo thorough parsing using AI to filter out the most relevant ones, and our AI system provides ideal candidate answers.",
-        "link" : "/selected-profiles"
+        "link" : "/core-subjects-tracker/operating-systems"
     },
     {
       "name": "Resume Based Questions",
@@ -241,7 +241,7 @@ const LandingPage2 = () => {
             <Fade>
               <div className="heading">
                 <h1>Elevate Your Coding Skills with</h1>
-                <h1 className='gradient-text'>Infographic Brilliance.</h1>
+                <h1 className='gradient-text'>AI and Visualization!</h1>
               </div>
             </Fade>
             <Fade>
@@ -264,8 +264,9 @@ const LandingPage2 = () => {
                   {/* <img src="https://spideo.com/wp-content/uploads/2021/12/Gif-Analytics-50-2.gif" alt="" draggable="false"/> */}
                   {/* <img src="https://analytics-smart.com/wp-content/uploads/2022/06/Data-Science1-1.gif" alt="" /> */}
                   {/* <img src={sideImage} alt="" /> */}
-                  <img src="https://img1.picmix.com/output/stamp/normal/1/9/5/4/2444591_542b7.gif" alt="" draggable="false" />
-                  {/* <img src="https://i.gifer.com/embedded/download/XDZc.gif" alt=""  draggable="false"/> */}
+                  {/* <img src="https://img1.picmix.com/output/stamp/normal/1/9/5/4/2444591_542b7.gif" alt="" draggable="false" /> */}
+                  <img src="https://64.media.tumblr.com/839357ea6275db93b26830442d2b09ca/68e588a8812a4c4d-3f/s500x750/e1724104c696b362e9de15678922e3ad17c6c145.gif" alt=""  draggable="false"/>
+                  {/* <img src="https://media0.giphy.com/media/P5S1CXl0y1v1I9308B/200w.gif?cid=6c09b952ifjcc0rzwkzfiqpi092ga6ssf5cvqk1nuxylglq1&ep=v1_gifs_search&rid=200w.gif&ct=s" alt="" /> */}
                 </div>
               </Fade>
             </div>
@@ -383,10 +384,10 @@ const LandingPage2 = () => {
                 </div>
                 <div className="points">
                   <RouterLink to="organisation-information/about-us" className="link">About us</RouterLink>                  
-                  <RouterLink to="organisation-information/core-team" className="link">Team</RouterLink>            
-                  <RouterLink to="organisation-information/mission" className="link">Our Mission</RouterLink>  
-                  <RouterLink to="organisation-information/contact" className="link">Contact</RouterLink>  
-                  <RouterLink to="organisation-information/future-vision" className="link">Future Vision</RouterLink>                  
+                  <RouterLink to="organisation-information/all-contributors" className="link">All Contributors</RouterLink>            
+                  <RouterLink to="organisation-information/contributor-work" className="link">Contributors Work</RouterLink>  
+                  <RouterLink to="https://business.algolisted.com/" target='_blank' className="link">Business</RouterLink>  
+                  <RouterLink to="https://github.com/Algolisted-Org/AlgoListed" target='_blank' className="link">Open Source</RouterLink>
                 </div>
               </div>
 
@@ -395,20 +396,19 @@ const LandingPage2 = () => {
                   General
                 </div>
                 <div className="points">
-                  <a href="/" className="link">Terms and Conditions</a>
-                  <a href="/" className="link">Data protection</a>
-                  <a href="/" className="link">Trust and Security</a>
+                  <a href="/organisation-information/privacy-policies" className="link">Privacy Policies</a>
+                  <a href="/page-not-found" className="link">Data protection</a>
+                  <a href="/organisation-information/disclaimer" className="link">Disclaimer</a>
                 </div>
               </div>
 
               <div className="left-content">
                 <div className="title">
-                  Account
+                  Founder
                 </div>
                 <div className="points">
-                  <RouterLink to="sign-in" className="link">Login</RouterLink>                  
-                  <RouterLink to="create-account"  className="link">Create account</RouterLink>      
-                  <RouterLink to="request-api"  className="link">Request API access</RouterLink>
+                  <RouterLink to="https://github.com/NayakPenguin" target='_blank' className="link">Github</RouterLink>
+                  <RouterLink to="https://www.linkedin.com/in/atanu-nayak-profile/" target='_blank' className="link">Linkedin</RouterLink>
                 </div>
               </div>
 

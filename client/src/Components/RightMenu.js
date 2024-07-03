@@ -14,7 +14,7 @@ const RightMenu = ({ blogid, blogname, ResourceType }) => {
 
   useEffect(() => {
     axios
-        .get(`http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/blog-resources/blog/${blogname}`)
+        .get(`https://algolisted.tonmoy1912.in/blog-resources/blog/${blogname}`)
         .then((res) => {
             setResourceData(res.data);
         })

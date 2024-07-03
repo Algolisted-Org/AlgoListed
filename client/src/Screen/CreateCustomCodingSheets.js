@@ -39,9 +39,9 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
             setIsPending(true)
           try {
             console.log(user)
-            console.log("http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/user-details/profile-update-email was called");
+            console.log("https://algolisted.tonmoy1912.in/user-details/profile-update-email was called");
             const response = await axios.post(
-              "http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/user-details/profile-update-email",
+              "https://algolisted.tonmoy1912.in/user-details/profile-update-email",
               user,
               { withCredentials: true }
             );
@@ -111,9 +111,9 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
     //     "profilePictureURL": result.user.profilePictureURL
     // }
     try {
-      console.log("http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/user-details/profile-create was called");
+      console.log("https://algolisted.tonmoy1912.in/user-details/profile-create was called");
       const response = await axios.post(
-        `http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/user-details/profile-create`,
+        `https://algolisted.tonmoy1912.in/user-details/profile-create`,
         result.user,
         { withCredentials: true }
       );
@@ -128,10 +128,10 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
       setUserGlobal(response.data.user);
     } catch (error) {
       try {
-        console.log("http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/user-details/profile-update-email was called");
+        console.log("https://algolisted.tonmoy1912.in/user-details/profile-update-email was called");
         console.log(result.user);
         const newResponse = await axios.post(
-          `http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/user-details/profile-update-email`,
+          `https://algolisted.tonmoy1912.in/user-details/profile-update-email`,
           result.user,
           { withCredentials: true }
         );
@@ -172,7 +172,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
     };
     console.log(newObj);
     try {
-      const newResponse = await axios.post(`http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/problem-sheets/create`, newObj, {
+      const newResponse = await axios.post(`https://algolisted.tonmoy1912.in/problem-sheets/create`, newObj, {
         withCredentials: true,
       });
       console.log(newResponse);
@@ -191,7 +191,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
     console.log(`/problem-sheets/get-by-owner/${ownerId} was called!`);
     try {
       const sheetList = await axios.get(
-        `http://ec2-15-206-82-121.ap-south-1.compute.amazonaws.com:8000/problem-sheets/get-by-owner/${ownerId}`
+        `https://algolisted.tonmoy1912.in/problem-sheets/get-by-owner/${ownerId}`
       );
       
       console.log(sheetList.data.sheets);

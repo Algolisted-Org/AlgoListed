@@ -9,7 +9,7 @@ export const contestAnalysisFilters = [
       text: "Codeforces",
       domainFilter: "codeforces",
       id: 2,
-      lock: false,
+      lock: true,
     },
     {
       text: "Unstop",

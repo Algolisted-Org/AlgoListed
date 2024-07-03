@@ -126,7 +126,7 @@ const LeftMenuDark = ({ marked }) => {
           <div className="text">algolisted.com</div>
           <div className="line"></div>
         </div>
-        <a href='mailto:nayak.primary@gmail.com' target={"_blank"} className="link">Algolisted Business <CallMadeIcon/></a>
+        <a href='https://business.algolisted.com/' target={"_blank"} className="link">Algolisted Business<CallMadeIcon/></a>
         <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link">Report an Issue</a>
       </div>
 
