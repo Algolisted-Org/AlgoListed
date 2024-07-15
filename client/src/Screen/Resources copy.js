@@ -38,7 +38,7 @@ const Resources = () => {
   }, []);
 
   useEffect(() => {
-    axios.get("https://algolisted.cyclic.app/resources/all")
+    axios.get("https://algolisted.tonmoy1912.in/resources/all")
       .then((res) => {
         setAllResources(res.data);
         // console.log(res.data);

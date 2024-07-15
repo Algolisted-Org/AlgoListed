@@ -56,7 +56,7 @@ const SelectedProfiles = () => {
 
 
   // useEffect(() => {
-  //   axios.get("https://algolisted.cyclic.app/resumes/all")
+  //   axios.get("https://algolisted.tonmoy1912.in/resumes/all")
   //     .then((res) => {
   //       setAllResumesData(res.data);
   //       console.log("All resumes : ", res.data);

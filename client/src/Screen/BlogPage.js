@@ -42,7 +42,7 @@ const BlogPage = () => {
 
       useEffect(() => {
         axios
-            .get(`https://algolisted.cyclic.app/blog-resources/blog/${blogname}`)
+            .get(`https://algolisted.tonmoy1912.in/blog-resources/blog/${blogname}`)
             .then((res) => {
                 setResourceData(res.data);
             })

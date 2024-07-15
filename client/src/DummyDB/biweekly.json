@@ -1,0 +1,970 @@
+[
+  {
+    "contest_name": "Biweekly Contest 115",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-115/",
+    "problems": {
+      "A": {
+        "name": "Last Visited Integers",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-115/problems/last-visited-integers/",
+        "problemset_problem_link": "https://leetcode.com/problems/last-visited-integers/",
+        "tags": [
+          "Array",
+          "Simulation"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Longest Unequal Adjacent Groups Subsequence I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-115/problems/longest-unequal-adjacent-groups-subsequence-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-i/",
+        "tags": [
+          "Array",
+          "String",
+          "Dynamic Programming",
+          "Greedy"
+        ],
+        "difficulty": "Easy"
+      },
+      "C": {
+        "name": "Longest Unequal Adjacent Groups Subsequence II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-115/problems/longest-unequal-adjacent-groups-subsequence-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/",
+        "tags": [
+          "Array",
+          "String",
+          "Dynamic Programming"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Count of Sub-Multisets With Bounded Sum",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-115/problems/count-of-sub-multisets-with-bounded-sum/",
+        "problemset_problem_link": "https://leetcode.com/problems/count-of-sub-multisets-with-bounded-sum/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Dynamic Programming",
+          "Sliding Window"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 116",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-116/",
+    "problems": {
+      "A": {
+        "name": "Subarrays Distinct Element Sum of Squares I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-116/problems/subarrays-distinct-element-sum-of-squares-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-i/",
+        "tags": [
+          "Array",
+          "Hash Table"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Minimum Number of Changes to Make Binary String Beautiful",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-116/problems/minimum-number-of-changes-to-make-binary-string-beautiful/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/",
+        "tags": [
+          "String"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Length of the Longest Subsequence That Sums to Target",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-116/problems/length-of-the-longest-subsequence-that-sums-to-target/",
+        "problemset_problem_link": "https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/",
+        "tags": [
+          "Array",
+          "Dynamic Programming"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Subarrays Distinct Element Sum of Squares II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-116/problems/subarrays-distinct-element-sum-of-squares-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-ii/",
+        "tags": [
+          "Array",
+          "Dynamic Programming",
+          "Binary Indexed Tree",
+          "Segment Tree"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 117",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-117/",
+    "problems": {
+      "A": {
+        "name": "Distribute Candies Among Children I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-117/problems/distribute-candies-among-children-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/distribute-candies-among-children-i/",
+        "tags": [
+          "Math",
+          "Combinatorics",
+          "Enumeration"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Distribute Candies Among Children II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-117/problems/distribute-candies-among-children-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/distribute-candies-among-children-ii/",
+        "tags": [
+          "Math",
+          "Combinatorics",
+          "Enumeration"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Number of Strings Which Can Be Rearranged to Contain Substring",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-117/problems/number-of-strings-which-can-be-rearranged-to-contain-substring/",
+        "problemset_problem_link": "https://leetcode.com/problems/number-of-strings-which-can-be-rearranged-to-contain-substring/",
+        "tags": [
+          "Math",
+          "Dynamic Programming",
+          "Combinatorics"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Maximum Spending After Buying Items",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-117/problems/maximum-spending-after-buying-items/",
+        "problemset_problem_link": "https://leetcode.com/problems/maximum-spending-after-buying-items/",
+        "tags": [
+          "Array",
+          "Greedy",
+          "Sorting",
+          "Heap (Priority Queue)",
+          "Matrix"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 118",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-118/",
+    "problems": {
+      "A": {
+        "name": "Find Words Containing Character",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-118/problems/find-words-containing-character/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-words-containing-character/",
+        "tags": [
+          "Array",
+          "String"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Maximize Area of Square Hole in Grid",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-118/problems/maximize-area-of-square-hole-in-grid/",
+        "problemset_problem_link": "https://leetcode.com/problems/maximize-area-of-square-hole-in-grid/",
+        "tags": [
+          "Array",
+          "Sorting"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Minimum Number of Coins for Fruits",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-118/problems/minimum-number-of-coins-for-fruits/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-number-of-coins-for-fruits/",
+        "tags": [
+          "Array",
+          "Dynamic Programming",
+          "Queue",
+          "Heap (Priority Queue)",
+          "Monotonic Queue"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Find Maximum Non-decreasing Array Length",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-118/problems/find-maximum-non-decreasing-array-length/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-maximum-non-decreasing-array-length/",
+        "tags": [
+          "Array",
+          "Binary Search",
+          "Dynamic Programming",
+          "Stack",
+          "Queue",
+          "Monotonic Stack",
+          "Monotonic Queue"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 119",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-119/",
+    "problems": {
+      "A": {
+        "name": "Find Common Elements Between Two Arrays",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-119/problems/find-common-elements-between-two-arrays/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-common-elements-between-two-arrays/",
+        "tags": [
+          "Array",
+          "Hash Table"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Remove Adjacent Almost-Equal Characters",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-119/problems/remove-adjacent-almost-equal-characters/",
+        "problemset_problem_link": "https://leetcode.com/problems/remove-adjacent-almost-equal-characters/",
+        "tags": [
+          "String",
+          "Dynamic Programming",
+          "Greedy"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Length of Longest Subarray With at Most K Frequency",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-119/problems/length-of-longest-subarray-with-at-most-k-frequency/",
+        "problemset_problem_link": "https://leetcode.com/problems/length-of-longest-subarray-with-at-most-k-frequency/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Sliding Window"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Number of Possible Sets of Closing Branches",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-119/problems/number-of-possible-sets-of-closing-branches/",
+        "problemset_problem_link": "https://leetcode.com/problems/number-of-possible-sets-of-closing-branches/",
+        "tags": [
+          "Bit Manipulation",
+          "Graph",
+          "Heap (Priority Queue)",
+          "Enumeration",
+          "Shortest Path"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 120",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-120/",
+    "problems": {
+      "A": {
+        "name": "Count the Number of Incremovable Subarrays I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-120/problems/count-the-number-of-incremovable-subarrays-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/count-the-number-of-incremovable-subarrays-i/",
+        "tags": [
+          "Array",
+          "Two Pointers",
+          "Binary Search",
+          "Enumeration"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Find Polygon With the Largest Perimeter",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-120/problems/find-polygon-with-the-largest-perimeter/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/",
+        "tags": [
+          "Array",
+          "Greedy",
+          "Sorting",
+          "Prefix Sum"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Count the Number of Incremovable Subarrays II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-120/problems/count-the-number-of-incremovable-subarrays-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/count-the-number-of-incremovable-subarrays-ii/",
+        "tags": [
+          "Array",
+          "Two Pointers",
+          "Binary Search"
+        ],
+        "difficulty": "Hard"
+      },
+      "D": {
+        "name": "Find Number of Coins to Place in Tree Nodes",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-120/problems/find-number-of-coins-to-place-in-tree-nodes/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-number-of-coins-to-place-in-tree-nodes/",
+        "tags": [
+          "Dynamic Programming",
+          "Tree",
+          "Depth-First Search",
+          "Sorting",
+          "Heap (Priority Queue)"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 121",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-121/",
+    "problems": {
+      "A": {
+        "name": "Smallest Missing Integer Greater Than Sequential Prefix Sum",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-121/problems/smallest-missing-integer-greater-than-sequential-prefix-sum/",
+        "problemset_problem_link": "https://leetcode.com/problems/smallest-missing-integer-greater-than-sequential-prefix-sum/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Sorting"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Minimum Number of Operations to Make Array XOR Equal to K",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-121/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/",
+        "tags": [
+          "Array",
+          "Bit Manipulation"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Minimum Number of Operations to Make X and Y Equal",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-121/problems/minimum-number-of-operations-to-make-x-and-y-equal/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-number-of-operations-to-make-x-and-y-equal/",
+        "tags": [
+          "Dynamic Programming",
+          "Breadth-First Search",
+          "Memoization"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Count the Number of Powerful Integers",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-121/problems/count-the-number-of-powerful-integers/",
+        "problemset_problem_link": "https://leetcode.com/problems/count-the-number-of-powerful-integers/",
+        "tags": [
+          "Math",
+          "String",
+          "Dynamic Programming"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 122",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-122/",
+    "problems": {
+      "A": {
+        "name": "Divide an Array Into Subarrays With Minimum Cost I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-122/problems/divide-an-array-into-subarrays-with-minimum-cost-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-i/",
+        "tags": [
+          "Array",
+          "Sorting",
+          "Enumeration"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Find if Array Can Be Sorted",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-122/problems/find-if-array-can-be-sorted/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-if-array-can-be-sorted/",
+        "tags": [
+          "Array",
+          "Bit Manipulation",
+          "Sorting"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Minimize Length of Array Using Operations",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-122/problems/minimize-length-of-array-using-operations/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimize-length-of-array-using-operations/",
+        "tags": [
+          "Array",
+          "Math",
+          "Greedy",
+          "Number Theory"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Divide an Array Into Subarrays With Minimum Cost II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-122/problems/divide-an-array-into-subarrays-with-minimum-cost-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-ii/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Sliding Window",
+          "Heap (Priority Queue)"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 123",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-123/",
+    "problems": {
+      "A": {
+        "name": "Type of Triangle",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-123/problems/type-of-triangle/",
+        "problemset_problem_link": "https://leetcode.com/problems/type-of-triangle/",
+        "tags": [
+          "Array",
+          "Math",
+          "Sorting"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Find the Number of Ways to Place People I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-123/problems/find-the-number-of-ways-to-place-people-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i/",
+        "tags": [
+          "Array",
+          "Math",
+          "Geometry",
+          "Sorting",
+          "Enumeration"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Maximum Good Subarray Sum",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-123/problems/maximum-good-subarray-sum/",
+        "problemset_problem_link": "https://leetcode.com/problems/maximum-good-subarray-sum/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Prefix Sum"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Find the Number of Ways to Place People II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-123/problems/find-the-number-of-ways-to-place-people-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-number-of-ways-to-place-people-ii/",
+        "tags": [
+          "Array",
+          "Math",
+          "Geometry",
+          "Sorting",
+          "Enumeration"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 124",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-124/",
+    "problems": {
+      "A": {
+        "name": "Maximum Number of Operations With the Same Score I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-124/problems/maximum-number-of-operations-with-the-same-score-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-i/",
+        "tags": [
+          "Array",
+          "Simulation"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Apply Operations to Make String Empty",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-124/problems/apply-operations-to-make-string-empty/",
+        "problemset_problem_link": "https://leetcode.com/problems/apply-operations-to-make-string-empty/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Sorting",
+          "Counting"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Maximum Number of Operations With the Same Score II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-124/problems/maximum-number-of-operations-with-the-same-score-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-ii/",
+        "tags": [
+          "Array",
+          "Dynamic Programming",
+          "Memoization"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Maximize Consecutive Elements in an Array After Modification",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-124/problems/maximize-consecutive-elements-in-an-array-after-modification/",
+        "problemset_problem_link": "https://leetcode.com/problems/maximize-consecutive-elements-in-an-array-after-modification/",
+        "tags": [
+          "Array",
+          "Dynamic Programming",
+          "Sorting"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 125",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-125/",
+    "problems": {
+      "A": {
+        "name": "Minimum Operations to Exceed Threshold Value I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-125/problems/minimum-operations-to-exceed-threshold-value-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-i/",
+        "tags": [
+          "Array"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Minimum Operations to Exceed Threshold Value II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-125/problems/minimum-operations-to-exceed-threshold-value-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-ii/",
+        "tags": [
+          "Array",
+          "Heap (Priority Queue)",
+          "Simulation"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Count Pairs of Connectable Servers in a Weighted Tree Network",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-125/problems/count-pairs-of-connectable-servers-in-a-weighted-tree-network/",
+        "problemset_problem_link": "https://leetcode.com/problems/count-pairs-of-connectable-servers-in-a-weighted-tree-network/",
+        "tags": [
+          "Array",
+          "Tree",
+          "Depth-First Search"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Find the Maximum Sum of Node Values",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-125/problems/find-the-maximum-sum-of-node-values/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-maximum-sum-of-node-values/",
+        "tags": [
+          "Array",
+          "Dynamic Programming",
+          "Greedy",
+          "Bit Manipulation",
+          "Tree",
+          "Sorting"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 126",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-126/",
+    "problems": {
+      "A": {
+        "name": "Find the Sum of Encrypted Integers",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-126/problems/find-the-sum-of-encrypted-integers/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-sum-of-encrypted-integers/",
+        "tags": [
+          "Array",
+          "Math"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Mark Elements on Array by Performing Queries",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-126/problems/mark-elements-on-array-by-performing-queries/",
+        "problemset_problem_link": "https://leetcode.com/problems/mark-elements-on-array-by-performing-queries/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Sorting",
+          "Heap (Priority Queue)",
+          "Simulation"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Replace Question Marks in String to Minimize Its Value",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-126/problems/replace-question-marks-in-string-to-minimize-its-value/",
+        "problemset_problem_link": "https://leetcode.com/problems/replace-question-marks-in-string-to-minimize-its-value/",
+        "tags": [
+          "Hash Table",
+          "String",
+          "Greedy",
+          "Sorting",
+          "Heap (Priority Queue)",
+          "Counting"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Find the Sum of the Power of All Subsequences",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-126/problems/find-the-sum-of-the-power-of-all-subsequences/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-sum-of-the-power-of-all-subsequences/",
+        "tags": [
+          "Array",
+          "Dynamic Programming"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 127",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-127/",
+    "problems": {
+      "A": {
+        "name": "Shortest Subarray With OR at Least K I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-127/problems/shortest-subarray-with-or-at-least-k-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-i/",
+        "tags": [
+          "Array",
+          "Bit Manipulation",
+          "Sliding Window"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Minimum Levels to Gain More Points",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-127/problems/minimum-levels-to-gain-more-points/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-levels-to-gain-more-points/",
+        "tags": [
+          "Array",
+          "Prefix Sum"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Shortest Subarray With OR at Least K II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-127/problems/shortest-subarray-with-or-at-least-k-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/",
+        "tags": [
+          "Array",
+          "Bit Manipulation",
+          "Sliding Window"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Find the Sum of Subsequence Powers",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-127/problems/find-the-sum-of-subsequence-powers/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-sum-of-subsequence-powers/",
+        "tags": [
+          "Array",
+          "Dynamic Programming",
+          "Sorting"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 128",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-128/",
+    "problems": {
+      "A": {
+        "name": "Score of a String",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-128/problems/score-of-a-string/",
+        "problemset_problem_link": "https://leetcode.com/problems/score-of-a-string/",
+        "tags": [
+          "String"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Minimum Rectangles to Cover Points",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-128/problems/minimum-rectangles-to-cover-points/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-rectangles-to-cover-points/",
+        "tags": [
+          "Array",
+          "Greedy",
+          "Sorting"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Minimum Time to Visit Disappearing Nodes",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-128/problems/minimum-time-to-visit-disappearing-nodes/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-time-to-visit-disappearing-nodes/",
+        "tags": [
+          "Array",
+          "Graph",
+          "Heap (Priority Queue)",
+          "Shortest Path"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Find the Number of Subarrays Where Boundary Elements Are Maximum",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-128/problems/find-the-number-of-subarrays-where-boundary-elements-are-maximum/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-number-of-subarrays-where-boundary-elements-are-maximum/",
+        "tags": [
+          "Array",
+          "Binary Search",
+          "Stack",
+          "Monotonic Stack"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 129",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-129/",
+    "problems": {
+      "A": {
+        "name": "Make a Square with the Same Color",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-129/problems/make-a-square-with-the-same-color/",
+        "problemset_problem_link": "https://leetcode.com/problems/make-a-square-with-the-same-color/",
+        "tags": [
+          "Array",
+          "Matrix",
+          "Enumeration"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Right Triangles",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-129/problems/right-triangles/",
+        "problemset_problem_link": "https://leetcode.com/problems/right-triangles/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Math",
+          "Combinatorics",
+          "Counting"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Find All Possible Stable Binary Arrays I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-129/problems/find-all-possible-stable-binary-arrays-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-all-possible-stable-binary-arrays-i/",
+        "tags": [
+          "Dynamic Programming",
+          "Prefix Sum"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Find All Possible Stable Binary Arrays II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-129/problems/find-all-possible-stable-binary-arrays-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-all-possible-stable-binary-arrays-ii/",
+        "tags": [
+          "Dynamic Programming",
+          "Prefix Sum"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 130",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-130/",
+    "problems": {
+      "A": {
+        "name": "Check if Grid Satisfies Conditions",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-130/problems/check-if-grid-satisfies-conditions/",
+        "problemset_problem_link": "https://leetcode.com/problems/check-if-grid-satisfies-conditions/",
+        "tags": [
+          "Array",
+          "Matrix"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Maximum Points Inside the Square",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-130/problems/maximum-points-inside-the-square/",
+        "problemset_problem_link": "https://leetcode.com/problems/maximum-points-inside-the-square/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "String",
+          "Binary Search",
+          "Sorting"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Minimum Substring Partition of Equal Character Frequency",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-130/problems/minimum-substring-partition-of-equal-character-frequency/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-substring-partition-of-equal-character-frequency/",
+        "tags": [
+          "Hash Table",
+          "String",
+          "Dynamic Programming",
+          "Counting"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Find Products of Elements of Big Array",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-130/problems/find-products-of-elements-of-big-array/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-products-of-elements-of-big-array/",
+        "tags": [
+          "Array",
+          "Binary Search",
+          "Bit Manipulation"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 131",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-131/",
+    "problems": {
+      "A": {
+        "name": "Find the XOR of Numbers Which Appear Twice",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-131/problems/find-the-xor-of-numbers-which-appear-twice/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-xor-of-numbers-which-appear-twice/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Bit Manipulation"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Find Occurrences of an Element in an Array",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-131/problems/find-occurrences-of-an-element-in-an-array/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-occurrences-of-an-element-in-an-array/",
+        "tags": [
+          "Array",
+          "Hash Table"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Find the Number of Distinct Colors Among the Balls",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-131/problems/find-the-number-of-distinct-colors-among-the-balls/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-number-of-distinct-colors-among-the-balls/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Simulation"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Block Placement Queries",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-131/problems/block-placement-queries/",
+        "problemset_problem_link": "https://leetcode.com/problems/block-placement-queries/",
+        "tags": [
+          "Array",
+          "Binary Search",
+          "Binary Indexed Tree",
+          "Segment Tree"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 132",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-132/",
+    "problems": {
+      "A": {
+        "name": "Clear Digits",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-132/problems/clear-digits/",
+        "problemset_problem_link": "https://leetcode.com/problems/clear-digits/",
+        "tags": [
+          "Hash Table",
+          "String",
+          "Simulation"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Find The First Player to win K Games in a Row",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-132/problems/find-the-first-player-to-win-k-games-in-a-row/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-first-player-to-win-k-games-in-a-row/",
+        "tags": [
+          "Array",
+          "Simulation"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Find the Maximum Length of a Good Subsequence I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-132/problems/find-the-maximum-length-of-a-good-subsequence-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-maximum-length-of-a-good-subsequence-i/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Dynamic Programming"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Find the Maximum Length of a Good Subsequence II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-132/problems/find-the-maximum-length-of-a-good-subsequence-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-the-maximum-length-of-a-good-subsequence-ii/",
+        "tags": [
+          "Array",
+          "Hash Table",
+          "Dynamic Programming"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  },
+  {
+    "contest_name": "Biweekly Contest 133",
+    "contest_link": "https://leetcode.com/contest/biweekly-contest-133/",
+    "problems": {
+      "A": {
+        "name": "Find Minimum Operations to Make All Elements Divisible by Three",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-133/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/",
+        "problemset_problem_link": "https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/",
+        "tags": [
+          "Array",
+          "Math"
+        ],
+        "difficulty": "Easy"
+      },
+      "B": {
+        "name": "Minimum Operations to Make Binary Array Elements Equal to One I",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-133/problems/minimum-operations-to-make-binary-array-elements-equal-to-one-i/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-operations-to-make-binary-array-elements-equal-to-one-i/",
+        "tags": [
+          "Array",
+          "Bit Manipulation",
+          "Queue",
+          "Sliding Window",
+          "Prefix Sum"
+        ],
+        "difficulty": "Medium"
+      },
+      "C": {
+        "name": "Minimum Operations to Make Binary Array Elements Equal to One II",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-133/problems/minimum-operations-to-make-binary-array-elements-equal-to-one-ii/",
+        "problemset_problem_link": "https://leetcode.com/problems/minimum-operations-to-make-binary-array-elements-equal-to-one-ii/",
+        "tags": [
+          "Array",
+          "Dynamic Programming",
+          "Greedy"
+        ],
+        "difficulty": "Medium"
+      },
+      "D": {
+        "name": "Count the Number of Inversions",
+        "contest_problem_link": "https://leetcode.com/contest/biweekly-contest-133/problems/count-the-number-of-inversions/",
+        "problemset_problem_link": "https://leetcode.com/problems/count-the-number-of-inversions/",
+        "tags": [
+          "Array",
+          "Dynamic Programming"
+        ],
+        "difficulty": "Hard"
+      }
+    }
+  }
+]

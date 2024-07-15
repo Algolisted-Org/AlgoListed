@@ -74,7 +74,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://algolisted.cyclic.app/problem-sheets/details?sheetId=${sheetId}`
+          `https://algolisted.tonmoy1912.in/problem-sheets/details?sheetId=${sheetId}`
         );
 
         setsheetData(response.data.sheet);
@@ -85,7 +85,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
 
         try {
           // alert("Hello World");
-          const response = await fetch(`https://algolisted.cyclic.app/user-details/profile-details/?ownerId=${sheetOwnerId}`);
+          const response = await fetch(`https://algolisted.tonmoy1912.in/user-details/profile-details/?ownerId=${sheetOwnerId}`);
           if (response.ok) {
             const data = await response.json();
             // alert("Hello World2");
@@ -262,7 +262,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
         withCredentials: true,
       });
 
-      const response2 = await axios.post("https://algolisted.cyclic.app/user-details/profile-update", userData, {
+      const response2 = await axios.post("https://algolisted.tonmoy1912.in/user-details/profile-update", userData, {
         withCredentials: true,
       });
 
@@ -285,7 +285,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
 
           // Open a new tab with the specified URL
           window.open(
-            `https://algolisted.cyclic.app/create-problem-list/sheet/${sheetId}`,
+            `https://algolisted.tonmoy1912.in/create-problem-list/sheet/${sheetId}`,
             "_blank"
           );
         } else {

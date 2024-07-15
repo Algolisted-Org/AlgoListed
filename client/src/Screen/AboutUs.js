@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
-import myimage from '../Images/dp.jpeg'
+import myimage from '../Images/dp.png'
 
 const AboutUs = () => {
     useEffect(() => {

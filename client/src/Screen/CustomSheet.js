@@ -169,7 +169,7 @@ const CodingSheets = () => {
 
 	useEffect(async () => {
 		try {
-			const sheetDetailsResponse = await axios.get(`https://algolisted.cyclic.app/problem-sheets/details?sheetId=${sheetId}`);
+			const sheetDetailsResponse = await axios.get(`https://algolisted.tonmoy1912.in/problem-sheets/details?sheetId=${sheetId}`);
 			const sheetData = sheetDetailsResponse.data.sheet;
 
 			setSheetName(sheetData.sheetName);
@@ -218,7 +218,7 @@ const CodingSheets = () => {
 			console.log(sheetOwnerId);
 
 			try {
-				const response = await fetch(`https://algolisted.cyclic.app/user-details/profile-details/?ownerId=${sheetOwnerId}`);
+				const response = await fetch(`https://algolisted.tonmoy1912.in/user-details/profile-details/?ownerId=${sheetOwnerId}`);
 
 				if (response.ok) {
 					const data = await response.json();

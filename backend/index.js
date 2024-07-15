@@ -3,22 +3,28 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+
 const dotenv = require("dotenv");
+
 dotenv.config();
 const fs = require("fs");
 
 const morgan = require("morgan");
+
 require("dotenv").config({
   path: "./config.env",
 });
 app.use(cookieParser());
+
 const corsOptions = {
   origin: "http://localhost:3000",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
+
 app.use(cors(corsOptions));
 app.set("trust proxy", 1);
+
 app.use(express.static("uploads"));
 //Middlewares
 app.use(express.urlencoded({ extended: true }));
