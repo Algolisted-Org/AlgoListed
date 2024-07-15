@@ -11,13 +11,17 @@
 
 
 ## About
-Explore a coding platform that harmoniously blends stylish design with robust capabilities. Track your coding progress, gain access to valuable contest insights, and partake in coding competitions with friends. We are a technology company fueled by artificial intelligence, committed to aiding individuals in their quest for employment by offering comprehensive insights into the IT industry.
+In the era of technological dominance, Algolisted stands out as a pioneering platform dedicated to algorithmic problem-solving. Addressing the growing demand for skilled coders, Algolisted serves as a centralized hub curating a diverse array of algorithmic challenges and fostering a vibrant community for knowledge exchange.
+
+Algolisted offers an immersive online environment where programmers and coding enthusiasts can enhance their skills through a comprehensive learning experience. Featuring Data Structures and Algorithms (DSA) sheets with practice problems and explanations, the platform caters to various learning styles. It also includes a tracking system for academic progress in key subjects such as Operating Systems, Database Management Systems, Computer Networks, and Object-Oriented Programming.
+
+The integration of OpenAI allows users to refine resumes with personalized touches, showcasing technical and soft skills. Additionally, the platform provides an adaptive testing environment and an opportunity section for job seekers, aligning with users' educational and career needs. Algolisted thus serves as a reliable companion in the pursuit of coding knowledge and proficiency.
 
 ## Tech Stack
-The foundation of this project primarily consists of the MERN stack, Flask, Beautiful Soup, and Selenium.
+The foundation of this project primarily consists of the MERN stack, Flask, Beautiful Soup, and Selenium,GEN AI.
 
 ## Deployment
-The website's frontend is hosted on Firebase, while its backend is deployed on Cyclic.sh. <br/>
+The website's frontend is on hosted on Firebase. <br/>
 Main Website : <a href="http://algolisted.com/">algolisted.com</a>
 
 ## All Features of Algolisted
@@ -43,15 +47,22 @@ Main Website : <a href="http://algolisted.com/">algolisted.com</a>
 <br/>
 
 ### 5. Create Problem List
-Screenshot will be added soon
+
+<img width="947" alt="Screenshot 2023-10-20 at 01 15 39 AM" src="https://github.com/user-attachments/assets/dc7f0e92-c4b0-41a5-89ff-11a332dafd68">
+<img width="947" alt="Screenshot 2023-10-20 at 01 15 39 AM" src="https://github.com/user-attachments/assets/dc7f0e92-c4b0-41a5-89ff-11a332dafd68">
+<img width="947" alt="Screenshot 2023-10-20 at 01 15 39 AM" src="https://github.com/user-attachments/assets/dc7f0e92-c4b0-41a5-89ff-11a332dafd68">
 <br/>
 
 ### 6. Resume Questions
-Screenshot will be added soon
+
+<img width="947" alt="Screenshot 2023-10-20 at 01 15 39 AM" src="https://github.com/user-attachments/assets/c4208cce-62f1-4960-8ef9-c2d5e184b181">
+<img width="947" alt="Screenshot 2023-10-20 at 01 15 39 AM" src="https://github.com/user-attachments/assets/261232a6-8067-487f-a8be-30e2a4811cd1">
 <br/>
 
 ### 7. All Internship & Job Opportunities Listed
-Screenshot will be added soon
+<img width="947" alt="Screenshot 2023-10-20 at 01 15 39 AM" src="https://github.com/user-attachments/assets/33045359-539d-4957-aeab-e09a2b356b37">
+<img width="947" alt="Screenshot 2023-10-20 at 01 15 39 AM" src="https://github.com/user-attachments/assets/e9e8f148-6773-49cc-ac73-c7f4f8b207ed">
+
 <br/>
 
 ## Bug Report or Feature Request
