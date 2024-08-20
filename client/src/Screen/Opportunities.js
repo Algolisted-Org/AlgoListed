@@ -161,7 +161,7 @@ const Opportunities = () => {
   //so for a more refined logic, we must check if the items_exp is a string like number a - number b using regex
   //If that is the case, then check if a is not 0. If that is also true, then it is experienced. 
   //In all other cases, like 0 - 4 years exp, 0 - 1 years exp, intern, Entry level, ...etc, the opportunity 
-  //is available to freshers :)
+  //is available to freshers, and thats what we will display
   const filterByExperience = (item) => {
     console.log(item.years_exp);
     if (item.years_exp === "Fresher" || item.years_exp === "fresher"){
