@@ -23,10 +23,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import LazyLoad from 'react-lazy-load';
 
 const Opportunities = () => {
+  let checker = 0;
+  let freshers = 0, experienced = 0, none = 0;
   const [needDarkMode, setNeedDarkMode] = useState(!false);
   const [openVisualiser, setOpenVisualiser] = useState(false);
   const [filterContestType, setFilterContestType] = useState("All");
-  const [filterContestTypeName, setFilterContestTypeName] = useState("Job Type");
+  const [filterOpportunityTypeName, setFilterOpportunityTypeName] = useState("Job Type");
   const [openModel1, setOpenModel1] = useState(false);
   const [openModel2, setOpenModel2] = useState(false);
   const [openModel3, setOpenModel3] = useState(false);
@@ -46,12 +48,15 @@ const Opportunities = () => {
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if (selectedTheme === 'dark') setNeedDarkMode(true);
-    if (selectedTheme === 'light') setNeedDarkMode(false);
+    if (selectedTheme === 'dark'){
+      setNeedDarkMode(true)
+    }
+    else
+    {
+      setNeedDarkMode(false);
+    }
   }, [])
 
-  //console.log("needDarkMode : ", needDarkMode);
-  //console.log(applyMagicFilter);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
@@ -63,7 +68,7 @@ const Opportunities = () => {
       )
       .then((res) => {
         setAllOpportunities(res.data);
-        //console.log(res.data);
+
       })
       .catch((err) => console.log(err));
   }, []);
@@ -130,19 +135,20 @@ const Opportunities = () => {
   const filterOpportunities = (opportunities) => {
     return opportunities
       .filter((item) => (applyMagicFilter ? item.magic_filter === "yes" : true))
-      .filter(filterByContestType)
+      .filter(filterByOpportunityType)
       .filter(filterByExperience)
       .filter(filterByLocation)
       .reverse();
   };
 
-  // Filter opportunities based on contest type
-  const filterByContestType = (item) => {
-    switch (filterContestTypeName) {
+  // Filter opportunities based on opportunities type
+  //Using .includes instead of checking for straight equality because some item.type are like "Intern & FTE"
+    const filterByOpportunityType = (item) => {
+    switch (filterOpportunityTypeName) {
       case "Intern":
-        return item.type === "Intern";
+        return item.type.includes("Intern");
       case "Full Time":
-        return item.type === "FTE";
+        return item.type.includes("FTE");
       case "Job Type":
         return true; // If no filter selected, show all
       default:
@@ -151,7 +157,22 @@ const Opportunities = () => {
   };
 
   // Filter opportunities based on experience level
+  //item.years_exp has values like "Fresher", "fresher", "1-2 years", "2-3 years", "Entry Level", "Internship etc." etc.
+  //so for a more refined logic, we must check if the items_exp is a string like number a - number b using regex
+  //If that is the case, then check if a is not 0. If that is also true, then it is experienced. 
+  //In all other cases, like 0 - 4 years exp, 0 - 1 years exp, intern, Entry level, ...etc, the opportunity 
+  //is available to freshers :)
   const filterByExperience = (item) => {
+    console.log(item.years_exp);
+    if (item.years_exp === "Fresher" || item.years_exp === "fresher"){
+      freshers++;
+    }
+    else if (item.years_exp !== "Fresher" && item.years_exp !== "fresher"){
+      experienced++;
+    }
+    else{
+      none++;
+    }
     switch (sliderInputValue) {
       case "Fresher":
         return item.years_exp === "Fresher" || item.years_exp === "fresher";
@@ -280,14 +301,14 @@ const Opportunities = () => {
             </SheetMessage>
             <EffectiveFilter className='noselect' needDarkMode={needDarkMode} applyMagicFilter={applyMagicFilter}>
               <div className="left">
-                <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterOpportunityTypeName}
                   {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                   {
                     openModel1 ? (
                       <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
-                        <div className="option" data-value="Job Type" onClick={(e) => setFilterContestTypeName(e.target.dataset.value)}>Job Type</div>
-                        <div className="option" data-value="Intern" onClick={(e) => setFilterContestTypeName(e.target.dataset.value)}>Intern</div>
-                        <div className="option" data-value="Full Time" onClick={(e) => setFilterContestTypeName(e.target.dataset.value)}>Full Time</div>
+                        <div className="option" data-value="Job Type" onClick={(e) => setFilterOpportunityTypeName(e.target.dataset.value)}>Job Type</div>
+                        <div className="option" data-value="Intern" onClick={(e) => setFilterOpportunityTypeName(e.target.dataset.value)}>Intern</div>
+                        <div className="option" data-value="Full Time" onClick={(e) => setFilterOpportunityTypeName(e.target.dataset.value)}>Full Time</div>
                       </ShowAbsoluteModelDropDown>
                     ) : <></>
                   }
@@ -352,18 +373,16 @@ const Opportunities = () => {
                 {/* <div className="branch">Branch</div> */}
                 <div className="source">Source</div>
               </div>
-
+              {console.log(allOpportunities.length)}
               {allOpportunities.length === 0 ? (
                 <div className="linear-progess-holder">
                   <LinearProgress />
                 </div>
               ) : (
                 <>
-                  {/* {console.log(filterContestTypeName)} */}
-                  {/* {console.log(sliderInputValue)} */}
                   {filterOpportunities(allOpportunities)
-                    .map((item, index) => (
-                      <div className="row" key={item.uniqueIdentifier}>
+                    .map((item, key) => {
+                      return (<div className="row" key={item.uniqueIdentifier}>
                         <div className="hash">{++count}</div>
                         <div className="opportunity">
                           <div className="left">
@@ -399,9 +418,10 @@ const Opportunities = () => {
                             <img src={getImageLink(item.source)} alt="" />
                           </a>
                         </div>
-                      </div>
-                    ))
+                      </div>)
+              })
                   }
+                  {console.log(freshers, experienced, none)}
                 </>
               )}
             </Table>
