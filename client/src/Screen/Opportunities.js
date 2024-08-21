@@ -23,19 +23,21 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import LazyLoad from 'react-lazy-load';
 
 const Opportunities = () => {
+
+  
   const [needDarkMode, setNeedDarkMode] = useState(!false);
   const [openVisualiser, setOpenVisualiser] = useState(false);
   const [filterContestType, setFilterContestType] = useState("All");
-  const [filterContestTypeName, setFilterContestTypeName] = useState("Job Type");
+  const [filterOpportunityTypeName, setFilterOpportunityTypeName] = useState("Job Type");
   const [openModel1, setOpenModel1] = useState(false);
   const [openModel2, setOpenModel2] = useState(false);
   const [openModel3, setOpenModel3] = useState(false);
   const [openModel4, setOpenModel4] = useState(false);
   const [applyMagicFilter, setApplyMagicFilter] = useState(false);
   const [sliderInputValue, setSliderInputValue] = useState("Fresher");
-  const [location, setLocation] = useState("All Location");
+  const [location, setLocation] = useState("All Locations");
   const [status, setStatus] = useState("Status")
-  const [cities,setCities]=useState([])
+  const [cities, setCities] = useState([])
   const [allOpportunities, setAllOpportunities] = useState([]);
 
   let count = 0;
@@ -46,12 +48,14 @@ const Opportunities = () => {
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if (selectedTheme === 'dark') setNeedDarkMode(true);
-    if (selectedTheme === 'light') setNeedDarkMode(false);
+    if (selectedTheme === 'dark') {
+      setNeedDarkMode(true)
+    }
+    else {
+      setNeedDarkMode(false);
+    }
   }, [])
 
-  //console.log("needDarkMode : ", needDarkMode);
-  //console.log(applyMagicFilter);
   const toggleDarkMode = () => {
     setNeedDarkMode(!needDarkMode);
   };
@@ -62,8 +66,9 @@ const Opportunities = () => {
         `https://script.googleusercontent.com/macros/echo?user_content_key=j9Co0fA6rp5kG1v2ji1_cWNf0Qyd9PiRVSMEFlosmhJLm00_tFel6zYGRqfJxOlWenWb_Exj0y9g-ljCbWFdh6qpF5o4vuRbm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA8Tr49F1Ivtr0o6Yp4fjnD9VY8k1Q0AdNpbEobTJSVU02RPIupYF5H0LqOn1gHHuTQr3i-TjMlDArlJytlu8mpjZbJ2bHHlb9z9Jw9Md8uu&lib=M_adtjhtYqTY4x3CHvLkZEzxNTvjCbw04`
       )
       .then((res) => {
+        console.log("Data Retrieved");
         setAllOpportunities(res.data);
-        //console.log(res.data);
+
       })
       .catch((err) => console.log(err));
   }, []);
@@ -117,7 +122,7 @@ const Opportunities = () => {
     // Define an asynchronous function to use the getCitiesByCountry function
     const fetchData = async () => {
       try {
-         await getCitiesByCountry("India");
+        await getCitiesByCountry("India");
       } catch (error) {
         console.error("Error:", error);
       }
@@ -130,19 +135,20 @@ const Opportunities = () => {
   const filterOpportunities = (opportunities) => {
     return opportunities
       .filter((item) => (applyMagicFilter ? item.magic_filter === "yes" : true))
-      .filter(filterByContestType)
+      .filter(filterByOpportunityType)
       .filter(filterByExperience)
       .filter(filterByLocation)
       .reverse();
   };
 
-  // Filter opportunities based on contest type
-  const filterByContestType = (item) => {
-    switch (filterContestTypeName) {
+  // Filter opportunities based on opportunities type
+  //Using .includes instead of checking for straight equality because some item.type are like "Intern & FTE"
+  const filterByOpportunityType = (item) => {
+    switch (filterOpportunityTypeName) {
       case "Intern":
-        return item.type === "Intern";
+        return item.type.includes("Intern");
       case "Full Time":
-        return item.type === "FTE";
+        return item.type.includes("FTE");
       case "Job Type":
         return true; // If no filter selected, show all
       default:
@@ -151,12 +157,57 @@ const Opportunities = () => {
   };
 
   // Filter opportunities based on experience level
-  const filterByExperience = (item) => {
+  // item.years_exp has values like "Fresher", "fresher", "1-2 years", "2-3 years", "Entry Level", 
+  // "0", "5", "Internship etc." etc.
+  // So for a more refined logic, we do the following : 
+  // 1. If the years_exp value is itself a string like "0", "1", "3", ...etc, 
+  //    we check whether the number is greater than 0. If yes, then it qualifies as experienced, otherwise as fresher
+  // 2. If the value is like a range : number x - number y, we check two things : (considering x < y) 
+  //    a) If x is greater than 0, this qualifies as an opportunity for only the expereinced
+  //    b) If x is equal to 0 this opportunity also qualifies for freshers as well as experienced
+  // 3. If the string is neither a single number nor a range, then its something like "fresher", "intern", etc..., 
+  // hence its for freshers
+
+  //  The above logic is based on the p[resumption that even in the future, the opportunities
+  //  scrapped will have years_exp value in ranges or single number only for experienced
+  //  and not something like "5 years", although this logic can be updated later on as required
+  
+  const filterByExperience = (item) => {  
+    const s = item.years_exp;
+    const pattern = /^(\d+)\s*-\s*\d+$/;
+    const match = s.match(pattern);
+    let singleNumber = false, experienced = false, fresher = false;
+
+    singleNumber = !isNaN(s) && !isNaN(parseFloat(s));
+
+    if (!singleNumber && match == null){
+      //means the stirng is not a number and not a range
+      //means its something like intern, fresher, etc...
+      fresher = true;
+    }
+
+    if (singleNumber){
+      //means its a single number
+      if (Number(s) == 0){
+        fresher = true;
+      }
+      else{
+        experienced = true;
+      }
+    }
+
+    if (match != null){
+      experienced = true;
+      if (match[1] === "0"){
+        fresher = true;
+      }
+    }
+
     switch (sliderInputValue) {
       case "Fresher":
-        return item.years_exp === "Fresher" || item.years_exp === "fresher";
+        return fresher;
       case "Experienced":
-        return item.years_exp !== "Fresher" && item.years_exp !== "fresher";
+        return experienced;
       default:
         return false;
     }
@@ -170,7 +221,7 @@ const Opportunities = () => {
         return (
           lowerLocation.includes("remote") || lowerLocation.includes("wfh")
         );
-      case "All Location":
+      case "All Locations":
         return true; // Show all locations
       case "India":
         return cities.some((city) =>
@@ -280,14 +331,14 @@ const Opportunities = () => {
             </SheetMessage>
             <EffectiveFilter className='noselect' needDarkMode={needDarkMode} applyMagicFilter={applyMagicFilter}>
               <div className="left">
-                <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterContestTypeName}
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterOpportunityTypeName}
                   {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                   {
                     openModel1 ? (
                       <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
-                        <div className="option" data-value="Job Type" onClick={(e) => setFilterContestTypeName(e.target.dataset.value)}>Job Type</div>
-                        <div className="option" data-value="Intern" onClick={(e) => setFilterContestTypeName(e.target.dataset.value)}>Intern</div>
-                        <div className="option" data-value="Full Time" onClick={(e) => setFilterContestTypeName(e.target.dataset.value)}>Full Time</div>
+                        <div className="option" data-value="Job Type" onClick={(e) => setFilterOpportunityTypeName(e.target.dataset.value)}>Job Type</div>
+                        <div className="option" data-value="Intern" onClick={(e) => setFilterOpportunityTypeName(e.target.dataset.value)}>Intern</div>
+                        <div className="option" data-value="Full Time" onClick={(e) => setFilterOpportunityTypeName(e.target.dataset.value)}>Full Time</div>
                       </ShowAbsoluteModelDropDown>
                     ) : <></>
                   }
@@ -308,11 +359,11 @@ const Opportunities = () => {
                   {
                     openModel3 ? (
                       <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
-                      <div className="option" data-value="All Locations" onClick={(e) => setLocation(e.target.dataset.value)}>All Locations</div>
-                      <div className="option" data-value="India" onClick={(e) => setLocation(e.target.dataset.value)}>India</div>
-                      <div className="option" data-value="Out of India" onClick={(e) => setLocation(e.target.dataset.value)}>Out of India</div>
-                      <div className="option" data-value="Remote" onClick={(e) => setLocation(e.target.dataset.value)}>Remote</div>
-                    </ShowAbsoluteModelDropDown>
+                        <div className="option" data-value="All Locations" onClick={(e) => setLocation(e.target.dataset.value)}>All Locations</div>
+                        <div className="option" data-value="India" onClick={(e) => setLocation(e.target.dataset.value)}>India</div>
+                        <div className="option" data-value="Out of India" onClick={(e) => setLocation(e.target.dataset.value)}>Out of India</div>
+                        <div className="option" data-value="Remote" onClick={(e) => setLocation(e.target.dataset.value)}>Remote</div>
+                      </ShowAbsoluteModelDropDown>
                     ) : <></>
                   }
                 </div>
@@ -352,18 +403,15 @@ const Opportunities = () => {
                 {/* <div className="branch">Branch</div> */}
                 <div className="source">Source</div>
               </div>
-
               {allOpportunities.length === 0 ? (
                 <div className="linear-progess-holder">
                   <LinearProgress />
                 </div>
               ) : (
                 <>
-                  {/* {console.log(filterContestTypeName)} */}
-                  {/* {console.log(sliderInputValue)} */}
                   {filterOpportunities(allOpportunities)
-                    .map((item, index) => (
-                      <div className="row" key={item.uniqueIdentifier}>
+                    .map((item, key) => {
+                      return (<div className="row" key={item.uniqueIdentifier}>
                         <div className="hash">{++count}</div>
                         <div className="opportunity">
                           <div className="left">
@@ -399,8 +447,8 @@ const Opportunities = () => {
                             <img src={getImageLink(item.source)} alt="" />
                           </a>
                         </div>
-                      </div>
-                    ))
+                      </div>)
+                    })
                   }
                 </>
               )}
@@ -787,11 +835,11 @@ const EffectiveFilter = styled.div`
 			cursor: pointer;
       color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
       border: 1px solid ${(props) =>
-      props.needDarkMode
-        ? props.applyMagicFilter
-          ? 'white'
-          : '#595b5f'
-        : props.applyMagicFilter
+    props.needDarkMode
+      ? props.applyMagicFilter
+        ? 'white'
+        : '#595b5f'
+      : props.applyMagicFilter
         ? 'black'
         : 'rgb(209, 213, 219)'};
       display: flex;
