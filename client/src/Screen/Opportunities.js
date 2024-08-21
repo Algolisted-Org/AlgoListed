@@ -23,8 +23,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import LazyLoad from 'react-lazy-load';
 
 const Opportunities = () => {
-  let checker = 0;
-  let freshers = 0, experienced = 0, none = 0;
+
+  
   const [needDarkMode, setNeedDarkMode] = useState(!false);
   const [openVisualiser, setOpenVisualiser] = useState(false);
   const [filterContestType, setFilterContestType] = useState("All");
@@ -37,7 +37,7 @@ const Opportunities = () => {
   const [sliderInputValue, setSliderInputValue] = useState("Fresher");
   const [location, setLocation] = useState("All Location");
   const [status, setStatus] = useState("Status")
-  const [cities,setCities]=useState([])
+  const [cities, setCities] = useState([])
   const [allOpportunities, setAllOpportunities] = useState([]);
 
   let count = 0;
@@ -48,11 +48,10 @@ const Opportunities = () => {
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");
-    if (selectedTheme === 'dark'){
+    if (selectedTheme === 'dark') {
       setNeedDarkMode(true)
     }
-    else
-    {
+    else {
       setNeedDarkMode(false);
     }
   }, [])
@@ -122,7 +121,7 @@ const Opportunities = () => {
     // Define an asynchronous function to use the getCitiesByCountry function
     const fetchData = async () => {
       try {
-         await getCitiesByCountry("India");
+        await getCitiesByCountry("India");
       } catch (error) {
         console.error("Error:", error);
       }
@@ -143,7 +142,7 @@ const Opportunities = () => {
 
   // Filter opportunities based on opportunities type
   //Using .includes instead of checking for straight equality because some item.type are like "Intern & FTE"
-    const filterByOpportunityType = (item) => {
+  const filterByOpportunityType = (item) => {
     switch (filterOpportunityTypeName) {
       case "Intern":
         return item.type.includes("Intern");
@@ -157,27 +156,57 @@ const Opportunities = () => {
   };
 
   // Filter opportunities based on experience level
-  //item.years_exp has values like "Fresher", "fresher", "1-2 years", "2-3 years", "Entry Level", "Internship etc." etc.
-  //so for a more refined logic, we must check if the items_exp is a string like number a - number b using regex
-  //If that is the case, then check if a is not 0. If that is also true, then it is experienced. 
-  //In all other cases, like 0 - 4 years exp, 0 - 1 years exp, intern, Entry level, ...etc, the opportunity 
-  //is available to freshers, and thats what we will display
-  const filterByExperience = (item) => {
-    console.log(item.years_exp);
-    if (item.years_exp === "Fresher" || item.years_exp === "fresher"){
-      freshers++;
+  // item.years_exp has values like "Fresher", "fresher", "1-2 years", "2-3 years", "Entry Level", 
+  // "0", "5", "Internship etc." etc.
+  // So for a more refined logic, we do the following : 
+  // 1. If the years_exp value is itself a string like "0", "1", "3", ...etc, 
+  //    we check whether the number is greater than 0. If yes, then it qualifies as experienced, otherwise as fresher
+  // 2. If the value is like a range : number x - number y, we check two things : (considering x < y) 
+  //    a) If x is greater than 0, this qualifies as an opportunity for only the expereinced
+  //    b) If x is equal to 0 this opportunity also qualifies for freshers as well as experienced
+  // 3. If the string is neither a single number nor a range, then its something like "fresher", "intern", etc..., 
+  // hence its for freshers
+
+  //  The above logic is based on the p[resumption that even in the future, the opportunities
+  //  scrapped will have years_exp value in ranges or single number only for experienced
+  //  and not something like "5 years", although this logic can be updated later on as required
+  
+  const filterByExperience = (item) => {  
+    const s = item.years_exp;
+    const pattern = /^(\d+)\s*-\s*\d+$/;
+    const match = s.match(pattern);
+    let singleNumber = false, experienced = false, fresher = false;
+
+    singleNumber = !isNaN(s) && !isNaN(parseFloat(s));
+
+    if (!singleNumber && match == null){
+      //means the stirng is not a number and not a range
+      //means its something like intern, fresher, etc...
+      fresher = true;
     }
-    else if (item.years_exp !== "Fresher" && item.years_exp !== "fresher"){
-      experienced++;
+
+    if (singleNumber){
+      //means its a single number
+      if (Number(s) == 0){
+        fresher = true;
+      }
+      else{
+        experienced = true;
+      }
     }
-    else{
-      none++;
+
+    if (match != null){
+      experienced = true;
+      if (match[1] === "0"){
+        fresher = true;
+      }
     }
+
     switch (sliderInputValue) {
       case "Fresher":
-        return item.years_exp === "Fresher" || item.years_exp === "fresher";
+        return fresher;
       case "Experienced":
-        return item.years_exp !== "Fresher" && item.years_exp !== "fresher";
+        return experienced;
       default:
         return false;
     }
@@ -191,7 +220,7 @@ const Opportunities = () => {
         return (
           lowerLocation.includes("remote") || lowerLocation.includes("wfh")
         );
-      case "All Location":
+      case "All Locations":
         return true; // Show all locations
       case "India":
         return cities.some((city) =>
@@ -329,11 +358,11 @@ const Opportunities = () => {
                   {
                     openModel3 ? (
                       <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
-                      <div className="option" data-value="All Locations" onClick={(e) => setLocation(e.target.dataset.value)}>All Locations</div>
-                      <div className="option" data-value="India" onClick={(e) => setLocation(e.target.dataset.value)}>India</div>
-                      <div className="option" data-value="Out of India" onClick={(e) => setLocation(e.target.dataset.value)}>Out of India</div>
-                      <div className="option" data-value="Remote" onClick={(e) => setLocation(e.target.dataset.value)}>Remote</div>
-                    </ShowAbsoluteModelDropDown>
+                        <div className="option" data-value="All Locations" onClick={(e) => setLocation(e.target.dataset.value)}>All Locations</div>
+                        <div className="option" data-value="India" onClick={(e) => setLocation(e.target.dataset.value)}>India</div>
+                        <div className="option" data-value="Out of India" onClick={(e) => setLocation(e.target.dataset.value)}>Out of India</div>
+                        <div className="option" data-value="Remote" onClick={(e) => setLocation(e.target.dataset.value)}>Remote</div>
+                      </ShowAbsoluteModelDropDown>
                     ) : <></>
                   }
                 </div>
@@ -373,7 +402,6 @@ const Opportunities = () => {
                 {/* <div className="branch">Branch</div> */}
                 <div className="source">Source</div>
               </div>
-              {console.log(allOpportunities.length)}
               {allOpportunities.length === 0 ? (
                 <div className="linear-progess-holder">
                   <LinearProgress />
@@ -419,9 +447,8 @@ const Opportunities = () => {
                           </a>
                         </div>
                       </div>)
-              })
+                    })
                   }
-                  {console.log(freshers, experienced, none)}
                 </>
               )}
             </Table>
@@ -807,11 +834,11 @@ const EffectiveFilter = styled.div`
 			cursor: pointer;
       color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
       border: 1px solid ${(props) =>
-      props.needDarkMode
-        ? props.applyMagicFilter
-          ? 'white'
-          : '#595b5f'
-        : props.applyMagicFilter
+    props.needDarkMode
+      ? props.applyMagicFilter
+        ? 'white'
+        : '#595b5f'
+      : props.applyMagicFilter
         ? 'black'
         : 'rgb(209, 213, 219)'};
       display: flex;
