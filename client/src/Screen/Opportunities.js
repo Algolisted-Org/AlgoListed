@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import styled from 'styled-components'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import InfoIcon from '@material-ui/icons/Info';
@@ -24,7 +24,7 @@ import LazyLoad from 'react-lazy-load';
 
 const Opportunities = () => {
 
-  
+
   const [needDarkMode, setNeedDarkMode] = useState(!false);
   const [openVisualiser, setOpenVisualiser] = useState(false);
   const [filterContestType, setFilterContestType] = useState("All");
@@ -36,9 +36,49 @@ const Opportunities = () => {
   const [applyMagicFilter, setApplyMagicFilter] = useState(false);
   const [sliderInputValue, setSliderInputValue] = useState("Fresher");
   const [location, setLocation] = useState("All Locations");
-  const [status, setStatus] = useState("Status")
+  const [status, setStatus] = useState("All Status")
   const [cities, setCities] = useState([])
-  const [allOpportunities, setAllOpportunities] = useState([]);
+
+  const ACTIONS = {
+    SET_DATA: 'set_data',
+    TOGGLE_LIKED: 'liked',
+    TOGGLE_FILLED: 'filled',
+    TOGGLE_NOT_INTERESTED: 'not_interested'
+  }
+
+  const reducer = (state, action) => {
+    console.log("Bring called for ", action.type);
+    switch (action.type){
+      case ACTIONS.SET_DATA : 
+        console.log("Set data has been called");
+        return action.payload.data;
+      case ACTIONS.TOGGLE_LIKED:
+        return state.map((item) =>
+          item.index === action.payload.index
+            ? { ...item, liked: !item.liked }
+            : item
+        );
+
+      case ACTIONS.TOGGLE_FILLED:
+        return state.map((item) =>
+          item.index === action.payload.index
+            ? { ...item, filled: !item.filled }
+            : item
+        );
+
+      case ACTIONS.TOGGLE_NOT_INTERESTED:
+        return state.map((item) =>
+          item.index === action.payload.index
+            ? { ...item, not_interested: !item.not_interested }
+            : item
+        );
+
+      default:
+        return state;
+    }
+  }
+
+  const [allOpportunities, dispatch] = useReducer(reducer, []); //initially empty list
 
   let count = 0;
 
@@ -66,9 +106,13 @@ const Opportunities = () => {
         `https://script.googleusercontent.com/macros/echo?user_content_key=j9Co0fA6rp5kG1v2ji1_cWNf0Qyd9PiRVSMEFlosmhJLm00_tFel6zYGRqfJxOlWenWb_Exj0y9g-ljCbWFdh6qpF5o4vuRbm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA8Tr49F1Ivtr0o6Yp4fjnD9VY8k1Q0AdNpbEobTJSVU02RPIupYF5H0LqOn1gHHuTQr3i-TjMlDArlJytlu8mpjZbJ2bHHlb9z9Jw9Md8uu&lib=M_adtjhtYqTY4x3CHvLkZEzxNTvjCbw04`
       )
       .then((res) => {
-        console.log("Data Retrieved");
-        setAllOpportunities(res.data);
-
+        const recievedData = res.data;
+        //the above is a list of objects
+        const newData = recievedData.map((item, index) => {
+          return { ...item, filled: false, liked: false, not_interested: false, index : index }
+        })
+        dispatch({ type: ACTIONS.SET_DATA, payload: { data : newData } });
+        setTimeout(() => {console.log(allOpportunities)}, 2000);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -110,6 +154,8 @@ const Opportunities = () => {
       if (response?.status === 200) {
         const cities = response.data.data;
         setCities(cities);
+        cities.push("Banglore"); //since the API returns some positions as banglore, which is misspelled of 
+        //bengaluru or bangalore, hence adding it manually
       }
     } catch (error) {
       console.error("Error fetching cities:", error);
@@ -171,8 +217,8 @@ const Opportunities = () => {
   //  The above logic is based on the p[resumption that even in the future, the opportunities
   //  scrapped will have years_exp value in ranges or single number only for experienced
   //  and not something like "5 years", although this logic can be updated later on as required
-  
-  const filterByExperience = (item) => {  
+
+  const filterByExperience = (item) => {
     const s = item.years_exp;
     const pattern = /^(\d+)\s*-\s*\d+$/;
     const match = s.match(pattern);
@@ -180,25 +226,25 @@ const Opportunities = () => {
 
     singleNumber = !isNaN(s) && !isNaN(parseFloat(s));
 
-    if (!singleNumber && match == null){
+    if (!singleNumber && match == null) {
       //means the stirng is not a number and not a range
       //means its something like intern, fresher, etc...
       fresher = true;
     }
 
-    if (singleNumber){
+    if (singleNumber) {
       //means its a single number
-      if (Number(s) == 0){
+      if (Number(s) == 0) {
         fresher = true;
       }
-      else{
+      else {
         experienced = true;
       }
     }
 
-    if (match != null){
+    if (match != null) {
       experienced = true;
-      if (match[1] === "0"){
+      if (match[1] === "0") {
         fresher = true;
       }
     }
@@ -216,21 +262,53 @@ const Opportunities = () => {
   // Filter opportunities based on location
   const filterByLocation = (item) => {
     const lowerLocation = item.location.toLowerCase();
+    // console.log("Location : ", item.location);
+    let remote = lowerLocation.includes("remote") || lowerLocation.includes("wfh");
+    //some locations have "unknown" in them, so we need to exclude them
+    //if at least one city from the city list is present in the location, then its in India
+    let india = cities.some((city) =>
+      lowerLocation.includes(city.toLowerCase()) && !lowerLocation.includes("unknown")
+    );
+    //if the location is not in India and not remote, then it is out of India
+    let out_of_india = !remote && !cities.some((city) =>
+      lowerLocation.includes(city.toLowerCase())) && !lowerLocation.includes("unknown");
+    // if (remote){
+    //   console.log(" - Remote");
+    // }
+    // if (india){
+    //   console.log(" - India");
+    // }
+    // if (out_of_india){
+    //   console.log(" - Out of India");
+    // }
     switch (location) {
       case "Remote":
-        return (
-          lowerLocation.includes("remote") || lowerLocation.includes("wfh")
-        );
+        return remote;
       case "All Locations":
         return true; // Show all locations
       case "India":
-        return cities.some((city) =>
-          lowerLocation.includes(city.toLowerCase())
-        );
+        return india;
       case "Out of India":
-        return !cities.some((city) =>
-          lowerLocation.includes(city.toLowerCase())
-        );
+        return out_of_india;
+      // Prev code below - If the location is not in India, then it can be remote or out of India
+      // return !cities.some((city) =>
+      //   lowerLocation.includes(city.toLowerCase())
+      // );
+      default:
+        return false;
+    }
+  };
+
+  const filterByStatus = (item) => {
+    switch (status) {
+      case "Liked":
+        return item.status === "Liked";
+      case "Filled":
+        return item.status === "Filled";
+      case "Not Interested":
+        return item.status === "Not Interested";
+      case "All Status":
+        return true;
       default:
         return false;
     }
@@ -372,10 +450,10 @@ const Opportunities = () => {
                   {
                     openModel4 ? (
                       <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
-                        <div className="option">All Status</div>
-                        <div className="option">Liked</div>
-                        <div className="option">Filled</div>
-                        <div className="option">Not Interested</div>
+                        <div className="option" data-value="All Status" onClick={(e) => { setStatus(e.target.dataset.value) }}>All Status</div>
+                        <div className="option" data-value="Liked" onClick={(e) => { setStatus(e.target.dataset.value) }}>Liked</div>
+                        <div className="option" data-value="Filled" onClick={(e) => { setStatus(e.target.dataset.value) }}>Filled</div>
+                        <div className="option" data-value="Not Interested" onClick={(e) => { setStatus(e.target.dataset.value) }}>Not Interested</div>
                       </ShowAbsoluteModelDropDown>
                     ) : <></>
                   }
@@ -436,9 +514,9 @@ const Opportunities = () => {
                             </div>
                           </div>
                           <div className="right">
-                            <CheckCircleOutlineIcon />
-                            <RemoveCircleOutlineIcon />
-                            <FavoriteBorderIcon />
+                            <CheckCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_FILLED, payload : {index : item.index}}) }} />
+                            <RemoveCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_NOT_INTERESTED, payload : {index : item.index}}) }} />
+                            <FavoriteBorderIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_LIKED, payload : {index : item.index}}) }} />
                             {/* <FavoriteIcon style={{"fill" : "#dd6565"}}/> */}
                           </div>
                         </div>
