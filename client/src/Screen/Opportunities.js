@@ -35,7 +35,7 @@ const Opportunities = () => {
   const [openModel4, setOpenModel4] = useState(false);
   const [applyMagicFilter, setApplyMagicFilter] = useState(false);
   const [sliderInputValue, setSliderInputValue] = useState("Fresher");
-  const [location, setLocation] = useState("All Location");
+  const [location, setLocation] = useState("All Locations");
   const [status, setStatus] = useState("Status")
   const [cities, setCities] = useState([])
   const [allOpportunities, setAllOpportunities] = useState([]);
@@ -66,6 +66,7 @@ const Opportunities = () => {
         `https://script.googleusercontent.com/macros/echo?user_content_key=j9Co0fA6rp5kG1v2ji1_cWNf0Qyd9PiRVSMEFlosmhJLm00_tFel6zYGRqfJxOlWenWb_Exj0y9g-ljCbWFdh6qpF5o4vuRbm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA8Tr49F1Ivtr0o6Yp4fjnD9VY8k1Q0AdNpbEobTJSVU02RPIupYF5H0LqOn1gHHuTQr3i-TjMlDArlJytlu8mpjZbJ2bHHlb9z9Jw9Md8uu&lib=M_adtjhtYqTY4x3CHvLkZEzxNTvjCbw04`
       )
       .then((res) => {
+        console.log("Data Retrieved");
         setAllOpportunities(res.data);
 
       })
