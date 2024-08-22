@@ -15,7 +15,9 @@ import { LinearProgress } from "@material-ui/core";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import DoneIcon from '@material-ui/icons/Done';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -47,10 +49,9 @@ const Opportunities = () => {
   }
 
   const reducer = (state, action) => {
-    console.log("Bring called for ", action.type);
+    // console.log("Reducer called for", action.type, " with payload ", action.payload.data);
     switch (action.type){
       case ACTIONS.SET_DATA : 
-        console.log("Set data has been called");
         return action.payload.data;
       case ACTIONS.TOGGLE_LIKED:
         return state.map((item) =>
@@ -79,6 +80,10 @@ const Opportunities = () => {
   }
 
   const [allOpportunities, dispatch] = useReducer(reducer, []); //initially empty list
+
+  // useEffect(() => {
+  //   console.log("All Opportunities was just updated to : ", allOpportunities);
+  // }, [allOpportunities])
 
   let count = 0;
 
@@ -112,7 +117,6 @@ const Opportunities = () => {
           return { ...item, filled: false, liked: false, not_interested: false, index : index }
         })
         dispatch({ type: ACTIONS.SET_DATA, payload: { data : newData } });
-        setTimeout(() => {console.log(allOpportunities)}, 2000);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -184,6 +188,7 @@ const Opportunities = () => {
       .filter(filterByOpportunityType)
       .filter(filterByExperience)
       .filter(filterByLocation)
+      .filter(filterByStatus)
       .reverse();
   };
 
@@ -302,11 +307,11 @@ const Opportunities = () => {
   const filterByStatus = (item) => {
     switch (status) {
       case "Liked":
-        return item.status === "Liked";
+        return item.liked;
       case "Filled":
-        return item.status === "Filled";
+        return item.filled;
       case "Not Interested":
-        return item.status === "Not Interested";
+        return item.not_interested;
       case "All Status":
         return true;
       default:
@@ -514,9 +519,9 @@ const Opportunities = () => {
                             </div>
                           </div>
                           <div className="right">
-                            <CheckCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_FILLED, payload : {index : item.index}}) }} />
-                            <RemoveCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_NOT_INTERESTED, payload : {index : item.index}}) }} />
-                            <FavoriteBorderIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_LIKED, payload : {index : item.index}}) }} />
+                            {item.filled ? <CheckCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { index: item.index } }) }} />: <CheckCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_FILLED, payload : {index : item.index}}) }} />}  
+                            {item.not_interested ? <RemoveCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { index: item.index } }) }} /> : <RemoveCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_NOT_INTERESTED, payload : {index : item.index}}) }} />}
+                            {item.liked ? <FavoriteIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { index: item.index } }) }} /> : <FavoriteBorderIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_LIKED, payload : {index : item.index}}) }} />}
                             {/* <FavoriteIcon style={{"fill" : "#dd6565"}}/> */}
                           </div>
                         </div>
