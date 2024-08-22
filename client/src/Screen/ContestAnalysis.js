@@ -17,10 +17,6 @@ import ClearIcon from "@material-ui/icons/Clear";
 import AdduserModal from "../MicroComponents/Allmodals/AddfriendModal";
 import LeftMenuDark from '../Components/LeftMenuDark';
 import CCHeaderDarkPlus from '../Components/CCHeaderDarkPlus';
-import * as calcA from "../Components/DummyPredictRatingforLC/calcA";
-import * as calcB from "../Components/DummyPredictRatingforLC/calcA";
-import * as calcC from "../Components/DummyPredictRatingforLC/calcA";
-import * as calcD from "../Components/DummyPredictRatingforLC/calcA";
 
 const ContestAnalysis = () => {
   const [platformName, setPlatformName] = useState("leetcode");
