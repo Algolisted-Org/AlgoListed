@@ -79,32 +79,11 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
           showModelCoffee ? <BuyMeACoffee showModelCoffee={showModelCoffee} setshowModelCoffee={setshowModelCoffee}/> : <></>
         }
 
-        {/* <div className="left-icons">
-          <div className="icon-box">
-            <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
-              <GitHubIcon/>
-            </a>
-          </div>
-          <div className="icon-box-nolimit">
-            <b>Last Commit : </b>
-            <p>Nayaker Added Func : Dark Mode on SDS</p>
-          </div>
-        </div> */}
-        {/* <div className="search-box">
-          <div className="icon"> 
-            <SearchIcon/>
-          </div>
-          <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
-        </div> */}
-
-        <a className="nav-adv" href='/' target={"_blank"}>
-          <div className="text">Thanks for being a <b>BETA Tester</b> - Report bugs and suggest improvements. <CallMadeIcon/> </div>
-          <div className="promotion-tag linear-gradient">BETA v2.10</div>
+        <a className="nav-adv" href="mailto:nayak@algolisted.com" target={"_blank"}>
+          <div className="text">We're restructuring our website. <b>Next.js frontend developers</b> , send your profile! <CallMadeIcon/> </div>
+          <div className="promotion-tag linear-gradient">Internship</div>
         </a>
 
-      {/* <div className="top-header">
-        <div className="semi-bold">Advertise with Us : </div>Promote your Linkedin profile, posts or Projects. 
-      </div> */}
 
       <div className="right-icons">
         {/* <a href='https://www.buymeacoffee.com/nayak' target={"_blank"} className="icontext-btn">

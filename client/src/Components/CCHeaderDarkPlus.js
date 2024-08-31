@@ -16,7 +16,7 @@ import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 
-const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => { 
+const CCHeaderDarkPlus = ({ needDarkMode, toggleDarkMode }) => {
   const [showAccountModel, setShowAccountModel] = useState(false);
   const [showWebUpdate, setShowWebUpdate] = useState(false);
   const [showNotificationModel, setShowNotificationModel] = useState(false);
@@ -33,30 +33,30 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
   };
 
   const setLightMode = () => {
-      document.querySelector("body").setAttribute('data-theme', 'light');
-      localStorage.setItem("selectedTheme", "light");
+    document.querySelector("body").setAttribute('data-theme', 'light');
+    localStorage.setItem("selectedTheme", "light");
   };
-  
+
   let selectedTheme = localStorage.getItem("selectedTheme");
-  
+
   if (selectedTheme === "dark") {
-      setDarkModeFunc();
+    setDarkModeFunc();
   }
-  
+
   const toggleTheme = (e) => {
-      if (selectedTheme === "dark") setLightMode();
-      else setDarkModeFunc();
-      handleToggleDarkMode();
-      selectedTheme = localStorage.getItem("selectedTheme");
-      console.log(selectedTheme);
+    if (selectedTheme === "dark") setLightMode();
+    else setDarkModeFunc();
+    handleToggleDarkMode();
+    selectedTheme = localStorage.getItem("selectedTheme");
+    console.log(selectedTheme);
   };
-  
+
   const handleNotification = () => {
     setShowNotificationModel(!showNotificationModel);
     setShowAccountModel(false);
     setShowWebUpdate(false);
   }
-  
+
   const handleWebUpdate = () => {
     setShowWebUpdate(!showWebUpdate);
     setShowAccountModel(false);
@@ -68,26 +68,25 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
     setShowNotificationModel(false);
     setShowWebUpdate(false);
   }
-  
+
   const [showModelCoffee, setshowModelCoffee] = useState(false);
-  
+
   return (
     <Container>
-        {
-          showModelCoffee ? <BuyMeACoffee showModelCoffee={showModelCoffee} setshowModelCoffee={setshowModelCoffee}/> : <></>
-        }
-        {/* <div className="search-box">
+      {
+        showModelCoffee ? <BuyMeACoffee showModelCoffee={showModelCoffee} setshowModelCoffee={setshowModelCoffee} /> : <></>
+      }
+      {/* <div className="search-box">
           <div className="icon"> 
             <SearchIcon/>
           </div>
           <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
         </div> */}
 
-        <a className="nav-adv" href='/' target={"_blank"}>
-          <div className="text">Thanks for being a <b>BETA Tester</b> - Report bugs and suggest improvements. <CallMadeIcon/> </div>
-          <div className="promotion-tag linear-gradient">BETA v2.10</div>
-        </a>
-
+      <a className="nav-adv" href="mailto:nayak@algolisted.com" target={"_blank"}>
+        <div className="text">We're restructuring our website. <b>Next.js frontend developers</b> , send your profile! <CallMadeIcon /> </div>
+        <div className="promotion-tag linear-gradient">Internship</div>
+      </a>
       {/* <div className="top-header">
         <div className="semi-bold">Advertise with Us : </div>Promote your Linkedin profile, posts or Projects. 
       </div> */}
@@ -96,19 +95,19 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
         {/* <a href='https://www.buymeacoffee.com/nayak' target={"_blank"} className="icontext-btn">
           <div className="text">Buy me a coffee</div>
         </a> */}
-        <div className="icontext-btn" onClick={() => {setshowModelCoffee(!showModelCoffee)}}>
+        <div className="icontext-btn" onClick={() => { setshowModelCoffee(!showModelCoffee) }}>
           <div className="text">
-            <FreeBreakfastIcon/>
+            <FreeBreakfastIcon />
             Buy me a coffee
           </div>
         </div>
-        
-        <div className="icon-box"  onClick={toggleTheme}>
-          <Brightness4Icon/>
+
+        <div className="icon-box" onClick={toggleTheme}>
+          <Brightness4Icon />
         </div>
         <div className="icon-box">
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
-            <GitHubIcon/>
+            <GitHubIcon />
           </a>
         </div>
         {/* <div className={showWebUpdate ? "icon-box clicked" : "icon-box"} onClick={handleWebUpdate}>
@@ -117,7 +116,7 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
         {/* <div className="icon-box" >
             <Brightness4Icon/>
         </div> */}
-        
+
         {/* <div className={showNotificationModel ? "icon-box clicked" : "icon-box"} onClick={handleNotification}>
             <NotificationsIcon/>
         </div>
@@ -133,7 +132,7 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
             <div className="line"></div>
             <div className="btn">
               <div className="btn-text">Your account has been successfully created, do check out the
-              opportunites you have with Algorithmist.
+                opportunites you have with Algorithmist.
               </div>
             </div>
             <div className="line"></div>
@@ -153,7 +152,7 @@ const CCHeaderDarkPlus = ({needDarkMode, toggleDarkMode}) => {
               <div className="line"></div>
               <div className="btn">
                 <div className="btn-text">
-                The majority of bugs have been fixed, and version 1 of the beta release is now available as a production build. If you encounter any issues, please visit GitHub.
+                  The majority of bugs have been fixed, and version 1 of the beta release is now available as a production build. If you encounter any issues, please visit GitHub.
                 </div>
               </div>
               <div className="small">Version - v0.12, 22 Jan 2023</div>
