@@ -76,6 +76,7 @@ const ContestArchive = () => {
         }
         const contestsData = await response.json();
         setContest(contestsData); // Store the entire contest data in state
+        setFilteredContestData(contestsData);
       } catch (error) {
         console.log(error.message);
       } finally {
@@ -147,7 +148,7 @@ const ContestArchive = () => {
   }, [filterContestType])
 
   useEffect(() => {
-    const filteredData = contestsData.filter((contest) => {
+    const filteredData = contest.filter((contest) => {
       if (filterContestType === 'All') {
         return true; // Show all contests
       } else {
