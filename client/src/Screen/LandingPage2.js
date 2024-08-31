@@ -13,8 +13,8 @@ import sideImage from "../Images/side-image-hero-page.png";
 import MobileNavbar from '../Components/MobileNavbar'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Fade from 'react-reveal/Fade';
-import {Link} from 'react-scroll';
-import { Link as RouterLink }from 'react-router-dom';
+import { Link } from 'react-scroll';
+import { Link as RouterLink } from 'react-router-dom';
 
 const LandingPage2 = () => {
   const [contributorsList, setContributorsList] = useState(null);
@@ -30,24 +30,24 @@ const LandingPage2 = () => {
 
   const modules = [
     {
-        "name" : "Contest Archive",
-        "desc" : "Cruise through a seamless and organized collection of all contest problems, empowering you to tackle them with maximum efficiency. On top of that, we enrich your contest experience with interactive visualizations and engaging infographics that bring the game to life and help you grasp it more effectively.",
-        "link" : "/contests-archive/leetcode"
+      "name": "Contest Archive",
+      "desc": "Cruise through a seamless and organized collection of all contest problems, empowering you to tackle them with maximum efficiency. On top of that, we enrich your contest experience with interactive visualizations and engaging infographics that bring the game to life and help you grasp it more effectively.",
+      "link": "/contests-archive/leetcode"
     },
     {
-        "name" : "Contest Analysis",
-        "desc" : "Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!",
-        "link" : "/contest-analysis"
+      "name": "Contest Analysis",
+      "desc": "Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!",
+      "link": "/contest-analysis"
     },
     {
-        "name" : "Coding Sheets",
-        "desc" : "Looking for a convenient way to access a variety of coding practice sheets from different sources? Look no further than Coding Sheets, a feature on the Algolisted website. Not only can you find a wide range of sheets all in one place, but the included analysis graphs make solving them even more enjoyable by allowing you to track your progress. Happy coding!",
-        "link" : "/coding-sheets/striver-sde-sheet"
+      "name": "Coding Sheets",
+      "desc": "Looking for a convenient way to access a variety of coding practice sheets from different sources? Look no further than Coding Sheets, a feature on the Algolisted website. Not only can you find a wide range of sheets all in one place, but the included analysis graphs make solving them even more enjoyable by allowing you to track your progress. Happy coding!",
+      "link": "/coding-sheets/striver-sde-sheet"
     },
     {
-        "name" : "Core Subjects Tracker",
-        "desc" : "We've compiled a comprehensive set of interview questions sourced from reputable websites such as GeeksforGeeks and InterviewBit. Additionally, we've incorporated core subject knowledge shared by renowned YouTubers like Striver, Fraz, etc. The questions undergo thorough parsing using AI to filter out the most relevant ones, and our AI system provides ideal candidate answers.",
-        "link" : "/core-subjects-tracker/operating-systems"
+      "name": "Core Subjects Tracker",
+      "desc": "We've compiled a comprehensive set of interview questions sourced from reputable websites such as GeeksforGeeks and InterviewBit. Additionally, we've incorporated core subject knowledge shared by renowned YouTubers like Striver, Fraz, etc. The questions undergo thorough parsing using AI to filter out the most relevant ones, and our AI system provides ideal candidate answers.",
+      "link": "/core-subjects-tracker/operating-systems"
     },
     {
       "name": "Resume Based Questions",
@@ -55,207 +55,213 @@ const LandingPage2 = () => {
       "link": "/resume-questions"
     },
     {
-      "name" : "All Internship & Job Opportunities",
-      "desc" : "This page is very similar to the coding competitions list page, here in this page we will provide information about all available hiring and internship opportunities, including the timing of these opportunities. We are currently in the planning stages and will be launching this page soon.",
-      "link" : "/opportunities"
+      "name": "All Internship & Job Opportunities",
+      "desc": "This page is very similar to the coding competitions list page, here in this page we will provide information about all available hiring and internship opportunities, including the timing of these opportunities. We are currently in the planning stages and will be launching this page soon.",
+      "link": "/opportunities"
     },
   ]
 
   return (
     <GrandContainer>
       <MobContainer>
-        <MobileNavbar/>
+        <MobileNavbar />
+        <Fade>
+          <div className="top-page">
+            <div className="heading">
+              <h1 className='gradient-text'>Open Community.</h1>
+              <h1>Better Information.</h1>
+            </div>
+            <div className="small-desc">
+              Algolisted is a community-driven platform for learning and improving coding skills. It offers a wealth of information on data structures and algorithms, and allows coders to interact with, modify, and contribute to the content.
+            </div>
+            <div className="btn"><Link to='content' spy={true} smooth={true} offset={30} duration={1000}>Learn More</Link></div>
+            {/* <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/HatefulHollowLangur-size_restricted.gif" alt="" /></div> */}
+            <DancerDownIcon>
+              <ExpandMoreIcon style={{ fontSize: '2rem', fill: '#333' }} />
+            </DancerDownIcon>
+          </div>
+        </Fade>
+        <Fade></Fade>
+        <div className="page2" id='content'>
+          <div className="content">
             <Fade>
-              <div className="top-page">
-                <div className="heading">
-                  <h1 className='gradient-text'>Open Community.</h1>
-                  <h1>Better Information.</h1>
-                </div>
-                <div className="small-desc">
-                  Algolisted is a community-driven platform for learning and improving coding skills. It offers a wealth of information on data structures and algorithms, and allows coders to interact with, modify, and contribute to the content.
-                </div>
-                <div className="btn"><Link to='content' spy={true} smooth={true} offset={30} duration={1000}>Learn More</Link></div>
-                {/* <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/HatefulHollowLangur-size_restricted.gif" alt="" /></div> */}
-                <DancerDownIcon>
-                  <ExpandMoreIcon style={{ fontSize: '2rem', fill: '#333' }} />
-                </DancerDownIcon>
+              <h1>Speed up your Learning and Development with Algolisted today</h1>
+            </Fade>
+            <Fade>
+              <div className="desc">
+                We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
+                learning models for get info about a company and applications web scraping to get you the questions from
+                other website at one place.
               </div>
             </Fade>
-            <Fade></Fade>
-            <div className="page2" id='content'>
-              <div className="content">
+          </div>
+          <div className="modules">
+            {
+              modules.map((item, index) => {
+                return (
                   <Fade>
-                    <h1>Speed up your Learning and Development with Algolisted today</h1>
+                    <a href={item.link} className="module">
+                      <div className="count">{index + 1}</div>
+                      <div className="name">{item.name}</div>
+                      <div className="desc">{item.desc}</div>
+                      <ArrowForwardIcon />
+                    </a>
                   </Fade>
-                  <Fade>
-                    <div className="desc">
-                        We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
-                        learning models for get info about a company and applications web scraping to get you the questions from
-                        other website at one place. 
-                    </div>
-                  </Fade>
-              </div>
-              <div className="modules">
-                  {
-                      modules.map((item, index) => {
-                          return (
-                              <Fade>
-                                <a href={item.link} className="module">
-                                    <div className="count">{index + 1}</div>
-                                    <div className="name">{item.name}</div>
-                                    <div className="desc">{item.desc}</div>
-                                    <ArrowForwardIcon/>
-                                </a>
-                              </Fade>
-                          )
-                      })
-                  }
-                  {/* <a href='/' className="module">
+                )
+              })
+            }
+            {/* <a href='/' className="module">
                       <div className="count">1</div>
                       <div className="name">Beginner Friendly Blogs</div>
                       <div className="desc">We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.</div>
                       <ArrowForwardIcon/>
                   </a> */}
+          </div>
+        </div>
+        <div className="open-source-page">
+          <div className="content">
+            <Fade>
+              <h1>Open Source Contribution</h1>
+            </Fade>
+            <Fade>
+              <div className="desc">
+                Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
               </div>
+            </Fade>
+          </div>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
+          <h1 className="sub-page-head">Our Contributors</h1>
+          <div className="hold-contributors">
+            {
+              contributorsList != null && contributorsList.map((item, index) => {
+                return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                  <img src={item.avatar_url} alt="" />
+                </a>
+              })
+            }
+          </div>
+        </div>
+        <PageThreeFooter>
+          <div className="top">
+            <p>
+              connect with us
+            </p>
+            <input type="email" placeholder="Email Address" />
+            <div className="social-icons">
+              <a className="social-icon">
+                <GitHubIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+              </a>
+              <a className="social-icon">
+                <EmailIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+              </a>
+              <a className="social-icon">
+                <InstagramIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+              </a>
+              <a className="social-icon">
+                <FacebookIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+              </a>
+
             </div>
-            <div className="open-source-page">
-              <div className="content">
-                  <Fade>
-                    <h1>Open Source Contribution</h1>  
-                  </Fade>
-                  <Fade>
-                    <div className="desc">
-                        Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
-                    </div>
-                  </Fade>
+          </div>
+
+          <div className="middle">
+            <div className="left">
+              <div className="left-content">
+                <div className="title">
+                  Algolisted
+                </div>
+                <div className="points">
+                  <RouterLink to="about-us" className="link">About us</RouterLink>
+                  <RouterLink to="core-team" className="link">Team</RouterLink>
+                  <RouterLink to="mission" className="link">Our Mission</RouterLink>
+                  <RouterLink to="contact" className="link">Contact</RouterLink>
+                  <RouterLink to="future-vision" className="link">Future Vision</RouterLink>
+                </div>
               </div>
-              <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
-              <h1 className="sub-page-head">Our Contributors</h1>
-              <div className="hold-contributors">
-                {
-                  contributorsList != null && contributorsList.map((item, index) => {
-                    return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
-                      <img src={item.avatar_url} alt="" />
-                    </a>
-                  })
-                }
+
+              <div className="left-content">
+                <div className="title">
+                  General
+                </div>
+                <div className="points">
+                  <a href="/" className="link">Terms and Conditions</a>
+                  <a href="/" className="link">Data protection</a>
+                  <a href="/" className="link">Trust and Security</a>
+                </div>
               </div>
+
+              <div className="left-content">
+                <div className="title">
+                  Account
+                </div>
+                <div className="points">
+                  <RouterLink to="sign-in" className="link">Login</RouterLink>
+                  <RouterLink to="create-account" className="link">Create account</RouterLink>
+                  <RouterLink to="request-api" className="link">Request API access</RouterLink>
+                </div>
+              </div>
+
             </div>
-            <PageThreeFooter>
-              <div className="top">
-                <p>
-                  connect with us
-                </p>
-                <input type="email" placeholder="Email Address" />
-                <div className="social-icons">
-                  <a className="social-icon">
-                    <GitHubIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-                  </a>
-                  <a className="social-icon">
-                    <EmailIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-                  </a>
-                  <a className="social-icon">
-                    <InstagramIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-                  </a>
-                  <a className="social-icon">
-                    <FacebookIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-                  </a>
+            <div className="right">
+              <h1>Algolisted.</h1>
+              <span>
+                Get organized listed information. Get productive.
+              </span>
+            </div>
+          </div>
 
-                </div>
-              </div>
-
-              <div className="middle">
-                <div className="left">
-                  <div className="left-content">
-                    <div className="title">
-                      Algolisted
-                    </div>
-                    <div className="points">
-                      <RouterLink to="about-us" className="link">About us</RouterLink>                  
-                      <RouterLink to="core-team" className="link">Team</RouterLink>            
-                      <RouterLink to="mission" className="link">Our Mission</RouterLink>  
-                      <RouterLink to="contact" className="link">Contact</RouterLink>  
-                      <RouterLink to="future-vision" className="link">Future Vision</RouterLink>                    
-                    </div>
-                  </div>
-
-                  <div className="left-content">
-                    <div className="title">
-                      General
-                    </div>
-                    <div className="points">
-                      <a href="/" className="link">Terms and Conditions</a>
-                      <a href="/" className="link">Data protection</a>
-                      <a href="/" className="link">Trust and Security</a>
-                    </div>
-                  </div>
-
-                  <div className="left-content">
-                    <div className="title">
-                      Account
-                    </div>
-                    <div className="points">
-                       <RouterLink to="sign-in" className="link">Login</RouterLink>                  
-                       <RouterLink to="create-account"  className="link">Create account</RouterLink>      
-                       <RouterLink to="request-api"  className="link">Request API access</RouterLink>                      
-                    </div>
-                  </div>
-
-                </div>
-                <div className="right">
-                  <h1>Algolisted.</h1>
-                  <span>
-                    Get organized listed information. Get productive.
-                  </span>
-                </div>
-              </div>
-
-              <div className="bottom">
-                {/* Open Source Project, by 
+          <div className="bottom">
+            {/* Open Source Project, by 
                 <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank">Atanu Nayak</a> and Community */}
-                All commercial rights reserved, Open Source Project.
-              </div>
-            </PageThreeFooter>
-          
+            All commercial rights reserved, Open Source Project.
+          </div>
+        </PageThreeFooter>
+
       </MobContainer>
       <Container>
         <Navbar>
+          <div className="top">
+            Hi, we are planning to restructure our entire website on Next JS. If you're a Next.js frontend developer, please send your profile to <a href="mailto:nayak@algolisted.com">nayak@algolisted.com</a>
+          </div>
+
+          <div className="bottom">
             <div className="logo">
-                <img src={logo} alt="" />
-                <div className="text">
-                    <div className="up-text">Algolisted</div>
-                </div>
+              <img src={logo} alt="" />
+              <div className="text">
+                <div className="up-text">Algolisted</div>
+              </div>
             </div>
             <div className="menu-list">
-                <a href='/contests-archive/leetcode' className="item">Archive</a>
-                <a href='/contest-analysis' className="item">Analysis</a>
-                <a href='/coding-sheets/striver-sde-sheet' className="item">Coding Sheets</a>
-                <a href='/core-subjects-tracker/operating-systems' className="item">Tracker</a>
-                <a href='/resume-questions' className="item">Resume AI</a>
-                <a href='/opportunities' className="item">Opportunities</a>
+              <a href='/contests-archive/leetcode' className="item">Archive</a>
+              <a href='/contest-analysis' className="item">Analysis</a>
+              <a href='/coding-sheets/striver-sde-sheet' className="item">Coding Sheets</a>
+              <a href='/core-subjects-tracker/operating-systems' className="item">Tracker</a>
+              <a href='/resume-questions' className="item">Resume AI</a>
+              <a href='/opportunities' className="item">Opportunities</a>
             </div>
+          </div>
         </Navbar>
         <div className="hero-page">
           <div className="responsive-1700">
             <div className="left">
-            <Fade>
-              <div className="heading">
-                <h1>Elevate Your Coding Skills with</h1>
-                <h1 className='gradient-text'>AI and Visualization!</h1>
-              </div>
-            </Fade>
-            <Fade>
-              <div className="small-desc">
-                Discover an AI-powered coding website that combines elegant design with powerful features. Track your progress, access contest insights, and challenge friends in coding competitions.
-              </div>
-            </Fade>
-            <Fade left>
-              <div className="learn">
-                <Link to='content' spy={true} smooth={true} offset={700} duration={1000}>
-                  <div className="btn">Learn More</div>
-                </Link>
-              </div>
-            </Fade>
+              <Fade>
+                <div className="heading">
+                  <h1>Elevate Your Coding Skills with</h1>
+                  <h1 className='gradient-text'>AI and Visualization!</h1>
+                </div>
+              </Fade>
+              <Fade>
+                <div className="small-desc">
+                  Discover an AI-powered coding website that combines elegant design with powerful features. Track your progress, access contest insights, and challenge friends in coding competitions.
+                </div>
+              </Fade>
+              <Fade left>
+                <div className="learn">
+                  <Link to='content' spy={true} smooth={true} offset={700} duration={1000}>
+                    <div className="btn">Learn More</div>
+                  </Link>
+                </div>
+              </Fade>
             </div>
             {/* <div className="right"><img style={{ "width": "100%", }} src="https://thumbs.gfycat.com/CharmingMilkyHamster-size_restricted.gif" alt="" /></div> */}
             <div className="right">
@@ -265,7 +271,8 @@ const LandingPage2 = () => {
                   {/* <img src="https://analytics-smart.com/wp-content/uploads/2022/06/Data-Science1-1.gif" alt="" /> */}
                   {/* <img src={sideImage} alt="" /> */}
                   {/* <img src="https://img1.picmix.com/output/stamp/normal/1/9/5/4/2444591_542b7.gif" alt="" draggable="false" /> */}
-                  <img src="https://64.media.tumblr.com/839357ea6275db93b26830442d2b09ca/68e588a8812a4c4d-3f/s500x750/e1724104c696b362e9de15678922e3ad17c6c145.gif" alt=""  draggable="false"/>
+                  {/* <img src="https://64.media.tumblr.com/839357ea6275db93b26830442d2b09ca/68e588a8812a4c4d-3f/s500x750/e1724104c696b362e9de15678922e3ad17c6c145.gif" alt="" draggable="false" /> */}
+                  <img src="https://shkspr.mobi/blog/wp-content/uploads/2015/02/loop2.gif" alt="" draggable="false"/>
                   {/* <img src="https://media0.giphy.com/media/P5S1CXl0y1v1I9308B/200w.gif?cid=6c09b952ifjcc0rzwkzfiqpi092ga6ssf5cvqk1nuxylglq1&ep=v1_gifs_search&rid=200w.gif&ct=s" alt="" /> */}
                 </div>
               </Fade>
@@ -277,52 +284,52 @@ const LandingPage2 = () => {
         </div>
 
         <div className="page2">
-            <div className="content">
-                <Fade bottom>
-                  <h1>Speed up your Learning and Development with Algolisted today</h1>
-                </Fade>
-                <Fade bottom>
-                  <div className="desc">
-                      We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
-                      learning models for get info about a company and applications web scraping to get you the questions from
-                      other website at one place. 
-                  </div>
-                </Fade>
-            </div>
-            <div className="modules">
-                {
-                    modules.map((item, index) => {
-                        return (
-                            <Fade bottom>
-                              <a href={item.link} className="module">
-                                  <div className="count">{index + 1}</div>
-                                  <div className="name">{item.name}</div>
-                                  <div className="desc">{item.desc}</div>
-                                  <ArrowForwardIcon/>
-                              </a>
-                            </Fade>
-                        )
-                    })
-                }
-            </div>
+          <div className="content">
+            <Fade bottom>
+              <h1>Speed up your Learning and Development with Algolisted today</h1>
+            </Fade>
+            <Fade bottom>
+              <div className="desc">
+                We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
+                learning models for get info about a company and applications web scraping to get you the questions from
+                other website at one place.
+              </div>
+            </Fade>
+          </div>
+          <div className="modules">
+            {
+              modules.map((item, index) => {
+                return (
+                  <Fade bottom>
+                    <a href={item.link} className="module">
+                      <div className="count">{index + 1}</div>
+                      <div className="name">{item.name}</div>
+                      <div className="desc">{item.desc}</div>
+                      <ArrowForwardIcon />
+                    </a>
+                  </Fade>
+                )
+              })
+            }
+          </div>
         </div>
 
         <div className="open-source-page">
-            <div className="content">
-                <Fade bottom>
-                  <h1>Open Source Contribution</h1>
-                </Fade>
-                <Fade bottom>
-                  <div className="desc">
-                      Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
-                  </div>
-                </Fade>
-            </div>
+          <div className="content">
+            <Fade bottom>
+              <h1>Open Source Contribution</h1>
+            </Fade>
+            <Fade bottom>
+              <div className="desc">
+                Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
+              </div>
+            </Fade>
+          </div>
           <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
           <h1 className="sub-page-head">Technologies Used</h1>
           <div className="hold-contributors">
-            <div className="contributor"><img src="https://icons-for-free.com/iconfiles/png/512/logo+react+react+js+icon-1320184811840217251.png" alt="" /></div>
-            <div className="contributor"><img src="https://vistaran-tech.s3.ap-south-1.amazonaws.com/wp-content/uploads/2022/05/13104926/nodejs-logo.png" alt="" /></div>
+            <div className="contributor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo8BG6UD3b_Fowh4gtwIjw2GPTWQQ30uBy-w&s" alt="" /></div>
+            <div className="contributor"><img src="https://friconix.com/png/fi-cnsuxx-nodejs.png" alt="" /></div>
             <div className="contributor"><img src="https://ajeetchaulagain.com/static/7cb4af597964b0911fe71cb2f8148d64/87351/express-js.png" alt="" /></div>
             <div className="contributor"><img src="https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/erkxwhl1gd48xfhe2yld" alt="" /></div>
             <div className="contributor"><img src="https://mui.com/static/logo.png" alt="" /></div>
@@ -383,10 +390,10 @@ const LandingPage2 = () => {
                   Algolisted
                 </div>
                 <div className="points">
-                  <RouterLink to="organisation-information/about-us" className="link">About us</RouterLink>                  
-                  <RouterLink to="organisation-information/all-contributors" className="link">All Contributors</RouterLink>            
-                  <RouterLink to="organisation-information/contributor-work" className="link">Contributors Work</RouterLink>  
-                  <RouterLink to="https://business.algolisted.com/" target='_blank' className="link">Business</RouterLink>  
+                  <RouterLink to="organisation-information/about-us" className="link">About us</RouterLink>
+                  <RouterLink to="organisation-information/all-contributors" className="link">All Contributors</RouterLink>
+                  <RouterLink to="organisation-information/contributor-work" className="link">Contributors Work</RouterLink>
+                  <RouterLink to="https://business.algolisted.com/" target='_blank' className="link">Business</RouterLink>
                   <RouterLink to="https://github.com/Algolisted-Org/AlgoListed" target='_blank' className="link">Open Source</RouterLink>
                 </div>
               </div>
@@ -1169,80 +1176,107 @@ const Container = styled.div`
 `
 
 const Navbar = styled.div`
-    height: 70px;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgb(233, 229, 229);
-    padding: 0 35px;
-    /* background-color: rgb(255, 255, 255); */
-    background-color: #ffffffd4;
-    box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 5%);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    flex-direction: column;
 
-    .logo{
+    .top{
+      height: 40px;
+      width: 100%;
+      background-color: #86e847;
       display: flex;
       align-items: center;
-      /* border: 1px solid black; */
-      height: 100%;
-      padding: 5px 0;
-
-      img{
-        height: 40px;
-        border-radius: 4px;
-        margin-right: 10px;
-      }
-
-      .text{
-        .up-text{
-          font-size: 1.25rem;
-          font-weight: 500;
-        }
-        .down-text{
-          font-size: 0.7rem;
-          font-weight: 200;
-        }
+      justify-content: flex-start;
+      padding: 0 40px;
+      font-weight: 300;
+      font-size: 0.75rem;
+      
+      a{
+        margin-left: 5px;
+        font-weight: 500;
+        color: #2b497f;
+        background-color: #7ccd4a;
+        padding: 2.5px 7.5px;
+        border-radius: 100px;
+        text-decoration: none;
       }
     }
 
-    .menu-list{
+    .bottom{
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgb(233, 229, 229);
+      padding: 0 35px;
+      /* background-color: rgb(255, 255, 255); */
+      background-color: #ffffffd4;
+      box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 5%);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+
+      .logo{
         display: flex;
         align-items: center;
+        /* border: 1px solid black; */
+        height: 100%;
+        padding: 5px 0;
 
-        /* background-color: #f3ec78;
-          background-image: linear-gradient(300deg,#a0bc42,#066df9);
-          background-size: 100%;
-          -webkit-background-clip: text;
-          -moz-background-clip: text;
-          -webkit-text-fill-color: transparent; 
-          -moz-text-fill-color: transparent; */
-        
-        .item{
-          font-size: 0.85rem;
-          margin: 0 15px;
-          font-weight: 400;
-          text-decoration: none;
-          color: inherit;
-          
-          
-
-            &:hover{
-                color: cornflowerblue;
-                background-color: #f3ec78;
-                background-image: linear-gradient(300deg,#a0bc42,#066df9);
-                background-size: 100%;
-                -webkit-background-clip: text;
-                -moz-background-clip: text;
-                -webkit-text-fill-color: transparent; 
-                -moz-text-fill-color: transparent;
-            }
+        img{
+          height: 40px;
+          border-radius: 4px;
+          margin-right: 10px;
         }
+
+        .text{
+          .up-text{
+            font-size: 1.25rem;
+            font-weight: 500;
+          }
+          .down-text{
+            font-size: 0.7rem;
+            font-weight: 200;
+          }
+        }
+      }
+
+      .menu-list{
+          display: flex;
+          align-items: center;
+
+          /* background-color: #f3ec78;
+            background-image: linear-gradient(300deg,#a0bc42,#066df9);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent; 
+            -moz-text-fill-color: transparent; */
+          
+          .item{
+            font-size: 0.85rem;
+            margin: 0 15px;
+            font-weight: 400;
+            text-decoration: none;
+            color: inherit;
+            
+            
+
+              &:hover{
+                  color: cornflowerblue;
+                  background-color: #f3ec78;
+                  background-image: linear-gradient(300deg,#a0bc42,#066df9);
+                  background-size: 100%;
+                  -webkit-background-clip: text;
+                  -moz-background-clip: text;
+                  -webkit-text-fill-color: transparent; 
+                  -moz-text-fill-color: transparent;
+              }
+          }
+      }
     }
 `
 
