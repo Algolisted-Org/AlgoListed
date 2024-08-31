@@ -33,10 +33,9 @@ const ContestArchive = () => {
   const [openVisualiser, setOpenVisualiser] = useState(true);
   const [contest, setContest] = useState([]);
   const [needDarkMode, setNeedDarkMode] = useState(true);
-
+  const [loading, setLoading] = useState(true);
   const [showTags, setShowTags] = useLocalStorage("showTags", true);
   const [filterContestType, setFilterContestType] = useState("All");
-  const [loading, setLoading] = useState(true);
   const [filterContestTypeName, setFilterContestTypeName] = useState("Both Contest Types");
   const [openModel1, setOpenModel1] = useState(false);
   const [openModel2, setOpenModel2] = useState(false);
@@ -148,16 +147,18 @@ const ContestArchive = () => {
   }, [filterContestType])
 
   useEffect(() => {
-    const filteredData = contest.filter((contest) => {
+    const filteredData = contestsData.filter((contest) => {
       if (filterContestType === 'All') {
         return true; // Show all contests
       } else {
-        return contest.contest_type === filterContestType;
+        const firstWord = contest.contest_name.split(' ')[0];
+        return firstWord === filterContestType;
       }
     }).slice(0, sliderInputValue);
 
     setFilteredContestData(filteredData);
-  }, [contest, filterContestType, sliderInputValue]);
+  }, [filterContestType, sliderInputValue]);
+
 
   const filters = contestAnalysisFilters.map((item) => {
     return item.lock === true ? (
