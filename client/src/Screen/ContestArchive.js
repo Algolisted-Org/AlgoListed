@@ -31,16 +31,17 @@ import { useParams } from "react-router-dom";
 
 const ContestArchive = () => {
   const [openVisualiser, setOpenVisualiser] = useState(true);
-
+  const [contest, setContest] = useState([]);
   const [needDarkMode, setNeedDarkMode] = useState(true);
 
   const [showTags, setShowTags] = useLocalStorage("showTags", true);
   const [filterContestType, setFilterContestType] = useState("All");
+  const [loading, setLoading] = useState(true);
   const [filterContestTypeName, setFilterContestTypeName] = useState("Both Contest Types");
   const [openModel1, setOpenModel1] = useState(false);
   const [openModel2, setOpenModel2] = useState(false);
   const [sliderInputValue, setSliderInputValue] = useState(20);
-  const [filteredContestData, setFilteredContestData] = useState(contestsData);
+  const [filteredContestData, setFilteredContestData] = useState([]);
   const [problemAIsChecked, setProblemAIsChecked] = useState(true);
   const [problemBIsChecked, setProblemBIsChecked] = useState(true);
   const [problemCIsChecked, setProblemCIsChecked] = useState(true);
@@ -66,6 +67,26 @@ const ContestArchive = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    const fetchContestData = async () => {
+      try {
+        const response = await fetch('https://api.thefutureproject.tech/leetcode/contest/last_hundred/info');
+        if (!response.ok) {
+          throw new Error('Failed to fetch contest data');
+        }
+        const contestsData = await response.json();
+        setContest(contestsData); // Store the entire contest data in state
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchContestData();
+  }, []);
+
 
   const handleSubscription = () => {
     const inputValue = inputRef.current.value;
@@ -127,7 +148,7 @@ const ContestArchive = () => {
   }, [filterContestType])
 
   useEffect(() => {
-    const filteredData = contestsData.filter((contest) => {
+    const filteredData = contest.filter((contest) => {
       if (filterContestType === 'All') {
         return true; // Show all contests
       } else {
@@ -136,8 +157,7 @@ const ContestArchive = () => {
     }).slice(0, sliderInputValue);
 
     setFilteredContestData(filteredData);
-  }, [filterContestType, sliderInputValue]);
-
+  }, [contest, filterContestType, sliderInputValue]);
 
   const filters = contestAnalysisFilters.map((item) => {
     return item.lock === true ? (
