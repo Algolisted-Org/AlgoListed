@@ -21,15 +21,20 @@ const LeftMenuDark = ({ marked }) => {
     //   link: "/showdown-server",
     // }, 
     {
+      value: "Open Source",
+      showAt: "open-source",
+      link: "/open-source",
+    },
+    {
       value: "Contests Archive",
       showAt: "contests-archive",
       link: "/contests-archive/leetcode",
     },
-    {
-      value: "Contest Analysis",
-      showAt: "contest-analysis",
-      link: "/contest-analysis",
-    },
+    // {
+    //   value: "Contest Analysis",
+    //   showAt: "contest-analysis",
+    //   link: "/contest-analysis",
+    // },
     // {
     //   value: "Coding Resources",
     //   showAt: "resources",
@@ -40,21 +45,21 @@ const LeftMenuDark = ({ marked }) => {
       showAt: "coding-sheets",
       link: "/coding-sheets/striver-sde-sheet",
     },
-    // {
-    //   value: "Create Problem List",
-    //   showAt: "create-problem-list",
-    //   link: "/create-problem-list",
-    // },
+    {
+      value: "Company Preparation",
+      showAt: "company-preparation",
+      link: "/company-preparation",
+    },
     {
       value: "Core Subjects Tracker",
       showAt: "core-subjects-tracker",
       link: "/core-subjects-tracker/operating-systems",
     },
-    {
-      value: "Mock Assessment",
-      showAt: "mock-assessment",
-      link: "/mock-assessment",
-    },
+    // {
+    //   value: "Mock Assessment",
+    //   showAt: "mock-assessment",
+    //   link: "/mock-assessment",
+    // },
     // {
     //   value: "Interview Summaries",
     //   showAt: "interview-summaries",
@@ -98,7 +103,7 @@ const LeftMenuDark = ({ marked }) => {
     //   showAt: "aptitude-round",
     //   link: "/aptitude-round",
     // },
-  ]  
+  ] 
 
   return (
     <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
@@ -126,7 +131,8 @@ const LeftMenuDark = ({ marked }) => {
           <div className="text">algolisted.com</div>
           <div className="line"></div>
         </div>
-        <a href='https://business.algolisted.com/' target={"_blank"} className="link">Algolisted Business<CallMadeIcon/></a>
+        {/* <a href='https://business.algolisted.com/' target={"_blank"} className="link">Algolisted Business<CallMadeIcon/></a> */}
+        <a href='https://play.google.com/store/apps/' target={"_blank"} className="link">Download Jobs Notifier<CallMadeIcon/></a>
         <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link">Report an Issue</a>
       </div>
 
@@ -241,7 +247,7 @@ const Container = styled.div`
       
       svg{
         /* display: none; */
-        font-size: 1.05rem;
+        font-size: 0.85rem;
         margin-left: 5px;
         fill: #949ba4;
       }
