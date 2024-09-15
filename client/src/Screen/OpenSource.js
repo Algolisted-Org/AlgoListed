@@ -6,6 +6,7 @@ import LeftMenu from '../Components/LeftMenu'
 import LeftMenuDark from '../Components/LeftMenuDark'
 import SimpleFooter from '../Components/SimpleFooter'
 import LockIcon from '@material-ui/icons/Lock';
+import CallMadeIcon from '@material-ui/icons/CallMade';
 import { openSourceFilters } from '../Components/openSourceFilters'
 
 const OpenSource = () => {
@@ -162,7 +163,9 @@ const OpenSource = () => {
                     <BoxContainer>
                         {swagsData.map((swag, index) => (
                             <div key={index} className="box">
-                                <img src={swag.logo} alt={`${swag.company} logo`} className="box-logo" />
+                                <div className="box-logo">
+                                    <img src={swag.logo} alt={`${swag.company} logo`} />
+                                </div>
                                 <h3 className="box-title">{swag.swagTitle}</h3>
                                 <p className="box-desc">{swag.desc}</p>
                                 <p className="box-tags">
@@ -170,7 +173,7 @@ const OpenSource = () => {
                                         <span key={idx} className="box-tag">{tag}</span>
                                     ))}
                                 </p>
-                                <a href={swag.link} className="box-link">Check it out</a>
+                                <a href={swag.link} className="box-link">Check it out <CallMadeIcon /> </a>
                             </div>
                         ))}
                     </BoxContainer>
@@ -426,8 +429,14 @@ const BoxContainer = styled.div`
         background-color: white;
         padding: 20px;
 
+        display: flex;  
+        flex-direction: column;
+
         .box-logo{
-            height: 40px;
+            margin-bottom: 10px;
+            img{
+                height: 40px;
+            }
         }
 
         .box-title{
@@ -444,15 +453,37 @@ const BoxContainer = styled.div`
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            margin: 5px 0;
+            margin: 15px 0 15px 0;
 
             .box-tag{
                 font-size: 0.75rem;
-                padding: 5px;
+                padding: 2.5px 10px;
                 border-radius: 5px;
                 margin-right: 5px;
-                background-color: orange;
+                background-color: #e2f3dd;
+                border: 1px solid #a1cd93;
+                border-radius: 100px;
                 margin-bottom: 5px;
+                font-weight: 300;
+            }
+        }
+
+        .box-link{
+            font-size: 0.75rem;
+            background-color: #e5e5e5;
+            padding: 10px 10px;
+            border-radius: 100px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg{
+                font-size: 0.85rem;
+                margin-left: 5px;
             }
         }
     }
