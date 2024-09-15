@@ -18,7 +18,7 @@ const OpenSource = () => {
     }, []);
 
     useEffect(() => {
-        document.title = "Template Page - Algolisted";
+        document.title = "Open Source - Algolisted";
     }, []);
 
     const filters = openSourceFilters.map((item) => {
@@ -42,6 +42,91 @@ const OpenSource = () => {
     const toggleDarkMode = () => {
         setNeedDarkMode(!needDarkMode);
     };
+
+    const swagsData = [
+        {
+            "swagTitle": "Huddle01",
+            "company": "Huddle01",
+            "difficulty": "medium",
+            "swagTags": ["cash", "clothing", "expired", "hacktoberfest"],
+            "desc": "Join Huddle01's Hacktoberfest 2023 challenge! Win from a $300/$100 pool prize for advanced/intermediate level respectively. Beginners can earn unique POAP tokens and merchandise.",
+            "link": "Check it out",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "swagTitle": "OpenBB",
+            "company": "OpenBB",
+            "difficulty": "medium",
+            "swagTags": ["clothing", "expired", "hacktoberfest"],
+            "desc": "Earn a T-shirt or hat from OpenBB in Hacktoberfest. Contribute by making no-code contributions, code enhancements, adding a non-extension feature, or creating a custom extension.",
+            "link": "Check it out",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "swagTitle": "Revert",
+            "company": "Revert",
+            "difficulty": "medium",
+            "swagTags": ["clothing", "expired", "hacktoberfest", "mug", "stickers"],
+            "desc": "Earn spooky pumpkins for every PR merged in the Hacktoberfest at Revert! Collect as many pumpkins as you can before Halloween 2023 strikes and win some amazing swags!!",
+            "link": "Check it out",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "swagTitle": "VeSoft",
+            "company": "VeSoft",
+            "difficulty": "medium",
+            "swagTags": ["clothing", "digitalbadge", "expired", "hacktoberfest", "mascotdoll", "mug", "stickers"],
+            "desc": "Earn digital badges and special SWAG from VeSoft in Hacktoberfest! With 1, 3, or 5 accepted PRs on vesoft-inc or nebula-contrib, receive different badges and amazing SWAG.",
+            "link": "Check it out",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "swagTitle": "Interledger",
+            "company": "Interledger",
+            "difficulty": "medium",
+            "swagTags": ["clothing", "expired", "hacktoberfest", "stickers"],
+            "desc": "Earn exclusive Interledger swag this Hacktoberfest! Get a T-shirt with 1+ accepted PRs. Get limited edition swag with 4+ accepted PRs.",
+            "link": "Check it out",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "swagTitle": "Haystack",
+            "company": "Haystack",
+            "difficulty": "medium",
+            "swagTags": ["expired", "hacktoberfest", "stickers"],
+            "desc": "Contribute to open issues with the 'hacktoberfest' tag at Haystack's repository and grab some exclusive stickers!",
+            "link": "Check it out",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "swagTitle": "Dyrector.io",
+            "company": "Dyrector.io",
+            "difficulty": "medium",
+            "swagTags": ["clothing", "expired", "hacktoberfest", "stickers"],
+            "desc": "Contribute to any issue of dyrector.io and win an exclusive cap and stickers! Swag can optionally be personally delivered at esteemed events like KubeCon EU, Web Summit, and more if you're in Europe.",
+            "link": "Check it out",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "swagTitle": "Covalent",
+            "company": "Covalent",
+            "difficulty": "medium",
+            "swagTags": ["cash", "expired", "hacktoberfest"],
+            "desc": "Join the Covalent Hacktoberfest. Get rewarded with cash prizes based on the complexity and level of your contributions. Beginners can earn $25 per merged PR, while experts have an opportunity to earn $100.",
+            "link": "Check it out",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "swagTitle": "Appblock",
+            "company": "Appblock",
+            "difficulty": "medium",
+            "swagTags": ["cash", "expired", "hacktoberfest"],
+            "desc": "Each accepted PR to AppBlock during the Hacktoberfest will win ₹5,000. You have a chance to win up to ₹30,000!!",
+            "link": "Check it out",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        }
+    ]
+
 
     return (
         <GrandContainer needDarkMode={needDarkMode}>
@@ -73,6 +158,22 @@ const OpenSource = () => {
                     <Filters needDarkMode={needDarkMode}>
                         {filters}
                     </Filters>
+
+                    <BoxContainer>
+                        {swagsData.map((swag, index) => (
+                            <div key={index} className="box">
+                                <img src={swag.logo} alt={`${swag.company} logo`} className="box-logo" />
+                                <h3 className="box-title">{swag.swagTitle}</h3>
+                                <p className="box-desc">{swag.desc}</p>
+                                <p className="box-tags">
+                                    {swag.swagTags.map((tag, idx) => (
+                                        <span key={idx} className="box-tag">{tag}</span>
+                                    ))}
+                                </p>
+                                <a href={swag.link} className="box-link">Check it out</a>
+                            </div>
+                        ))}
+                    </BoxContainer>
                 </div>
                 <SimpleFooter />
             </Container>
@@ -308,3 +409,51 @@ const Filters = styled.div`
 
 
 `;
+
+
+const BoxContainer = styled.div`
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 40px;
+
+    .box{
+        width: calc(33.3333% - 20px);
+        margin-bottom: 25px;
+        border-radius: 10px;
+        border: 1px solid rgb(209, 213, 219);
+        background-color: white;
+        padding: 20px;
+
+        .box-logo{
+            height: 40px;
+        }
+
+        .box-title{
+            font-size: 1.05rem;
+            font-weight: 500;
+        }        
+
+        .box-desc{
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        .box-tags{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 5px 0;
+
+            .box-tag{
+                font-size: 0.75rem;
+                padding: 5px;
+                border-radius: 5px;
+                margin-right: 5px;
+                background-color: orange;
+                margin-bottom: 5px;
+            }
+        }
+    }
+`
