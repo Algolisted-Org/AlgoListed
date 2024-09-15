@@ -293,7 +293,7 @@ const CodingSheets = () => {
 		updatedData[index].isRunning = !updatedData[index].isRunning;
 		setFilteredData(updatedData);
 	};
-	
+
 	const handleReset = (index) => {
 		const updatedData = [...filteredData];
 		updatedData[index].isRunning = false;
@@ -307,7 +307,7 @@ const CodingSheets = () => {
 		const [elapsedTime, setElapsedTime] = useState(initialElapsed);
 		const intervalRef = React.useRef(null);
 		const updatedData = [...filteredData];
-		
+
 		// start the timer
 		useEffect(() => {
 			if (isRunning) {
@@ -323,7 +323,7 @@ const CodingSheets = () => {
 
 		// stores the elapsed time into local storage
 		useEffect(() => {
-			if (isRunning && elapsedTime!=0) {
+			if (isRunning && elapsedTime != 0) {
 				localStorage.setItem(`elapsedTimeSheetQuestion-${updatedData[id]._id}`, elapsedTime);
 				updatedData[id].elapsedTime = elapsedTime;
 			}
@@ -335,16 +335,16 @@ const CodingSheets = () => {
 			const remainingSeconds = totalSeconds % 3600;
 			const minutes = Math.floor(remainingSeconds / 60);
 			const seconds = remainingSeconds % 60;
-		  
+
 			if (hours > 0) {
-			  return `${hours}hours ${minutes}mins ${seconds} secs`;
+				return `${hours}hours ${minutes}mins ${seconds} secs`;
 			} else if (minutes > 0) {
-			  return `${minutes} mins ${seconds} secs`;
+				return `${minutes} mins ${seconds} secs`;
 			} else {
-			  return `${seconds} secs`;
+				return `${seconds} secs`;
 			}
-		  }
-		  
+		}
+
 		return (
 			formatTime(elapsedTime)
 		);
@@ -358,7 +358,7 @@ const CodingSheets = () => {
 		if (selectedTheme === 'dark') setNeedDarkMode(true);
 		if (selectedTheme === 'light') setNeedDarkMode(false);
 	}, [])
-	
+
 	// UseEffect 2: to fetch data from the server based on 'sheetname', process the data, and update state variables
 	useEffect(() => {
 		// retrieve the data from the server
@@ -376,7 +376,7 @@ const CodingSheets = () => {
 						completed: completed === "true",
 						marked: marked === "true",
 						isRunning: false,
-      					elapsedTime: elapsedTime,
+						elapsedTime: elapsedTime,
 					};
 				});
 
@@ -399,7 +399,7 @@ const CodingSheets = () => {
 	}, [sheetname]);
 
 	// UseEffect 3: to process data, calculate tag-related statistics, and update state variables
-	useEffect(() => { 
+	useEffect(() => {
 		setFilteredData(data)
 
 		// finding unique tags
@@ -506,26 +506,26 @@ const CodingSheets = () => {
 	// UseEffect 6: to filter and sort data based on selected label, value, tags, and sorting criteria
 	useEffect(() => {
 		const newFilteredData = data.filter(item => {
-		  if (selectedLabel !== 'All' && !item.tags.includes(selectedLabel)) {
-			return false;
-		  }
-	  
-		  if (selectedValue !== 'All' && (selectedValue === 'Marked for later' && !item.marked)) {
-			return false;
-		  }
-		  if (selectedValue !== 'All' && (selectedValue === 'Marked as completed' && !item.completed)) {
-			return false;
-		  }
+			if (selectedLabel !== 'All' && !item.tags.includes(selectedLabel)) {
+				return false;
+			}
 
-		  if(tags.length && !(tags.length && tags.every(tag=> item.tags.includes(tag)))){
-			return false;
-		  }
-		  return true;
+			if (selectedValue !== 'All' && (selectedValue === 'Marked for later' && !item.marked)) {
+				return false;
+			}
+			if (selectedValue !== 'All' && (selectedValue === 'Marked as completed' && !item.completed)) {
+				return false;
+			}
+
+			if (tags.length && !(tags.length && tags.every(tag => item.tags.includes(tag)))) {
+				return false;
+			}
+			return true;
 		});
 
 		// For sorting filter
-		let newSortedData=[...newFilteredData];
-		if(selectedSort == false) {
+		let newSortedData = [...newFilteredData];
+		if (selectedSort == false) {
 			//Stores the indices of original data array and later compares to get original sort
 			const indexMap = new Map();
 			data.forEach((element, index) => {
@@ -540,8 +540,8 @@ const CodingSheets = () => {
 		}
 
 		setFilteredData(newSortedData);
-	  }, [selectedLabel, selectedValue,tags, selectedSort]);
-	
+	}, [selectedLabel, selectedValue, tags, selectedSort]);
+
 	// UseEffect 7: to find unique tags from solved data and update state variables for solved data tags
 	useEffect(() => {
 		let len = solvedData.length;
@@ -881,7 +881,7 @@ const CodingSheets = () => {
 							<Tagsfilter className="filter-item" data={data} needDarkMode={needDarkMode} tags={allowedProblemTags} filterdata={filteredData} setfilter={setFilteredData} setTags={setTags} />
 							<div className="filter-item" onClick={() => setShowTags(!showTags)}>{showTags ? "Hide Problem Tags" : "Show Problem Tags"}</div>
 							<Tooltip title={selectedSort ? "Unsort" : "Sort based on Time"}>
-								<SortIcon onClick={() => setSelectedSort(!selectedSort)}/>
+								<SortIcon onClick={() => setSelectedSort(!selectedSort)} />
 							</Tooltip>
 							{/* <div className="filter-item"><CheckCircleOutlineIcon/></div> */}
 							{/* <div className="filter-item"><UpdateIcon/></div> */}
@@ -932,8 +932,8 @@ const CodingSheets = () => {
 															initialElapsed={parseInt(item.elapsedTime, 10)}
 															isRunning={item.isRunning}
 														/>
-														
-														<ReplayIcon onClick={()=>handleReset(index)}/>
+
+														<ReplayIcon onClick={() => handleReset(index)} />
 													</div>
 												</div>
 												<div className="tags">
@@ -975,8 +975,8 @@ const CodingSheets = () => {
 												</div>
 											</Tooltip>
 											<Tooltip title="Stop Watch">
-												<div className="stop-watch-btn" onClick={()=>handleStartStop(index)}>
-													{item.isRunning ? <PauseIcon style={{ fill: "orange" }} /> : <TimerIcon/>}
+												<div className="stop-watch-btn" onClick={() => handleStartStop(index)}>
+													{item.isRunning ? <PauseIcon style={{ fill: "orange" }} /> : <TimerIcon />}
 												</div>
 											</Tooltip>
 											{/* <Tooltip title="Add Notes">
@@ -984,9 +984,9 @@ const CodingSheets = () => {
 													<NotesIcon/> 
 												</div>
 											</Tooltip> */}
-											
-											
-											
+
+
+
 											{/* <Tooltip title="Notes">
 												<div className="review-btn">
 													<CreateIcon/>

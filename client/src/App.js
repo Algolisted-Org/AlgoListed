@@ -63,60 +63,64 @@ import MockAssessment from "./Screen/MockAssessment";
 import ContestArchiveCF from "./Screen/ContestArchiveCF";
 import MockAssessmentRunning from "./Screen/MockAssessmentRunning";
 import Profile from "./Screen/Profile";
+import OpenSource from "./Screen/OpenSource";
 
 
 
-const App = ({currentThemeDark}) => {
+const App = ({ currentThemeDark }) => {
   const [userGlobal, setUserGlobal] = useState();
-  
+
   return (
     <div>
       <ScrollToTop />
       <Routes>
         {/* <Route path="/development" element={<CompetitionApi/>} /> */}
-        <Route path="/" element={<LandingPage2/>} />
+        <Route path="/" element={<LandingPage2 />} />
         {/* <Route path="/" element={<LandingPage3/>} /> */}
-        <Route path="/auth" element={<AuthPage/>} />
-        <Route path="/sign-in" element={<AuthPage/>} />
-        <Route path="/create-account" element={<AuthPage/>} />
-        <Route path="/about-us" element={<AboutUs/>} />
-        <Route path="/core-team" element={<CoreTeam/>} />
-        <Route path="/contact" element={<Contact/>} />
-        <Route path="/mission" element={<Mission/>} />
-        <Route path="/future-vision" element={<FutureVision/>} />
-        <Route path="/request-api" element={<RequestAPI/>} />
-        <Route path="/blog/ideas" element={<BlogIdeas/>} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/sign-in" element={<AuthPage />} />
+        <Route path="/create-account" element={<AuthPage />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/core-team" element={<CoreTeam />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/mission" element={<Mission />} />
+        <Route path="/future-vision" element={<FutureVision />} />
+        <Route path="/request-api" element={<RequestAPI />} />
+        <Route path="/blog/ideas" element={<BlogIdeas />} />
         {/* <Route path="/coding-competitions" element={<CodingCompetitions/>} /> */}
-        <Route path="/organisation-information/:showpage" element={<OrganisationInfo/>} />
-        <Route path="/issues" element={<Issues/>}/>
-        <Route path="/resources" element={<Resources/>} />
-        
-        <Route path="/blogs/:blogid/:blogname" element={<BlogPage/>} />
-        <Route path="/blogs/all" element={<AllBlogs/>} />
+        <Route path="/organisation-information/:showpage" element={<OrganisationInfo />} />
+        <Route path="/issues" element={<Issues />} />
+        <Route path="/resources" element={<Resources />} />
 
-        <Route path="/work-with-us" element={<ContributeSite/>} />
-        <Route path="/aptitude-round" element={<AptitudeRound/>} />
-        <Route path="/opportunities" element={<Opportunities/>} />
-        <Route path="/get-blog-code" element={<BlogAutoCode/>} />
-        <Route path="/selected-profiles" element={<SelectedProfiles/>} />
+        <Route path="/blogs/:blogid/:blogname" element={<BlogPage />} />
+        <Route path="/blogs/all" element={<AllBlogs />} />
+
+        <Route path="/work-with-us" element={<ContributeSite />} />
+        <Route path="/aptitude-round" element={<AptitudeRound />} />
+        <Route path="/opportunities" element={<Opportunities />} />
+        <Route path="/get-blog-code" element={<BlogAutoCode />} />
+        <Route path="/selected-profiles" element={<SelectedProfiles />} />
         {/* <Route path="/coding-sheets" element={<CodingSheets/>} /> */}
-        <Route path="/coding-sheets/:sheetname" element={<CodingSheets/>} />
+        <Route path="/coding-sheets/:sheetname" element={<CodingSheets />} />
         <Route path="/create-problem-list" element={<CreateCustomCodingSheets setUserGlobal={setUserGlobal} />} />
-        <Route path="/create-problem-list/sheet-dashboard/:sheetId" element={<CreateCustomCodingSheetsEdit userGlobal={userGlobal}/>} />
-        <Route path="/create-problem-list/sheet/:sheetId" element={<CustomSheet/>} />
-        <Route path="/add-content-core-only" element={<AddContentCoreOnly/>} />
-        <Route path="/readme" element={<Readme/>} />
-        <Route path="/contest-analysis" element={<ContestAnalysisList/>} />
-        <Route path="/contest-analysis/:contestName" element={<ContestAnalysis/>} />
-        <Route path="/contests-archive/" element={<ContestArchive/>} />
-        <Route path="/contests-archive/leetcode" element={<ContestArchive/>} />
-        <Route path="/contests-archive/codeforces" element={<ContestArchiveCF/>} />
-        <Route path="/courses-review" element={<CoursesReview/>} />
-        <Route path="/online-assessment" element={<OnlineAssessment/>} />
-        <Route path="/interview-summaries" element={<InterviewSummaries/>} />
-        <Route path="/core-subjects-tracker/:subjectName" element={<CoreSubjectsTracker/>} />
-        <Route path="/mock-assessment" element={<MockAssessment/>} />
-        <Route path="/mock-assessment/:contestId" element={<MockAssessmentRunning/>} />
+        <Route path="/create-problem-list/sheet-dashboard/:sheetId" element={<CreateCustomCodingSheetsEdit userGlobal={userGlobal} />} />
+        <Route path="/create-problem-list/sheet/:sheetId" element={<CustomSheet />} />
+        <Route path="/add-content-core-only" element={<AddContentCoreOnly />} />
+        <Route path="/readme" element={<Readme />} />
+        <Route path="/contest-analysis" element={<ContestAnalysisList />} />
+        <Route path="/contest-analysis/:contestName" element={<ContestAnalysis />} />
+        <Route path="/contests-archive/" element={<ContestArchive />} />
+        <Route path="/contests-archive/leetcode" element={<ContestArchive />} />
+        <Route path="/contests-archive/codeforces" element={<ContestArchiveCF />} />
+        <Route path="/courses-review" element={<CoursesReview />} />
+        <Route path="/online-assessment" element={<OnlineAssessment />} />
+        <Route path="/interview-summaries" element={<InterviewSummaries />} />
+        <Route path="/core-subjects-tracker/:subjectName" element={<CoreSubjectsTracker />} />
+        <Route path="/mock-assessment" element={<MockAssessment />} />
+        <Route path="/mock-assessment/:contestId" element={<MockAssessmentRunning />} />
+
+        <Route path="/open-source" element={<OpenSource />} />
+        <Route path="/open-source/:routeId" element={<OpenSource />} />
 
         {/* <Route path="/showdown-server" element={<ShowdownServer/>} />
         <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
@@ -125,10 +129,10 @@ const App = ({currentThemeDark}) => {
         {/* <Route path="/showdown-server/:serverId" element={<ShowdownServerOpened/>} /> */}
         {/* <Route path="/showdown-server-anurag/:serverId" element={<ShowdownServerOpenedFBDB/>} /> */}
 
-        <Route path="/profile/:profileId" element={<Profile/>} />
-        <Route path="/development" element={<Development/>} />
-        <Route path="/resume-questions" element={<ResumeSection/>} />
-        <Route path="*" element={<PageNotExist/>} />
+        <Route path="/profile/:profileId" element={<Profile />} />
+        <Route path="/development" element={<Development />} />
+        <Route path="/resume-questions" element={<ResumeSection />} />
+        <Route path="*" element={<PageNotExist />} />
       </Routes>
       <GoToTop />
     </div>

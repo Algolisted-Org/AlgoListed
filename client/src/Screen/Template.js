@@ -7,54 +7,54 @@ import LeftMenuDark from '../Components/LeftMenuDark'
 import SimpleFooter from '../Components/SimpleFooter'
 
 const Template = () => {
-    const [needDarkMode, setNeedDarkMode] = useState(false);
-    
-    useEffect(() => {
-      let selectedTheme = localStorage.getItem("selectedTheme");
-      if (selectedTheme === 'dark') setNeedDarkMode(true);
-    }, []);
-  
-    useEffect(() => {
-      document.title = "Template Page - Algolisted";
-    }, []);
-  
-    console.log("needDarkMode : ", needDarkMode);
-    const toggleDarkMode = () => {
-      setNeedDarkMode(!needDarkMode);
-    };
+  const [needDarkMode, setNeedDarkMode] = useState(false);
 
-    return ( 
-        <GrandContainer needDarkMode={needDarkMode}>
-            <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with 
-                width more than 1100px, a standard laptop or tablet landscape. 
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
-            </MobContainer>
-            <Container needDarkMode={needDarkMode}>
-                {
-                    needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
-                }
-                {
-                    needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
-                }
-                {/* ---> change this all-blogs to your desired page-id */}
+  useEffect(() => {
+    let selectedTheme = localStorage.getItem("selectedTheme");
+    if (selectedTheme === 'dark') setNeedDarkMode(true);
+  }, []);
 
-                <div className="cc-middle-content">
-                    <h1 className='main-heading'>Template Name Here</h1>
-                    <p className="heading-supporter">
-                        Random Text : We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
-                    </p>
-                    <div className="message">
-                        <div className="icon"></div>
-                        <div className="text">
-                            Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
-                        </div>
-                    </div>
-                </div>
-                <SimpleFooter/>
-            </Container>
-        </GrandContainer>
-    )
+  useEffect(() => {
+    document.title = "Template Page - Algolisted";
+  }, []);
+
+  console.log("needDarkMode : ", needDarkMode);
+  const toggleDarkMode = () => {
+    setNeedDarkMode(!needDarkMode);
+  };
+
+  return (
+    <GrandContainer needDarkMode={needDarkMode}>
+      <MobContainer>
+        We are still working on Responsive Version of the website, please view the site with
+        width more than 1100px, a standard laptop or tablet landscape.
+        <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+      </MobContainer>
+      <Container needDarkMode={needDarkMode}>
+        {
+          needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
+        }
+        {
+          needDarkMode ? <LeftMenuDark marked={"contests-archive"} /> : <LeftMenu marked={"contests-archive"} />
+        }
+        {/* ---> change this all-blogs to your desired page-id */}
+
+        <div className="cc-middle-content">
+          <h1 className='main-heading'>Template Name Here</h1>
+          <p className="heading-supporter">
+            Random Text : We have beginner friendly website contents, no fancy texts and informations. We just give as much information required by the first time reading users, because we firmly believe that when you want to learn a language you don't study it from a dictionary.
+          </p>
+          <div className="message">
+            <div className="icon"></div>
+            <div className="text">
+              Text here : We are constantly looking for good blogs. Want to be a technical content writer <a href="/">click here</a>
+            </div>
+          </div>
+        </div>
+        <SimpleFooter />
+      </Container>
+    </GrandContainer>
+  )
 }
 
 export default Template
