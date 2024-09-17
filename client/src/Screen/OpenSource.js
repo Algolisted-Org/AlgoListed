@@ -191,7 +191,6 @@ const OpenSource = () => {
 
                             : null
                     }
-
                 </div>
                 <SimpleFooter />
             </Container>

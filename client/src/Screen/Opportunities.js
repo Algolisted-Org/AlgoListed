@@ -50,8 +50,8 @@ const Opportunities = () => {
 
   const reducer = (state, action) => {
     // console.log("Reducer called for", action.type, " with payload ", action.payload.data);
-    switch (action.type){
-      case ACTIONS.SET_DATA : 
+    switch (action.type) {
+      case ACTIONS.SET_DATA:
         return action.payload.data;
       case ACTIONS.TOGGLE_LIKED:
         return state.map((item) =>
@@ -114,9 +114,9 @@ const Opportunities = () => {
         const recievedData = res.data;
         //the above is a list of objects
         const newData = recievedData.map((item, index) => {
-          return { ...item, filled: false, liked: false, not_interested: false, index : index }
+          return { ...item, filled: false, liked: false, not_interested: false, index: index }
         })
-        dispatch({ type: ACTIONS.SET_DATA, payload: { data : newData } });
+        dispatch({ type: ACTIONS.SET_DATA, payload: { data: newData } });
       })
       .catch((err) => console.log(err));
   }, []);
@@ -484,7 +484,7 @@ const Opportunities = () => {
                 {/* <div className="salary">Salary</div> */}
                 {/* <div className="exp">Experience</div> */}
                 {/* <div className="branch">Branch</div> */}
-                <div className="source">Source</div>
+                <div className="source">Track</div>
               </div>
               {allOpportunities.length === 0 ? (
                 <div className="linear-progess-holder">
@@ -518,17 +518,19 @@ const Opportunities = () => {
                               ) : null}
                             </div>
                           </div>
-                          <div className="right">
+                          {/* <div className="right">
                             {item.filled ? <CheckCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { index: item.index } }) }} />: <CheckCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_FILLED, payload : {index : item.index}}) }} />}  
                             {item.not_interested ? <RemoveCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { index: item.index } }) }} /> : <RemoveCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_NOT_INTERESTED, payload : {index : item.index}}) }} />}
                             {item.liked ? <FavoriteIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { index: item.index } }) }} /> : <FavoriteBorderIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_LIKED, payload : {index : item.index}}) }} />}
-                            {/* <FavoriteIcon style={{"fill" : "#dd6565"}}/> */}
-                          </div>
+                          </div> */}
                         </div>
                         <div className="source">
-                          <a href={item.source} target="_blank">
+                          {/* <a href={item.source} target="_blank">
                             <img src={getImageLink(item.source)} alt="" />
-                          </a>
+                          </a> */}
+                          {item.filled ? <CheckCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { index: item.index } }) }} /> : <CheckCircleOutlineIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { index: item.index } }) }} />}
+                          {item.not_interested ? <RemoveCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { index: item.index } }) }} /> : <RemoveCircleOutlineIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { index: item.index } }) }} />}
+                          {item.liked ? <FavoriteIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { index: item.index } }) }} /> : <FavoriteBorderIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { index: item.index } }) }} />}
                         </div>
                       </div>)
                     })
@@ -827,7 +829,7 @@ const Table = styled.div`
     }
 
     .source{
-      width: 80px;
+      width: 150px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -839,6 +841,15 @@ const Table = styled.div`
       img{
         height: 25px;
         border-radius: 100px;
+      }
+
+      display: flex;
+      align-items: center;
+
+      svg{
+        font-size: 2rem;
+        margin-left: 5px;
+        fill: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#b5a6a6')};
       }
     }
   }
