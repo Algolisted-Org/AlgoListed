@@ -129,6 +129,202 @@ const OpenSource = () => {
         }
     ]
 
+    const hiringData = [
+        {
+            "jobTitle": "Full Stack Developer",
+            "company": "Huddle01",
+            "location": "Remote",
+            "employmentType": "Full-time",
+            "salary": "$70,000 - $90,000 USD",
+            "tags": ["open-source", "full-stack", "remote"],
+            "desc": "Join Huddle01 as a Full Stack Developer. Work on open-source projects and contribute to decentralized communication systems. Candidates with experience in React.js, Node.js, and WebRTC are preferred.",
+            "link": "Apply here",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "jobTitle": "Backend Engineer",
+            "company": "OpenBB",
+            "location": "Onsite - San Francisco, CA",
+            "employmentType": "Full-time",
+            "salary": "$100,000 - $120,000 USD",
+            "tags": ["open-source", "backend", "onsite"],
+            "desc": "OpenBB is looking for a Backend Engineer to work on open-source financial tools. Strong knowledge of Python and API development is essential. Familiarity with financial systems and databases is a plus.",
+            "link": "Apply here",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "jobTitle": "Frontend Developer",
+            "company": "Revert",
+            "location": "Remote/Onsite - EU Preferred",
+            "employmentType": "Contract",
+            "salary": "€60,000 - €80,000 EUR",
+            "tags": ["frontend", "open-source", "remote", "contract"],
+            "desc": "Revert is hiring a Frontend Developer to enhance their open-source projects. The role focuses on React.js and TypeScript, contributing to projects for a global user base.",
+            "link": "Apply here",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "jobTitle": "DevOps Engineer",
+            "company": "VeSoft",
+            "location": "Remote",
+            "employmentType": "Full-time",
+            "salary": "$80,000 - $100,000 USD",
+            "tags": ["DevOps", "cloud", "remote", "open-source"],
+            "desc": "VeSoft is seeking a DevOps Engineer with experience in AWS and Kubernetes to manage their cloud infrastructure and contribute to open-source tooling.",
+            "link": "Apply here",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "jobTitle": "Blockchain Developer",
+            "company": "Interledger",
+            "location": "Onsite - New York, NY",
+            "employmentType": "Full-time",
+            "salary": "$110,000 - $130,000 USD",
+            "tags": ["blockchain", "open-source", "onsite"],
+            "desc": "Interledger is hiring a Blockchain Developer to work on cutting-edge decentralized finance protocols. Must have experience with smart contracts and Solidity.",
+            "link": "Apply here",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "jobTitle": "Product Manager",
+            "company": "Haystack",
+            "location": "Remote",
+            "employmentType": "Full-time",
+            "salary": "$90,000 - $110,000 USD",
+            "tags": ["product-management", "remote", "open-source"],
+            "desc": "Haystack is looking for a Product Manager to lead the development of their open-source projects. Must have experience with agile methodologies and managing cross-functional teams.",
+            "link": "Apply here",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "jobTitle": "Frontend Engineer",
+            "company": "Dyrector.io",
+            "location": "Remote",
+            "employmentType": "Contract",
+            "salary": "$70,000 - $90,000 USD",
+            "tags": ["frontend", "contract", "open-source", "remote"],
+            "desc": "Dyrector.io is hiring a Frontend Engineer to work on their open-source tools. The ideal candidate has experience in JavaScript frameworks like React.js and Svelte.",
+            "link": "Apply here",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "jobTitle": "Data Scientist",
+            "company": "Covalent",
+            "location": "Remote",
+            "employmentType": "Full-time",
+            "salary": "$100,000 - $120,000 USD",
+            "tags": ["data-science", "remote", "open-source"],
+            "desc": "Covalent is seeking a Data Scientist with experience in analyzing large datasets for their open-source blockchain projects. Proficiency in Python and machine learning is essential.",
+            "link": "Apply here",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "jobTitle": "Mobile App Developer",
+            "company": "Appblock",
+            "location": "Onsite - Bangalore, India",
+            "employmentType": "Full-time",
+            "salary": "₹15,00,000 - ₹25,00,000 INR",
+            "tags": ["mobile", "onsite", "open-source"],
+            "desc": "Appblock is hiring a Mobile App Developer to work on their open-source Android and iOS applications. Candidates must be proficient in Kotlin and Swift.",
+            "link": "Apply here",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        }
+    ];
+
+    const bountyData = [
+        {
+            "bountyTitle": "Huddle01 Bug Fix",
+            "company": "Huddle01",
+            "difficulty": "medium",
+            "bountyTags": ["bug-fix", "high-priority"],
+            "desc": "Fix critical bugs in Huddle01's communication platform. Reward up to $500 for successful fixes. Ideal for experienced contributors familiar with JavaScript and WebRTC.",
+            "reward": "$500 USD",
+            "link": "Claim this bounty",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "bountyTitle": "OpenBB Feature Addition",
+            "company": "OpenBB",
+            "difficulty": "high",
+            "bountyTags": ["feature-request", "open-source"],
+            "desc": "Develop a new feature for OpenBB's financial analysis tool. Up to $1,000 reward for a well-implemented feature. Knowledge of Python and financial systems required.",
+            "reward": "$1,000 USD",
+            "link": "Claim this bounty",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "bountyTitle": "Revert UI Enhancement",
+            "company": "Revert",
+            "difficulty": "medium",
+            "bountyTags": ["ui-ux", "enhancement"],
+            "desc": "Enhance the UI/UX of Revert's open-source project. Rewards include up to $750 and special recognition in the community.",
+            "reward": "$750 USD",
+            "link": "Claim this bounty",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "bountyTitle": "VeSoft Documentation Improvement",
+            "company": "VeSoft",
+            "difficulty": "low",
+            "bountyTags": ["documentation", "improvement"],
+            "desc": "Improve documentation for VeSoft's Nebula project. Earn up to $300 for high-quality improvements. Great for those skilled in technical writing.",
+            "reward": "$300 USD",
+            "link": "Claim this bounty",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "bountyTitle": "Interledger Security Audit",
+            "company": "Interledger",
+            "difficulty": "high",
+            "bountyTags": ["security", "audit"],
+            "desc": "Conduct a security audit on Interledger's open-source protocols. Reward of up to $1,500 for identifying critical vulnerabilities.",
+            "reward": "$1,500 USD",
+            "link": "Claim this bounty",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "bountyTitle": "Haystack Code Optimization",
+            "company": "Haystack",
+            "difficulty": "medium",
+            "bountyTags": ["code-optimization", "performance"],
+            "desc": "Optimize code for Haystack's open-source project to improve performance. Up to $600 reward based on impact and efficiency.",
+            "reward": "$600 USD",
+            "link": "Claim this bounty",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "bountyTitle": "Dyrector.io Integration",
+            "company": "Dyrector.io",
+            "difficulty": "high",
+            "bountyTags": ["integration", "api"],
+            "desc": "Integrate Dyrector.io with a third-party API. Rewards up to $1,200 for seamless integration and documentation.",
+            "reward": "$1,200 USD",
+            "link": "Claim this bounty",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "bountyTitle": "Covalent Data Analysis",
+            "company": "Covalent",
+            "difficulty": "medium",
+            "bountyTags": ["data-analysis", "open-source"],
+            "desc": "Analyze and visualize data from Covalent's blockchain projects. Reward of up to $800 for insightful and actionable reports.",
+            "reward": "$800 USD",
+            "link": "Claim this bounty",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        },
+        {
+            "bountyTitle": "Appblock Mobile Feature",
+            "company": "Appblock",
+            "difficulty": "medium",
+            "bountyTags": ["mobile", "feature-request"],
+            "desc": "Develop a new feature for Appblock's mobile app. Reward of ₹50,000 for high-quality feature implementation.",
+            "reward": "₹50,000 INR",
+            "link": "Claim this bounty",
+            "logo": "https://appwrite.io/assets/logomark/logo.png"
+        }
+    ];
+
+
     const params = useParams();
     const { routeId } = params;
 
@@ -188,8 +384,54 @@ const OpenSource = () => {
                                     ))}
                                 </BoxContainer>
                             )
-
-                            : null
+                            : routeId == "hiring" ? (
+                                <div>
+                                    <BoxContainer>
+                                        {hiringData.map((job, index) => (
+                                            <div key={index} className="box">
+                                                <div className="box-logo">
+                                                    <img src={job.logo} alt={`${job.company} logo`} />
+                                                </div>
+                                                <h3 className="box-title">{job.jobTitle} Hiring</h3>
+                                                <p className="box-desc">{job.desc}</p>
+                                                <p className="box-tags">
+                                                    {job.tags.map((tag, idx) => (
+                                                        <span key={idx} className="box-tag">{tag}</span>
+                                                    ))}
+                                                </p>
+                                                <p className="box-tags2">
+                                                    <p className="box-tag">{job.location}</p>
+                                                    <p className="box-tag">{job.salary}</p>
+                                                </p>
+                                                <a href={job.link} className="box-link">Apply here <CallMadeIcon /> </a>
+                                            </div>
+                                        ))}
+                                    </BoxContainer>
+                                </div>
+                            ) : (
+                                <div>
+                                    <BoxContainer>
+                                        {bountyData.map((bounty, index) => (
+                                            <div key={index} className="box">
+                                                <div className="box-logo">
+                                                    <img src={bounty.logo} alt={`${bounty.company} logo`} />
+                                                </div>
+                                                <h3 className="box-title">{bounty.bountyTitle}</h3>
+                                                <p className="box-desc">{bounty.desc}</p>
+                                                <p className="box-tags">
+                                                    {bounty.bountyTags.map((tag, idx) => (
+                                                        <span key={idx} className="box-tag">{tag}</span>
+                                                    ))}
+                                                </p>
+                                                <p className="box-tags2">
+                                                    <p className="box-tag">{bounty.reward}</p>
+                                                </p>
+                                                <a href={bounty.link} className="box-link">Claim this bounty <CallMadeIcon /> </a>
+                                            </div>
+                                        ))}
+                                    </BoxContainer>
+                                </div>
+                            )
                     }
                 </div>
                 <SimpleFooter />
@@ -467,7 +709,7 @@ const BoxContainer = styled.div`
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            margin: 15px 0 15px 0;
+            margin: 15px 0 5px 0;
 
             .box-tag{
                 font-size: 0.75rem;
@@ -476,6 +718,25 @@ const BoxContainer = styled.div`
                 margin-right: 5px;
                 background-color: #e2f3dd;
                 border: 1px solid #a1cd93;
+                border-radius: 100px;
+                margin-bottom: 5px;
+                font-weight: 300;
+            }
+        }
+
+        .box-tags2{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 0px 0 15px 0;
+
+            .box-tag{
+                font-size: 0.75rem;
+                padding: 2.5px 10px;
+                border-radius: 5px;
+                margin-right: 5px;
+                background-color: #e8f4fe;
+                border: 1px solid #84b4dc;
                 border-radius: 100px;
                 margin-bottom: 5px;
                 font-weight: 300;
