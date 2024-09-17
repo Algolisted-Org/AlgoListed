@@ -6,6 +6,7 @@ import LeftMenu from '../Components/LeftMenu'
 import LeftMenuDark from '../Components/LeftMenuDark'
 import SimpleFooter from '../Components/SimpleFooter'
 import LockIcon from '@material-ui/icons/Lock';
+import { useParams } from "react-router-dom";
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import { openSourceFilters } from '../Components/openSourceFilters'
 
@@ -128,6 +129,12 @@ const OpenSource = () => {
         }
     ]
 
+    const params = useParams();
+    const { routeId } = params;
+
+    console.log(routeId);
+
+
 
     return (
         <GrandContainer needDarkMode={needDarkMode}>
@@ -160,23 +167,31 @@ const OpenSource = () => {
                         {filters}
                     </Filters>
 
-                    <BoxContainer>
-                        {swagsData.map((swag, index) => (
-                            <div key={index} className="box">
-                                <div className="box-logo">
-                                    <img src={swag.logo} alt={`${swag.company} logo`} />
-                                </div>
-                                <h3 className="box-title">{swag.swagTitle}</h3>
-                                <p className="box-desc">{swag.desc}</p>
-                                <p className="box-tags">
-                                    {swag.swagTags.map((tag, idx) => (
-                                        <span key={idx} className="box-tag">{tag}</span>
+                    {
+                        routeId == undefined || routeId == "swags" ?
+                            (
+                                <BoxContainer>
+                                    {swagsData.map((swag, index) => (
+                                        <div key={index} className="box">
+                                            <div className="box-logo">
+                                                <img src={swag.logo} alt={`${swag.company} logo`} />
+                                            </div>
+                                            <h3 className="box-title">{swag.swagTitle}</h3>
+                                            <p className="box-desc">{swag.desc}</p>
+                                            <p className="box-tags">
+                                                {swag.swagTags.map((tag, idx) => (
+                                                    <span key={idx} className="box-tag">{tag}</span>
+                                                ))}
+                                            </p>
+                                            <a href={swag.link} className="box-link">Check it out <CallMadeIcon /> </a>
+                                        </div>
                                     ))}
-                                </p>
-                                <a href={swag.link} className="box-link">Check it out <CallMadeIcon /> </a>
-                            </div>
-                        ))}
-                    </BoxContainer>
+                                </BoxContainer>
+                            )
+
+                            : null
+                    }
+
                 </div>
                 <SimpleFooter />
             </Container>
