@@ -328,6 +328,10 @@ const OpenSource = () => {
     const params = useParams();
     const { routeId } = params;
 
+    useEffect(() => {
+        if (routeId != undefined) setTabName(routeId);
+    }, [routeId])
+
     console.log(routeId);
 
 
