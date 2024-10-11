@@ -49,36 +49,60 @@ const Opportunities = () => {
   }
 
   const reducer = (state, action) => {
-    // console.log("Reducer called for", action.type, " with payload ", action.payload.data);
     switch (action.type) {
       case ACTIONS.SET_DATA:
-        return action.payload.data;
+        // Initialize data and preferences
+        const storedPreferences = JSON.parse(localStorage.getItem('jobPreferences') || '{}');
+        return action.payload.data.map((item, index) => ({
+          ...item,
+          liked: storedPreferences[index]?.liked || false,  // Use index as key in preferences
+          filled: storedPreferences[index]?.filled || false,
+          not_interested: storedPreferences[index]?.not_interested || false,
+          index: index, // Ensure index is included in each item
+        }));
+  
       case ACTIONS.TOGGLE_LIKED:
-        return state.map((item) =>
-          item.index === action.payload.index
-            ? { ...item, liked: !item.liked }
-            : item
-        );
-
       case ACTIONS.TOGGLE_FILLED:
-        return state.map((item) =>
-          item.index === action.payload.index
-            ? { ...item, filled: !item.filled }
-            : item
-        );
-
-      case ACTIONS.TOGGLE_NOT_INTERESTED:
-        return state.map((item) =>
-          item.index === action.payload.index
-            ? { ...item, not_interested: !item.not_interested }
-            : item
-        );
-
+      case ACTIONS.TOGGLE_NOT_INTERESTED: {
+        const updatedState = state.map((item) => {
+          const propertyToToggle = {
+            [ACTIONS.TOGGLE_LIKED]: 'liked',
+            [ACTIONS.TOGGLE_FILLED]: 'filled',
+            [ACTIONS.TOGGLE_NOT_INTERESTED]: 'not_interested',
+          }[action.type];
+  
+          if (item.index === action.payload.uniqueIdentifier) {  // Use index for comparison
+            return { ...item, [propertyToToggle]: !item[propertyToToggle] };
+          } else {
+            return item;
+          }
+        });
+  
+        updateLocalStorage(updatedState);
+        return updatedState;
+      }
+  
       default:
         return state;
     }
-  }
-
+  };
+  
+  // Function to update local storage with preferences
+  const updateLocalStorage = (opportunities) => {
+    const preferences = {};
+    opportunities.forEach((item) => {
+      if (item.liked || item.filled || item.not_interested) {
+        // Use index as the key in preferences object
+        preferences[item.index] = {
+          liked: item.liked,
+          filled: item.filled,
+          not_interested: item.not_interested,
+        };
+      }
+    });
+    localStorage.setItem('jobPreferences', JSON.stringify(preferences));
+  };
+  
   const [allOpportunities, dispatch] = useReducer(reducer, []); //initially empty list
 
   // useEffect(() => {
@@ -478,66 +502,66 @@ const Opportunities = () => {
               </div>
             </EffectiveFilter>
             <Table needDarkMode={needDarkMode}>
-              <div className="row top-row">
-                <div className="hash">Count</div>
-                <div className="opportunity">Opportunity</div>
-                {/* <div className="salary">Salary</div> */}
-                {/* <div className="exp">Experience</div> */}
-                {/* <div className="branch">Branch</div> */}
-                <div className="source">Track</div>
-              </div>
-              {allOpportunities.length === 0 ? (
-                <div className="linear-progess-holder">
-                  <LinearProgress />
+  <div className="row top-row">
+    <div className="hash">Count</div>
+    <div className="opportunity">Opportunity</div>
+    <div className="source">Track</div>
+  </div>
+  {allOpportunities.length === 0 ? (
+    <div className="linear-progess-holder">
+      <LinearProgress />
+    </div>
+  ) : (
+    <>
+      {filterOpportunities(allOpportunities).map((item, index) => (
+        <div className="row" key={item.uniqueIdentifier}>
+          <div className="hash">{index + 1}</div>
+          <div className="opportunity">
+            <div className="left">
+              <a href={item.job_link} target="_blank" className="link">
+                {item.job_title} <CallMadeIcon />
+              </a>
+              <div className="extra-info">
+                {item.location && <div className="info">{item.location}</div>}
+                <div className="info">{item.role}</div>
+                <div className="info">{item.type}</div>
+                <div className="info">
+                  {item.years_exp}
+                  {item.years_exp === 'Fresher' ? null : "+ Year Exp"}
                 </div>
+                {item.salary_low !== '-' && (
+                  <div className="info">
+                    {item.salary_low}
+                    {item.salary_low !== item.salary_high ? `- ${item.salary_high}` : null}
+                    {item.type === "FTE" ? " LPA" : " INR"}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="source">
+              {item.filled ? (
+                <CheckCircleIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { uniqueIdentifier: item.index } })} />
               ) : (
-                <>
-                  {filterOpportunities(allOpportunities)
-                    .map((item, key) => {
-                      return (<div className="row" key={item.uniqueIdentifier}>
-                        <div className="hash">{++count}</div>
-                        <div className="opportunity">
-                          <div className="left">
-                            <a href={item.job_link} target="_blank" className="link">
-                              {item.job_title} <CallMadeIcon />
-                            </a>
-                            <div className="extra-info">
-                              {item.location && <div className="info">{item.location}</div>}
-                              <div className="info">{item.role}</div>
-                              <div className="info">{item.type}</div>
-                              <div className="info">
-                                {item.years_exp}
-                                {item.years_exp === 'Fresher' ? null : "+ Year Exp"}
-                              </div>
-                              {item.salary_low !== '-' ? (
-                                <div className="info">
-                                  {item.salary_low}
-                                  {item.salary_low !== item.salary_high ? `- ${item.salary_high}` : null}
-                                  {item.type === "FTE" ? " LPA" : " INR"}
-                                </div>
-                              ) : null}
-                            </div>
-                          </div>
-                          {/* <div className="right">
-                            {item.filled ? <CheckCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { index: item.index } }) }} />: <CheckCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_FILLED, payload : {index : item.index}}) }} />}  
-                            {item.not_interested ? <RemoveCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { index: item.index } }) }} /> : <RemoveCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_NOT_INTERESTED, payload : {index : item.index}}) }} />}
-                            {item.liked ? <FavoriteIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { index: item.index } }) }} /> : <FavoriteBorderIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_LIKED, payload : {index : item.index}}) }} />}
-                          </div> */}
-                        </div>
-                        <div className="source">
-                          {/* <a href={item.source} target="_blank">
-                            <img src={getImageLink(item.source)} alt="" />
-                          </a> */}
-                          {item.filled ? <CheckCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { index: item.index } }) }} /> : <CheckCircleOutlineIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { index: item.index } }) }} />}
-                          {item.not_interested ? <RemoveCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { index: item.index } }) }} /> : <RemoveCircleOutlineIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { index: item.index } }) }} />}
-                          {item.liked ? <FavoriteIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { index: item.index } }) }} /> : <FavoriteBorderIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { index: item.index } }) }} />}
-                        </div>
-                      </div>)
-                    })
-                  }
-                </>
+                <CheckCircleOutlineIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { uniqueIdentifier: item.index } })} />
               )}
-            </Table>
+              {item.not_interested ? (
+                <RemoveCircleIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { uniqueIdentifier: item.index } })} />
+              ) : (
+                <RemoveCircleOutlineIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { uniqueIdentifier: item.index} })} />
+              )}
+              {item.liked ? (
+                <FavoriteIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { uniqueIdentifier:item.index } })} />
+              ) : (
+                <FavoriteBorderIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { uniqueIdentifier: item.index} })} />
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  )}
+</Table>
+
           </div>
         </div>
         <SimpleFooter />
