@@ -414,8 +414,8 @@ const LandingPage2 = () => {
                   Founder
                 </div>
                 <div className="points">
-                  <RouterLink to="https://github.com/NayakPenguin" target='_blank' className="link">Github</RouterLink>
-                  <RouterLink to="https://www.linkedin.com/in/atanu-nayak-profile/" target='_blank' className="link">Linkedin</RouterLink>
+                  <a href="https://github.com/NayakPenguin" target='_blank' className="link">Github</a>
+                  <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target='_blank' className="link">Linkedin</a>
                 </div>
               </div>
 
