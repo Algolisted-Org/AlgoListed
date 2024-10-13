@@ -30,6 +30,7 @@ import {
   RequestAPI,
   ChartTemp,
   PushDataToMongoDB,
+  
 } from "./Screen";
 import ScrollToTop from "./Components/ScrollToTop";
 import GoToTop from "./Components/GoToTop";
@@ -64,8 +65,7 @@ import ContestArchiveCF from "./Screen/ContestArchiveCF";
 import MockAssessmentRunning from "./Screen/MockAssessmentRunning";
 import Profile from "./Screen/Profile";
 import OpenSource from "./Screen/OpenSource";
-
-
+import ComingSoon from "./Screen/CommingSoon";
 
 const App = ({ currentThemeDark }) => {
   const [userGlobal, setUserGlobal] = useState();
@@ -133,6 +133,7 @@ const App = ({ currentThemeDark }) => {
         <Route path="/development" element={<Development />} />
         <Route path="/resume-questions" element={<ResumeSection />} />
         <Route path="*" element={<PageNotExist />} />
+        <Route path="/company-preparation" element={<ComingSoon/>} /> {/* New Route */}
       </Routes>
       <GoToTop />
     </div>

@@ -9,7 +9,7 @@ const PageNotExist = () => {
     <GrandContainer>
       <MessageContainer >
         <ButtonLink href='/'>Back to Home Page</ButtonLink>
-        <h1>Feature will be soon available</h1>
+        <h1>404 Page Not Found</h1>
         <p>Oops! The page you are looking for doesn't exist.</p>
       </MessageContainer>
 
