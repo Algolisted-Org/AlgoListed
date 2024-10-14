@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import TranslateIcon from '@material-ui/icons/Translate';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InstagramIcon from '@material-ui/icons/Instagram';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailIcon from '@material-ui/icons/Email';
-import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
 import axios from "axios";
 import logo from "../Images/logo-temp10.png";
 import sideImage from "../Images/side-image-hero-page.png";
@@ -154,12 +154,7 @@ const LandingPage2 = () => {
               <a className="social-icon">
                 <EmailIcon style={{ fill: "white", fontSize: '1.2rem' }} />
               </a>
-              <a className="social-icon">
-                <InstagramIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-              </a>
-              <a className="social-icon">
-                <FacebookIcon style={{ fill: "white", fontSize: '1.2rem' }} />
-              </a>
+
 
             </div>
           </div>
@@ -363,23 +358,22 @@ const LandingPage2 = () => {
         <PageThreeFooter>
           <div className="top">
             <p>
-              connect with us
+              Connect with us
             </p>
             <input type="email" placeholder="Email Address" />
             <div className="social-icons">
-              <a className="social-icon">
+              <a className="social-icon" href='https://github.com/Algolisted-Org/AlgoListed'>
                 <GitHubIcon style={{ fill: "white", fontSize: '1.2rem' }} />
               </a>
-              <a className="social-icon">
+              <a className="social-icon" href='nayak@algolisted.com'>
                 <EmailIcon style={{ fill: "white", fontSize: '1.2rem' }} />
               </a>
-              <a className="social-icon">
-                <InstagramIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+              <a className="social-icon" href="https://twitter.com/NayakPenguin">
+                <TwitterIcon style={{ fill: "white", fontSize: '1.2rem' }} />
               </a>
-              <a className="social-icon">
-                <FacebookIcon style={{ fill: "white", fontSize: '1.2rem' }} />
+              <a className="social-icon" href="https://www.linkedin.com/company/algolisted/">
+                <LinkedInIcon style={{ fill: "white", fontSize: '1.2rem' }} />
               </a>
-
             </div>
           </div>
 
