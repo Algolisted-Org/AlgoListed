@@ -61,26 +61,24 @@ const Opportunities = () => {
           index: index, // Ensure index is included in each item
         }));
   
-      case ACTIONS.TOGGLE_LIKED:
-      case ACTIONS.TOGGLE_FILLED:
-      case ACTIONS.TOGGLE_NOT_INTERESTED: {
-        const updatedState = state.map((item) => {
-          const propertyToToggle = {
-            [ACTIONS.TOGGLE_LIKED]: 'liked',
-            [ACTIONS.TOGGLE_FILLED]: 'filled',
-            [ACTIONS.TOGGLE_NOT_INTERESTED]: 'not_interested',
-          }[action.type];
-  
-          if (item.index === action.payload.uniqueIdentifier) {  // Use index for comparison
-            return { ...item, [propertyToToggle]: !item[propertyToToggle] };
-          } else {
-            return item;
+        case ACTIONS.TOGGLE_LIKED:
+          case ACTIONS.TOGGLE_FILLED:
+          case ACTIONS.TOGGLE_NOT_INTERESTED: {
+            const updatedState = state.map((item) => {
+              if (item.uniqueIdentifier === action.payload.uniqueIdentifier) {
+                const propertyToToggle = {
+                  [ACTIONS.TOGGLE_LIKED]: 'liked',
+                  [ACTIONS.TOGGLE_FILLED]: 'filled',
+                  [ACTIONS.TOGGLE_NOT_INTERESTED]: 'not_interested',
+                }[action.type];
+                return { ...item, [propertyToToggle]: !item[propertyToToggle] };
+              }
+              return item;
+            });
+          
+            updateLocalStorage(updatedState);
+            return updatedState;
           }
-        });
-  
-        updateLocalStorage(updatedState);
-        return updatedState;
-      }
   
       default:
         return state;
@@ -89,20 +87,19 @@ const Opportunities = () => {
   
   // Function to update local storage with preferences
   const updateLocalStorage = (opportunities) => {
-    const preferences = {};
-    opportunities.forEach((item) => {
+    const preferences = opportunities.reduce((acc, item) => {
       if (item.liked || item.filled || item.not_interested) {
-        // Use index as the key in preferences object
-        preferences[item.index] = {
+        acc[item.uniqueIdentifier] = {
           liked: item.liked,
           filled: item.filled,
           not_interested: item.not_interested,
         };
       }
-    });
+      return acc;
+    }, {});
     localStorage.setItem('jobPreferences', JSON.stringify(preferences));
   };
-  
+
   const [allOpportunities, dispatch] = useReducer(reducer, []); //initially empty list
 
   // useEffect(() => {
@@ -138,7 +135,7 @@ const Opportunities = () => {
         const recievedData = res.data;
         //the above is a list of objects
         const newData = recievedData.map((item, index) => {
-          return { ...item, filled: false, liked: false, not_interested: false, index: index }
+          return { ...item, filled: false, liked: false, not_interested: false, uniqueIdentifier: index}
         })
         dispatch({ type: ACTIONS.SET_DATA, payload: { data: newData } });
       })
@@ -502,66 +499,66 @@ const Opportunities = () => {
               </div>
             </EffectiveFilter>
             <Table needDarkMode={needDarkMode}>
-  <div className="row top-row">
-    <div className="hash">Count</div>
-    <div className="opportunity">Opportunity</div>
-    <div className="source">Track</div>
-  </div>
-  {allOpportunities.length === 0 ? (
-    <div className="linear-progess-holder">
-      <LinearProgress />
-    </div>
-  ) : (
-    <>
-      {filterOpportunities(allOpportunities).map((item, index) => (
-        <div className="row" key={item.uniqueIdentifier}>
-          <div className="hash">{index + 1}</div>
-          <div className="opportunity">
-            <div className="left">
-              <a href={item.job_link} target="_blank" className="link">
-                {item.job_title} <CallMadeIcon />
-              </a>
-              <div className="extra-info">
-                {item.location && <div className="info">{item.location}</div>}
-                <div className="info">{item.role}</div>
-                <div className="info">{item.type}</div>
-                <div className="info">
-                  {item.years_exp}
-                  {item.years_exp === 'Fresher' ? null : "+ Year Exp"}
-                </div>
-                {item.salary_low !== '-' && (
-                  <div className="info">
-                    {item.salary_low}
-                    {item.salary_low !== item.salary_high ? `- ${item.salary_high}` : null}
-                    {item.type === "FTE" ? " LPA" : " INR"}
-                  </div>
-                )}
+              <div className="row top-row">
+                <div className="hash">Count</div>
+                <div className="opportunity">Opportunity</div>
+                {/* <div className="salary">Salary</div> */}
+                {/* <div className="exp">Experience</div> */}
+                {/* <div className="branch">Branch</div> */}
+                <div className="source">Track</div>
               </div>
-            </div>
-            <div className="source">
-              {item.filled ? (
-                <CheckCircleIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { uniqueIdentifier: item.index } })} />
+              {allOpportunities.length === 0 ? (
+                <div className="linear-progess-holder">
+                  <LinearProgress />
+                </div>
               ) : (
-                <CheckCircleOutlineIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { uniqueIdentifier: item.index } })} />
+                <>
+                  {filterOpportunities(allOpportunities)
+                    .map((item, key) => {
+                      return (<div className="row" key={item.uniqueIdentifier}>
+                        <div className="hash">{++count}</div>
+                        <div className="opportunity">
+                          <div className="left">
+                            <a href={item.job_link} target="_blank" className="link">
+                              {item.job_title} <CallMadeIcon />
+                            </a>
+                            <div className="extra-info">
+                              {item.location && <div className="info">{item.location}</div>}
+                              <div className="info">{item.role}</div>
+                              <div className="info">{item.type}</div>
+                              <div className="info">
+                                {item.years_exp}
+                                {item.years_exp === 'Fresher' ? null : "+ Year Exp"}
+                              </div>
+                              {item.salary_low !== '-' ? (
+                                <div className="info">
+                                  {item.salary_low}
+                                  {item.salary_low !== item.salary_high ? `- ${item.salary_high}` : null}
+                                  {item.type === "FTE" ? " LPA" : " INR"}
+                                </div>
+                              ) : null}
+                            </div>
+                          </div>
+                          {/* <div className="right">
+                            {item.filled ? <CheckCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { index: item.index } }) }} />: <CheckCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_FILLED, payload : {index : item.index}}) }} />}  
+                            {item.not_interested ? <RemoveCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { index: item.index } }) }} /> : <RemoveCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_NOT_INTERESTED, payload : {index : item.index}}) }} />}
+                            {item.liked ? <FavoriteIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { index: item.index } }) }} /> : <FavoriteBorderIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_LIKED, payload : {index : item.index}}) }} />}
+                          </div> */}
+                        </div>
+                        <div className="source">
+                          {/* <a href={item.source} target="_blank">
+                            <img src={getImageLink(item.source)} alt="" />
+                          </a> */}
+                          {item.filled ? (<CheckCircleIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>) : (<CheckCircleOutlineIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>)}
+                          {item.not_interested ? (<RemoveCircleIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>) : (<RemoveCircleOutlineIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>)}
+                          {item.liked ? (<FavoriteIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>) : (<FavoriteBorderIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>)}
+                        </div>
+                      </div>)
+                    })
+                  }
+                </>
               )}
-              {item.not_interested ? (
-                <RemoveCircleIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { uniqueIdentifier: item.index } })} />
-              ) : (
-                <RemoveCircleOutlineIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { uniqueIdentifier: item.index} })} />
-              )}
-              {item.liked ? (
-                <FavoriteIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { uniqueIdentifier:item.index } })} />
-              ) : (
-                <FavoriteBorderIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { uniqueIdentifier: item.index} })} />
-              )}
-            </div>
-          </div>
-        </div>
-      ))}
-    </>
-  )}
-</Table>
-
+            </Table>
           </div>
         </div>
         <SimpleFooter />
