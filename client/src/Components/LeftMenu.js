@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import MenuIcon from '@material-ui/icons/Menu';
-import Tooltip from '@material-ui/core/Tooltip';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Link as RouterLink }from 'react-router-dom';
-import CallMadeIcon from '@material-ui/icons/CallMade';
+import React, { useState } from "react";
+import styled from "styled-components";
+import MenuIcon from "@material-ui/icons/Menu";
+import Tooltip from "@material-ui/core/Tooltip";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { Link as RouterLink } from "react-router-dom";
+import CallMadeIcon from "@material-ui/icons/CallMade";
 
 const LeftMenu = ({ marked }) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
 
   // ----- FOR DARK MODE -----
-	const [needDarkMode, setNeedDarkMode] = useState(false);
-	let selectedTheme = localStorage.getItem("selectedTheme");
-	// console.log("needDarkMode : ", needDarkMode);
-	const toggleDarkMode = () => {
-		setNeedDarkMode(!needDarkMode);
-	};
-	// ----- FOR DARK MODE -----
+  const [needDarkMode, setNeedDarkMode] = useState(false);
+  let selectedTheme = localStorage.getItem("selectedTheme");
+  // console.log("needDarkMode : ", needDarkMode);
+  const toggleDarkMode = () => {
+    setNeedDarkMode(!needDarkMode);
+  };
+  // ----- FOR DARK MODE -----
 
   const menuItems = [
     // {
@@ -28,7 +28,7 @@ const LeftMenu = ({ marked }) => {
     //   value: "Showdown Server",
     //   showAt: "showdown-server",
     //   link: "/showdown-server",
-    // }, 
+    // },
     {
       value: "Open Source",
       showAt: "open-source",
@@ -79,14 +79,13 @@ const LeftMenu = ({ marked }) => {
       showAt: "resume-questions",
       link: "/resume-questions",
     },
-    
-    
+
     // {
     //   value: "Coding Competitions",
     //   showAt: "all-coding-competitions",
     //   link: "/coding-competitions",
     // },
-    
+
     // {
     //   value: "Selected Profiles",
     //   showAt: "selected-profiles",
@@ -112,26 +111,40 @@ const LeftMenu = ({ marked }) => {
     //   showAt: "aptitude-round",
     //   link: "/aptitude-round",
     // },
-  ] 
+  ];
 
   return (
-    <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
+    <Container
+      onClick={() =>
+        showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo
+      }
+    >
       {/* <a href='/' className="logo">AlgoListed</a> */}
-      
+
       <Tooltip title="Version - v2.10">
-        <div className="logo">
+        <RouterLink
+          className="more-link"
+          to="/"
+        >
+          <div className="logo">
             Algolisted
-          {/* <div className="small-top">V2.17</div> */}
-        </div>
+            {/* <div className="small-top">V2.17</div> */}
+          </div>
+        </RouterLink>
       </Tooltip>
       <div className="mid-links">
-        {
-          menuItems.map((item, index) => {
-            return <RouterLink key={index} to={`${item.link}`} className={item.showAt == marked ? "link current-link" : "link"}>{item.value}
+        {menuItems.map((item, index) => {
+          return (
+            <RouterLink
+              key={index}
+              to={`${item.link}`}
+              className={item.showAt == marked ? "link current-link" : "link"}
+            >
+              {item.value}
               {/* <ChevronRightIcon/> */}
             </RouterLink>
-          })
-        }
+          );
+        })}
         {/* <a href='https://jasonfenggit.github.io/Visualizer/' target={"_blank"} className="link">Algorithm Visualizers</a> */}
 
         <div className="flag">
@@ -140,32 +153,83 @@ const LeftMenu = ({ marked }) => {
           <div className="line"></div>
         </div>
         {/* <a href='https://business.algolisted.com/' target={"_blank"} className="link">Algolisted Business<CallMadeIcon/></a> */}
-        <a href='https://play.google.com/store/apps/' target={"_blank"} className="link">Download Jobs Notifier<CallMadeIcon/></a>
-        <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link">Report an Issue</a>
+        <a
+          href="https://play.google.com/store/apps/"
+          target={"_blank"}
+          className="link"
+        >
+          Download Jobs Notifier
+          <CallMadeIcon />
+        </a>
+        <a
+          href="https://github.com/Nayaker/Algorithmist/"
+          target={"_blank"}
+          className="link"
+        >
+          Report an Issue
+        </a>
       </div>
 
-      {
-        showMoreInfo ? (
-          <div className="more-model">
-            {/* <div><a className="more-link" href='/organisation-information/core-team'>Core Team</a></div> */}
-            <div><RouterLink className="more-link" to='/organisation-information/all-contributors'>Contributors</RouterLink></div>
-            <div><RouterLink className="more-link" to='/organisation-information/about-us'>About Us</RouterLink></div>
-            <div><RouterLink className="more-link" to='/organisation-information/contributor-work'>Contributor Work</RouterLink></div>
-            <div><RouterLink className="more-link" to='/organisation-information/privacy-policies'>Privacy Policies</RouterLink></div>
-            <div><RouterLink className="more-link last-more-link" to='/organisation-information/disclaimer'>Disclaimer</RouterLink></div>
+      {showMoreInfo ? (
+        <div className="more-model">
+          {/* <div><a className="more-link" href='/organisation-information/core-team'>Core Team</a></div> */}
+          <div>
+            <RouterLink
+              className="more-link"
+              to="/organisation-information/all-contributors"
+            >
+              Contributors
+            </RouterLink>
           </div>
-        ) : (<></>)
-      }
+          <div>
+            <RouterLink
+              className="more-link"
+              to="/organisation-information/about-us"
+            >
+              About Us
+            </RouterLink>
+          </div>
+          <div>
+            <RouterLink
+              className="more-link"
+              to="/organisation-information/contributor-work"
+            >
+              Contributor Work
+            </RouterLink>
+          </div>
+          <div>
+            <RouterLink
+              className="more-link"
+              to="/organisation-information/privacy-policies"
+            >
+              Privacy Policies
+            </RouterLink>
+          </div>
+          <div>
+            <RouterLink
+              className="more-link last-more-link"
+              to="/organisation-information/disclaimer"
+            >
+              Disclaimer
+            </RouterLink>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
 
-      <div className="bottom-btns" onClick={() => setShowMetmoreInfo(!showMoreInfo)}>
-        <MenuIcon className='icon' />
+      <div
+        className="bottom-btns"
+        onClick={() => setShowMetmoreInfo(!showMoreInfo)}
+      >
+        <MenuIcon className="icon" />
         <div className="text">More</div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default LeftMenu
+export default LeftMenu;
 
 const Container = styled.div`
   width: 200px;
@@ -180,7 +244,7 @@ const Container = styled.div`
   left: 0;
   padding: 10px;
 
-  a{
+  a {
     cursor: pointer;
   }
 
@@ -189,7 +253,7 @@ const Container = styled.div`
   flex-direction: column;
   user-select: none;
 
-  .logo{
+  .logo {
     user-select: none;
     width: 100%;
     font-size: 0.8rem;
@@ -208,41 +272,40 @@ const Container = styled.div`
     cursor: pointer;
     position: relative;
 
-    .small-top{
+    .small-top {
       position: absolute;
       font-size: 0.5rem;
-      font-weight: 200; 
+      font-weight: 200;
       top: 3.5px;
       right: 100px;
       color: white;
     }
   }
 
-  .mid-links{
+  .mid-links {
     margin-top: 15px;
-   
 
-    .flag{
+    .flag {
       display: flex;
       justify-content: space-between;
       align-items: center;
 
       margin: 30px 0 10px 0;
 
-      .line{
+      .line {
         width: 20%;
         height: 1px;
         background-color: var(--body_menup_text3);
       }
 
-      .text{
+      .text {
         font-size: 0.8rem;
         font-weight: 400;
         color: var(--body_menup_text1);
       }
     }
 
-    .link{
+    .link {
       width: 100%;
       font-size: 0.75rem;
       font-weight: 300;
@@ -257,30 +320,30 @@ const Container = styled.div`
       color: var(--body_menulink);
       text-decoration: none;
       padding: 0 5px;
-      
-      svg{
+
+      svg {
         /* display: none; */
         font-size: 0.85rem;
         margin-left: 5px;
       }
 
-      &:hover{
+      &:hover {
         background-color: var(--body_menuhoverbg);
         color: var(--body_menuhovercolor);
         transition-duration: 250ms;
       }
     }
-    
-    .current-link{
+
+    .current-link {
       background-color: var(--body_menuselectedbg);
       color: var(--body_menulinkselected);
 
-      &:hover{
+      &:hover {
         background-color: var(--body_menuselectedbg);
         color: var(--body_menulinkselected);
       }
 
-      svg{
+      svg {
         display: block;
         font-size: 1rem;
         position: absolute;
@@ -289,7 +352,7 @@ const Container = styled.div`
     }
   }
 
-  .more-model{
+  .more-model {
     width: 200px;
     position: absolute;
     left: 10px;
@@ -300,8 +363,8 @@ const Container = styled.div`
     background-color: var(--body_menubgcolor);
     overflow: hidden;
 
-    .more-link{
-      display:block;
+    .more-link {
+      display: block;
       width: 100%;
       font-size: 0.75rem;
       font-weight: 300;
@@ -311,43 +374,43 @@ const Container = styled.div`
       text-decoration: none;
       border-bottom: 1px solid var(--body_modelborders);
 
-      &:hover{
+      &:hover {
         background-color: var(--body_menuhoverbg);
         transition-duration: 250ms;
         color: var(--body_menulinkselected);
       }
     }
 
-    .last-more-link{
+    .last-more-link {
       border-bottom-color: transparent;
     }
   }
 
-  .bottom-btns{
+  .bottom-btns {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 45px;
-    
+
     cursor: pointer;
 
-    .icon{
+    .icon {
       color: var(--body_menup_text2);
-      svg{
+      svg {
         fill: var(--body_menup_text2);
       }
     }
 
-    svg{
+    svg {
       fill: var(--body_menup_text2);
     }
 
-    .text{
+    .text {
       font-weight: 300;
       font-size: 0.85rem;
       margin-left: 5px;
       color: var(--body_menup_text2);
     }
   }
-`
+`;

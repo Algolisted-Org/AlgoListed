@@ -1,23 +1,28 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import MenuIcon from '@material-ui/icons/Menu';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import Tooltip from '@material-ui/core/Tooltip';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Link as RouterLink }from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import MenuIcon from "@material-ui/icons/Menu";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import Tooltip from "@material-ui/core/Tooltip";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { Link as RouterLink } from "react-router-dom";
 
-const OILeftMenu = ({marked}) => {
+const OILeftMenu = ({ marked }) => {
   console.log(marked);
 
   return (
     <Container>
       {/* <div className="logo">Atanu Nayak</div> */}
       <Tooltip title="Version - v2.10">
-        <div className="logo">Algolisted</div>
+        <RouterLink className="more-link" to="/">
+          <div className="logo">
+            Algolisted
+            {/* <div className="small-top">V2.17</div> */}
+          </div>
+        </RouterLink>
       </Tooltip>
       <div className="mid-links">
-        <a href='/contests-archive' className="link">
-          <ArrowBackIosIcon/>
+        <a href="/contests-archive" className="link">
+          <ArrowBackIosIcon />
           Explore Features
         </a>
         <div className="flag">
@@ -28,21 +33,78 @@ const OILeftMenu = ({marked}) => {
         {/* {
           marked == "core-team" ? (<a href='/organisation-information/core-team' className="link current-link">Core Team</a>) : (<a href='/organisation-information/core-team' className="link">Core Team</a>)
         } */}
-        {
-          marked == "all-contributors" ? (<RouterLink to='/organisation-information/all-contributors' className="link current-link">Contributors</RouterLink>) : (<RouterLink to='/organisation-information/all-contributors' className="link">Contributors</RouterLink>)
-        }
-        {
-          marked == "about-us" ? (<RouterLink to='/organisation-information/about-us' className="link current-link">About Us</RouterLink>) : (<RouterLink to='/organisation-information/about-us' className="link">About Us</RouterLink>)
-        }
-        {
-          marked == "contributor-work" ? (<RouterLink to='/organisation-information/contributor-work' className="link current-link">Contributor Work</RouterLink>) : (<RouterLink to='/organisation-information/contributor-work' className="link">Contributor Work</RouterLink>)
-        }
-        {
-          marked == "privacy-policies" ? (<RouterLink to='/organisation-information/privacy-policies' className="link current-link">Privacy Policies</RouterLink>) : (<RouterLink to='/organisation-information/privacy-policies' className="link">Privacy Policies</RouterLink>)
-        }
-        {
-          marked == "disclaimer" ? (<RouterLink to='/organisation-information/disclaimer' className="link current-link">Disclaimer</RouterLink>) : (<RouterLink to='/organisation-information/disclaimer' className="link">Disclaimer</RouterLink>)
-        }
+        {marked == "all-contributors" ? (
+          <RouterLink
+            to="/organisation-information/all-contributors"
+            className="link current-link"
+          >
+            Contributors
+          </RouterLink>
+        ) : (
+          <RouterLink
+            to="/organisation-information/all-contributors"
+            className="link"
+          >
+            Contributors
+          </RouterLink>
+        )}
+        {marked == "about-us" ? (
+          <RouterLink
+            to="/organisation-information/about-us"
+            className="link current-link"
+          >
+            About Us
+          </RouterLink>
+        ) : (
+          <RouterLink to="/organisation-information/about-us" className="link">
+            About Us
+          </RouterLink>
+        )}
+        {marked == "contributor-work" ? (
+          <RouterLink
+            to="/organisation-information/contributor-work"
+            className="link current-link"
+          >
+            Contributor Work
+          </RouterLink>
+        ) : (
+          <RouterLink
+            to="/organisation-information/contributor-work"
+            className="link"
+          >
+            Contributor Work
+          </RouterLink>
+        )}
+        {marked == "privacy-policies" ? (
+          <RouterLink
+            to="/organisation-information/privacy-policies"
+            className="link current-link"
+          >
+            Privacy Policies
+          </RouterLink>
+        ) : (
+          <RouterLink
+            to="/organisation-information/privacy-policies"
+            className="link"
+          >
+            Privacy Policies
+          </RouterLink>
+        )}
+        {marked == "disclaimer" ? (
+          <RouterLink
+            to="/organisation-information/disclaimer"
+            className="link current-link"
+          >
+            Disclaimer
+          </RouterLink>
+        ) : (
+          <RouterLink
+            to="/organisation-information/disclaimer"
+            className="link"
+          >
+            Disclaimer
+          </RouterLink>
+        )}
       </div>
       <div className="bottom-btns">
         Open Source Project <br />
@@ -51,10 +113,10 @@ const OILeftMenu = ({marked}) => {
         {/* <div className="text">More</div> */}
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default OILeftMenu
+export default OILeftMenu;
 
 const Container = styled.div`
   width: 200px;
@@ -73,11 +135,11 @@ const Container = styled.div`
   justify-content: space-between;
   flex-direction: column;
 
-  a{
+  a {
     text-decoration: none;
   }
 
-  .logo{
+  .logo {
     width: 100%;
     font-size: 0.8rem;
     font-weight: 300;
@@ -93,33 +155,33 @@ const Container = styled.div`
     border-radius: 100px;
     cursor: pointer;
 
-    &:hover{
+    &:hover {
       /* background-color: #e0f7e1; */
       transition-duration: 250ms;
     }
   }
 
-  .mid-links{
-    .flag{
+  .mid-links {
+    .flag {
       display: flex;
       justify-content: space-between;
       align-items: center;
 
       margin: 20px 0 10px 0;
 
-      .line{
+      .line {
         width: 12.5%;
         height: 1px;
         background-color: black;
       }
 
-      .text{
+      .text {
         font-size: 0.8rem;
         font-weight: 400;
       }
     }
 
-    .link{
+    .link {
       width: 100%;
       font-size: 0.75rem;
       font-weight: 300;
@@ -134,23 +196,23 @@ const Container = styled.div`
       text-decoration: none;
       color: inherit;
 
-      svg{
+      svg {
         font-size: 0.8rem;
         margin-right: 10px;
       }
-      
-      &:hover{
+
+      &:hover {
         background-color: #e5e5e5;
         transition-duration: 250ms;
       }
     }
-    
-    .current-link{
+
+    .current-link {
       background-color: #e5e5e5;
     }
   }
 
-  .bottom-btns{
+  .bottom-btns {
     width: 100%;
     display: flex;
     align-items: center;
@@ -163,14 +225,13 @@ const Container = styled.div`
 
     font-size: 0.6rem;
 
-    .icon{
-
+    .icon {
     }
 
-    .text{
+    .text {
       font-weight: 300;
       font-size: 0.85rem;
       margin-left: 5px;
     }
   }
-`
+`;
