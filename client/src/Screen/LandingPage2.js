@@ -144,7 +144,7 @@ const LandingPage2 = () => {
         <PageThreeFooter>
           <div className="top">
             <p>
-              connect with us
+              Connect with us
             </p>
             <input type="email" placeholder="Email Address" />
             <div className="social-icons">
