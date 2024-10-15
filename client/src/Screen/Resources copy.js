@@ -110,10 +110,10 @@ const Resources = () => {
                     if (filter == "All Resources" || item.mainTag == filter) {
                       return (
                         <div className="resource">
-                          <a className="img-container" href={item.link} target="_blank" >
+                          <a className="img-container" href={item.link} target="_blank" rel="noreferrer" >
                             <img src={item.imgLink}  target="_blank" alt="" />
                           </a>
-                          <a href={item.link} target={"_blank"} className="title">{item.title}</a>
+                          <a href={item.link} target={"_blank"} className="title" rel="noreferrer">{item.title}</a>
                           <div className="short-desc">{item.description}</div>
                           <div className="tags">
                             <div className="main-tag">{item.mainTag}</div>
@@ -190,10 +190,10 @@ const Resources = () => {
                             ):(<></>)
                           }
                           <div className="top-part">
-                            <a href={item.link} target="_blank" className="img-container">
+                            <a href={item.link} target="_blank" className="img-container" rel="noreferrer">
                               <img src={item.imgLink} target="_blank" alt="" />
                             </a>
-                            <a href={item.link} target={"_blank"} className="title">{item.title}</a>
+                            <a href={item.link} target={"_blank"} className="title" rel="noreferrer">{item.title}</a>
                             <div className="short-desc">{item.description}</div>
                           </div>
                           <div className="bottom-part">
@@ -202,7 +202,7 @@ const Resources = () => {
                               <div className="tag">{item.type}</div>
                             </div>
                             <div className="follow-me-link">
-                              <a href={item.promotionLink} target={"_blank"}>Support contributor</a>
+                              <a href={item.promotionLink} target={"_blank"} rel="noreferrer">Support contributor</a>
                             </div>
                           </div>
                         </div>

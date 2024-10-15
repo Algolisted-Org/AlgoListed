@@ -11,7 +11,7 @@ const SimpleFooter = () => {
             <a href="/organisation-information/verify-contributor" className="link">Verify Contributors</a>
             <a href="/organisation-information/privacy-policies" className="link">Privacy Policies</a>
             <a href="/organisation-information/disclaimer" className="link">Disclaimer</a>
-            <a href="https://www.figma.com/file/WxQNK11kprjLMxfvESOP8y/Algorithmist-Project?node-id=0%3A1&t=6wm3USW7eS7dBjT3-0" target={"_blank"}>Figma</a>
+            <a href="https://www.figma.com/file/WxQNK11kprjLMxfvESOP8y/Algorithmist-Project?node-id=0%3A1&t=6wm3USW7eS7dBjT3-0" target={"_blank"} rel="noreferrer">Figma</a>
         </div>
         {/* <div className="company-info">
             <a className="text">Open Source project - beta version - a Nayak production</a>

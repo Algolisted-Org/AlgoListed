@@ -248,7 +248,7 @@ const LandingPage3 = () => {
           <div className="desc">
             Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
           </div>
-          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn" rel="noreferrer">Start Contributing</a>
           <h1 className="sub-page-head">Technologies Used</h1>
           <div className="hold-collection">
             <div className="contributor"><img src="https://icons-for-free.com/iconfiles/png/512/logo+react+react+js+icon-1320184811840217251.png" alt="" /></div>
@@ -272,7 +272,7 @@ const LandingPage3 = () => {
           <div className="hold-collection">
             {
               contributorsList != null && contributorsList.map((item, index) => {
-                return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                return <a className="contributor" href={item.html_url} target={"_blank"} key={index} rel="noreferrer">
                   <img src={item.avatar_url} alt="" />
                 </a>
               })
@@ -291,7 +291,7 @@ const LandingPage3 = () => {
           <div className="desc-2">
             Elevate your digital presence with Algolisted's expertise in scalable web and ML solutions, next-gen applications, UI excellence, SEO prowess, and AI-driven feature enhancements.
           </div>
-          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Get Started</a>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn" rel="noreferrer">Get Started</a>
           <h1 className="sub-page-head">You are in Good Company</h1>
           <div className="hold-collection">
             <div className="contributor">

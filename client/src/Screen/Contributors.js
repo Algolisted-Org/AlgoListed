@@ -36,7 +36,7 @@ const Contributors = () => {
             {
               contributorsList != null && contributorsList.map((item, index) => {
                 return (
-                  <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                  <a className="contributor" href={item.html_url} target={"_blank"} key={index} rel="noreferrer">
                     <img src={item.avatar_url} alt="" />
                   </a>
                 )

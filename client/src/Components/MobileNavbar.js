@@ -44,7 +44,7 @@ const MobileDownMenu = () => {
                   <a href="/coding-sheets/striver-sde-sheet" className="link">SDE Coding Sheets</a>
                   {/* <a href="/selected-profiles" className="link">Selected Profiles</a> */}
                   <a href="/opportunities" className="link">All Internship & Job Opportunities</a>
-                  <a href="https://github.com/Nayaker/AlgoListed" target={"_blank"} className="link">Visit Github for Algolisted</a>
+                  <a href="https://github.com/Nayaker/AlgoListed" target={"_blank"} className="link" rel="noreferrer">Visit Github for Algolisted</a>
                 </div>
               </MenuDropDownList>
         ) : (<></>)

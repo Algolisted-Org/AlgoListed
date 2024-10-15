@@ -30,7 +30,7 @@ const ShowdownServer = () => {
                     <div className="message">
                         <div className="icon"></div>
                         <div className="text">
-                            <b>For the developers working on this feature : </b>Our goal is to develop a functionality akin to <a href="https://skribbl.io/" target='_blank'>skribbl.io</a>. In essence, a user will be able to initiate a server without any login, modify settings within it, and subsequently share a link with their friends for them to join.
+                            <b>For the developers working on this feature : </b>Our goal is to develop a functionality akin to <a href="https://skribbl.io/" target='_blank' rel="noreferrer">skribbl.io</a>. In essence, a user will be able to initiate a server without any login, modify settings within it, and subsequently share a link with their friends for them to join.
                         </div>
                     </div>
 

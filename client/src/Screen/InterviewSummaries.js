@@ -110,7 +110,7 @@ const InterviewSummaries = () => {
               feature{" "}
               <a
                 href="https://github.com/Nayaker/AlgoListed/issues/new"
-                target={"_blank"}
+                target={"_blank"} rel="noreferrer"
               >
                 click here
               </a>

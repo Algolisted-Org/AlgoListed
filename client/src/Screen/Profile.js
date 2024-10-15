@@ -180,8 +180,8 @@ const Profile = () => {
                        <b className='highlight'>Notable Pull Requests : </b>
                     </p>
                     <div className="showcase-links">
-                        <a className='showcase-link' href="https://github.com/CircuitVerse/cv-frontend-vue/pull/223" target='_blank'>github.com/CircuitVerse/cv-frontend-vue/pull/223</a>
-                        <a className='showcase-link' href="https://github.com/CircuitVerse/cv-frontend-vue/pull/224" target='_blank'>github.com/CircuitVerse/cv-frontend-vue/pull/224</a>
+                        <a className='showcase-link' href="https://github.com/CircuitVerse/cv-frontend-vue/pull/223" target='_blank' rel="noreferrer">github.com/CircuitVerse/cv-frontend-vue/pull/223</a>
+                        <a className='showcase-link' href="https://github.com/CircuitVerse/cv-frontend-vue/pull/224" target='_blank' rel="noreferrer">github.com/CircuitVerse/cv-frontend-vue/pull/224</a>
                     </div>
                 </div>
             </div>

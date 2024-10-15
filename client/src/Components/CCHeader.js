@@ -74,7 +74,7 @@ const CCHeader = () => {
           </div>
         </div>
         <div className="icon-box">
-          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} rel="noreferrer">
             <GitHubIcon/>
           </a>
         </div>

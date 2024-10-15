@@ -149,7 +149,7 @@ const SelectedProfiles = () => {
             <img src={sampleImage2} alt="" onClick={() => { setImageValue(sampleImage2); setShowImageModel(true); }} />
             <div className="small-gap"></div>
             <br />
-            <a href="https://forms.gle/oLPuSXBuxCjLZjiYA" target={"_blank"} className='take-data'>
+            <a href="https://forms.gle/oLPuSXBuxCjLZjiYA" target={"_blank"} className='take-data' rel="noreferrer">
               Add resume
             </a>
           </TempDoc>
@@ -235,7 +235,7 @@ const SelectedProfiles = () => {
               <img src={sampleImage2} alt="" onClick={() => { setImageValue(sampleImage2); setShowImageModel(true); }} />
               <div className="small-gap"></div>
               <br />
-              <a href="https://forms.gle/oLPuSXBuxCjLZjiYA" target={"_blank"} className='take-data'>
+              <a href="https://forms.gle/oLPuSXBuxCjLZjiYA" target={"_blank"} className='take-data' rel="noreferrer">
                 Add resume
               </a>
             </TempDoc>
@@ -267,10 +267,10 @@ const SelectedProfiles = () => {
 
                           <div className="btns">
                             <a target={"_blank"} className="default-btn">Coding Profiles</a>
-                            <a target={"_blank"} href={item.resume} className="default-btn">Resume</a>
-                            <a target={"_blank"} href={item.linkedin} className="default-btn">Linkedin</a>
+                            <a target={"_blank"} href={item.resume} className="default-btn" rel="noreferrer">Resume</a>
+                            <a target={"_blank"} href={item.linkedin} className="default-btn" rel="noreferrer">Linkedin</a>
                             <a target={"_blank"} className="default-btn">Projects</a>
-                            <a target={"_blank"} href={item.mentorship} className="default-btn highlight">Personal Mentorship</a>
+                            <a target={"_blank"} href={item.mentorship} className="default-btn highlight" rel="noreferrer">Personal Mentorship</a>
                           </div>
                         </div>
                       );

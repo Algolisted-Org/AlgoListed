@@ -398,7 +398,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
                         {filters}
                     </Filters> */}
           <div className="controls">
-            <p className="link">Your generated link is <div><a target="_blank" href={`/create-problem-list/sheet/${sheetId}`}>https://www.algolisted.com/create-problem-list/sheet/{sheetId}</a></div> <CallMadeIcon /> </p>
+            <p className="link">Your generated link is <div><a target="_blank" href={`/create-problem-list/sheet/${sheetId}`} rel="noreferrer">https://www.algolisted.com/create-problem-list/sheet/{sheetId}</a></div> <CallMadeIcon /> </p>
             <div className="export-btn" onClick={() => setShowModal(true)}>
               {exportingSheet ? (
                 <>Exporting...</>
@@ -450,7 +450,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
                       <a
                         href={problemData.quesLink}
                         target="_blank"
-                        className="problem-name"
+                        className="problem-name" rel="noreferrer"
                       >
                         {problemData.quesName}
                         {status === "scrapping" ? (
@@ -535,7 +535,7 @@ const CreateCustomCodingSheetsEdit = (userGlobal) => {
                       <a
                         href={problemData.quesLink}
                         target="_blank"
-                        className="problem-name"
+                        className="problem-name" rel="noreferrer"
                       >
                         {problemData.quesName}
                         <StorageIcon />

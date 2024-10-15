@@ -75,7 +75,7 @@ const BlogAutoCode = () => {
           showCodeFile ? "Hide raw HTML Code" : "Show raw HTML Code"
         }
       </button>
-      <a href='https://github.com/Nayaker/Algorithmist/issues' target="_blank" className='btn-2'>Report an Issue</a>
+      <a href='https://github.com/Nayaker/Algorithmist/issues' target="_blank" className='btn-2' rel="noreferrer">Report an Issue</a>
 
       {
         showCodeFile ? (
