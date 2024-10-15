@@ -557,7 +557,7 @@ const ContestAnalysis = () => {
                     {rankings.map((ranking, index) => (
                       <li className="ranking" key={index}>
                         <div>
-                          <a target="_blank" href={`https://leetcode.com/${ranking.username}`}>
+                          <a target="_blank" href={`https://leetcode.com/${ranking.username}`} rel="noreferrer">
                             {ranking.username}
                           </a>
                         </div>
@@ -575,7 +575,7 @@ const ContestAnalysis = () => {
                   If your username doesn't align with your country, it could be
                   because you haven't specified your country in your LeetCode
                   account settings. Visit the following URL:{" "}
-                  <a href="https://leetcode.com/profile/" target="_blank">
+                  <a href="https://leetcode.com/profile/" target="_blank" rel="noreferrer">
                     https://leetcode.com/profile/
                   </a>{" "}
                   and update your location information.
@@ -614,7 +614,7 @@ const ContestAnalysis = () => {
                               <a
                                 href={`https://leetcode.com/${eachuser.username}/`}
                                 className="username"
-                                target="_blank" 
+                                target="_blank" rel="noreferrer" 
                               >
                                 {eachuser.username}
                               </a>
@@ -648,7 +648,7 @@ const ContestAnalysis = () => {
                               <a
                                 href={`https://leetcode.com/${eachuser.username}/`}
                                 className="username"
-                                target="_blank" 
+                                target="_blank" rel="noreferrer" 
                               >
                                 {eachuser.username}
                               </a>

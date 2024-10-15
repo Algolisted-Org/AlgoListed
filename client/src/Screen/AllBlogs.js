@@ -71,7 +71,7 @@ return (
                     <a className="blog-title">{item.title}</a>
                     <div className="blog-desc">{item.desc}
                       <div className="author">
-                        <a href={item.authorLink[0]} target="_blank">
+                        <a href={item.authorLink[0]} target="_blank" rel="noreferrer">
                           <img src={item.authorImageLink[0]} alt="" />
                         </a>
                         <div className="text">Contribution by {item.author[0]} {item.author.length > 1 ? <>+ {item.author.length - 1} others</> : <></>}</div>
@@ -115,7 +115,7 @@ return (
               <div className="text">
                   <b>Under Development : </b> Our primary goal is to streamline the procedure of searching for a company's name, extracting approximately 25-50 recent and pertinent interview experiences, and utilizing this as input for our machine learning model. Subsequently, our model produces results, which we store for a 30-day period. Consequently, you consistently receive the most up-to-date information, ensuring that you are always provided with current data instead of outdated information. Have an idea in this feature
                   {" "}
-                  <a href="https://github.com/Nayaker/AlgoListed/issues/new" target={"_blank"}>click here</a>
+                  <a href="https://github.com/Nayaker/AlgoListed/issues/new" target={"_blank"} rel="noreferrer">click here</a>
               </div>
           </div>
 
@@ -138,7 +138,7 @@ return (
                     <a href={item.link} className="blog-title">{item.title}</a>
                     <div className="blog-desc">{item.desc}
                       <div className="author">
-                        <a href={item.authorLink[0]} target="_blank">
+                        <a href={item.authorLink[0]} target="_blank" rel="noreferrer">
                           <img src={item.authorImageLink[0]} alt="" />
                         </a>
                         <div className="text">Contribution by {item.author[0]} {item.author.length > 1 ? <>+ {item.author.length - 1} others</> : <></>}</div>

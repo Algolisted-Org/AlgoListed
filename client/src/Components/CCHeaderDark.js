@@ -53,7 +53,7 @@ const CCHeaderDark = () => {
           <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
         </div> */}
 
-        <a className="nav-adv" href='https://bit.ly/3t1AktU' target={"_blank"}>
+        <a className="nav-adv" href='https://bit.ly/3t1AktU' target={"_blank"} rel="noreferrer">
           <div className="text">Master complete DSA as a beginner <b>absolutely free</b> with <b>Love Babbar</b></div>
           <div className="promotion-tag linear-gradient">Promotion</div>
         </a>
@@ -76,7 +76,7 @@ const CCHeaderDark = () => {
             <Brightness4Icon />
         </div>
         <div className="icon-box">
-          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} rel="noreferrer">
             <GitHubIcon/>
           </a>
         </div>

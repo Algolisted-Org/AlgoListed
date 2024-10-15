@@ -229,7 +229,7 @@ const CoreSubjectsTracker = () => {
                     </p>
 
                     <Filters needDarkMode={needDarkMode}>
-                        <a href="https://github.com/Nayaker/AlgoListed/tree/main/client/src/DummyDB/CoreSubjects" target="_blank" className="filter2">
+                        <a href="https://github.com/Nayaker/AlgoListed/tree/main/client/src/DummyDB/CoreSubjects" target="_blank" className="filter2" rel="noreferrer">
                             Contribute Topics or Questions
                             <CallMadeIcon />
                             <div className="tag">Open Sourced 🚀</div>
@@ -272,7 +272,7 @@ const CoreSubjectsTracker = () => {
                                 {
                                     resources.map((item, index) => {
                                         return (
-                                            <a target="_blank" href={item.link}>
+                                            <a target="_blank" href={item.link} rel="noreferrer">
                                                 <img src={item.image} alt="" loading="lazy" />
                                             </a>
                                         )
@@ -357,7 +357,7 @@ const CoreSubjectsTracker = () => {
                             <label htmlFor="medium">Marked</label>
                         </div>
                         <div className="right">
-                            <a href="https://github.com/Nayaker/AlgoListed/blob/main/client/src/DummyDB/CoreSubjects/OSquestions.json" target="_blank" className="filter-item">Contribute - New or Enhancement <CallMadeIcon /></a>
+                            <a href="https://github.com/Nayaker/AlgoListed/blob/main/client/src/DummyDB/CoreSubjects/OSquestions.json" target="_blank" className="filter-item" rel="noreferrer">Contribute - New or Enhancement <CallMadeIcon /></a>
                         </div>
                     </EffectiveFilter>
 

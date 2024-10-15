@@ -64,19 +64,19 @@ const BlogPage = () => {
                         <div className="blog-contributors">
                             <div className="top-title">Blog Contributors</div>
                             <div className="top-desc">
-                              This blog is has being written by <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target='_blank'>Atanu Nayak</a> and a lot of resources are contributed 
+                              This blog is has being written by <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target='_blank' rel="noreferrer">Atanu Nayak</a> and a lot of resources are contributed 
                               by the community.
                             </div>
                             <div className="hold-contributors">
                                 {
                                 data[blogid].authorImageLink.map((item, index) => {
-                                    return (<a className="contributor" href={data[blogid].authorLink[index]} target={"_blank"} key={index}><img src={item} alt="" /></a>);
+                                    return (<a className="contributor" href={data[blogid].authorLink[index]} target={"_blank"} key={index} rel="noreferrer"><img src={item} alt="" /></a>);
                                 })
                                 }
                             </div>
                             
                             <div className="btns">
-                            <a href={`https://github.com/Nayaker/AlgoListed/blob/main/client/src/MarkdownFiles/Blog${blogid}.md`} target={"_blank"} className="full-btn cl-2">Add content to this blog or Report a bug</a>
+                            <a href={`https://github.com/Nayaker/AlgoListed/blob/main/client/src/MarkdownFiles/Blog${blogid}.md`} target={"_blank"} className="full-btn cl-2" rel="noreferrer">Add content to this blog or Report a bug</a>
                             <button className="full-btn cl-1">Become a Technical Content Writer</button>
                             </div>
                         </div>

@@ -151,7 +151,7 @@ const WorkWithUs = () => {
 
                 <div className="bottom">
                     Open Source Project, by
-                    <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank">Atanu Nayak</a> and Community
+                    <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank" rel="noreferrer">Atanu Nayak</a> and Community
                 </div>
             </PageThreeFooter>
         </GrandContainer>

@@ -120,7 +120,7 @@ const ContributorWork = () => {
                 <div className="contributor-info">
                   <a
                     href={`https://github.com/${item.user_name}`}
-                    target={"_blank"}
+                    target={"_blank"} rel="noreferrer"
                   >
                     <img src={item.avatar_url} alt="" />
                   </a>

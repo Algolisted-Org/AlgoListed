@@ -47,13 +47,13 @@ const RightMenu = ({ blogid, blogname, ResourceType }) => {
         <div className="hold-contributors">
             {
               data[blogid].authorImageLink.map((item, index) => {
-                return (<a className="contributor" href={data[blogid].authorLink[index]} target={"_blank"} key={index}><img src={item} alt="" /></a>);
+                return (<a className="contributor" href={data[blogid].authorLink[index]} target={"_blank"} key={index} rel="noreferrer"><img src={item} alt="" /></a>);
               })
             }
         </div>
         
         <div className="btns">
-          <a href={`https://github.com/Nayaker/AlgoListed/blob/main/client/src/MarkdownFiles/Blog${blogid}.md`} target={"_blank"} className="full-btn cl-2">Add content to this blog or Report a bug</a>
+          <a href={`https://github.com/Nayaker/AlgoListed/blob/main/client/src/MarkdownFiles/Blog${blogid}.md`} target={"_blank"} className="full-btn cl-2" rel="noreferrer">Add content to this blog or Report a bug</a>
           <button className="full-btn cl-1">Become a Technical Content Writer</button>
         </div>
       </div>

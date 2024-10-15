@@ -310,7 +310,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
                   {userSheet.length > 0 &&
                     userSheet.map((sheet) => (
                         <div className="sheet-container">
-                          <a href={`create-problem-list/sheet/${sheet._id}`} target="_blank" className="title">
+                          <a href={`create-problem-list/sheet/${sheet._id}`} target="_blank" className="title" rel="noreferrer">
                             {sheet.sheetName} <CallMadeIcon />{" "}
                           </a>
                           <div className="desc">{sheet.sheetDesc}</div>
@@ -325,7 +325,7 @@ const CreateCustomCodingSheets = ({setUserGlobal}) => {
                                 {formatDate(sheet.lastUpdated)}
                               </div>
                             </div>
-                            <a href={`create-problem-list/sheet-dashboard/${sheet._id}`} target="_blank" className="btn">Edit Sheet Content {'>'} </a>
+                            <a href={`create-problem-list/sheet-dashboard/${sheet._id}`} target="_blank" className="btn" rel="noreferrer">Edit Sheet Content {'>'} </a>
                           </div>
                         </div>
                     ))}
