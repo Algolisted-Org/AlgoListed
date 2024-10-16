@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import MenuIcon from '@material-ui/icons/Menu';
-import Tooltip from '@material-ui/core/Tooltip';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Link as RouterLink }from 'react-router-dom';
-import CallMadeIcon from '@material-ui/icons/CallMade';
+import React, { useState } from "react";
+import styled from "styled-components";
+import MenuIcon from "@material-ui/icons/Menu";
+import Tooltip from "@material-ui/core/Tooltip";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { Link as RouterLink } from "react-router-dom";
+import CallMadeIcon from "@material-ui/icons/CallMade";
 
-const LeftMenuDark = ({ marked }) => { 
+const LeftMenuDark = ({ marked }) => {
   const [showMoreInfo, setShowMetmoreInfo] = useState(false);
 
   const menuItems = [
@@ -19,7 +19,7 @@ const LeftMenuDark = ({ marked }) => {
     //   value: "Showdown Server",
     //   showAt: "showdown-server",
     //   link: "/showdown-server",
-    // }, 
+    // },
     {
       value: "Open Source",
       showAt: "open-source",
@@ -70,14 +70,13 @@ const LeftMenuDark = ({ marked }) => {
       showAt: "resume-questions",
       link: "/resume-questions",
     },
-    
-    
+
     // {
     //   value: "Coding Competitions",
     //   showAt: "all-coding-competitions",
     //   link: "/coding-competitions",
     // },
-    
+
     // {
     //   value: "Selected Profiles",
     //   showAt: "selected-profiles",
@@ -103,27 +102,38 @@ const LeftMenuDark = ({ marked }) => {
     //   showAt: "aptitude-round",
     //   link: "/aptitude-round",
     // },
-  ] 
+  ];
 
   return (
-    <Container onClick={() => showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo}>
+    <Container
+      onClick={() =>
+        showMoreInfo == true ? setShowMetmoreInfo(false) : showMoreInfo
+      }
+    >
       {/* <a href='/' className="logo">AlgoListed</a> */}
-      
+
       <Tooltip title="Version - v2.10">
-        <div className="logo">
-          {/* Alpha Version */}
+        <RouterLink className="more-link" to="/">
+          <div className="logo">
+            {/* Alpha Version */}
             Algolisted
-          {/* <div className="small-top">V2.17</div> */}
-        </div>
+            {/* <div className="small-top">V2.17</div> */}
+          </div>
+        </RouterLink>
       </Tooltip>
       <div className="mid-links">
-        {
-          menuItems.map((item, index) => {
-            return <RouterLink key={index} to={`${item.link}`} className={item.showAt == marked ? "link current-link" : "link"}>{item.value}
+        {menuItems.map((item, index) => {
+          return (
+            <RouterLink
+              key={index}
+              to={`${item.link}`}
+              className={item.showAt == marked ? "link current-link" : "link"}
+            >
+              {item.value}
               {/* <ChevronRightIcon/> */}
             </RouterLink>
-          })
-        }
+          );
+        })}
         {/* <a href='https://jasonfenggit.github.io/Visualizer/' target={"_blank"} className="link">Algorithm Visualizers</a> */}
 
         <div className="flag">
@@ -132,32 +142,83 @@ const LeftMenuDark = ({ marked }) => {
           <div className="line"></div>
         </div>
         {/* <a href='https://business.algolisted.com/' target={"_blank"} className="link">Algolisted Business<CallMadeIcon/></a> */}
-        <a href='https://play.google.com/store/apps/' target={"_blank"} className="link">Download Jobs Notifier<CallMadeIcon/></a>
-        <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link">Report an Issue</a>
+        <a
+          href="https://play.google.com/store/apps/"
+          target={"_blank"}
+          className="link"
+        >
+          Download Jobs Notifier
+          <CallMadeIcon />
+        </a>
+        <a
+          href="https://github.com/Nayaker/Algorithmist/"
+          target={"_blank"}
+          className="link"
+        >
+          Report an Issue
+        </a>
       </div>
 
-      {
-        showMoreInfo ? (
-          <div className="more-model">
-            {/* <div><a className="more-link" href='/organisation-information/core-team'>Core Team</a></div> */}
-            <div><RouterLink className="more-link" to='/organisation-information/all-contributors'>Contributors</RouterLink></div>
-            <div><RouterLink className="more-link" to='/organisation-information/about-us'>About Us</RouterLink></div>
-            <div><RouterLink className="more-link" to='/organisation-information/contributor-work'>Contributor Work</RouterLink></div>
-            <div><RouterLink className="more-link" to='/organisation-information/privacy-policies'>Privacy Policies</RouterLink></div>
-            <div><RouterLink className="more-link last-more-link" to='/organisation-information/disclaimer'>Disclaimer</RouterLink></div>
+      {showMoreInfo ? (
+        <div className="more-model">
+          {/* <div><a className="more-link" href='/organisation-information/core-team'>Core Team</a></div> */}
+          <div>
+            <RouterLink
+              className="more-link"
+              to="/organisation-information/all-contributors"
+            >
+              Contributors
+            </RouterLink>
           </div>
-        ) : (<></>)
-      }
+          <div>
+            <RouterLink
+              className="more-link"
+              to="/organisation-information/about-us"
+            >
+              About Us
+            </RouterLink>
+          </div>
+          <div>
+            <RouterLink
+              className="more-link"
+              to="/organisation-information/contributor-work"
+            >
+              Contributor Work
+            </RouterLink>
+          </div>
+          <div>
+            <RouterLink
+              className="more-link"
+              to="/organisation-information/privacy-policies"
+            >
+              Privacy Policies
+            </RouterLink>
+          </div>
+          <div>
+            <RouterLink
+              className="more-link last-more-link"
+              to="/organisation-information/disclaimer"
+            >
+              Disclaimer
+            </RouterLink>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
 
-      <div className="bottom-btns" onClick={() => setShowMetmoreInfo(!showMoreInfo)}>
-        <MenuIcon className='icon' />
+      <div
+        className="bottom-btns"
+        onClick={() => setShowMetmoreInfo(!showMoreInfo)}
+      >
+        <MenuIcon className="icon" />
         <div className="text">More</div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default LeftMenuDark
+export default LeftMenuDark;
 
 const Container = styled.div`
   width: 200px;
@@ -177,7 +238,7 @@ const Container = styled.div`
   flex-direction: column;
   user-select: none;
 
-  .logo{
+  .logo {
     user-select: none;
     width: 100%;
     font-size: 0.8rem;
@@ -194,43 +255,42 @@ const Container = styled.div`
     /* border: 1px solid #f7d59d; */
     border-radius: 100px;
     cursor: pointer;
-    position: relative;;
+    position: relative;
 
-    .small-top{
+    .small-top {
       position: absolute;
       font-size: 0.5rem;
-      font-weight: 200; 
+      font-weight: 200;
       top: 3.5px;
       right: 100px;
       color: white;
     }
   }
 
-  .mid-links{
+  .mid-links {
     margin-top: 15px;
-   
 
-    .flag{
+    .flag {
       display: flex;
       justify-content: space-between;
       align-items: center;
 
       margin: 30px 0 10px 0;
 
-      .line{
+      .line {
         width: 20%;
         height: 1px;
         background-color: #949ba4;
       }
 
-      .text{
+      .text {
         font-size: 0.8rem;
         font-weight: 400;
         color: #f2f3f5;
       }
     }
 
-    .link{
+    .link {
       width: 100%;
       font-size: 0.75rem;
       font-weight: 300;
@@ -244,25 +304,25 @@ const Container = styled.div`
       margin-bottom: 7.5px;
       color: #949ba4;
       text-decoration: none;
-      
-      svg{
+
+      svg {
         /* display: none; */
         font-size: 0.85rem;
         margin-left: 5px;
         fill: #949ba4;
       }
 
-      &:hover{
+      &:hover {
         background-color: #404249;
         transition-duration: 250ms;
       }
     }
-    
-    .current-link{
+
+    .current-link {
       background-color: #404249;
       color: #f2f3f5;
 
-      svg{
+      svg {
         display: block;
         font-size: 1rem;
         position: absolute;
@@ -271,7 +331,7 @@ const Container = styled.div`
     }
   }
 
-  .more-model{
+  .more-model {
     width: 200px;
     position: absolute;
     left: 10px;
@@ -282,8 +342,8 @@ const Container = styled.div`
     background-color: #2b2d31;
     overflow: hidden;
 
-    .more-link{
-      display:block;
+    .more-link {
+      display: block;
       width: 100%;
       font-size: 0.75rem;
       font-weight: 300;
@@ -293,36 +353,36 @@ const Container = styled.div`
       text-decoration: none;
       border-bottom: 1px solid #3d3b3b;
 
-      &:hover{
+      &:hover {
         background-color: #404249;
         transition-duration: 250ms;
         color: #f2f3f5;
       }
     }
 
-    .last-more-link{
+    .last-more-link {
       border-bottom-color: transparent;
     }
   }
 
-  .bottom-btns{
+  .bottom-btns {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 45px;
-    
+
     cursor: pointer;
 
-    .icon{
-        fill: #f2f3f5;
+    .icon {
+      fill: #f2f3f5;
     }
 
-    .text{
+    .text {
       font-weight: 300;
       font-size: 0.85rem;
       margin-left: 5px;
       color: #f2f3f5;
     }
   }
-`
+`;
