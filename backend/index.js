@@ -2,23 +2,23 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const userModel = require("./Models/userModel");
 const cookieParser = require("cookie-parser");
-
+const session = require('express-session');
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy; // Specify `.Strategy`
 const dotenv = require("dotenv");
-
-dotenv.config();
 const fs = require("fs");
-
 const morgan = require("morgan");
 
-require("dotenv").config({
-  path: "./config.env",
-});
+dotenv.config({ path: "./config.env" }); // Consolidated dotenv
+
+// Cookie parser middleware
 app.use(cookieParser());
 
 const corsOptions = {
   origin: "http://localhost:3000",
-  credentials: true, //access-control-allow-credentials:true
+  credentials: true, // access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
 
@@ -26,12 +26,37 @@ app.use(cors(corsOptions));
 app.set("trust proxy", 1);
 
 app.use(express.static("uploads"));
-//Middlewares
+
+// Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("dev"));
 
-//Routes
+// **Session middleware needs to come before passport.session()**
+const sessionOptions = {
+  secret: "secrett",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000, // expire date 7 days
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true, // to prevent cross-site scripting attacks
+  },
+};
+app.use(session(sessionOptions));
+
+// Passport initialization
+app.use(passport.initialize());
+app.use(passport.session());
+
+// **Passport Local Strategy** setup
+passport.use(new LocalStrategy(userModel.authenticate)); // **Fix: Add parentheses**
+
+// Serialization/deserialization
+passport.serializeUser(userModel.serializeUser()); // store user information in session
+passport.deserializeUser(userModel.deserializeUser()); // remove user info from session
+
+// Routes
 app.get("/", (req, res) => {
   res.send("You are using Algolisted APIs. - a Atanu Nayak production");
 });
@@ -47,6 +72,7 @@ app.use("/problem-sheets", require("./Routers/router_sheets"));
 app.use("/sheetproblem", require("./Routers/router_problems"));
 app.use("/ai", require("./Routers/ai"));
 
+// Server and MongoDB connection
 const port = process.env.PORT || 8000;
 
 app.listen(port, "0.0.0.0", (err) => {
