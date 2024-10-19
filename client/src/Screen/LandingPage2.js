@@ -751,6 +751,7 @@ const MobContainer = styled.div`
     .hold-contributors{
       width: 90%;
       display: flex;
+      gap: 10px;
       justify-content: center;
       flex-wrap: wrap;
       margin: auto;
@@ -1093,7 +1094,8 @@ const Container = styled.div`
     .hold-contributors{
       display: flex;
       flex-wrap: wrap;
-      width: 350px;
+      width: 50% !important;
+      gap: 20px;
       justify-content: center;
       margin-top: 30px;
 
