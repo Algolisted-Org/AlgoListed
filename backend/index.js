@@ -3,35 +3,41 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-
 const dotenv = require("dotenv");
-
-dotenv.config();
 const fs = require("fs");
-
 const morgan = require("morgan");
+const compression = require("compression");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 
-require("dotenv").config({
-  path: "./config.env",
-});
+// Load environment variables
+dotenv.config({ path: "./config.env" });
+
+// Middleware
 app.use(cookieParser());
-
-const corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
-app.set("trust proxy", 1);
-
+app.use(compression()); // Enable compression
+app.use(helmet()); // Secure HTTP headers
 app.use(express.static("uploads"));
-//Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("dev"));
 
-//Routes
+// CORS configuration
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
+// Rate Limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
+
+// Routes
 app.get("/", (req, res) => {
   res.send("You are using Algolisted APIs. - a Atanu Nayak production");
 });
@@ -49,21 +55,33 @@ app.use("/ai", require("./Routers/ai"));
 
 const port = process.env.PORT || 8000;
 
+// MongoDB connection using async/await
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.DATABASE || "mongodb://localhost:27017", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      poolSize: 5, // Connection pool size
+    });
+    console.log("MongoDB Connection Successful !!!");
+  } catch (err) {
+    console.error("MongoDB Connection Error:", err);
+  }
+};
+
 app.listen(port, "0.0.0.0", (err) => {
   if (err) {
     console.log("Error in setting up server!");
     return;
   }
   console.log(`App Listening at http://localhost:${port}...`);
-  mongoose
-    .connect(process.env.DATABASE ?? "mongodb://localhost:27017", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-    .then(() => {
-      console.log("MongoDB Connection Successful !!!");
-    })
-    .catch((err) => console.log(err));
+  connectDB(); // Call the async function to connect to the database
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 // const express = require('express');
