@@ -204,10 +204,11 @@ export default CCHeaderDarkPlus
 const Container = styled.div`
     z-index: 1000;  
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     height: 55px;
     /* width: calc(100vw - 200px); */
-    width: 100vw;
+    width: 100%;
     /* background-color: orange; */
     border-bottom: 1px solid rgb(233, 229, 229);
     box-shadow: rgb(0 0 0 / 5%) 1px 1px 10px 0px;
@@ -223,7 +224,7 @@ const Container = styled.div`
     background-color: #ffffffd4;
     box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 5%);
     -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);    
     
     .search-box{
       width: 50%;
@@ -233,6 +234,7 @@ const Container = styled.div`
       background-color: #fff;
 
       display: flex;
+      
       align-items: center;
       padding: 10px 15px;
 
@@ -250,7 +252,7 @@ const Container = styled.div`
     }
 
     .nav-adv{
-      /* width: 50%; */
+      width: 100%; 
       border-radius: 10px;
       border: 1px solid rgba(230, 230, 230, 1);
       height: 60%;
@@ -287,6 +289,7 @@ const Container = styled.div`
           fill: #7c7acf;
         }
       }
+        
 
       .promotion-tag{
         position: absolute;
@@ -304,6 +307,9 @@ const Container = styled.div`
         background-color: rgba(230, 230, 230, 1);
         transition-duration: 250ms;
       }
+
+      
+        
     }
 
     .linear-gradient{
@@ -344,7 +350,7 @@ const Container = styled.div`
       height: 80%;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       background-color: #f7f5f5;
       border: 1px solid rgba(230, 230, 230, 1);
 
@@ -421,6 +427,7 @@ const Container = styled.div`
         margin-left: 10px;
         cursor: pointer;
         display: flex;
+        flex-direction: row;
         align-items: center;
         padding: 10px;
         user-select: none;
@@ -449,12 +456,16 @@ const Container = styled.div`
         background-color: #f2ecf9;
       }
     }
-
+@media (max-width: 1500px) {
+  .nav-adv {
+    margin-top: 20px; /* Lift nav-adv by 20px for smaller sizes */
+  }
     .right-icons{
       position: absolute;
-      right: 25px;
+      right: 0px;
       display: flex;
       align-items: center;
+      margin-top: 20px;
 
       a{
         margin-top: 4px;
@@ -594,10 +605,7 @@ const Container = styled.div`
           top: -0.5rem;
           right: 0;
         }
-
       }
-
-
     }
 
 `
