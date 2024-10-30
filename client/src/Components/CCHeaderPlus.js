@@ -204,7 +204,7 @@ export default CCHeaderDarkPlus
 const Container = styled.div`
     z-index: 1000;  
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     height: 55px;
     /* width: calc(100vw - 200px); */
@@ -225,6 +225,8 @@ const Container = styled.div`
     box-shadow: 1px 1px 10px 0 rgb(0 0 0 / 5%);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);    
+    padding-bottom: 20px;
+    margin-right: 20px;
     
     .search-box{
       width: 50%;
@@ -257,7 +259,7 @@ const Container = styled.div`
       border: 1px solid rgba(230, 230, 230, 1);
       height: 60%;
       background-color: #f1f1f1;
-      position: relative;
+      // position: absolute;
 
       display: flex;
       align-items: center;
@@ -293,8 +295,8 @@ const Container = styled.div`
 
       .promotion-tag{
         position: absolute;
-        top: -7.5px;
-        left: -20px;
+        top: 1.5px;
+        left: 220px;
         padding: 3.5px 8.5px;
         background-color: #e89898;
         color: white;
@@ -456,17 +458,19 @@ const Container = styled.div`
         background-color: #f2ecf9;
       }
     }
-@media (max-width: 1500px) {
+@media (max-width: 1800px) {
   .nav-adv {
     margin-top: 20px; /* Lift nav-adv by 20px for smaller sizes */
   }
     .right-icons{
-      position: absolute;
+      position: relative;
       right: 0px;
       display: flex;
       align-items: center;
       margin-top: 20px;
 
+      align-items: center;
+      flex-direction: row;
       a{
         margin-top: 4px;
         padding: 0;

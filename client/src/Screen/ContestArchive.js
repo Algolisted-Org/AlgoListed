@@ -469,11 +469,11 @@ const ContestArchive = () => {
 
   return (
     <GrandContainer aria-disabled={isModalOpen}>
-      <MobContainer>
+      {/* <MobContainer>
         We are still working on Responsive Version of the website, please view the site with
         width more than 1100px, a standard laptop or tablet landscape.
         <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
-      </MobContainer>
+      </MobContainer> */}
       <Container needDarkMode={needDarkMode}>
         {
           needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
@@ -679,31 +679,31 @@ const GrandContainer = styled.div`
   }
 `
 
-const MobContainer = styled.div`
-  width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+// const MobContainer = styled.div`
+//   width: 100vw;
+//   padding: 40px;
+//   text-align: center;
+//   font-size: 2rem;
+//   font-weight: 500;
 
-  img{
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
-  }
+//   img{
+//     width: calc(100% - 80px);
+//     margin: 40px;
+//     border-radius: 5px;
+//     display: block;
+//   }
 
-  @media only screen and (min-width: 1099px){
-    display: none;
-  }
-`
+//   @media only screen and (min-width: 1099px){
+//     display: none;
+//   }
+// `
 
 const Container = styled.div`
     position: relative;
     padding-bottom: 80px;
 
     @media only screen and (max-width: 1099px){
-        display: none;
+        display: row;
     }
 
     display: flex;

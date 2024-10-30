@@ -338,11 +338,13 @@ const OpenSource = () => {
 
     return (
         <GrandContainer needDarkMode={needDarkMode}>
-            <MobContainer>
+            {/* after Responsivness no need for this MobContainer... */}
+
+            {/* <MobContainer>
                 We are still working on Responsive Version of the website, please view the site with
                 width more than 1100px, a standard laptop or tablet landscape.
                 <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
-            </MobContainer>
+            </MobContainer> */}
             <Container needDarkMode={needDarkMode}>
                 {
                     needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
@@ -450,34 +452,37 @@ const GrandContainer = styled.div`
 
 `
 
-const MobContainer = styled.div`
-  width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+// const MobContainer = styled.div`
+//   width: 100vw;
+//   padding: 40px;
+//   text-align: center;
+//   font-size: 2rem;
+//   font-weight: 500;
 
-  img{
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
-  }
+//   img{
+//     width: calc(100% - 80px);
+//     margin: 40px;
+//     border-radius: 5px;
+//     display: block;
+//   }
 
-  @media only screen and (min-width: 1099px){
-    display: none;
-  }
-`
+//   @media only screen and (min-width: 1099px){
+//     display: none;
+//   }
+// `
 
 const Container = styled.div`
     position: relative;
     padding-bottom: 80px;
+    display: flex;
 
-    @media only screen and (max-width: 1099px){
-        display: none;
+    flex-direction: column;
+    
+    @media only screen and (max-width: 1099px){    
+    flex-direction: row;
+
     }
 
-    display: flex;
     justify-content: space-between;
     padding-left: 200px;
     
@@ -494,7 +499,7 @@ const Container = styled.div`
 
     .cc-middle-content{
       min-height: 100vh;
-      width: 100%;
+      width: 100%;  
       /* padding: 80px min(120px, 5vw) 50px min(120px, 5vw); */
       padding: 80px 120px 50px 120px;
       position: relative;
@@ -682,7 +687,9 @@ const BoxContainer = styled.div`
     margin-top: 40px;
 
     .box{
-        width: calc(33.3333% - 20px);
+        // width: calc(33.3333% - 20px);
+        max-width: 300px; /* Limit width on larger screens */
+        width: calc(100% - 40px); /* Full width for mobile */        
         margin-bottom: 25px;
         border-radius: 10px;
         border: 1px solid rgb(209, 213, 219);
@@ -764,6 +771,28 @@ const BoxContainer = styled.div`
                 font-size: 0.85rem;
                 margin-left: 5px;
             }
+        }
+    }
+
+/* Media Queries for Responsive Layout */
+    @media (max-width: 320px) {
+        .box {
+            width: calc(100% - 40px); /* 1 card for small mobile screens */
+        }
+    }
+    @media (min-width: 321px) and (max-width: 576px) {
+        .box {
+            width: calc(100% - 40px); /* 1 card for screens between 321px and 576px */
+        }
+    }
+    @media (min-width: 576px) {
+        .box {
+            width: calc(50% - 20px); /* 2 cards on small screens */
+        }
+    }
+    @media (min-width: 768px) {
+        .box {
+            width: calc(33.3333% - 20px); /* 3 cards on medium screens */
         }
     }
 `
