@@ -61,7 +61,11 @@ const Container = styled.div`
     .hold-contributors{
       display: flex;
       flex-wrap: wrap;
-      margin-top: 40px;
+      justify-content: center;
+      gap: 20px;
+      width: 60% !important;
+      margin: auto !important;
+      margin-top: 40px !important;
       max-width: 75%;
 
       .contributor{
