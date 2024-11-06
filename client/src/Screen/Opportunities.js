@@ -23,6 +23,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LazyLoad from 'react-lazy-load';
+import MobileNavbar from "../Components/MobileNavbar";
 
 const Opportunities = () => {
 
@@ -343,9 +344,214 @@ const Opportunities = () => {
   return (
     <GrandContainer>
       <MobContainer>
-        We are still working on Responsive Version of the website, please view the site with
-        width more than 1100px, a standard laptop or tablet landscape.
-        <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+      <MobileNavbar />
+      <div className="main-content">
+            <h1 className='main-heading'>All Internship & Job Opportunities
+              <div className="head-tag">
+                Powered by Algolisted Scraper-Ai{" "}
+                <img
+                  draggable="false"
+                  src="https://static.wixstatic.com/media/592002_0f04cb41e098424588d09e2fba76ec65~mv2.gif"
+                  alt=""
+                />
+              </div>
+            </h1>
+            <p className="heading-supporter">
+              This page provides information on a range of job openings and internship possibilities. While these opportunities are primarily tailored for students in India, we are actively working to incorporate opportunities from around the world as well.
+            </p>
+            {/* <div className="messages">
+              <div className="message">
+                <div className="icon"></div>
+                <div className="text">
+                  We are seeking out <b>small YouTube, Linkedin or Telegram channels</b> engaged in similar activities to ours, with a mutual interest in collaborating on this website.
+                  If interested <i><a href="mailto:nayak.primary@gmail.com">contact here</a></i>
+                </div>
+              </div>
+            </div> */}
+            {/* <h4>Information Extracted From : </h4>
+            <div className="resources-used">
+              <div className="special-thanks"><img src="https://res.cloudinary.com/adaface/image/upload/v1583493789/adaface_logo.png" alt="" /></div>
+              <div className="resource">
+                <LazyLoad height={30}>
+                  <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="" />
+                </LazyLoad>
+              </div>
+              <div className="resource">
+                <LazyLoad height={30}>
+                  <img src="https://cdn2.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-whatsapp-circle-512.png" alt="" />
+                </LazyLoad>
+              </div>
+              <div className="resource">
+                <LazyLoad height={30}>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" alt="" />
+                </LazyLoad>
+              </div>
+              <div className="resource">
+                <LazyLoad height={30}>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/2048px-YouTube_social_red_circle_%282017%29.svg.png" alt="" />
+                </LazyLoad>
+              </div>
+            </div> */}
+            <SheetMessage needDarkMode={needDarkMode}>
+              <div className="text">
+                Explore the dynamics of the IT job market over the past six months to gain a comprehensive understanding of its current state. This page presents graphical representations of company job openings data, providing valuable insights into the prevailing trends and opportunities within the industry.
+              </div>
+              <div className="open-btn" onClick={() => setOpenVisualiser(!openVisualiser)}>
+                {
+                  openVisualiser ? (
+                    <>
+                      <div className="desc">
+                        Close Visualization
+                      </div>
+                      <ExpandLessIcon />
+                    </>
+                  ) : (
+                    <>
+                      <div className="desc">
+                        Open Visualization
+                      </div>
+                      <ExpandMoreIcon />
+                    </>
+                  )
+                }
+              </div>
+              {
+                openVisualiser ? (
+                  <div className="all-resources">
+                    Under Development
+                  </div>
+                ) : (<></>)
+              }
+            </SheetMessage>
+            <EffectiveFilter className='noselect' needDarkMode={needDarkMode} applyMagicFilter={applyMagicFilter}>
+              <div className="left">
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel1(!openModel1)}> {filterOpportunityTypeName}
+                  {openModel1 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                  {
+                    openModel1 ? (
+                      <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
+                        <div className="option" data-value="Job Type" onClick={(e) => setFilterOpportunityTypeName(e.target.dataset.value)}>Job Type</div>
+                        <div className="option" data-value="Intern" onClick={(e) => setFilterOpportunityTypeName(e.target.dataset.value)}>Intern</div>
+                        <div className="option" data-value="Full Time" onClick={(e) => setFilterOpportunityTypeName(e.target.dataset.value)}>Full Time</div>
+                      </ShowAbsoluteModelDropDown>
+                    ) : <></>
+                  }
+                </div>
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel2(!openModel2)}> {sliderInputValue}
+                  {openModel2 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                  {
+                    openModel2 ? (
+                      <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
+                        <div className="option" data-value="Fresher" onClick={(e) => setSliderInputValue(e.target.dataset.value)}>Fresher</div>
+                        <div className="option" data-value="Experienced" onClick={(e) => setSliderInputValue(e.target.dataset.value)}>Experienced</div>
+                      </ShowAbsoluteModelDropDown>
+                    ) : <></>
+                  }
+                </div>
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel3(!openModel3)}> {location}
+                  {openModel3 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                  {
+                    openModel3 ? (
+                      <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
+                        <div className="option" data-value="All Locations" onClick={(e) => setLocation(e.target.dataset.value)}>All Locations</div>
+                        <div className="option" data-value="India" onClick={(e) => setLocation(e.target.dataset.value)}>India</div>
+                        <div className="option" data-value="Out of India" onClick={(e) => setLocation(e.target.dataset.value)}>Out of India</div>
+                        <div className="option" data-value="Remote" onClick={(e) => setLocation(e.target.dataset.value)}>Remote</div>
+                      </ShowAbsoluteModelDropDown>
+                    ) : <></>
+                  }
+                </div>
+                <div className="filter-item check_color noselect" onClick={() => setOpenModel4(!openModel4)}> {status}
+                  {openModel4 === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                  {
+                    openModel4 ? (
+                      <ShowAbsoluteModelDropDown needDarkMode={needDarkMode}>
+                        <div className="option" data-value="All Status" onClick={(e) => { setStatus(e.target.dataset.value) }}>All Status</div>
+                        <div className="option" data-value="Liked" onClick={(e) => { setStatus(e.target.dataset.value) }}>Liked</div>
+                        <div className="option" data-value="Filled" onClick={(e) => { setStatus(e.target.dataset.value) }}>Filled</div>
+                        <div className="option" data-value="Not Interested" onClick={(e) => { setStatus(e.target.dataset.value) }}>Not Interested</div>
+                      </ShowAbsoluteModelDropDown>
+                    ) : <></>
+                  }
+                </div>
+              </div>
+              <div className="right">
+                {/* <div className="filter-item">A</div>
+              <div className="filter-item">B</div>
+              <div className="filter-item">C</div>
+              <div className="filter-item">D</div> */}
+                <div className="filter-item filter-right" onClick={() => setApplyMagicFilter(!applyMagicFilter)}>
+                  Show for tier 1 & 2 college CSE students
+                  <ChevronRightIcon />
+                </div>
+                {/* <div className="filter-item">Hide Problem Tags</div> */}
+                {/* <div className="filter-item">Show Unsolved</div>  */}
+              </div>
+            </EffectiveFilter>
+            <Table needDarkMode={needDarkMode}>
+              <div className="row top-row">
+                <div className="hash">Count</div>
+                <div className="opportunity">Opportunity</div>
+                {/* <div className="salary">Salary</div> */}
+                {/* <div className="exp">Experience</div> */}
+                {/* <div className="branch">Branch</div> */}
+                <div className="source">Track</div>
+              </div>
+              {allOpportunities.length === 0 ? (
+                <div className="linear-progess-holder">
+                  <LinearProgress />
+                </div>
+              ) : (
+                <>
+                  {filterOpportunities(allOpportunities)
+                    .map((item, key) => {
+                      return (<div className="row" key={item.uniqueIdentifier}>
+                        <div className="hash">{++count}</div>
+                        <div className="opportunity">
+                          <div className="left">
+                            <a href={item.job_link} target="_blank" className="link">
+                              {item.job_title} <CallMadeIcon />
+                            </a>
+                            <div className="extra-info">
+                              {item.location && <div className="info">{item.location}</div>}
+                              <div className="info">{item.role}</div>
+                              <div className="info">{item.type}</div>
+                              <div className="info">
+                                {item.years_exp}
+                                {item.years_exp === 'Fresher' ? null : "+ Year Exp"}
+                              </div>
+                              {item.salary_low !== '-' ? (
+                                <div className="info">
+                                  {item.salary_low}
+                                  {item.salary_low !== item.salary_high ? `- ${item.salary_high}` : null}
+                                  {item.type === "FTE" ? " LPA" : " INR"}
+                                </div>
+                              ) : null}
+                            </div>
+                          </div>
+                          {/* <div className="right">
+                            {item.filled ? <CheckCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { index: item.index } }) }} />: <CheckCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_FILLED, payload : {index : item.index}}) }} />}  
+                            {item.not_interested ? <RemoveCircleIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { index: item.index } }) }} /> : <RemoveCircleOutlineIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_NOT_INTERESTED, payload : {index : item.index}}) }} />}
+                            {item.liked ? <FavoriteIcon onClick={(e) => { dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { index: item.index } }) }} /> : <FavoriteBorderIcon onClick={(e) => { dispatch({type : ACTIONS.TOGGLE_LIKED, payload : {index : item.index}}) }} />}
+                          </div> */}
+                        </div>
+                        <div className="source">
+                          {/* <a href={item.source} target="_blank">
+                            <img src={getImageLink(item.source)} alt="" />
+                          </a> */}
+                          {item.filled ? (<CheckCircleIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>) : (<CheckCircleOutlineIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_FILLED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>)}
+                          {item.not_interested ? (<RemoveCircleIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>) : (<RemoveCircleOutlineIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_NOT_INTERESTED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>)}
+                          {item.liked ? (<FavoriteIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>) : (<FavoriteBorderIcon onClick={() => dispatch({ type: ACTIONS.TOGGLE_LIKED, payload: { uniqueIdentifier: item.uniqueIdentifier } })}/>)}
+                        </div>
+                      </div>)
+                    })
+                  }
+                </>
+              )}
+            </Table>
+          </div>
+
+          <SimpleFooter />
       </MobContainer>
       <Container needDarkMode={needDarkMode}>
         {
@@ -574,20 +780,69 @@ const GrandContainer = styled.div`
 `
 
 const MobContainer = styled.div`
-  width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+    width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;  // Ensure vertical stacking
+//position: relative;
+  padding-top: 60px;
+  padding-bottom: 100px; // Space for footer
+  background-color: ${(props) => (props.needDarkMode ? '#313338' : '#ffffff')};
 
-  img{
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
+  .main-content {
+    flex: 1;
+    padding: 15px;
+    margin-bottom: auto;
+    flex-direction: column;
+
+
+    .main-heading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #292929;
+       margin-bottom: 5px;
+
+      display: flex;
+      align-items: center;
+
+       .head-tag {
+        font-size: 0.55rem;
+        font-weight: 500;
+        padding: 0.2rem 0.4rem;
+        padding: 5px;
+        border-radius: 10px;
+        background-color: #a5bb26;
+        margin-left: 10px;
+        width: 170px;
+
+        img {
+          position: absolute;
+          height: 1.5rem;
+          margin-top: -5px;
+          margin-left: -3px;
+        }
+      }
+    }
+
+
+    .heading-supporter {
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+      font-weight: 400;
+      color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
+    }
+
   }
 
-  @media only screen and (min-width: 1099px){
+ footer {
+    width: 100%;
+    background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#ffffff')};
+    border-top: 1px solid ${(props) => (props.needDarkMode ? '#404040' : '#e0e0e0')};
+    padding: 15px;
+    margin-top: auto; // Push footer to bottom
+  }
+
+  @media only screen and (min-width: 1100px) {
     display: none;
   }
 `
@@ -602,6 +857,7 @@ const Container = styled.div`
     }
 
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding-left: 200px;
 
@@ -755,7 +1011,7 @@ const Table = styled.div`
     border-top: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
 
     .hash{
-      width: 80px;
+      width: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -770,10 +1026,10 @@ const Table = styled.div`
     
     .opportunity{
       flex: 1;
-      padding: 15px 15px;
+      padding: 5px 5px;
       background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#fff')};
       border-right: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(202, 195, 195)')};
-      font-size: 0.85rem;
+      font-size: 0.15rem;
       font-weight: 500;
 
       display: flex;
@@ -868,7 +1124,7 @@ const Table = styled.div`
       align-items: center;
 
       svg{
-        font-size: 2rem;
+        font-size: 1.4rem;
         margin-left: 5px;
         fill: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#b5a6a6')};
       }
@@ -900,16 +1156,138 @@ const Table = styled.div`
   }
 `
 
+// const EffectiveFilter = styled.div`
+// 	display: flex;
+//     flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+// 	justify-content: space-between;
+// 	align-items: center;
+// 	margin: 20px 0 20px 0;
+
+// 	.left{
+// 		display: flex;
+// 		justify-content: space-between;
+// 		align-items: center;
+
+//     .filter-item{
+// 			padding: 5px 10px;
+// 			font-size: 0.7rem;
+// 			color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
+//       border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+//       /* background-color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#201f1f')}; */
+// 			border-radius: 3px;
+// 			margin-right: 5px;
+// 			cursor: pointer;
+//       /* color: #e5e5e5; */
+//       /* background-color: ${(props) => (props.needDarkMode ? 'white' : 'yellow')};  */
+
+//       position: relative;
+
+//       display: flex;
+//       align-items: center;
+
+//       svg{
+//         font-size: 1rem;
+//         margin-left: 5px;
+//         fill: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
+//         /* fill: #e5e5e5; */
+//         /* fill: ${(props) => (props.needDarkMode ? 'white' : 'black')}; */
+//       }
+// 		}
+// 	}
+
+// 	.right{
+// 		display: flex;
+// 		align-items: center;
+
+// 		.filter-item{
+// 			padding: 5px 10px;
+// 			font-size: 0.7rem;
+// 			border-radius: 3px;
+//       margin-left: 5px;
+// 			cursor: pointer;
+//       color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
+//       border: 1px solid ${(props) =>
+//     props.needDarkMode
+//       ? props.applyMagicFilter
+//         ? 'white'
+//         : '#595b5f'
+//       : props.applyMagicFilter
+//         ? 'black'
+//         : 'rgb(209, 213, 219)'};
+//       display: flex;
+//       align-items: center;
+
+//       svg{
+//         font-size: 1rem;
+//         margin-left: 5px;
+//         fill: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#333')};
+//       }
+// 		}
+
+//     .magic-filter{
+//         background-color: #404249;
+//         color: #333;
+//         background: linear-gradient(300deg,#56f238,#b3adff,#c5c5ef,#bde6ce,#56f238);
+//         background-size: 400% 400%;
+//         -webkit-animation: AnimationName 10s ease infinite;
+//         -moz-animation: AnimationName 10s ease infinite;
+//         animation: AnimationName 10s ease infinite;
+//         border-color: transparent;
+//         cursor: pointer;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         text-align: center;
+//         opacity: 0.75;
+//         /* border-radius: 100px; */
+        
+
+//         a{
+//           color: #333; 
+//         }
+
+//         &:hover{
+//           background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : 'whitesmoke')};
+//           color: #333;
+//           cursor: pointer;
+//           transition-duration: 500ms;
+//           opacity: 1;
+//         }
+//       }
+
+//       @-webkit-keyframes AnimationName {
+//           0%{background-position:0% 50%}
+//           50%{background-position:100% 50%} 
+//           100%{background-position:0% 50%}
+//       }
+
+//       @-moz-keyframes AnimationName {
+//           0%{background-position:0% 50%}
+//           50%{background-position:100% 50%}
+//           100%{background-position:0% 50%}
+//       }
+
+//       @keyframes AnimationName {
+//           0%{background-position:0% 50%}
+//           50%{background-position:100% 50%}
+//           100%{background-position:0% 50%}
+//       }
+// 	}
+// `
+
 const EffectiveFilter = styled.div`
 	display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
 	justify-content: space-between;
 	align-items: center;
-	margin: 20px 0 20px 0;
+	margin: 20px 0;
 
 	.left{
 		display: flex;
-		justify-content: space-between;
+    flex-wrap: wrap;
+		// justify-content: space-between;
 		align-items: center;
+    
 
     .filter-item{
 			padding: 5px 10px;
@@ -941,6 +1319,7 @@ const EffectiveFilter = styled.div`
 	.right{
 		display: flex;
 		align-items: center;
+    margin-top:10px;
 
 		.filter-item{
 			padding: 5px 10px;
@@ -949,72 +1328,8 @@ const EffectiveFilter = styled.div`
       margin-left: 5px;
 			cursor: pointer;
       color: ${(props) => (props.needDarkMode ? '#ebdddd' : '#4a4d5a')};
-      border: 1px solid ${(props) =>
-    props.needDarkMode
-      ? props.applyMagicFilter
-        ? 'white'
-        : '#595b5f'
-      : props.applyMagicFilter
-        ? 'black'
-        : 'rgb(209, 213, 219)'};
-      display: flex;
-      align-items: center;
-
-      svg{
-        font-size: 1rem;
-        margin-left: 5px;
-        fill: ${(props) => (props.needDarkMode ? '#b4a7a6' : '#333')};
-      }
+      border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
 		}
-
-    .magic-filter{
-        background-color: #404249;
-        color: #333;
-        background: linear-gradient(300deg,#56f238,#b3adff,#c5c5ef,#bde6ce,#56f238);
-        background-size: 400% 400%;
-        -webkit-animation: AnimationName 10s ease infinite;
-        -moz-animation: AnimationName 10s ease infinite;
-        animation: AnimationName 10s ease infinite;
-        border-color: transparent;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        opacity: 0.75;
-        /* border-radius: 100px; */
-        
-
-        a{
-          color: #333; 
-        }
-
-        &:hover{
-          background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : 'whitesmoke')};
-          color: #333;
-          cursor: pointer;
-          transition-duration: 500ms;
-          opacity: 1;
-        }
-      }
-
-      @-webkit-keyframes AnimationName {
-          0%{background-position:0% 50%}
-          50%{background-position:100% 50%} 
-          100%{background-position:0% 50%}
-      }
-
-      @-moz-keyframes AnimationName {
-          0%{background-position:0% 50%}
-          50%{background-position:100% 50%}
-          100%{background-position:0% 50%}
-      }
-
-      @keyframes AnimationName {
-          0%{background-position:0% 50%}
-          50%{background-position:100% 50%}
-          100%{background-position:0% 50%}
-      }
 	}
 `
 

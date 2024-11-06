@@ -708,115 +708,227 @@ const MobContainer = styled.div`
                 margin-left: 0.25rem;
             }
         }
+        h4{
+            margin-top: 20px;
+        }
 
-       
+         .topics-container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row; 
+        margin: 0px 0 60px 0;
 
-        .table {
-            margin: 15px 0;
-            width: 100%;
-            /* background-color: #fbf7f7; */
-            border: 1px solid #d1d5db;
-            /* border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')}; */
-            border-radius: 5px;
-            /* padding: 0 15px; */
+        .topic{
+            width: 50%;
             display: flex;
-            flex-direction: column;
-            background-color: white;
-            border-bottom-color: transparent;
+            align-items: center;
+            /* border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')}; */
+            /* padding: 10px 20px; */
+            /* margin: 2.5px 2.5px 0 0; */
+            margin-top: 20px;
 
-            .link-row {
-                padding: 20px 20px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-                border-bottom: 1px solid #d1d5db;
-
-                .link-row-left {
-                    display: flex;
-					align-items: flex-start;
-
-                    .count {
-                        font-size: 1rem;
-                        font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
-                            BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
-                            Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-                            Segoe UI Symbol, Noto Color Emoji;
-                        margin-right: 20px;
-                        font-weight: 500;
-                    }
-
-                    .main-row-content {
-                        a {
-                            font-size: 0.85rem;
-                            font-weight: 500;
-                            text-decoration: none;
-                            /* color: inherit; */
-
-                            &:hover {
-                                text-decoration: underline;
-                            }
-                        }
-
-                        .tags {
-                            margin: 0;
-                            margin-top: 5px;
-                            display: flex;
-                            flex-wrap: wrap;
-
-                            .tag {
-                                background-color: #f3f4f7;
-                                color: inherit;
-                                padding: 2.5px 5px;
-                                border-radius: 100px;
-                                font-size: 0.6rem;
-                                margin-right: 5px;
-                                border: 1px solid #cac3c3;
-                                margin-bottom: 2.5px;
-                            }
-
-                            .special-tag {
-                                /* background-color: #ffeac2; */
-                                color: inherit;
-                                /* background-color: black; */
-                                /* color: white; */
-                                font-weight: 400;
-                                border: 1px solid #a99c9c;
-                            }
-                        }
-                    }
-                }
-
-                .done-btn {
-                    .MuiSvgIcon-root {
-                        fill: #b5a6a6;
-                        font-size: 1.75rem;
-
-                        &:hover {
-                            transition-duration: 250ms;
-                            fill: orange;
-                            cursor: pointer;
-                        }
-                    }
-                }
+            label{
+                color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                margin-left: 5px;
+                font-size: 0.85rem;
+                font-weight: 300;
+                
             }
 
-            .done-row {
-                background-color: #dcf8eb;
-
-                .done-btn {
-                    .MuiSvgIcon-root {
-                        fill: orange;
-                        font-size: 1.75rem;
-                    }
-                }
-            }
-
-            .no-bottom-border {
-                border-bottom: 1px solid transparent;
+            input[type="checkbox"] {
+                transform: scale(1.5); 
+                margin-right: 10px;
+                border: none;
+                cursor: pointer;
             }
         }
+      }
+       
+
+       .table {
+			margin: 15px 0;
+			width: 100%;
+			/* background-color: #fbf7f7; */
+			/* border: 1px solid #d1d5db; */
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+			border-radius: 5px;
+			/* padding: 0 15px; */
+			display: flex;
+			flex-direction: column;
+			background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#fff')};
+			border-bottom-color: transparent;
+
+			.link-row {
+				min-height: 94px;
+				// padding: 20px 20px;
+				display: flex;
+				justify-content: space-between;
+				border-top-left-radius: 5px;
+				border-top-right-radius: 5px;
+				border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+                
+
+				.strip{
+					display: none;
+				}
+
+				.link-row-left {
+					display: flex;
+					align-items: center;
+
+
+					.count {
+                        width: 30px;
+						font-size: 1rem;
+						font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
+							BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+							Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+							Segoe UI Symbol, Noto Color Emoji;
+						margin-right: 30px;
+                        margin-left: 20px;
+						font-weight: 500;
+						text-align: center;
+						color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                        display: flex;
+                        justify-content: space-between;
+                        /* background-color: yellow; */
+					}
+
+					.main-row-content {
+                        flex: 1;
+
+						.question-main{
+							position: relative;
+                            font-size: 0.85rem;
+                            font-weight: 600;
+                            text-decoration: none;
+                            margin-right: 15px;
+                            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                            
+                            .toggle-answer{
+                                cursor: pointer;
+                                margin-top: 5px;
+                                font-weight: 300;
+                                color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                            }
+
+                            .toggle-answer:hover {
+                                filter: brightness(150%);
+                            }
+						}
+
+                        .seperator-line{
+                            height: 1px;
+                            width: 80px;
+                            background-color: #595b5f;
+                            margin: 10px 0;
+                        }
+                        
+						.answer-main{
+                            position: relative;
+                            font-size: 0.85rem;
+                            font-weight: 300;
+                            text-decoration: none;
+                            margin-right: 15px;
+                            color: ${(props) => (props.needDarkMode ? '#c1c1c1' : '#333')};
+                            
+                            a{
+                                margin-left: 5px;
+                            }
+                        }
+					}
+				}
+
+				.right-icons{
+					display: flex;
+					align-items: center;
+
+					svg{
+						font-size: 1.5rem;
+						fill: #b5a6a6;
+						margin-left: 10px;
+						cursor: pointer;
+					}
+
+					.done-btn {
+						.MuiSvgIcon-root {
+							fill: #b5a6a6;
+							margin-left: 10px;
+	
+							&:hover {
+								transition-duration: 250ms;
+								fill: orange;
+								cursor: pointer;
+							}
+						}
+					}
+
+					.review-btn {
+						.MuiSvgIcon-root {
+							fill: #b5a6a6;
+							margin-left: 10px;
+	
+							&:hover {
+								transition-duration: 250ms;
+								fill: #cf5f5f;
+								cursor: pointer;
+							}
+						}
+					}
+				}
+
+			}
+
+			.done-row {
+				background-color: ${(props) => (props.needDarkMode ? '#2e3b4c' : '#dcf8eb')};
+				
+				.right-icons{
+					display: flex;
+					
+					.done-btn {
+						.MuiSvgIcon-root {
+							fill: orange;
+						}
+					}
+				}
+
+				.strip{
+					display: none;
+				}
+			}
+
+			.review-row {
+				z-index: 0;
+				position: relative;
+				background-color: ${(props) => (props.needDarkMode ? '#2b2023' : '#ffe3e2')};
+				border-radius: 0;
+				
+				.right-icons{
+					display: flex;
+
+					.review-btn {
+						.MuiSvgIcon-root {
+							fill: #cf5f5f;
+						}
+					}
+				}
+
+				.strip{
+					display: block !important; 
+					position: absolute;
+					width: 7.5px;
+					height: 100%;
+					background-color: #cf5e5f;
+					top: 0;
+					left: 0;
+					
+				}
+			}
+			
+			.no-bottom-border {
+				border-bottom: 1px solid transparent;
+			}
+		}
     }
 
     footer {

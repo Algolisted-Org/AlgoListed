@@ -1011,7 +1011,7 @@ export default CodingSheets;
 const GrandContainer = styled.div``;
 
 const MobContainer = styled.div`
-	width: 100vw;
+  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;  // Ensure vertical stacking
