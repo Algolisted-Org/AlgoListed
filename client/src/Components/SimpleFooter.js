@@ -24,7 +24,7 @@ export default SimpleFooter
 
 const Container = styled.div`
     width: calc(100vw - 200px);
-    position: absolute;
+    // position: absolute;
     bottom: 30px;
     left: 200px;
 

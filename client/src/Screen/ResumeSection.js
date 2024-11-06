@@ -19,6 +19,7 @@ import OpenAI from "openai";
 import * as pdfjs from "pdfjs-dist";
 import SimpleFooter from "../Components/SimpleFooter";
 import { teal } from "@material-ui/core/colors";
+import MobileNavbar from "../Components/MobileNavbar";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -331,14 +332,422 @@ const ResumeSection = () => {
   return (
     <GrandContainer>
       <MobContainer>
-        We are still working on Responsive Version of the website, please view
-        the site with width more than 1100px, a standard laptop or tablet
-        landscape.
-        <img
-          src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif"
-          alt=""
-        />
+      <MobileNavbar />
+
+      <div className="main-content">
+          <h1 className="main-heading">
+            Resume Based Questions{" "}
+            <div className="head-tag">
+              Powered by Algolisted GPT-Ai{" "}
+              <img
+                draggable="false"
+                src="https://static.wixstatic.com/media/592002_0f04cb41e098424588d09e2fba76ec65~mv2.gif"
+                alt=""
+              />
+            </div>
+          </h1>
+          <p className="heading-supporter">
+            Using this feature, once you've uploaded your resume, our AI
+            identifies the specific qualities your target company is looking for
+            and then poses questions that match those company preferences. This
+            encompasses your preparation for non-technical interview rounds,
+            such as HR and project-related discussions.
+          </p>
+          <div className="input-container">
+            {!textFromPDF ? (
+              <div
+                className="resume-upload"
+                onDragOver={(e) => e.preventDefault()}
+                onDragEnter={(e) => e.preventDefault()}
+                onDrop={handleDrop}
+                onClick={handleUploadClick}
+              >
+                <CloudUploadIcon />
+                <div className="text">Click to upload or drag and drop</div>
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept=".pdf"
+                  style={{ display: "none" }}
+                  onChange={uploadresume}
+                />
+              </div>
+            ) : (
+              <div className="file-name-display">
+                <p> {file?.name}</p>
+              </div>
+            )}
+            <div className="other-details">
+              <h3 className="text">Additional Information</h3>
+              <div className="details">
+                <div className="detail">
+                  <select
+                    value={selectedCompany}
+                    className="text"
+                    onChange={handleCompany}
+                  >
+                    <option value="0">Select Category:</option>
+                    <option value="1">Multinational Corporation (MNC)</option>
+                    <option value="2">Startups</option>
+                    <option value="3">Unicorn</option>
+                    <option value="4">Remote</option>
+                  </select>
+                </div>
+                <div className="detail">
+                  <select
+                    value={difficultyLevel}
+                    className="text"
+                    onChange={handleDifficult}
+                  >
+                    <option value="0">Select Difficulty level:</option>
+                    <option value="1">Easy</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Hard</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="info">
+              <h3 className="text">GPT Model</h3>
+              <div className="detail">
+                <div className="text">gpt-3.5-turbo</div>
+              </div>
+            </div>
+            <div className="input-api-key">
+              <div className="left-section">
+                Generate your Free Open AI API key
+                <CallMadeIcon />
+              </div>
+              <div className="right-section">
+                <input
+                  type="text"
+                  placeholder="Enter you Open AI API key eg. sk-.... "
+                  onChange={(e) => setApiKey(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="submit-btn" onClick={handleSend}>
+              Generate Result
+            </div>
+          </div>
+          <div className="main-info">
+            <div className="text">
+              <InfoIcon />
+              We operate as an open-source company without current sponsorship,
+              which is why it's necessary to input your API key. Rest assured,
+              we're committed to introducing a version of the feature that
+              doesn't require a personal API key in the near future.
+            </div>
+          </div>
+
+          <div className="display-line"></div>
+
+          <div className="ai-generated-results">
+            {responseText ? (
+              <>
+                <h2 className="ai-text-gradient">
+                  AI Generated Resume Based Questions
+                </h2>
+                <p>Good Luck with your Interview ✨✨</p>
+                <div className="questions">
+                  <div className="graphs">
+                    <div className="column">
+                      <div className="doughnut">
+                        <div className="percentage">{iamTemp.atsScore}</div>
+                        <div className="graph">
+                          <Doughnut
+                            options={doughnutOptions}
+                            data={data(parseFloat(iamTemp.atsScore))}
+                          />
+                        </div>
+                      </div>
+                      <div className="title">ATS Score</div>
+                    </div>
+                    <div className="column">
+                      <div className="doughnut">
+                        <div className="percentage">
+                          {parseFloat(iamTemp.impScore) * 10}%
+                        </div>
+                        <div className="graph">
+                          <Doughnut
+                            options={doughnutOptions}
+                            data={data(parseFloat(iamTemp.impScore) * 10)}
+                          />
+                        </div>
+                      </div>
+                      <div className="title">Impact</div>
+                    </div>
+                  </div>
+                  <h2 className="ai-text-gradient">Technical Questions</h2>
+                  <div>
+                    <>
+                      {iamTemp.technicalQuestions?.map((question, index) => (
+                        <p key={index}>
+                          {index + 1}. {question}
+                        </p>
+                      ))}
+                      {moreQuestion && (
+                        <>
+                          <div>
+                            {moreQuestion.technical?.map((question, index) => (
+                              <p key={index}>
+                                {iamTemp.technicalQuestions.length + index + 1}.{" "}
+                                {question}
+                              </p>
+                            ))}
+                          </div>
+                        </>
+                      )}
+
+                      <div className="submit-btn" onClick={techMore}>
+                        Show more
+                      </div>
+                    </>
+                  </div>
+                </div>
+                <div className="questions">
+                  <h2 className="ai-text-gradient">Soft Skill Questions</h2>
+                  <div>
+                    {iamTemp.softSkillQuestions?.map((question, index) => (
+                      <p key={index}>
+                        {index + 1}. {question}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="questions">
+                  <h2 className="ai-text-gradient">Project Ratings</h2>
+                  <div>
+                    {iamTemp.projectRatings?.map((rating, index) => (
+                      <p key={index}>
+                        {index + 1}. {rating}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+                <div className="questions">
+                  <h2 className="ai-text-gradient">ATS Score</h2>
+                  <p>{iamTemp.atsScore}</p>
+
+                  <h2 className="ai-text-gradient">Area of Improvement</h2>
+                  <p>{iamTemp.areaOfImprovement}</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="show-sample">
+                  <div
+                    className="text btn-clickable"
+                    onClick={toggleResultDummy}
+                  >
+                    {resultDummy
+                      ? "Hide Sample Results"
+                      : "Show Sample Results"}
+                    {resultDummy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  </div>
+                  {resultDummy && (
+                    <div className="ai-generated-results">
+                      {/* ADD GRAPH HERE */}
+                      <div className="graphs">
+                        <div className="column">
+                          <div className="doughnut">
+                            <div className="percentage">
+                              {dummyResponse.atsScoreValue}%
+                            </div>
+                            <div className="graph">
+                              <Doughnut
+                                options={doughnutOptions}
+                                data={data(dummyResponse.atsScoreValue)}
+                              />
+                            </div>
+                          </div>
+                          <div className="title">ATS Score</div>
+                        </div>
+                        <div className="column">
+                          <div className="doughnut">
+                            <div className="percentage">
+                              {dummyResponse.grammer}%
+                            </div>
+                            <div className="graph">
+                              <Doughnut
+                                options={doughnutOptions}
+                                data={data(dummyResponse.grammer)}
+                              />
+                            </div>
+                          </div>
+                          <div className="title">Grammer</div>
+                        </div>
+                        <div className="column">
+                          <div className="doughnut">
+                            <div className="percentage">
+                              {dummyResponse.impact}%
+                            </div>
+                            <div className="graph">
+                              <Doughnut
+                                options={doughnutOptions}
+                                data={data(dummyResponse.impact)}
+                              />
+                            </div>
+                          </div>
+                          <div className="title">Impact</div>
+                        </div>
+                      </div>
+                      <div className="questions">
+                        <h2>Technical Questions</h2>
+                        <p>
+                          1. In the project SocialSphere, how did you implement
+                          the forum functionality? Can you explain the role of
+                          React JS and MongoDB in this project?{" "}
+                        </p>
+                        <p>
+                          2. For the project Algolisted, what technologies did
+                          you use to develop the personalized resume
+                          questionnaire feature? How did you integrate OpenAI
+                          API into the project?
+                        </p>
+                        <p>
+                          3. In Cryptomania, can you explain how you utilized
+                          Chartjs and API integration to provide cryptocurrency
+                          statistics and real-time news updates?
+                        </p>
+
+                        <h2>Soft Questions</h2>
+                        <p>
+                          1. I see you have worked on the project SocialSphere.
+                          What inspired you to create a forum for history and
+                          political enthusiasts? How do you think this project
+                          aligns with your values?
+                        </p>
+                      </div>
+                      <div className="stats">
+                        <h2>Useful Stats about Resumes</h2>
+                        <p>This is will be a locally generated stuff!</p>
+                      </div>
+                      <div className="stats">
+                        <h2>Get your Resume Reviewed by Professionals</h2>
+                        <p>topmate.io shit! with LLM vector database</p>
+                      </div>
+                      <div className="stats">
+                        <h2>Resourses for Resume</h2>
+                        <p>Local stuff!</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="ai-generated-results">
+                  {responseText ? (
+                    <>
+                      <h2 className="ai-text-gradient">
+                        AI Generated Resume Based Questions
+                      </h2>
+                      <p>Good Luck with your Interview ✨✨</p>
+                      <div className="questions">
+                        <h2 className="ai-text-gradient">
+                          Technical Questions
+                        </h2>
+                        <div>
+                          <>
+                            {iamTemp.technicalQuestions?.map(
+                              (question, index) => (
+                                <p key={index}>
+                                  {index + 1}. {question}
+                                </p>
+                              )
+                            )}
+                            {moreQuestion && (
+                              <>
+                                <div>
+                                  {moreQuestion.technical?.map(
+                                    (question, index) => (
+                                      <p key={index}>
+                                        {iamTemp.technicalQuestions.length +
+                                          index +
+                                          1}
+                                        . {question}
+                                      </p>
+                                    )
+                                  )}
+                                </div>
+                              </>
+                            )}
+
+                            <button className="submit-btn" onClick={techMore}>
+                              Show more
+                            </button>
+                          </>
+                        </div>
+                      </div>
+                      <div className="questions">
+                        <h2 className="ai-text-gradient">
+                          Soft Skill Questions
+                        </h2>
+                        <div>
+                          {iamTemp.softSkillQuestions?.map(
+                            (question, index) => (
+                              <p key={index}>
+                                {index + 1}. {question}
+                              </p>
+                            )
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="questions">
+                        <h2 className="ai-text-gradient">Project Ratings</h2>
+                        <div>
+                          {iamTemp.projectRatings?.map((rating, index) => (
+                            <p key={index}>
+                              {index + 1}. {rating}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="questions">
+                        <h2 className="ai-text-gradient">ATS Score</h2>
+                        <p>{iamTemp.atsScore}</p>
+
+                        <h2 className="ai-text-gradient">
+                          Area of Improvement
+                        </h2>
+                        <p>{iamTemp.areaOfImprovement}</p>
+                      </div>
+                    </>
+                  ) : (
+                    <p>No questions generated yet!</p>
+                  )}
+                  {isLoading ? (
+                    <LoadingSection>
+                      <div className="loading-section">
+                        {/* <img src={loader} alt="Loading" /> */}
+                        <PuffLoader />
+                        <p>
+                          We are analysing your resume, it will take around 60
+                          seconds...
+                        </p>
+                      </div>
+                    </LoadingSection>
+                  ) : (
+                    <>
+                      {file && (
+                        <div>
+                          <Document
+                            file={file}
+                            onLoadSuccess={handleTextExtraction}
+                          />
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        <SimpleFooter />
       </MobContainer>
+
+
       <Container needDarkMode={needDarkMode}>
         {needDarkMode ? (
           <CCHeaderDarkPlus
@@ -783,24 +1192,396 @@ const GrandContainer = styled.div`
   }
 `;
 
+
 const MobContainer = styled.div`
   width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;  // Ensure vertical stacking
+//position: relative;
+  padding-top: 60px;
+  padding-bottom: 100px; // Space for footer
+  background-color: ${(props) => (props.needDarkMode ? '#313338' : '#ffffff')};
 
-  img {
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
+  .main-content {
+    flex: 1;
+    padding: 15px;
+    margin-bottom: auto;
+    flex-direction: column;
+
+
+    .main-heading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #292929;
+       margin-bottom: 5px;
+
+      display: flex;
+      align-items: center;
+
+       .head-tag {
+        font-size: 0.55rem;
+        font-weight: 500;
+        padding: 0.2rem 0.4rem;
+        padding-right: 35px;
+        border-radius: 100px;
+        background-color: #a5bb26;
+        margin-left: 10px;
+
+        img {
+          position: absolute;
+          height: 1.5rem;
+          margin-top: -5px;
+          margin-left: -3px;
+        }
+      }
+    }
+
+
+    .heading-supporter {
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+      font-weight: 400;
+      color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
+    }
+
+  }
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 50px;
+      margin-bottom: 10px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .resume-upload {
+        width: calc(100% - 10px);
+        height: 100px;
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed
+          ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+
+        svg {
+          fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          font-size: 2rem;
+        }
+
+        .text {
+          max-width: 150px;
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          font-size: 0.75rem;
+          text-align: center;
+          margin-top: 5px;
+          font-weight: 200;
+        }
+      }
+      .file-name-display {
+        width: calc(100% - 10px);
+        height: 100px;
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed
+          ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        p {
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          font-size: 1rem;
+
+          text-align: center;
+          margin-top: 5px;
+          font-weight: 200;
+        }
+      }
+
+      .other-details {
+        width: calc(100% - 10px);
+        height: 100px;
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 15px 15px;
+        margin-top: 10px;
+
+        .text {
+          font-size: 0.7rem;
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        }
+
+        h3 {
+          font-size: 1rem !important;
+          font-weight: 500;
+          margin-left: 5px;
+        }
+
+        .details {
+          margin-top: 10px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          /* justify-content: center; */
+
+          .detail {
+            min-width: 190px;
+            height: 35px;
+            width: 40%;
+            background-color: ${(props) =>
+              props.needDarkMode ? "#313337" : "#d0d0d0"};
+            border: 1px solid
+              ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
+            border-radius: 100px;
+            margin-right: 5px;
+            color: #000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 10px;
+            select {
+              display: flex;
+              width: 100%;
+              border: none;
+              background-color: transparent;
+              outline: none;
+            }
+          }
+        }
+
+        svg {
+          font-size: 1rem;
+          fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        }
+      }
+
+      .info {
+        width: calc(100% - 10px);
+        height: 100px;
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 15px 15px;
+        margin-top: 10px;
+
+        .text {
+          font-size: 0.7rem;
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        }
+
+        h3 {
+          font-size: 1rem !important;
+          font-weight: 500;
+          margin-left: 5px;
+        }
+
+        .detail {
+          height: 35px;
+          width: 100%;
+          background-color: ${(props) =>
+            props.needDarkMode ? "#313337" : "#d0d0d0"};
+          border: 1px solid
+            ${(props) => (props.needDarkMode ? "#56575d" : "#c3b4b4")};
+          border-radius: 100px;
+          margin-right: 5px;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          padding: 0 10px;
+        }
+
+        svg {
+          font-size: 1rem;
+          fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+        }
+      }
+
+      .input-api-key {
+        width: calc(100% - 10px);
+        margin-top: 10px;
+        background-color: #404249;
+        height: 100px;
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background-color: ${(props) =>
+          props.needDarkMode ? "#404249" : "#e5e5e5"};
+
+        .left-section {
+          height: 100%;
+          /* background-color: #313337; */
+          border-radius: 12.5px;
+          padding: 0 20px;
+          /* background-color: ${(props) =>
+            props.needDarkMode ? "#404249" : "#e5e5e5"}; */
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          background-color: ${(props) =>
+            props.needDarkMode ? "#313337" : "#d0d0d0"};
+          /* border: 1px solid ${(props) =>
+            props.needDarkMode ? "#56575d" : "#c3b4b4"}; */
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          svg {
+            fill: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+            font-size: 1rem;
+            margin-left: 10px;
+          }
+
+          color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+          font-size: 0.75rem;
+          text-align: center;
+          font-weight: 500;
+        }
+
+        .right-section {
+          flex: 1;
+          border-left: 1px solid #635757;
+          margin-left: 10px;
+          padding: 0 0 0 10px;
+          height: 100%;
+
+          input {
+            height: 100%;
+            border-radius: 100px;
+            border: none;
+            width: 100%-80px;
+            font-size: 0.75rem;
+            font-weight: 200;
+            padding: 0 12.5px;
+            background-color: ${(props) =>
+              props.needDarkMode ? "#313337" : "#d0d0d0"};
+            color: ${(props) => (props.needDarkMode ? "#e5e5e5" : "#333")};
+            /* border: 1px solid ${(props) =>
+              props.needDarkMode ? "" : "#c3b4b4"}; */
+          }
+        }
+      }
+
+      .submit-btn {
+        width: calc(100% - 10px);
+        margin-top: 10px;
+        background-color: #404249;
+        height: 45px;
+        border-radius: 10px;
+        border: 1px solid #c2b1b1;
+        color: #333;
+        display: inline-block;
+        font-size: 0.85rem;
+        font-weight: 300;
+        text-decoration: none;
+        /* text-transform: uppercase; */
+        border-radius: 100px;
+        background: linear-gradient(
+          300deg,
+          #56f238,
+          #b3adff,
+          #c5c5ef,
+          #bde6ce,
+          #56f238
+        );
+        background-size: 400% 400%;
+        -webkit-animation: AnimationName 10s ease infinite;
+        -moz-animation: AnimationName 10s ease infinite;
+        animation: AnimationName 10s ease infinite;
+        border-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        opacity: 0.75;
+
+        a {
+          color: #333;
+        }
+
+        &:hover {
+          background-color: whitesmoke;
+          color: #333;
+          cursor: pointer;
+          transition-duration: 500ms;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes AnimationName {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @-moz-keyframes AnimationName {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes AnimationName {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+    }
+
+  footer {
+    width: 100%;
+    background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#ffffff')};
+    border-top: 1px solid ${(props) => (props.needDarkMode ? '#404040' : '#e0e0e0')};
+    padding: 15px;
+    margin-top: auto; // Push footer to bottom
   }
 
-  @media only screen and (min-width: 1099px) {
+  @media only screen and (min-width: 1100px) {
     display: none;
   }
 `;
+
+
 
 const Container = styled.div`
   position: relative;
@@ -818,6 +1599,7 @@ const Container = styled.div`
   }
 
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding-left: 200px;
 

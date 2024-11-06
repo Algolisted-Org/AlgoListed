@@ -209,10 +209,234 @@ const CoreSubjectsTracker = () => {
     return (
         <GrandContainer needDarkMode={needDarkMode}>
             <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with
-                width more than 1100px, a standard laptop or tablet landscape.
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" loading="lazy"/>
+                <MobileNavbar />
+                <div className="main-content">
+                    <h1 className='main-heading'>Core Subjects Tracker</h1>
+                    <p className="heading-supporter">
+                        We've compiled a comprehensive set of interview questions sourced from reputable websites such as GeeksforGeeks and InterviewBit. Additionally, we've incorporated core subject knowledge shared by renowned YouTubers like Striver, Fraz, etc. The questions undergo thorough parsing using AI to filter out the most relevant ones, and our AI system provides ideal candidate answers.
+                    </p>
+
+                    <Filters needDarkMode={needDarkMode}>
+                        <a href="https://github.com/Nayaker/AlgoListed/tree/main/client/src/DummyDB/CoreSubjects" target="_blank" className="filter2">
+                            Contribute Topics or Questions
+                            <CallMadeIcon />
+                            <div className="tag">Open Sourced 🚀</div>
+                        </a>
+                    </Filters>
+
+                    <Filters needDarkMode={needDarkMode}>{filters}</Filters>
+                    {/* <div className="message">
+                        <div className="icon"></div>
+                        <div className="text">
+                            If you believe that a certain topic or question is missing from the core subject questions, please <a href="/">click here</a>
+                        </div>
+                    </div> */}
+                    <SheetMessage needDarkMode={needDarkMode}>
+                        <div className="text">
+                            Discover a goldmine of operating system resources on our website! As an open-source platform, we've handpicked the best content, from YouTube playlists to courses and websites, all designed to supercharge your preparation for placements. Your one-stop shop for all things OS – exclusively on our site!
+                        </div>
+                        <div className="open-btn" onClick={() => setOpenVisualiser(!openVisualiser)}>
+                            {
+                                openVisualiser ? (
+                                    <>
+                                        <div className="desc">
+                                            Close Resources
+                                        </div>
+                                        <ExpandLessIcon />
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="desc">
+                                            Open Resources
+                                        </div>
+                                        <ExpandMoreIcon /> 
+                                    </>
+                                )
+                            }
+                        </div>
+                        {
+                            openVisualiser ? (
+                                <div className="all-resources">
+                                {
+                                    resources.map((item, index) => {
+                                        return (
+                                            <a target="_blank" href={item.link}>
+                                                <img src={item.image} alt="" loading="lazy" />
+                                            </a>
+                                        )
+                                    })
+                                }
+                                </div>
+                            ) : null
+                        }
+                    </SheetMessage>
+                    <h4>Topics</h4>
+                    {/* <Progress needDarkMode={needDarkMode}>
+                        <div className="text">Progress : </div>
+                        <div className="value">{`${topicsProgressBarPercent}%`}</div>
+                        <div className="bar">
+                            <div
+                                className="fill"
+                                style={{ width: `${topicsProgressBarPercent}%` }}
+                            ></div>
+                        </div>
+                    </Progress> */}
+
+                    <div className="topics-container">
+                        {topicsData.map((topic, index) => (
+                            <div className="topic" key={topic.name}>
+                                <input
+                                    type="checkbox"
+                                    id={topic.name.toLowerCase().replace(/\s+/g, "-")}
+                                    checked={topic.completed}
+                                    onChange={() => handleTopicsLabelClick(index)}
+                                />
+                                <label htmlFor={topic.name.toLowerCase().replace(/\s+/g, "-")}>{topic.name}</label>
+                            </div>
+                        ))}
+                    </div>
+
+                    <h4>Questions</h4>
+
+                    <Progress needDarkMode={needDarkMode}>
+                        <div className="text">Progress : </div>
+                        <div className="value">{`${questionsProgressBarPercent}%`}</div>
+                        <div className="bar">
+                            <div
+                                className="fill"
+                                style={{ width: `${questionsProgressBarPercent}%` }}
+                            ></div>
+                        </div>
+                    </Progress>
+
+                    <EffectiveFilter needDarkMode={needDarkMode}>
+                        {/* <div className="left">
+							<select className="filter-item">
+								<option value="All">Problem Difficulty</option>
+								<option value="Easy">Easy</option>
+								<option value="Medium">Medium</option>
+								<option value="Hard">Hard</option>
+							</select>
+							<select className="filter-item">
+								<option value="All">Status</option>
+								<option value="Marked for later">Marked</option>
+								<option value="Marked as completed">Completed</option>
+							</select>
+						</div> */}
+                        <div className="left">
+                            <input type="checkbox" id="all" checked={showAllQuestions} onChange={() => {
+                            setShowAllQuestions(true);
+                            setShowSolvedQuestions(false);
+                            setShowMarkedQuestions(false);
+          }}/>
+                            <label htmlFor="all">All Questions</label>
+                            <input type="checkbox" id="easy" checked={showSolvedQuestions} onChange={() => {
+                            setShowAllQuestions(false);
+                            setShowSolvedQuestions(!showSolvedQuestions);
+                            setShowMarkedQuestions(false);
+          }} />
+                            <label htmlFor="easy">Solved</label>
+                            <input type="checkbox" id="medium"   checked={showMarkedQuestions}
+          onChange={() => {
+            setShowAllQuestions(false);
+            setShowSolvedQuestions(false);
+            setShowMarkedQuestions(!showMarkedQuestions);
+          }}/>
+                            <label htmlFor="medium">Marked</label>
+                        </div>
+                       
+                        <div className="right">
+                            <a href="https://github.com/Nayaker/AlgoListed/blob/main/client/src/DummyDB/CoreSubjects/OSquestions.json" target="_blank" className="filter-item">Contribute - New or Enhancement <CallMadeIcon /></a>
+                        </div>
+                    </EffectiveFilter>
+
+                    <div className="table">
+                        {dataLoading ? (
+                            <>
+                                <LinearProgress />
+                            </>
+                        ) : (
+                            filteredData.length === 0 ? <></> : filteredData.map((item, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className={
+                                            item.marked ? (
+                                                item.completed ? "review-row link-row done-row" : "review-row link-row"
+                                            ) : (
+                                                item.completed ? "link-row done-row" : "link-row"
+                                            )
+                                        }
+                                    >
+                                        {" "}
+                                        <div className="strip"></div>
+                                        <div className="link-row-left">
+                                            <div className="count">{index < 9 ? "0" + (index + 1) : index + 1}</div>
+                                            <div className="main-row-content">
+                                                <div className="question-main">
+                                                    {item.quesName}
+                                                    <div
+                                                        className="toggle-answer"
+                                                        onClick={() => toggleAnswerVisibility(index)}
+                                                    >
+                                                        {answerVisibility[index] ? 'Hide Answer' : 'Show Answer'}
+                                                    </div>
+                                                </div>
+
+                                                <div className="seperator-line" style={{ display: answerVisibility[index] ? 'block' : 'none' }}></div>
+
+                                                <div className="answer-main" style={{ display: answerVisibility[index] ? 'block' : 'none' }}>
+                                                    {item.answer}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="right-icons">
+                                            <Tooltip title={item.completed ? "Mark as Uncompleted" : "Mark as Completed"}>
+                                                <div className="done-btn">
+                                                    <CheckCircleOutlineIcon
+                                                        onClick={() => toggleCompleted(index)}
+                                                    />
+                                                </div>
+                                            </Tooltip>
+                                            <Tooltip title={item.marked ? "Unmark" : "Mark for Later"}>
+                                                <div className="review-btn">
+                                                    <BookmarkIcon
+                                                        onClick={() => toggleMarked(index)}
+                                                    />
+                                                </div>
+                                            </Tooltip>
+                                            {/* <Tooltip title="Add Notes">
+												<div className="notes-btn">
+													<NotesIcon/>
+												</div>
+											</Tooltip> */}
+
+
+
+                                            {/* <Tooltip title="Notes">
+												<div className="review-btn">
+													<CreateIcon/>
+												</div>
+											</Tooltip> */}
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        )}
+                    </div>
+                </div>
+
+
+                <SimpleFooter />
+
+
             </MobContainer>
+            
+            
+            
+            
+            
+            
             <Container needDarkMode={needDarkMode}>
                 {
                     needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
@@ -261,7 +485,7 @@ const CoreSubjectsTracker = () => {
                                         <div className="desc">
                                             Open Resources
                                         </div>
-                                        <ExpandMoreIcon />
+                                        <ExpandMoreIcon /> 
                                     </>
                                 )
                             }
@@ -449,23 +673,279 @@ const GrandContainer = styled.div`
 `
 
 const MobContainer = styled.div`
-  width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;  // Ensure vertical stacking
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 100px; // Space for footer
+    background-color: ${(props) => (props.needDarkMode ? '#313338' : '#ffffff')};
 
-  img{
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
-  }
+    .main-content {
+        flex: 1;
+        padding: 15px;
+        margin-bottom: auto;
+        flex-direction: column;
 
-  @media only screen and (min-width: 1099px){
-    display: none;
-  }
-`
+        .main-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #292929;
+            margin-bottom: 5px;
+        }
+
+        .heading-supporter {
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            font-weight: 400;
+            color: #696168;
+
+            a {
+                color: #18489f;
+                font-size: 0.75rem;
+                font-weight: 300;
+                margin-left: 0.25rem;
+            }
+        }
+        h4{
+            margin-top: 20px;
+        }
+
+         .topics-container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row; 
+        margin: 0px 0 60px 0;
+
+        .topic{
+            width: 50%;
+            display: flex;
+            align-items: center;
+            /* border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')}; */
+            /* padding: 10px 20px; */
+            /* margin: 2.5px 2.5px 0 0; */
+            margin-top: 20px;
+
+            label{
+                color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                margin-left: 5px;
+                font-size: 0.85rem;
+                font-weight: 300;
+                
+            }
+
+            input[type="checkbox"] {
+                transform: scale(1.5); 
+                margin-right: 10px;
+                border: none;
+                cursor: pointer;
+            }
+        }
+      }
+       
+
+       .table {
+			margin: 15px 0;
+			width: 100%;
+			/* background-color: #fbf7f7; */
+			/* border: 1px solid #d1d5db; */
+			border: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+			border-radius: 5px;
+			/* padding: 0 15px; */
+			display: flex;
+			flex-direction: column;
+			background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#fff')};
+			border-bottom-color: transparent;
+
+			.link-row {
+				min-height: 94px;
+				// padding: 20px 20px;
+				display: flex;
+				justify-content: space-between;
+				border-top-left-radius: 5px;
+				border-top-right-radius: 5px;
+				border-bottom: 1px solid ${(props) => (props.needDarkMode ? '#595b5f' : 'rgb(209, 213, 219)')};
+                
+
+				.strip{
+					display: none;
+				}
+
+				.link-row-left {
+					display: flex;
+					align-items: center;
+
+
+					.count {
+                        width: 30px;
+						font-size: 1rem;
+						font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
+							BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+							Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+							Segoe UI Symbol, Noto Color Emoji;
+						margin-right: 30px;
+                        margin-left: 20px;
+						font-weight: 500;
+						text-align: center;
+						color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                        display: flex;
+                        justify-content: space-between;
+                        /* background-color: yellow; */
+					}
+
+					.main-row-content {
+                        flex: 1;
+
+						.question-main{
+							position: relative;
+                            font-size: 0.85rem;
+                            font-weight: 600;
+                            text-decoration: none;
+                            margin-right: 15px;
+                            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                            
+                            .toggle-answer{
+                                cursor: pointer;
+                                margin-top: 5px;
+                                font-weight: 300;
+                                color: ${(props) => (props.needDarkMode ? '#e5e5e5' : '#333')};
+                            }
+
+                            .toggle-answer:hover {
+                                filter: brightness(150%);
+                            }
+						}
+
+                        .seperator-line{
+                            height: 1px;
+                            width: 80px;
+                            background-color: #595b5f;
+                            margin: 10px 0;
+                        }
+                        
+						.answer-main{
+                            position: relative;
+                            font-size: 0.85rem;
+                            font-weight: 300;
+                            text-decoration: none;
+                            margin-right: 15px;
+                            color: ${(props) => (props.needDarkMode ? '#c1c1c1' : '#333')};
+                            
+                            a{
+                                margin-left: 5px;
+                            }
+                        }
+					}
+				}
+
+				.right-icons{
+					display: flex;
+					align-items: center;
+
+					svg{
+						font-size: 1.5rem;
+						fill: #b5a6a6;
+						margin-left: 10px;
+						cursor: pointer;
+					}
+
+					.done-btn {
+						.MuiSvgIcon-root {
+							fill: #b5a6a6;
+							margin-left: 10px;
+	
+							&:hover {
+								transition-duration: 250ms;
+								fill: orange;
+								cursor: pointer;
+							}
+						}
+					}
+
+					.review-btn {
+						.MuiSvgIcon-root {
+							fill: #b5a6a6;
+							margin-left: 10px;
+	
+							&:hover {
+								transition-duration: 250ms;
+								fill: #cf5f5f;
+								cursor: pointer;
+							}
+						}
+					}
+				}
+
+			}
+
+			.done-row {
+				background-color: ${(props) => (props.needDarkMode ? '#2e3b4c' : '#dcf8eb')};
+				
+				.right-icons{
+					display: flex;
+					
+					.done-btn {
+						.MuiSvgIcon-root {
+							fill: orange;
+						}
+					}
+				}
+
+				.strip{
+					display: none;
+				}
+			}
+
+			.review-row {
+				z-index: 0;
+				position: relative;
+				background-color: ${(props) => (props.needDarkMode ? '#2b2023' : '#ffe3e2')};
+				border-radius: 0;
+				
+				.right-icons{
+					display: flex;
+
+					.review-btn {
+						.MuiSvgIcon-root {
+							fill: #cf5f5f;
+						}
+					}
+				}
+
+				.strip{
+					display: block !important; 
+					position: absolute;
+					width: 7.5px;
+					height: 100%;
+					background-color: #cf5e5f;
+					top: 0;
+					left: 0;
+					
+				}
+			}
+			
+			.no-bottom-border {
+				border-bottom: 1px solid transparent;
+			}
+		}
+    }
+
+    footer {
+        width: 100%;
+        background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#ffffff')};
+        border-top: 1px solid ${(props) => (props.needDarkMode ? '#404040' : '#e0e0e0')};
+        padding: 15px;
+        margin-top: auto; // Push footer to bottom
+    }
+
+    @media only screen and (min-width: 1100px) {
+        display: none;
+    }
+`;
+
+
+
 
 const Container = styled.div`
     position: relative;
@@ -476,6 +956,7 @@ const Container = styled.div`
     }
 
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding-left: 200px;
     
@@ -1053,9 +1534,12 @@ const Progress = styled.div`
 
 const EffectiveFilter = styled.div`
 	display: flex;
+    flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
 	margin: 30px 0 20px 0;
+        align-items: flex-start;
+
 
 	svg{
 		cursor: pointer;
@@ -1063,8 +1547,9 @@ const EffectiveFilter = styled.div`
 
 	.left{
 		display: flex;
+        display-direction:column;
 		justify-content: space-between;
-		align-items: center;
+        align-items: flex-start;
 
 		label{
 			font-size: 0.75rem;
@@ -1112,7 +1597,9 @@ const EffectiveFilter = styled.div`
 
 	.right{
 		display: flex;
-		align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
+
 
 		.filter-item{
 			z-index: 1;
@@ -1141,4 +1628,7 @@ const EffectiveFilter = styled.div`
 			fill: #cf5f5f;
 		}
 	}
+
+
+    
 `

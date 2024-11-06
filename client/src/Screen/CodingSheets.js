@@ -1011,11 +1011,20 @@ export default CodingSheets;
 const GrandContainer = styled.div``;
 
 const MobContainer = styled.div`
-	width: 100vw;
-	padding-top: 60px;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;  // Ensure vertical stacking
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 100px; // Space for footer
+  background-color: ${(props) => (props.needDarkMode ? '#313338' : '#ffffff')};
 
 	.main-content {
-		padding: 10px 15px;
+    flex: 1;
+    padding: 15px;
+    margin-bottom: auto;
+    flex-direction: column;
 
 		.main-heading {
 			font-size: 1.25rem;
@@ -1215,9 +1224,17 @@ const MobContainer = styled.div`
 		}
 	}
 
-	@media only screen and (min-width: 1100px) {
-		display: none;
-	}
+	 footer {
+    width: 100%;
+    background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#ffffff')};
+    border-top: 1px solid ${(props) => (props.needDarkMode ? '#404040' : '#e0e0e0')};
+    padding: 15px;
+    margin-top: auto; // Push footer to bottom
+  }
+
+  @media only screen and (min-width: 1100px) {
+    display: none;
+  }
 `;
 
 const Container = styled.div`
@@ -1229,6 +1246,7 @@ const Container = styled.div`
 	}
 
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	padding-left: 200px;
 

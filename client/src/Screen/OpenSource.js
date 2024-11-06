@@ -9,6 +9,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import { useParams } from "react-router-dom";
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import { openSourceFilters } from '../Components/openSourceFilters'
+import MobileNavbar from "../Components/MobileNavbar"; 
 
 const OpenSource = () => {
     const [needDarkMode, setNeedDarkMode] = useState(false);
@@ -339,10 +340,91 @@ const OpenSource = () => {
     return (
         <GrandContainer needDarkMode={needDarkMode}>
             <MobContainer>
-                We are still working on Responsive Version of the website, please view the site with
-                width more than 1100px, a standard laptop or tablet landscape.
-                <img src="https://media4.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" alt="" />
+            <MobileNavbar />
+      <div className="main-content">
+        <h1 className="main-heading">Open Source</h1>
+        <p className="heading-supporter">
+        Looking for the ultimate open-source experience? Algolisted is your go-to platform, offering a comprehensive collection of resources, updates, and community-driven projects. Whether you're after the latest open-source tools, opportunities to join thriving communities, or insights on exclusive bounties and swags, you'll find everything in one place. With regular updates and collaboration features, Algolisted ensures you stay ahead while contributing to impactful projects. Dive in today and unlock the world of open-source!        </p>
+        <Filters needDarkMode={needDarkMode}>
+          {filters}
+        </Filters>
+        {
+                        routeId == undefined || routeId == "swags" ?
+                            (
+                                <BoxContainer>
+                                    {swagsData.map((swag, index) => (
+                                        <div key={index} className="box">
+                                            <div className="box-logo">
+                                                <img src={swag.logo} alt={`${swag.company} logo`} />
+                                            </div>
+                                            <h3 className="box-title">{swag.swagTitle}</h3>
+                                            <p className="box-desc">{swag.desc}</p>
+                                            <p className="box-tags">
+                                                {swag.swagTags.map((tag, idx) => (
+                                                    <span key={idx} className="box-tag">{tag}</span>
+                                                ))}
+                                            </p>
+                                            <a href={swag.link} className="box-link">Check it out <CallMadeIcon /> </a>
+                                        </div>
+                                    ))}
+                                </BoxContainer>
+                            )
+                            : routeId == "hiring" ? (
+                                <div>
+                                    <BoxContainer>
+                                        {hiringData.map((job, index) => (
+                                            <div key={index} className="box">
+                                                <div className="box-logo">
+                                                    <img src={job.logo} alt={`${job.company} logo`} />
+                                                </div>
+                                                <h3 className="box-title">{job.jobTitle} Hiring</h3>
+                                                <p className="box-desc">{job.desc}</p>
+                                                <p className="box-tags">
+                                                    {job.tags.map((tag, idx) => (
+                                                        <span key={idx} className="box-tag">{tag}</span>
+                                                    ))}
+                                                </p>
+                                                <p className="box-tags2">
+                                                    <p className="box-tag">{job.location}</p>
+                                                    <p className="box-tag">{job.salary}</p>
+                                                </p>
+                                                <a href={job.link} className="box-link">Apply here <CallMadeIcon /> </a>
+                                            </div>
+                                        ))}
+                                    </BoxContainer>
+                                </div>
+                            ) : (
+                                <div>
+                                    <BoxContainer>
+                                        {bountyData.map((bounty, index) => (
+                                            <div key={index} className="box">
+                                                <div className="box-logo">
+                                                    <img src={bounty.logo} alt={`${bounty.company} logo`} />
+                                                </div>
+                                                <h3 className="box-title">{bounty.bountyTitle}</h3>
+                                                <p className="box-desc">{bounty.desc}</p>
+                                                <p className="box-tags">
+                                                    {bounty.bountyTags.map((tag, idx) => (
+                                                        <span key={idx} className="box-tag">{tag}</span>
+                                                    ))}
+                                                </p>
+                                                <p className="box-tags2">
+                                                    <p className="box-tag">{bounty.reward}</p>
+                                                </p>
+                                                <a href={bounty.link} className="box-link">Claim this bounty <CallMadeIcon /> </a>
+                                            </div>
+                                        ))}
+                                    </BoxContainer>
+                                </div>
+                            )
+                    }
+                </div>
+              <SimpleFooter />
             </MobContainer>
+
+
+
+
             <Container needDarkMode={needDarkMode}>
                 {
                     needDarkMode ? <CCHeaderDarkPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} /> : <CCHeaderPlus needDarkMode={needDarkMode} toggleDarkMode={toggleDarkMode} />
@@ -452,34 +534,75 @@ const GrandContainer = styled.div`
 
 const MobContainer = styled.div`
   width: 100vw;
-  padding: 40px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;  // Ensure vertical stacking
+//   position: relative;
+  padding-top: 60px;
+  padding-bottom: 100px; // Space for footer
+  background-color: ${(props) => (props.needDarkMode ? '#313338' : '#ffffff')};
 
-  img{
-    width: calc(100% - 80px);
-    margin: 40px;
-    border-radius: 5px;
-    display: block;
+  .main-content {
+    flex: 1;
+    padding: 15px;
+    margin-bottom: auto;
+    flex-direction: column;
+
+
+    .main-heading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: ${(props) => (props.needDarkMode ? '#e5e6e8' : '#292929')};
+      margin-bottom: 10px;
+    }
+
+    .heading-supporter {
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+      font-weight: 400;
+      color: ${(props) => (props.needDarkMode ? '#ffffffa6' : '#696168')};
+    }
+
+    .message {
+      background-color: ${(props) => (props.needDarkMode ? '#444754' : '#d5f7e1')};
+      border-radius: 5px;
+      padding: 12px;
+      margin: 15px 0;
+
+      .text {
+        font-size: 0.8rem;
+        color: ${(props) => (props.needDarkMode ? '#b7b8ba' : '#13803b')};
+        font-weight: 300;
+      }
+    }
   }
 
-  @media only screen and (min-width: 1099px){
+  footer {
+    width: 100%;
+    background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : '#ffffff')};
+    border-top: 1px solid ${(props) => (props.needDarkMode ? '#404040' : '#e0e0e0')};
+    padding: 15px;
+    margin-top: auto; // Push footer to bottom
+  }
+
+  @media only screen and (min-width: 1100px) {
     display: none;
   }
-`
+`;
+
 
 const Container = styled.div`
     position: relative;
     padding-bottom: 80px;
-
     @media only screen and (max-width: 1099px){
         display: none;
     }
 
-    display: flex;
+   display: flex;
+   flex-direction:column;
     justify-content: space-between;
     padding-left: 200px;
+    
     
 
     background-color: ${(props) => (props.needDarkMode ? '#313338' : 'transparent')};
@@ -679,91 +802,131 @@ const BoxContainer = styled.div`
     align-items: flex-start;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 20px;
+    padding: 0 10px;
 
-    .box{
-        width: calc(33.3333% - 20px);
-        margin-bottom: 25px;
-        border-radius: 10px;
+
+    .box {
+        max-width: 300px;
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 8px;
         border: 1px solid rgb(209, 213, 219);
         background-color: white;
-        padding: 20px;
-
+        padding: 15px;
         display: flex;  
         flex-direction: column;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 
-        .box-logo{
-            margin-bottom: 10px;
-            img{
-                height: 40px;
+        .box-logo {
+            margin-bottom: 12px;
+            img {
+                height: 32px;
+                object-fit: contain;
             }
         }
 
-        .box-title{
-            font-size: 1.05rem;
+        .box-title {
+            font-size: 1rem;
             font-weight: 500;
+            margin-bottom: 8px;
         }        
 
-        .box-desc{
-            font-size: 0.85rem;
+        .box-desc {
+            font-size: 0.8rem;
             font-weight: 300;
+            line-height: 1.4;
         }
 
-        .box-tags{
+        .box-tags {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            margin: 15px 0 5px 0;
+            margin: 12px 0 8px 0;
+            gap: 6px;
 
-            .box-tag{
-                font-size: 0.75rem;
-                padding: 2.5px 10px;
-                border-radius: 5px;
-                margin-right: 5px;
+            .box-tag {
+                font-size: 0.7rem;
+                padding: 4px 12px;
+                border-radius: 100px;
                 background-color: #e2f3dd;
                 border: 1px solid #a1cd93;
-                border-radius: 100px;
-                margin-bottom: 5px;
                 font-weight: 300;
             }
         }
 
-        .box-tags2{
+        .box-tags2 {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            margin: 0px 0 15px 0;
+            margin: 0 0 12px 0;
+            gap: 6px;
 
-            .box-tag{
-                font-size: 0.75rem;
-                padding: 2.5px 10px;
-                border-radius: 5px;
-                margin-right: 5px;
+            .box-tag {
+                font-size: 0.7rem;
+                padding: 4px 12px;
+                border-radius: 100px;
                 background-color: #e8f4fe;
                 border: 1px solid #84b4dc;
-                border-radius: 100px;
-                margin-bottom: 5px;
                 font-weight: 300;
             }
         }
 
-        .box-link{
+        .box-link {
             font-size: 0.75rem;
             background-color: #e5e5e5;
-            padding: 10px 10px;
+            padding: 12px;
             border-radius: 100px;
             text-align: center;
             text-decoration: none;
             color: #333;
-
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-top: auto;
+            transition: background-color 0.2s;
 
-            svg{
+            &:active {
+                background-color: #d5d5d5;
+            }
+
+            svg {
                 font-size: 0.85rem;
                 margin-left: 5px;
             }
         }
     }
-`
+
+
+    /* Media Queries for Responsive Layout */
+    @media (max-width: 320px) {
+        padding: 0 15px;
+        .box {
+            width: 100%;
+            margin: 0 0 15px 0;
+        }
+    }
+
+    @media (min-width: 321px) and (max-width: 576px) {
+        padding: 0 20px;
+        .box {
+            width: 100%;
+            margin: 0 0 20px 0;
+        }
+    }
+
+    @media (min-width: 577px) and (max-width: 767px) {
+        padding: 0 15px;
+        justify-content: space-around;
+        .box {
+            width: calc(50% - 15px);
+        }
+    }
+
+    @media (min-width: 768px) {
+        padding: 0;
+        .box {
+            width: calc(33.3333% - 20px);
+        }
+    }
+`;
