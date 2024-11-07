@@ -9,7 +9,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import { useParams } from "react-router-dom";
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import { openSourceFilters } from '../Components/openSourceFilters'
-import MobileNavbar from "../Components/MobileNavbar"; 
+import MobileNavbar from "../Components/MobileNavbar";
 
 const OpenSource = () => {
     const [needDarkMode, setNeedDarkMode] = useState(false);
@@ -340,15 +340,15 @@ const OpenSource = () => {
     return (
         <GrandContainer needDarkMode={needDarkMode}>
             <MobContainer>
-            <MobileNavbar />
-      <div className="main-content">
-        <h1 className="main-heading">Open Source</h1>
-        <p className="heading-supporter">
-        Looking for the ultimate open-source experience? Algolisted is your go-to platform, offering a comprehensive collection of resources, updates, and community-driven projects. Whether you're after the latest open-source tools, opportunities to join thriving communities, or insights on exclusive bounties and swags, you'll find everything in one place. With regular updates and collaboration features, Algolisted ensures you stay ahead while contributing to impactful projects. Dive in today and unlock the world of open-source!        </p>
-        <Filters needDarkMode={needDarkMode}>
-          {filters}
-        </Filters>
-        {
+                <MobileNavbar />
+                <div className="main-content">
+                    <h1 className="main-heading">Open Source</h1>
+                    <p className="heading-supporter">
+                        Looking for the ultimate open-source experience? Algolisted is your go-to platform, offering a comprehensive collection of resources, updates, and community-driven projects. Whether you're after the latest open-source tools, opportunities to join thriving communities, or insights on exclusive bounties and swags, you'll find everything in one place. With regular updates and collaboration features, Algolisted ensures you stay ahead while contributing to impactful projects. Dive in today and unlock the world of open-source!        </p>
+                    <Filters needDarkMode={needDarkMode}>
+                        {filters}
+                    </Filters>
+                    {
                         routeId == undefined || routeId == "swags" ?
                             (
                                 <BoxContainer>
@@ -419,11 +419,8 @@ const OpenSource = () => {
                             )
                     }
                 </div>
-              <SimpleFooter />
+                <SimpleFooter />
             </MobContainer>
-
-
-
 
             <Container needDarkMode={needDarkMode}>
                 {
@@ -452,7 +449,7 @@ const OpenSource = () => {
                     {
                         routeId == undefined || routeId == "swags" ?
                             (
-                                <BoxContainer>
+                                <BoxContainer needDarkMode={needDarkMode}>
                                     {swagsData.map((swag, index) => (
                                         <div key={index} className="box">
                                             <div className="box-logo">
@@ -472,7 +469,7 @@ const OpenSource = () => {
                             )
                             : routeId == "hiring" ? (
                                 <div>
-                                    <BoxContainer>
+                                    <BoxContainer needDarkMode={needDarkMode}>
                                         {hiringData.map((job, index) => (
                                             <div key={index} className="box">
                                                 <div className="box-logo">
@@ -496,7 +493,7 @@ const OpenSource = () => {
                                 </div>
                             ) : (
                                 <div>
-                                    <BoxContainer>
+                                    <BoxContainer needDarkMode={needDarkMode}>
                                         {bountyData.map((bounty, index) => (
                                             <div key={index} className="box">
                                                 <div className="box-logo">
@@ -811,8 +808,8 @@ const BoxContainer = styled.div`
         width: 100%;
         margin-bottom: 20px;
         border-radius: 8px;
-        border: 1px solid rgb(209, 213, 219);
-        background-color: white;
+        border: ${(props) => (props.needDarkMode ? '1px solid #514f4f' : '1px solid rgb(209, 213, 219)')};
+        background-color: ${(props) => (props.needDarkMode ? '#2b2d31' : 'white')};
         padding: 15px;
         display: flex;  
         flex-direction: column;
@@ -830,12 +827,14 @@ const BoxContainer = styled.div`
             font-size: 1rem;
             font-weight: 500;
             margin-bottom: 8px;
+            color: ${(props) => (props.needDarkMode ? '#e5e5e5' : 'inherit')};
         }        
 
         .box-desc {
             font-size: 0.8rem;
             font-weight: 300;
             line-height: 1.4;
+            color: ${(props) => (props.needDarkMode ? '#b7b8ba' : 'inherit')};
         }
 
         .box-tags {
@@ -849,9 +848,10 @@ const BoxContainer = styled.div`
                 font-size: 0.7rem;
                 padding: 4px 12px;
                 border-radius: 100px;
-                background-color: #e2f3dd;
-                border: 1px solid #a1cd93;
                 font-weight: 300;
+                border: ${(props) => (props.needDarkMode ? '1px solid #514f4f' : '1px solid #a1cd93')};
+                background-color: ${(props) => (props.needDarkMode ? '#211f1f' : '#e2f3dd')};
+                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : 'inherit')};
             }
         }
 
@@ -874,29 +874,30 @@ const BoxContainer = styled.div`
 
         .box-link {
             font-size: 0.75rem;
-            background-color: #e5e5e5;
+            background-color: ${(props) => (props.needDarkMode ? '#404249' : '#e5e5e5')};
             padding: 12px;
             border-radius: 100px;
             text-align: center;
             text-decoration: none;
-            color: #333;
+            color: ${(props) => (props.needDarkMode ? '#fff' : 'inherit')};
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: auto;
             transition: background-color 0.2s;
+            
 
             &:active {
                 background-color: #d5d5d5;
             }
 
             svg {
+                fill: ${(props) => (props.needDarkMode ? '#fff' : 'inherit')};
                 font-size: 0.85rem;
                 margin-left: 5px;
             }
         }
     }
-
 
     /* Media Queries for Responsive Layout */
     @media (max-width: 320px) {
