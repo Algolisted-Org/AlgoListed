@@ -866,8 +866,11 @@ const BoxContainer = styled.div`
                 font-size: 0.7rem;
                 padding: 4px 12px;
                 border-radius: 100px;
-                background-color: #e8f4fe;
-                border: 1px solid #84b4dc;
+                
+                border: ${(props) => (props.needDarkMode ? '1px solid #514f4f' : '1px solid #84b4dc')};
+                background-color: ${(props) => (props.needDarkMode ? '#211f1f' : '#e8f4fe')};
+                color: ${(props) => (props.needDarkMode ? '#b7b8ba' : 'inherit')};
+
                 font-weight: 300;
             }
         }
