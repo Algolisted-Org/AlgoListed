@@ -31,35 +31,36 @@ const LandingPage2 = () => {
   const modules = [
     {
       "name": "Contest Archive",
-      "desc": "Cruise through a seamless and organized collection of all contest problems, empowering you to tackle them with maximum efficiency. On top of that, we enrich your contest experience with interactive visualizations and engaging infographics that bring the game to life and help you grasp it more effectively.",
+      "desc": "Explore a well-structured and seamless collection of all contest problems, empowering you to tackle challenges with maximum efficiency. Moreover, we enhance your contest experience with interactive visualizations and compelling infographics that bring the game alive and aid your understanding effectively."
+      ,
       "link": "/contests-archive/leetcode"
     },
     {
       "name": "Contest Analysis",
-      "desc": "Unlock a world of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Predict rating changes, view country rankings, and delve into problem statistics. Explore contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!",
+      "desc": "Dive into a realm of coding insights with post-contest analyses from platforms like LeetCode and Codeforces. Forecast rating changes, examine country rankings, and explore problem statistics. Discover contest performance showcases and problem archives with visualized topics and difficulty levels – all in one place!",
       "link": "/contest-analysis"
     },
     {
       "name": "Coding Sheets",
-      "desc": "Looking for a convenient way to access a variety of coding practice sheets from different sources? Look no further than Coding Sheets, a feature on the Algolisted website. Not only can you find a wide range of sheets all in one place, but the included analysis graphs make solving them even more enjoyable by allowing you to track your progress. Happy coding!",
+      "desc": "Searching for an easy way to access diverse coding practice sheets from multiple sources? Look no further than Coding Sheets, a dedicated feature on the Algolisted website. You can find a comprehensive collection of sheets all in one place, and the integrated analysis graphs enhance your solving experience!",
       "link": "/coding-sheets/striver-sde-sheet"
     },
     {
       "name": "Core Subjects Tracker",
-      "desc": "We've compiled a comprehensive set of interview questions sourced from reputable websites such as GeeksforGeeks and InterviewBit. Additionally, we've incorporated core subject knowledge shared by renowned YouTubers like Striver, Fraz, etc. The questions undergo thorough parsing using AI to filter out the most relevant ones, and our AI system provides ideal candidate answers.",
+      "desc": "We have gathered a wide array of interview questions from respected sources like GeeksforGeeks and InterviewBit. Furthermore, we've integrated core subject insights provided by popular YouTubers such as Striver and Fraz. Our AI meticulously parses these questions to highlight the most relevant ones, ensuring you receive optimal candidate answers.",
       "link": "/core-subjects-tracker/operating-systems"
     },
     {
       "name": "Resume Based Questions",
-      "desc": "Using this feature, once you've uploaded your resume, our AI identifies the specific qualities your target company is looking for and then poses questions that match those company preferences. This encompasses your preparation for non-technical interview rounds, such as HR and project-related discussions.",
+      "desc": "With this feature, after uploading your resume, our advanced AI analyzes the specific traits and skills your target company seeks. It generates tailored questions that align with those preferences, preparing you for both technical and non-technical interview rounds, including HR discussions and project-related inquiries, ensuring you're fully prepared.",
       "link": "/resume-questions"
     },
     {
       "name": "All Internship & Job Opportunities",
-      "desc": "This page is very similar to the coding competitions list page, here in this page we will provide information about all available hiring and internship opportunities, including the timing of these opportunities. We are currently in the planning stages and will be launching this page soon.",
+      "desc": "This page mirrors the coding competitions list, as it will present a comprehensive overview of all available hiring and internship opportunities. You will find essential details such as application timelines and requirements for each position. Currently, we are diligently working on this feature.",
       "link": "/opportunities"
     },
-  ]
+  ];
 
   return (
     <GrandContainer>
@@ -85,13 +86,12 @@ const LandingPage2 = () => {
         <div className="page2" id='content'>
           <div className="content">
             <Fade>
-              <h1>Speed up your Learning and Development with Algolisted today</h1>
+              <h1>Accelerate Your Learning and Development with Algolisted Today!
+              </h1>
             </Fade>
             <Fade>
               <div className="desc">
-                We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
-                learning models for get info about a company and applications web scraping to get you the questions from
-                other website at one place.
+                Our platform is structured into five comprehensive modules, each designed to benefit coders of all levels. We leverage machine learning models to provide insights about companies and utilize web scraping to gather coding questions from various sources, all in one convenient location.
               </div>
             </Fade>
           </div>
@@ -125,7 +125,7 @@ const LandingPage2 = () => {
             </Fade>
             <Fade>
               <div className="desc">
-                Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
+                Our website showcases the commitment and talent of our incredible open-source community. Each contributor has invested their best efforts to develop and enhance the site. If you wish to report an issue or propose a new feature, we invite you to engage in the open-source process by submitting an issue.
               </div>
             </Fade>
           </div>
@@ -216,7 +216,7 @@ const LandingPage2 = () => {
       <Container>
         <Navbar>
           <div className="top">
-            Hi, we are planning to restructure our entire website on Next JS. If you're a Next.js frontend developer, please send your profile to <a href="mailto:nayak@algolisted.com">nayak@algolisted.com</a>
+            "Hi, we’re excited to share that we are restructuring our website with Next.js. If you're a frontend developer skilled in Next.js, please send your profile to <a href="mailto:nayak@algolisted.com">nayak@algolisted.com</a>
           </div>
 
           <div className="bottom">
@@ -241,13 +241,13 @@ const LandingPage2 = () => {
             <div className="left">
               <Fade>
                 <div className="heading">
-                  <h1>Elevate Your Coding Skills with</h1>
+                  <h1>Transform Your Coding Journey with</h1>
                   <h1 className='gradient-text'>AI and Visualization!</h1>
                 </div>
               </Fade>
               <Fade>
                 <div className="small-desc">
-                  Discover an AI-powered coding website that combines elegant design with powerful features. Track your progress, access contest insights, and challenge friends in coding competitions.
+                  Explore an AI-driven coding platform that seamlessly blends stunning design with dynamic features. Monitor your progress, dive into competition insights, and compete with friends in exciting coding challenges
                 </div>
               </Fade>
               <Fade left>
@@ -267,7 +267,7 @@ const LandingPage2 = () => {
                   {/* <img src={sideImage} alt="" /> */}
                   {/* <img src="https://img1.picmix.com/output/stamp/normal/1/9/5/4/2444591_542b7.gif" alt="" draggable="false" /> */}
                   {/* <img src="https://64.media.tumblr.com/839357ea6275db93b26830442d2b09ca/68e588a8812a4c4d-3f/s500x750/e1724104c696b362e9de15678922e3ad17c6c145.gif" alt="" draggable="false" /> */}
-                  <img src="https://shkspr.mobi/blog/wp-content/uploads/2015/02/loop2.gif" alt="" draggable="false"/>
+                  <img src="https://shkspr.mobi/blog/wp-content/uploads/2015/02/loop2.gif" alt="" draggable="false" />
                   {/* <img src="https://media0.giphy.com/media/P5S1CXl0y1v1I9308B/200w.gif?cid=6c09b952ifjcc0rzwkzfiqpi092ga6ssf5cvqk1nuxylglq1&ep=v1_gifs_search&rid=200w.gif&ct=s" alt="" /> */}
                 </div>
               </Fade>
@@ -281,13 +281,11 @@ const LandingPage2 = () => {
         <div className="page2">
           <div className="content">
             <Fade bottom>
-              <h1>Speed up your Learning and Development with Algolisted today</h1>
+              <h1>Accelerate Your Learning and Development with Algolisted Today!</h1>
             </Fade>
             <Fade bottom>
               <div className="desc">
-                We are currently divided into 5 Modules, all are helpful for every coder. We have also applied machine
-                learning models for get info about a company and applications web scraping to get you the questions from
-                other website at one place.
+                Our platform is structured into five comprehensive modules, each designed to benefit coders of all levels. We leverage machine learning models to provide insights about companies and utilize web scraping to gather coding questions from various sources, all in one convenient location.
               </div>
             </Fade>
           </div>
@@ -316,7 +314,7 @@ const LandingPage2 = () => {
             </Fade>
             <Fade bottom>
               <div className="desc">
-                Our website is a testament to the dedication and contributions of our amazing open source community. Every member has put in their best efforts to create and improve the site. If you want to resolve an issue or suggest a new feature, we encourage you to participate in the open source process by creating an issue.
+              Our website showcases the commitment and talent of our incredible open-source community. Each contributor has invested their best efforts to develop and enhance the site. If you wish to report an issue or propose a new feature, we invite you to engage in the open-source process by submitting an issue.
               </div>
             </Fade>
           </div>
