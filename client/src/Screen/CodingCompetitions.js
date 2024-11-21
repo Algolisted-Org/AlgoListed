@@ -266,7 +266,7 @@ const CodingCompetitions = () => {
 
 					<Sort>
 						{/* <Tooltip title="Under Development"> */}
-							<a href="https://docs.google.com/forms/d/e/1FAIpQLSeMogvmpnRIg0MWh50H9xIGq5aSdzH3sbMtRENc_3r7sZpAOw/viewform" target={"_blank"} className="box">
+							<a href="https://docs.google.com/forms/d/e/1FAIpQLSeMogvmpnRIg0MWh50H9xIGq5aSdzH3sbMtRENc_3r7sZpAOw/viewform" target={"_blank"} className="box" rel="noreferrer">
 								<AddIcon />
 							</a>
 						{/* </Tooltip> */}

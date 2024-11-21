@@ -80,7 +80,7 @@ export default function CompetitionItem({ item, index }) {
       <div className="hash">{index + 1}</div>
       <div className="platform">{platform}</div>
       <div className="contest">
-        <a href={`${competition_link}`} target="_blank">
+        <a href={`${competition_link}`} target="_blank" rel="noreferrer">
           {competition_name}
         </a>
       </div>

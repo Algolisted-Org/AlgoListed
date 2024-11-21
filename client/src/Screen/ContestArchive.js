@@ -780,10 +780,10 @@ const ContestArchive = () => {
               <div className="one-contest-problems-parent" key={index}>
                 <div className="contest-name">{contestData.contest_name}</div>
                 <div className="contest-outlinks">
-                  <a href={contestData.contest_link} target='_blank' className="link">
+                  <a href={contestData.contest_link} target='_blank' className="link" rel="noreferrer">
                     <CallMadeIcon />
                   </a>
-                  <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link">
+                  <a href={generateContestAnalysisURL(contestData.contest_name)} target='_blank' className="link" rel="noreferrer">
                     <EqualizerIcon />
                   </a>
                   {notes.includes(contestData.contest_name) ?
@@ -810,7 +810,7 @@ const ContestArchive = () => {
                             <input type="checkbox" onChange={() => { onClickShared(problem.name, contestData.contest_name) }} checked={isQuestionSolved(contestData.contest_name, problem.name)} />
                             Problem Unsolved
                           </label>
-                          <a href={problem.problemset_problem_link} target='_blank' className="problem-name">{String.fromCharCode(65 + problemIndex)}. {problem.name}</a>
+                          <a href={problem.problemset_problem_link} target='_blank' className="problem-name" rel="noreferrer">{String.fromCharCode(65 + problemIndex)}. {problem.name}</a>
                         </div>
                         {
                           showTags ? (

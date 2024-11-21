@@ -129,12 +129,12 @@ const LandingPage2 = () => {
               </div>
             </Fade>
           </div>
-          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn" rel="noreferrer">Start Contributing</a>
           <h1 className="sub-page-head">Our Contributors</h1>
           <div className="hold-contributors">
             {
               contributorsList != null && contributorsList.map((item, index) => {
-                return <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                return <a className="contributor" href={item.html_url} target={"_blank"} key={index} rel="noreferrer">
                   <img src={item.avatar_url} alt="" />
                 </a>
               })
@@ -318,7 +318,7 @@ const LandingPage2 = () => {
               </div>
             </Fade>
           </div>
-          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn">Start Contributing</a>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="btn" rel="noreferrer">Start Contributing</a>
           <h1 className="sub-page-head">Technologies Used</h1>
           <div className="hold-contributors">
             <div className="contributor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo8BG6UD3b_Fowh4gtwIjw2GPTWQQ30uBy-w&s" alt="" /></div>
@@ -343,7 +343,7 @@ const LandingPage2 = () => {
               contributorsList != null && contributorsList.map((item, index) => {
                 return (
                   <Fade up>
-                    <a className="contributor" href={item.html_url} target={"_blank"} key={index}>
+                    <a className="contributor" href={item.html_url} target={"_blank"} key={index} rel="noreferrer">
                       <img src={item.avatar_url} alt="" />
                     </a>
                   </Fade>
@@ -406,8 +406,8 @@ const LandingPage2 = () => {
                   Founder
                 </div>
                 <div className="points">
-                  <a href="https://github.com/NayakPenguin" target='_blank' className="link">Github</a>
-                  <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target='_blank' className="link">Linkedin</a>
+                  <a href="https://github.com/NayakPenguin" target='_blank' className="link" rel="noreferrer">Github</a>
+                  <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target='_blank' className="link" rel="noreferrer">Linkedin</a>
                 </div>
               </div>
 

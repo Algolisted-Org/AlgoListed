@@ -142,21 +142,8 @@ const LeftMenuDark = ({ marked }) => {
           <div className="line"></div>
         </div>
         {/* <a href='https://business.algolisted.com/' target={"_blank"} className="link">Algolisted Business<CallMadeIcon/></a> */}
-        <a
-          href="https://play.google.com/store/apps/"
-          target={"_blank"}
-          className="link"
-        >
-          Download Jobs Notifier
-          <CallMadeIcon />
-        </a>
-        <a
-          href="https://github.com/Nayaker/Algorithmist/"
-          target={"_blank"}
-          className="link"
-        >
-          Report an Issue
-        </a>
+        <a href='https://play.google.com/store/apps/' target={"_blank"} className="link" rel="noreferrer">Download Jobs Notifier<CallMadeIcon/></a>
+        <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} className="link" rel="noreferrer">Report an Issue</a>
       </div>
 
       {showMoreInfo ? (

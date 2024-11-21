@@ -36,7 +36,7 @@ const AboutUs = () => {
             Thank you for choosing Algolisted, and we look forward to supporting you on your journey to success.
             </p>
             <p className="heading-supporter">
-                Visit my Linkedin : <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank">Click Here</a>
+                Visit my Linkedin : <a href="https://www.linkedin.com/in/atanu-nayak-profile/" target="_blank" rel="noreferrer">Click Here</a>
             </p>
 
             {/* <p className="heading-supporter">

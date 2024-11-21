@@ -725,7 +725,7 @@ const Opportunities = () => {
                         <div className="hash">{++count}</div>
                         <div className="opportunity">
                           <div className="left">
-                            <a href={item.job_link} target="_blank" className="link">
+                            <a href={item.job_link} target="_blank" className="link" rel="noreferrer">
                               {item.job_title} <CallMadeIcon />
                             </a>
                             <div className="extra-info">

@@ -83,7 +83,7 @@ const CCHeaderDarkPlus = ({ needDarkMode, toggleDarkMode }) => {
           <input type="text" className="input" placeholder='Search for algorithm or datastructure'/>
         </div> */}
 
-      <a className="nav-adv" href="mailto:nayak@algolisted.com" target={"_blank"}>
+      <a className="nav-adv" href="mailto:nayak@algolisted.com" target={"_blank"} rel="noreferrer">
         <div className="text">We're restructuring our website. <b>Next.js frontend developers</b> , send your profile! <CallMadeIcon /> </div>
         <div className="promotion-tag linear-gradient">Internship</div>
       </a>
@@ -106,7 +106,7 @@ const CCHeaderDarkPlus = ({ needDarkMode, toggleDarkMode }) => {
           <Brightness4Icon />
         </div>
         <div className="icon-box">
-          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"}>
+          <a href='https://github.com/Nayaker/Algorithmist/' target={"_blank"} rel="noreferrer">
             <GitHubIcon />
           </a>
         </div>
