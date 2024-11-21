@@ -5,38 +5,47 @@ body{
     align-items: center;
     justify-content: center;
     font-family: 'Poppins',sans-serif;
+    padding: 10px;
 }
-.container{
-    width: 400px;
+
+.container {
+    width: 100%;
+    max-width: 400px;
     border-top: 4.5px solid rgb(29, 29, 219);
     border-bottom: 4.5px solid rgb(29, 29, 219);
     margin: auto;
     display: flex;
     flex-direction: column;
+    padding: 10px;
 }
-.header{
+
+.header {
     display: flex;
     flex-direction: row;
     border-bottom: 3px solid rgb(106, 106, 218);
     justify-content: space-around;
+    align-items: center;
 }
-.header-logo{
-    width: 17%;
-    margin-top: auto;
-    margin-bottom: auto;
+
+.header-logo {
+    width: 15%;
 }
-.header-text{
+
+.header-text {
     width: 70%;
 }
-.header-text h2,h3{
-    margin-top: 1%;
-    margin-bottom: 1%;
+
+.header-text h2, .header-text h3 {
+    margin: 1%;
+    font-size: 1rem;
 }
-.header div img{
+
+.header div img {
     width: 100%;
-    height: 100%;
+    height: auto;
 }
-.coding-list{
+
+.coding-list {
     width: 100%;
     display: flex;
     margin-top: 3px;
@@ -45,30 +54,72 @@ body{
     flex-direction: row;
     justify-content: space-around;
 }
-.serial-no{
-    width: 10%;
-    font-size: 1.2rem;
+
+.serial-no {
+    width: 15%;
+    font-size: 1rem;
     text-align: center;
 }
-.details{
-    width: 85%;
+
+.details {
+    width: 80%;
 }
-.comp-name{
-    font-size: 1.1rem;
+
+.comp-name {
+    font-size: 1rem;
 }
-.comp-details{
+
+.comp-details {
     font-family: sans-serif;
+    font-size: 0.9rem;
 }
-.coding-list:hover{
+
+.coding-list:hover {
     cursor: pointer;
+    background-color: rgb(195, 252, 252);
 }
-.suggestAdditon{
+
+.suggestAdditon {
     text-align: center;
     font-size: 1.4rem;
 }
-.suggestAdditon h5{
+
+.suggestAdditon h5 {
     margin: 3%;
 }
-.coding-list:hover{
-    background-color: rgb(195, 252, 252);
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 5px;
+    }
+    
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-logo, .header-text {
+        width: 100%;
+    }
+
+    .coding-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .serial-no, .details {
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .comp-name, .comp-details {
+        font-size: 0.9rem;
+    }
+
+    .suggestAdditon {
+        font-size: 1.2rem;
+    }
 }

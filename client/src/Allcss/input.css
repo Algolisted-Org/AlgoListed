@@ -41,3 +41,17 @@
   box-shadow: 0 0 0 2px #79b1ff;
   border: 0;
 }
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  .global-input-container label {
+    left: 12px; /* Slightly closer to the input edge on small screens */
+    font-size: 14px; /* Adjust font size for better readability */
+  }
+
+  .global-input-container input {
+    height: 54px;
+    padding: 20px 12px 4px 12px; /* Reduced padding for more space */
+    font-size: 14px;
+  }
+}
