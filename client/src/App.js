@@ -66,6 +66,7 @@ import MockAssessmentRunning from "./Screen/MockAssessmentRunning";
 import Profile from "./Screen/Profile";
 import OpenSource from "./Screen/OpenSource";
 import ComingSoon from "./Screen/CommingSoon";
+import CompanyPreperation from "./Screen/CompanyPreperation";
 
 const App = ({ currentThemeDark }) => {
   const [userGlobal, setUserGlobal] = useState();
@@ -107,6 +108,7 @@ const App = ({ currentThemeDark }) => {
         <Route path="/create-problem-list/sheet/:sheetId" element={<CustomSheet />} />
         <Route path="/add-content-core-only" element={<AddContentCoreOnly />} />
         <Route path="/readme" element={<Readme />} />
+        <Route path="/company-preparation" element={<CompanyPreperation />} />
         <Route path="/contest-analysis" element={<ContestAnalysisList />} />
         <Route path="/contest-analysis/:contestName" element={<ContestAnalysis />} />
         <Route path="/contests-archive/" element={<ContestArchive />} />
