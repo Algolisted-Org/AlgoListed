@@ -325,6 +325,11 @@ const OpenSource = () => {
         }
     ];
 
+    // create a function that we see the param - 
+    // 1. routeId == "swags" then call get API - https://script.googleusercontent.com/macros/echo?user_content_key=Fk_vqS5T71wKx9QeYnzDKQEp7yDUDhqgSBrioYrK7mEH0AQq8bwR-yws7-IQIpksCaQfAPVVlAlmuNl70nR6a0tHmyOFvWxrm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDOslLGY_n9Gl3g_uC9VpNeVrtplh6Q7n_vbBVg-q9rN5ILL8Lfl3vBOawG1Kb7V-sjEbml9wLwovyM-3p0tV1AN6lKLe-Uvsg&lib=MR2LvpqcdzA-4mtR_RpLjtYUOjMGOTAfL then call a empty function, formatSwagsData
+    // 2. routeId == "hiring" then call https://script.googleusercontent.com/macros/echo?user_content_key=QNxzDhVFzyyabKrXHUt6r7qe7oHnIHrEgfSEzEm0EMxZ5acQMG3rIqEClKjZ2Jj4cdWwxLuvf_7DwStEwkvJ2-yzhMQ8JYuwm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA8Tr49F1Ivtr0o6Yp4fjnD9VY8k1Q0AdNpbEobTJSVU02RPIupYF5H0LqOn1gHHuTQr3i-TjMlDArlJytlu8mpjZbJ2bHHlb9z9Jw9Md8uu&lib=M_adtjhtYqTY4x3CHvLkZEzxNTvjCbw04 then call a empty function, formatHiringData
+    // 3. 
+
 
     const params = useParams();
     const { routeId } = params;
