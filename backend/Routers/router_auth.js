@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { isAuthenticatedUser } = require("../Middleware/auth");
 
 const UserAuth = require("../Controllers/auth/user_auth");
 
@@ -26,6 +27,14 @@ router.post('/user-signup',(req,res)=>{
 
 router.post('/user-login',(req,res)=>{
     UserAuth.login(req,res);
+});
+
+router.post('/sync-local-data', isAuthenticatedUser, (req,res)=>{
+    UserAuth.syncLocalData(req,res);
+});
+
+router.get('/sync-local-data', isAuthenticatedUser, (req,res)=>{
+    UserAuth.getSyncedLocalData(req,res);
 });
 
 module.exports=router;

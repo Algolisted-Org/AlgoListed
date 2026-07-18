@@ -94,6 +94,12 @@ To run the front end of the project follow these steps.
 Now to install the required dependencies use npm i --force.
 And once the required dependencies are installed just use npm start to run the repo on your local machine.**__
 
+### Authentication and local data sync
+
+The authentication page uses `/auth/user-signup` and `/auth/user-login` for email/password authentication. Both endpoints return a JWT token and user record. After a successful signup or login, the client saves the token locally and automatically syncs browser `localStorage` data to `/auth/sync-local-data`.
+
+Users can also trigger the same sync manually from the authentication page with the **Sync Local Data** button after logging in. Set `REACT_APP_API_BASE_URL` in the client environment to point the frontend at a local or deployed backend; otherwise it uses `https://algorithmist-api.onrender.com`.
+
 Currently Working on the redux part on the front-end.
 <br/><br/>
 

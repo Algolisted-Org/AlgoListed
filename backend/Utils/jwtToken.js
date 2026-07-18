@@ -3,6 +3,10 @@
 const sendToken = (user, statusCode, res) => {
   try {
     const token = user.getJWTToken();
+    const responseUser =
+      typeof user.toObject === "function" ? user.toObject() : { ...user };
+
+    delete responseUser.password;
 
     // options for cookie
     const options = {
@@ -17,7 +21,7 @@ const sendToken = (user, statusCode, res) => {
 
     res.status(statusCode).cookie("token", token, options).json({
       success: true,
-      user,
+      user: responseUser,
       token,
     });
   } catch (error) {

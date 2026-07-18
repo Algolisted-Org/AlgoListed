@@ -4,52 +4,90 @@ import CCHeader from '../Components/CCHeader'
 import LeftMenu from '../Components/LeftMenu'
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import {
+    API_BASE_URL,
+    saveAuthenticatedUser,
+    syncLocalStorageToServer,
+} from '../Utils/authSync';
 
 const AuthPage = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [authMode, setAuthMode] = useState("signup");
+    const [authUser, setAuthUser] = useState(null);
+    const [syncStatus, setSyncStatus] = useState("");
 
-    const handleSignUp = () => {
-        console.log(email);
-        console.log(password);
+    useEffect(() => {
+        const storedUser = localStorage.getItem("algolistedUser");
 
+        if (storedUser) {
+            setAuthUser(JSON.parse(storedUser));
+        }
+    }, []);
+
+    const completeAuth = async (response) => {
+        const user = await response.json();
+
+        if (!response.ok || user.message != undefined) {
+            throw new Error(user.message || "Authentication failed.");
+        }
+
+        saveAuthenticatedUser(user);
+        setAuthUser(user.user);
         setEmail("");
         setPassword("");
+        setSyncStatus("Syncing local data...");
+        await syncLocalStorageToServer(user.token);
+        setSyncStatus("Local data synced successfully.");
+    }
 
-        fetch('https://algorithmist-api.onrender.com/auth/user-signup', {
+    const handleSignUp = () => {
+        fetch(`${API_BASE_URL}/auth/user-signup`, {
             method: 'post',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({
                 email: (email.toLowerCase()),
                 password,
             })
-        }).then(response => response.json())
-            .then(user => {
-                if(user.message != undefined) alert(user.message);
-                else alert("User Created Successfully!");
-                console.log(user);
+        }).then(completeAuth)
+            .then(() => {
+                alert("User Created Successfully!");
+            })
+            .catch((error) => {
+                setSyncStatus(error.message);
+                alert(error.message);
             })
     }
 
     const handleLogin = () => {
-        console.log(email);
-        console.log(password);
-
-        setEmail("");
-        setPassword("");
-
-        fetch('https://algorithmist-api.onrender.com/auth/user-login', {
+        fetch(`${API_BASE_URL}/auth/user-login`, {
             method: 'post',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({
                 email: (email.toLowerCase()),
                 password,
             })
-        }).then(response => response.json())
-            .then(user => {
-                console.log(user);
+        }).then(completeAuth)
+            .then(() => {
+                alert("Logged in successfully!");
             })
+            .catch((error) => {
+                setSyncStatus(error.message);
+                alert(error.message);
+            })
+    }
+
+    const handleManualSync = () => {
+        setSyncStatus("Syncing local data...");
+
+        syncLocalStorageToServer()
+            .then(() => {
+                setSyncStatus("Local data synced successfully.");
+            })
+            .catch((error) => {
+                setSyncStatus(error.message);
+            });
     }
 
 
@@ -68,7 +106,7 @@ const AuthPage = () => {
                     {/* <span className='company-name'>Algorithmist</span> */}
 
                     <div className="form">
-                        <div className="heading">Create an Account</div>
+                        <div className="heading">{authMode === "signup" ? "Create an Account" : "Log In"}</div>
                         <div className="line"></div>
                         <div className="btn blue">
                             <div className="icon blue-shade"><img src="https://www.firstrust.com/getattachment/cf7dac57-a2ed-437b-8d50-9fac4634a8a2/google_logo.png?lang=en-US&width=300&height=300&ext=.png" alt="" /></div>
@@ -89,10 +127,15 @@ const AuthPage = () => {
 
                         <p className='small-text'>or</p>
 
-                        <input type="text" placeholder='Full Name' value={name} onChange={(e) => setName(e.target.value)} />
+                        {authMode === "signup" && <input type="text" placeholder='Full Name' value={name} onChange={(e) => setName(e.target.value)} />}
                         <input type="email" placeholder='Enter Email Address' value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <input type="text" placeholder='Enter password (8+ chars)' value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <button onClick={() => handleSignUp()}>Create Profile</button>
+                        <input type="password" placeholder='Enter password (8+ chars)' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <button onClick={() => authMode === "signup" ? handleSignUp() : handleLogin()}>{authMode === "signup" ? "Create Profile" : "Log In"}</button>
+                        <button className="link-button" onClick={() => setAuthMode(authMode === "signup" ? "login" : "signup")}>
+                            {authMode === "signup" ? "Already have an account? Log in" : "Need an account? Create one"}
+                        </button>
+                        {authUser && <button className="sync-button" onClick={() => handleManualSync()}>Sync Local Data</button>}
+                        {syncStatus && <div className="sync-status">{syncStatus}</div>}
                         <div className="desc">We are taking this information just for uniquely identifying our users. And later our giving out personal informations, or credits for work.</div>
                     </div>
 
@@ -246,6 +289,25 @@ const Container = styled.div`
                 cursor: pointer;
                 text-transform: uppercase;
                 letter-spacing: 0.25rem;
+            }
+
+            .link-button{
+                background-color: transparent;
+                color: #111;
+                letter-spacing: 0.03rem;
+                text-transform: none;
+            }
+
+            .sync-button{
+                background-color: #18489f;
+            }
+
+            .sync-status{
+                width: 100%;
+                margin-top: 10px;
+                font-size: 0.8rem;
+                text-align: center;
+                color: #18489f;
             }
 
             .small-text{
